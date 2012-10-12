@@ -4,6 +4,7 @@
     <legend>Kollektion</legend>
         {% for product in products %}
             <a href="{{product.pk}}"> {{ product.name }} </a></h2>
+                    {{ product.article.price }}
         {% endfor %}
 {% endblock %}
 
