@@ -75,7 +75,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     #'/theme/static/',
-    #'/home/palle/Project/django/../theme/static',
+    '/home/palle/Project/django/virtual_vb/vb/vamlingbolaget/theme/static',
     
 )
 
@@ -117,7 +117,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.    
     #'/usr/lib/python2.7/site-packages/django/contrib/admin/media',
-    #'/home/palle/Project/django/../theme/templates',
+    '/home/palle/Project/django/virtual_vb/vb/vamlingbolaget/theme/templates',
     #os.path.join(ROOT_DIR, '/theme/templates'),
     
 )

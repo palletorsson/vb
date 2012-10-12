@@ -6,10 +6,14 @@ Kattens Modeller
 
 class Variation(models.Model):
     name = models.CharField(max_length=40)
+    article = models.ForeignKey('Article')
     color = models.ForeignKey('Color')
     pattern = models.ForeignKey('Pattern')    
     file = models.ImageField("Image", upload_to="variations")
     active = models.BooleanField("Active")
+
+    def __unicode__(self):
+        return unicode(self.name)
 
 class Size(models.Model):
     """

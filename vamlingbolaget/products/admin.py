@@ -1,6 +1,10 @@
 from django.contrib import admin
 from models import *
 
+
+class VariationAdmin(admin.ModelAdmin):
+    model = Variation
+
 class ArticleAdmin(admin.ModelAdmin):
     model = Article
 
@@ -20,6 +24,7 @@ class QualityAdmin(admin.ModelAdmin):
 class TypeAdmin(admin.ModelAdmin):
     model = Type
     
+admin.site.register(Variation, VariationAdmin)    
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Size, SizeAdmin)
 admin.site.register(Color, ColorAdmin)
