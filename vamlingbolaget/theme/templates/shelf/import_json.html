@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table class="table table-striped">
+<form action="" enctype="multipart/form-data" method="post">
+ <legend>Import json </legend>
+    {% csrf_token %}
+    {{form}}
+<tr><td></td><td><input type="submit" value="Submit" /></td>
+</table>
+{% endblock %}
