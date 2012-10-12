@@ -2,8 +2,16 @@ from django.contrib import admin
 from models import *
 
 
+
+class VariationImageInline(admin.StackedInline):
+  model = Image
+  max_num=4
+  extra=0
+
 class VariationAdmin(admin.ModelAdmin):
     model = Variation
+    inlines = [VariationImageInline,]
+
 
 class ArticleAdmin(admin.ModelAdmin):
     model = Article

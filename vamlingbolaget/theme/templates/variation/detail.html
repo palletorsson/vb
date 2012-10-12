@@ -2,11 +2,16 @@
 
 {% block content %}
     <legend>Kollektion / {{ product.name }} </legend>
-        {{ product.name }}
-        {{ product.article.price }}
-        {{ product.color }}
-        {{ product.pattern }}
-        {{ product.file }}
+        Name: {{ product.name }}
+        <hr/>
+        Price: {{ product.article.price }} kr
+        <hr/>
+        Color: {{ product.color }}
+        <hr/>
+        Pattern: {{ product.pattern }}
+        <hr/>
+        Thumbnail: <img src="{{ product.image_1200.url }}" />
+         
     
 {% endblock %}
 
