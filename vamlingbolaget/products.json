@@ -1,0 +1,59 @@
+/home/palle/Project/django/virtual_vb/vb/vamlingbolaget/vamlingbolaget
+/home/palle/Project/django/virtual_vb/vb/vamlingbolaget
+[
+    {
+        "pk": 1, 
+        "model": "products.quality", 
+        "fields": {
+            "name": "Manchester"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "products.quality", 
+        "fields": {
+            "name": "Plysch"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "products.quality", 
+        "fields": {
+            "name": "Silkestrik\u00e5"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "products.quality", 
+        "fields": {
+            "name": "Silkestrik\u00e5"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "products.type", 
+        "fields": {
+            "name": "Kl\u00e4nning"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "products.type", 
+        "fields": {
+            "name": "Kl\u00e4nning"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "products.article", 
+        "fields": {
+            "name": "Kl\u00e4nning", 
+            "quality": 4, 
+            "price": 200, 
+            "file": "article/raglanklanninglangarn_tigermorkbotten_turkos.jpg", 
+            "active": true, 
+            "type": 2, 
+            "sku_number": "6278"
+        }
+    }
+]
