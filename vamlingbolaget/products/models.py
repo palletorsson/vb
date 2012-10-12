@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext as _
 from django.db import models
 
 """
@@ -6,6 +7,8 @@ Kattens Modeller
 
 class Variation(models.Model):
     name = models.CharField(max_length=40)
+    slug = models.SlugField(max_length=255)
+    description = models.TextField()
     article = models.ForeignKey('Article')
     color = models.ForeignKey('Color')
     pattern = models.ForeignKey('Pattern')    
@@ -79,7 +82,9 @@ class Article(models.Model):
     Article are related to Product.         
     """
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=255)
     sku_number = models.CharField(max_length=10)
+    description = models.TextField()
     quality = models.ForeignKey('Quality')
     type = models.ForeignKey('Type')
     price = models.IntegerField()
