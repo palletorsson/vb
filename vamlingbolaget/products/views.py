@@ -11,12 +11,13 @@ def index(request):
 
     except:
         return HttpResponse(404)
-    
+
     images = Image.objects.all()
-    print images
+    products = zip(products, images)
+    print products
     return render_to_response('variation/index.html',
-                             {'products': products,
-                              'images': images },
+                             {'products': products,  
+                              },
                              context_instance=RequestContext(request))
 
 def detail(request, pk):
