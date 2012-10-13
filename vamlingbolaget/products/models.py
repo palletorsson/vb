@@ -1,46 +1,35 @@
 from django.utils.translation import ugettext as _
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Adjust
-
 from django.db import models
+import datetime
 
-"""
-Kattens Modeller
-"""
 
-class Variation(models.Model):
+class TimeStampedActivate(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    active = models.BooleanField("Active")
+    
+    class Meta:
+        abstract = True
+
+class Variation(TimeStampedActivate):
     name = models.CharField(max_length=40)
     slug = models.SlugField(max_length=255)
     description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     article = models.ForeignKey('Article')
     mainimage = models.ForeignKey('Mainimage')
     color = models.ForeignKey('Color')
     pattern = models.ForeignKey('Pattern')    
-    active = models.BooleanField("Active")
     
     def __unicode__(self):
         return unicode(self.name)
 
 class Image(models.Model):
     variation = models.ForeignKey('Variation')
-    file = models.ImageField("Image", upload_to="variations")
-    image_1200 = ImageSpecField([Adjust(contrast=1, sharpness=1),
-        ResizeToFill(1200)], image_field='file', format='JPEG', 
-            options={'quality': 100}, )
-    image_900 = ImageSpecField([Adjust(contrast=1, sharpness=1),
-        ResizeToFill(900)], image_field='file', format='JPEG', 
-            options={'quality': 90}, )
-    image_600 = ImageSpecField([Adjust(contrast=1, sharpness=1),
-        ResizeToFill(600)], image_field='file', format='JPEG', 
-            options={'quality': 90}, )
-    image_460 = ImageSpecField([Adjust(contrast=1, sharpness=1),
-        ResizeToFill(460)], image_field='file', format='JPEG', 
-            options={'quality': 90}, )    
-    thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-        ResizeToFill(150)], image_field='file',
-        format='JPEG', options={'quality': 90})
-
-class Mainimage(models.Model):
+    is_featured = models.BooleanField(default=False)
     file = models.ImageField("Image", upload_to="variations")
     image_1200 = ImageSpecField([Adjust(contrast=1, sharpness=1),
         ResizeToFill(1200)], image_field='file', format='JPEG', 
@@ -118,7 +107,7 @@ class Type(models.Model):
         return unicode(self.name)
 
 
-class Article(models.Model):
+class Article(TimeStampedActivate):
     """
     Article are related to Product.         
     """
@@ -130,7 +119,6 @@ class Article(models.Model):
     type = models.ForeignKey('Type')
     price = models.IntegerField()
     file = models.ImageField("Image", upload_to="articles")
-    active = models.BooleanField("Active")
     
     def __unicode__(self):
         return unicode(self.name)
