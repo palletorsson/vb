@@ -88,6 +88,7 @@ class Quality(models.Model):
     Quality used in Article Model         
     """
     name = models.CharField(max_length=100)
+    description = models.TextField()
     active = models.BooleanField("Active")
 
     def __unicode__(self):
