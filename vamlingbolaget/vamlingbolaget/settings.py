@@ -1,10 +1,8 @@
 # Django settings for vamlingbolaget project.
 import os
 PROJECT_ROOT = os.path.dirname(__file__)
-print PROJECT_ROOT
 
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-print ROOT_DIR
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

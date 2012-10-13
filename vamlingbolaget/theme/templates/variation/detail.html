@@ -1,16 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="row-fluid">
+    <div class="span12">
     <legend>Kollektion / {{ product.name }} </legend>
-        Name: {{ product.name }}
+    <div class="row-fluid">
+    <div class="span6"><img src="{{ images.image_600.url }}" />
+        </br>
+        
+        </div>
+    <div class="span6">
         <hr/>
-        Price: {{ product.article.price }} kr
+        Pris: {{ product.article.price }} kr
         <hr/>
-        Color: {{ product.color }}
+        <img src="{{ product.article.file.url }}" >  
         <hr/>
-        Pattern: {{ product.pattern }}
+        Artikelnummer: {{ product.article.sku_number }}  
         <hr/>
-        Thumbnail: <img src="../../{{ images.image_460 }}" />
+        Färg: {{ product.color }}
+        <hr/>
+        Mönster: {{ product.pattern }}
+        <hr/>
+        Kvalitet: {{ product.article.quality }}
+        <hr/>
+        {{ product.article.quality.description }}  
+         
+        </div>
+    </div>
+    </div>
+    </div>
          
     
 {% endblock %}

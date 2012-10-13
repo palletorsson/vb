@@ -3,6 +3,11 @@
 {% block content %}
     <legend>Kollektion</legend>
         {% for product in products %}
+        
+        {% for image in images %}
+                    <img src="{{ image.image_300.url }}" />
+        {% endfor %}                            
+        </br>    
             <a href="{{product.pk}}"> {{ product.name }} </a></h2>
                     {{ product.article.price }}
         {% endfor %}
