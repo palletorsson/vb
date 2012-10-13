@@ -11,18 +11,32 @@
         </div>
     <div class="span6">
         <hr/>
-        Pris: {{ product.article.price }} kr
-        <hr/>
-        <img src="{{ product.article.file.url }}" >  
-        <hr/>
+      
+        <div class="span6">
         Artikelnummer: {{ product.article.sku_number }}  
+        </div>
+
+        <img src="{{ product.article.file.url }}" >  </br>
         <hr/>
-        Färg: {{ product.color }}
+
+   
+        <div class="span6">
+            Färg: {{ product.color }} </br>
+            Mönster: {{ product.pattern }}
+        </div>
+        <img src="{{ product.pattern.file.url }}" width="100" />
         <hr/>
-        Mönster: {{ product.pattern }}
+        <div class="span6">
+        <strong> Pris: {{ product.article.price }} kr </strong>
+        </div>
+
+            <button class="btn btn-success" type="button">Lägg till i Köplista</button>
         <hr/>
+        
+        <div class="span6">
         Kvalitet: {{ product.article.quality }}
-        <hr/>
+        </br>        </br>        </br>
+        </div>
         {{ product.article.quality.description }}  
          
         </div>
