@@ -11,27 +11,54 @@ class VariationImageInline(admin.StackedInline):
 class VariationAdmin(admin.ModelAdmin):
     model = Variation
     inlines = [VariationImageInline,]
-
+    prepopulated_fields = {"slug": ("name",)}
+    list_display = ('active', 'name', 'article', 'color', 'pattern')
+    list_display_links = ('name',)
+    list_editable = ('active',)
+    list_filter = ('created_at', 'updated_at', 'active')
 
 class ArticleAdmin(admin.ModelAdmin):
     model = Article
+    prepopulated_fields = {"slug": ("name",)}
+    list_display = ('active', 'name', 'sku_number', 'price', 'quality', 'type')
+    list_display_links = ('name',)
+    list_editable = ('active',)
+    list_filter = ('active', )
 
 class ColorAdmin(admin.ModelAdmin):
     model = Color
+    list_display = ('active', 'name', )
+    list_display_links = ('name',)
+    list_editable = ('active', )
+    list_filter = ('active', )
+
     
 class PatternAdmin(admin.ModelAdmin):
     model = Pattern
-    
+    list_display = ('active', 'name',)
+    list_display_links = ('name',)
+    list_editable = ('active', )
+    list_filter = ('active', )
+ 
 
 class SizeAdmin(admin.ModelAdmin):
     model = Size
     
 class QualityAdmin(admin.ModelAdmin):
     model = Quality
+    list_display = ('active', 'name',)
+    list_display_links = ('name',)
+    list_editable = ('active', )
+    list_filter = ('active', )
 
+    
 class TypeAdmin(admin.ModelAdmin):
     model = Type
-
+    list_display = ('active', 'name',)
+    list_display_links = ('name',)
+    list_editable = ('active', )
+    list_filter = ('active', )
+    
 class ImageAdmin(admin.ModelAdmin):
     model = Image
     
