@@ -20,7 +20,6 @@ class Variation(TimeStampedActivate):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     article = models.ForeignKey('Article')
-    mainimage = models.ForeignKey('Mainimage')
     color = models.ForeignKey('Color')
     pattern = models.ForeignKey('Pattern')    
     
