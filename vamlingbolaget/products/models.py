@@ -133,6 +133,12 @@ class Article(TimeStampedActivate):
     type = models.ForeignKey('Type')
     price = models.IntegerField()
     file = models.ImageField("Image", upload_to="articles")
+
+    def image(self):
+        return '<img src="../../../media/%s" width="60"/>' % self.file
+        print '<img src="%s" width="100" />' % self.file
+    image.allow_tags = True
+
     
     def save(self, *args, **kwargs):
         if self.slug is None:

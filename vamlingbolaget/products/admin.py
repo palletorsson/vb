@@ -20,7 +20,7 @@ class VariationAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     model = Article
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name', 'sku_number', 'price', 'quality', 'type')
+    list_display = ('active', 'sku_number', 'name', 'price', 'type', 'quality', 'image')
     list_display_links = ('name',)
     list_editable = ('active',)
     list_filter = ('active', )
