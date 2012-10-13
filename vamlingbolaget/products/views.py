@@ -16,9 +16,13 @@ def detail(request, pk):
         product = Variation.objects.get(pk=pk)
     except:
         return HttpResponse(404)
-    print product.thumbnail
+    name = product.name
+    images = Variation.get_images(product, pk)
+
     return render_to_response('variation/detail.html',
-                              {'product': product},
+                              {'product': product,
+                               'images': images },
+                              
                               context_instance=RequestContext(request)
                               )
 

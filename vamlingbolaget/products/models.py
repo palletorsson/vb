@@ -23,6 +23,10 @@ class Variation(TimeStampedActivate):
     color = models.ForeignKey('Color')
     pattern = models.ForeignKey('Pattern')    
     
+    def get_images(self, name):
+        images = Image.objects.get(variation=name)
+        return images
+    
     def __unicode__(self):
         return unicode(self.name)
 
@@ -45,6 +49,9 @@ class Image(models.Model):
     thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
         ResizeToFill(150)], image_field='file',
         format='JPEG', options={'quality': 90})
+
+    def __unicode__(self):
+        return unicode(self.file)
 
 
 class Size(models.Model):
@@ -111,8 +118,8 @@ class Article(TimeStampedActivate):
     """
     Article are related to Product.         
     """
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=255)
+    name = models.CharField(max_length=160)
+    slug = models.SlugField(max_length=255, blank=True)
     sku_number = models.CharField(max_length=10)
     description = models.TextField()
     quality = models.ForeignKey('Quality')
@@ -120,5 +127,10 @@ class Article(TimeStampedActivate):
     price = models.IntegerField()
     file = models.ImageField("Image", upload_to="articles")
     
+    def save(self, *args, **kwargs):
+        if self.slug is None:
+             self.slug = slugify(self.name)
+        super(Article, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return unicode(self.name)
