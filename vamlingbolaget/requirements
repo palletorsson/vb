@@ -1,5 +1,6 @@
 Django==1.4.1
-PIL==1.1.7
+Pillow==1.7.7
+South==0.7.6
 argparse==1.2.1
 django-appconf==0.5
 django-grappelli==2.4.2
