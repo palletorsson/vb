@@ -125,7 +125,8 @@ class Combo(models.Model):
     quality = models.ForeignKey('Quality')
     pattern = models.ForeignKey('Pattern')
     color = models.ForeignKey('Color')
-
+    active = models.BooleanField("Active")
+    
     def image(self):
         return '<img src="../../../media/%s" width="60"/>' % self.file
     image.allow_tags = True

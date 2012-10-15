@@ -20,7 +20,7 @@ class VariationAdmin(admin.ModelAdmin):
     list_filter = ('created_at', 'updated_at', 'active', 'article',)
     search_fields = ['name']
     list_per_page = 20
-    ordering = ['name']
+    ordering = ['active','name']
 
 class ArticleAdmin(admin.ModelAdmin):
     model = Article
@@ -31,7 +31,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_filter = ('active', 'type',)
     search_fields = ['sku_number', 'name']
     list_per_page = 20
-    ordering = ['name']
+    ordering = ['active', 'name']
     
 class ColorAdmin(admin.ModelAdmin):
     model = Color
@@ -72,9 +72,13 @@ class ImageVariationAdmin(admin.ModelAdmin):
     
 class ComboAdmin(admin.ModelAdmin):
     model = Image   
-    list_display = ('image', 'pattern', 'color','quality',)
+    list_display = ('active', 'image', 'pattern', 'color','quality',)
     list_display_links = ('image',)
     list_filter = ('quality',)
+    list_editable = ('active', )
+    list_filter = ('active', )
+    list_per_page = 20
+    ordering = ['active', '-color', 'pattern']
  
 admin.site.register(Variation, VariationAdmin)    
 admin.site.register(Article, ArticleAdmin)
