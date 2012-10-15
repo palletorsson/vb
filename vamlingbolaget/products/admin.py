@@ -4,18 +4,22 @@ from models import *
 
 
 class VariationImageInline(admin.StackedInline):
-  model = Image
+  model = ImageVariation
   max_num=4
   extra=1
+  
+class CartAdmin(admin.ModelAdmin):
+    model = CartItem
+
 
 class VariationAdmin(admin.ModelAdmin):
     model = Variation
     inlines = [VariationImageInline,]
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name', 'article', 'color', 'pattern')
+    list_display = ('active', 'name', 'article', 'combo', 'image')
     list_display_links = ('name',)
     list_editable = ('active',)
-    list_filter = ('created_at', 'updated_at', 'active')
+    list_filter = ('created_at', 'updated_at', 'active', 'article',)
 
 class ArticleAdmin(admin.ModelAdmin):
     model = Article
@@ -23,22 +27,22 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ('active', 'sku_number', 'name', 'price', 'type', 'quality', 'image')
     list_display_links = ('name',)
     list_editable = ('active',)
-    list_filter = ('active', )
+    list_filter = ('active', 'type',)
 
 class ColorAdmin(admin.ModelAdmin):
     model = Color
-    list_display = ('active', 'name', )
+    list_display = ('active', 'name', 'quality',)
     list_display_links = ('name',)
     list_editable = ('active', )
-    list_filter = ('active', )
+    list_filter = ('active', 'quality',)
 
     
 class PatternAdmin(admin.ModelAdmin):
     model = Pattern
-    list_display = ('active', 'name',)
+    list_display = ('active', 'name', 'quality',)
     list_display_links = ('name',)
     list_editable = ('active', )
-    list_filter = ('active', )
+    list_filter = ('active', 'quality',)
  
 
 class SizeAdmin(admin.ModelAdmin):
@@ -59,7 +63,11 @@ class TypeAdmin(admin.ModelAdmin):
     list_editable = ('active', )
     list_filter = ('active', )
     
-class ImageAdmin(admin.ModelAdmin):
+class ImageVariationAdmin(admin.ModelAdmin):
+    model = Image
+    
+    
+class ComboAdmin(admin.ModelAdmin):
     model = Image
     
 admin.site.register(Variation, VariationAdmin)    
@@ -69,4 +77,8 @@ admin.site.register(Color, ColorAdmin)
 admin.site.register(Pattern, PatternAdmin)
 admin.site.register(Quality, QualityAdmin)
 admin.site.register(Type, TypeAdmin)
-admin.site.register(Image, ImageAdmin)
+admin.site.register(ImageVariation, ImageVariationAdmin)
+
+admin.site.register(Combo, ComboAdmin)
+
+admin.site.register(CartItem, CartAdmin)    

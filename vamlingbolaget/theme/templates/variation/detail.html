@@ -21,15 +21,14 @@
 
    
         <div class="span6">
-            Färg: {{ product.color }} </br>
-            Mönster: {{ product.pattern }}
+            Färg: {{ product.combo.color }} </br>
+            Mönster: {{ product.combo.pattern }}
         </div>
-        <img src="{{ product.pattern.file.url }}" width="100" />
+        <img src="{{ product.combo.file.url }}" width="100" />
         <hr/>
         <div class="span6">
         <strong> Pris: {{ product.article.price }} kr </strong>
         </div>
-
             <button class="btn btn-success" type="button">Lägg till i Köplista</button>
         <hr/>
         

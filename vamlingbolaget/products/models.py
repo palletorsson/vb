@@ -13,6 +13,7 @@ class TimeStampedActivate(models.Model):
     class Meta:
         abstract = True
 
+
 class Variation(TimeStampedActivate):
     name = models.CharField(max_length=40)
     slug = models.SlugField(max_length=255)
@@ -20,23 +21,28 @@ class Variation(TimeStampedActivate):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     article = models.ForeignKey('Article')
-    color = models.ForeignKey('Color')
-    pattern = models.ForeignKey('Pattern')    
+    combo = models.ForeignKey('Combo', help_text="A combination of pattern, color and quality")
     
     def get_images(self, name):
-        images = Image.objects.get(variation=name)
+        images = ImageVariation.objects.get(variation=name)
         return images
     
     def get_index_images(self):
-        images = Image.objects.all()
+        images = ImageVariation.objects.all()
         return images
+
+    def image(self):
+        images = ImageVariation.objects.filter(variation__pk=1)
+        print images
+        return '<img src="../../../media/%s" width="60"/>' % self.images
+    
+    image.allow_tags = True
     
     def __unicode__(self):
         return unicode(self.name)
 
+ 
 class Image(models.Model):
-    variation = models.ForeignKey('Variation')
-    is_featured = models.BooleanField(default=False)
     file = models.ImageField("Image", upload_to="variations")
     image_1200 = ImageSpecField([Adjust(contrast=1, sharpness=1),
         ResizeToFill(900, 1350)], image_field='file', format='JPEG', 
@@ -57,8 +63,15 @@ class Image(models.Model):
         ResizeToFill(100, 150)], image_field='file',
         format='JPEG', options={'quality': 90})
 
+    class Meta:
+        abstract = True
+
+class ImageVariation(Image):
+    variation = models.ForeignKey('Variation')
+    is_featured = models.BooleanField(default=False)
+
     def __unicode__(self):
-        return unicode(self.file)
+        return unicode(self.variation)
 
 
 class Size(models.Model):
@@ -77,7 +90,6 @@ class Color(models.Model):
     """
     name = models.CharField(max_length=20)
     quality = models.ForeignKey('Quality')
-    file = models.ImageField("Image", upload_to="colors")
     active = models.BooleanField("Active")
     
     def __unicode__(self):
@@ -90,7 +102,6 @@ class Pattern(models.Model):
     """
     name = models.CharField(max_length=20)
     quality = models.ForeignKey('Quality')
-    file = models.ImageField("Image", upload_to="patterns")
     active = models.BooleanField("Active")
     
     def __unicode__(self):
@@ -109,12 +120,21 @@ class Quality(models.Model):
         return unicode(self.name)
 
 
+class Combo(models.Model):
+    file = models.ImageField("Image", upload_to="combo")
+    quality = models.ForeignKey('Quality')
+    pattern = models.ForeignKey('Pattern')
+    color = models.ForeignKey('Color')
+
+    def __unicode__(self):
+        return unicode(self.file)
+
+
 class Type(models.Model):
     """
     Type used in Article Model         
     """
     name = models.CharField(max_length=100)
-    quality = models.ForeignKey('Quality')
     active = models.BooleanField("Active")
     
     def __unicode__(self):
@@ -136,7 +156,6 @@ class Article(TimeStampedActivate):
 
     def image(self):
         return '<img src="../../../media/%s" width="60"/>' % self.file
-        print '<img src="%s" width="100" />' % self.file
     image.allow_tags = True
 
     
@@ -147,3 +166,27 @@ class Article(TimeStampedActivate):
 
     def __unicode__(self):
         return unicode(self.name)
+
+class CartItem(models.Model):
+    cart_id = models.CharField(max_length=50)
+    article_id  = models.ForeignKey(Article)
+    color = models.ForeignKey(Color)
+    pattern = models.ForeignKey(Pattern)
+    size = models.ForeignKey(Size)
+    date_added = models.DateTimeField(auto_now_add=True)
+    quantity = models.PositiveIntegerField(default=1)
+    
+    class Meta:
+        ordering=['date_added']
+    
+    def total(self):
+        return self.quantiy * self.article_id.price
+    
+    def name(self):
+        return self.article_id.name
+    
+    def price(self):
+        return self.article_id.price * self.quantity
+
+    def __unicode__(self):
+        return "%dx %s" % (self.quantity, self.article_id.name)

@@ -49,8 +49,8 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/home/palle/Project/django/virtual_vb/vb/vamlingbolaget/media'
-
+MEDIA_ROOT = os.path.join(ROOT_DIR, 'media'),
+    
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
@@ -72,8 +72,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    #'/theme/static/',
-    '/home/palle/Project/django/virtual_vb/vb/vamlingbolaget/theme/static',
+    os.path.join(ROOT_DIR, '/theme/static'),
     
 )
 
@@ -116,8 +115,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.    
     #'/usr/lib/python2.7/site-packages/django/contrib/admin/media',
-    '/home/palle/Project/django/virtual_vb/vb/vamlingbolaget/theme/templates',
-    #os.path.join(ROOT_DIR, '/theme/templates'),
+    os.path.join(ROOT_DIR, '/theme/templates'),
     
 )
 
@@ -133,9 +131,10 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     #installed apps
     'imagekit',
-    'south',
-    #OUR APPS
+    #'south',
+    #Our Apps
     'products',
+    #'cart', 
     
 )
 

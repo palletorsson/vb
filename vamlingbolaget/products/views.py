@@ -3,7 +3,7 @@ from django.views.generic import ListView
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 
-from models import Variation, Image
+from models import Variation, ImageVariation
 
 def index(request):
     try:
@@ -12,7 +12,7 @@ def index(request):
     except:
         return HttpResponse(404)
 
-    images = Image.objects.all()
+    images = ImageVariation.objects.all()
     products = zip(products, images)
     print products
     return render_to_response('variation/index.html',
