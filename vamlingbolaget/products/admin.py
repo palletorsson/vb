@@ -1,8 +1,6 @@
 from django.contrib import admin
 from models import *
 
-
-
 class VariationImageInline(admin.StackedInline):
   model = ImageVariation
   max_num=4
@@ -20,6 +18,9 @@ class VariationAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
     list_editable = ('active',)
     list_filter = ('created_at', 'updated_at', 'active', 'article',)
+    search_fields = ['name']
+    list_per_page = 20
+    ordering = ['name']
 
 class ArticleAdmin(admin.ModelAdmin):
     model = Article
@@ -28,14 +29,16 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
     list_editable = ('active',)
     list_filter = ('active', 'type',)
-
+    search_fields = ['sku_number', 'name']
+    list_per_page = 20
+    ordering = ['name']
+    
 class ColorAdmin(admin.ModelAdmin):
     model = Color
     list_display = ('active', 'name', 'quality',)
     list_display_links = ('name',)
     list_editable = ('active', )
     list_filter = ('active', 'quality',)
-
     
 class PatternAdmin(admin.ModelAdmin):
     model = Pattern
@@ -68,8 +71,11 @@ class ImageVariationAdmin(admin.ModelAdmin):
     
     
 class ComboAdmin(admin.ModelAdmin):
-    model = Image
-    
+    model = Image   
+    list_display = ('image', 'pattern', 'color','quality',)
+    list_display_links = ('image',)
+    list_filter = ('quality',)
+ 
 admin.site.register(Variation, VariationAdmin)    
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Size, SizeAdmin)

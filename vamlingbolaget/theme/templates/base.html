@@ -43,15 +43,14 @@
                <li class="">
                     <a href="/products/">Kollektion</a>
               </li>
-             {% with flatpage_list as pages %}
-{% for page in pages %}
-       <li class="">
-             
-<a href="{{ page.url }}">{{ page.title }}</a>
+               <li class="">
+                    <a href="/products/patternandcolor/">Färger och Mönster</a>
               </li>
-
-{% endfor %}
-{% endwith %} 
+              {% load flatpages %}
+              {% get_flatpages as flatpages %}
+                  {% for page in flatpages %}
+                      <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                  {% endfor %}
               </li>
             </ul>
           </div>

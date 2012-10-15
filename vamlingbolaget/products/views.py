@@ -3,12 +3,11 @@ from django.views.generic import ListView
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 
-from models import Variation, ImageVariation
+from models import Variation, ImageVariation, Combo
 
 def index(request):
     try:
         products = Variation.objects.all()
-
     except:
         return HttpResponse(404)
 
@@ -35,6 +34,16 @@ def detail(request, pk):
                               context_instance=RequestContext(request)
                               )
 
+def patternandcolor(request):
+    try:
+        combos = Combo.objects.all().order_by('color','-pattern' )
+    except:
+        return HttpResponse(404)
+
+    return render_to_response('variation/combos.html',
+                             {'combos': combos,  
+                              },
+                             context_instance=RequestContext(request))
 
 
     

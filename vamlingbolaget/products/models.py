@@ -126,6 +126,10 @@ class Combo(models.Model):
     pattern = models.ForeignKey('Pattern')
     color = models.ForeignKey('Color')
 
+    def image(self):
+        return '<img src="../../../media/%s" width="60"/>' % self.file
+    image.allow_tags = True
+
     def __unicode__(self):
         return unicode(self.file)
 
@@ -165,8 +169,8 @@ class Article(TimeStampedActivate):
         super(Article, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return unicode(self.name)
-
+        return unicode(self.name) + " (" + unicode(self.sku_number)+ ")"
+    
 class CartItem(models.Model):
     cart_id = models.CharField(max_length=50)
     article_id  = models.ForeignKey(Article)
