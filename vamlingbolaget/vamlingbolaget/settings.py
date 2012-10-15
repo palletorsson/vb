@@ -131,7 +131,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     #installed apps
     'imagekit',
-    #'south',
+    'south',
     #Our Apps
     'products',
     #'cart', 
