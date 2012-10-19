@@ -2,3 +2,6 @@
 *.pot
 *.pyc
 local_settings.py
+/env
+/.idea
+vamlingbolaget/vb.komodoproject

@@ -19,9 +19,15 @@
         padding-bottom: 40px;
       }
     </style>
-  <script type="text/javascript"
+    
+    <!-- The scripts -->
+   <script type="text/javascript"
             src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js">
     </script>
+	<script src="{{ STATIC_URL }}js/underscore.js" type="text/javascript"> </script>
+	<script src="{{ STATIC_URL }}js/backbone.js" type="text/javascript"> </script>
+	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>
+
     {% block extra_head %}{% endblock %}
     
     <title> {% block title %} Vamlingbolaget {% endblock %} </title>
@@ -67,6 +73,8 @@
     
       {% block content %} {% endblock %}
     </div>
+  <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/app.js" type="text/javascript"> </script>
   
  </body>
 </html>

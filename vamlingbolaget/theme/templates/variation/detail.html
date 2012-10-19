@@ -29,13 +29,11 @@
 			<option value="{{ color.name }}">{{ color.name }}</option>
 		{% endfor %}
 	    </select> 	    
-	    <script> jQuery("#color").val("{{ product.combo.color }}").attr("selected", "selected"); </script>
 	    <select id='pattern'>
 		{% for pattern in patterns %}
 			<option value="{{ pattern.name }}">{{ pattern.name }}</option>
 		{% endfor %}
 	    </select> 	
-	    <script> jQuery("#pattern").val("{{ product.combo.pattern }}").attr("selected", "selected"); </script>
 		</br>
 		</br>
 	    <select id='size'>
@@ -43,7 +41,6 @@
 			<option value="{{ size.name }}">{{ size.name }}</option>
 		{% endfor %}
 	    </select> 	
-	    <script> jQuery("#size").val("Medium").attr("selected", "selected"); </script>
 	
 	</div>
         <img src="{{ product.combo.file.url }}" width="100" />

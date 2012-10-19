@@ -26,16 +26,16 @@ def detail(request, pk):
         images = Variation.get_images(product, pk)
         colors = Color.objects.all()
         patterns = Pattern.objects.all()
-	sizes = Size.objects.all()
+        sizes = Size.objects.all()
     except:
         return HttpResponse(404)
 
     return render_to_response('variation/detail.html',
                               {'product': product,
                                'images': images,
-			       'colors': colors,
-			       'patterns': patterns,
-			       'sizes': sizes },
+                   'colors': colors,
+                   'patterns': patterns,
+                   'sizes': sizes },
                               
                               context_instance=RequestContext(request)
                               )
