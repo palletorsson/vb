@@ -3,8 +3,8 @@ from products.models import *
 import datetime
 
 class CartItem(models.Model):
-    cart_id = models.CharField(max_length=50)
-    article_id  = models.ForeignKey(Article)
+    cart = models.CharField(max_length=50)
+    article = models.ForeignKey(Article)
     color = models.ForeignKey(Color)
     pattern = models.ForeignKey(Pattern)
     size = models.ForeignKey(Size)
@@ -15,7 +15,7 @@ class CartItem(models.Model):
         ordering=['date_added']
     
     def total(self):
-        return self.quantiy * self.article.price
+        return self.quantiy * self.article_id.price
     
     def name(self):
         return self.article.name

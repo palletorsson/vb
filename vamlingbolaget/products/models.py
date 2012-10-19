@@ -148,7 +148,6 @@ class Type(models.Model):
     def __unicode__(self):
         return unicode(self.name)
 
-
 class Article(TimeStampedActivate):
     """
     Article are related to Product.         
@@ -175,26 +174,3 @@ class Article(TimeStampedActivate):
     def __unicode__(self):
         return unicode(self.name) + " (" + unicode(self.sku_number)+ ")"
     
-class CartItem(models.Model):
-    cart_id = models.CharField(max_length=50)
-    article_id  = models.ForeignKey(Article)
-    color = models.ForeignKey(Color)
-    pattern = models.ForeignKey(Pattern)
-    size = models.ForeignKey(Size)
-    date_added = models.DateTimeField(auto_now_add=True)
-    quantity = models.PositiveIntegerField(default=1)
-    
-    class Meta:
-        ordering=['date_added']
-    
-    def total(self):
-        return self.quantiy * self.article_id.price
-    
-    def name(self):
-        return self.article_id.name
-    
-    def price(self):
-        return self.article_id.price * self.quantity
-
-    def __unicode__(self):
-        return "%dx %s" % (self.quantity, self.article_id.name)
