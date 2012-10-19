@@ -20,19 +20,18 @@ class Migration(SchemaMigration):
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
             ('article', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Article'])),
-            ('color', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Color'])),
-            ('pattern', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Pattern'])),
+            ('combo', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Combo'])),
         ))
         db.send_create_signal('products', ['Variation'])
 
-        # Adding model 'Image'
-        db.create_table('products_image', (
+        # Adding model 'ImageVariation'
+        db.create_table('products_imagevariation', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('file', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
             ('variation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Variation'])),
             ('is_featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('file', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
         ))
-        db.send_create_signal('products', ['Image'])
+        db.send_create_signal('products', ['ImageVariation'])
 
         # Adding model 'Size'
         db.create_table('products_size', (
@@ -46,7 +45,6 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=20)),
             ('quality', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Quality'])),
-            ('file', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal('products', ['Color'])
@@ -56,7 +54,6 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=20)),
             ('quality', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Quality'])),
-            ('file', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal('products', ['Pattern'])
@@ -70,11 +67,21 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('products', ['Quality'])
 
+        # Adding model 'Combo'
+        db.create_table('products_combo', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('file', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
+            ('quality', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Quality'])),
+            ('pattern', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Pattern'])),
+            ('color', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Color'])),
+            ('active', self.gf('django.db.models.fields.BooleanField')(default=False)),
+        ))
+        db.send_create_signal('products', ['Combo'])
+
         # Adding model 'Type'
         db.create_table('products_type', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('quality', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Quality'])),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal('products', ['Type'])
@@ -85,8 +92,8 @@ class Migration(SchemaMigration):
             ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=160)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255, blank=True)),
             ('sku_number', self.gf('django.db.models.fields.CharField')(max_length=10)),
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('quality', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Quality'])),
@@ -101,8 +108,8 @@ class Migration(SchemaMigration):
         # Deleting model 'Variation'
         db.delete_table('products_variation')
 
-        # Deleting model 'Image'
-        db.delete_table('products_image')
+        # Deleting model 'ImageVariation'
+        db.delete_table('products_imagevariation')
 
         # Deleting model 'Size'
         db.delete_table('products_size')
@@ -115,6 +122,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Quality'
         db.delete_table('products_quality')
+
+        # Deleting model 'Combo'
+        db.delete_table('products_combo')
 
         # Deleting model 'Type'
         db.delete_table('products_type')
@@ -132,23 +142,31 @@ class Migration(SchemaMigration):
             'file': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '160'}),
             'price': ('django.db.models.fields.IntegerField', [], {}),
             'quality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Quality']"}),
             'sku_number': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255', 'blank': 'True'}),
             'type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Type']"})
         },
         'products.color': {
             'Meta': {'object_name': 'Color'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'file': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'quality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Quality']"})
         },
-        'products.image': {
-            'Meta': {'object_name': 'Image'},
+        'products.combo': {
+            'Meta': {'object_name': 'Combo'},
+            'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'color': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Color']"}),
+            'file': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'pattern': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Pattern']"}),
+            'quality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Quality']"})
+        },
+        'products.imagevariation': {
+            'Meta': {'object_name': 'ImageVariation'},
             'file': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -157,7 +175,6 @@ class Migration(SchemaMigration):
         'products.pattern': {
             'Meta': {'object_name': 'Pattern'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'file': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'quality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Quality']"})
@@ -178,21 +195,19 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Type'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'quality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Quality']"})
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         'products.variation': {
             'Meta': {'object_name': 'Variation'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'article': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Article']"}),
-            'color': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Color']"}),
+            'combo': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Combo']"}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
-            'pattern': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Pattern']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         }

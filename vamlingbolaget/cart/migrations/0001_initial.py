@@ -11,7 +11,7 @@ class Migration(SchemaMigration):
         # Adding model 'CartItem'
         db.create_table('cart_cartitem', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('cart_id', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('cart', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('article', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Article'])),
             ('color', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Color'])),
             ('pattern', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Pattern'])),
@@ -31,7 +31,7 @@ class Migration(SchemaMigration):
         'cart.cartitem': {
             'Meta': {'ordering': "['date_added']", 'object_name': 'CartItem'},
             'article': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Article']"}),
-            'cart_id': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'cart': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'color': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Color']"}),
             'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -57,7 +57,6 @@ class Migration(SchemaMigration):
         'products.color': {
             'Meta': {'object_name': 'Color'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'file': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'quality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Quality']"})
@@ -65,7 +64,6 @@ class Migration(SchemaMigration):
         'products.pattern': {
             'Meta': {'object_name': 'Pattern'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'file': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'quality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Quality']"})
@@ -86,8 +84,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Type'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'quality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Quality']"})
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         }
     }
 
