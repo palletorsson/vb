@@ -7,28 +7,54 @@
     <div class="row-fluid">
     <div class="span6"><img src="{{ images.image_600.url }}" />
         </br>
+	<h5> {{ product.article.name }} i {{ product.combo.color }} {{ product.combo.pattern }} </h5>  
     </div>
     
     <div class="span6">
-        <h4> {{ product.name }} </h4>
-        <hr/>
-        <div class="span6">
-        Artikelnummer: {{ product.article.sku_number }}  
+     
+        <div class="span7">
+		<h4> {{ product.article.name }} </h4>
+		Artikelnummer: {{ product.article.sku_number }}  
         </div>
 
         <img src="{{ product.article.file.url }}" >  </br>
         <hr/>
+            <h4> Färg och Mönster </h4>  
+        <hr/>
 
    
-        <div class="span6">
-            Färg: {{ product.combo.color }} </br>
-            Mönster: {{ product.combo.pattern }}
-        </div>
+        <div class="span7">
+	    <select id="color">
+		{% for color in colors %}
+			<option value="{{ color.name }}">{{ color.name }}</option>
+		{% endfor %}
+	    </select> 	    
+	    <script> jQuery("#color").val("{{ product.combo.color }}").attr("selected", "selected"); </script>
+	    <select id='pattern'>
+		{% for pattern in patterns %}
+			<option value="{{ pattern.name }}">{{ pattern.name }}</option>
+		{% endfor %}
+	    </select> 	
+	    <script> jQuery("#pattern").val("{{ product.combo.pattern }}").attr("selected", "selected"); </script>
+		</br>
+		</br>
+	    <select id='size'>
+		{% for size in sizes %}
+			<option value="{{ size.name }}">{{ size.name }}</option>
+		{% endfor %}
+	    </select> 	
+	    <script> jQuery("#size").val("Medium").attr("selected", "selected"); </script>
+	
+	</div>
         <img src="{{ product.combo.file.url }}" width="100" />
         <hr/>
-        <div class="span6">
-        <strong> Pris: {{ product.article.price }} kr </strong>
+
+        
+	<div class="span7">
+        <h4> Pris: {{ product.article.price }} kr </h4>
+
         </div>
+	
             <button class="btn btn-success" type="button">Lägg till i Köplista</button>
         <hr/>
         

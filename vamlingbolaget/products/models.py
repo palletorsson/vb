@@ -92,6 +92,7 @@ class Color(models.Model):
     quality = models.ForeignKey('Quality')
     active = models.BooleanField("Active")
     
+    
     def __unicode__(self):
         return unicode(self.name)
 
@@ -115,6 +116,8 @@ class Quality(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     active = models.BooleanField("Active")
+
+
 
     def __unicode__(self):
         return unicode(self.name)

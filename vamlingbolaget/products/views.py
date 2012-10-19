@@ -3,7 +3,7 @@ from django.views.generic import ListView
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 
-from models import Variation, ImageVariation, Combo
+from models import Variation, ImageVariation, Combo, Color, Pattern, Size
 
 def index(request):
     try:
@@ -24,12 +24,18 @@ def detail(request, pk):
         product = Variation.objects.get(pk=pk)
         name = product.name
         images = Variation.get_images(product, pk)
+        colors = Color.objects.all()
+        patterns = Pattern.objects.all()
+	sizes = Size.objects.all()
     except:
         return HttpResponse(404)
 
     return render_to_response('variation/detail.html',
                               {'product': product,
-                               'images': images },
+                               'images': images,
+			       'colors': colors,
+			       'patterns': patterns,
+			       'sizes': sizes },
                               
                               context_instance=RequestContext(request)
                               )
