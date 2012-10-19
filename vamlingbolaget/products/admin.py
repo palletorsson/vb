@@ -6,10 +6,6 @@ class VariationImageInline(admin.StackedInline):
   max_num=4
   extra=1
   
-class CartAdmin(admin.ModelAdmin):
-    model = CartItem
-
-
 class VariationAdmin(admin.ModelAdmin):
     model = Variation
     inlines = [VariationImageInline,]
@@ -90,5 +86,3 @@ admin.site.register(Type, TypeAdmin)
 admin.site.register(ImageVariation, ImageVariationAdmin)
 
 admin.site.register(Combo, ComboAdmin)
-
-admin.site.register(CartItem, CartAdmin)    

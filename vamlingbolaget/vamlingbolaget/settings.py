@@ -130,11 +130,12 @@ INSTALLED_APPS = (
     'grappelli',
     'django.contrib.admin',
     #installed apps
+    'tastypie',
     'imagekit',
     'south',
     #Our Apps
     'products',
-    #'cart', 
+    'cart', 
     
 )
 
