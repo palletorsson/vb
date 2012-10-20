@@ -1,7 +1,7 @@
 
 //en instans
 MyModel = Backbone.Tastypie.Model.extend({
-    urlRoot: '/api/cart/cartitem/',
+    urlRoot: '/api/cart/cart/cartitem/',
     defaults: {
         'cart': 'no cart yet'
     }
@@ -9,7 +9,7 @@ MyModel = Backbone.Tastypie.Model.extend({
 
 //lista av instanser
 MyCollection = Backbone.Tastypie.Collection.extend({
-    urlRoot: '/api/cart/cartitem/',
+    urlRoot: '/api/cart/cart/cartitem/',
     model: MyModel
 })
 
@@ -29,7 +29,7 @@ MyItemView = Backbone.View.extend({
     },
     //lägger till att man kan klicka på raden och spara ner att de ar klara
     events : {
-        'click': 'onClick', //binder onClick till clicket 
+        'click': 'onClick' //binder onClick till clicket
     
     },
 
@@ -40,15 +40,17 @@ MyItemView = Backbone.View.extend({
 	var sku_number = $('#sku_number').text();
 	var cart = $('#sku_number').text();
 	var pattern = parseInt($('#pattern option:selected').val());
-	var color = parseInt($('#color option:selected').val());
+	var color_pk = parseInt($('#color option:selected').val());
 	var size = parseInt($('#size option:selected').val());
-	var article = parseInt($('#article_pk').text());
-        new_item.set({'cart': cart, 
-	              'article': '2',
-                      'color': '',
-                      'pattern': pattern,
-                      'size': size});
-	console.log(article +"cart:"+cart+ " color: "+color+"pattern: "+pattern+ "size: " +size)
+	var article_pk = parseInt($('#article_pk').text());
+        new_item.set({
+                  'cart': cart,
+	              'article.id': article_pk,
+                  'color.id': color_pk,
+                  'pattern': pattern,
+                  'size': size
+                     });
+	    console.log(article_pk +"cart:"+cart+ " color: "+color_pk+"pattern: "+pattern+ "size: " +size)
         new_item.save();
     }
 })

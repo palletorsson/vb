@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-from django.views.generic import ListView
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 

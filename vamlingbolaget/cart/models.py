@@ -2,10 +2,11 @@ from django.db import models
 from products.models import * 
 import datetime
 
+
 class CartItem(models.Model):
     cart = models.CharField(max_length=50, default="1")
-    article = models.ForeignKey(Article, default="1")
-    color = models.ForeignKey(Color, default="1")
+    article = models.ForeignKey(Article, default=1)
+    color = models.ForeignKey(Color, default=1)
     pattern = models.ForeignKey(Pattern, default="1")
     size = models.ForeignKey(Size, default="1")
     date_added = models.DateTimeField(auto_now_add=True)

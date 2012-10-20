@@ -1,26 +1,25 @@
 # cart/api.py
-from tastypie.resources import ModelResource, fields, utils
+from tastypie import fields, utils
+from tastypie.resources import ModelResource, Resource
+
+from tastypie.api import Api #, CartItemResource
+
 
 from tastypie.authorization import DjangoAuthorization
 from tastypie.authentication import Authentication
 
-from cart.models import CartItem
-from products.models import Article
+from products.api import ArticleResource, ColorResource
 
-class ArticleResource(ModelResource):
-    class Meta:
-        queryset = Article.objects.all()
-        resource_name = 'article'
+from models import CartItem
 
 class CartItemResource(ModelResource):
-
-    #articles = fields.ToManyField('ArticleResource', 'article', related_name='article')
+    article = fields.ToOneField(ArticleResource, 'article')
+    color = fields.ToOneField(ColorResource, 'color')
 
     class Meta:
         queryset = CartItem.objects.all()
         resource_name = 'cartitem'
-        list_allowed_methods = ['get', 'post']
         authorization = DjangoAuthorization()
         authentication = Authentication()
-	#excludes ['']
+
 	
