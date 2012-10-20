@@ -1,23 +1,23 @@
 
 //en instans
-CartItemModel = Backbone.Tastypie.Model.extend({
-    urlRoot: '/api/cart/cartitem/',
+MyModel = Backbone.Tastypie.Model.extend({
+    urlRoot: '/api/cart/cart/cartitem/',
     defaults: {
-        'label': 'no name yet'
+        'cart': 'no cart yet'
     }
 });
 
 //lista av instanser
-CartItemCollection = Backbone.Tastypie.Collection.extend({
-    urlRoot: '/api/cart/cartitem/',
-    model: CartItemModel
+MyCollection = Backbone.Tastypie.Collection.extend({
+    urlRoot: '/api/cart/cart/cartitem/',
+    model: MyModel
 })
 
 
 //vyer //handelbars = ett templatesprak
-CartItemView = Backbone.View.extend({
-    tagName : 'li', //skapa vyn for varje rad = li-tag
-    templateHtml: '<span> <%= cart %> </span>',
+MyItemView = Backbone.View.extend({
+    tagName : 'span', //skapa vyn for varje rad = li-tag
+    templateHtml: '<span class="btn btn-success"> Lägg till i Köplista </span>',
     
     initialize : function(){
         this.template = _.template(this.templateHtml) //_ ar underscoreklassen som man typ extendar har
@@ -27,22 +27,47 @@ CartItemView = Backbone.View.extend({
     render : function(){
         this.$el.html(this.template(this.model.toJSON()));
     },
+    //lägger till att man kan klicka på raden och spara ner att de ar klara
+    events : {
+        'click': 'onClick' //binder onClick till clicket
     
-})
+    },
 
-CartView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad i jquery, dessa skapas automatiskt och ar egenskaper till objektet
+
+
+    onClick : function(){
+        var new_item = new MyModel();
+        var sku_number = $('#sku_number').text();
+        var cart = $('#sku_number').text();
+        var pattern_id = parseInt($('#pattern option:selected').val());
+        var color_id = parseInt($('#color option:selected').val());
+        var size_id = parseInt($('#size option:selected').val());
+        var article_id = parseInt($('#article_pk').text());
+            new_item.set({
+                      'cart': cart,
+                      'article.id': article_id,
+                      'color.id': color_id,
+                      'pattern.id': pattern_id,
+                      'size.id': size_id,
+                      'quantity': '2'
+                         });
+            new_item.save();
+        }
+})
+    
+
+MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad i jquery, dessa skapas automatiskt och ar egenskaper till objektet
     tagName : 'div', //skapa vyn i vad yttre koden
-    templateHtml: '<ul id="cartList"> </ul>', //inre koden
+    templateHtml: '<ul id="myList"> </ul>', //inre koden
     
     initialize : function(){
         this.template = _.template(this.templateHtml)
-        this.list = new CartItemCollection()
+        this.list = new MyCollection()
         var _this = this;
         this.list.bind('reset', function(){ //binder till event
             _this.onReset()  //nar listan populeras, kor onReset
         });
         this.list.fetch()
-        console.log('int')
     },
 
     onReset: function(){
@@ -52,36 +77,13 @@ CartView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrapp
     render : function(){
         this.$el.html(this.template())
         _.each(this.list.models, function(elem){
-            var view = new CartItemView({model:elem})
-            jQuery('#cartList').append(view.$el);
+            var view = new MyItemView({model:elem})
+            jQuery('#myList').append(view.$el);
         })
         this.template();
-    },
-    //lägger till att man kan klicka på raden och spara ner att de ar klara
-    /*events: {
-        'click .btn-success': 'addItem' //binder onClick till clicket 
-    },*/
-    
-    addItem: function(){
-        console.log('click')
-        /*var done = this.model.get('cart');
-        var label = this.model.get('label');
-        this.model.set('done', !done);
-        this.model.set('label','tjenis');
-        this.model.save();*/
     }
 })
 
-var appView = new CartView();
+var appView = new MyView();
 
-jQuery('#app-canvas').append(appView.$el)
-
-jQuery('.btn-success').click(function(){
-    var cartitem = new CartItemModel();
-    //cartitem.set('cart','Ny cart');
-    var cartitemcoll = new CartItemCollection({model:cartitem});
-    var foo = new CartItemView({model:cartitemcoll});
-    console.log(foo)
-    cartitem.save()
-});
-
+jQuery('#app-canvas').html(appView.$el)
