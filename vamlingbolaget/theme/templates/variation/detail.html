@@ -14,7 +14,8 @@
      
         <div class="span7">
 		<h4> {{ product.article.name }} </h4>
-		Artikelnummer: {{ product.article.sku_number }}  
+		Artikelnummer: <span id="sku_number">{{ product.article.sku_number }}</span>  
+		 <span id="article_pk">{{ product.article.pk }}</span>  
         </div>
 
         <img src="{{ product.article.file.url }}" >  </br>
@@ -26,19 +27,19 @@
         <div class="span7">
 	    <select id="color">
 		{% for color in colors %}
-			<option value="{{ color.name }}">{{ color.name }}</option>
+			<option value="{{ color.pk }}">{{ color.name }}</option>
 		{% endfor %}
 	    </select> 	    
 	    <select id='pattern'>
 		{% for pattern in patterns %}
-			<option value="{{ pattern.name }}">{{ pattern.name }}</option>
+			<option value="{{ pattern.pk }}">{{ pattern.name }}</option>
 		{% endfor %}
 	    </select> 	
 		</br>
 		</br>
 	    <select id='size'>
 		{% for size in sizes %}
-			<option value="{{ size.name }}">{{ size.name }}</option>
+			<option value="{{ size.pk }}">{{ size.name }}</option>
 		{% endfor %}
 	    </select> 	
 	
@@ -54,7 +55,11 @@
 	
             <button class="btn btn-success" type="button">Lägg till i Köplista</button>
         <hr/>
-        
+	<div id='app-canvas'> iiiiiiiiiiiiiiii 
+	         <button class="add_item" type="button">ADD</button>
+	</div>    
+	<hr/>
+            
         <div class="span6">
         Kvalitet: {{ product.article.quality }}
         </br>        </br>        </br>
