@@ -4,7 +4,7 @@ from django.contrib import admin
 from tastypie.api import Api
 
 from cart.api import CartItemResource
-from products.api import ArticleResource, ColorResource
+from products.api import ArticleResource, ColorResource, PatternResource, SizeResource
 
 admin.autodiscover()
 
@@ -20,6 +20,14 @@ color_resource = ColorResource()
 colorApi = Api(api_name = 'color')
 colorApi.register(ColorResource())
 
+pattern_resource = PatternResource()
+patternApi = Api(api_name = 'pattern')
+patternApi.register(PatternResource())
+
+size_resource = SizeResource()
+sizeApi = Api(api_name = 'size')
+sizeApi.register(SizeResource())
+
 urlpatterns = patterns('',
     url(r'^products/', include('products.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
@@ -27,7 +35,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/cart/', include(cartApi.urls)),
     url(r'^api/products/', include(articleApi.urls)),
-    url(r'^api/color/', include(colorApi.urls)),
+    url(r'^api/colors/', include(colorApi.urls)),
+    url(r'^api/pattern/', include(patternApi.urls)),
+    url(r'^api/size/', include(sizeApi.urls)),
 )
 
 

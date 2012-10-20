@@ -37,22 +37,22 @@ MyItemView = Backbone.View.extend({
 
     onClick : function(){
         var new_item = new MyModel();
-	var sku_number = $('#sku_number').text();
-	var cart = $('#sku_number').text();
-	var pattern = parseInt($('#pattern option:selected').val());
-	var color_pk = parseInt($('#color option:selected').val());
-	var size = parseInt($('#size option:selected').val());
-	var article_pk = parseInt($('#article_pk').text());
-        new_item.set({
-                  'cart': cart,
-	              'article.id': article_pk,
-                  'color.id': color_pk,
-                  'pattern': pattern,
-                  'size': size
-                     });
-	    console.log(article_pk +"cart:"+cart+ " color: "+color_pk+"pattern: "+pattern+ "size: " +size)
-        new_item.save();
-    }
+        var sku_number = $('#sku_number').text();
+        var cart = $('#sku_number').text();
+        var pattern_id = parseInt($('#pattern option:selected').val());
+        var color_id = parseInt($('#color option:selected').val());
+        var size_id = parseInt($('#size option:selected').val());
+        var article_id = parseInt($('#article_pk').text());
+            new_item.set({
+                      'cart': cart,
+                      'article.id': article_id,
+                      'color.id': color_id,
+                      'pattern.id': pattern_id,
+                      'size.id': size_id,
+                      'quantity': '2'
+                         });
+            new_item.save();
+        }
 })
     
 
