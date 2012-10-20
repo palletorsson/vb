@@ -43,6 +43,7 @@ MyItemView = Backbone.View.extend({
         var color_id = parseInt($('#color option:selected').val());
         var size_id = parseInt($('#size option:selected').val());
         var article_id = parseInt($('#article_pk').text());
+
             new_item.set({
                       'cart': cart,
                       'article.id': article_id,
@@ -51,6 +52,7 @@ MyItemView = Backbone.View.extend({
                       'size.id': size_id,
                       'quantity': '2'
                          });
+
             new_item.save();
         }
 })
