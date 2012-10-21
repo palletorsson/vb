@@ -25,14 +25,14 @@
 
    
         <div class="span7">
-	    <select id="color">
+	    <select class="changonselect" id="color">
 		{% for color in colors %}
 			<option value="{{ color.pk }}">{{ color.name }}</option>
 		{% endfor %}
 	    </select> 	    
-	    <select id='pattern'>
+	    <select class="changonselect" id='pattern'>
 		{% for pattern in patterns %}
-			<option value="{{ pattern.pk }}">{{ pattern.name }}</option>
+			<option  value="{{ pattern.pk }}">{{ pattern.name }}</option>
 		{% endfor %}
 	    </select> 	
 		</br>
@@ -44,20 +44,40 @@
 	    </select> 	
 	
 	</div>
-        <img src="{{ product.combo.file.url }}" width="100" />
+        <img id="pattern_color_image" src="{{ product.combo.file.url }}" width="100" />
         <hr/>
 
-        
-	<div class="span7">
+
+        <div id="changetext"></div>
+        <script>
+            $(".changonselect").change(function () {
+                var str = "{{ product.article.name }}"+ " i ";
+                var folder = "/media/combo/";
+                var img = "";
+                $(".changonselect option:selected").each(function () {
+                    str += $(this).text() + " ";
+                    var pattern_num = $("#pattern").val();
+                    var color_num = $("#color").val();
+                    img = folder+"m"+pattern_num+"c"+color_num+".jpg";
+                });
+                $("#changetext").text(str);
+                $("#changeimg").text(img);
+                $("#pattern_color_image").attr("src", img);
+            })
+                    .change();
+
+        </script>
+
+
+        <div class="span7">
         <h4> Pris: {{ product.article.price }} kr </h4>
 
         </div>
-	
-            <button class="btn btn-success" type="button">Lägg till i Köplista</button>
+
+        <div id='app-canvas'>
+        <button class="btn btn-success" type="button">Lägg till i Köplista</button>
+        </div>
         <hr/>
-	<div id='app-canvas'> iiiiiiiiiiiiiiii 
-	         <button class="add_item" type="button">ADD</button>
-	</div>    
 	<hr/>
             
         <div class="span6">
