@@ -8,14 +8,22 @@ from tastypie.authentication import Authentication
 
 from products.api import ArticleResource, ColorResource
 
-from models import CartItem
+from models import CartItem, Cart
+
+class CartResource(ModelResource):
+    class Meta:
+        queryset = Cart.objects.all()[:1]
+        resource_name = 'cart'
+        authorization = DjangoAuthorization()
+        authentication = Authentication()
+
 
 class CartItemResource(ModelResource):
     article = fields.ToOneField(ArticleResource, 'article')
     color = fields.ToOneField(ColorResource, 'color')
 
     class Meta:
-        queryset = CartItem.objects.all()
+        queryset = CartItem.objects.all()[:2]
         resource_name = 'cartitem'
         authorization = DjangoAuthorization()
         authentication = Authentication()

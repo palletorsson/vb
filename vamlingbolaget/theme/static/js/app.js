@@ -39,10 +39,11 @@ MyItemView = Backbone.View.extend({
         var new_item = new MyModel();
         var sku_number = $('#sku_number').text();
         var cart = $('#sku_number').text();
-        var pattern_id = parseInt($('#pattern option:selected').val());
+        var pattern_id = $('#pattern option:selected').val();
         var color_id = parseInt($('#color option:selected').val());
         var size_id = parseInt($('#size option:selected').val());
         var article_id = parseInt($('#article_pk').text());
+        console.log('Pattern: '+ pattern_id + 'Color: '+ color_id + 'Size: '+ size_id);
             new_item.set({
                       'cart': cart,
                       'article.id': article_id,
@@ -53,7 +54,7 @@ MyItemView = Backbone.View.extend({
                          });
             new_item.save();
         }
-})
+    })
     
 
 MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad i jquery, dessa skapas automatiskt och ar egenskaper till objektet

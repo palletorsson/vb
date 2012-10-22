@@ -8,23 +8,23 @@ from products.api import ArticleResource, ColorResource, PatternResource, SizeRe
 
 admin.autodiscover()
 
-cart_resource = CartItemResource()
+#cart_resource = CartItemResource()
 cartApi = Api(api_name = 'cart')
 cartApi.register(CartItemResource())
 
-article_resource = ArticleResource()
+#article_resource = ArticleResource()
 articleApi = Api(api_name = 'articles')
 articleApi.register(ArticleResource())
 
-color_resource = ColorResource()
+#color_resource = ColorResource()
 colorApi = Api(api_name = 'color')
 colorApi.register(ColorResource())
 
-pattern_resource = PatternResource()
+#pattern_resource = PatternResource()
 patternApi = Api(api_name = 'pattern')
 patternApi.register(PatternResource())
 
-size_resource = SizeResource()
+#size_resource = SizeResource()
 sizeApi = Api(api_name = 'size')
 sizeApi.register(SizeResource())
 
