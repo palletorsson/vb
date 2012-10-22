@@ -52,6 +52,7 @@ MyItemView = Backbone.View.extend({
                       'size.id': size_id,
                       'quantity': '2'
                          });
+
             new_item.save();
         }
     })
@@ -79,7 +80,7 @@ MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad
         this.$el.html(this.template())
         _.each(this.list.models, function(elem){
             var view = new MyItemView({model:elem})
-            jQuery('#myList').append(view.$el);
+            jQuery('#myList').html(view.$el);
         })
         this.template();
     }
@@ -87,4 +88,5 @@ MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad
 
 var appView = new MyView();
 
+jQuery('#app-canvas').html('')
 jQuery('#app-canvas').html(appView.$el)
