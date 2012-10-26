@@ -88,6 +88,15 @@ STATICFILES_FINDERS = (
 SECRET_KEY = '@4ysa4i353-b!iwff6())2455g^s#zab!ep$bgn2**yjtii$j%'
 
 # List of callables that know how to import templates from various sources.
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.request',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'zinnia.context_processors.version',) # Optional
+
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
@@ -126,17 +135,22 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.flatpages', 
+    'django.contrib.flatpages',
+    #"django.contrib.comments",
+    #'tagging',
+    #'mptt',
+    #'zinnia',
     'grappelli',
     'django.contrib.admin',
     #installed apps
+
     'tastypie',
     'imagekit',
     'south',
     #Our Apps
     'products',
-    'cart', 
-    
+    'cart',
+
 )
 
 # A sample logging configuration. The only tangible logging

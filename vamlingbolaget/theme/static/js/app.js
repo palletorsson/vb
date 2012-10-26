@@ -1,7 +1,7 @@
 
 //en instans
 MyModel = Backbone.Tastypie.Model.extend({
-    urlRoot: '/api/cart/cart/cartitem/',
+    urlRoot: '/api/v1/cartitem/',
     defaults: {
         'cart': 'no cart yet'
     }
@@ -9,7 +9,7 @@ MyModel = Backbone.Tastypie.Model.extend({
 
 //lista av instanser
 MyCollection = Backbone.Tastypie.Collection.extend({
-    urlRoot: '/api/cart/cart/cartitem/',
+    urlRoot: '/api/v1/cartitem/',
     model: MyModel
 })
 
@@ -33,23 +33,25 @@ MyItemView = Backbone.View.extend({
     
     },
 
-
-
     onClick : function(){
         var new_item = new MyModel();
         var sku_number = $('#sku_number').text();
         var cart = $('#sku_number').text();
-        var pattern_id = parseInt($('#pattern option:selected').val());
-        var color_id = parseInt($('#color option:selected').val());
-        var size_id = parseInt($('#size option:selected').val());
-        var article_id = parseInt($('#article_pk').text());
+        var pattern_id = $('#pattern option:selected').val();
+        var color_id = +$('#color option:selected').val();
+        var size_id = $('#size option:selected').val();
+        var article_id = $('#article_pk').text();
+        article_id = "api/v1/articles/"+article_id+"/";
+        color_id  = "api/v1/colors/"+color_id+"/";
+        pattern_id  = "api/v1/pattern/"+pattern_id+"/";
+        size_id = "api/v1/size/"+size_id+"/";
 
-            new_item.set({
+        new_item.set({
                       'cart': cart,
                       'article.id': article_id,
-                      'color.id': color_id,
-                      'pattern.id': pattern_id,
-                      'size.id': size_id,
+                      'color': color_id,
+                      'pattern': pattern_id,
+                      'size': size_id,
                       'quantity': '2'
                          });
 
@@ -87,7 +89,5 @@ MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad
 })
 
 var appView = new MyView();
-
-jQuery('#app-canvas').html('')
 
 jQuery('#app-canvas').html(appView.$el)
