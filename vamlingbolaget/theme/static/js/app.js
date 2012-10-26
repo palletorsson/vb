@@ -45,7 +45,6 @@ MyItemView = Backbone.View.extend({
         color_id  = "api/v1/colors/"+color_id+"/";
         pattern_id  = "api/v1/pattern/"+pattern_id+"/";
         size_id = "api/v1/size/"+size_id+"/";
-
         new_item.set({
                       'cart': cart,
                       'article.id': article_id,
@@ -57,7 +56,7 @@ MyItemView = Backbone.View.extend({
 
             new_item.save();
         }
-})
+    })
     
 
 MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad i jquery, dessa skapas automatiskt och ar egenskaper till objektet
@@ -90,4 +89,8 @@ MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad
 
 var appView = new MyView();
 
+<<<<<<< HEAD
+jQuery('#app-canvas').html('')
+=======
+>>>>>>> f185a8975b530cdcf7816be987a93aeffa0828fd
 jQuery('#app-canvas').html(appView.$el)

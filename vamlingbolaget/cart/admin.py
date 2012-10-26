@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import CartItem
+from models import CartItem, Cart
 
 class CartAdmin(admin.ModelAdmin):
     model = CartItem
@@ -8,6 +8,7 @@ class CartAdmin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['cart', 'date_added',]
 
-admin.site.register(CartItem, CartAdmin)    
+admin.site.register(CartItem, CartAdmin)
+admin.site.register(Cart)
 
   

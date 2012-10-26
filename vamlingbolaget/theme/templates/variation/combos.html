@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+   <div class="span10">
+
     <legend>Färger och Mönster</legend> 
         {% for item in combos %}
             <div><img src="{{  item.file.url }}" />
            {{ item.pattern }}  {{ item.color }} 
             </hr></div></br>
         {% endfor %}
+
 {% endblock %}
 

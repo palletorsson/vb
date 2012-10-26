@@ -96,7 +96,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
-    'zinnia.context_processors.version',) # Optional
+    #'zinnia.context_processors.version',
+    ) # Optional
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',

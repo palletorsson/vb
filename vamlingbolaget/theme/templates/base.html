@@ -26,10 +26,7 @@
     </script>
 	<script src="{{ STATIC_URL }}js/underscore.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/backbone.js" type="text/javascript"> </script>
-	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>
-
-    {% block extra_head %}{% endblock %}
-    
+	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>    
     <title> {% block title %} Vamlingbolaget {% endblock %} </title>
   </head>
  <body data-spy="scroll" data-target=".bs-docs-sidebar">
@@ -66,15 +63,25 @@
         </div>
       </div>  
     </div>
+    <div class="container"> <!--this is for the left margin -->
 
-     <div class="container">
-
-      {% block sidebar %} {% endblock %}
-    
-      {% block content %} {% endblock %}
+      <div class="pagetitle">
+        {% block pagetitle %} {% endblock %}
+        {% block pagedesc %} {% endblock %}
+      </div>
+      
+        {% block allcontent %} 
+          {% block sidebar %} BASE SIDEBAR {% endblock %}
+          {% block content %} {% endblock %}
+        {% endblock %}
+      <footer>
+        {% block footer %} FOOTER BASE.HTML{% endblock %}
+      </footer>
     </div>
-  <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
+    
+
   <script src="{{ STATIC_URL }}js/app.js" type="text/javascript"> </script>
+  <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
   
  </body>
 </html>

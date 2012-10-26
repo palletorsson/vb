@@ -1,4 +1,4 @@
-# cart/api.py
+# products/api.py
 from tastypie import fields, utils
 from tastypie.resources import ModelResource, Resource
 from tastypie.authorization import DjangoAuthorization
@@ -28,8 +28,8 @@ class PatternResource(ModelResource):
         authentication = Authentication()
 
 class SizeResource(ModelResource):
-        class Meta:
-            queryset = Size.objects.all()
-            resource_name = 'size'
-            authorization = DjangoAuthorization()
-            authentication = Authentication()
+    class Meta:
+        queryset = Size.objects.all()
+        resource_name = 'size'
+        authorization = DjangoAuthorization()
+        authentication = Authentication()
