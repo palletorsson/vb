@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 
+from filebrowser.sites import site
+
 from tastypie.api import Api
 
 from cart.api import CartItemResource
@@ -20,6 +22,9 @@ v1_api.register(SizeResource())
 
 urlpatterns = patterns('',
     url(r'^products/', include('products.urls')),
+
+
+    url(r'^admin/filebrowser/', include(site.urls)),
 
     url(r'^grappelli/', include('grappelli.urls')),
 

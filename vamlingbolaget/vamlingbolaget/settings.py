@@ -66,6 +66,7 @@ STATIC_ROOT = ROOT_DIR
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+DIRECTORY =  os.path.join(ROOT_DIR, 'media/uploads/')
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -141,15 +142,17 @@ INSTALLED_APPS = (
     #'mptt',
     #'zinnia',
     'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     #installed apps
-
+    'taggit',
     'tastypie',
     'imagekit',
     'south',
     #Our Apps
     'products',
     'cart',
+    'blog',
 
 )
 
