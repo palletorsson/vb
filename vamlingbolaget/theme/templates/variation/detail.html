@@ -1,9 +1,18 @@
 {% extends "base.html" %}
+{% block pagetitle %}
+	<legend>Kollektion / {{ product.name }} </legend>
+{% endblock %}
+
+{% block sidebar %}
+   <div class="span2">
+     SIDEBAR HEJ!
+    </div>
+ 
+{% endblock %}
 
 {% block content %}
 <div class="row-fluid">
-    <div class="span12">
-    <legend>Kollektion / {{ product.name }} </legend>
+    <div class="span10">
     <div class="row-fluid">
     <div class="span6"><img src="{{ images.image_600.url }}" />
         </br>
@@ -79,7 +88,9 @@
         </div>
         <hr/>
 	<hr/>
-            
+
+
+
         <div class="span6">
         Kvalitet: {{ product.article.quality }}
         </br>        </br>        </br>
