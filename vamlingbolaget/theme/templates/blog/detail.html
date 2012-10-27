@@ -1,0 +1,21 @@
+
+{% extends "base.html" %}
+{% block content %}
+hello {{ post }}
+{% if post %}
+</h2> {{ post.title }} <</h2>
+<div class="post_meta">
+    on {{ post.created }}
+</div>
+<div class="post_body">
+    on {{ post.body|safe|linebreaks }}
+</div>
+<div class="tags">
+    {% if tag in post.tags.all %}
+    {{ tag }} {% if not forloop.last %}, {% endif %}
+    {% endif %}
+</div>
+
+{% endif %}
+{% endblock %}
+    

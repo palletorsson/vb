@@ -89,8 +89,5 @@ MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad
 
 var appView = new MyView();
 
-<<<<<<< HEAD
 jQuery('#app-canvas').html('')
-=======
->>>>>>> f185a8975b530cdcf7816be987a93aeffa0828fd
 jQuery('#app-canvas').html(appView.$el)

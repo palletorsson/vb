@@ -23,7 +23,8 @@ v1_api.register(SizeResource())
 urlpatterns = patterns('',
     url(r'^products/', include('products.urls')),
 
-
+    url(r'^news/', include('blog.urls')),
+    url(r'^tiny_mce/', include('tinymce.urls')),
     url(r'^admin/filebrowser/', include(site.urls)),
 
     url(r'^grappelli/', include('grappelli.urls')),
@@ -38,4 +39,13 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+)
+
+
+urlpatterns += patterns('',
+
+    (r'^tiny_mce/(?P<path>.*)$', 'django.views.static.serve',
+ { 'document_root': '/home/palle/Project/django/virtual_vb/vb/vamlingbolaget/tiny_mce/' }),
+
+
 )
