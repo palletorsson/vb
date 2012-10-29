@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+   <div class="span2">
+     SIDEBAR HEJ!
+    </div>
+{% endblock %}
+
+{% block content %}
+    <legend>Kollektion</legend> 
+        {% for product, image in products %}
+            <div><img src="{{ image.image_300.url }}" />
+            <a href="{{product.pk}}"> {{ product.name }} </a>
+            {{ product.article.price }}
+            </hr></div></br>
+        {% endfor %}
+{% endblock %}

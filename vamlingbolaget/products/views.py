@@ -4,6 +4,19 @@ from django.template import RequestContext
 
 from models import Variation, ImageVariation, Combo, Color, Pattern, Size
 
+def first_page(request):
+	try:
+		products = Variation.objects.all()
+	except:
+		return HttpResponse(404)
+	
+	return render_to_response('variation/first_page.html',
+							  {'products': products,
+							   },
+							  context_instance=RequestContext(request))
+	
+
+
 def index(request):
     try:
         products = Variation.objects.all()
