@@ -2,12 +2,12 @@
 
 {% block sidebar %}
    <div class="span2">
-     SIDEBAR HEJ!
+     SIDEBAR FIRSTPAGE!
     </div>
 {% endblock %}
 
 {% block content %}
-    <legend>Kollektion</legend> 
+    <legend> Kollektion </legend> 
         {% for product, image in products %}
             <div><img src="{{ image.image_300.url }}" />
             <a href="{{product.pk}}"> {{ product.name }} </a>
