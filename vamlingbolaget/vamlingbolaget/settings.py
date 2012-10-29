@@ -50,7 +50,7 @@ USE_TZ = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = os.path.join(ROOT_DIR, 'media'),
-    
+
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
@@ -66,6 +66,7 @@ STATIC_ROOT = ROOT_DIR
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+DIRECTORY =  os.path.join(ROOT_DIR, 'media/upload/')
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -142,15 +143,18 @@ INSTALLED_APPS = (
     #'mptt',
     #'zinnia',
     'grappelli',
+    'filebrowser',
     'django.contrib.admin',
+    'tinymce',
     #installed apps
-
+    'taggit',
     'tastypie',
     'imagekit',
     'south',
     #Our Apps
     'products',
     'cart',
+    'blog',
 
 )
 
@@ -188,3 +192,11 @@ try:
 except ImportError:
     pass
 
+
+TINYMCE_JS_URL = '/tiny_mce/jscripts/tiny_mce/tiny_mce_src.js'
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table",
+    'theme': "simple",
+    }
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True

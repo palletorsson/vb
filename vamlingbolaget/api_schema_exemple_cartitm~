@@ -1,0 +1,27 @@
+
+{"articles": {"list_endpoint": "/api/v1/articles/", "schema": "/api/v1/articles/schema/"},
+ 
+"cartitem": {"list_endpoint": "/api/v1/cartitem/", "schema": "/api/v1/cartitem/schema/"},  <--
+
+"colors": {"list_endpoint": "/api/v1/colors/", "schema": "/api/v1/colors/schema/"}, 
+
+"pattern": {"list_endpoint": "/api/v1/pattern/", "schema": "/api/v1/pattern/schema/"}, 
+
+"size": {"list_endpoint": "/api/v1/size/", "schema": "/api/v1/size/schema/"}}
+
+Cartitem schema:  
+{"allowed_detail_http_methods": ["get", "post", "put", "delete", "patch"], "allowed_list_http_methods": ["get", "post", "put", "delete", "patch"], "default_format": "application/json", "default_limit": 20, "fields": {
+
+"article": {"blank": false, "default": "No default provided.", "help_text": "A single related resource. Can be either a URI or set of nested resource data.", "nullable": false, "readonly": false, "type": "related", "unique": false},
+
+ "cart": {"blank": false, "default": "cart session 1", "help_text": "Unicode string data. Ex: \"Hello World\"", "nullable": false, "readonly": false, "type": "string", "unique": false},
+
+"color": {"blank": false, "default": "No default provided.", "help_text": "A single related resource. Can be either a URI or set of nested resource data.", "nullable": false, "readonly": false, "type": "related", "unique": false}, 
+
+"date_added": {"blank": false, "default": "", "help_text": "A date & time as a string. Ex: \"2010-11-10T03:07:43\"", "nullable": false, "readonly": false, "type": "datetime", "unique": false}, "id": {"blank": false, "default": "", "help_text": "Unicode string data. Ex: \"Hello World\"", "nullable": false, "readonly": false, "type": "string", "unique": true},
+
+"pattern": {"blank": false, "default": "No default provided.", "help_text": "A single related resource. Can be either a URI or set of nested resource data.", "nullable": false, "readonly": false, "type": "relatesized", "unique": false}, 
+
+"quantity": {"blank": false, "default": 1, "help_text": "Integer data. Ex: 2673", "nullable": false, "readonly": false, "type": "integer", "unique": false}, "resource_uri": {"blank": false, "default": "No default provided.", "help_text": "Unicode string data. Ex: \"Hello World\"", "nullable": false, "readonly": true, "type": "string", "unique": false}, 
+
+"size": {"blank": false, "default": "No default provided.", "help_text": "A single related resource. Can be either a URI or set of nested resource data.", "nullable": false, "readonly": false, "type": "related", "unique": false}}}
