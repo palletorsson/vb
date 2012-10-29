@@ -19,6 +19,7 @@ v1_api.register(PatternResource())
 v1_api.register(SizeResource())
 
 urlpatterns = patterns('',
+    url(r'^$', include('products.urls')),
     url(r'^products/', include('products.urls')),
 
     url(r'^grappelli/', include('grappelli.urls')),
