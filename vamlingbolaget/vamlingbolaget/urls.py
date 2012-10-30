@@ -24,8 +24,9 @@ urlpatterns = patterns('',
     url(r'^$', include('products.urls')),
     url(r'^products/', include('products.urls')),
 
+    (r'^ckeditor/', include('ckeditor.urls')),
+
     url(r'^news/', include('blog.urls')),
-    url(r'^tinymce/', include('tinymce.urls')),
     url(r'^admin/filebrowser/', include(site.urls)),
 
     url(r'^grappelli/', include('grappelli.urls')),
@@ -42,10 +43,3 @@ urlpatterns += patterns('',
     (r'^theme/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_URL}),
 )
 
-
-urlpatterns += patterns('',
-    (r'^tinymce/(?P<path>.*)$', 'django.views.static.serve',
-    { 'document_root': '/home/palle/Project/django/virtual_vb/vb/vamlingbolaget/tinymce/' }),
-
-
-)
