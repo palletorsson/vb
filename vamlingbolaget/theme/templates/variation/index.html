@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
+{% block sidebar %}
+<div class="span2">
+    <ul>
+    {% for quality in qualities %}
+    <li>
+        <a href="quality/{{quality.pk}}"> {{ quality.name }} </a>
+   </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
 {% block content %}
     <legend>Kollektion</legend> 
         {% for product, image in products %}
