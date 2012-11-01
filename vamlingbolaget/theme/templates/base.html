@@ -46,7 +46,8 @@
     </script>
 	<script src="{{ STATIC_URL }}js/underscore.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/backbone.js" type="text/javascript"> </script>
-	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>    
+	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>
+
     <title> {% block title %} Vamlingbolaget {% endblock %} </title>
   </head>
  <body data-spy="scroll" data-target=".bs-docs-sidebar">
@@ -83,6 +84,9 @@
                <li class="">
                     <a href="/products/patternandcolor/">Färger och Mönster</a>
               </li>
+               <li class="">
+                    <a href="/news/">Nyheter</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -101,7 +105,16 @@
           SIDEBAR Base!
           {% endblock %}
        </div>
-          {% block content %} FEATURED COLLECTION{% endblock %}
+          {% block content %}
+        <div class="span7">
+          
+          FEATURED COLLECTION
+        
+       </div>
+          
+          
+          
+          {% endblock %}
         {% endblock %}
       <footer>
         {% block footer %}  <img src="{{ STATIC_URL }}img/orange_line.png" width="100%"/>  <br/>

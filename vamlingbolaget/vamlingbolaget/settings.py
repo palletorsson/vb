@@ -141,16 +141,19 @@ INSTALLED_APPS = (
     #"django.contrib.comments",
     #'tagging',
     #'mptt',
+
     #'zinnia',
+    'tinymce',
     'grappelli',
     'filebrowser',
     'django.contrib.admin',
-    'tinymce',
+
     #installed apps
     'taggit',
     'tastypie',
     'imagekit',
     'south',
+    'photologue',
     #Our Apps
     'products',
     'cart',
@@ -192,11 +195,27 @@ try:
 except ImportError:
     pass
 
+URL_TINYMCE = STATIC_URL + "tinymce/jscripts/tiny_mce/"
+PATH_TINYMCE = URL_TINYMCE
 
-TINYMCE_JS_URL = '/tiny_mce/jscripts/tiny_mce/tiny_mce_src.js'
-TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "table",
-    'theme': "simple",
-    }
+FILEBROWSER_JS_URL = STATIC_URL + 'filebrowser/js/TinyMCEAdmin.js'
+
+TINYMCE_JS_URL = STATIC_URL + 'tinymce/jscripts/tiny_mce/tiny_mce_src.js'
+TINYMCE_JS_URL = STATIC_URL +'grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js'
+
+
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = True
+TINYMCE_FILEBROWSER = True
+
+
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace,inlinepopups",
+    'theme': "advanced",
+    'theme_advanced_toolbar_location':"top",
+    'cleanup_on_startup': True,
+    'entity_encoding': 'raw',
+    #'relative_urls': True
+    }
+
+

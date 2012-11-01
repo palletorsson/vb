@@ -25,11 +25,11 @@ urlpatterns = patterns('',
     url(r'^products/', include('products.urls')),
 
     url(r'^news/', include('blog.urls')),
-    url(r'^tiny_mce/', include('tinymce.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
     url(r'^admin/filebrowser/', include(site.urls)),
 
     url(r'^grappelli/', include('grappelli.urls')),
-
+    url(r'^photologue/', include('photologue.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
@@ -37,16 +37,15 @@ urlpatterns = patterns('',
 
 )
 
-
 urlpatterns += patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    (r'^theme/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_URL}),
 )
 
 
 urlpatterns += patterns('',
-
-    (r'^tiny_mce/(?P<path>.*)$', 'django.views.static.serve',
- { 'document_root': '/home/palle/Project/django/virtual_vb/vb/vamlingbolaget/tiny_mce/' }),
+    (r'^tinymce/(?P<path>.*)$', 'django.views.static.serve',
+    { 'document_root': '/home/palle/Project/django/virtual_vb/vb/vamlingbolaget/tinymce/' }),
 
 
 )
