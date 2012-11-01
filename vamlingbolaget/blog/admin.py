@@ -2,17 +2,24 @@ from django.core.urlresolvers import reverse
 from django.contrib import admin
 from django.conf import settings
 from models import Blog, Post
+from django import forms
 
-from django.contrib.flatpages.admin import FlatPageAdmin
+from ckeditor.widgets import CKEditorWidget
+
+
 from django.contrib.flatpages.models import FlatPage
 
-from tinymce.widgets import TinyMCE
+from django.contrib.flatpages.admin import FlatPageAdmin as FlatPageAdminOld
+from django.contrib.flatpages.admin import FlatpageForm as FlatpageFormOld
 
 
-class EventAdmin(admin.ModelAdmin):
-    class Media:
-        js = (settings.TINYMCE_JS_URL,
-              settings.FILEBROWSER_JS_URL,)
+class FlatpageForm(FlatpageFormOld):
+    content = forms.CharField(widget=CKEditorWidget())
+    class Meta:
+        model = FlatPage
+
+class FlatPageAdmin(FlatPageAdminOld):
+    form = FlatpageForm
 
 class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -20,7 +27,8 @@ class BlogAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
     list_editable = ('active',)
     list_filter = ('modified', 'created', 'active')
-    
+
+
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     fieldsets = (
@@ -29,7 +37,7 @@ class PostAdmin(admin.ModelAdmin):
 	}),
 	('Publication', {
             'fields': ('active', 'publish_at'),
-	    'description': "visable" 
+	    'description': "visable"
 	}),
 	('Content', {
             'fields': ('excerpt', 'body', 'tags'),
@@ -45,36 +53,10 @@ class PostAdmin(admin.ModelAdmin):
     list_editable = ('active', 'publish_at')
     list_filter = ('modified', 'created', 'active')
 
-    class Media:
-        js = (settings.TINYMCE_JS_URL,
-              settings.FILEBROWSER_JS_URL,)
 
-class TinyMCEPostAdmin(PostAdmin):
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        if db_field.name == 'body':
-            return db_field.formfield(widget=TinyMCE(
-                attrs={'cols': 80, 'rows': 30},
-                mce_attrs={'external_link_list_url': reverse('tinymce.views.flatpages_link_list')},
-            ))
-        return super(TinyMCEPostAdmin, self).formfield_for_dbfield(db_field, **kwargs)
-
-
-admin.site.register(Post, TinyMCEPostAdmin)
+admin.site.register(Post, PostAdmin)
 
 admin.site.register(Blog, BlogAdmin)
 
-
-class TinyMCEFlatPageAdmin(FlatPageAdmin):
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        if db_field.name == 'content':
-            return db_field.formfield(widget=TinyMCE(
-                attrs={'cols': 80, 'rows': 30},
-                mce_attrs={'external_link_list_url': reverse('tinymce.views.flatpages_link_list')},
-            ))
-        return super(TinyMCEFlatPageAdmin, self).formfield_for_dbfield(db_field, **kwargs)
-    class Meta:
-        model = FlatPage
-
-
 admin.site.unregister(FlatPage)
-admin.site.register(FlatPage, TinyMCEFlatPageAdmin)
+admin.site.register(FlatPage, FlatPageAdmin)

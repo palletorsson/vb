@@ -21,7 +21,7 @@ function CustomFileBrowser(field_name, url, type, win) {
 }
 
 tinyMCE.init({
-    
+
     // see
     // http://wiki.moxiecode.com/index.php/TinyMCE:Configuration
     

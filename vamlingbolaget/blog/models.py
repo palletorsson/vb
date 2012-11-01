@@ -2,7 +2,7 @@ import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
-
+from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
 
 class PostManager(models.Manager):
@@ -65,7 +65,7 @@ class Post(TimeStampedActivate):
     slug = models.SlugField()
     excerpt = models.TextField(blank=True,
                               help_text="A small teaser of your content")
-    body = models.TextField()
+    body = RichTextField()
     publish_at = models.DateTimeField(default=datetime.datetime.now(), 
                                      help_text="Date and time post should become visible")
     

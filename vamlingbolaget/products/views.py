@@ -1,8 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
-from basic.blog.models import Post
-from models import Variation, ImageVariation, Combo, Color, Pattern, Size
+from models import Variation, ImageVariation, Combo, Color, Pattern, Size, Quality
 
 def first_page(request):
 	try:
@@ -27,11 +26,14 @@ def index(request):
     except:
         return HttpResponse(404)
 
+    qualities = Quality.objects.all()
+
     images = ImageVariation.objects.all()
     products = zip(products, images)
     print products
     return render_to_response('variation/index.html',
-                             {'products': products,  
+                             {'products': products,
+                              'qualities': qualities,
                               },
                              context_instance=RequestContext(request))
 
