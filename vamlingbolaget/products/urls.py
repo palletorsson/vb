@@ -5,5 +5,7 @@ from models import Variation
 urlpatterns = patterns('products.views',
     url(r'^$', 'index'),
     url(r'^(?P<pk>\d+)/$', 'detail'),
-    url(r'^patternandcolor/$', 'patternandcolor')
+    url(r'^patternandcolor/$', 'patternandcolor'),
+    url(r'^products/type/(?P<name>[a-zA-Z0-9_.-]+)/$', 'category'),
+    url(r'^products/quality/(?P<name>[a-zA-Z0-9_.-]+)/$', 'quality')
 )

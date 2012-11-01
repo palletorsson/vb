@@ -160,6 +160,7 @@ INSTALLED_APPS = (
     'products',
     'cart',
     'blog',
+    'frontpage'
 
 )
 

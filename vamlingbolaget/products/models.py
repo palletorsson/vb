@@ -84,47 +84,46 @@ class Size(models.Model):
         return unicode(self.name)
 
 
-class Color(models.Model):
+class ChoiceBase(models.Model):
+    """
+    use as common base model for Color, pattern and Quality
+    """
+    name = models.CharField(max_length=160)
+    slug = models.SlugField(max_length=160)
+    order = models.IntegerField("If you need to other these items")
+    active = models.BooleanField("Active")
+
+    def __unicode__(self):
+        return unicode(self.name)
+
+
+class Type(ChoiceBase):
+    """
+    Type used in Article Model
+    """
+    pass
+
+
+class Color(ChoiceBase):
     """
     Color used in Product Model         
     """
-    name = models.CharField(max_length=20)
     quality = models.ForeignKey('Quality')
-    active = models.BooleanField("Active")
-    
-    
-    def __unicode__(self):
-        return unicode(self.name)
 
 
-class Pattern(models.Model):
+class Pattern(ChoiceBase):
     """
     Pattern used in Product Model         
     """
-    name = models.CharField(max_length=20)
-    #slug = models.SlugField(max_length=255)
     quality = models.ForeignKey('Quality')
-    #order = models.IntegerField()
-    active = models.BooleanField("Active")
-    
-    def __unicode__(self):
-        return unicode(self.name)
 
 
-class Quality(models.Model):
+
+class Quality(ChoiceBase):
     """
     Quality used in Article Model         
     """
-    name = models.CharField(max_length=100)
-    #slug = models.SlugField(max_length=255)
     description = models.TextField()
-    #order = models.IntegerField()
-    active = models.BooleanField("Active")
-
-
-
-    def __unicode__(self):
-        return unicode(self.name)
 
 
 class Combo(models.Model):
@@ -141,16 +140,6 @@ class Combo(models.Model):
     def __unicode__(self):
         return unicode(self.file)
 
-
-class Type(models.Model):
-    """
-    Type used in Article Model         
-    """
-    name = models.CharField(max_length=100)
-    active = models.BooleanField("Active")
-    
-    def __unicode__(self):
-        return unicode(self.name)
 
 class Article(TimeStampedActivate):
     """
