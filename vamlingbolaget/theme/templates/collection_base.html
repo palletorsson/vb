@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<div class="span2  ">
+    <ul class="nav-list">
+        Typer
+        {% for type in types %}
+        <li>
+
+            <a href="/products/type/{{type.name}}"> {{ type.name }} </a>
+
+        </li>
+        {% endfor %}
+
+        Kvaliter
+
+        {% for quality in qualities %}
+        <li>
+
+            <a href="/products/quality/{{quality.pk}}"> {{ quality.name }} </a>
+
+        </li>
+        {% endfor %}
+
+    </ul>
+</div>
+{% endblock %}
