@@ -155,6 +155,7 @@ INSTALLED_APPS = (
     'tastypie',
     'imagekit',
     'south',
+    'photologue',
     #Our Apps
     'products',
     'cart',

@@ -21,7 +21,7 @@ v1_api.register(PatternResource())
 v1_api.register(SizeResource())
 
 urlpatterns = patterns('',
-    url(r'^$', include('products.urls')),
+    url(r'^$', 'products.views.first_page', name='index'),
     url(r'^products/', include('products.urls')),
 
     (r'^ckeditor/', include('ckeditor.urls')),
@@ -30,7 +30,7 @@ urlpatterns = patterns('',
     url(r'^admin/filebrowser/', include(site.urls)),
 
     url(r'^grappelli/', include('grappelli.urls')),
-
+    url(r'^photologue/', include('photologue.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 

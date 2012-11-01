@@ -1,0 +1,11 @@
+*.log
+*.pot
+*.pyc
+local_settings.py
+/env
+
+vamlingbolaget/.idea
+vamlingbolaget/vb.komodoproject
+vamlingbolaget/db
+vamlingbolaget/cart/migrations/
+vamlingbolaget/products/migrations/

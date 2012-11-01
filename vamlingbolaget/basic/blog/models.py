@@ -7,8 +7,8 @@ from django.conf import settings
 from basic.blog.managers import PublicManager
 
 import datetime
-import tagging
-from tagging.fields import TagField
+#import tagging
+#from tagging.fields import TagField
 
 
 class Category(models.Model):
@@ -47,7 +47,7 @@ class Post(models.Model):
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
     categories = models.ManyToManyField(Category, blank=True)
-    tags = TagField()
+    #tags = TagField()
     objects = PublicManager()
 
     class Meta:

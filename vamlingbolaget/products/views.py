@@ -1,19 +1,23 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
-
 from models import Variation, ImageVariation, Combo, Color, Pattern, Size, Quality, Type
+
 
 def first_page(request):
 	try:
 		products = Variation.objects.all()
 	except:
 		return HttpResponse(404)
-	
+	images = ImageVariation.objects.all()
+	products = zip(products, images)
+	news = Post.objects.all()
+	print news
 	return render_to_response('variation/first_page.html',
-							  {'products': products,
-							   },
-							  context_instance=RequestContext(request))
+							{'products': products,
+							'news': news,
+							},
+							context_instance=RequestContext(request))
 	
 
 

@@ -1,17 +1,27 @@
 {% extends "base.html" %}
 
 {% block sidebar %}
-   <div class="span2">
-     SIDEBAR HEJ!
+   <div class="span3" style="min-height: 500px;float: right;">
+     <h3>NEWS!</h3>
+     <dl>
+    {%for item in news %}
+      </dd><h4>{{item.title}}</h4>
+      {{item.body}}
+    {%endfor%}
+    </dl>
     </div>
 {% endblock %}
 
 {% block content %}
-    <legend>Kollektion</legend> 
+   <div class="span8">
+
+    <legend> Kollektion first_page </legend> 
+        <div><img src="{{ STATIC_URL }}img/klanningar.jpg" />
         {% for product, image in products %}
             <div><img src="{{ image.image_300.url }}" />
             <a href="{{product.pk}}"> {{ product.name }} </a>
             {{ product.article.price }}
             </hr></div></br>
         {% endfor %}
+    </div>
 {% endblock %}
