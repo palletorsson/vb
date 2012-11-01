@@ -102,7 +102,9 @@ class Pattern(models.Model):
     Pattern used in Product Model         
     """
     name = models.CharField(max_length=20)
+    #slug = models.SlugField(max_length=255)
     quality = models.ForeignKey('Quality')
+    #order = models.IntegerField()
     active = models.BooleanField("Active")
     
     def __unicode__(self):
@@ -114,7 +116,9 @@ class Quality(models.Model):
     Quality used in Article Model         
     """
     name = models.CharField(max_length=100)
+    #slug = models.SlugField(max_length=255)
     description = models.TextField()
+    #order = models.IntegerField()
     active = models.BooleanField("Active")
 
 

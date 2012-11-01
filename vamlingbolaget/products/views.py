@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 
-from models import Variation, ImageVariation, Combo, Color, Pattern, Size, Quality
+from models import Variation, ImageVariation, Combo, Color, Pattern, Size, Quality, Type
 
 def first_page(request):
 	try:
@@ -24,13 +24,14 @@ def index(request):
         return HttpResponse(404)
 
     qualities = Quality.objects.all()
-
+    types = Type.objects.all()
     images = ImageVariation.objects.all()
     products = zip(products, images)
     print products
     return render_to_response('variation/index.html',
                              {'products': products,
                               'qualities': qualities,
+                              'types': types,
                               },
                              context_instance=RequestContext(request))
 
@@ -42,6 +43,8 @@ def detail(request, pk):
         colors = Color.objects.all()
         patterns = Pattern.objects.all()
         sizes = Size.objects.all()
+        qualities = Quality.objects.all()
+        types = Type.objects.all()
     except:
         return HttpResponse(404)
 
@@ -50,8 +53,12 @@ def detail(request, pk):
                                'images': images,
                    'colors': colors,
                    'patterns': patterns,
-                   'sizes': sizes },
-                              
+                   'sizes': sizes,
+                   'qualities': qualities,
+                   'types': types,
+                   },
+
+
                               context_instance=RequestContext(request)
                               )
 
