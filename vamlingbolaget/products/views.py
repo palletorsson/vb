@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
-from models import Variation, ImageVariation, Combo, Color, Pattern, Size, Quality
+from models import Variation, ImageVariation, Combo, Color, Pattern, Size, Quality, Type
+from blog.models import Post
 
 def first_page(request):
 	try:
