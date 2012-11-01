@@ -1,0 +1,108 @@
+{% extends "photologue/root.html" %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+<table class="full_size" summary="page body">
+<tr><td class="title">
+    <!-- Title -->
+    <table class="title" summary="title bar">
+    <tr> <td>
+    <span class="title">{{ object.title }}</span>
+    </td></tr>
+    </table>
+</td></tr>
+<tr><td class="nav_bar">
+<!-- Navigation Bar -->
+{% if is_paginated %}
+<table class="full_size" summary="navigation bar">
+    <tr><td>
+    &nbsp;
+    </td>
+    <td class="button">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">
+				<img src="{{ MEDIA_URL }}example/img/prev.png" alt="Previous" />
+			</a>
+        {% else %}
+            <img src="{{ MEDIA_URL }}example/img/background.gif" alt="void" />
+        {% endif %}
+    </td>
+    <td class="button">
+        <span class="page_index">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+    </td>
+    <td class="button">
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">
+				<img src="{{ MEDIA_URL }}example/img/next.png" alt="Next" />
+			</a>
+        {% else %}
+			<img src="{{ MEDIA_URL }}example/img/background.gif" alt="void" />
+        {% endif %}
+    </td></tr>
+</table>
+{% endif %}
+</td></tr>
+<tr><td>
+
+<!-- noch einzupflegen, sinnvoll -->
+<h2>Originally published {{ object.date_added|date:"l, F jS, Y" }}</h2>
+{% if object.description %}<p>{{ object.description }}</p>{% endif %}
+
+<!-- Photos -->
+<div class="thumbnails">
+<table summary="thumbnails">
+
+{% for photo in photo_list %}
+{% if forloop.counter0|divisibleby:"3" %}
+    <tr class="tr_index">
+{% endif %}
+
+    <td class="td_index">
+
+    <table class="photo" summary="photo">
+      <tr>
+        <td colspan="3"><img class="photo_top" src="{{ MEDIA_URL }}example/img/top.png" alt="Top" /></td>
+      </tr>
+      <tr>
+        <td><img class="photo_left" src="{{ MEDIA_URL }}example/img/left.png" alt="Left" /></td>
+        <td class="photo">
+          <a href="{{ photo.get_absolute_url }}{{ object.title_slug }}/"><!--width="159" height="106" -->
+            <img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}" class="photo_center" /></a>
+        </td>
+        <td><img class="photo_right" src="{{ MEDIA_URL }}example/img/right.png" alt="Right" /></td>
+      </tr>
+      <tr>
+        <td colspan="3"><img class="photo_bottom" src="{{ MEDIA_URL }}example/img/bot.png" alt="Bottom" /></td>
+      </tr>
+      </table>
+    <span class="comment">{{ photo.title }}
+    </span><br />
+    </td>
+{% if forloop.last or forloop.counter|divisibleby:"3" %}
+    </tr>
+{% endif %}
+{% endfor %}
+</table>
+</div>
+
+</td>
+</tr>
+<tr>
+<td class="footer">
+
+<!-- Footer -->
+<table class="full_size" summary="copyright">
+<tr>
+  <td>
+  <!-- <span class="copyright">footfootfootfoot</span> -->
+    <p><a href="{% url pl-gallery-list 1 %}">View all galleries</a></p>
+  </td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+{% endblock %}

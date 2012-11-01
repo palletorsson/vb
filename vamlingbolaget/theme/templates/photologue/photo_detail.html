@@ -1,0 +1,119 @@
+{% extends "photologue/root.html" %}
+
+{% load photologue_tags %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+
+<table class="full_size" summary="page body">
+<tr>
+<td class="title">
+
+<!-- Title -->
+<table class="title" summary="title bar">
+<tr>
+  <td>
+  <span class="title">{{ object.title }}</span>
+  </td>
+</tr>
+</table>
+
+</td>
+</tr>
+<tr>
+<td class="nav_bar">
+
+<!-- Navigation Bar -->
+{% if gallery %}
+	<table class="full_size" summary="navigation bar">
+	<tr>
+		<td class="button">
+			<a href="{{ gallery.get_absolute_url }}"><img src="{{ MEDIA_URL }}example/img/back.png" alt="Back" /></a>
+		</td>
+		<td>
+			&nbsp;
+		</td>
+		<td class="button">
+		{% if photo_prev %}
+			<a href="{{ photo_prev.get_absolute_url }}{{ gallery.title_slug }}/">
+				<img src="{{ MEDIA_URL }}example/img/prev.png" alt="Previous" />
+			</a>
+		{% else %}
+			<img src="{{ MEDIA_URL }}example/img/background.gif" alt="void" />
+		{% endif %}
+		</td>
+		<td class="button">
+		<span class="page_index">X / {{ gallery.photo_count }}</span>
+		</td>
+		<td class="button">
+		{% if photo_next %}
+			<a href="{{ photo_next.get_absolute_url }}{{ gallery.title_slug }}/">
+				<img src="{{ MEDIA_URL }}example/img/next.png" alt="Next" />
+			</a>
+		{% else %}
+			<img src="{{ MEDIA_URL }}example/img/background.gif" alt="void" />
+		{% endif %}
+		</td>
+	</tr>
+	</table>
+{% else %}
+	&nbsp;
+{% endif %}
+</td>
+</tr>
+<tr>
+<td>
+
+<!-- Thumbnails and preview -->
+<table class="row" summary="preview">
+<tr>
+  <td><!-- width="450" height="286" -->
+    <a href="{{ object.image.url }}"><img src="{{ object.get_display_url }}" alt="{{ object.title }}"  class="preview" /></a>
+  </td>
+</tr>
+</table>
+
+<!-- Comment and Exif data -->
+<div class="properties">
+<div class="preview_comment">
+  <span class="comment">
+    {% if object.caption %}<p>{{ object.caption }}</p>{% endif %}
+    </span><br />
+</div>
+<table summary="image properties">
+    <p>{% exif object  "Image Orientation" %}</p>
+</table>
+</div>
+
+</td>
+</tr>
+<tr>
+<td class="footer">
+
+<!-- Footer -->
+<table class="full_size" summary="copyright">
+<tr>
+  <td>
+<!--  <span class="copyright">footfootfootfoot</span> -->
+{% if object.public_galleries %}
+<h2>This photo is found in the following galleries:</h2>
+<ol>
+{% for gallery in object.public_galleries %}
+    <li>{%previous_in_gallery object gallery%} <a href="{{ gallery.get_absolute_url }}">{{ gallery.title }}</a> {%next_in_gallery object gallery%}</li>
+{% endfor %}
+</ol>
+{% endif %}
+<p>
+  <a href="{{ object.get_admin_url }}">Admin</a>
+</p>
+
+  </td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+{% endblock %}
