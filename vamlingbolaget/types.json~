@@ -1,0 +1,18 @@
+[ {
+    "pk": 1,
+    "model": "products.type",
+    "fields": {
+        "active": true,
+        "quality": 1,
+        "name": "Kl\u00e4nning"
+    }
+}, 
+{
+    "pk": 2,
+    "model": "products.type",
+    "fields": {
+        "active": true,
+        "quality": 1,
+        "name": "Tr\u00f6jor och linnen"
+    }
+]

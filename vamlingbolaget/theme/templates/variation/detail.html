@@ -1,13 +1,11 @@
 {% extends "collection_base.html" %}
 {% block pagetitle %}
-	<legend>Kollektion / {{ product.name }} </legend>
+	<legend><a href="/products/">Kollektion</a> / {{ product.name }} </legend>
 {% endblock %}
 
 
-{% block content %}
+{% block allcontent %}
 <div class="row-fluid">
-    <div class="span10">
-    <div class="row-fluid">
     <div class="span6"><img src="{{ images.image_600.url }}" />
         </br>
 	<h5> {{ product.article.name }} i {{ product.combo.color }} {{ product.combo.pattern }} </h5>  
@@ -21,13 +19,13 @@
 		 <span id="article_pk">{{ product.article.pk }}</span>  
         </div>
 
-        <img src="{{ product.article.file.url }}" >  </br>
+        <img src="{{ product.article.image.image.url }}" >  </br>
         <hr/>
             <h4> Färg och Mönster </h4>  
         <hr/>
 
    
-        <div class="span7">
+        <div class="span8">
 	    <select class="changonselect" id="color">
 		{% for color in colors %}
 			<option value="{{ color.pk }}">{{ color.name }}</option>
@@ -47,7 +45,8 @@
 	    </select> 	
 	
 	</div>
-        <img id="pattern_color_image" src="{{ product.combo.file.url }}" width="100" />
+        <img id="pattern_color_image" src="{{product.combo.file.url}}" width="100" />
+        <div style="clear: both;"></div>
         <hr/>
 
 
@@ -71,11 +70,13 @@
 
         </script>
 
+        <div style="clear: both;"></div>
 
         <div class="span7">
         <h4> Pris: {{ product.article.price }} kr </h4>
 
         </div>
+        <div style="clear: both;"></div>
 
         <div id='app-canvas'>
         <button class="btn btn-success" type="button">Lägg till i Köplista</button>
@@ -93,9 +94,7 @@
          
         </div>
     </div>
-    </div>
-    </div>
-         
+
     
 {% endblock %}
 

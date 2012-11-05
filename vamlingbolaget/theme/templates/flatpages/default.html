@@ -1,7 +1,15 @@
+
 {% extends "base.html" %}
+{% block pagetitle %}
+<legend>{{ flatpage.title }}</legend>
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
 
 {% block content %}
-    <legend>Om oss</legend> 
-    {{ flatpage.content }}
+{{ flatpage.content }}
 {% endblock %}
 

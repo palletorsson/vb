@@ -1,0 +1,1805 @@
+[
+    {
+        "pk": 9,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "tag",
+            "name": "Tag",
+            "app_label": "taggit"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "taggeditem",
+            "name": "Tagged Item",
+            "app_label": "taggit"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "apiaccess",
+            "name": "api access",
+            "app_label": "tastypie"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "apikey",
+            "name": "api key",
+            "app_label": "tastypie"
+        }
+    },
+    {
+        "pk": 24,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "article",
+            "name": "article",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": 27,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "blog",
+            "name": "blog",
+            "app_label": "blog"
+        }
+    },
+    {
+        "pk": 25,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "cart",
+            "name": "cart",
+            "app_label": "cart"
+        }
+    },
+    {
+        "pk": 26,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "cartitem",
+            "name": "cart item",
+            "app_label": "cart"
+        }
+    },
+    {
+        "pk": 18,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "choicebase",
+            "name": "choice base",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": 20,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "color",
+            "name": "color",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": 23,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "combo",
+            "name": "combo",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "contenttype",
+            "name": "content type",
+            "app_label": "contenttypes"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "flatpage",
+            "name": "flat page",
+            "app_label": "flatpages"
+        }
+    },
+    {
+        "pk": 29,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "frontpage",
+            "name": "frontpage",
+            "app_label": "frontpage"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "gallery",
+            "name": "gallery",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "group",
+            "name": "group",
+            "app_label": "auth"
+        }
+    },
+    {
+        "pk": 16,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "image",
+            "name": "image",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "logentry",
+            "name": "log entry",
+            "app_label": "admin"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "migrationhistory",
+            "name": "migration history",
+            "app_label": "south"
+        }
+    },
+    {
+        "pk": 21,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "pattern",
+            "name": "pattern",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "permission",
+            "name": "permission",
+            "app_label": "auth"
+        }
+    },
+    {
+        "pk": 28,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "post",
+            "name": "post",
+            "app_label": "blog"
+        }
+    },
+    {
+        "pk": 22,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "quality",
+            "name": "quality",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "session",
+            "name": "session",
+            "app_label": "sessions"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "site",
+            "name": "site",
+            "app_label": "sites"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "size",
+            "name": "size",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": 19,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "type",
+            "name": "type",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "user",
+            "name": "user",
+            "app_label": "auth"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "variation",
+            "name": "variation",
+            "app_label": "products"
+        }
+    },
+    {
+        "pk": "8254d2e25af7f33a3ff1e9ae7371bff1",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2012-11-17T16:29:22.316Z",
+            "session_data": "ZDUwMjZkZjlkZTE4Zjk4OTU0Nzc3YzdjNzA3YTM4ZmUwMDkyNTJkOTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+        }
+    },
+    {
+        "pk": "f79852103eeaa98e595d6b2543bf45b5",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2012-11-17T20:24:21.380Z",
+            "session_data": "ZDUwMjZkZjlkZTE4Zjk4OTU0Nzc3YzdjNzA3YTM4ZmUwMDkyNTJkOTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "sites.site",
+        "fields": {
+            "domain": "example.com",
+            "name": "example.com"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "flatpages.flatpage",
+        "fields": {
+            "registration_required": false,
+            "title": "Om oss",
+            "url": "/omoss/",
+            "template_name": "",
+            "sites": [
+                1
+            ],
+            "content": "\tVamlingbolaget startades 1983 n&auml;r Kristina Torsson med familj flyttade in i ett f d mejeri i Vamlingbo p&aring; s&ouml;dra Gotland. Huvudbyggnaden inneh&aring;ller idag en verkstad d&auml;r 6-8 personer arbetar &aring;ret runt me f&auml;rgning av tyger, tillsk&auml;rning och s&ouml;mnad plus v&aring;r postorderexpedition. P&aring; &ouml;verv&aring;ningen finns bostaden och atelj&eacute;n d&auml;r Kristina arbetar med att ta fram nya f&auml;rgskalor, m&ouml;nster och modeller. Produktionsid&eacute;n sm&aring;skalighet, lokal f&ouml;rankring och en kombination av hantverk och industri.<br />\r\n\t<br />\r\n\t<img alt=\"work\" class=\"float_img\" src=\"http://vamlingbolaget.com/pict/arbete.jpg\" /><br />\r\n\t<br />\r\n\tVamlingbolaget f&ouml;rvaltar en kl&auml;dtradition som skapades av Mah-Jong under 70-talet. Samma material anv&auml;nds: plysch, manchester, bomull och den glansiga silkestrik&aring;n. Kontinuerligt sker en produktutveckling och f&ouml;rnyelse i dialog med de anst&auml;llda, kunder och &aring;terf&ouml;rs&auml;ljare. Kristina ber&auml;ttar:<br />\r\n\t<br />\r\n\t- Det klassiska materialet i v&aring;ra tyger och kl&auml;der &auml;r en silkestrik&aring; av h&auml;lften bomull, h&auml;lften viskos. Bomullen ger en mjuk och kroppsv&auml;nlig insida. Den glansiga viskosen p&aring; utsidan lyfter fram de typiska grafiska m&ouml;nstren i svart/vitt, som vi sedan f&auml;rgar in i liten skala n&auml;r vi f&aring;r in best&auml;llningar. Vamlingbolagets kl&auml;der kan b&auml;ras &aring;ret om av vuxna och barn. Kl&auml;nningar, kort&auml;rmade tr&ouml;jor och fladdriga kjolar svalkar i sommarv&auml;rmen och &auml;r idealiska p&aring; resa eftersom de tar liten plats och inte skrynklar sig. L&aring;ng&auml;rmade tr&ouml;jor och byxor i silkestrik&aring; &auml;r ocks&aring; sk&ouml;na att b&auml;ra kroppsn&auml;ra p&aring; vintern.<br />\r\n\t<br />\r\n\t- Mina tankar om kl&auml;der och mode best&aring;r sedan 60-talet: Vackra vardagskl&auml;der som h&aring;ller &aring;r efter &aring;r och l&auml;tt kompletteras med nyare plagg ur Vamlingbolagets kollektion. Vi har en egen karakt&auml;r utanf&ouml;r modetrenderna. V&aring;ra plagg &auml;r gjorda av naturmaterial i f&auml;rger som inte bleknar. Numera v&auml;vs och trycks tygerna i Istanbul. En b&auml;ttre kvalitet och l&auml;gre priser gjorde att vi f&ouml;r n&aring;gra &aring;r sedan s&ouml;kte oss till den turkiska textilindustrin.<br />\r\n\t<br />\r\n\t<img alt=\"work\" class=\"float_img\" src=\"http://vamlingbolaget.com/pict/tygkommer.jpg\" /><br />\r\n\t-Milj&ouml;n h&auml;r p&aring; s&ouml;dra Gotland har gett oss gener&ouml;sa f&ouml;ruts&auml;ttningar f&ouml;r arbetsro, produktion och utveckling. Landskapet med &auml;ngsmark och kuster &auml;r en st&auml;ndig inspirationsk&auml;lla i arbetet.<br />\r\n\t<br />\r\n\t&Auml;nda sedan starten har de svart/vita tryckta silkestygerna varit grunden i Vamlingbolagets sortiment, till skillnad fr&aring;n Mah-Jongs kl&auml;der d&auml;r svart n&auml;stan aldrig f&ouml;rekom. M&aring;nga nya m&ouml;nster har tillkommit genom &aring;ren. Fj&auml;der och Vatten ritade Kristina efter en rapph&ouml;nas fj&auml;der hon hittade i v&auml;grenen. Blommor fr&aring;n det gotl&auml;ndska &auml;nget och den egna tr&auml;dg&aring;rden finns i m&ouml;nstret Varma backen: kaprifol, akvileja och l&ouml;jtnantshj&auml;rta g&aring;r att k&auml;nna igen. Flera lite stramare grafiska m&ouml;nster finns i N&auml;tet, Twin Peaks och Kapris. N&aring;gra m&ouml;nster fr&aring;n Mah-Jong har tagits upp i Vamlingbolagets produktion de senaste &aring;ren: K&auml;rna, Tiger, F&aring;gel och Mah-Jongblomma. Under &aring;rens lopp har Kristina ritat &ouml;ver 20 nya m&ouml;nster; en del har blivit klassiker som f&ouml;ljer med &aring;r efter &aring;r.<br />\r\n\t<br />\r\n\t<img alt=\"work\" class=\"float_img\" src=\"http://vamlingbolaget.com/pict/green.jpg\" /><br />\r\n\t<br />\r\n\tInf&ouml;r varje s&auml;song tas en ny f&auml;rgskala fram. Kristina provf&auml;rgar och i samr&aring;d de som arbetar i verkstan och med butiken i Stockholm utvecklas nya plagg och modeller. Tygerna f&auml;rgas in, manglas och plaggen sk&auml;rs till och sys upp p&aring; plats i Vamlingbo. Steget &auml;r aldrig l&aring;ngt mellan atelj&eacute;n d&auml;r m&ouml;nstren ritas och verkstan d&auml;r plaggen blir till.<br />\r\n\t<br />\r\n\tI Vamlingbo finns ocks&aring; v&aring;r sommarbutik som &auml;r inrymd i ett gammalt s&auml;desmagasin. Den &auml;r &ouml;ppen fr&aring;n maj till september. Dessutom har vi f&ouml;rs&auml;ljning p&aring; Gotl&auml;ndsk Konst och Form, &ouml;ppen &aring;ret runt i Visby. V&aring;r egen butik p&aring; &Aring;s&ouml;gatan i Stockholm &auml;r viktig f&ouml;r kontinuiteten i produktionen. Den ger oss m&ouml;jlighet att visa v&aring;ra kl&auml;der f&ouml;r en st&ouml;rre kundkrets och s&auml;krar jobben i Vamlingbo &aring;ret om. Hemsidan, v&aring;r postorderf&ouml;rs&auml;ljning och &aring;terf&ouml;rs&auml;ljare p&aring; olika platser runt om i landet.<br />\r\n\t<br />\r\n\t<img alt=\"work\" class=\"float_img\" src=\"http://vamlingbolaget.com/pict/barn_2009_600.jpg\" /> <img alt=\"work\" class=\"float_img\" src=\"http://vamlingbolaget.com/pict/group_80_600.jpg\" />\r\n",
+            "enable_comments": false
+        }
+    },
+    {
+        "pk": 1,
+        "model": "taggit.tag",
+        "fields": {
+            "name": "cat",
+            "slug": "cat"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "taggit.taggeditem",
+        "fields": {
+            "tag": 1,
+            "content_type": 28,
+            "object_id": 1
+        }
+    },
+    {
+        "pk": 1,
+        "model": "products.variation",
+        "fields": {
+            "description": "Ingeborg har på sig en vacker äggprick t-shirt.",
+            "created": "2012-11-03T16:34:50.895Z",
+            "created_at": "2012-11-03T16:34:50.895Z",
+            "modified": "2012-11-03T21:58:27.223Z",
+            "updated_at": "2012-11-03T21:58:27.223Z",
+            "combo": 1,
+            "active": true,
+            "article": 1,
+            "slug": "liten-t-shirt-agg-prick-lila",
+            "name": "Liten T-shirt Ägg prick Lila"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "products.variation",
+        "fields": {
+            "description": "ran",
+            "created": "2012-11-03T21:12:10.184Z",
+            "created_at": "2012-11-03T21:12:10.184Z",
+            "modified": "2012-11-03T21:12:10.184Z",
+            "updated_at": "2012-11-03T21:12:10.184Z",
+            "combo": 2,
+            "active": true,
+            "article": 2,
+            "slug": "raglanklanning-lang-arm",
+            "name": "Raglanklänning lång ärm"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "products.gallery",
+        "fields": {
+            "status": "Sommar",
+            "is_active": true,
+            "name": "sommar_2012",
+            "created_date": "2012-11-03T16:35:41.596Z"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "products.gallery",
+        "fields": {
+            "status": "Active",
+            "is_active": true,
+            "name": "collection-fall-2012",
+            "created_date": "2012-11-04T10:28:27.248Z"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "products.image",
+        "fields": {
+            "is_featured": true,
+            "name": "Liten T-shirt Ägg prick Lila",
+            "text": "Lillemor  har på sig en t-shirt med mönstret äggprick",
+            "variation": 1,
+            "file": "variations/litentshirt_aggprick_lila_1.jpg",
+            "gallery": [
+                2
+            ]
+        }
+    },
+    {
+        "pk": 2,
+        "model": "products.image",
+        "fields": {
+            "is_featured": true,
+            "name": "Raglanklänning lång ärm",
+            "text": "Raglanklänning lång ärm",
+            "variation": 2,
+            "file": "variations/raglanklanninglangarn_tigermorkbotten_turkos_5.jpg",
+            "gallery": [
+                2
+            ]
+        }
+    },
+    {
+        "pk": 1,
+        "model": "products.size",
+        "fields": {
+            "name": "Medium"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 1,
+            "name": "Silkestrikå",
+            "slug": "silky-jersey"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 2,
+            "name": "Tröjor och linnen",
+            "slug": "tops"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 1,
+            "name": "Äggprick",
+            "slug": "aggprick"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 2,
+            "name": "Koboltblå",
+            "slug": "koboltbla"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 1,
+            "name": "Klänningar",
+            "slug": "dresses"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 1,
+            "name": "Tiger mörk botten",
+            "slug": "tiger-mork-botten"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 2,
+            "name": "Turkos",
+            "slug": "turkos"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "products.type",
+        "fields": {}
+    },
+    {
+        "pk": 5,
+        "model": "products.type",
+        "fields": {}
+    },
+    {
+        "pk": 4,
+        "model": "products.color",
+        "fields": {
+            "quality": 1
+        }
+    },
+    {
+        "pk": 7,
+        "model": "products.color",
+        "fields": {
+            "quality": 1
+        }
+    },
+    {
+        "pk": 3,
+        "model": "products.pattern",
+        "fields": {
+            "quality": 1
+        }
+    },
+    {
+        "pk": 6,
+        "model": "products.pattern",
+        "fields": {
+            "quality": 1
+        }
+    },
+    {
+        "pk": 1,
+        "model": "products.quality",
+        "fields": {
+            "description": "Silkestrikå"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "products.combo",
+        "fields": {
+            "color": 4,
+            "pattern": 3,
+            "quality": 1,
+            "active": true,
+            "file": "combo/1f_18m_1.jpg"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "products.combo",
+        "fields": {
+            "color": 7,
+            "pattern": 6,
+            "quality": 1,
+            "active": true,
+            "file": "combo/16f_7m.jpg"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "products.article",
+        "fields": {
+            "name": "Liten t-shirt",
+            "created": "2012-11-03T16:32:51.049Z",
+            "type": 2,
+            "description": "Liten t-shirt",
+            "modified": "2012-11-03T16:32:51.049Z",
+            "price": 680,
+            "file": "articles/9802_3.gif",
+            "active": false,
+            "quality": 1,
+            "slug": "liten-t-shirt",
+            "sku_number": "1234"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "products.article",
+        "fields": {
+            "name": "Raglanklänning",
+            "created": "2012-11-03T21:09:20.992Z",
+            "type": 5,
+            "description": "raglan",
+            "modified": "2012-11-03T21:09:20.992Z",
+            "price": 1000,
+            "file": "articles/9807_1.gif",
+            "active": false,
+            "quality": 1,
+            "slug": "raglanklanning",
+            "sku_number": "1008"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "blog.post",
+        "fields": {
+            "body": "<p>\r\n\t<img alt=\"\" height=\"139\" src=\"/media/uploads/2012/11/03/cat1.jpg\" width=\"139\" /></p>\r\n",
+            "title": "Nya kattungar, yay!",
+            "created": "2012-11-03T17:28:39.159Z",
+            "excerpt": "First",
+            "modified": "2012-11-03T18:01:16.144Z",
+            "blog": 1,
+            "active": true,
+            "publish_at": "2012-11-03T17:25:11Z",
+            "slug": "first-blog-post"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "frontpage.frontpage",
+        "fields": {
+            "body": "<p>\r\n\t<img alt=\"\" height=\"514\" src=\"/media/uploads/2012/11/03/klanningar.jpg\" width=\"775\" /></p>\r\n",
+            "extra_head": "",
+            "show_extra_head": false
+        }
+    },
+    {
+        "pk": 22,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_logentry",
+            "name": "Can add log entry",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 23,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_logentry",
+            "name": "Can change log entry",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 24,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_logentry",
+            "name": "Can delete log entry",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 1,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_group",
+            "name": "Can add group",
+            "content_type": 2
+        }
+    },
+    {
+        "pk": 4,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_group",
+            "name": "Can change group",
+            "content_type": 2
+        }
+    },
+    {
+        "pk": 7,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_group",
+            "name": "Can delete group",
+            "content_type": 2
+        }
+    },
+    {
+        "pk": 2,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_permission",
+            "name": "Can add permission",
+            "content_type": 1
+        }
+    },
+    {
+        "pk": 5,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_permission",
+            "name": "Can change permission",
+            "content_type": 1
+        }
+    },
+    {
+        "pk": 8,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_permission",
+            "name": "Can delete permission",
+            "content_type": 1
+        }
+    },
+    {
+        "pk": 3,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_user",
+            "name": "Can add user",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": 6,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_user",
+            "name": "Can change user",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": 9,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_user",
+            "name": "Can delete user",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": 79,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_blog",
+            "name": "Can add blog",
+            "content_type": 27
+        }
+    },
+    {
+        "pk": 81,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_blog",
+            "name": "Can change blog",
+            "content_type": 27
+        }
+    },
+    {
+        "pk": 83,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_blog",
+            "name": "Can delete blog",
+            "content_type": 27
+        }
+    },
+    {
+        "pk": 80,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_post",
+            "name": "Can add post",
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 82,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_post",
+            "name": "Can change post",
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 84,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_post",
+            "name": "Can delete post",
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 73,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_cart",
+            "name": "Can add cart",
+            "content_type": 25
+        }
+    },
+    {
+        "pk": 75,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_cart",
+            "name": "Can change cart",
+            "content_type": 25
+        }
+    },
+    {
+        "pk": 77,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_cart",
+            "name": "Can delete cart",
+            "content_type": 25
+        }
+    },
+    {
+        "pk": 74,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_cartitem",
+            "name": "Can add cart item",
+            "content_type": 26
+        }
+    },
+    {
+        "pk": 76,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_cartitem",
+            "name": "Can change cart item",
+            "content_type": 26
+        }
+    },
+    {
+        "pk": 78,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_cartitem",
+            "name": "Can delete cart item",
+            "content_type": 26
+        }
+    },
+    {
+        "pk": 10,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_contenttype",
+            "name": "Can add content type",
+            "content_type": 4
+        }
+    },
+    {
+        "pk": 11,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_contenttype",
+            "name": "Can change content type",
+            "content_type": 4
+        }
+    },
+    {
+        "pk": 12,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_contenttype",
+            "name": "Can delete content type",
+            "content_type": 4
+        }
+    },
+    {
+        "pk": 19,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_flatpage",
+            "name": "Can add flat page",
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 20,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_flatpage",
+            "name": "Can change flat page",
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 21,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_flatpage",
+            "name": "Can delete flat page",
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 85,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_frontpage",
+            "name": "Can add frontpage",
+            "content_type": 29
+        }
+    },
+    {
+        "pk": 86,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_frontpage",
+            "name": "Can change frontpage",
+            "content_type": 29
+        }
+    },
+    {
+        "pk": 87,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_frontpage",
+            "name": "Can delete frontpage",
+            "content_type": 29
+        }
+    },
+    {
+        "pk": 40,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_article",
+            "name": "Can add article",
+            "content_type": 24
+        }
+    },
+    {
+        "pk": 51,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_article",
+            "name": "Can change article",
+            "content_type": 24
+        }
+    },
+    {
+        "pk": 62,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_article",
+            "name": "Can delete article",
+            "content_type": 24
+        }
+    },
+    {
+        "pk": 41,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_choicebase",
+            "name": "Can add choice base",
+            "content_type": 18
+        }
+    },
+    {
+        "pk": 52,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_choicebase",
+            "name": "Can change choice base",
+            "content_type": 18
+        }
+    },
+    {
+        "pk": 63,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_choicebase",
+            "name": "Can delete choice base",
+            "content_type": 18
+        }
+    },
+    {
+        "pk": 42,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_color",
+            "name": "Can add color",
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 53,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_color",
+            "name": "Can change color",
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 64,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_color",
+            "name": "Can delete color",
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 43,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_combo",
+            "name": "Can add combo",
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 54,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_combo",
+            "name": "Can change combo",
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 65,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_combo",
+            "name": "Can delete combo",
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 44,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_gallery",
+            "name": "Can add gallery",
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 55,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_gallery",
+            "name": "Can change gallery",
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 66,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_gallery",
+            "name": "Can delete gallery",
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 45,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_image",
+            "name": "Can add image",
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 56,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_image",
+            "name": "Can change image",
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 67,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_image",
+            "name": "Can delete image",
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 46,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_pattern",
+            "name": "Can add pattern",
+            "content_type": 21
+        }
+    },
+    {
+        "pk": 57,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_pattern",
+            "name": "Can change pattern",
+            "content_type": 21
+        }
+    },
+    {
+        "pk": 68,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_pattern",
+            "name": "Can delete pattern",
+            "content_type": 21
+        }
+    },
+    {
+        "pk": 47,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_quality",
+            "name": "Can add quality",
+            "content_type": 22
+        }
+    },
+    {
+        "pk": 58,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_quality",
+            "name": "Can change quality",
+            "content_type": 22
+        }
+    },
+    {
+        "pk": 69,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_quality",
+            "name": "Can delete quality",
+            "content_type": 22
+        }
+    },
+    {
+        "pk": 48,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_size",
+            "name": "Can add size",
+            "content_type": 17
+        }
+    },
+    {
+        "pk": 59,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_size",
+            "name": "Can change size",
+            "content_type": 17
+        }
+    },
+    {
+        "pk": 70,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_size",
+            "name": "Can delete size",
+            "content_type": 17
+        }
+    },
+    {
+        "pk": 49,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_type",
+            "name": "Can add type",
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 60,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_type",
+            "name": "Can change type",
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 71,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_type",
+            "name": "Can delete type",
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 50,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_variation",
+            "name": "Can add variation",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 61,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_variation",
+            "name": "Can change variation",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 72,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_variation",
+            "name": "Can delete variation",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 13,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_session",
+            "name": "Can add session",
+            "content_type": 5
+        }
+    },
+    {
+        "pk": 14,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_session",
+            "name": "Can change session",
+            "content_type": 5
+        }
+    },
+    {
+        "pk": 15,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_session",
+            "name": "Can delete session",
+            "content_type": 5
+        }
+    },
+    {
+        "pk": 16,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_site",
+            "name": "Can add site",
+            "content_type": 6
+        }
+    },
+    {
+        "pk": 17,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_site",
+            "name": "Can change site",
+            "content_type": 6
+        }
+    },
+    {
+        "pk": 18,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_site",
+            "name": "Can delete site",
+            "content_type": 6
+        }
+    },
+    {
+        "pk": 37,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_migrationhistory",
+            "name": "Can add migration history",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 38,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_migrationhistory",
+            "name": "Can change migration history",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 39,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_migrationhistory",
+            "name": "Can delete migration history",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 25,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_tag",
+            "name": "Can add Tag",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 27,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_tag",
+            "name": "Can change Tag",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 29,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_tag",
+            "name": "Can delete Tag",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 26,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_taggeditem",
+            "name": "Can add Tagged Item",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 28,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_taggeditem",
+            "name": "Can change Tagged Item",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 30,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_taggeditem",
+            "name": "Can delete Tagged Item",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 31,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_apiaccess",
+            "name": "Can add api access",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 33,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_apiaccess",
+            "name": "Can change api access",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 35,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_apiaccess",
+            "name": "Can delete api access",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 32,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_apikey",
+            "name": "Can add api key",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 34,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_apikey",
+            "name": "Can change api key",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 36,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_apikey",
+            "name": "Can delete api key",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "username": "palle",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2012-11-03T20:24:21.239Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$icz5IZPnpD4K$usR/qeefVsc09/WkFoPdYRMfkosvF8S8EAbfJ+qjzNo=",
+            "email": "p@p.com",
+            "date_joined": "2012-11-03T16:29:00.673Z"
+        }
+    },
+    {
+        "pk": 30,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2012-11-04T10:28:44.416Z",
+            "object_repr": "Liten T-shirt Ägg prick Lila",
+            "object_id": "1",
+            "change_message": "Changed gallery.",
+            "user": 1,
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 29,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2012-11-04T10:28:33.817Z",
+            "object_repr": "Raglanklänning lång ärm",
+            "object_id": "2",
+            "change_message": "Changed gallery.",
+            "user": 1,
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 28,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-04T10:28:27.248Z",
+            "object_repr": "collection-fall-2012",
+            "object_id": "2",
+            "change_message": "",
+            "user": 1,
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 27,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2012-11-03T21:58:27.419Z",
+            "object_repr": "Liten T-shirt Ägg prick Lila",
+            "object_id": "1",
+            "change_message": "Changed active.",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 26,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T21:19:10.892Z",
+            "object_repr": "Medium",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 17
+        }
+    },
+    {
+        "pk": 25,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T21:12:10.202Z",
+            "object_repr": "Raglanklänning lång ärm",
+            "object_id": "2",
+            "change_message": "",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 24,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T21:11:33.902Z",
+            "object_repr": "combo/16f_7m.jpg",
+            "object_id": "2",
+            "change_message": "",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 23,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T21:11:21.471Z",
+            "object_repr": "Turkos",
+            "object_id": "7",
+            "change_message": "",
+            "user": 1,
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 22,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T21:11:07.277Z",
+            "object_repr": "Tiger mörk botten",
+            "object_id": "6",
+            "change_message": "",
+            "user": 1,
+            "content_type": 21
+        }
+    },
+    {
+        "pk": 21,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T21:09:20.994Z",
+            "object_repr": "Raglanklänning (1008)",
+            "object_id": "2",
+            "change_message": "",
+            "user": 1,
+            "content_type": 24
+        }
+    },
+    {
+        "pk": 20,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T21:08:46.646Z",
+            "object_repr": "Klänningar",
+            "object_id": "5",
+            "change_message": "",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 19,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2012-11-03T20:24:56.574Z",
+            "object_repr": "/omoss/ -- Om oss",
+            "object_id": "1",
+            "change_message": "Changed content.",
+            "user": 1,
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 18,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2012-11-03T18:01:16.151Z",
+            "object_repr": "Nya kattungar, yay!",
+            "object_id": "1",
+            "change_message": "Changed title, body and tags.",
+            "user": 1,
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 17,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2012-11-03T17:58:13.148Z",
+            "object_repr": "first news",
+            "object_id": "1",
+            "change_message": "Changed title, body and tags.",
+            "user": 1,
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 16,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2012-11-03T17:57:13.194Z",
+            "object_repr": "Edit the single Frontpage",
+            "object_id": "1",
+            "change_message": "Changed body.",
+            "user": 1,
+            "content_type": 29
+        }
+    },
+    {
+        "pk": 15,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2012-11-03T17:56:25.161Z",
+            "object_repr": "first new",
+            "object_id": "1",
+            "change_message": "Changed title, body and tags.",
+            "user": 1,
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 14,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2012-11-03T17:29:39.434Z",
+            "object_repr": "first blog post",
+            "object_id": "1",
+            "change_message": "Changed body and tags.",
+            "user": 1,
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 13,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T17:28:39.171Z",
+            "object_repr": "first blog post",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 12,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T17:27:20.301Z",
+            "object_repr": "Vamlingbolaget newfeed",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 27
+        }
+    },
+    {
+        "pk": 11,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T17:26:48.349Z",
+            "object_repr": "Edit the single Frontpage",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 29
+        }
+    },
+    {
+        "pk": 10,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T16:48:14.917Z",
+            "object_repr": "/omoss/ -- Om oss",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 9,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T16:36:28.273Z",
+            "object_repr": "Liten T-shirt Ägg prick Lila",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 8,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T16:35:41.596Z",
+            "object_repr": "sommar_2012",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 7,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T16:34:50.897Z",
+            "object_repr": "Liten T-shirt Ägg prick Lila",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 6,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T16:34:38.945Z",
+            "object_repr": "combo/1f_18m_1.jpg",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 5,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T16:34:28.790Z",
+            "object_repr": "Koboltblå",
+            "object_id": "4",
+            "change_message": "",
+            "user": 1,
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 4,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T16:33:35.052Z",
+            "object_repr": "Äggprick",
+            "object_id": "3",
+            "change_message": "",
+            "user": 1,
+            "content_type": 21
+        }
+    },
+    {
+        "pk": 3,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T16:32:51.051Z",
+            "object_repr": "Liten t-shirt (1234)",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 24
+        }
+    },
+    {
+        "pk": 2,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T16:31:48.840Z",
+            "object_repr": "Tröjor och linnen",
+            "object_id": "2",
+            "change_message": "",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 1,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-11-03T16:31:21.717Z",
+            "object_repr": "Silkestrikå",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 22
+        }
+    },
+    {
+        "pk": 1,
+        "model": "blog.blog",
+        "fields": {
+            "description": "vamlingbolaget",
+            "created": "2012-11-03T17:27:20.300Z",
+            "modified": "2012-11-03T17:27:20.300Z",
+            "user": 1,
+            "active": false,
+            "slug": "vamlingbolaget-newfeed",
+            "name": "Vamlingbolaget newfeed"
+        }
+    }
+]

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+
+{% block pagetitle %}
+
+<legend > Galler{{ num_gallery|pluralize:"y,ies" }}</legend>
+{% endblock %}
+
+{% block allcontent %}
+    <dl>
+
+        {% for gallery in galleries %}
+        <dd>Name: <a href="/gallery/{{gallery.pk}}" >{{gallery.name}}</a></dd>
+        <dd>Status: {{gallery.status}}</dd>
+        <dd>Created: {{gallery.created_date}}</dd>
+        <dd>Image: <img src="{% version gallery.feature_image 'medium' %}" /></dd>
+        {% endfor %}
+
+        {% for image in images %}
+            <img src="{{image.image.url}}" />
+        {% endfor %}
+    </dl>
+{% endblock %}

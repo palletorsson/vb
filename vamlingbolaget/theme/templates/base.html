@@ -12,13 +12,14 @@
 
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
+l    <style type="text/css">
   
-      body {
+      body html {
         padding-top: 60px;
         padding-bottom: 40px;
       }
-      footer{
+
+      footer {
         text-align: right;
         color: #ff3300;
         
@@ -30,16 +31,38 @@
       .flatpages{
         display: block;
         width: 100%;
-        heigh: 30px;
-        margin: 0;
+        heigh: 25px;
+        margin-right: 0;
+        background: #ffffff;
         
       }
       .flatpages ul{
         float: right;
         right: 0;
       }
+      .flatpages li{
+          float:right;
+      }
+
+      .navbar-inner {
+          height: 40px;
+      }
+
+      .scrollable {
+          overflow: auto;
+      }
+      .content{
+         margin-top: 100px;;
+
+      }
+
+
+      li  {list-style-type: none;}
+      .nav > li > a:hover {color:blue;}
+      ul.query{padding-left: -15px;}
     </style>
-    
+
+
     <!-- The scripts -->
    <script type="text/javascript"
             src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js">
@@ -47,52 +70,55 @@
 	<script src="{{ STATIC_URL }}js/underscore.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/backbone.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>
-
-    <title> {% block title %} Vamlingbolaget {% endblock %} </title>
+      <title> {% block title %} Vamlingbolaget {% endblock %} </title>
   </head>
  <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
     <!-- Navbar
     ================================================== -->
-    <div class="navbar navbar-fixed-top"> 
+    <div class="navbar navbar-fixed-top">
               
       <div class="navbar-inner">
         <div class="container">
-        <div class="flatpages pull-right navbar-inverse">
-          <div class="flatpages pull-right navbar-inner">
-            <ul class="nav pull-right">
-              {% load flatpages %}
-              {% get_flatpages as flatpages %}
-                  {% for page in flatpages %}
-                      <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-                  {% endfor %}
-              </li>
-            </ul>
-        </div>
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-               
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vamllogo.png" class="leftside"/></a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-               <li class="">
-                    <a href="/products/">Kollektion</a>
-              </li>
-               <li class="">
-                    <a href="/products/patternandcolor/">Färger och Mönster</a>
-              </li>
-                <li class="">
-                    <a href="/news/">Nyheter</a>
-                </li>
-            </ul>
+          <div class="navbar-inner">
+              <div class="flatpages pull-right>
+                <ul class="nav pull-right">
+                  {% load flatpages %}
+                  {% get_flatpages as flatpages %}
+                      {% for page in flatpages %}
+                          <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                      {% endfor %}
+                  </li>
+                </ul>
+              </div>
+
+              <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vamllogo.png" class="leftside"/> <br />
+                  - Vackra kläder med rötter i Mah-Jong tillverkade på Gotland -</a>
+
+                <br />
+
+              <div class="nav-collapse collapse">
+                <ul class="nav">
+                   <li class="">
+                        <a href="/products/">Kollektion</a>
+                  </li>
+                   <li class="">
+                        <a href="/patternandcolor/">Färger och Mönster</a>
+                  </li>
+                    <li class="">
+                        <a href="/news/">Nyheter</a>
+                    </li>
+                    <li class="">
+                        <a href="/gallery/">Gallerier</a>
+                    </li>
+                </ul>
+              </div>
           </div>
         </div>
-      </div>  
+      </div>
     </div>
-    <div class="container"> <!--this is for the left margin -->
+
+    <div class="container content"> <!--this is for the left margin -->
 
       <div class="pagetitle">
         {% block pagetitle %} {% endblock %}
@@ -105,24 +131,26 @@
           SIDEBAR Base!
           {% endblock %}
        </div>
-          {% block content %}
-        <div class="span7">
-          
+        <div class="span9">
+        {% block content %}
+
           FEATURED COLLECTION
         
-       </div>
-          
+
           
           
           {% endblock %}
+        </div>
         {% endblock %}
-      <footer>
-        {% block footer %}  <img src="{{ STATIC_URL }}img/orange_line.png" width="100%"/>  <br/>
-        VamlingboLaget * 623 31 Burgsvik * 0498-498080 * info@vamlingbolaget.com {% endblock %}
-      </footer>
-    </div>
-    
 
+
+        <footer>
+            {% block footer %}
+                <img src="{{ STATIC_URL }}img/orange_line.png" width="100%"/>  <br/>
+                VamlingboLaget * 623 31 Burgsvik * 0498-498080 * info@vamlingbolaget.com
+            {% endblock %}
+        </footer>
+    </div>
   <script src="{{ STATIC_URL }}js/app.js" type="text/javascript"> </script>
   <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
   

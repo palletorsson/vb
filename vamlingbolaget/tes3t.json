@@ -1,0 +1,66 @@
+[
+    {
+        "pk": 1,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 1,
+            "name": "Klänningar",
+            "slug": "dresses"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 2,
+            "name": "Tröjor och linnen",
+            "slug": "tops"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 1,
+            "name": "Silkestrikå",
+            "slug": "silky-jersey"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "products.choicebase",
+        "fields": {
+            "active": true,
+            "order": 2,
+            "name": "Plysch",
+            "slug": "velour"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "products.type",
+        "fields": {}
+    },
+    {
+        "pk": 2,
+        "model": "products.type",
+        "fields": {}
+    },
+    {
+        "pk": 3,
+        "model": "products.quality",
+        "fields": {
+            "description": "Silkeskvaliten består av 50 % bomull och 50 % viskos. Tvättas i 60 grader.\r\n"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "products.quality",
+        "fields": {
+            "description": "Plyschen består av 80 % ekologisk bomull och 20% polyamid. Tvättas i 40 grader. "
+        }
+    }
+]

@@ -1,11 +1,14 @@
 {% extends "base.html" %}
+{% block pagetitle %}
+<legend> Välkommen Vamlingbolaget </legend>
+{% endblock %}
 
 {% block sidebar %}
-   <div class="span3" style="min-height: 500px;float: right;">
-     <h3>Nyheter</h3>
+   <div>
+     <h4>Nyheter</h4>
      <dl>
     {%for item in news %}
-      </dd><h4>{{item.title}}</h4>
+      </dd><h5>{{item.title}}</h5>
       {{item.body|safe|linebreaks}}
     {%endfor%}
     </dl>
@@ -15,13 +18,8 @@
 {% block content %}
    <div class="span8">
 
-    <legend> Kollektion first_page </legend> 
-        <div><img src="{{ STATIC_URL }}img/klanningar.jpg" />
-        {% for product, image in products %}
-            <div><img src="{{ image.image_300.url }}" />
-            <a href="{{product.pk}}"> {{ product.name }} </a>
-            {{ product.article.price }}
-            </hr></div></br>
-        {% endfor %}
-    </div>
+
+       <div> {{frontpage.body|safe|linebreaks}}
+
+       </div>
 {% endblock %}

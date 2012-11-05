@@ -21,7 +21,7 @@ MyItemView = Backbone.View.extend({
     
     initialize : function(){
         this.template = _.template(this.templateHtml) //_ ar underscoreklassen som man typ extendar har
-        this.render()
+        this.render();
     },
     
     render : function(){
@@ -74,7 +74,7 @@ MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad
     },
 
     onReset: function(){
-        this.render()
+        this.render();
     },    
 
     render : function(){
@@ -91,3 +91,4 @@ var appView = new MyView();
 
 jQuery('#app-canvas').html('')
 jQuery('#app-canvas').html(appView.$el)
+

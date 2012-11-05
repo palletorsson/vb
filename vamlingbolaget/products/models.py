@@ -2,6 +2,10 @@ from django.utils.translation import ugettext as _
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Adjust
 from django.db import models
+from filebrowser.fields import FileBrowseField
+from filebrowser.settings import ADMIN_THUMBNAIL
+
+
 import datetime
 
 
@@ -21,58 +25,55 @@ class Variation(TimeStampedActivate):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     article = models.ForeignKey('Article')
-    combo = models.ForeignKey('Combo', help_text="A combination of pattern, color and quality")
-    
+    pattern = models.ForeignKey('Pattern')
+    color = models.ForeignKey('Color')
+
     def get_images(self, name):
-        images = ImageVariation.objects.get(variation=name)
+        images = Image.objects.get(variation=name)
         return images
     
     def get_index_images(self):
-        images = ImageVariation.objects.all()
+        images = Image.objects.all()
         return images
 
-    def image(self):
-        images = ImageVariation.objects.filter(variation__pk=1)
+    def get_image(self, pk):
+        images = Image.objects.filter(variation__pk=pk)
         print images
         return '<img src="../../../media/%s" width="60"/>' % self.images
-    
-    image.allow_tags = True
+
+    get_image.allow_tags = True
     
     def __unicode__(self):
         return unicode(self.name)
 
- 
-class Image(models.Model):
-    file = models.ImageField("Image", upload_to="variations")
-    image_1200 = ImageSpecField([Adjust(contrast=1, sharpness=1),
-        ResizeToFill(900, 1350)], image_field='file', format='JPEG', 
-            options={'quality': 100}, )
-    image_900 = ImageSpecField([Adjust(contrast=1, sharpness=1),
-        ResizeToFill(600, 900)], image_field='file', format='JPEG', 
-            options={'quality': 90}, )
-    image_600 = ImageSpecField([Adjust(contrast=1, sharpness=1),
-        ResizeToFill(400, 600)], image_field='file', format='JPEG', 
-            options={'quality': 90}, )
-    image_460 = ImageSpecField([Adjust(contrast=1, sharpness=1),
-        ResizeToFill(300, 450)], image_field='file', format='JPEG', 
-            options={'quality': 90}, )    
-    image_300 = ImageSpecField([Adjust(contrast=1, sharpness=1),
-        ResizeToFill(200, 300)], image_field='file', format='JPEG', 
-            options={'quality': 90}, )  
-    thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-        ResizeToFill(100, 150)], image_field='file',
-        format='JPEG', options={'quality': 90})
+
+GALLERY_STATUS = (
+    ('A', 'Active'),
+    ('F', 'Featured'),
+    ('H', 'History'),
+    )
+
+class Gallery(models.Model):
+    name= models.CharField(max_length=50)
+    is_active = models.BooleanField(default=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=1, choices=GALLERY_STATUS)
+    feature_image = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg"], blank=True, null=True)
+    def __unicode__(self):
+        return unicode(self.name)
 
     class Meta:
-        abstract = True
+        verbose_name_plural = 'galleries'
 
-class ImageVariation(Image):
-    variation = models.ForeignKey('Variation')
+class Image(models.Model):
+    name= models.CharField(max_length=50, default="default",)
+    image = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg"], blank=True, null=True)
+    gallery = models.ManyToManyField('Gallery', blank=True, null=True)
+    variation = models.ForeignKey('Variation', blank=True, null=True)
     is_featured = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return unicode(self.variation)
-
+        return unicode(self.name)
 
 class Size(models.Model):
     """
@@ -90,7 +91,7 @@ class ChoiceBase(models.Model):
     """
     name = models.CharField(max_length=160)
     slug = models.SlugField(max_length=160)
-    order = models.IntegerField("If you need to other these items")
+    order = models.IntegerField("order items")
     active = models.BooleanField("Active")
 
     def __unicode__(self):
@@ -108,15 +109,15 @@ class Color(ChoiceBase):
     """
     Color used in Product Model         
     """
-    quality = models.ForeignKey('Quality')
+    pass
+
 
 
 class Pattern(ChoiceBase):
     """
     Pattern used in Product Model         
     """
-    quality = models.ForeignKey('Quality')
-
+    pass
 
 
 class Quality(ChoiceBase):
@@ -124,21 +125,6 @@ class Quality(ChoiceBase):
     Quality used in Article Model         
     """
     description = models.TextField()
-
-
-class Combo(models.Model):
-    file = models.ImageField("Image", upload_to="combo")
-    quality = models.ForeignKey('Quality')
-    pattern = models.ForeignKey('Pattern')
-    color = models.ForeignKey('Color')
-    active = models.BooleanField("Active")
-    
-    def image(self):
-        return '<img src="../../../media/%s" width="60"/>' % self.file
-    image.allow_tags = True
-
-    def __unicode__(self):
-        return unicode(self.file)
 
 
 class Article(TimeStampedActivate):
@@ -152,13 +138,18 @@ class Article(TimeStampedActivate):
     quality = models.ForeignKey('Quality')
     type = models.ForeignKey('Type')
     price = models.IntegerField()
-    file = models.ImageField("Image", upload_to="articles")
+    file = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg", ".gif", ".png"], blank=True, null=True)
 
-    def image(self):
-        return '<img src="../../../media/%s" width="60"/>' % self.file
-    image.allow_tags = True
+    """
+    def image_thumbnail(self, article):
+        if article.image and article.image.filetype == "Image":
+            return '<img src="%s" />' % article.image.version_generate(ADMIN_THUMBNAIL).url
+        else:
+            return ""
+    image_thumbnail.allow_tags = True
+    image_thumbnail.short_description = "Thumbnail"
+    """
 
-    
     def save(self, *args, **kwargs):
         if self.slug is None:
              self.slug = slugify(self.name)

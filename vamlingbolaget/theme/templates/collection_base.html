@@ -1,27 +1,26 @@
 {% extends "base.html" %}
 
 {% block sidebar %}
-<div class="span2  ">
-    <ul class="nav-list">
-        Kategorier
+
+    <ul class="nav-list query">
+        <h5>Kategorier</h5>
         {% for type in types %}
         <li>
 
-            <a href="/products/type/{{type.name}}"> {{ type.name }} </a>
+            <a href="/products/type/{{type.slug}}"> {{ type.name }} </a>
 
         </li>
         {% endfor %}
-
-        Kvaliter
+        <br/>
+        <h5>Kvaliter</h5>
 
         {% for quality in qualities %}
         <li>
 
-            <a href="/products/quality/{{quality.pk}}"> {{ quality.name }} </a>
+            <a href="/products/quality/{{quality.slug}}"> {{ quality.name }} </a>
 
         </li>
         {% endfor %}
 
     </ul>
-</div>
 {% endblock %}

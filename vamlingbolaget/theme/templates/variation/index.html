@@ -1,11 +1,22 @@
 {% extends "collection_base.html" %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% block pagetitle %}
+    <legend>Kollektion</legend>
+
+{% endblock %}
 
 {% block content %}
-    <legend>Kollektion</legend>
         {% for product, image in products %}
-            <div><img src="{{ image.image_300.url }}" />
-            <a href="{{product.pk}}"> {{ product.name }} </a>
-            {{ product.article.price }}
-            </hr></div></br>
+            <div class='image_wrapper'>
+                <a href="/products/{{product.pk}}"><img src="{% version image.image 'small' %}" class="imgborder" style="z-index: -1"/>
+
+                <div class='image_description'>
+                    <div class='description_content'> {{ product.name }} {{ product.article.price }}
+                    </div>
+                </a>
+            </div>
+
         {% endfor %}
+
 {% endblock %}

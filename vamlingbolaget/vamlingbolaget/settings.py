@@ -98,6 +98,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
+
     #'zinnia.context_processors.version',
     ) # Optional
 
@@ -133,6 +134,9 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    #'admin_tools',
+    #'admin_tools.menu',
+    #'admin_tools.dashboard',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -140,6 +144,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
+
     #"django.contrib.comments",
     #'tagging',
     #'mptt',
@@ -155,7 +160,7 @@ INSTALLED_APPS = (
     'tastypie',
     'imagekit',
     'south',
-    'photologue',
+    #'photologue',
     #Our Apps
     'products',
     'cart',
@@ -199,47 +204,6 @@ try:
     from .local_settings import *
 except ImportError:
     pass
-"""
-URL_TINYMCE = STATIC_URL + "tinymce/jscripts/tiny_mce/"
-TINYMCE_JS_ROOT = URL_TINYMCE
-PATH_TINYMCE = URL_TINYMCE
 
-FILEBROWSER_JS_URL = STATIC_URL + 'filebrowser/js/TinyMCEAdmin.js'
-
-print FILEBROWSER_JS_URL
-
-# TINYMCE_JS_URL = STATIC_URL + 'tinymce/jscripts/tiny_mce/tiny_mce_src.js'
-TINYMCE_JS_URL = STATIC_URL +'grappelli/tinymce/jscripts/tiny_mce/tiny_mce_src.js'
-print TINYMCE_JS_URL
-
-TINYMCE_SPELLCHECKER = True
-TINYMCE_COMPRESSOR = True
-
-
-TINYMCE_DEFAULT_CONFIG = {
-    'width': '760',
-    'height': '480',
-    'plugins':"spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
-    'theme':"advanced",
-    'cleanup_on_startup':True,
-    'custom_undo_redo_levels':10,
-    'relative_urls': False,
-    'theme_advanced_toolbar_location': 'top',
-    'theme_advanced_toolbar_align': 'left',
-    'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'\
-                               'justifyleft,justifycenter,justifyright,justifyfull,|,forecolor,'\
-                               'formatselect,sub,sup,removeformat,charmap,|,bullist,numlist,|,'\
-                               'indent,outdent,|,link,unlink,anchor,image,media,|,visualaid,code,'\
-                               'preview,fullscreen',
-    'theme_advanced_buttons2': 'undo,redo,|,cut,copy,paste,pasteword,'\
-                               'pastetext,selectall,|,cleanup,help,|,hr',
-    'theme_advanced_buttons3': '',
-    'theme_advanced_blockformats': 'p,pre,address,blockquote,h1,h2,h3,h4,'\
-                                   'h5,h6',
-    'plugin_preview_width' : '800',
-    'plugin_preview_height' : '600',
-    'paste_auto_cleanup_on_paste': 'true',
-    'file_browser_callback': 'CustomFileBrowser',
-    }
-TINYMCE_FILEBROWSER=True
-"""
+ADMIN_TOOLS_MENU = 'vamlingbolaget.menu.CustomMenu'
+ADMIN_TOOLS_INDEX_DASHBOARD = 'vamlingbolaget.dashboard.CustomIndexDashboard'
