@@ -10,21 +10,19 @@
 <div class="row-fluid">{{ images.pk }}
     <div class="span6">
         {% for image in images %}
-        <img src="{% version image.image 'large' %}" class="imgborder" style="z-index: -1"/>
+            <img src="{% version image.image 'medium' %}" class="imgborder" style="z-index: -1"/>
         {% endfor %}
         </br>
-	<h5> {{ product.article.name }} i {{ product.combo.color }} {{ product.combo.pattern }} </h5>  
+	<h5> {{ product.article.name }} i {{ product.color|lower }} {{ product.pattern|lower }} </h5>
     </div>
 
     <div class="span6">
      
         <div class="span7">
-		<h4> {{ product.article.name }} </h4>
-		Artikelnummer: <span id="sku_number">{{ product.article.sku_number }}</span>  
-		 <span id="article_pk">{{ product.article.pk }}</span>  
+    		<h4> {{ product.article.name }} </h4>
+            Artikelnummer: <span id="sku_number">{{ product.article.sku_number }}</span>
         </div>
-
-        <img src="{{ product.article.image.image.url }}" >  </br>
+            <img src="{% version product.article.file 'small' %} " >  </br>
         <hr/>
             <h4> Färg och Mönster </h4>  
         <hr/>
@@ -33,12 +31,22 @@
         <div class="span8">
 	    <select class="changonselect" id="color">
 		{% for color in colors %}
-			<option value="{{ color.pk }}">{{ color.name }}</option>
-		{% endfor %}
+			<option value="{{ color.order }}"
+                {% if color.order == product.color.order %}
+                    selected="selected"
+                {%endif%} >
+            {{ color.name }} </option>
+            {% endfor %}
 	    </select> 	    
 	    <select class="changonselect" id='pattern'>
 		{% for pattern in patterns %}
-			<option  value="{{ pattern.pk }}">{{ pattern.name }}</option>
+			<option value="{{ pattern.order }}"
+            {% if pattern.order == product.pattern.order %}
+                selected="selected"
+            {%endif%}
+            >
+            {{ pattern.name }}</option>
+
 		{% endfor %}
 	    </select> 	
 		</br>
@@ -50,28 +58,28 @@
 	    </select> 	
 	
 	</div>
-        <img id="pattern_color_image" src="{{product.combo.file.url}}" width="100" />
+        <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" />
         <div style="clear: both;"></div>
         <hr/>
 
 
         <div id="changetext"></div>
+
         <script>
             $(".changonselect").change(function () {
                 var str = "{{ product.article.name }}"+ " i ";
-                var folder = "/media/combo/";
+                var folder = "{{MEDIA_URL}}uploads/120/";
                 var img = "";
                 $(".changonselect option:selected").each(function () {
                     str += $(this).text() + " ";
                     var pattern_num = $("#pattern").val();
                     var color_num = $("#color").val();
-                    img = folder+"m"+pattern_num+"c"+color_num+".jpg";
+                    img = folder+color_num+"f_"+pattern_num+"m.jpg";
                 });
                 $("#changetext").text(str);
-                $("#changeimg").text(img);
                 $("#pattern_color_image").attr("src", img);
             })
-                    .change();
+
 
         </script>
 

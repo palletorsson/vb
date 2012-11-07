@@ -8,17 +8,25 @@
 {% endblock %}
 
 {% block allcontent %}
-    <dl>
 
-        {% for gallery in galleries %}
-        <dd>Name: <a href="/gallery/{{gallery.pk}}" >{{gallery.name}}</a></dd>
-        <dd>Status: {{gallery.status}}</dd>
-        <dd>Created: {{gallery.created_date}}</dd>
-        <dd>Image: <img src="{% version gallery.feature_image 'medium' %}" /></dd>
-        {% endfor %}
+    <div class="gallery_list">
+        {%if galleries %}
 
-        {% for image in images %}
-            <img src="{{image.image.url}}" />
-        {% endfor %}
-    </dl>
+            {% for gallery in galleries %}
+            <dl class="gallery_list">
+
+                <dd> <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" /></a></dd>
+                <dd>Galleri: <a href="/gallery/{{gallery.pk}}" > {{gallery.name}}</a></dd>
+            </dl>
+            {% endfor %}
+
+        {%else%}
+            {% with gallery.image_set.all|first as image %}
+            <div>
+                <img src="{% version image.image 'large' %}" class="imgborder" />
+            </div>
+            {% endwith %}
+        {%endif%}
+    </div>
+
 {% endblock %}

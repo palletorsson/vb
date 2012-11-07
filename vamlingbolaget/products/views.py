@@ -20,11 +20,9 @@ def first_page(request):
 
 
 def index(request):
-    variations = Variation.objects.all()
+    products = Variation.objects.all()
     qualities = Quality.objects.all()
     types = Type.objects.all()
-    images = Image.objects.filter(variation__isnull=False)
-    products = zip(variations, images)
     return render_to_response('variation/index.html',
                              {'products': products,
                               'qualities': qualities,
@@ -33,17 +31,9 @@ def index(request):
                              context_instance=RequestContext(request))
 
 def by_type(request, key):
-    same_types = Variation.objects.filter(article__type__slug = key)
-    images = Image.objects.all()
-    products = zip(same_types, images)
+    products = Variation.objects.filter(article__type__slug = key)
     qualities = Quality.objects.all()
     types = Type.objects.all()
-    images = Image.objects.all()
-
-
-    print same_types
-    #same_color = Variation.objects.filter(combo__color__name = product.combo.color.name)
-    #same_pattern = Variation.objects.filter(combo__pattern__name = product.combo.pattern.name)
     return render_to_response('variation/index.html',
              {'products': products,
               'qualities': qualities,
@@ -52,11 +42,9 @@ def by_type(request, key):
 
 
 def by_quality(request, key):
-    same_quality = Variation.objects.filter(quality__slug = key)
-    images = Image.objects.all()
+    products = Variation.objects.filter(article__quality__slug = key)
     qualities = Quality.objects.all()
     types = Type.objects.all()
-    products = zip(same_quality, images)
     return render_to_response('variation/index.html',
         {'products': products,
          'qualities': qualities,
@@ -67,10 +55,9 @@ def by_quality(request, key):
 def detail(request, pk):
     try:
         product = Variation.objects.get(pk=pk)
-        name = product.name
         images = Image.objects.filter(variation__pk=pk)
-        print "---"
-        print images
+        color_id = product.color.order
+        pattern_id = product.pattern.order
         colors = Color.objects.all()
         patterns = Pattern.objects.all()
         sizes = Size.objects.all()
@@ -87,6 +74,8 @@ def detail(request, pk):
                    'sizes': sizes,
                    'qualities': qualities,
                    'types': types,
+                   'color_id':color_id,
+                   'pattern_id':pattern_id,
                    },
                    context_instance=RequestContext(request)
                     )
@@ -115,13 +104,9 @@ def show_gallery(request, key):
     gallery = Gallery.objects.get(pk=key)
     images = gallery.image_set.all()
 
-
-
     return render_to_response('variation/gallery.html',
         {'gallery': gallery,
-         'images': images,
          'num_gallery' : 1
-
          },context_instance=RequestContext(request)
     )
 

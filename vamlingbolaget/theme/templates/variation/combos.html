@@ -2,12 +2,17 @@
 
 {% block allcontent %}
    <div class="span10">
-    <legend>Färger och Mönster</legend> 
-        {% for color in colors %}
-                {% for pattern in patterns %}
-                    {{  color.order }} {{  pattern.order }}
-                {% endfor %}
-        {% endfor %}
-
+    <legend>Färger och Mönster</legend>
+    <table>
+       {% for color in colors %}
+       <tr>
+           <td class="pattern_row"> {{  color.name }}:</td>
+           {% for pattern in patterns %}
+                 <td class="pattern_image"> <img src="{{ MEDIA_URL }}/uploads/120/{{  color.order }}f_{{  pattern.order }}m.jpg" />
+                 {{ pattern.name }}</td>
+           {% endfor %}
+       </tr>
+       {% endfor %}
+    </table>
 {% endblock %}
 
