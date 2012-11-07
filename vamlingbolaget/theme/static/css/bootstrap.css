@@ -144,7 +144,8 @@ textarea {
 }
 body {
     margin: 0;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family:
+    "Courier New",Courier,serif;
     font-size: 14px;
     line-height: 20px;
     color: #777777;
@@ -5373,7 +5374,7 @@ textarea {
 }
 body {
     margin: 0;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family:    "Courier New",Courier,serif, Georgia, "Times New Roman", Times, serif;
     font-size: 14px;
     line-height: 20px;
     color: #777777;

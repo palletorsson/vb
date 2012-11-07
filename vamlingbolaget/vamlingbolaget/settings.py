@@ -165,8 +165,8 @@ INSTALLED_APPS = (
     'products',
     'cart',
     'blog',
-    'frontpage'
-
+    'frontpage',
+    'gallery',
 )
 
 # A sample logging configuration. The only tangible logging

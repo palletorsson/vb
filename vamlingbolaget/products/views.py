@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from models import *
 from blog.models import Post
+from gallery.models import *
 
 def first_page(request):
     variations = Variation.objects.all()
@@ -20,12 +21,10 @@ def first_page(request):
 
 def index(request):
     variations = Variation.objects.all()
-    print variations
     qualities = Quality.objects.all()
     types = Type.objects.all()
-    images = Image.objects.all()
+    images = Image.objects.filter(variation__isnull=False)
     products = zip(variations, images)
-    print products
     return render_to_response('variation/index.html',
                              {'products': products,
                               'qualities': qualities,
@@ -69,7 +68,9 @@ def detail(request, pk):
     try:
         product = Variation.objects.get(pk=pk)
         name = product.name
-        images = Variation.get_images(product, pk)
+        images = Image.objects.filter(variation__pk=pk)
+        print "---"
+        print images
         colors = Color.objects.all()
         patterns = Pattern.objects.all()
         sizes = Size.objects.all()

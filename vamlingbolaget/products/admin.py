@@ -1,5 +1,6 @@
 from django.contrib import admin
 from models import *
+from gallery.models import Image, Gallery
 
 class VariationImageInline(admin.StackedInline):
   model = Image
@@ -68,8 +69,6 @@ class TypeAdmin(admin.ModelAdmin):
     list_filter = ('active', )
     ordering = ['order']
 
-class ImageVariationAdmin(admin.ModelAdmin):
-    model = Image
 
     
 
@@ -80,7 +79,4 @@ admin.site.register(Color, ColorAdmin)
 admin.site.register(Pattern, PatternAdmin)
 admin.site.register(Quality, QualityAdmin)
 admin.site.register(Type, TypeAdmin)
-admin.site.register(Image, ImageVariationAdmin)
-
-admin.site.register(Gallery)
 
