@@ -57,6 +57,7 @@ class Size(models.Model):
         return unicode(self.name)
 
 
+
 class ChoiceBase(models.Model):
     """
     use as common base model for Color, pattern and Quality
@@ -97,6 +98,8 @@ class Quality(ChoiceBase):
     Quality used in Article Model         
     """
     description = models.TextField()
+    class Meta:
+        verbose_name_plural = 'Qualies'
 
 
 class Article(TimeStampedActivate):

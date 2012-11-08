@@ -17,6 +17,7 @@ l    <style type="text/css">
       body html {
         padding-top: 60px;
         padding-bottom: 40px;
+        color: black;
 
       }
 
@@ -115,7 +116,7 @@ l    <style type="text/css">
                   {% load flatpages %}
                   {% get_flatpages as flatpages %}
                       {% for page in flatpages %}
-                          <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                          <li style="padding-left: 10px"> <a href="{{ page.url }}">{{ page.title }}</a> </li>
                       {% endfor %}
                   </li>
                 </ul>
@@ -166,8 +167,8 @@ l    <style type="text/css">
           FEATURED COLLECTION
         
 
-          
-          
+
+
           {% endblock %}
         </div>
         {% endblock %}
@@ -180,7 +181,7 @@ l    <style type="text/css">
             {% endblock %}
         </footer>
     </div>
-  <script src="{{ STATIC_URL }}js/app.js" type="text/javascript"> </script>
+  <script src="{{ STATIC_URL }}js/cart.js" type="text/javascript"> </script>
   <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
   
  </body>

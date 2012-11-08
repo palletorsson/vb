@@ -8,14 +8,21 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding model 'Cart'
+        db.create_table('cart_cart', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('owner', self.gf('django.db.models.fields.CharField')(default='anonymous', max_length=50)),
+        ))
+        db.send_create_signal('cart', ['Cart'])
+
         # Adding model 'CartItem'
         db.create_table('cart_cartitem', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('cart', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('article', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Article'])),
-            ('color', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Color'])),
-            ('pattern', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Pattern'])),
-            ('size', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Size'])),
+            ('cart', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cart.Cart'])),
+            ('article', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['products.Article'])),
+            ('color', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['products.Color'])),
+            ('pattern', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['products.Pattern'])),
+            ('size', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['products.Size'])),
             ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('quantity', self.gf('django.db.models.fields.PositiveIntegerField')(default=1)),
         ))
@@ -23,28 +30,36 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Deleting model 'Cart'
+        db.delete_table('cart_cart')
+
         # Deleting model 'CartItem'
         db.delete_table('cart_cartitem')
 
 
     models = {
+        'cart.cart': {
+            'Meta': {'object_name': 'Cart'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'owner': ('django.db.models.fields.CharField', [], {'default': "'anonymous'", 'max_length': '50'})
+        },
         'cart.cartitem': {
             'Meta': {'ordering': "['date_added']", 'object_name': 'CartItem'},
-            'article': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Article']"}),
-            'cart': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'color': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Color']"}),
+            'article': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': "orm['products.Article']"}),
+            'cart': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cart.Cart']"}),
+            'color': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': "orm['products.Color']"}),
             'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'pattern': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Pattern']"}),
+            'pattern': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': "orm['products.Pattern']"}),
             'quantity': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
-            'size': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Size']"})
+            'size': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': "orm['products.Size']"})
         },
         'products.article': {
             'Meta': {'object_name': 'Article'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {}),
-            'file': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'file': ('filebrowser.fields.FileBrowseField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '160'}),
@@ -54,26 +69,26 @@ class Migration(SchemaMigration):
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255', 'blank': 'True'}),
             'type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Type']"})
         },
-        'products.color': {
-            'Meta': {'object_name': 'Color'},
+        'products.choicebase': {
+            'Meta': {'object_name': 'ChoiceBase'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'quality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Quality']"})
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '160'}),
+            'order': ('django.db.models.fields.IntegerField', [], {}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '160'})
+        },
+        'products.color': {
+            'Meta': {'object_name': 'Color', '_ormbases': ['products.ChoiceBase']},
+            'choicebase_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['products.ChoiceBase']", 'unique': 'True', 'primary_key': 'True'})
         },
         'products.pattern': {
-            'Meta': {'object_name': 'Pattern'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'quality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Quality']"})
+            'Meta': {'object_name': 'Pattern', '_ormbases': ['products.ChoiceBase']},
+            'choicebase_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['products.ChoiceBase']", 'unique': 'True', 'primary_key': 'True'})
         },
         'products.quality': {
-            'Meta': {'object_name': 'Quality'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'Meta': {'object_name': 'Quality', '_ormbases': ['products.ChoiceBase']},
+            'choicebase_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['products.ChoiceBase']", 'unique': 'True', 'primary_key': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {})
         },
         'products.size': {
             'Meta': {'object_name': 'Size'},
@@ -81,10 +96,8 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '10'})
         },
         'products.type': {
-            'Meta': {'object_name': 'Type'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'Meta': {'object_name': 'Type', '_ormbases': ['products.ChoiceBase']},
+            'choicebase_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['products.ChoiceBase']", 'unique': 'True', 'primary_key': 'True'})
         }
     }
 

@@ -1,0 +1,82 @@
+{% extends "collection_base.html" %}
+
+{% block pagetitle %}
+<legend>Din köplista</legend>
+{% endblock %}
+
+{% block allcontent %}
+<table>
+    <thead>
+    <tr>
+        <th>
+            <div>
+                <span> Antal </span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> Artikel </span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> Färg </span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> Mönster </span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> Kvalietet </span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> Pris </span>
+            </div>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in cartitems %}
+    <tr>
+    <th>
+        <div>
+            <span> {{ item.quantity }}</span>
+        </div>
+    </th>
+    <th>
+        <div>
+            <span> {{ item.article }}</span>
+        </div>
+    </th>
+    <th>
+        <div>
+            <span>{{ item.color }} </span>
+        </div>
+    </th>
+    <th>
+        <div>
+            <span>{{ item.pattern }}</span>
+        </div>
+    </th>
+    <th>
+        <div>
+            <span> {{ item.quality }} </span>
+        </div>
+    </th>
+    <th>
+        <div>
+            <span> {{ item.article.price }} </span>
+        </div>
+    </th>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}

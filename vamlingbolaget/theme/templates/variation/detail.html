@@ -8,27 +8,38 @@
 
 {% block allcontent %}
 <div class="row-fluid">{{ images.pk }}
-    <div class="span6">
+    <div class="span5">
         {% for image in images %}
-            <img src="{% version image.image 'medium' %}" class="imgborder" style="z-index: -1"/>
+            <img src="{% version image.image 'large' %}"  style="width: 360px;"/>
         {% endfor %}
         </br>
-	<h5> {{ product.article.name }} i {{ product.color|lower }} {{ product.pattern|lower }} </h5>
+	<span style="width: 200px; margin:3px;"> {{ product.article.name }} i {{ product.color|lower }} {{ product.pattern|lower }}</span>
     </div>
 
+
     <div class="span6">
-     
-        <div class="span7">
+
+        <div class="span12">
     		<h4> {{ product.article.name }} </h4>
-            Artikelnummer: <span id="sku_number">{{ product.article.sku_number }}</span>
+            <hr/>
         </div>
-            <img src="{% version product.article.file 'small' %} " >  </br>
-        <hr/>
-            <h4> Färg och Mönster </h4>  
+        <div style="clear: both;"></div>
+        <div class="span6">
+            Artikelnummer: <span id="sku_number">{{ product.article.sku_number }}</span><br/><br/>
+
+            Kvalitet: {{ product.article.quality }}<br>
+            {{ product.article.quality.description }}
+
+        </div>
+            <span style="padding-left: 40px;"><img src="{% version product.article.file 'small' %} " >  </span></br>
+
+        <div style="clear: both;"></div>
+        <br/><br/>
+            <h4> Färg och Mönster </h4>
         <hr/>
 
    
-        <div class="span8">
+        <div class="span7">
 	    <select class="changonselect" id="color">
 		{% for color in colors %}
 			<option value="{{ color.order }}"
@@ -48,17 +59,16 @@
             {{ pattern.name }}</option>
 
 		{% endfor %}
-	    </select> 	
-		</br>
+	    </select>
 		</br>
 	    <select id='size'>
 		{% for size in sizes %}
-			<option value="{{ size.pk }}">{{ size.name }}</option>
+			<option value="{{ size.pk }} selected="selected"">{{ size.name }} </option>
 		{% endfor %}
 	    </select> 	
 	
 	</div>
-        <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" />
+        <span style="padding-left: 10px;"><img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" /></span>
         <div style="clear: both;"></div>
         <hr/>
 
@@ -66,48 +76,133 @@
         <div id="changetext"></div>
 
         <script>
-            $(".changonselect").change(function () {
-                var str = "{{ product.article.name }}"+ " i ";
-                var folder = "{{MEDIA_URL}}uploads/120/";
-                var img = "";
-                $(".changonselect option:selected").each(function () {
-                    str += $(this).text() + " ";
-                    var pattern_num = $("#pattern").val();
-                    var color_num = $("#color").val();
-                    img = folder+color_num+"f_"+pattern_num+"m.jpg";
-                });
-                $("#changetext").text(str);
-                $("#pattern_color_image").attr("src", img);
-            })
 
 
         </script>
-
+        <hr/>
         <div style="clear: both;"></div>
 
-        <div class="span7">
+        <div class="span6">
         <h4> Pris: {{ product.article.price }} kr </h4>
 
         </div>
-        <div style="clear: both;"></div>
 
-        <div id='app-canvas'>
-        <button class="btn btn-success" type="button">Lägg till i Köplista</button>
+
+        <div id='addtocart' style="display:block;">
+        <span style="padding-left: 30px;">
+            <button class="btn btn-success" type="button">Lägg till i Köplista</button></span>
         </div>
         <hr/>
-	<hr/>
-
-
-
-        <div class="span6">
-        Kvalitet: {{ product.article.quality }}
-        </br>        </br>        </br>
-        </div>
-        {{ product.article.quality.description }}  
-         
-        </div>
     </div>
 
-    
+<script>
+    $(function(){
+        // using jQuery
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        function sameOrigin(url) {
+            // test that a given url is a same-origin URL
+            // url could be relative or scheme relative or absolute
+            var host = document.location.host; // host + port
+            var protocol = document.location.protocol;
+            var sr_origin = '//' + host;
+            var origin = protocol + sr_origin;
+            // Allow absolute or scheme relative URLs to same origin
+            return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+                    (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+                // or any other URL that isn't scheme relative or absolute i.e relative.
+                    !(/^(\/\/|http:|https:).*/.test(url));
+        }
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                    // Send the token to same-origin, relative URLs only.
+                    // Send the token only if the method warrants CSRF protection
+                    // Using the CSRFToken value acquired earlier
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        })
+
+    rest_url = '/api/v1/cartitem/';
+    var sku_number = $('#sku_number').text();
+    console.log(sku_number);
+    var cart = $('#sku_number').text();
+    var pattern_id = $('#pattern option:selected').val();
+    var color_id = +$('#color option:selected').val();
+    var size_id = $('#size option:selected').val();
+    var article_id = $('#article_pk').text();
+    var quantity = 1;
+
+    $(".changonselect").change(function () {
+
+    var str = "Du valde: "+"{{ product.article.name }}"+ " i ";
+    var folder = "{{MEDIA_URL}}uploads/120/";
+    var img = "";
+
+    $(".changonselect option:selected").each(function () {
+    str += $(this).text() + " ";
+    pattern_id = $("#pattern").val();
+    color_id = $("#color").val();
+    size_id = $("#size").val();
+    img = folder+color_id+"f_"+pattern_id+"m.jpg";
+
+    });
+
+    $("#changetext").text(str);
+    $("#pattern_color_image").attr("src", img);
+
+
+    })
+
+    $("#addtocart").click(function() {
+
+        $.ajax({
+            type:"POST",
+            url:"http://127.0.0.1:8000/cart/addtocart/",
+            data: {
+                article_sku: sku_number,
+                pattern: pattern_id,
+                color: color_id,
+                size: size_id,
+                'csrfmiddlewaretoken': csrftoken,
+                'quantity': quantity
+            },
+            success: function(data){
+                msg = data.message.msg;
+                $("#changetext").text(msg);
+            }
+        });
+
+
+    });
+
+    });
+
+</script>
+
+
+
+    });
+
 {% endblock %}
 

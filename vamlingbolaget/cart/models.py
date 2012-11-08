@@ -6,20 +6,13 @@ import random
 
 class Cart(models.Model):
     owner = models.CharField(max_length = 50, default='anonymous')
-
+    #key = models.CharField(max_length = 100)
     def __unicode__(self):
         return 'Cart of %s' %self.owner
 
-    def _generate_cart_id():
-        cart_id = ''
-        characters = 'ABCDEFGHIJKLMNOPQRQSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()'
-        cart_id_length = 50
-        for y in range(cart_id_length):
-            cart_id += characters[random.randint(0, len(characters)-1)]
-        return cart_id
 
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart)
+    cart_id = models.CharField(max_length = 50, default='anonymous')
     article = models.ForeignKey(Article, default=1)
     color = models.ForeignKey(Color, default=1)
     pattern = models.ForeignKey(Pattern, default=1)
@@ -31,7 +24,7 @@ class CartItem(models.Model):
         ordering=['date_added']
     
     def total(self):
-        return self.quantity * self.article_id.price
+        return self.quantity * self.article.price
     
     def name(self):
         return self.article.name
@@ -42,4 +35,3 @@ class CartItem(models.Model):
 
     def __unicode__(self):
         return "%dx %s" % (self.quantity, self.article.name)
-
