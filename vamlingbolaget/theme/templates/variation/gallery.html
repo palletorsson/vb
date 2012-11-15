@@ -3,8 +3,12 @@
 {% version model.field_name version_prefix %}
 
 {% block pagetitle %}
-
-<legend > Galler{{ num_gallery|pluralize:"i,ier" }}</legend>
+    {%if galleries %}
+        <!--legend > Galler{{ num_gallery|pluralize:"i,ier" }}</legend-->
+    {%else%}
+        <legend > {{ gallery.name|title }}</legend>
+    {%endif%}
+    
 {% endblock %}
 
 {% block allcontent %}
@@ -13,19 +17,54 @@
         {%if galleries %}
 
             {% for gallery in galleries %}
-            <dl class="gallery_list">
+                {%if gallery.status == 'F'%}
+                    <div class="gallery featured">
+                        <legend> Senaste nytt! </legend>
+                        <dl class="gallery_list">
+                            <dd>
+                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" />
+                                <div class="overlay">&nbsp;Galleri: {{gallery.name}}</div></a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <hr/>
+                {%elif gallery.status == 'A'%}
+                    <div class="gallery active">
+                        <legend> Nya gallerier </legend>
+                        <dl class="gallery_list active">
+                            <dd>
+                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" />
+                                <div class="overlay"> &nbsp; Galleri: {{gallery.name}}</div></a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <hr/>
+                {%elif gallery.status == 'H'%}
+                    <div class="gallery history">
+                        <legend> Arkivgallerier </legend>
 
-                <dd> <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" /></a></dd>
-                <dd>Galleri: <a href="/gallery/{{gallery.pk}}" > {{gallery.name}}</a></dd>
-            </dl>
+                        <dl class="gallery_list history">
+                            <dd>
+                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" />
+                                <div class="overlay">&nbsp;Galleri: {{gallery.name}}</div></a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <hr/>
+                {%endif%}
             {% endfor %}
 
         {%else%}
-            {% with gallery.image_set.all|first as image %}
-            <div>
-                <img src="{% version image.image 'large' %}" class="imgborder" />
-            </div>
-            {% endwith %}
+                <div>
+                    <a href="{% version gallery.feature_image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
+                        <img src="{% version gallery.feature_image 'medium' %}"  class="imgborder isfeatured" />
+                    </a> 
+                    {%for image in images%}
+                    <a href="{% version image.image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
+                        <img src="{% version image.image 'thumbnail' %}"  class="imgborder enlarge" />
+                    </a>    
+                    {%endfor%}
+                </div>
         {%endif%}
     </div>
 

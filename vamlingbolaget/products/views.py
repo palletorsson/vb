@@ -19,6 +19,8 @@ def first_page(request):
 							context_instance=RequestContext(request))
 
 
+
+
 def index(request):
     products = Variation.objects.all()
     qualities = Quality.objects.all()
@@ -106,7 +108,7 @@ def show_gallery(request, key):
 
     return render_to_response('variation/gallery.html',
         {'gallery': gallery,
-         'num_gallery' : 1
+         'num_gallery' : 1, 'images':images,
          },context_instance=RequestContext(request)
     )
 
