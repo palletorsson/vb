@@ -12,6 +12,7 @@
 
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
 l    <style type="text/css">
   
       body html {
@@ -93,6 +94,7 @@ l    <style type="text/css">
       .icon-remove-sign{
           cursor: pointer;
       }
+
     </style>
 
 
@@ -103,6 +105,7 @@ l    <style type="text/css">
 	<script src="{{ STATIC_URL }}js/underscore.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/backbone.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>
+	<script src="{{ STATIC_URL }}js/lightbox.js" type="text/javascript"> </script>
       <title> {% block title %} Vamlingbolaget {% endblock %} </title>
   </head>
  <body data-spy="scroll" data-target=".bs-docs-sidebar">
@@ -157,32 +160,26 @@ l    <style type="text/css">
         </div>
       </div>
     </div>
-
+{% block stretchpage %}
     <div class="container content"> <!--this is for the left margin -->
-
       <div class="pagetitle">
-        {% block pagetitle %} {% endblock %}
-        {% block pagedesc %} {% endblock %}
+      {% block pagetitle %} {% endblock %}
+      {% block pagedesc %} {% endblock %}
       </div>
       
-        {% block allcontent %} 
+      {% block allcontent %} 
         <div class="span2">
            {% block sidebar %} 
-          SIDEBAR Base!
-          {% endblock %}
+              SIDEBAR Base!
+           {% endblock %}
        </div>
         <div class="span9">
-        {% block content %}
-
-          FEATURED COLLECTION
-        
-
-
-
+           {% block content %}
+                 FEATURED COLLECTION
           {% endblock %}
         </div>
-        {% endblock %}
-
+      {% endblock %}
+{% endblock %}
 
         <footer>
             {% block footer %}
