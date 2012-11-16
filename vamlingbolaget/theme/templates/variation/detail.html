@@ -47,8 +47,9 @@
                     selected="selected"
                 {%endif%} >
             {{ color.name }} </option>
-            {% endfor %}
+        {% endfor %}
 	    </select> 	    
+
 	    <select class="changonselect" id='pattern'>
 		{% for pattern in patterns %}
 			<option value="{{ pattern.order }}"
@@ -57,13 +58,13 @@
             {%endif%}
             >
             {{ pattern.name }}</option>
-
 		{% endfor %}
 	    </select>
+
 		</br>
 	    <select id='size'>
 		{% for size in sizes %}
-			<option value="{{ size.pk }} selected="selected"">{{ size.name }} </option>
+			<option value="{{ size.pk }}" selected="selected">{{ size.name }} </option>
 		{% endfor %}
 	    </select> 	
 	
@@ -73,7 +74,9 @@
         <hr/>
 
 
-        <div id="changetext"></div>
+        <div id="changetext">
+            <p>Plagget går att få i alla mönster och färger.</p>
+        </div>
 
         <script>
 
@@ -143,36 +146,31 @@
             }
         })
 
-    rest_url = '/api/v1/cartitem/';
-    var sku_number = $('#sku_number').text();
-    console.log(sku_number);
-    var cart = $('#sku_number').text();
-    var pattern_id = $('#pattern option:selected').val();
-    var color_id = +$('#color option:selected').val();
-    var size_id = $('#size option:selected').val();
-    var article_id = $('#article_pk').text();
-    var quantity = 1;
+    var sku_number = $('#sku_number').text(),
+        cart = $('#sku_number').text(),
+        pattern_id = $('#pattern option:selected').val(),
+        color_id = +$('#color option:selected').val(),
+        size_id = $('#size option:selected').val(),
+        article_id = $('#article_pk').text(),
+        quantity = 1;
 
     $(".changonselect").change(function () {
 
-    var str = "Du valde: "+"{{ product.article.name }}"+ " i ";
-    var folder = "{{MEDIA_URL}}uploads/120/";
-    var img = "";
+        var str = "Du valde: "+"{{ product.article.name }}"+ " i ",
+            folder = "{{MEDIA_URL}}uploads/120/",
+            img = "";
 
-    $(".changonselect option:selected").each(function () {
-    str += $(this).text() + " ";
-    pattern_id = $("#pattern").val();
-    color_id = $("#color").val();
-    size_id = $("#size").val();
-    img = folder+color_id+"f_"+pattern_id+"m.jpg";
+        $(".changonselect option:selected").each(function () {
+            str += $(this).text() + " ";
+            pattern_id = $("#pattern").val();
+            color_id = $("#color").val();
+            size_id = $("#size").val();
+            img = folder+color_id+"f_"+pattern_id+"m.jpg";
+        });
 
+        $("#changetext").text(str);
+        $("#pattern_color_image").attr("src", img);
     });
-
-    $("#changetext").text(str);
-    $("#pattern_color_image").attr("src", img);
-
-
-    })
 
     $("#addtocart").click(function() {
 
@@ -188,8 +186,9 @@
                 'quantity': quantity
             },
             success: function(data){
-                msg = data.message.msg;
-                $("#changetext").text(msg);
+                var msg = data.message.msg,
+                    _ = data.cartitem;
+                $("#changetext").text( msg + _.quantity +" "+ _.article + ". Mönster: " + _.pattern + " Färg: "+ _.color+" Storlek: "+ _.size);
             }
         });
 
@@ -199,10 +198,5 @@
     });
 
 </script>
-
-
-
-    });
-
 {% endblock %}
 

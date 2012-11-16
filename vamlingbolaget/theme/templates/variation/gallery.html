@@ -16,13 +16,13 @@
             <dl class="gallery_list">
 
                 <dd> <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" /></a></dd>
-                <dd>Galleri: <a href="/gallery/{{gallery.pk}}" > {{gallery.name}}</a></dd>
+
             </dl>
             {% endfor %}
 
         {%else%}
             {% with gallery.image_set.all|first as image %}
-            <div>
+            <div >
                 <img src="{% version image.image 'large' %}" class="imgborder" />
             </div>
             {% endwith %}

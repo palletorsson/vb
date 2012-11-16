@@ -4,6 +4,10 @@ import datetime
 import random
 
 
+
+
+
+
 class Cart(models.Model):
     owner = models.CharField(max_length = 50, default='anonymous')
     #key = models.CharField(max_length = 100)
@@ -19,13 +23,16 @@ class CartItem(models.Model):
     size = models.ForeignKey(Size, default=1)
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.PositiveIntegerField(default=1)
-    
+
+
     class Meta:
         ordering=['date_added']
-    
+
+
     def total(self):
         return self.quantity * self.article.price
-    
+    print total
+
     def name(self):
         return self.article.name
     

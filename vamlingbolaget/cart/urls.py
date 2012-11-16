@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('cart.views',
-    url(r'^show/(?P<key>[a-zA-Z0-9_.-]+)/$', 'showcart'),
+    url(r'^show/$', 'showcart'),
     url(r'^addtocart/$', 'addtocart'),
+    url(r'^removefromcart/$', 'removefromcart'),
 )

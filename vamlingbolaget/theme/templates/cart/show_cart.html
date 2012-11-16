@@ -1,82 +1,89 @@
 {% extends "collection_base.html" %}
 
 {% block pagetitle %}
-<legend>Din köplista</legend>
+    <legend> Din köplista </legend>
 {% endblock %}
 
 {% block allcontent %}
-<table>
+<table class="table table-bordered">
     <thead>
     <tr>
         <th>
-            <div>
                 <span> Antal </span>
-            </div>
         </th>
         <th>
-            <div>
+            <span>  </span>
+        </th>
+        <th>
                 <span> Artikel </span>
-            </div>
         </th>
         <th>
-            <div>
                 <span> Färg </span>
-            </div>
         </th>
         <th>
-            <div>
                 <span> Mönster </span>
-            </div>
         </th>
         <th>
-            <div>
                 <span> Kvalietet </span>
-            </div>
         </th>
         <th>
-            <div>
                 <span> Pris </span>
-            </div>
         </th>
     </tr>
     </thead>
     <tbody>
-    {% for item in cartitems %}
-    <tr>
-    <th>
-        <div>
-            <span> {{ item.quantity }}</span>
-        </div>
-    </th>
-    <th>
-        <div>
-            <span> {{ item.article }}</span>
-        </div>
-    </th>
-    <th>
-        <div>
-            <span>{{ item.color }} </span>
-        </div>
-    </th>
-    <th>
-        <div>
-            <span>{{ item.pattern }}</span>
-        </div>
-    </th>
-    <th>
-        <div>
-            <span> {{ item.quality }} </span>
-        </div>
-    </th>
-    <th>
-        <div>
-            <span> {{ item.article.price }} </span>
-        </div>
-    </th>
-    {% endfor %}
+    {%if cartitems%}
+        {% for item in cartitems %}
+        <tr>
+            <td>
+                    <span> {{ item.quantity }}</span>
+            </td>
+            <td>
+                <i id="{{item.id}}" class="icon-remove-sign"></i>
+            </td>
+            <td>
+                    <span> {{ item.article }}</span>
+            </td>
+            <td>
+                    <span>{{ item.color }} </span>
+            </td>
+            <td>
+                    <span>{{ item.pattern }}</span>
+            </td>
+            <td>
+                    <span> {{ item.article.quality }} </span>
+            </td>
+            <td>
+                    <span> {{ item.article.price }} </span>
+            </td>
+        </tr>
+
+        {% endfor %}
+        <tr>
+            <th>{{totalitems}}</th>
+            <td colspan="4">
+            </td>
+            <th>
+                Total pris:
+            </th>
+            <th>
+                {{ totalprice }}
+            </th>
+        </tr>
+    {% else %}
+        <tr>
+        <td colspan="7">
+            Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
+        </td>
+        </tr>
+
+    {% endif %}
+
     </tbody>
 </table>
 
+<script type="text/javascript">
 
+</script>
 
 {% endblock %}

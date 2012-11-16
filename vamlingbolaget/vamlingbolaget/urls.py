@@ -27,7 +27,7 @@ urlpatterns = patterns('',
     url(r'^galleries/$', 'products.views.show_galleries'),
     url(r'^gallery/(?P<key>[a-zA-Z0-9_.-]+)/$', 'products.views.show_gallery'),
     url(r'^ckeditor/', include('ckeditor.urls')),
-
+    url(r'^accounts/', include('userena.urls')),
     url(r'^admin_tools/', include('admin_tools.urls')),
 
     url(r'^cart/', include('cart.urls')),
