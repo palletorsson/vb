@@ -150,32 +150,26 @@ l    <style type="text/css">
         </div>
       </div>
     </div>
-
+{% block stretchpage %}
     <div class="container content"> <!--this is for the left margin -->
-
       <div class="pagetitle">
-        {% block pagetitle %} {% endblock %}
-        {% block pagedesc %} {% endblock %}
+      {% block pagetitle %} {% endblock %}
+      {% block pagedesc %} {% endblock %}
       </div>
       
-        {% block allcontent %} 
+      {% block allcontent %} 
         <div class="span2">
            {% block sidebar %} 
-          SIDEBAR Base!
-          {% endblock %}
+              SIDEBAR Base!
+           {% endblock %}
        </div>
         <div class="span9">
-        {% block content %}
-
-          FEATURED COLLECTION
-        
-
-
-
+           {% block content %}
+                 FEATURED COLLECTION
           {% endblock %}
         </div>
-        {% endblock %}
-
+      {% endblock %}
+{% endblock %}
 
         <footer>
             {% block footer %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+<legend> Välkommen Vamlingbolaget </legend>
+{% endblock %}
+
+{% block sidebar %}
+   <div>
+     <h4>Nyheter</h4>
+     <dl>
+    {%for item in news %}
+      </dd><h5>{{item.title}}</h5>
+      {{item.body|safe|linebreaks}}
+    {%endfor%}
+    </dl>
+    </div>
+{% endblock %}
+
+{% block content %}
+   <div class="span8">
+
+
+       <div> {{frontpage.body|safe|linebreaks}}
+
+       </div>
+{% endblock %}

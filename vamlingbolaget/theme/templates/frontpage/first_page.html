@@ -1,25 +1,13 @@
 {% extends "base.html" %}
-{% block pagetitle %}
-<legend> Välkommen Vamlingbolaget </legend>
-{% endblock %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
 
-{% block sidebar %}
-   <div>
-     <h4>Nyheter</h4>
-     <dl>
-    {%for item in news %}
-      </dd><h5>{{item.title}}</h5>
-      {{item.body|safe|linebreaks}}
-    {%endfor%}
-    </dl>
-    </div>
-{% endblock %}
+{% block stretchpage %}
+    <legend> Välkommen Vamlingbolaget </legend>
+    <div class="spanfullscreen">
+          {%for image in images%}
+           {{frontpage.body|safe|linebreaks}}       
+          {%endfor%}
+    </div>    
 
-{% block content %}
-   <div class="span8">
-
-
-       <div> {{frontpage.body|safe|linebreaks}}
-
-       </div>
 {% endblock %}
