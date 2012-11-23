@@ -6,6 +6,7 @@ GALLERY_STATUS = (
     ('A', 'Active'),
     ('F', 'Featured'),
     ('H', 'History'),
+    ('I', 'Indexpage')
     )
 
 class Gallery(models.Model):

@@ -94,9 +94,15 @@ def pattern_and_color(request):
 
 def show_galleries(request):
     galleries = Gallery.objects.all()
+    fgalleries = galleries.filter(status= 'F')
+    agalleries = galleries.filter(status= 'A')
+    hgalleries = galleries.filter(status= 'H')
     num_gallery = galleries.count()
     return render_to_response('variation/gallery.html',
         {'galleries': galleries,
+		 'fgalleries' : fgalleries,
+		 'agalleries' : agalleries,
+		 'hgalleries' : hgalleries,
          'num_gallery' : num_gallery
         },
         context_instance=RequestContext(request)

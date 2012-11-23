@@ -14,55 +14,66 @@
 {% block allcontent %}
 
     <div class="gallery_list">
-        {%if galleries %}
-
-            {% for gallery in galleries %}
-                {%if gallery.status == 'F'%}
+        {%if galleries%}
+                {%if fgalleries %}
                     <div class="gallery featured">
-                        <legend> Senaste nytt! </legend>
-                        <dl class="gallery_list">
-                            <dd>
+                        <legend> Featured galleries </legend>
+                        <div class="gallery_list">
+                            {% for gallery in fgalleries %}
+                            <div style="float: left; display: inline; margin-right: 5px; height: 200px; width: 300px; overflow: hidden;">
+                                <div class="overlay">&nbsp; {{gallery.name}}</div></a>
                                 <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" />
-                                <div class="overlay">&nbsp;Galleri: {{gallery.name}}</div></a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <hr/>
-                {%elif gallery.status == 'A'%}
-                    <div class="gallery active">
-                        <legend> Nya gallerier </legend>
-                        <dl class="gallery_list active">
-                            <dd>
-                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" />
-                                <div class="overlay"> &nbsp; Galleri: {{gallery.name}}</div></a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <hr/>
-                {%elif gallery.status == 'H'%}
-                    <div class="gallery history">
-                        <legend> Arkivgallerier </legend>
-
-                        <dl class="gallery_list history">
-                            <dd>
-                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" />
-                                <div class="overlay">&nbsp;Galleri: {{gallery.name}}</div></a>
-                            </dd>
+                            </div>
+                            {%endfor%}
                         </dl>
                     </div>
                     <hr/>
                 {%endif%}
-            {% endfor %}
-
+                {%if agalleries %}
+                    <div class="gallery archive">
+                        <legend> Arkiv </legend>
+                        <div class="gallery_list">
+                            {% for gallery in agalleries %}
+                            <div style="float: left; display: inline;">
+                                <a href="/gallery/{{gallery.pk}}" >
+                                    <div class="overlay">&nbsp;{{gallery.name}}</div>
+                                    <img src="{% version gallery.feature_image 'medium' %}" />
+                                    
+                                </a>
+                            </div>
+                            {%endfor%}
+                        </dl>
+                    </div>
+                    <hr/>
+                {%endif%}
+                {%if hgalleries %}
+                    <div class="gallery history">
+                        <legend> Historiska </legend>
+                        <div class="gallery_list">
+                            {% for gallery in hgalleries %}
+                            <div style="float: left; display: inline;">
+                                <div class="overlay">&nbsp;{{gallery.name}}</div></a>
+                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" />
+                                
+                            </div>
+                            {%endfor%}
+                        </dl>
+                    </div>
+                    <hr/>
+                {%endif%}
         {%else%}
                 <div>
+                    <div style="height: 200px;width: 300px; float: left;overflow: hidden;">
                     <a href="{% version gallery.feature_image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
                         <img src="{% version gallery.feature_image 'medium' %}"  class="imgborder isfeatured" />
-                    </a> 
+                    </a>
+                    </div>
                     {%for image in images%}
+                    <div style="height: 200px;width: 300px; float: left;overflow: hidden;">
                     <a href="{% version image.image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
-                        <img src="{% version image.image 'thumbnail' %}"  class="imgborder enlarge" />
+                        <img src="{% version image.image 'medium' %}"  class="imgborder enlarge" />
                     </a>    
+                    </div>
                     {%endfor%}
                 </div>
         {%endif%}
