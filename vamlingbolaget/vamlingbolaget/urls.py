@@ -5,20 +5,20 @@ from filebrowser.sites import site
 
 from tastypie.api import Api
 
-from cart.api import CartItemResource
+from cart.api import CartResource, CartItemResource
 from products.api import ArticleResource, ColorResource, PatternResource, SizeResource
 
 from django.contrib import admin
 admin.autodiscover()
 
 v1_api = Api(api_name='v1')
-
-
+v1_api.register(CartResource())
 v1_api.register(CartItemResource())
 v1_api.register(ArticleResource())
 v1_api.register(ColorResource())
 v1_api.register(PatternResource())
 v1_api.register(SizeResource())
+
 
 urlpatterns = patterns('',
     url(r'^$', 'frontpage.views.first_page', name='index'),

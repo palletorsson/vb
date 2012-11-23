@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block allcontent %}
-<table class="table table-bordered">
+
+    <table class="table table-bordered">
     <thead>
     <tr>
         <th>
@@ -31,51 +32,28 @@
         </th>
     </tr>
     </thead>
-    <tbody>
-    {%if cartitems%}
-        {% for item in cartitems %}
-        <tr>
-            <td>
-                    <span> {{ item.quantity }}</span>
-            </td>
-            <td>
-                <i id="{{item.id}}" class="icon-remove-sign"></i>
-            </td>
-            <td>
-                    <span> {{ item.article }}</span>
-            </td>
-            <td>
-                    <span>{{ item.color }} </span>
-            </td>
-            <td>
-                    <span>{{ item.pattern }}</span>
-            </td>
-            <td>
-                    <span> {{ item.article.quality }} </span>
-            </td>
-            <td>
-                    <span> {{ item.article.price }} </span>
-            </td>
-        </tr>
 
-        {% endfor %}
-        <tr>
-            <th>{{totalitems}}</th>
-            <td colspan="4">
-            </td>
-            <th>
-                Total pris:
-            </th>
-            <th>
-                {{ totalprice }}
-            </th>
-        </tr>
+    <tbody id="shoppinglist">
+
+
+    </tbody>
+    {%if cartitems %}
+        <th>
+            Total pris:
+        </th>
+        <th>
+            {{ totalprice }}
+        </th>
+    </tr>
     {% else %}
-        <tr>
+    <tr>
         <td colspan="7">
             Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
         </td>
-        </tr>
+    </tr>
+    </tbody>
+
+
 
     {% endif %}
 

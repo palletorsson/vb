@@ -1,7 +1,6 @@
 
 $(function(){
 
-
 // using jQuery
 function getCookie(name) {
     var cookieValue = null;
@@ -49,18 +48,21 @@ $.ajaxSetup({
 })
 
     $('.icon-remove-sign').click(function(){
-            console.log($(this).attr('id'))
-            if(confirm('Vill du ta bort denna post?')){
-                $.post('/cart/removefromcart/',{'id':$(this).attr('id')})
+
+        if(confirm('Vill du ta bort denna post?')){
+                var id = $(this).attr('id');
+                $.ajax({
+
+                    url: '/cart/removefromcart/'+id,
+                    dataType: "application/json",
+                    csrfmiddlewaretoken: csrftoken,
+                    contentType: "application/json",
+                    success: function( data ){
+                        console.log($('#'+id).parent('tr'));
+                    }
+            })
+
+
             }
         });
 })
-
-/*
-$('.icon-remove-sign').click(function(){
-    console.log($(this).attr('id'), csrftoken)
-    if(confirm('Vill du ta bort denna post?')){
-        $.post('/cart/removefromcart/',{'id':$(this).attr('id')})
-    }
-});
-*/

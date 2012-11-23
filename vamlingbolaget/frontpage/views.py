@@ -10,11 +10,9 @@ def first_page(request):
     frontpage = Frontpage.objects.get(pk=1)
     gallery = Gallery.objects.get(name = 'Frontpage')
     images = gallery.image_set.all()
-    print '--------------------------------------'
-    print images
     news = Post.objects.all()
 
-    return render_to_response('frontpage/first_page.html',
+    return render_to_response('frontpage/first_page2.html',
         {'frontpage': frontpage,
          'images': images,
          'news': news,},
