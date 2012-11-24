@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from models import Cart, CartItem
 from django.http import HttpResponse
-from products.models import Article, Color, Pattern, Size
+from products.models import Article, Color, Pattern, Size, Quality
 import random
 from django.core import urlresolvers
 from models import CartItem
@@ -41,23 +41,16 @@ def addtocart(request):
     if request.method == 'POST':
 
         d = request.POST
-        sku = d['article_sku']
-        print sku
+        sku = int(d['article_sku'])
         article_db = Article.objects.get(sku_number = sku)
-        print article_db
         color = d['color']
-        print color
         color_db = Color.objects.get(order=color)
-
         pattern = d['pattern']
         pattern_db = Pattern.objects.get(order=pattern)
-
         size = d['size']
         size_db = Size.objects.get(pk=size)
-
-        quantity = d['quantity']
-        print "---------1---"
-        #cart_items = get_cart_items(request)
+        quantity = int(d['quantity'])
+        cartitem_id = int(d['cartitem_id'])
         item_in_cart = False
 
         """
@@ -70,20 +63,21 @@ def addtocart(request):
                 item_in_cart = True
          """
 
-        print "---------2---"
         if not item_in_cart:
-            cart_id = _cart_id(request) #skapar nytt cart
+            cart_id = _cart_id(request)
             cart, created = Cart.objects.get_or_create(key = cart_id)
             cart.save()
-            print cart.key
-            print request.session[CART_ID_SESSION_KEY]
-            cartitem = CartItem.objects.create(cart_id = cart)
-            print cartitem.cart_id.key
+            print cartitem_id
+            if (cartitem_id == -1):
+                cartitem = CartItem.objects.create(cart_id = cart)
+            else:
+                cartitem, created = CartItem.objects.get_or_create(pk = cartitem_id)
             cartitem.article = article_db
             cartitem.pattern = pattern_db
             cartitem.size = size_db
             cartitem.color = color_db
             cartitem.quantity = quantity
+            print "----3--"
             print cartitem
             cartitem.save()
 
@@ -99,11 +93,11 @@ def addtocart(request):
             'message': { 'msg' : 'Du la till: '  }
         }
 
-
     return_data = json.dumps(returnjson)
 
     response = HttpResponse(return_data, mimetype="application/json")
     return response
+
 
 
 def show_product(request, article_slug):
@@ -147,7 +141,37 @@ def showcart(request):
 
         context_instance=RequestContext(request))
 
-def removefromcart(request, key):
+def editcartitem(request, key):
     cartitem = CartItem.objects.get(pk=key)
+    colors = Color.objects.all()
+    patterns = Pattern.objects.all()
+    sizes = Size.objects.all()
+    qualities = Quality.objects.all()
+    return render_to_response('cart/detail.html',
+        {'cartitem': cartitem,
+         'colors': colors,
+         'patterns': patterns,
+         'sizes': sizes,
+         'qualities': qualities,
+         },
+        context_instance=RequestContext(request))
+
+
+def removefromcart(request, key):
+    cartitem = CartItem.objects.get(pk = key)
+    mycart = cartitem.cart_id
     cartitem.delete()
-    return HttpResponse('ok')
+    cart = Cart.objects.get(key=mycart)
+    cartitems = cart.cartitem_set.all()
+    print cartitems
+    totalprice = 0
+    totalitems = 0
+    for item in cartitems:
+        totalprice += item.article.price * item.quantity
+        totalitems += item.quantity
+    print totalprice
+
+    return_data = json.dumps({'totalprice':totalprice, 'totalitems':totalitems})
+    print cartitem.pk
+    response = HttpResponse(return_data, mimetype="application/json")
+    return response

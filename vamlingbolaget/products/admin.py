@@ -22,14 +22,14 @@ class VariationAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     model = Article
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'sku_number', 'name', 'price', 'type', 'quality',)
-    list_display_links = ('name',)
-    list_editable = ('active',)
+    list_display = ('active', 'sku_number', 'name', 'price', 'type', 'quality', 'file')
+    list_display_links = ('name', )
+    list_editable = ('active','file', )
     list_filter = ('active', 'type',)
     search_fields = ['sku_number', 'name']
     list_per_page = 20
     ordering = ['active', 'name']
-    
+
 class ColorAdmin(admin.ModelAdmin):
     model = Color
     prepopulated_fields = {"slug": ("name",)}
@@ -50,7 +50,6 @@ class PatternAdmin(admin.ModelAdmin):
 class SizeAdmin(admin.ModelAdmin):
     model = Size
 
-
 class QualityAdmin(admin.ModelAdmin):
     model = Quality
     prepopulated_fields = {"slug": ("name",)}
@@ -68,9 +67,6 @@ class TypeAdmin(admin.ModelAdmin):
     list_editable = ('active', )
     list_filter = ('active', )
     ordering = ['order']
-
-
-    
 
 admin.site.register(Variation, VariationAdmin)    
 admin.site.register(Article, ArticleAdmin)

@@ -39,7 +39,7 @@ $('document').ready(function(){
         }); 
         
     }
-    initgallery();
+    //initgallery();
 
     /*
      * Overlay for gallery feature images that
@@ -49,9 +49,11 @@ $('document').ready(function(){
     
     $('.overlay').each(function(){ 
         var me = $(this);
-        $(this).siblings().load(function(){ 
-            var width = $(this).css('width'),
-                pos = $(this).offset();
+        console.log($(this).parent().closest('div'));
+        $(this).siblings().load(function(){
+            console.log($(this).parent().closest('div'));
+            var width = $(this).parent().css('width'),
+                pos = $(this).parent().offset();
             me.css({'width': width, 'left':pos.left, 'top':pos.top, 'height': '20px', 'background-color':'#000', 'color':'#fff'});
         })
     });

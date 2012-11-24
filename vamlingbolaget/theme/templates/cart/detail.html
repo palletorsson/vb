@@ -2,46 +2,46 @@
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {% block pagetitle %}
-	<legend><a href="/products/">Kollektion</a> / {{ product.name }} </legend>
+	<legend>Du editerar beställningspost : <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
 {% endblock %}
 
 
 {% block allcontent %}
 <div class="row-fluid">{{ images.pk }}
-    <div class="span5" id="fadeifchangeorder">
-        {% for image in images %}
-            <img src="{% version image.image 'large' %}"  style="width: 360px;"/>
-        {% endfor %}
-        </br>
-	<span style="width: 200px; margin:3px;"> {{ product.article.name }} i {{ product.color|lower }} {{ product.pattern|lower }}</span>
+    <div class="span5" >
+
+        <div style="clear: both;"></div>
+        <div class="span6">
+            <strong>{{ cartitem.article.name }} </strong><br/>
+            Artikelnummer: <span id="sku_number">{{ cartitem.article.sku_number }}</span><br/><br/>
+
+            Kvalitet: {{ cartitem.article.quality }}<br/>
+            {{ cartitem.article.quality.description }}
+            <h4>Pris: {{ cartitem.article.price }} kr</h4>
+
+
+
+        </div>
+        <span style="padding-left: 40px;"><img src="{% version cartitem.article.file 'small' %} " >  </span>
+
+
+        <div style="clear: both;"></div>
+
+
+        <hr/>
+        <div class="span10">
+            Plagget går att få i alla <a href="/patternandcolor/">mönster och färger</a>.
+        </div>
+        <hr/>
     </div>
 
 
     <div class="span6">
-
-        <div style="clear: both;"></div>
-        <div class="span6">
-            <strong>{{ product.article.name }} </strong><br>
-            Artikelnummer: <span id="sku_number">{{ product.article.sku_number }}</span><br/><br/>
-
-            Kvalitet: {{ product.article.quality }}<br>
-            {{ product.article.quality.description }}
-
-        </div>
-            <span style="padding-left: 40px;"><img src="{% version product.article.file 'small' %} " >  </span></br>
-
-        <div style="clear: both;"></div>
-        <hr/>
-        <div class="span10">
-        Plagget går att få i alla <a href="/patternandcolor/">mönster och färger</a>.
-        </div>
-        <div style="clear: both;"></div>
-        <hr/>
         <div class="span7">
 	    <select class="changonselect" id="color">
 		{% for color in colors %}
 			<option value="{{ color.order }}"
-                {% if color.order == product.color.order %}
+                {% if color.order == cartitem.color.order %}
                     selected="selected"
                 {%endif%} >
             Färg: {{ color.name }} </option>
@@ -51,7 +51,7 @@
 	    <select class="changonselect" id='pattern'>
 		{% for pattern in patterns %}
 			<option value="{{ pattern.order }}"
-            {% if pattern.order == product.pattern.order %}
+            {% if pattern.order == cartitem.pattern.order %}
                 selected="selected"
             {%endif%}
             >
@@ -60,20 +60,25 @@
 	    </select>
 
 		</br>
-	    <select id='size'>
+	    <select  class="changonselect"  id='size'>
 		{% for size in sizes %}
-			<option value="{{ size.pk }}" > Storlek: {{ size.name }} </option>
+			<option value="{{ size.pk }}"
+            {% if size.order == cartitem.size.order %}
+            selected="selected"
+            {%endif%}
+            > Storlek: {{ size.name }} </option>
+
 		{% endfor %}
 	    </select>
-        <select id='quantiy_pk'>
-            <option value="1" selected="selected">Antal : 1 </option>
-            <option value="2">Antal : 2 </option>
-            <option value="3">Antal : 3 </option>
-            <option value="4">Antal : 4 </option>
+        <select  class="changonselect"  id='quantity_pk'>
+            <option {%if cartitem.quantity == 1 %} selected="selected" {%endif%} value="1" selected="selected">Antal : 1 </option>
+            <option {%if cartitem.quantity == 2 %} selected="selected" {%endif%} value="2">Antal : 2 </option>
+            <option {%if cartitem.quantity == 3 %} selected="selected" {%endif%} value="3">Antal : 3 </option>
+            <option {%if cartitem.quantity == 4 %} selected="selected" {%endif%}value="4">Antal : 4 </option>
         </select>
 
         </div>
-        <span style="padding-left: 10px;"><img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" /></span>
+        <span style="padding-left: 10px;"><img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" /></span>
         <div style="clear: both;"></div>
         <hr/>
         <div id="changetext">
@@ -86,16 +91,11 @@
         </script>
         <hr/>
         <div style="clear: both;"></div>
-
         <div class="span6">
-        <h4> Pris: {{ product.article.price }} kr </h4>
-
         </div>
-
-
         <div id='addtocart' style="display:block;">
         <span style="padding-left: 30px;">
-            <button class="btn btn-success" type="button">Lägg till i Köplista</button></span>
+            <button class="btn btn-success" type="button">Uppdatera</button></span>
         </div>
         <hr/>
     </div>
@@ -149,13 +149,12 @@
         })
 
     var sku_number = $('#sku_number').text(),
-        cart = $('#sku_number').text(),
+        cartitem_id = $('#cartitem_id').text(),
         pattern_id = $('#pattern option:selected').val(),
         color_id = +$('#color option:selected').val(),
         size_id = $('#size option:selected').val(),
         article_id = $('#article_pk option:selected').val(),
-        quantity = $('#quantiy_pk option:selected').val();
-        cartitem_id = -1;
+        quantity = $('#quantity_pk option:selected').val();
 
 
     $(".changonselect").change(function () {
@@ -163,7 +162,7 @@
         $('#fadeifchangeorder').fadeTo(500,0.6);
 
 
-        var str = "Beställ "+"{{ product.article.name }}"+ " i ",
+        var str = "Uppdatera "+"{{ cartitem.article.name }}"+ " i ",
             folder = "{{MEDIA_URL}}uploads/120/",
             img = "";
 
@@ -177,9 +176,9 @@
             pattern_id = $("#pattern").val();
             color_id = $("#color").val();
             size_id = $("#size").val();
+            quantity = $("#quantity_pk").val();
+            console.log(cartitem_id);
             img = folder+color_id+"f_"+pattern_id+"m.jpg";
-
-
         });
 
         $("#changetext").text(str);
@@ -196,15 +195,15 @@
                 pattern: pattern_id,
                 color: color_id,
                 size: size_id,
-                csrfmiddlewaretoken: csrftoken,
                 quantity: quantity,
-                cartitem_id: cartitem_id
+                cartitem_id: cartitem_id,
+                csrfmiddlewaretoken: csrftoken
             },
             success: function(data){
-                var msg = data.message.msg,
-                    _ = data.cartitem;
-                $("#changetext").text( msg + _.quantity +" "+ _.article + ". Mönster: " + _.pattern + " Färg: "+ _.color+" Storlek: "+ _.size);
-
+                //var msg = data.message.msg,
+                //    _ = data.cartitem;
+                //$("#changetext").text( msg + _.quantity +" "+ _.article + ". Mönster: " + _.pattern + " Färg: "+ _.color+" Storlek: "+ _.size);
+                window.location.replace("/cart/show/");
             }
         });
 
@@ -215,4 +214,3 @@
 
 </script>
 {% endblock %}
-

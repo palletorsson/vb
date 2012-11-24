@@ -6,6 +6,7 @@ GALLERY_STATUS = (
     ('A', 'Active'),
     ('F', 'Featured'),
     ('H', 'History'),
+    ('I', 'Indexpage')
     )
 
 class Gallery(models.Model):
@@ -14,6 +15,7 @@ class Gallery(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=1, choices=GALLERY_STATUS)
     feature_image = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg"], blank=True, null=True)
+
     def __unicode__(self):
         return unicode(self.name)
 

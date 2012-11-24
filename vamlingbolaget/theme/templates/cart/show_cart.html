@@ -13,7 +13,10 @@
                 <span> Antal </span>
         </th>
         <th>
-            <span>  </span>
+            <span>Ta bort  </span>
+        </th>
+        <th>
+            <span> Ändra </span>
         </th>
         <th>
                 <span> Artikel </span>
@@ -25,29 +28,61 @@
                 <span> Mönster </span>
         </th>
         <th>
-                <span> Kvalietet </span>
-        </th>
-        <th>
                 <span> Pris </span>
         </th>
     </tr>
     </thead>
 
-    <tbody id="shoppinglist">
-
-
-    </tbody>
-    {%if cartitems %}
+        <tbody>
+        {% for item in cartitems %}
+        <tr>
         <th>
-            Total pris:
+            <div>
+                <span> {{ item.quantity }}</span>
+            </div>
         </th>
         <th>
+            <div>
+                <a href="remove : {{ item.article }}"><span class="icon-minus" id="{{ item.id }}"></span></a>
+            </div>
+        </th>
+        <th>
+            <div>
+                <a href="/cart/edititem/{{ item.id }}/"><span class="icon-edit"> </span></a>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> {{ item.article }} i {{item.article.quality|lower}}</span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span>{{ item.color }} </span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span>{{ item.pattern }}</span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> {{ item.article.price }} </span>
+            </div>
+        </th>
+        {% endfor %}
+        </tbody>    {%if cartitems %}
+        <th class="totalprice" colspan="6" style="text-align: right">
+            Total pris:
+        </th>
+        <th id="totalprice">
             {{ totalprice }}
         </th>
     </tr>
     {% else %}
-    <tr>
-        <td colspan="7">
+    <tr id="empty">
+        <td colspan="8">
             Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
         </td>
     </tr>
@@ -60,8 +95,5 @@
     </tbody>
 </table>
 
-<script type="text/javascript">
-
-</script>
 
 {% endblock %}

@@ -47,22 +47,47 @@ $.ajaxSetup({
     }
 })
 
-    $('.icon-remove-sign').click(function(){
-
+    $('.icon-minus').click(function(e){
+        e.stopPropagation();
+        e.preventDefault();
         if(confirm('Vill du ta bort denna post?')){
                 var id = $(this).attr('id');
                 $.ajax({
-
                     url: '/cart/removefromcart/'+id,
-                    dataType: "application/json",
                     csrfmiddlewaretoken: csrftoken,
                     contentType: "application/json",
-                    success: function( data ){
-                        console.log($('#'+id).parent('tr'));
+                    success: function( data ) {
+                        if(data.totalprice != 0){
+                            $('#totalprice').html(data.totalprice);
+                        }else{
+                            $('.totalprice').html('Du har tömt din varukorg <a href="/products/">fortsätt att utforska vårt utbud</a>');
+                            $('#totalprice').html(data.totalprice);
+                        }
+                        $('#'+id).closest('tr').remove();
                     }
             })
 
 
-            }
-        });
+        }
+    });
+/*
+    $('.icon-edit').click(function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        if(confirm('Vill du ta editera denna post?')){
+            var id = $(this).attr('id');
+            $.ajax({
+                url: '/cart/editcart/'+id,
+                csrfmiddlewaretoken: csrftoken,
+                contentType: "application/json",
+                success: function( data ) {
+                    console.log(data);
+                }
+            })
+
+
+        }
+    });
+*/
+
 })
