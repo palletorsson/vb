@@ -41,6 +41,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^api/', include(v1_api.urls)),
+    url(r'^i18n/', include('django.conf.urls.i18n'), name='i18n'),
 
 )
 
@@ -49,3 +50,7 @@ urlpatterns += patterns('',
     (r'^theme/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_URL}),
 )
 
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += patterns('',
+        url(r'^rosetta/', include('rosetta.urls')),
+    )

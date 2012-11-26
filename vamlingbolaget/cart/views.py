@@ -15,7 +15,6 @@ import json
 
 CART_ID_SESSION_KEY = 'cart_id'
 
-
 def _generate_cart_id():
     cart_id = ''
     characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
@@ -53,21 +52,10 @@ def addtocart(request):
         cartitem_id = int(d['cartitem_id'])
         item_in_cart = False
 
-        """
-        for item in cart_items:
-            if (item.article.pk == article_db.pk and item.color.pk == color_db.pk and item.pattern.pk == pattern_db.pk):
-                quantity = int(quantity)
-                quantity = quantity + int(item.quantity)
-                item.quantity = quantity
-                item.save()
-                item_in_cart = True
-         """
-
         if not item_in_cart:
             cart_id = _cart_id(request)
             cart, created = Cart.objects.get_or_create(key = cart_id)
             cart.save()
-            print cartitem_id
             if (cartitem_id == -1):
                 cartitem = CartItem.objects.create(cart_id = cart)
             else:
@@ -77,8 +65,6 @@ def addtocart(request):
             cartitem.size = size_db
             cartitem.color = color_db
             cartitem.quantity = quantity
-            print "----3--"
-            print cartitem
             cartitem.save()
 
         returnjson = {
@@ -129,13 +115,16 @@ def showcart(request):
     print cartitems
     totalprice = 0
     totalitems = 0
+    handling  = 40
     for item in cartitems:
         totalprice += item.article.price * item.quantity
         totalitems += item.quantity
+    totalprice = totalprice + handling
     print totalprice
 
     return render_to_response('cart/show_cart.html',
         {'cartitems': cartitems,
+         'handling': handling,
          'totalprice': totalprice,
          'totalitems':totalitems,},
 

@@ -32,7 +32,7 @@ TIME_ZONE = 'Europe/Stockholm'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'sv-SE'
 
 SITE_ID = 1
 
@@ -99,6 +99,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
 
+
     #'zinnia.context_processors.version',
     ) # Optional
 
@@ -118,6 +119,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
@@ -160,7 +162,7 @@ INSTALLED_APPS = (
     'ckeditor',
     'grappelli',
     'django.contrib.admin',
-
+    'rosetta',
     #installed apps
     'taggit',
     'tastypie',
@@ -241,3 +243,12 @@ USERENA_ACTIVATION_REQUIRED = False
 ANONYMOUS_USER_ID = -1
 
 AUTH_PROFILE_MODULE = 'accounts.MyProfile'
+
+ugettext = lambda s: s
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('sv', 'Swedish'),
+    )
+DEFAULT_LANGUAGE = 2
+

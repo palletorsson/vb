@@ -33,19 +33,21 @@ class ArticleAdmin(admin.ModelAdmin):
 class ColorAdmin(admin.ModelAdmin):
     model = Color
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name',)
+    list_display = ('active', 'name', 'order',)
     list_display_links = ('name',)
-    list_editable = ('active', )
+    list_editable = ('active', 'order',)
     list_filter = ('active',)
-    
+    ordering = ['order', 'name',]
+
+
 class PatternAdmin(admin.ModelAdmin):
     model = Pattern
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name',)
+    list_display = ('active', 'name', 'order')
     list_display_links = ('name',)
-    list_editable = ('active', )
+    list_editable = ('active', 'order',)
     list_filter = ('active',)
-    ordering = ['order']
+    ordering = ['order', 'name',]
 
 class SizeAdmin(admin.ModelAdmin):
     model = Size
@@ -53,18 +55,18 @@ class SizeAdmin(admin.ModelAdmin):
 class QualityAdmin(admin.ModelAdmin):
     model = Quality
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name', 'description')
+    list_display = ('active', 'name', 'description', 'order',)
     list_display_links = ('name',)
-    list_editable = ('active', )
+    list_editable = ('active', 'order',)
     list_filter = ('active', )
     ordering = ['order']
     
 class TypeAdmin(admin.ModelAdmin):
     model = Type
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name', 'slug',)
+    list_display = ('active', 'name', 'order',)
     list_display_links = ('name',)
-    list_editable = ('active', )
+    list_editable = ('active', 'order',)
     list_filter = ('active', )
     ordering = ['order']
 

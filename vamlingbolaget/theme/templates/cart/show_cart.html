@@ -74,12 +74,22 @@
         {% endfor %}
         </tbody>    {%if cartitems %}
         <th class="totalprice" colspan="6" style="text-align: right">
+            Leverans:
+        </th>
+        <th id="handling">
+            {{ handling }}
+        </th>
+        </tbody>
+        <tbody>
+        <th class="totalprice" colspan="6" style="text-align: right">
             Total pris:
         </th>
         <th id="totalprice">
-            {{ totalprice }}
+            {{ totalprice }} SEK
         </th>
     </tr>
+        </tbody>
+
     {% else %}
     <tr id="empty">
         <td colspan="8">
@@ -87,13 +97,11 @@
         </td>
     </tr>
     </tbody>
-
-
-
     {% endif %}
-
     </tbody>
 </table>
+
+<div style="text-align:right"><button class="btn btn-success" type="button">Checka ut</button></div>
 
 
 {% endblock %}
