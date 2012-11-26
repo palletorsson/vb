@@ -1,6 +1,7 @@
 from django.contrib import admin
 from models import *
 from gallery.models import Image, Gallery
+from modeltranslation.admin import TranslationAdmin
 
 class VariationImageInline(admin.StackedInline):
   model = Image
@@ -10,16 +11,16 @@ class VariationImageInline(admin.StackedInline):
 class VariationAdmin(admin.ModelAdmin):
     model = Variation
     inlines = [VariationImageInline,]
-    prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name', 'article', 'pattern','color',)
-    list_display_links = ('name',)
+    list_display = ('active', 'article', 'pattern','color',)
+    list_display_links = ('article',)
     list_editable = ('active',)
-    list_filter = ('created_at', 'updated_at', 'active', 'article',)
-    search_fields = ['name']
+    list_filter = ('active', 'article',)
+    search_fields = ['article']
     list_per_page = 20
-    ordering = ['active','name']
+    ordering = ['active','article']
 
-class ArticleAdmin(admin.ModelAdmin):
+
+class ArticleAdmin(TranslationAdmin):
     model = Article
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('active', 'sku_number', 'name', 'price', 'type', 'quality', 'file')
@@ -30,7 +31,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['active', 'name']
 
-class ColorAdmin(admin.ModelAdmin):
+class ColorAdmin(TranslationAdmin):
     model = Color
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('active', 'name', 'order',)
@@ -40,7 +41,7 @@ class ColorAdmin(admin.ModelAdmin):
     ordering = ['order', 'name',]
 
 
-class PatternAdmin(admin.ModelAdmin):
+class PatternAdmin(TranslationAdmin):
     model = Pattern
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('active', 'name', 'order')
@@ -52,7 +53,7 @@ class PatternAdmin(admin.ModelAdmin):
 class SizeAdmin(admin.ModelAdmin):
     model = Size
 
-class QualityAdmin(admin.ModelAdmin):
+class QualityAdmin(TranslationAdmin):
     model = Quality
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('active', 'name', 'description', 'order',)
@@ -61,7 +62,7 @@ class QualityAdmin(admin.ModelAdmin):
     list_filter = ('active', )
     ordering = ['order']
     
-class TypeAdmin(admin.ModelAdmin):
+class TypeAdmin(TranslationAdmin):
     model = Type
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('active', 'name', 'order',)

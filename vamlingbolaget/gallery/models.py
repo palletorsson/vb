@@ -28,7 +28,7 @@ class Gallery(models.Model):
 class Image(models.Model):
     name= models.CharField(max_length=50, default="default",)
     image = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg"], blank=True, null=True)
-    gallery = models.ManyToManyField('Gallery', blank=True, null=True)
+    gallery = models.ForeignKey('Gallery', blank=True, null=True)
     variation = models.ForeignKey(v, blank=True, null=True)
     is_featured = models.BooleanField(default=False)
 

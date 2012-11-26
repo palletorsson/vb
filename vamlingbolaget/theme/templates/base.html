@@ -206,10 +206,8 @@ l    <style type="text/css">
                 {% csrf_token %}
                 <input name="next" type="hidden" value="{{ redirect_to }}" />
                 <select name="language">
-                    {% get_language_info_list for LANGUAGES as languages %}
-                    {% for language in languages %}
-                    <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
-                    {% endfor %}
+                    <option value="en">English (en)</option>
+                    <option value="sv">Swedish (sv)</option>
                 </select>
                 <input type="submit" value="Go" />
             </form>

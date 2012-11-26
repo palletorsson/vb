@@ -63,8 +63,6 @@ class Post(TimeStampedActivate):
     title = models.CharField(max_length=255, 
                             help_text="Title if the post. Can be anything up to 255 characters.")
     slug = models.SlugField()
-    excerpt = models.TextField(blank=True,
-                              help_text="A small teaser of your content")
     body = RichTextField()
     publish_at = models.DateTimeField(default=datetime.datetime.now(), 
                                      help_text="Date and time post should become visible")

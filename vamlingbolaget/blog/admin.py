@@ -40,7 +40,7 @@ class PostAdmin(admin.ModelAdmin):
 	    'description': "visable"
 	}),
 	('Content', {
-            'fields': ('excerpt', 'body', 'tags'),
+            'fields': ('body', 'tags'),
 	}),
 	('Optional', {
             'fields': ('slug',),
@@ -48,7 +48,7 @@ class PostAdmin(admin.ModelAdmin):
 	})
     )
     search_fields = ['title','excerpt', 'body']
-    list_display = ('active', 'title', 'excerpt', 'publish_at')
+    list_display = ('active', 'title', 'publish_at')
     list_display_links = ('title',)
     list_editable = ('active', 'publish_at')
     list_filter = ('modified', 'created', 'active')

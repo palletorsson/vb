@@ -1,5 +1,5 @@
 from django.db import models
-class checkout(models.Model):
+class Checkout(models.Model):
     # billing
     first_name = models.CharField("First name", max_length=80)
     last_name = models.CharField("Last name", max_length=80)

@@ -12,24 +12,19 @@ import datetime
 class TimeStampedActivate(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    active = models.BooleanField("Active")
+    active = models.BooleanField("Active", default=True)
     
     class Meta:
         abstract = True
 
 
 class Variation(TimeStampedActivate):
-    name = models.CharField(max_length=40)
-    slug = models.SlugField(max_length=255)
-    description = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     article = models.ForeignKey('Article')
     pattern = models.ForeignKey('Pattern')
     color = models.ForeignKey('Color')
 
-    def get_images(self, name):
-        images = Image.objects.get(variation=name)
+    def get_images(self, pk):
+        images = Image.objects.get(variation__pk=pk)
         return images
     
     def get_index_images(self):
@@ -38,13 +33,12 @@ class Variation(TimeStampedActivate):
 
     def get_image(self, pk):
         images = Image.objects.filter(variation__pk=pk)
-        print images
         return '<img src="../../../media/%s" width="60"/>' % self.images
 
     get_image.allow_tags = True
     
     def __unicode__(self):
-        return unicode(self.name)
+        return unicode(self.article)
 
 
 class Size(models.Model):
@@ -65,7 +59,7 @@ class ChoiceBase(models.Model):
     name = models.CharField(max_length=160)
     slug = models.SlugField(max_length=160)
     order = models.IntegerField("order items")
-    active = models.BooleanField("Active")
+    active = models.BooleanField("Active", default=True)
 
     def __unicode__(self):
         return unicode(self.name)

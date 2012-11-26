@@ -152,7 +152,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
-
     #"django.contrib.comments",
     #'tagging',
     #'mptt',
@@ -163,6 +162,7 @@ INSTALLED_APPS = (
     'grappelli',
     'django.contrib.admin',
     'rosetta',
+    'modeltranslation',
     #installed apps
     'taggit',
     'tastypie',
@@ -244,11 +244,14 @@ ANONYMOUS_USER_ID = -1
 
 AUTH_PROFILE_MODULE = 'accounts.MyProfile'
 
-ugettext = lambda s: s
+gettext = lambda s: s
 
 LANGUAGES = (
-    ('en', 'English'),
-    ('sv', 'Swedish'),
+    ('sv', gettext('Swedish')),
+    ('en', gettext('English')),
     )
-DEFAULT_LANGUAGE = 2
+
+MODELTRANSLATION_TRANSLATION_FILES = (
+    'products.translation',
+    )
 
