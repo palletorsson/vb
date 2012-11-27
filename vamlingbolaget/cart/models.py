@@ -5,27 +5,27 @@ import random
 
 
 class Cart(models.Model):
-    owner = models.CharField(max_length = 50, default='anonymous')
-    #key = models.CharField(max_length = 100)
+    key = models.CharField(max_length = 50)
     def __unicode__(self):
-        return 'Cart of %s' %self.owner
+        return '%s' %self.key
 
 
 class CartItem(models.Model):
-    cart_id = models.CharField(max_length = 50, default='anonymous')
+    cart_id = models.ForeignKey(Cart, default=1)
     article = models.ForeignKey(Article, default=1)
     color = models.ForeignKey(Color, default=1)
     pattern = models.ForeignKey(Pattern, default=1)
     size = models.ForeignKey(Size, default=1)
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.PositiveIntegerField(default=1)
-    
+
     class Meta:
         ordering=['date_added']
-    
+
     def total(self):
         return self.quantity * self.article.price
-    
+    print total
+
     def name(self):
         return self.article.name
     
@@ -34,4 +34,5 @@ class CartItem(models.Model):
 
 
     def __unicode__(self):
-        return "%dx %s" % (self.quantity, self.article.name)
+        return "%s %s" % (self.quantity, self.article.name)
+

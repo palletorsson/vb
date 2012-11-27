@@ -11,8 +11,9 @@
     <!-- The styles -->
 
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
+
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
 l    <style type="text/css">
   
       body html {
@@ -22,34 +23,42 @@ l    <style type="text/css">
 
       }
 
-
       footer {
         text-align: right;
         color: #ff3300;
         
       }
+
       .leftside{
         height: 40px;
+        padding-left: 100px;
       }
       
       .flatpages{
         display: block;
         width: 100%;
-        heigh: 25px;
-        margin-right: 0;
-        background: #ffffff;
+        heigh: 10px;
+
+        background: rgba(206, 200, 171, 0.12);
         
       }
       .flatpages ul{
         float: right;
         right: 0;
       }
-      .flatpages li{
+       li{
           float:right;
       }
 
+      .flatpages .nav > li > a {
+          color: black;
+      }
+
       .navbar-inner {
-          height: 40px;
+          height: 100px;
+
+          border-bottom: 1px solid black;
+          background-image: linear-gradient(to bottom, #f4f4f4, #ffffff);
       }
 
       .scrollable {
@@ -59,11 +68,24 @@ l    <style type="text/css">
          margin-top: 100px;;
 
       }
+      .navbar-static-top .container,
+      .navbar-fixed-top .container,
+      .navbar-fixed-bottom .container {
+          width: 100%;
+      }
 
+      li  {list-style-type: none;  }
+      .nav > li > a:hover {color:blue; }
+      .nav .nav-collapse {
+      text-transform: uppercase;
+      }
 
-      li  {list-style-type: none;}
-      .nav > li > a:hover {color:blue;}
-      ul.query{padding-left: -15px;}
+      .brand {
+          font-size: 12px
+
+      }
+
+      ul.query{ padding-left: -15px;}
 
       .collection_list{
           float:left;
@@ -91,7 +113,10 @@ l    <style type="text/css">
           color:#000;
           vertical-align: bottom;
       }
-      
+      .icon-remove-sign{
+          cursor: pointer;
+      }
+
     </style>
 
 
@@ -114,7 +139,7 @@ l    <style type="text/css">
       <div class="navbar-inner">
         <div class="container">
           <div class="navbar-inner">
-              <div class="flatpages pull-right>
+              <div class="flatpages pull-right">
                 <ul class="nav pull-right">
                   {% load flatpages %}
                   {% get_flatpages as flatpages %}
@@ -124,12 +149,8 @@ l    <style type="text/css">
                   </li>
                 </ul>
               </div>
-
-              <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vamllogo.png" class="leftside"/> <br />
-                  - Vackra kläder med rötter i Mah-Jong tillverkade på Gotland -</a>
-
-                <br />
-
+              <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" class="leftside"/> <br />
+              </a>
               <div class="nav-collapse collapse">
                 <ul class="nav">
                    <li class="">
@@ -143,6 +164,12 @@ l    <style type="text/css">
                     </li>
                     <li class="">
                         <a href="/galleries/">Gallerier</a>
+                    </li>
+                    <li class="">
+                        <a id="token" href="/cart/show/">
+                            Shoppinglåda
+                            --> <img src="{{STATIC_URL}}img/lad.png" style="float:right;">
+                        </a>
                     </li>
                 </ul>
               </div>
@@ -180,6 +207,6 @@ l    <style type="text/css">
     </div>
   <script src="{{ STATIC_URL }}js/cart.js" type="text/javascript"> </script>
   <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
-  
+    <script src="{{ STATIC_URL }}js/shoppingcart.js"  type="text/javascript"></script>
  </body>
 </html>

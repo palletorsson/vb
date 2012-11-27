@@ -108,6 +108,12 @@ TEMPLATE_LOADERS = (
     # 'django.template.loaders.eggs.Loader',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    )
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -148,7 +154,7 @@ INSTALLED_APPS = (
     #"django.contrib.comments",
     #'tagging',
     #'mptt',
-
+    'accounts',
     #'zinnia',
     'filebrowser',
     'ckeditor',
@@ -160,6 +166,9 @@ INSTALLED_APPS = (
     'tastypie',
     'imagekit',
     'south',
+    'userena',
+    'guardian',
+    'easy_thumbnails',
     #'photologue',
     #Our Apps
     'products',
@@ -167,6 +176,7 @@ INSTALLED_APPS = (
     'blog',
     'frontpage',
     'gallery',
+
 )
 
 # A sample logging configuration. The only tangible logging
@@ -219,3 +229,15 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 # Whether the session cookie should be secure (https:// only).
 SESSION_COOKIE_SECURE = False
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'yourgmailaccount@gmail.com'
+EMAIL_HOST_PASSWORD = 'yourgmailpassword'
+USERENA_ACTIVATION_REQUIRED = False
+ANONYMOUS_USER_ID = -1
+
+AUTH_PROFILE_MODULE = 'accounts.MyProfile'
