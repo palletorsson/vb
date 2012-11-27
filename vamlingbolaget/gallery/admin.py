@@ -1,6 +1,9 @@
 from django.contrib import admin
 from models import Image, Gallery
 
+class ImagesInLine(admin.TabularInline):
+    model = Image
+    
 
 class ImagesInline(admin.StackedInline):
     model = Image
@@ -24,6 +27,9 @@ class GalleryAdmin(admin.ModelAdmin):
     ordering = ['name', 'created_date',]
 
     model = Gallery
+    inlines = [
+        ImagesInLine
+    ]
 
 
 admin.site.register(Image, ImageAdmin)
