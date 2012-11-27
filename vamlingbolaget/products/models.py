@@ -5,9 +5,7 @@ from django.db import models
 from filebrowser.fields import FileBrowseField
 from filebrowser.settings import ADMIN_THUMBNAIL
 from gallery.models import *
-
 import datetime
-
 
 class TimeStampedActivate(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -16,7 +14,6 @@ class TimeStampedActivate(models.Model):
     
     class Meta:
         abstract = True
-
 
 class Variation(TimeStampedActivate):
     article = models.ForeignKey('Article')
@@ -51,7 +48,6 @@ class Size(models.Model):
         return unicode(self.name)
 
 
-
 class ChoiceBase(models.Model):
     """
     use as common base model for Color, pattern and Quality
@@ -71,6 +67,11 @@ class Type(ChoiceBase):
     """
     pass
 
+class Category(ChoiceBase):
+    """
+    Type used in Article Model
+    """
+    pass
 
 class Color(ChoiceBase):
     """
@@ -78,14 +79,11 @@ class Color(ChoiceBase):
     """
     pass
 
-
-
 class Pattern(ChoiceBase):
     """
     Pattern used in Product Model         
     """
     pass
-
 
 class Quality(ChoiceBase):
     """
@@ -94,7 +92,6 @@ class Quality(ChoiceBase):
     description = models.TextField()
     class Meta:
         verbose_name_plural = 'Qualies'
-
 
 class Article(TimeStampedActivate):
     """
@@ -105,6 +102,7 @@ class Article(TimeStampedActivate):
     sku_number = models.CharField(max_length=10)
     description = models.TextField()
     quality = models.ForeignKey('Quality')
+    category = models.ForeignKey('Category')
     type = models.ForeignKey('Type')
     price = models.IntegerField()
     file = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg", ".gif", ".png"], blank=True, null=True)

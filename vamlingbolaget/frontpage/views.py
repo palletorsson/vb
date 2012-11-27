@@ -7,8 +7,8 @@ from blog.models import Post
 
 
 def first_page(request):
-    frontpage = Frontpage.objects.get(pk=1)
-    gallery = Gallery.objects.get(status = 'I')
+    frontpage, created = Frontpage.objects.get_or_create(pk=1)
+    gallery,created = Gallery.objects.get_or_create(status = 'I')
     images = gallery.image_set.all()
     news = Post.objects.all()
 

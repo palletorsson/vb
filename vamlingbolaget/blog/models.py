@@ -76,4 +76,18 @@ class Post(TimeStampedActivate):
 	
     class Meta:
         ordering = ['-publish_at', '-modified', '-created']
-			
+
+
+class News(TimeStampedActivate):
+    title = models.CharField(max_length=255,
+        help_text="Title if the post. Can be anything up to 255 characters.")
+    slug = models.SlugField()
+    body = models.TextField()
+    publish_at = models.DateTimeField(default=datetime.datetime.now(),
+        help_text="Date and time post should become visible")
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-publish_at', '-modified', '-created']
+

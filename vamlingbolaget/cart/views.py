@@ -110,7 +110,7 @@ def show_product(request, article_slug):
 
 def showcart(request):
     key = _cart_id(request)
-    cart = Cart.objects.get(key=key)
+    cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
     print cartitems
     totalprice = 0
