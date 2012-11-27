@@ -11,12 +11,12 @@
 {% block content %}
 	{% if posts %}
 		{% for post in posts %}
-			</h2><a href="{{ post.slug }}/"> {{ post.title }} </a></h2>
+			<legend><a href="{{ post.slug }}/"> {{ post.title }} </a></legend>
 			<div class="post_meta ">
-				on {{ post.created }}
+				{{ post.created }}
 			</div> 
 			<div class="post_body">
-				on {{ post.body|safe|linebreaks }}
+				{{ post.body|safe|linebreaks }}
 			</div> 
 			<div class="tags">
 				{% if tag in post.tags.all %}

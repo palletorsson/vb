@@ -38,7 +38,6 @@ l    <style type="text/css">
         display: block;
         width: 100%;
         heigh: 10px;
-
         background: rgba(206, 200, 171, 0.12);
         
       }
@@ -56,7 +55,6 @@ l    <style type="text/css">
 
       .navbar-inner {
           height: 100px;
-
           border-bottom: 1px solid black;
           background-image: linear-gradient(to bottom, #f4f4f4, #ffffff);
       }
@@ -154,16 +152,17 @@ l    <style type="text/css">
               <div class="nav-collapse collapse">
                 <ul class="nav">
                    <li class="">
-                        <a href="/products/">Kollektion</a>
+
+                        <a href="/products/">{% trans "Kollektion" %}</a>
                   </li>
                    <li class="">
-                        <a href="/patternandcolor/">Färger och Mönster</a>
+                        <a href="/patternandcolor/">Färger och Mönster </a>
                   </li>
                     <li class="">
-                        <a href="/news/">Nyheter</a>
+                        <a href="/news/">{% trans "Nyheter" %}</a>
                     </li>
                     <li class="">
-                        <a href="/galleries/">Gallerier</a>
+                        <a href="/galleries/">{% trans "Gallerier" %}</a>
                     </li>
                     <li class="">
                         <a id="token" href="/cart/show/">
@@ -203,10 +202,20 @@ l    <style type="text/css">
                 <img src="{{ STATIC_URL }}img/orange_line.png" width="100%"/>  <br/>
                 VamlingboLaget * 623 31 Burgsvik * 0498-498080 * info@vamlingbolaget.com
             {% endblock %}
+            <form action="/i18n/setlang/" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                <select name="language">
+                    <option value="en">English (en)</option>
+                    <option value="sv">Swedish (sv)</option>
+                </select>
+                <input type="submit" value="Go" />
+            </form>
         </footer>
+
     </div>
   <script src="{{ STATIC_URL }}js/cart.js" type="text/javascript"> </script>
   <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
-    <script src="{{ STATIC_URL }}js/shoppingcart.js"  type="text/javascript"></script>
+    <!--<script src="{{ STATIC_URL }}js/shoppingcart.js"  type="text/javascript"></script>-->
  </body>
 </html>

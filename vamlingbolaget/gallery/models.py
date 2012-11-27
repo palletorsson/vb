@@ -1,3 +1,6 @@
+
+
+from django.utils.translation import ugettext as _
 from django.db import models
 from filebrowser.fields import FileBrowseField
 from products.models import Variation as v

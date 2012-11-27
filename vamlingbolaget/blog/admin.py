@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.contrib import admin
 from django.conf import settings
-from models import Blog, Post
+from models import Blog, Post, News
 from django import forms
 
 from ckeditor.widgets import CKEditorWidget
@@ -40,7 +40,7 @@ class PostAdmin(admin.ModelAdmin):
 	    'description': "visable"
 	}),
 	('Content', {
-            'fields': ('excerpt', 'body', 'tags'),
+            'fields': ('body', 'tags'),
 	}),
 	('Optional', {
             'fields': ('slug',),
@@ -48,13 +48,40 @@ class PostAdmin(admin.ModelAdmin):
 	})
     )
     search_fields = ['title','excerpt', 'body']
-    list_display = ('active', 'title', 'excerpt', 'publish_at')
+    list_display = ('active', 'title', 'publish_at')
     list_display_links = ('title',)
     list_editable = ('active', 'publish_at')
     list_filter = ('modified', 'created', 'active')
 
 
+class NewsAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
+    fieldsets = (
+    (None, {
+        'fields': ('title',),
+        }),
+    ('Publication', {
+        'fields': ('active', 'publish_at'),
+        'description': "visable"
+    }),
+    ('Content', {
+        'fields': ('body',),
+        }),
+    ('Optional', {
+        'fields': ('slug',),
+        'classes': ('collapse',),
+        })
+    )
+search_fields = ['title', 'body']
+list_display = ('active', 'title', 'publish_at')
+list_display_links = ('title',)
+list_editable = ('active', 'publish_at')
+list_filter = ('modified', 'created', 'active')
+
+
 admin.site.register(Post, PostAdmin)
+
+admin.site.register(News, NewsAdmin)
 
 admin.site.register(Blog, BlogAdmin)
 

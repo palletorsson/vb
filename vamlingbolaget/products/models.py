@@ -5,31 +5,23 @@ from django.db import models
 from filebrowser.fields import FileBrowseField
 from filebrowser.settings import ADMIN_THUMBNAIL
 from gallery.models import *
-
 import datetime
-
 
 class TimeStampedActivate(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    active = models.BooleanField("Active")
+    active = models.BooleanField("Active", default=True)
     
     class Meta:
         abstract = True
 
-
 class Variation(TimeStampedActivate):
-    name = models.CharField(max_length=40)
-    slug = models.SlugField(max_length=255)
-    description = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     article = models.ForeignKey('Article')
     pattern = models.ForeignKey('Pattern')
     color = models.ForeignKey('Color')
 
-    def get_images(self, name):
-        images = Image.objects.get(variation=name)
+    def get_images(self, pk):
+        images = Image.objects.get(variation__pk=pk)
         return images
     
     def get_index_images(self):
@@ -38,13 +30,12 @@ class Variation(TimeStampedActivate):
 
     def get_image(self, pk):
         images = Image.objects.filter(variation__pk=pk)
-        print images
         return '<img src="../../../media/%s" width="60"/>' % self.images
 
     get_image.allow_tags = True
     
     def __unicode__(self):
-        return unicode(self.name)
+        return unicode(self.article)
 
 
 class Size(models.Model):
@@ -57,7 +48,6 @@ class Size(models.Model):
         return unicode(self.name)
 
 
-
 class ChoiceBase(models.Model):
     """
     use as common base model for Color, pattern and Quality
@@ -65,7 +55,7 @@ class ChoiceBase(models.Model):
     name = models.CharField(max_length=160)
     slug = models.SlugField(max_length=160)
     order = models.IntegerField("order items")
-    active = models.BooleanField("Active")
+    active = models.BooleanField("Active", default=True)
 
     def __unicode__(self):
         return unicode(self.name)
@@ -77,6 +67,11 @@ class Type(ChoiceBase):
     """
     pass
 
+class Category(ChoiceBase):
+    """
+    Type used in Article Model
+    """
+    pass
 
 class Color(ChoiceBase):
     """
@@ -84,14 +79,11 @@ class Color(ChoiceBase):
     """
     pass
 
-
-
 class Pattern(ChoiceBase):
     """
     Pattern used in Product Model         
     """
     pass
-
 
 class Quality(ChoiceBase):
     """
@@ -100,7 +92,6 @@ class Quality(ChoiceBase):
     description = models.TextField()
     class Meta:
         verbose_name_plural = 'Qualies'
-
 
 class Article(TimeStampedActivate):
     """
@@ -111,6 +102,7 @@ class Article(TimeStampedActivate):
     sku_number = models.CharField(max_length=10)
     description = models.TextField()
     quality = models.ForeignKey('Quality')
+    category = models.ForeignKey('Category')
     type = models.ForeignKey('Type')
     price = models.IntegerField()
     file = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg", ".gif", ".png"], blank=True, null=True)
