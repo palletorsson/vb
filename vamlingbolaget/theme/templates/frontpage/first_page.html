@@ -6,8 +6,9 @@
     <legend> Välkommen Vamlingbolaget </legend>
     <div class="spanfullscreen">
           {%for image in images%}
-           {{frontpage.body|safe|linebreaks}}       
+            <div class="halffullscreen">
+              <img src="{{MEDIA_URL}}{{image.image}}" />
+            </div>
           {%endfor%}
-    </div>    
-
+    </div>
 {% endblock %}

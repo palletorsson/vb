@@ -44,7 +44,7 @@ $('document').ready(function(){
     /*
      * Overlay for gallery feature images that
      * dynamically calculates size of image.
-     * Tthe siblings are the feature images, perform check when these are loaded
+     * The siblings are the feature images, perform check when these are loaded
      */
     
     $('.overlay').each(function(){ 
@@ -63,9 +63,20 @@ $('document').ready(function(){
      * and adjust the image heights accordingly, remove space
      */
     
-    $('.spanfullscreen').each(function(){ 
+    
+    var set_first_page = function(){
         var wheight = $(window).height(),
-            fullheight = wheight-130,
+            fullheight = wheight-130;
+        
+        $('.spanfullscreen').css({'width':$(window).width(), 'background-color':'#fff','margin':0, 'height': fullheight, 'overflow':'hidden', 'padding':0 });
+        $('.halffullscreen').css({'float':'left','width':($(window).width())/2, 'background-color':'#fff','margin':0, 'height': fullheight, 'overflow':'hidden', 'padding':0 });
+        $('.halffullscreen img').css({'width':(($(window).width())/2), 'height': 'auto', 'margin':0, 'padding':0});
+        console.log($('.halffullscreen img'))
+    }
+    
+    set_first_page();
+    /*
+    $('.spanfullscreen').each(function(){ 
             img = $(this).find('img'),
             p = $(this).find('p');
             
@@ -73,8 +84,12 @@ $('document').ready(function(){
         $(this).find('br').remove(); //hack to remove space
         
         p.css({'margin':0});
-        img.css({'height': fullheight, 'width':'auto'})
-    });
+        
+        $('.halffullscreen').css('width')
+            img = $(this).find('img'),
+            img.css({'height': fullheight, 'width':'auto'})
     
+    });
+    */
     
 });

@@ -6,6 +6,6 @@ local_settings.py
 
 vamlingbolaget/.idea
 vamlingbolaget/vb.komodoproject
-vamlingbolaget/db
+vamlingbolaget/db/*
 vamlingbolaget/cart/migrations/
 vamlingbolaget/products/migrations/
