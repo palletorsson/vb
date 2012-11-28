@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.contrib import admin
 from django.conf import settings
-from models import Blog, Post, News
+from models import Blog, Post, New
 from django import forms
 
 from ckeditor.widgets import CKEditorWidget
@@ -81,7 +81,7 @@ list_filter = ('modified', 'created', 'active')
 
 admin.site.register(Post, PostAdmin)
 
-admin.site.register(News, NewsAdmin)
+admin.site.register(New, NewsAdmin)
 
 admin.site.register(Blog, BlogAdmin)
 

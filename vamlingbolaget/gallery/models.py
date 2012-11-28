@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 from django.db import models
 from filebrowser.fields import FileBrowseField
 from products.models import Variation as v
-from flatpages.models import Flatpage
+
 
 GALLERY_STATUS = (
     ('A', 'Active'),
@@ -19,7 +19,6 @@ class Gallery(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=1, choices=GALLERY_STATUS)
     feature_image = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg"], blank=True, null=True)
-    flatpage = models.ForeignKey(Flatpage)
     def __unicode__(self):
         return unicode(self.name)
 

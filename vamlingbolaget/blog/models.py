@@ -78,7 +78,7 @@ class Post(TimeStampedActivate):
         ordering = ['-publish_at', '-modified', '-created']
 
 
-class News(TimeStampedActivate):
+class New(TimeStampedActivate):
     title = models.CharField(max_length=255,
         help_text="Title if the post. Can be anything up to 255 characters.")
     slug = models.SlugField()
