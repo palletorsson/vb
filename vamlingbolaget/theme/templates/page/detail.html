@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+    <legend> {% if post %} {{ post.title }} {% endif %} </legend>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+    {% if post %}
+        <div class="post_body">
+            {{ post.body|safe|linebreaks }}
+        </div>
+    {% endif %}
+{% endblock %}

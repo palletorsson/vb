@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
-
 from filebrowser.sites import site
 
 from tastypie.api import Api
@@ -21,6 +20,7 @@ v1_api.register(SizeResource())
 
 
 urlpatterns = patterns('',
+
     url(r'^$', 'frontpage.views.first_page', name='index'),
     url(r'^products/', include('products.urls')),
     url(r'^patternandcolor/$', 'products.views.pattern_and_color'),
@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^ckeditor/', include('ckeditor.urls')),
     url(r'^accounts/', include('userena.urls')),
     url(r'^admin_tools/', include('admin_tools.urls')),
+    url(r'^page/', include('page.urls')),
 
     url(r'^cart/', include('cart.urls')),
 
