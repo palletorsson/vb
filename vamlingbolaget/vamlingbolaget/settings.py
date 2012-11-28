@@ -173,7 +173,6 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     #'photologue',
     #Our Apps
-    'page',
     'products',
     'cart',
     'blog',

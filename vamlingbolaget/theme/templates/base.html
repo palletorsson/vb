@@ -144,6 +144,11 @@ l    <style type="text/css">
               <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" class="leftside"/> <br />
               </a>
               <div class="nav-collapse collapse">
+                  {% if pages %}
+                  <div class="post_body">
+                      {{ pages.url }}
+                  </div>
+                  {% endif %}
                 <ul class="nav">
                    <li class="">
 
