@@ -178,7 +178,7 @@ INSTALLED_APPS = (
     'blog',
     'frontpage',
     'gallery',
-
+    'flatpages',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -253,5 +253,6 @@ LANGUAGES = (
 
 MODELTRANSLATION_TRANSLATION_FILES = (
     'products.translation',
+    'flatpages.translation',
     )
 

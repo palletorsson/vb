@@ -12,7 +12,7 @@ def first_page(request):
     images = gallery.image_set.all()
     news = Post.objects.all()
 
-    return render_to_response('frontpage/first_page2.html',
+    return render_to_response('frontpage/first_page1.html',
         {'frontpage': frontpage,
          'images': images,
          'news': news,},

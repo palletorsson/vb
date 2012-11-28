@@ -16,7 +16,7 @@ class Migration(SchemaMigration):
             ('created_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('status', self.gf('django.db.models.fields.CharField')(max_length=1)),
             ('feature_image', self.gf('filebrowser.fields.FileBrowseField')(max_length=200, null=True, blank=True)),
-            ('flatpage', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['flatpages.FlatPage'], null=True)),
+            ('flatpage', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['flatpages.FlatPage'], null=True, blank=True)),
         ))
         db.send_create_signal('gallery', ['Gallery'])
 
@@ -56,7 +56,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Gallery'},
             'created_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'feature_image': ('filebrowser.fields.FileBrowseField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'flatpage': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['flatpages.FlatPage']", 'null': 'True'}),
+            'flatpage': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['flatpages.FlatPage']", 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),

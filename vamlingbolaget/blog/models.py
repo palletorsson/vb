@@ -90,4 +90,5 @@ class News(TimeStampedActivate):
 
     class Meta:
         ordering = ['-publish_at', '-modified', '-created']
+        verbose_name_plural = 'news'
 
