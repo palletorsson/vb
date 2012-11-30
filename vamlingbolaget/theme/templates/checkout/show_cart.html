@@ -1,0 +1,107 @@
+{% extends "collection_base.html" %}
+
+{% block pagetitle %}
+    <legend> Din köplista </legend>
+{% endblock %}
+
+{% block allcontent %}
+
+    <table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>
+                <span> Antal </span>
+        </th>
+        <th>
+            <span>Ta bort  </span>
+        </th>
+        <th>
+            <span> Ändra </span>
+        </th>
+        <th>
+                <span> Artikel </span>
+        </th>
+        <th>
+                <span> Färg </span>
+        </th>
+        <th>
+                <span> Mönster </span>
+        </th>
+        <th>
+                <span> Pris </span>
+        </th>
+    </tr>
+    </thead>
+
+        <tbody>
+        {% for item in cartitems %}
+        <tr>
+        <th>
+            <div>
+                <span> {{ item.quantity }}</span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <a href="remove : {{ item.article }}"><span class="icon-minus" id="{{ item.id }}"></span></a>
+            </div>
+        </th>
+        <th>
+            <div>
+                <a href="/cart/edititem/{{ item.id }}/"><span class="icon-edit"> </span></a>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> {{ item.article }} i {{item.article.quality|lower}}</span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span>{{ item.color }} </span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span>{{ item.pattern }}</span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> {{ item.article.price }} </span>
+            </div>
+        </th>
+        {% endfor %}
+        </tbody>    {%if cartitems %}
+        <th class="totalprice" colspan="6" style="text-align: right">
+            Leverans:
+        </th>
+        <th id="handling">
+            {{ handling }}
+        </th>
+        </tbody>
+        <tbody>
+        <th class="totalprice" colspan="6" style="text-align: right">
+            Total pris:
+        </th>
+        <th id="totalprice">
+            {{ totalprice }} SEK
+        </th>
+    </tr>
+        </tbody>
+
+    {% else %}
+    <tr id="empty">
+        <td colspan="8">
+            Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
+        </td>
+    </tr>
+    </tbody>
+    {% endif %}
+    </tbody>
+</table>
+
+<div style="text-align:right"><a href="/checkout/"><button class="btn btn-success" type="button">Checka ut</button></a></div>
+
+
+{% endblock %}

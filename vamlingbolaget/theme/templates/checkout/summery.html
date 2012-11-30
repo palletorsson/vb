@@ -1,0 +1,100 @@
+{% extends "collection_base.html" %}
+
+{% block pagetitle %}
+    <legend> Din Beställning </legend>
+{% endblock %}
+
+{% block allcontent %}
+
+    <table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>
+                <span> Antal </span>
+        </th>
+        <th>
+                <span> Artikel </span>
+        </th>
+        <th>
+                <span> Färg </span>
+        </th>
+        <th>
+                <span> Mönster </span>
+        </th>
+        <th>
+                <span> Pris </span>
+        </th>
+    </tr>
+    </thead>
+
+        <tbody>
+        {% for item in cartitems %}
+        <tr>
+        <th>
+            <div>
+                <span> {{ item.quantity }}</span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> {{ item.article }} i {{item.article.quality|lower}}</span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span>{{ item.color }} </span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span>{{ item.pattern }}</span>
+            </div>
+        </th>
+        <th>
+            <div>
+                <span> {{ item.article.price }} </span>
+            </div>
+        </th>
+        {% endfor %}
+        </tbody>    {%if cartitems %}
+        <th class="totalprice" colspan="4" style="text-align: right">
+            Leverans:
+        </th>
+        <th id="handling">
+            {{ handling }}
+        </th>
+        </tbody>
+        <tbody>
+        <th class="totalprice" colspan="4" style="text-align: right">
+            Total pris:
+        </th>
+        <th id="totalprice">
+            {{ totalprice }} SEK
+        </th>
+    </tr>
+        </tbody>
+
+    {% else %}
+    <tr id="empty">
+        <td colspan="8">
+            Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
+        </td>
+    </tr>
+    </tbody>
+    {% endif %}
+    </tbody>
+</table>
+<legend>Dina uppgifter</legend>
+<form action="" method="post" class="form-horizontal">{% csrf_token %}
+    {% for field in form %}
+    <div class="control-group" id="{{field.name}}">
+        {{ field.errors }}
+        <label class="control-label" > {{ field.label_tag }} </label>
+        <div class="controls">
+            {{ field }}
+        </div>
+    </div>
+    {% endfor %}
+    <input type="submit" class="btn" value="Submit"  />
+</form>
+{% endblock %}
