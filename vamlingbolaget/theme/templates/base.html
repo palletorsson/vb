@@ -30,7 +30,7 @@ l    <style type="text/css">
       }
 
       .leftside{
-        height: 40px;
+        height: 20px;
         padding-left: 100px;
       }
       
@@ -57,6 +57,7 @@ l    <style type="text/css">
           height: 100px;
           border-bottom: 1px solid black;
           background-image: linear-gradient(to bottom, #f4f4f4, #ffffff);
+          background-color: #f8f8ff;
       }
 
       .scrollable {
@@ -76,6 +77,15 @@ l    <style type="text/css">
       .nav > li > a:hover {color:blue; }
       .nav .nav-collapse {
       text-transform: uppercase;
+      }
+
+      .nav-collapse > .collapse {
+          background-color: black;
+      }
+
+      .nav-collapse > ul {
+          text-transform: uppercase;
+          padding-top: -10px;
       }
 
       .brand {
@@ -133,25 +143,28 @@ l    <style type="text/css">
     <!-- Navbar
     ================================================== -->
     <div class="navbar navbar-fixed-top">
-              
+
       <div class="navbar-inner">
         <div class="container">
+
           <div class="navbar-inner">
               <div class="flatpages pull-right">
                 <ul class="nav pull-right">
                 </ul>
               </div>
-              <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" class="leftside"/> <br />
-              </a>
+              <a class="brand" href="/"><br /><img src="{{ STATIC_URL }}img/vb_logo.png"  class="leftside"/> | </a>
               <div class="nav-collapse collapse">
-                  {% if pages %}
-                  <div class="post_body">
-                      {{ pages.url }}
-                  </div>
-                  {% endif %}
+
+                  {% load flatpages %}
+                  {% get_flatpages as flatpages %}
+                  <ul>
+                      {% for page in flatpages %}
+                      <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                      {% endfor %}
+
+                  </ul>
                 <ul class="nav">
                    <li class="">
-
                         <a href="/products/">{% trans "Kollektion" %}</a>
                   </li>
                    <li class="">
@@ -165,8 +178,7 @@ l    <style type="text/css">
                     </li>
                     <li class="">
                         <a id="token" href="/cart/show/">
-                            Shoppinglåda
-                            --> <img src="{{STATIC_URL}}img/lad.png" style="float:right;">
+                           |   Shoppinglåda - - > <img src="{{STATIC_URL}}img/lad.png" style="float:right; position:relative; padding-left:  20px;">
                         </a>
                     </li>
                 </ul>

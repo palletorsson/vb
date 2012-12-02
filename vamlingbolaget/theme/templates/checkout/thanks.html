@@ -1,0 +1,16 @@
+{% extends "collection_base.html" %}
+
+{% block pagetitle %}
+<legend> {{ message }} </legend>
+
+{% endblock %}
+
+{% block allcontent %}
+{% if order %}
+        {{order.order}}
+        <legend>Dina uppgifter</legend>
+        Ordernummer: {{ order.order_number}} <br>
+        En bekräftelse på din beställing har skickats till : {{order.email}}
+{% endif %}
+
+{% endblock %}

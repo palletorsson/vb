@@ -1,0 +1,204 @@
+{% extends "collection_base.html" %}
+
+{% block pagetitle %}
+    <legend> Din Beställning </legend>
+{% endblock %}
+
+{% block allcontent %}
+{%if cartitems %}
+    <table class="table table-bordered table-striped" >
+    <thead>
+    <tr>
+        <th>
+                <span> Antal </span>
+        </th>
+        <th>
+                <span> Artikel </span>
+        </th>
+        <th>
+                <span> Färg </span>
+        </th>
+        <th>
+                <span> Mönster </span>
+        </th>
+        <th>
+                <span> Pris </span>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+        {% for item in cartitems %}
+        <tr>
+        <td>
+            <div>
+                <span> {{ item.quantity }}</span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span> {{ item.article }} i {{item.article.quality|lower}}</span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span>{{ item.color }} </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span>{{ item.pattern }}</span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span> {{ item.article.price }} </span>
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+    {%if cartitems %}
+    <tr>
+        <td class="totalprice" colspan="4" style="text-align: right">
+            Leverans:
+        </td>
+        <td id="handling">
+            {{ handling }}
+        </td>
+    </tr>
+    <tr>
+        <th class="totalprice" colspan="4" style="text-align: right">
+            Total pris:
+        </th>
+        <th id="totalprice">
+            {{ totalprice }} SEK
+        </th>
+    </tr>
+    {% else %}
+        <tr id="empty">
+            <td colspan="8">
+                Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
+            </td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>
+<form action="" method="post" class="form-horizontal">{% csrf_token %}
+<table id="" class="table table-striped table-bordered">
+    <tr>
+        <th>
+            Adressuppgifter
+        </th>
+        <th>
+            Kontaktuppgifter
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <div class="control-group" id="first_name">
+                <label class="control-label" > <label for="id_first_name">First name</label> </label>
+                {{ form.subject.first_name}}
+                <div class="controls">
+                    {{ form.first_name }}
+                    <span class="label label-important">{{ form.first_name.errors }}</span>
+                </div>
+            </div>
+            <div class="control-group" id="last_name">
+             <label class="control-label" > <label for="id_last_name">Last name</label> </label>
+                {{ form.subject.last_name}}
+                <div class="controls">
+                    {{ form.last_name }}
+                    <span class="label label-important">{{ form.last_name.errors }}</span>
+                </div>
+            </div>
+            <div class="control-group" id="street">
+                <label class="control-label" > <label for="id_street">Street</label> </label>
+                {{ form.subject.street}}
+                <div class="controls">
+                    {{ form.street }}
+                    <span class="label label-important">{{ form.street.errors }}</span>
+                </div>
+            </div>
+
+            <div class="control-group" id="city">
+                <label class="control-label" > <label for="id_city">City</label> </label>
+                {{ form.subject.city}}
+                <div class="controls">
+                    {{ form.city }}
+                    <span class="label label-important">{{ form.city.errors }}</span>
+                </div>
+            </div>
+
+            <div class="control-group" id="postcode">
+                <label class="control-label" > <label for="id_postcode">Postcode</label> </label>
+                {{ form.subject.postcode}}
+                {% if field.errors %}< li>{{ field.subject.errors|striptags }}< /li>{% endif %}
+                <div class="controls">
+                    {{ form.postcode }}
+                    <span class="label label-important">{{ form.postcode.errors }}</span>
+                </div>
+            </div>
+
+            <div class="control-group" id="country">
+                <label class="control-label" > <label for="id_country">Land</label> </label>
+                {{ form.subject.country}}
+                <div class="controls">
+                    {{ form.country }}
+
+                </div>
+            </div>
+        </td>
+        <td>
+
+
+    <div class="control-group" id="email">
+        <label class="control-label" > <label for="id_email">Email</label> </label>
+        {{ form.subject.email}}
+        <div class="controls">
+            {{ form.email }}
+            <span class="label label-important">{{ form.email.errors }}</span>
+        </div>
+    </div>
+
+    <div class="control-group" id="phone">
+        <label class="control-label" > <label for="id_phone">Telefon eller mobiltelefon</label> </label>
+        {{ form.subject.phone}}
+        <div class="controls">
+            {{ form.phone }}
+            <span class="label label-important">{{ form.phone.errors }}</span>
+        </div>
+    </div>
+    <div class="control-group" id="message">
+        <label class="control-label" > <label for="id_message">Meddelande till beställning</label> </label>
+        {{form.subject.message}}
+        <div class="controls">
+            {{ form.message }}
+        </div>
+    </div>
+        </td>
+    </tr>
+    <tr>
+        <th>
+
+        </th>
+        <th style="text-align: right">
+            <div class="control-group" id="postal">
+                <label class="control-label" > </label>
+                {{ form.subject.post }}
+                <div class="controls">
+                    {{ form.post }}
+                    <img src="{{ STATIC_URL }}img/post.jpg" width="50px"/> <span class="label label-important">{{ form.post.errors }}</span>
+                </div>
+            </div>
+            <input type="submit" class="btn" value="Skicka Din Beställning"  />
+        </th>
+
+    </tr>
+</table>
+</form>
+{% endif %}
+{% if not cartitems %}
+Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
+{% endif %}
+
+{% endblock %}

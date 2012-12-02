@@ -17,5 +17,3 @@ def detail(request, slug):
     return render_to_response('blog/detail.html', {
         'post': post
     }, context_instance=RequestContext(request))
-
-    

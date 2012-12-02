@@ -73,28 +73,8 @@
         </th>
     </tr>
         </tbody>
-
-    {% else %}
-    <tr id="empty">
-        <td colspan="8">
-            Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
-        </td>
-    </tr>
-    </tbody>
-    {% endif %}
     </tbody>
 </table>
 <legend>Dina uppgifter</legend>
-<form action="" method="post" class="form-horizontal">{% csrf_token %}
-    {% for field in form %}
-    <div class="control-group" id="{{field.name}}">
-        {{ field.errors }}
-        <label class="control-label" > {{ field.label_tag }} </label>
-        <div class="controls">
-            {{ field }}
-        </div>
-    </div>
-    {% endfor %}
-    <input type="submit" class="btn" value="Submit"  />
-</form>
+Visa adressen
 {% endblock %}

@@ -29,10 +29,9 @@ urlpatterns = patterns('',
     url(r'^ckeditor/', include('ckeditor.urls')),
     url(r'^accounts/', include('userena.urls')),
     url(r'^admin_tools/', include('admin_tools.urls')),
-    url(r'^page/', include('page.urls')),
 
     url(r'^cart/', include('cart.urls')),
-
+    url(r'^checkout/', include('checkout.urls')),
     url(r'^news/', include('blog.urls')),
     url(r'^admin/filebrowser/', include(site.urls)),
 

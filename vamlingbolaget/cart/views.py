@@ -28,6 +28,9 @@ def _cart_id(request):
         request.session[CART_ID_SESSION_KEY] = _generate_cart_id()
     return request.session[CART_ID_SESSION_KEY]
 
+def _new_cart_id(request):
+    request.session[CART_ID_SESSION_KEY] = _generate_cart_id()
+
 def get_cart_items(request):
     return CartItem.objects.filter(cart_id=_cart_id(request))
 
@@ -112,22 +115,10 @@ def showcart(request):
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
-    print cartitems
-    totalprice = 0
-    totalitems = 0
-    handling  = 40
-    for item in cartitems:
-        totalprice += item.article.price * item.quantity
-        totalitems += item.quantity
-    totalprice = totalprice + handling
-    print totalprice
-
+    returntotal = totalsum(cartitems)
+    returntotal['cartitems'] =  cartitems
     return render_to_response('cart/show_cart.html',
-        {'cartitems': cartitems,
-         'handling': handling,
-         'totalprice': totalprice,
-         'totalitems':totalitems,},
-
+        returntotal,
         context_instance=RequestContext(request))
 
 def editcartitem(request, key):
@@ -145,22 +136,26 @@ def editcartitem(request, key):
          },
         context_instance=RequestContext(request))
 
-
 def removefromcart(request, key):
     cartitem = CartItem.objects.get(pk = key)
     mycart = cartitem.cart_id
     cartitem.delete()
     cart = Cart.objects.get(key=mycart)
     cartitems = cart.cartitem_set.all()
-    print cartitems
-    totalprice = 0
-    totalitems = 0
-    for item in cartitems:
-        totalprice += item.article.price * item.quantity
-        totalitems += item.quantity
-    print totalprice
-
-    return_data = json.dumps({'totalprice':totalprice, 'totalitems':totalitems})
-    print cartitem.pk
+    total = totalsum(cartitems)
+    return_data = json.dumps(total)
     response = HttpResponse(return_data, mimetype="application/json")
     return response
+
+def totalsum(cartitems):
+    handling = 40
+    temp_p = 0
+    temp_q = 0
+    for item in cartitems:
+        temp_p = temp_p + item.article.price * item.quantity
+        temp_q = temp_q + item.quantity
+        if (temp_p != 0):
+            temp_p = temp_p + handling
+
+    total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling}
+    return total
