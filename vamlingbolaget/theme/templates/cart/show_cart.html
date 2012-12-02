@@ -1,10 +1,11 @@
 {% extends "collection_base.html" %}
 
 {% block pagetitle %}
-    <legend> Din köplista </legend>
+    <legend> Din Shoppinglåda </legend>
 {% endblock %}
 
 {% block allcontent %}
+{%if cartitems %}
 
     <table class="table table-bordered">
     <thead>
@@ -72,7 +73,7 @@
             </div>
         </th>
         {% endfor %}
-        </tbody>    {%if cartitems %}
+        </tbody>
         <th class="totalprice" colspan="6" style="text-align: right">
             Leverans:
         </th>

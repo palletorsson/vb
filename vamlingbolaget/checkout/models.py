@@ -24,3 +24,6 @@ class Checkout(models.Model):
     order_number = models.IntegerField(blank=True)
     status = models.CharField(max_length=1, choices=ORDER_STATUS, blank=True)
     session_key = models.CharField("Session key", max_length=50, blank=True)
+
+    def __unicode__(self):
+        return "%s %s %s" % (self.first_name, self.order, self.status)

@@ -23,27 +23,30 @@ def checkout(request):
         form = CheckoutForm(request.POST)
         if form.is_valid():
             new_order = form.save(commit=False)
-            #print new_order.id
+
             new_order.ip = request.META['REMOTE_ADDR']
             new_order.status = 'O'
-
-            c_items =  {}
-            msg = "Order:\n"
+            msg = "> ORDER:\n"
             i = 1
             for item in cartitems:
-                msg = msg + '# ' + str(i) + ': \n'
-                msg = msg + 'Artikel : ' + item.article.name + ' (' + item.article.sku_number + ') \n'
-                msg = msg + 'Monster : ' + item.pattern.name + ', Farg : ' + item.color.name + ' \n'
-                msg = msg + 'Antal : ' + str(item.quantity) + ', Pris : ' + str(item.article.price) +  '\n'
+                msg = msg + '>> ' + item.article.name + ' (' + item.article.sku_number + ') \n'
+                msg = msg + '>> i ' + item.pattern.name + ', ' + item.color.name + ' \n'
+                msg = msg + '>> Antal : ' + str(item.quantity) + ' \n'
+                msg = msg + '>> Pris per plagg: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
 
+            msg = msg + '------------------------------------------------------\n'
+            msg = msg + '>> Frakt och Hantering: 40 SEK \n'
+            msg = msg + '------------------------------------------------------\n'
+            msg = msg + '>>> Totalpris: ' + str(totalprice) +  ' SEK \n'
+
+
             new_order.order_number = random.randrange(0, 111111, 3)
-            msg = msg + 'Totalpris med handling : ' + str(totalprice)
             new_order.session_key = _cart_id(request)
             new_order.order = msg
             new_order.save()
-            #from django.core.mail import send_mail
 
+            #from django.core.mail import send_mail
             #send_mail(subject, message, sender, recipients)
             return HttpResponseRedirect('thanks/')
 
@@ -62,14 +65,13 @@ def thanks(request):
         order = Checkout.objects.get(session_key=cart_id)
     except:
         order = 1
-
     if (order != 1):
         cart = Cart.objects.filter(key = cart_id)
         cart.delete()
         _new_cart_id(request)
         message = "Tack for din order"
     else:
-        message = "skicka en order"
+        message = "Skicka en order"
         return render_to_response('checkout/thanks.html', {
             'message': message
         }, context_instance=RequestContext(request))
