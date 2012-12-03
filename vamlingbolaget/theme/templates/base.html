@@ -133,30 +133,28 @@ l    <style type="text/css">
     <!-- Navbar
     ================================================== -->
     <div class="navbar navbar-fixed-top">
-              
       <div class="navbar-inner">
         <div class="container">
           <div class="navbar-inner">
-              <div class="flatpages pull-right">
-                <ul class="nav pull-right">
-                </ul>
-              </div>
-              <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" class="leftside"/> <br />
-              </a>
-              <div class="nav-collapse collapse">
-                  {% if pages %}
-                  <div class="post_body">
-                      {{ pages.url }}
-                  </div>
-                  {% endif %}
+            <div class="flatpages pull-right">
+              <ul class="nav pull-right">
+                    {% load flatpages %}
+                    {% get_flatpages as flatpages %}
+                    {% for page in flatpages %}  
+                       <li style="padding-left: 10px"> <a href="{{ page.url }}">{{ page.title }}</a> </li>
+                    {% endfor %}
+                  </ul>
+            </div>
+            <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" class="leftside"/> </a>
+            <br />
+            <div class="nav-collapse collapse">
                 <ul class="nav">
-                   <li class="">
-
-                        <a href="/products/">{% trans "Kollektion" %}</a>
-                  </li>
-                   <li class="">
-                        <a href="/patternandcolor/">Färger och Mönster </a>
-                  </li>
+                    <li class="">
+                         <a href="/products/">{% trans "Kollektion" %}</a>
+                    </li>
+                    <li class="">
+                         <a href="/patternandcolor/">{% trans "Färger och Mönster" %} </a>
+                    </li>
                     <li class="">
                         <a href="/news/">{% trans "Nyheter" %}</a>
                     </li>
@@ -165,12 +163,12 @@ l    <style type="text/css">
                     </li>
                     <li class="">
                         <a id="token" href="/cart/show/">
-                            Shoppinglåda
-                            --> <img src="{{STATIC_URL}}img/lad.png" style="float:right;">
+                            Shoppinglåda -->
+                            <img src="{{STATIC_URL}}img/lad.png" style="float:right;">
                         </a>
                     </li>
                 </ul>
-              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -178,41 +176,43 @@ l    <style type="text/css">
 {% block stretchpage %}
     <div class="container content"> <!--this is for the left margin -->
       <div class="pagetitle">
-      {% block pagetitle %} {% endblock %}
-      {% block pagedesc %} {% endblock %}
+        {% block pagetitle %} {% endblock %}
+        {% block pagedesc %} {% endblock %}
       </div>
       
-      {% block allcontent %} 
-        <div class="span2">
+    {% block allcontent %} 
+      <div class="span2">
            {% block sidebar %} 
               SIDEBAR Base!
            {% endblock %}
-       </div>
-        <div class="span9">
+      </div>
+      <div class="span9">
            {% block content %}
                  FEATURED COLLECTION
           {% endblock %}
-        </div>
-      {% endblock %}
+      </div>
+    {% endblock %}
+  </div>
 {% endblock %}
-
-        <footer>
-            {% block footer %}
+{% block footer %}
+   
+  <footer>
                 <img src="{{ STATIC_URL }}img/orange_line.png" width="100%"/>  <br/>
                 VamlingboLaget * 623 31 Burgsvik * 0498-498080 * info@vamlingbolaget.com
             {% endblock %}
+            {% get_language_info for LANGUAGE_CODE as lang %}
+            <br />
+            Language code: {{ lang.code }}<br />
+            Name of language: {{ lang.name_local }}<br />
+            Name in English: {{ lang.name }}<br />
             <form action="/i18n/setlang/" method="post">
                 {% csrf_token %}
                 <input name="next" type="hidden" value="{{ redirect_to }}" />
-                <select name="language">
-                    <option value="en">English (en)</option>
-                    <option value="sv">Swedish (sv)</option>
-                </select>
-                <input type="submit" value="Go" />
+                <input type="image" name="language" value="en" src="{{STATIC_URL}}img/english_flag.gif" onclick="$(this).attr('selected','selected');submit-form();$(this).attr({'src':'selected'});">
+                <input type="image" name="language" value="sv" src="{{STATIC_URL}}img/svensk_flagga.gif" onclick="$(this).attr('selected','selected');submit-form()">
             </form>
-        </footer>
+  </footer>
 
-    </div>
   <script src="{{ STATIC_URL }}js/cart.js" type="text/javascript"> </script>
   <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
     <!--<script src="{{ STATIC_URL }}js/shoppingcart.js"  type="text/javascript"></script>-->

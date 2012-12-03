@@ -1,7 +1,8 @@
 from modeltranslation.translator import translator, TranslationOptions
-from models import Flatpage
+from django.contrib.flatpages.models import FlatPage
+
 
 class FlatpageTranslationOptions(TranslationOptions):
     fields = ('title', 'content',)
 
-translator.register(Flatpage, FlatpageTranslationOptions)
+translator.register(FlatPage, FlatpageTranslationOptions)

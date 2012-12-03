@@ -3,23 +3,10 @@ from django.contrib import admin
 from django.conf import settings
 from models import Blog, Post, New
 from django import forms
-
-from ckeditor.widgets import CKEditorWidget
-
-
+from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
-
-from django.contrib.flatpages.admin import FlatPageAdmin as FlatPageAdminOld
-from django.contrib.flatpages.admin import FlatpageForm as FlatpageFormOld
-
-
-class FlatpageForm(FlatpageFormOld):
-    content = forms.CharField(widget=CKEditorWidget())
-    class Meta:
-        model = FlatPage
-
-class FlatPageAdmin(FlatPageAdminOld):
-    form = FlatpageForm
+from gallery.models import Gallery
+from modeltranslation.admin import TranslationAdmin
 
 class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -84,6 +71,3 @@ admin.site.register(Post, PostAdmin)
 admin.site.register(New, NewsAdmin)
 
 admin.site.register(Blog, BlogAdmin)
-
-admin.site.unregister(FlatPage)
-admin.site.register(FlatPage, FlatPageAdmin)

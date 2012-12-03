@@ -8,54 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'GalleryStatus'
-        db.create_table('gallery_gallerystatus', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('name_sv', self.gf('django.db.models.fields.CharField')(max_length=30, null=True, blank=True)),
-            ('name_en', self.gf('django.db.models.fields.CharField')(max_length=30, null=True, blank=True)),
-            ('order', self.gf('django.db.models.fields.IntegerField')()),
-            ('display_on_gallery_page', self.gf('django.db.models.fields.BooleanField')(default=True)),
-        ))
-        db.send_create_signal('gallery', ['GalleryStatus'])
-
-        # Adding model 'Gallery'
-        db.create_table('gallery_gallery', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('name_sv', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
-            ('name_en', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
-            ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('created_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('status', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['gallery.GalleryStatus'])),
-            ('feature_image', self.gf('filebrowser.fields.FileBrowseField')(max_length=200, null=True, blank=True)),
-            ('flatpage', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['flatpages.FlatPage'], null=True, blank=True)),
-        ))
-        db.send_create_signal('gallery', ['Gallery'])
-
-        # Adding model 'Image'
-        db.create_table('gallery_image', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(default='default', max_length=50)),
-            ('name_sv', self.gf('django.db.models.fields.CharField')(default='default', max_length=50, null=True, blank=True)),
-            ('name_en', self.gf('django.db.models.fields.CharField')(default='default', max_length=50, null=True, blank=True)),
-            ('image', self.gf('filebrowser.fields.FileBrowseField')(max_length=200, null=True, blank=True)),
-            ('gallery', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['gallery.Gallery'], null=True, blank=True)),
-            ('variation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Variation'], null=True, blank=True)),
-            ('is_featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal('gallery', ['Image'])
+        # Adding field 'GalleryStatus.display_on_index_page'
+        db.add_column('gallery_gallerystatus', 'display_on_index_page',
+                      self.gf('django.db.models.fields.BooleanField')(default=False),
+                      keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting model 'GalleryStatus'
-        db.delete_table('gallery_gallerystatus')
-
-        # Deleting model 'Gallery'
-        db.delete_table('gallery_gallery')
-
-        # Deleting model 'Image'
-        db.delete_table('gallery_image')
+        # Deleting field 'GalleryStatus.display_on_index_page'
+        db.delete_column('gallery_gallerystatus', 'display_on_index_page')
 
 
     models = {
@@ -89,6 +50,7 @@ class Migration(SchemaMigration):
         'gallery.gallerystatus': {
             'Meta': {'object_name': 'GalleryStatus'},
             'display_on_gallery_page': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'display_on_index_page': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'name_en': ('django.db.models.fields.CharField', [], {'max_length': '30', 'null': 'True', 'blank': 'True'}),

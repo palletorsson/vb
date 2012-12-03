@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+
+{% block pagetitle %}
+    {%if galleries %}
+        <!--legend > Galler{{ num_gallery|pluralize:"i,ier" }}</legend-->
+    {%else%}
+        <legend > <a href="/galleries/">Alla gallerier</a> / {{ gallery.name|title }}</legend>
+    {%endif%}
+    
+{% endblock %}
+
+{% block allcontent %}
+
+    <div class="gallery_list">
+        {%if galleries%}
+            {%for status in statuses%}
+                <h3>{{status.name}}</h3>
+                {%for gallery in galleries%}
+                    {% if gallery.status = status %}
+                        <div style="float: left; display: inline;">
+                            <div class="overlay">&nbsp;{{gallery.name}}</div>
+                            <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" /></a>
+                        </div>
+                    {%endif%}
+                {%endfor%}
+                <div style="clear: both"></div>
+                <br />
+            {%endfor%}
+    </div>
+        {%else%}
+                <div>
+                    <div style="height: 140px;width: 200px; float: left;overflow: hidden;margin:2px;">
+                    <a href="{% version gallery.feature_image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
+                        <img src="{% version gallery.feature_image 'medium' %}"  class="imgborder isfeatured" />
+                    </a>
+                    </div>
+                    {%for image in images%}
+                    <div style="height: 140px;width: 200px; float: left;overflow: hidden;margin: 2px;">
+                    <a href="{% version image.image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
+                        <img src="{% version image.image 'medium' %}"  class="imgborder enlarge" />
+                    </a>    
+                    </div>
+                    {%endfor%}
+                </div>
+        {%endif%}
+    </div>
+
+{% endblock %}

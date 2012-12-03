@@ -92,31 +92,6 @@ def pattern_and_color(request):
                               },
                              context_instance=RequestContext(request))
 
-def show_galleries(request):
-    galleries = Gallery.objects.all()
-    fgalleries = galleries.filter(status= 'F')
-    agalleries = galleries.filter(status= 'A')
-    hgalleries = galleries.filter(status= 'H')
-    num_gallery = galleries.count()
-    return render_to_response('variation/gallery.html',
-        {'galleries': galleries,
-		 'fgalleries' : fgalleries,
-		 'agalleries' : agalleries,
-		 'hgalleries' : hgalleries,
-         'num_gallery' : num_gallery
-        },
-        context_instance=RequestContext(request)
-    )
-
-def show_gallery(request, key):
-    gallery = Gallery.objects.get(pk=key)
-    images = gallery.image_set.all()
-
-    return render_to_response('variation/gallery.html',
-        {'gallery': gallery,
-         'num_gallery' : 1, 'images':images,
-         },context_instance=RequestContext(request)
-    )
 
 def quality(request, name):
     pass
