@@ -41,10 +41,10 @@ def augment_quantity(self, quantity):
 
 def addtocart(request):
     if request.method == 'POST':
-
         d = request.POST
         sku = int(d['article_sku'])
         article_db = Article.objects.get(sku_number = sku)
+
         color = d['color']
         color_db = Color.objects.get(order=color)
         pattern = d['pattern']
@@ -52,23 +52,35 @@ def addtocart(request):
         size = d['size']
         size_db = Size.objects.get(pk=size)
         quantity = int(d['quantity'])
-        cartitem_id = int(d['cartitem_id'])
-        item_in_cart = False
+        add_or_edit = d['add_or_edit'];
 
-        if not item_in_cart:
-            cart_id = _cart_id(request)
-            cart, created = Cart.objects.get_or_create(key = cart_id)
-            cart.save()
-            if (cartitem_id == -1):
-                cartitem = CartItem.objects.create(cart_id = cart)
-            else:
-                cartitem, created = CartItem.objects.get_or_create(pk = cartitem_id)
-            cartitem.article = article_db
-            cartitem.pattern = pattern_db
-            cartitem.size = size_db
-            cartitem.color = color_db
-            cartitem.quantity = quantity
-            cartitem.save()
+        cart_id = _cart_id(request)
+
+        cart, created = Cart.objects.get_or_create(key = cart_id)
+        cart.save()
+
+        existing_cartitems = CartItem.objects.filter(cart=cart)
+        change = False
+
+        # and item.pattern.name == pattern and item.size.name == size
+        if (add_or_edit == 'add'):
+            if (existing_cartitems):
+                for item in existing_cartitems:
+                    if (str(item.article.sku_number) == str(sku) and str(item.pattern.order) == str(pattern) and str(item.color.order) == str(color) and str(item.size.pk) == str(size)):
+                        add_q = item.quantity
+                        change = True
+
+        cartitem, created = CartItem.objects.get_or_create(cart = cart)
+
+        cartitem.article = article_db
+        cartitem.pattern = pattern_db
+        cartitem.size = size_db
+        cartitem.color = color_db
+        cartitem.quantity = quantity
+        if (change):
+            cartitem.quantity = add_q + quantity
+
+        cartitem.save()
 
         returnjson = {
             'cartitem': {
@@ -82,7 +94,10 @@ def addtocart(request):
             'message': { 'msg' : 'Du la till: '  }
         }
 
-    return_data = json.dumps(returnjson)
+        return_data = json.dumps(returnjson)
+
+    if request.method == 'GET':
+        return_data = json.dumps({'msg' : 'noting here'})
 
     response = HttpResponse(return_data, mimetype="application/json")
     return response
@@ -137,10 +152,10 @@ def editcartitem(request, key):
         context_instance=RequestContext(request))
 
 def removefromcart(request, key):
-    cartitem = CartItem.objects.get(pk = key)
-    mycart = cartitem.cart_id
+    cartitem = CartItem.objects.filter(id = int(key))
     cartitem.delete()
-    cart = Cart.objects.get(key=mycart)
+    key = _cart_id(request)
+    cart = Cart.objects.get(key=key)
     cartitems = cart.cartitem_set.all()
     total = totalsum(cartitems)
     return_data = json.dumps(total)

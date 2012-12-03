@@ -155,7 +155,7 @@
         size_id = $('#size option:selected').val(),
         article_id = $('#article_pk option:selected').val(),
         quantity = $('#quantiy_pk option:selected').val();
-        cartitem_id = -1;
+
 
 
     $(".changonselect").change(function () {
@@ -178,19 +178,18 @@
             color_id = $("#color").val();
             size_id = $("#size").val();
             img = folder+color_id+"f_"+pattern_id+"m.jpg";
-
-
         });
 
         $("#changetext").text(str);
         $("#pattern_color_image").attr("src", img);
     });
 
+    var add_or_edit = 'add'
     $("#addtocart").click(function() {
 
         $.ajax({
             type:"POST",
-            url:"http://127.0.0.1:8000/cart/addtocart/",
+            url:"/cart/addtocart/",
             data: {
                 article_sku: sku_number,
                 pattern: pattern_id,
@@ -198,7 +197,7 @@
                 size: size_id,
                 csrfmiddlewaretoken: csrftoken,
                 quantity: quantity,
-                cartitem_id: cartitem_id
+                add_or_edit : add_or_edit
             },
             success: function(data){
                 var msg = data.message.msg,

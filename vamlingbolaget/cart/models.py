@@ -11,7 +11,7 @@ class Cart(models.Model):
 
 
 class CartItem(models.Model):
-    cart_id = models.ForeignKey(Cart, default=1)
+    cart = models.ForeignKey(Cart, default=1)
     article = models.ForeignKey(Article, default=1)
     color = models.ForeignKey(Color, default=1)
     pattern = models.ForeignKey(Pattern, default=1)

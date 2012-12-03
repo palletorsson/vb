@@ -19,8 +19,6 @@
             {{ cartitem.article.quality.description }}
             <h4>Pris: {{ cartitem.article.price }} kr</h4>
 
-
-
         </div>
         <span style="padding-left: 40px;"><img src="{% version cartitem.article.file 'small' %} " >  </span>
 
@@ -185,6 +183,8 @@
         $("#pattern_color_image").attr("src", img);
     });
 
+    var add_or_edit = 'edit';
+
     $("#addtocart").click(function() {
 
         $.ajax({
@@ -197,6 +197,7 @@
                 size: size_id,
                 quantity: quantity,
                 cartitem_id: cartitem_id,
+                add_or_edit: add_or_edit,
                 csrfmiddlewaretoken: csrftoken
             },
             success: function(data){
