@@ -71,7 +71,8 @@ class Category(ChoiceBase):
     """
     Type used in Article Model
     """
-    pass
+    class Meta:
+        verbose_name_plural = 'Categories'
 
 class Color(ChoiceBase):
     """

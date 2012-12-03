@@ -1,0 +1,19 @@
+{% extends "collection_base.html" %}
+
+{% block pagetitle %}
+{% if order %}
+<legend> {{ message }} </legend>
+{% endif %}
+<a href="/products/">Fortsätt att utforska utbudet!</a>
+{% endblock %}
+
+{% block allcontent %}
+{% if order %}
+<pre> Ordernummer: {{ order.order_number}} <br></pre>
+<pre>En bekräftelse på din beställing har skickats till : {{order.email}} </pre>
+<pre>{{order.order}}</pre>
+<pre>Tack!</pre>
+<pre>Vi hör av oss om vi har några frågor. </pre>
+{% endif %}
+
+{% endblock %}

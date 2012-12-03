@@ -24,6 +24,7 @@ DATABASES = {
     }
 }
 
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -98,9 +99,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
-
-
-    #'zinnia.context_processors.version',
     ) # Optional
 
 TEMPLATE_LOADERS = (
@@ -124,7 +122,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'vamlingbolaget.urls'
@@ -171,6 +169,7 @@ INSTALLED_APPS = (
     'userena',
     'guardian',
     'easy_thumbnails',
+    'gunicorn',
     #'photologue',
     #Our Apps
     'products',
@@ -179,6 +178,7 @@ INSTALLED_APPS = (
     'frontpage',
     'gallery',
     'flatpages',
+    'checkout',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -1,5 +1,5 @@
 from modeltranslation.translator import translator, TranslationOptions
-from models import Article, Type, Quality, Color, Pattern
+from models import Article, Type, Quality, Color, Pattern, Category
 
 class ArticleTranslationOptions(TranslationOptions):
     fields = ('name', 'description',)
@@ -25,3 +25,8 @@ class PatternTranslationOptions(TranslationOptions):
     fields = ('name',)
 
 translator.register(Pattern, PatternTranslationOptions)
+
+class CategoryTranslationOptions(TranslationOptions):
+    fields = ('name',)
+
+translator.register(Category, CategoryTranslationOptions)

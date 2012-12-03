@@ -5,8 +5,6 @@ from models import Frontpage
 from gallery.models import Gallery
 from blog.models import Post
 
-
-
 def first_page(request):
     frontpage, created = Frontpage.objects.get_or_create(pk=1)
     #gallery,created = Gallery.objects.get_or_create(status = 'I')

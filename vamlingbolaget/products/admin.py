@@ -71,6 +71,15 @@ class TypeAdmin(TranslationAdmin):
     list_filter = ('active', )
     ordering = ['order']
 
+class CategoryAdmin(TranslationAdmin):
+    model = Type
+    prepopulated_fields = {"slug": ("name",)}
+    list_display = ('active', 'name', 'order',)
+    list_display_links = ('name',)
+    list_editable = ('active', 'order',)
+    list_filter = ('active', )
+    ordering = ['order']
+
 admin.site.register(Variation, VariationAdmin)    
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Size, SizeAdmin)
@@ -78,4 +87,4 @@ admin.site.register(Color, ColorAdmin)
 admin.site.register(Pattern, PatternAdmin)
 admin.site.register(Quality, QualityAdmin)
 admin.site.register(Type, TypeAdmin)
-
+admin.site.register(Category, CategoryAdmin)

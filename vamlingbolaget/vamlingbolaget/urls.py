@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     url(r'^admin_tools/', include('admin_tools.urls')),
 
     url(r'^cart/', include('cart.urls')),
-
+    url(r'^checkout/', include('checkout.urls')),
     url(r'^news/', include('blog.urls')),
     url(r'^admin/filebrowser/', include(site.urls)),
 

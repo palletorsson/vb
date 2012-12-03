@@ -1,23 +1,16 @@
 {% extends "collection_base.html" %}
 
 {% block pagetitle %}
-    <legend> Din Shoppinglåda </legend>
+    <legend> Din Beställning </legend>
 {% endblock %}
 
 {% block allcontent %}
-{%if cartitems %}
 
     <table class="table table-bordered">
     <thead>
     <tr>
         <th>
                 <span> Antal </span>
-        </th>
-        <th>
-            <span>Ta bort  </span>
-        </th>
-        <th>
-            <span> Ändra </span>
         </th>
         <th>
                 <span> Artikel </span>
@@ -44,16 +37,6 @@
         </th>
         <th>
             <div>
-                <a href="remove : {{ item.article }}"><span class="icon-minus" id="{{ item.id }}"></span></a>
-            </div>
-        </th>
-        <th>
-            <div>
-                <a href="/cart/edititem/{{ item.id }}/"><span class="icon-edit"> </span></a>
-            </div>
-        </th>
-        <th>
-            <div>
                 <span> {{ item.article }} i {{item.article.quality|lower}}</span>
             </div>
         </th>
@@ -73,8 +56,8 @@
             </div>
         </th>
         {% endfor %}
-        </tbody>
-        <th class="totalprice" colspan="6" style="text-align: right">
+        </tbody>    {%if cartitems %}
+        <th class="totalprice" colspan="4" style="text-align: right">
             Leverans:
         </th>
         <th id="handling">
@@ -82,7 +65,7 @@
         </th>
         </tbody>
         <tbody>
-        <th class="totalprice" colspan="6" style="text-align: right">
+        <th class="totalprice" colspan="4" style="text-align: right">
             Total pris:
         </th>
         <th id="totalprice">
@@ -90,20 +73,8 @@
         </th>
     </tr>
         </tbody>
-
-    {% else %}
-    <tr id="empty">
-        <td colspan="8">
-            Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
-        </td>
-    </tr>
-    </tbody>
-    {% endif %}
     </tbody>
 </table>
-{%if cartitems %}
-    <div style="text-align:right"><a href="/checkout/"><button class="btn btn-success" type="button">Beställ</button></a></div>
-{% endif %}
-
-
+<legend>Dina uppgifter</legend>
+Visa adressen
 {% endblock %}
