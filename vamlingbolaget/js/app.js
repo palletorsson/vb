@@ -4,6 +4,7 @@ MyModel = Backbone.Tastypie.Model.extend({
     urlRoot: '/api/v1/cartitem/',
     defaults: {
         'cart': 'no cart yet'
+
     }
 });
 
@@ -16,7 +17,7 @@ MyCollection = Backbone.Tastypie.Collection.extend({
 
 //vyer //handelbars = ett templatesprak
 MyItemView = Backbone.View.extend({
-    tagName : 'span', //skapa vyn for varje rad = li-tag
+    tagName : 'li', //skapa vyn for varje rad = li-tag
     templateHtml: '<span class="btn btn-success"> Lägg till i Köplista </span>',
     
     initialize : function(){
@@ -25,39 +26,19 @@ MyItemView = Backbone.View.extend({
     },
     
     render : function(){
-        this.$el.html(this.template(this.model.toJSON()));
+        this.$el.html(this.template(this.model.toJSON())); // load the
     },
-    //lägger till att man kan klicka på raden och spara ner att de ar klara
+
     events : {
-        'click': 'onClick' //binder onClick till clicket
-    
+        'click': 'onClick'
     },
+
 
     onClick : function(){
-        var new_item = new MyModel();
-        var sku_number = $('#sku_number').text();
-        var cart = $('#sku_number').text();
-        var pattern_id = $('#pattern option:selected').val();
-        var color_id = +$('#color option:selected').val();
-        var size_id = $('#size option:selected').val();
-        var article_id = $('#article_pk').text();
-        article_id = "api/v1/articles/"+article_id+"/";
-        color_id  = "api/v1/colors/"+color_id+"/";
-        pattern_id  = "api/v1/pattern/"+pattern_id+"/";
-        size_id = "api/v1/size/"+size_id+"/";
+        console.log("clicked");
+    }
 
-        new_item.set({
-                      'cart': cart,
-                      'article.id': article_id,
-                      'color': color_id,
-                      'pattern': pattern_id,
-                      'size': size_id,
-                      'quantity': '2'
-                         });
-
-            new_item.save();
-        }
-})
+    })
     
 
 MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad i jquery, dessa skapas automatiskt och ar egenskaper till objektet
@@ -82,12 +63,25 @@ MyView = Backbone.View.extend({ //el = elementet for hela vyn, $el samma wrappad
         this.$el.html(this.template())
         _.each(this.list.models, function(elem){
             var view = new MyItemView({model:elem})
-            jQuery('#myList').html(view.$el);
+            jQuery('#myList').append(view.$el);
         })
         this.template();
     }
 })
 
-var appView = new MyView();
+// you can do getter and setters
+var appView = new MyView({
+cart: 1,
+article: 1,
+color:  1,
+pattern: 1,
+size: 1,
+date_added: 1,
+quantity: 1
+});
+var person = new Person({ name: "Thomas", age: 67, child: 'Ryan'});
 
+cart = models.ForeignKey(Cart)
+
+jQuery('#app-canvas').html('')
 jQuery('#app-canvas').html(appView.$el)

@@ -1,6 +1,6 @@
 
 function CustomFileBrowser(field_name, url, type, win) {
-    
+
     var cmsURL = '/admin/filebrowser/browse/?pop=2';
     cmsURL = cmsURL + '&type=' + type;
     
@@ -10,7 +10,7 @@ function CustomFileBrowser(field_name, url, type, win) {
         height: 500,
         resizable: 'yes',
         scrollbars: 'yes',
-        inline: 'no',  // This parameter only has an effect if you use the inlinepopups plugin!
+        inline: 'yes',  // This parameter only has an effect if you use the inlinepopups plugin!
         close_previous: 'no'
     }, {
         window: win,
@@ -21,7 +21,7 @@ function CustomFileBrowser(field_name, url, type, win) {
 }
 
 tinyMCE.init({
-    
+
     // see http://www.tinymce.com/wiki.php/Configuration
     
     // Init
@@ -37,7 +37,7 @@ tinyMCE.init({
     keep_styles: false,
     language: 'en',
     object_resizing: false,
-    plugins: 'advimage,advlink,fullscreen,paste,media,searchreplace,grappelli,template',
+    plugins: 'spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template',
     // directionality : "rtl",
     
     // Callbacks
