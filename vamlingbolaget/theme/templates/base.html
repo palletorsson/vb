@@ -146,6 +146,10 @@ l    <style type="text/css">
           text-align: right;
           color: #ff3300;
       }
+      
+      .change_lang{
+        cursor: pointer;
+      }
 
     </style>
 
@@ -242,8 +246,9 @@ top:-10px;">
             <form action="/i18n/setlang/" method="post" id="lang">
                 {% csrf_token %}
                 <input name="next" type="hidden" value="{{ redirect_to }}" />
-                <input type="image" name="language" value="en" src="{{STATIC_URL}}img/english_flag.gif" />
-                <input type="image" name="language" value="sv" src="{{STATIC_URL}}img/svensk_flagga.gif" />
+                <input name="language" type="hidden" value=""  />
+                <img src="{{STATIC_URL}}img/english_flag.gif" class="change_lang" id="en"/>
+                <img src="{{STATIC_URL}}img/svensk_flagga.gif" class="change_lang" id="sv"/>
             </form>
   </footer>
 

@@ -75,15 +75,11 @@ $('document').ready(function(){
     }
     
     
-    var change_lang = function(){
-        $('#lang:input[type=image]').click(function(){
-                $(this).attr('selected','selected');
-                $('form#lang').submit();
-                $(this).removeAttr('selected');
-            
-        })
-    }
+    $('.change_lang').click(function(){
+        var val = $(this).attr('id');
+        $('input[name=language]').val(val)         
+        $('form#lang').submit();
+    });
     
     set_first_page();
-    change_lang();    
 });
