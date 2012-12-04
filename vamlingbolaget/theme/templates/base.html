@@ -10,7 +10,7 @@
 
     <!-- The styles -->
 
-    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+
     <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
 
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
@@ -26,20 +26,22 @@ l    <style type="text/css">
         color: black;
       }
 
-      footer {
-        text-align: right;
-        color: #ff3300;
-      }
 
+      /* menu Logo vamlingoblaget  */
       .leftside{
         height: 20px;
         padding-left: 100px;
-        padding-top: 21px;
+        padding-top: 16px;
       }
 
+      /* menu line beside logo vamlingbolaget */
       .leftsideline{
           position:relative;
-          top:12px;
+          top:8px;
+      }
+
+      .nav-collapse {
+          padding-top: 14px;
       }
 
       .flatpages{
@@ -48,7 +50,8 @@ l    <style type="text/css">
         heigh: 10px;
         background: rgba(206, 200, 171, 0.12);
       }
-      .flatpages ul{
+
+      .flatpages ul {
         float: right;
         right: 0;
       }
@@ -63,23 +66,17 @@ l    <style type="text/css">
 
       .navbar-inner {
           height: 100px;
+          background-color: #F8F8FF;
+          background-image: none;
           border-bottom: 1px solid black;
-          background-image: linear-gradient(to bottom, #f4f4f4, #ffffff);
-          background-color: #f8f8ff;
       }
 
       .scrollable {
           overflow: auto;
       }
+
       .content{
          margin-top: 90px;
-      }
-
-      .navbar-inner {
-          background-color: #F8F8FF;
-          background-image: linear-gradient(to bottom, #F4F4F4, #FFFFFF);
-          border-bottom: 1px solid black;
-          height: 80px;
       }
 
       .navbar-static-top .container,
@@ -143,6 +140,11 @@ l    <style type="text/css">
           cursor: pointer;
       }
 
+      footer {
+          text-align: right;
+          color: #ff3300;
+      }
+
     </style>
 
 
@@ -172,6 +174,9 @@ l    <style type="text/css">
                     {% for page in flatpages %}  
                        <li style="padding-left: 10px"> <a href="{{ page.url }}">{{ page.title }}</a> </li>
                     {% endfor %}
+                    {% if not flatpages %}
+                        Placeholder
+                    {% endif %}
                   </ul>
             </div>
             <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" class="leftside"/>  <span class="leftsideline"> | </span></a>

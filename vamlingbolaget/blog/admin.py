@@ -1,12 +1,5 @@
-from django.core.urlresolvers import reverse
 from django.contrib import admin
-from django.conf import settings
 from models import Blog, Post, New
-from django import forms
-from django.contrib.flatpages.admin import FlatPageAdmin
-from django.contrib.flatpages.models import FlatPage
-from gallery.models import Gallery
-from modeltranslation.admin import TranslationAdmin
 
 class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
