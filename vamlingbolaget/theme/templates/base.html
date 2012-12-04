@@ -39,12 +39,9 @@ l    <style type="text/css">
           top:8px;
       }
 
+      /* the main menu text */
       .nav-collapse {
-          padding-top: 10px;
-      }
-
-      .nav {
-          padding-top: 12px;
+          padding-top: 23px;
       }
 
       .flatpages{
@@ -77,7 +74,7 @@ l    <style type="text/css">
       }
 
       .content{
-         margin-top: 90px;
+         margin-top: 100px;
       }
 
       .navbar-static-top .container,
@@ -176,7 +173,7 @@ l    <style type="text/css">
                        <li style="padding-left: 10px"> <a href="{{ page.url }}">{{ page.title }}</a> </li>
                     {% endfor %}
                     {% if not flatpages %}
-                        Placeholder
+                  <li style="padding-left: 10px"><a href=""> Placeholder</a> </li>
                     {% endif %}
                   </ul>
             </div>
