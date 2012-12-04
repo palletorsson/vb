@@ -174,12 +174,18 @@ l    <style type="text/css">
                     {% load flatpages %}
                     {% get_flatpages as flatpages %}
                     {% for page in flatpages %}  
-                       <li style="padding-left: 10px"> <a href="{{ page.url }}">{{ page.title }}</a> </li>
+                       <!--li style="padding-left: 10px"> <a href="{{ page.url }}">{{ page.title }}</a> </li-->
                     {% endfor %}
                     {% if not flatpages %}
                   <li style="padding-left: 10px"><a href=""> Placeholder</a> </li>
                     {% endif %}
-                  </ul>
+                    <li>
+                        <a id="token" href="/cart/show/">
+                           Din kundkorg <img src="{{STATIC_URL}}img/box.png" width="40px" style="float:right; position:relative; padding-left: 20px; position:relative;
+top:-32px;">
+                        </a>
+                    </li>
+              </ul>
             </div>
             <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" class="leftside"/>  <span class="leftsideline"> | </span></a>
             <br />
@@ -189,19 +195,19 @@ l    <style type="text/css">
                          <a href="/products/">{% trans "Kollektion" %}</a>
                     </li>
                     <li class="">
-                         <a href="/patternandcolor/">{% trans "Färger och Mönster" %} </a>
+                        <a href="/shop/">{% trans "Butik" %}</a>
                     </li>
                     <li class="">
                         <a href="/news/">{% trans "Nyheter" %}</a>
                     </li>
                     <li class="">
+                        <a href="/about/">{% trans "Om oss" %}</a>
+                    </li>
+                    <li class="">
                         <a href="/galleries/">{% trans "Gallerier" %}</a>
                     </li>
                     <li class="">
-                        <a id="token" href="/cart/show/">
-                           |   Shoppinglåda - - > <img src="{{STATIC_URL}}img/box.png" width="40px" style="float:right; position:relative; padding-left: 20px; position:relative;
-top:-10px;">
-                        </a>
+
                     </li>
                 </ul>
             </div>
