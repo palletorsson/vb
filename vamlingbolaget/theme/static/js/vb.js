@@ -67,29 +67,13 @@ $('document').ready(function(){
     var set_first_page = function(){
         var wheight = $(window).height(),
             fullheight = wheight-130;
-        
         $('.spanfullscreen').css({'width':$(window).width(), 'background-color':'#fff','margin':0, 'height': fullheight, 'overflow':'hidden', 'padding':0 });
         $('.halffullscreen').css({'float':'left','width':($(window).width())/2, 'background-color':'#fff','margin':0, 'height': fullheight, 'overflow':'hidden', 'padding':0 });
         $('.halffullscreen img').css({'width':(($(window).width())/2), 'height': 'auto', 'margin':0, 'padding':0});
-        console.log($('.halffullscreen img'))
+        $('.spanfullscreen img').css({'width':($(window).width()), 'height': 'auto', 'margin':0, 'padding':0});
+        $('.carousel-control').show()
     }
     
     set_first_page();
-    /*
-    $('.spanfullscreen').each(function(){ 
-            img = $(this).find('img'),
-            p = $(this).find('p');
-            
-        $(this).css({'width':$(window).width(), 'background-color':'#000','margin':0, 'height': fullheight, 'overflow':'hidden' });
-        $(this).find('br').remove(); //hack to remove space
-        
-        p.css({'margin':0});
-        
-        $('.halffullscreen').css('width')
-            img = $(this).find('img'),
-            img.css({'height': fullheight, 'width':'auto'})
-    
-    });
-    */
     
 });

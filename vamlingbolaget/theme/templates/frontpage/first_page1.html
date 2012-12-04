@@ -23,3 +23,22 @@
 
        </div>
 {% endblock %}
+
+ 
+ <!-------------------------------------------------------------------
+        {%for g in gallery%}
+            <div class="halffullscreen">
+              <a href="#" class="image {{forloop.counter0}}">
+                <img src="{{MEDIA_URL}}{{g.feature_image}}"  name="{{g.feature_image.name}}" />
+              </a>
+            </div>
+        {%endfor%}
+        {%for image in images%}
+            <div class="halffullscreen">
+              <a href="#" class="image {{forloop.counter}}">
+                <img src="{{MEDIA_URL}}{{image.image}}" name="{{image.name}}" />
+              </a>
+            </div>
+        {%endfor%}
+    </div>
+-->    

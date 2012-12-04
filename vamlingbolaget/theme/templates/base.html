@@ -233,8 +233,6 @@ top:-10px;">
             {% endblock %}
             {% get_language_info for LANGUAGE_CODE as lang %}
             <br />
-            Language code: {{ lang.code }}<br />
-            Name of language: {{ lang.name_local }}<br />
             Name in English: {{ lang.name }}<br />
             <form action="/i18n/setlang/" method="post">
                 {% csrf_token %}
