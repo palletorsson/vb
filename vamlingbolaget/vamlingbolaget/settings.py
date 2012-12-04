@@ -256,4 +256,7 @@ MODELTRANSLATION_TRANSLATION_FILES = (
     'flatpages.translation',
     )
 
-FILEBROWSER_ADMIN_VERSIONS=  ['thumbnail', 'small', 'medium', 'big', 'large']
+try:
+    from .grappelli import *
+except ImportError:
+    pass
