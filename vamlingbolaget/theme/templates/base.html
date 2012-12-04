@@ -31,6 +31,7 @@ l    <style type="text/css">
         height: 20px;
         padding-left: 100px;
         padding-top: 16px;
+        margin-right: 100px;
       }
 
       /* menu line beside logo vamlingbolaget */
@@ -56,11 +57,6 @@ l    <style type="text/css">
         right: 0;
         padding-right: 10px;
       }
-
-      li{
-          float:right;
-      }
-
 
       .navbar-inner {
           height: 100px;
@@ -181,13 +177,13 @@ l    <style type="text/css">
                     {% endif %}
                     <li>
                         <a id="token" href="/cart/show/" style="font-size: 11px;">
-                           Din kundkorg <img src="{{STATIC_URL}}img/box.png" width="25px" style="float:right; position:relative; padding-left: 5px; position:relative;
+                           Din låda <img src="{{STATIC_URL}}img/box.png" width="25px" style="float:right; position:relative; padding-left: 5px; position:relative;
 top:-27px;">
                         </a>
                     </li>
               </ul>
             </div>
-            <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" class="leftside"/>  <span class="leftsideline"> | </span></a>
+            <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" class="leftside"/>  <span class="leftsideline"> </span></a>
             <br />
             <div class="nav-collapse collapse">
                 <ul class="nav">
