@@ -7,7 +7,7 @@ from blog.models import Post
 
 def first_page(request):
     frontpage, created = Frontpage.objects.get_or_create(pk=1)
-    gallery = Gallery.objects.filter(status__display_on_index_page = True)
+    gallery = Gallery.objects.filter(status__display_on_index_page = True) 
     images = Image.objects.filter(gallery=gallery)
 
     return render_to_response('frontpage/first_page.html',
