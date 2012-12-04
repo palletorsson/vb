@@ -74,6 +74,16 @@ $('document').ready(function(){
         $('.carousel-control').show()
     }
     
-    set_first_page();
     
+    var change_lang = function(){
+        $('#lang:input[type=image]').click(function(){
+                $(this).attr('selected','selected');
+                $('form#lang').submit();
+                $(this).removeAttr('selected');
+            
+        })
+    }
+    
+    set_first_page();
+    change_lang();    
 });
