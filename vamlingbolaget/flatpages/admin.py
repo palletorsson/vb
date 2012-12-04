@@ -22,8 +22,6 @@ class FlatPageAdmin(TranslationAdmin,FlatPageAdminOld):
         GalleryInline
     ]
 
-    
-    
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageAdmin)
                     
