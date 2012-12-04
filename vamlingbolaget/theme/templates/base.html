@@ -239,11 +239,11 @@ top:-10px;">
             {% get_language_info for LANGUAGE_CODE as lang %}
             <br />
             Name in English: {{ lang.name }}<br />
-            <form action="/i18n/setlang/" method="post">
+            <form action="/i18n/setlang/" method="post" id="lang">
                 {% csrf_token %}
                 <input name="next" type="hidden" value="{{ redirect_to }}" />
-                <input type="image" name="language" value="en" src="{{STATIC_URL}}img/english_flag.gif" onclick="$(this).attr('selected','selected');submit-form();$(this).attr({'src':'selected'});">
-                <input type="image" name="language" value="sv" src="{{STATIC_URL}}img/svensk_flagga.gif" onclick="$(this).attr('selected','selected');submit-form()">
+                <input type="image" name="language" value="en" src="{{STATIC_URL}}img/english_flag.gif" onclick="javascript: $(this).attr('selected','selected');document.lang.submit();$(this).removeAttr('selected');">
+                <input type="image" name="language" value="sv" src="{{STATIC_URL}}img/svensk_flagga.gif" onclick="javascript: $(this).attr('selected','selected');document.lang.submit();$(this).removeAttr('selected');">
             </form>
   </footer>
 
