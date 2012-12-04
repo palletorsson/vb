@@ -256,4 +256,16 @@ MODELTRANSLATION_TRANSLATION_FILES = (
     'flatpages.translation',
     )
 
-FILEBROWSER_ADMIN_VERSIONS=  ['thumbnail', 'small', 'medium', 'big', 'large']
+try:
+    from .grappelli import *
+except ImportError:
+    pass
+
+FILEBROWSER_MEDIA_ROOT = MEDIA_ROOT
+FILEBROWSER_MEDIA_URL = MEDIA_URL
+FILEBROWSER_STATIC_ROOT = STATIC_ROOT
+FILEBROWSER_STATIC_URL = STATIC_URL
+URL_FILEBROWSER_MEDIA = STATIC_URL + 'filebrowser/'
+PATH_FILEBROWSER_MEDIA = STATIC_ROOT + 'filebrowser/'
+URL_TINYMCE = STATIC_URL + 'tiny_mce/'
+PATH_TINYMCE = STATIC_ROOT + 'tiny_mce/'
