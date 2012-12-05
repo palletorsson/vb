@@ -6,7 +6,6 @@
 
 {% block allcontent %}
 {%if cartitems %}
-
     <table class="table table-bordered">
     <thead>
     <tr>
@@ -36,6 +35,7 @@
 
         <tbody>
         {% for item in cartitems %}
+
         <tr>
         <th>
             <div>
@@ -44,7 +44,7 @@
         </th>
         <th>
             <div>
-                <a href="remove : {{ item.article }}"><span class="icon-minus" id="{{ item.id }}"></span></a>
+                <a href="remove : {{ item.article.id }}"><span class="icon-minus" id="{{ item.id }}"></span></a>
             </div>
         </th>
         <th>

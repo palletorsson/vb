@@ -62,6 +62,8 @@ $.ajaxSetup({
                         }else{
                             $('.totalprice').html('Du har tömt din varukorg <a href="/products/">fortsätt att utforska vårt utbud</a>');
                             $('#totalprice').html(data.totalprice);
+                            $('#handling').parent().remove();
+                            $('button').hide();
                         }
                         $('#'+id).closest('tr').remove();
                     }

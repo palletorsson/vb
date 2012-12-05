@@ -64,15 +64,15 @@
             {% if size.order == cartitem.size.order %}
             selected="selected"
             {%endif%}
-            > Storlek: {{ size.name }} </option>
+            > Storlek: {{ size.name }} </option>changonselect
 
 		{% endfor %}
 	    </select>
         <select  class="changonselect"  id='quantity_pk'>
-            <option {%if cartitem.quantity == 1 %} selected="selected" {%endif%} value="1" selected="selected">Antal : 1 </option>
+            <option {%if cartitem.quantity == 1 %} selected="selected" {%endif%} value="1">Antal : 1 </option>
             <option {%if cartitem.quantity == 2 %} selected="selected" {%endif%} value="2">Antal : 2 </option>
             <option {%if cartitem.quantity == 3 %} selected="selected" {%endif%} value="3">Antal : 3 </option>
-            <option {%if cartitem.quantity == 4 %} selected="selected" {%endif%}value="4">Antal : 4 </option>
+            <option {%if cartitem.quantity == 4 %} selected="selected" {%endif%} value="4">Antal : 4 </option>
         </select>
 
         </div>
@@ -175,7 +175,6 @@
             color_id = $("#color").val();
             size_id = $("#size").val();
             quantity = $("#quantity_pk").val();
-            console.log(cartitem_id);
             img = folder+color_id+"f_"+pattern_id+"m.jpg";
         });
 

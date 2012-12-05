@@ -52,7 +52,9 @@ def addtocart(request):
         size = d['size']
         size_db = Size.objects.get(pk=size)
         quantity = int(d['quantity'])
-        #add_or_edit = d['add_or_edit'];
+        print quantity
+        cartitem_id = int(d['cartitem_id'])
+        add_or_edit = d['add_or_edit'];
 
         cart_id = _cart_id(request)
 
@@ -63,13 +65,23 @@ def addtocart(request):
 
         # and item.pattern.name == pattern and item.size.name == size
 
-        if (existing_cartitems):
+        if (cartitem_id):
+            cartitem = CartItem.objects.get(pk=cartitem_id)
+            cartitem.pattern = pattern_db
+            cartitem.size = size_db
+            cartitem.color = color_db
+            cartitem.quantity = quantity
+            cartitem.save()
+            msg = u'Du har andrat till: '
+
+        elif (existing_cartitems):
             for item in existing_cartitems:
                 if (str(item.article.sku_number) == str(sku) and str(item.pattern.order) == str(pattern) and str(item.color.order) == str(color) and str(item.size.pk) == str(size)):
-                    add_q = item.quantity
+                    print item
                     item.quantity = item.quantity + quantity
-                    quantity = item.quantity
                     item.save()
+                    msg = u'Du la till ytterligare %s av denna %s och har nu: ' %(quantity, article_db.name)
+                    quantity = item.quantity
                 else:
                     cartitem = CartItem.objects.create(cart = cart)
                     cartitem.article = article_db
@@ -78,8 +90,21 @@ def addtocart(request):
                     cartitem.color = color_db
                     cartitem.quantity = quantity
                     cartitem.save()
+                    msg = u'Du la till: '
 
-        returnjson = {
+        else:
+            cartitem = CartItem.objects.create(cart = cart)
+            cartitem.article = article_db
+            cartitem.pattern = pattern_db
+            cartitem.size = size_db
+            cartitem.color = color_db
+            cartitem.quantity = quantity
+            cartitem.save()
+            msg = u'Du la till: '
+
+
+
+    returnjson = {
             'cartitem': {
                 'article': article_db.name,
                 'sku' : sku,
@@ -87,11 +112,11 @@ def addtocart(request):
                 'pattern': pattern_db.name,
                 'size': size_db.name,
                 'quantity': quantity,
-                 },
-            'message': { 'msg' : 'Du la till: '  }
+                },
+            'message': { 'msg' : msg  }
         }
 
-        return_data = json.dumps(returnjson)
+    return_data = json.dumps(returnjson)
 
     if request.method == 'GET':
         return_data = json.dumps({'msg' : 'nothing here'})
