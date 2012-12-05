@@ -12,7 +12,7 @@ class ImagesInline(ImagesInLine, TranslationAdmin):
 
 class ImageAdmin(TranslationAdmin):
     list_display = ('name', 'image', 'variation', 'is_featured','order','gallery', )
-    list_editable = ('image', 'variation', 'is_featured','order',)
+    list_editable = ('image', 'variation', 'is_featured','order','gallery',)
     list_filter = ('name', 'image', 'gallery', 'variation', 'is_featured',)
     ordering = ['name', 'gallery', 'variation']
     model = Image

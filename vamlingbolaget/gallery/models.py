@@ -42,6 +42,9 @@ class Gallery(models.Model):
 class Photographer(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
 
+    def __unicode__(self):
+        return unicode(self.name)
+
 class Image(models.Model):
     name= models.CharField(max_length=255, default="default",)
     image = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg"], blank=True, null=True)

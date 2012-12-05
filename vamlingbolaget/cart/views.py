@@ -52,7 +52,7 @@ def addtocart(request):
         size = d['size']
         size_db = Size.objects.get(pk=size)
         quantity = int(d['quantity'])
-        add_or_edit = d['add_or_edit'];
+        #add_or_edit = d['add_or_edit'];
 
         cart_id = _cart_id(request)
 
@@ -60,27 +60,24 @@ def addtocart(request):
         cart.save()
 
         existing_cartitems = CartItem.objects.filter(cart=cart)
-        change = False
 
         # and item.pattern.name == pattern and item.size.name == size
-        if (add_or_edit == 'add'):
-            if (existing_cartitems):
-                for item in existing_cartitems:
-                    if (str(item.article.sku_number) == str(sku) and str(item.pattern.order) == str(pattern) and str(item.color.order) == str(color) and str(item.size.pk) == str(size)):
-                        add_q = item.quantity
-                        change = True
 
-        cartitem = CartItem.objects.create(cart = cart)
-
-        cartitem.article = article_db
-        cartitem.pattern = pattern_db
-        cartitem.size = size_db
-        cartitem.color = color_db
-        cartitem.quantity = quantity
-        if (change):
-            cartitem.quantity = add_q + quantity
-
-        cartitem.save()
+        if (existing_cartitems):
+            for item in existing_cartitems:
+                if (str(item.article.sku_number) == str(sku) and str(item.pattern.order) == str(pattern) and str(item.color.order) == str(color) and str(item.size.pk) == str(size)):
+                    add_q = item.quantity
+                    item.quantity = item.quantity + quantity
+                    quantity = item.quantity
+                    item.save()
+                else:
+                    cartitem = CartItem.objects.create(cart = cart)
+                    cartitem.article = article_db
+                    cartitem.pattern = pattern_db
+                    cartitem.size = size_db
+                    cartitem.color = color_db
+                    cartitem.quantity = quantity
+                    cartitem.save()
 
         returnjson = {
             'cartitem': {
@@ -97,7 +94,7 @@ def addtocart(request):
         return_data = json.dumps(returnjson)
 
     if request.method == 'GET':
-        return_data = json.dumps({'msg' : 'noting here'})
+        return_data = json.dumps({'msg' : 'nothing here'})
 
     response = HttpResponse(return_data, mimetype="application/json")
     return response
