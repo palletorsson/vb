@@ -265,7 +265,7 @@ top:-6px;">
          <strong> Nyheter </strong><br/>
 
           {% load news_extra %}
-          {% show_news as news %}
+
           {% for n in news %}
           <strong>{{n }} {{n.title}}</strong> <small>({{n.publish_at}})</small>
           <p>{{ n.body }}</p>
