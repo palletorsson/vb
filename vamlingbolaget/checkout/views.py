@@ -28,10 +28,12 @@ def checkout(request):
             new_order.ip = request.META['REMOTE_ADDR']
             new_order.status = 'O'
             name = request.POST['first_name']
+            l_name = request.POST['second_name']
+
             msg = "> Order Vamlingbolaget:\n"
             msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
             i = 1
-            msg = u'Namn: %s \n' %name
+            msg = u'Ditt Namn: %s  %s \n' % (name, l_name)
             msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
             for item in cartitems:
                 msg = msg + '>> ' + item.article.name + ' (' + item.article.sku_number + ') \n'

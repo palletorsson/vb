@@ -42,7 +42,7 @@ def augment_quantity(self, quantity):
 def addtocart(request):
     if (request.method == 'POST'):
         d = request.POST
-        sku = int(d['article_sku'])
+        sku = d['article_sku']
         article_db = Article.objects.get(sku_number = sku)
 
         color = d['color']
