@@ -232,12 +232,31 @@ l    <style type="text/css">
 {% block footer %}
    
   <footer>
-                <img src="{{ STATIC_URL }}img/orange_line.png" width="100%"/>  <br/>
-                VamlingboLaget * 623 31 Burgsvik * 0498-498080 * info@vamlingbolaget.com
-            {% endblock %}
+      <img src="{{ STATIC_URL }}img/orange_line.png" width="100%"/>  <br/>
+      <div class="span4">
+          Vamlingbolaget </br>
+          623 31 Burgsvik </br>
+          0498-498080  </br>
+          info@vamlingbolaget.com </br>
+          <a href="/about/"> Om oss vamlingbolaget</a>
+      </div>
+      <div class="span4">
+          Vamlingblaget Stockholm </br>
+          11624 STOCKHOLM </br>
+          08 - 640 31 37 </br>
+          Åsögatan 112 </br>
+
+          Öppettider:
+          Vardagar kl. 11-18 </br>
+          Lördagar kl. 11-15 </br>
+      </div>
+
+      <div class="span3">
+       Senaste nyheter.
+      </div>
+      <div class="span4">
+              {% endblock %}
             {% get_language_info for LANGUAGE_CODE as lang %}
-            <br />
-            Name in English: {{ lang.name }}<br />
             <form action="/i18n/setlang/" method="post" id="lang">
                 {% csrf_token %}
                 <input name="next" type="hidden" value="{{ redirect_to }}" />
@@ -245,6 +264,7 @@ l    <style type="text/css">
                 <img src="{{STATIC_URL}}img/english_flag.gif" class="change_lang" id="en"/>
                 <img src="{{STATIC_URL}}img/svensk_flagga.gif" class="change_lang" id="sv"/>
             </form>
+              </div>
   </footer>
 
   <script src="{{ STATIC_URL }}js/cart.js" type="text/javascript"> </script>
