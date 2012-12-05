@@ -135,8 +135,7 @@ l    <style type="text/css">
       }
 
       footer {
-          text-align: right;
-          color: #ff3300;
+         font-size: 10px;
       }
       
       .change_lang{
@@ -237,27 +236,34 @@ top:-6px;">
   <footer>
       <img src="{{ STATIC_URL }}img/orange_line.png" width="100%"/>  <br/>
       <div class="span4">
-          Vamlingbolaget </br>
-          623 31 Burgsvik </br>
-          0498-498080  </br>
-          info@vamlingbolaget.com </br>
+          <address>
+              <strong>Vamlingbolaget</strong><br/>
+              623 31 Burgsvik<br/>
+              <abbr title="Phone">P:</abbr>0498-498080 <br/>
+              info@vamlingbolaget.com
+          </address>
           <a href="/about/"> Om oss vamlingbolaget</a>
       </div>
       <div class="span4">
-          Vamlingblaget Stockholm </br>
-          11624 STOCKHOLM </br>
-          08 - 640 31 37 </br>
-          Åsögatan 112 </br>
-
+          <address>
+              <strong>Vamlingbolaget Stockholm </strong><br/>
+              Åsögatan 112 <br/>
+              11624 Stockholm<br/>
+              <abbr title="Phone">P:</abbr>08 - 640 31 37 <br/>
+              info@vamlingbolaget.com
+          </address>
           Öppettider:
-          Vardagar kl. 11-18 </br>
-          Lördagar kl. 11-15 </br>
+          Vardagar kl. 11-18 <br/>
+          Lördagar kl. 11-15 <br/>
       </div>
 
-      <div class="span3">
-       Senaste nyheter.
-      </div>
       <div class="span4">
+         <strong> Senaste nyheter. </strong><br/>
+         {% for n in news %}
+             {{ n.body }}
+         {% endfor %}
+      </div>
+      <div class="span2">
               {% endblock %}
             {% get_language_info for LANGUAGE_CODE as lang %}
             <form action="/i18n/setlang/" method="post" id="lang">
@@ -267,7 +273,7 @@ top:-6px;">
                 <img src="{{STATIC_URL}}img/english_flag.gif" class="change_lang" id="en"/>
                 <img src="{{STATIC_URL}}img/svensk_flagga.gif" class="change_lang" id="sv"/>
             </form>
-              </div>
+      </div>
   </footer>
 
   <script src="{{ STATIC_URL }}js/cart.js" type="text/javascript"> </script>
