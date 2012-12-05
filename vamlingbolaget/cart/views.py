@@ -70,7 +70,7 @@ def addtocart(request):
                         add_q = item.quantity
                         change = True
 
-        cartitem, created = CartItem.objects.get_or_create(cart = cart)
+        cartitem = CartItem.objects.create(cart = cart)
 
         cartitem.article = article_db
         cartitem.pattern = pattern_db
