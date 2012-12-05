@@ -3541,6 +3541,7 @@ input[type="submit"].btn.btn-mini {
     display: block;
     padding: 9.5px 20px 9.5px;
     margin-left: -20px;
+    margin-right: 20px;
     font-size: 20px;
     font-weight: 200;
     color: #333333;
