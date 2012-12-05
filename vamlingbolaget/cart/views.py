@@ -40,7 +40,7 @@ def augment_quantity(self, quantity):
 
 
 def addtocart(request):
-    if request.method == 'POST':
+    if (request.method == 'POST'):
         d = request.POST
         sku = int(d['article_sku'])
         article_db = Article.objects.get(sku_number = sku)
@@ -77,7 +77,6 @@ def addtocart(request):
         elif (existing_cartitems):
             for item in existing_cartitems:
                 if (str(item.article.sku_number) == str(sku) and str(item.pattern.order) == str(pattern) and str(item.color.order) == str(color) and str(item.size.pk) == str(size)):
-                    print item
                     item.quantity = item.quantity + quantity
                     item.save()
                     msg = u'Du la till ytterligare %s av denna %s och har nu: ' %(quantity, article_db.name)

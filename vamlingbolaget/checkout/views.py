@@ -1,8 +1,10 @@
+# -*- coding: utf8 -*- 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
 from cart.views import _cart_id, totalsum,  _new_cart_id
-
+            
 from cart.models import Cart
 from forms import CheckoutForm
 from models import Checkout
@@ -19,7 +21,6 @@ def checkout(request):
     form = CheckoutForm()
     returntotal['form'] = form
     if request.method == 'POST':
-
         form = CheckoutForm(request.POST)
         if form.is_valid():
             new_order = form.save(commit=False)
@@ -46,8 +47,8 @@ def checkout(request):
             new_order.order = msg
             new_order.save()
 
-            #from django.core.mail import send_mail
-            #send_mail(subject, message, sender, recipients)
+            send_mail('Din beställning från Vamlingbolaget', 'Tack för din beställning, den är som följer \n %s' %msg, '23ctest@gmail.com', [request.POST['email']])
+
             return HttpResponseRedirect('thanks/')
 
     return render_to_response('checkout/checkout.html', {
