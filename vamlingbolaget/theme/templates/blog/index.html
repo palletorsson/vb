@@ -2,30 +2,25 @@
 {% load i18n %}
 {% block pagetitle %}
    <div>
-    <span class=span3><legend> {% trans "Nyheter" %} </legend></span>
-    <span class=span8><legend> {% trans "Blog" %} </legend></span>
+    <span ><legend> {% trans "Nyheter och Blog" %} </legend></span>
   </div>
 <div style="clear: both;"></div>
-
 {% endblock %}
-{% block allcontent %}
+{% block sidebar %}
+{% endblock %}
+{% block content %}
 {% if news %}
-        {% for n in news %}
-<span class=span3>
-           <span><strong>{{ n.title }}</strong></span> | <small>( {{ n.created }} )</small>
-            <div class="news_body">
-                {{ n.body|safe|linebreaks }}
-            </div>
-    </span>
-        {% endfor %}
-    {% endif %}
-
-
-	{% if posts %}
-		{% for post in posts %}
-<span class=span8>
-    <strong><a href="{{ post.slug }}/"> {{ post.title }} </a></strong>
-                <small>| {{ post.created }} </small>
+    {% for n in news %}
+        <strong>{{ n.title }}</strong> | <small>( {{ n.created }} )</small>
+        <div class="news_body">
+            {{ n.body|safe|linebreaks }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% if posts %}
+    {% for post in posts %}
+        <strong><a href="{{ post.slug }}/"> {{ post.title }} </a></strong>
+            <small>| ( {{ post.created }} ) </small>
                 <hr/>
                 <div class="post_body">
 				    {{ post.body|safe|linebreaks }}
@@ -35,7 +30,6 @@
                     {{ tag }} {% if not forloop.last %}, {% endif %}
                     {% endif %}
                 </div>
-        </span>
 		{% endfor %}
 	{% endif %}
 {% endblock %}

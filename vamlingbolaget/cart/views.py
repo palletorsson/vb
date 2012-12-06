@@ -44,7 +44,6 @@ def addtocart(request):
         d = request.POST
         sku = d['article_sku']
         article_db = Article.objects.get(sku_number = sku)
-
         color = d['color']
         color_db = Color.objects.get(order=color)
         pattern = d['pattern']
