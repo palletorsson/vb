@@ -10845,102 +10845,102 @@ msgstr "titel"
 
 #: vb/vamlingbolaget/theme/templates/base.html:191
 msgid "Kollektion"
-msgstr "iiiiiiiiii"
+msgstr "Collection"
 
 #: vb/vamlingbolaget/theme/templates/base.html:194
 msgid "Butik"
-msgstr ""
+msgstr "Shop"
 
 #: vb/vamlingbolaget/theme/templates/base.html:197
 #: vb/vamlingbolaget/theme/templates/base.html:265
-#: vb/vamlingbolaget/theme/templates/blog/index.html:4
+#: vb/vamlingbolaget/theme/templates/blog/index.html:4"Lördagar"
 msgid "Nyheter"
-msgstr ""
+msgstr "News"
 
 #: vb/vamlingbolaget/theme/templates/base.html:200
 msgid "Om oss"
-msgstr ""
+msgstr "About"
 
 #: vb/vamlingbolaget/theme/templates/base.html:203
 msgid "Gallerier"
-msgstr ""
+msgstr "Galleries"
 
 #: vb/vamlingbolaget/theme/templates/base.html:245
 msgid "Öppettider:"
-msgstr ""
+msgstr "Opening hours"
 
 #: vb/vamlingbolaget/theme/templates/base.html:247
 #: vb/vamlingbolaget/theme/templates/base.html:260
 msgid "Vardagar"
-msgstr ""
+msgstr "Weekdays"
 
 #: vb/vamlingbolaget/theme/templates/base.html:248
 #: vb/vamlingbolaget/theme/templates/base.html:261
 msgid "Lördagar"
-msgstr ""
+msgstr "Saturdays"
 
 #: vb/vamlingbolaget/theme/templates/collection_base.html:20
 msgid "Färger och Mönster"
-msgstr ""
+msgstr "Colors and Patterns"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:6
 msgid "Du editerar beställningspost"
-msgstr ""
+msgstr "You are editing you order"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:17
 msgid "Artikelnummer"
-msgstr ""
+msgstr "Item number"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:19
 msgid "Kvalitet"
-msgstr ""
+msgstr "Quality"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:21
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:31
 msgid "Pris"
-msgstr ""
+msgstr "Price"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:32
 msgid "Plagget går att få i alla"
-msgstr ""
+msgstr "The products is available in all"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:32
 msgid "mönster och färger"
-msgstr ""
+msgstr "colors and patterns"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:46
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:25
 msgid "Färg"
-msgstr ""
+msgstr "Color"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:57
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:28
 msgid "Mönster"
-msgstr ""
+msgstr "Pattern"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:68
 msgid "Storlek"
-msgstr ""
+msgstr "Size"
 
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:4
 msgid "Din Shoppinglåda"
-msgstr ""
+msgstr "Your Shopping cart"
 
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:13
 msgid "Antal"
-msgstr ""
+msgstr "Count"
 
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:16
 msgid "Ta bort"
-msgstr ""
+msgstr "Remove"
 
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:19
 msgid "Ändra"
-msgstr ""
+msgstr "Change"
 
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:22
 msgid "Artikel"
-msgstr ""
+msgstr "Article"
 
 #~ msgid "publish"
 #~ msgstr "publisera"
