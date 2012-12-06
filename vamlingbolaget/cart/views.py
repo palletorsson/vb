@@ -38,7 +38,6 @@ def augment_quantity(self, quantity):
     self.quantity = self.quantity + int(quantity)
     self.save()
 
-
 def addtocart(request):
     if (request.method == 'POST'):
         d = request.POST

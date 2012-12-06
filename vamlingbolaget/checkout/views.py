@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from django.core import mail
-from cart.views import _cart_id, totalsum,  _new_cart_id
+from cart.views import _cart_id, totalsum, _new_cart_id
             
 from cart.models import Cart
 from forms import CheckoutForm
@@ -44,7 +44,7 @@ def checkout(request):
             msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
             msg = msg + '>> Frakt och Hantering: 40 SEK \n'
             msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
-            msg = msg + '>>> Totalpris: ' + str(totalprice) +  ' SEK \n'
+            msg = msg + '>>> Totalpris: %s SEK \n' %str(totalprice)
             msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
             msg = msg + '>> En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
             msg = msg + '------------------------------------------------------------------------------------------------------------*\n'

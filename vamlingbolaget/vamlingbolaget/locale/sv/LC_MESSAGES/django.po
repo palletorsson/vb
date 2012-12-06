@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-06 09:51+0100\n"
+"POT-Creation-Date: 2012-12-06 23:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8779,6 +8779,7 @@ msgstr ""
 #: lib/python2.7/site-packages/userena/forms.py:156
 #: lib/python2.7/site-packages/userena/templates/userena/profile_detail.html:34
 #: lib/python2.7/site-packages/zinnia/templates/comments/comment_notification_email.txt:2
+#: vb/vamlingbolaget/checkout/models.py:15
 #: vb/vamlingbolaget/theme/templates/userena/profile_detail.html:34
 msgid "Email"
 msgstr ""
@@ -10807,7 +10808,48 @@ msgstr ""
 msgid "No title"
 msgstr ""
 
+#: vb/vamlingbolaget/checkout/models.py:13
+msgid "Namn"
+msgstr ""
+
+#: vb/vamlingbolaget/checkout/models.py:14
+msgid "Efternamn"
+msgstr ""
+
+#: vb/vamlingbolaget/checkout/models.py:16
+msgid "Telefonnummer"
+msgstr ""
+
+#: vb/vamlingbolaget/checkout/models.py:17
+msgid "Gatuadress"
+msgstr ""
+
+#: vb/vamlingbolaget/checkout/models.py:18
+msgid "Postort"
+msgstr ""
+
+#: vb/vamlingbolaget/checkout/models.py:19
+msgid "Postnummer"
+msgstr ""
+
+#: vb/vamlingbolaget/checkout/models.py:20
+msgid "Land"
+msgstr ""
+
+#: vb/vamlingbolaget/checkout/models.py:21
+msgid "Meddelande"
+msgstr ""
+
+#: vb/vamlingbolaget/checkout/models.py:22
+msgid "Ip"
+msgstr ""
+
+#: vb/vamlingbolaget/checkout/models.py:27
+msgid "Session key"
+msgstr ""
+
 #: vb/vamlingbolaget/theme/templates/base.html:191
+#: vb/vamlingbolaget/theme/templates/variation/index.html:6
 msgid "Kollektion"
 msgstr ""
 
@@ -10817,7 +10859,6 @@ msgstr ""
 
 #: vb/vamlingbolaget/theme/templates/base.html:197
 #: vb/vamlingbolaget/theme/templates/base.html:265
-#: vb/vamlingbolaget/theme/templates/blog/index.html:4
 msgid "Nyheter"
 msgstr ""
 
@@ -10843,8 +10884,25 @@ msgstr ""
 msgid "Lördagar"
 msgstr ""
 
-#: vb/vamlingbolaget/theme/templates/collection_base.html:20
+#: vb/vamlingbolaget/theme/templates/collection_base.html:5
+msgid "Kategorier"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:12
+msgid "Kvaliter"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:19
+msgid "Överskikt"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:21
+#: vb/vamlingbolaget/theme/templates/variation/combos.html:5
 msgid "Färger och Mönster"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/blog/index.html:5
+msgid "Nyheter och Blog"
 msgstr ""
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:6
@@ -10861,6 +10919,7 @@ msgstr ""
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:21
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:31
+#: vb/vamlingbolaget/theme/templates/variation/index.html:19
 msgid "Pris"
 msgstr ""
 
@@ -10904,6 +10963,22 @@ msgstr ""
 
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:22
 msgid "Artikel"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:7
+msgid "Fortsätt att utforska utbudet!"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:12
+msgid "Ordernummer"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:13
+msgid "En bekräftelse på din beställing har skickats till"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:15
+msgid "Vi hör av oss om vi har några frågor"
 msgstr ""
 
 #~ msgid "hello"

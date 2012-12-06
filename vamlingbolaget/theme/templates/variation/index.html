@@ -1,8 +1,9 @@
 {% extends "collection_base.html" %}
+{% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {% block pagetitle %}
-    <legend>Kollektion</legend>
+    <legend>{% trans "Kollektion" %}</legend>
 {% endblock %}
 
 {% block content %}
@@ -15,7 +16,7 @@
                             <img src="{% version image.image 'small' %}" class="imgborder" />
                             <br/>
                             <span class='image_description'>
-                                {{ product.article.name }}<br/> Pris: {{ product.article.price }}
+                                {{ product.article.name }}<br/> {% trans "Pris" %} : {{ product.article.price }}
                             </span>
                         </div>
                     {% endwith %}
