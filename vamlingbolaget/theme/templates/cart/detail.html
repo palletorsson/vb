@@ -3,7 +3,7 @@
 {% version model.field_name version_prefix %}
 {% load i18n %}
 {% block pagetitle %}
-	<legend>Du editerar beställningspost : <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
+	<legend>{% trans "Du editerar beställningspost" %} : <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
 {% endblock %}
 
 
@@ -14,11 +14,11 @@
         <div style="clear: both;"></div>
         <div class="span6">
             <strong>{{ cartitem.article.name }} </strong><br/>
-            {% trans Artikelnummer: %} <span id="sku_number">{{ cartitem.article.sku_number }}</span><br/><br/>
+            {% trans "Artikelnummer" %} :  <span id="sku_number">{{ cartitem.article.sku_number }}</span><br/><br/>
 
-            {% trans Kvalitet: %} {{ cartitem.article.quality }}<br/>
+            {% trans "Kvalitet" %}:  {{ cartitem.article.quality }}<br/>
             {{ cartitem.article.quality.description }}
-            <h4>{% trans Pris: %} {{ cartitem.article.price }} kr</h4>
+            <h4>{% trans "Pris" %}: {{ cartitem.article.price }} kr</h4>
 
         </div>
         <span style="padding-left: 40px;"><img src="{% version cartitem.article.file 'small' %} " >  </span>
@@ -29,7 +29,7 @@
 
         <hr/>
         <div class="span10">
-            {% trans Plagget går att få i alla %} <a href="/patternandcolor/"> {% trans mönster och färger %}</a>.
+            {% trans "Plagget går att få i alla" %} <a href="/patternandcolor/"> {% trans "mönster och färger" %}</a>.
         </div>
         <hr/>
     </div>
@@ -43,7 +43,7 @@
                 {% if color.order == cartitem.color.order %}
                     selected="selected"
                 {%endif%} >
-            {% trans Färg: %} {{ color.name }} </option>
+            {% trans "Färg" %}: {{ color.name }} </option>
         {% endfor %}
 	    </select> 	    
 
@@ -54,7 +54,7 @@
                 selected="selected"
             {%endif%}
             >
-            {% trans Mönster: %} {{ pattern.name }}</option>
+            {% trans "Mönster" %}: {{ pattern.name }}</option>
 		{% endfor %}
 	    </select>
 
@@ -65,7 +65,7 @@
             {% if size.order == cartitem.size.order %}
             selected="selected"
             {%endif%}
-            > {% trans Storlek: %} {{ size.name }} </option>changonselect
+            > {% trans "Storlek" %}: {{ size.name }} </option>changonselect
 
 		{% endfor %}
 	    </select>
