@@ -44,7 +44,9 @@ def by_type(request, key):
 
 
 def by_quality(request, key):
-    products = Variation.objects.filter(article__type__slug = key, active=True).order_by('article__quality')
+    products = Variation.objects.filter(article__quality__slug = key, active=True)
+    print products
+    print key
     qualities = Quality.objects.filter(active=True)
     types = Type.objects.filter(active=True)
     return render_to_response('variation/index.html',
