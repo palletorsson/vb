@@ -18,9 +18,6 @@ def first_page(request):
 							},
 							context_instance=RequestContext(request))
 
-
-
-
 def index(request):
     products = Variation.objects.filter(active=True).order_by('article__quality')
     qualities = Quality.objects.filter(active=True)
@@ -67,7 +64,6 @@ def detail(request, pk):
         types = Type.objects.filter(active=True)
         if (product.article.quality.slug == 'plysch'):
             colors = Color.objects.filter(active=True, order__gt=30)
-            print colors
             patterns = Pattern.objects.filter(active=True, order__gt=30)
         else:
             colors = Color.objects.filter(active=True, order__lt=30)
