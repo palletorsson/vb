@@ -28,7 +28,7 @@ def checkout(request):
             new_order.ip = request.META['REMOTE_ADDR']
             new_order.status = 'O'
             name = request.POST['first_name']
-            l_name = request.POST['second_name']
+            l_name = request.POST['last_name']
 
             msg = "> Order Vamlingbolaget:\n"
             msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
