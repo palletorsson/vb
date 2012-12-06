@@ -6,7 +6,7 @@ from blog.models import Post
 from gallery.models import *
 
 def first_page(request):
-    variations = Variation.objects.all()
+    variations = Variation.objects.filter(active=True).order_by('article__quality')
     images = Image.objects.all()
     print images.image
     products = zip(variations, images)
@@ -22,9 +22,9 @@ def first_page(request):
 
 
 def index(request):
-    products = Variation.objects.all()
-    qualities = Quality.objects.all()
-    types = Type.objects.all()
+    products = Variation.objects.filter(active=True).order_by('article__quality')
+    qualities = Quality.objects.filter(active=True)
+    types = Type.objects.filter(active=True)
     return render_to_response('variation/index.html',
                              {'products': products,
                               'qualities': qualities,
@@ -33,9 +33,9 @@ def index(request):
                              context_instance=RequestContext(request))
 
 def by_type(request, key):
-    products = Variation.objects.filter(article__type__slug = key)
-    qualities = Quality.objects.all()
-    types = Type.objects.all()
+    products = Variation.objects.filter(article__type__slug = key, active=True).order_by('article__quality')
+    qualities = Quality.objects.filter(active=True)
+    types = Type.objects.filter(active=True)
     return render_to_response('variation/index.html',
              {'products': products,
               'qualities': qualities,
@@ -44,9 +44,9 @@ def by_type(request, key):
 
 
 def by_quality(request, key):
-    products = Variation.objects.filter(article__quality__slug = key)
-    qualities = Quality.objects.all()
-    types = Type.objects.all()
+    products = Variation.objects.filter(article__type__slug = key, active=True).order_by('article__quality')
+    qualities = Quality.objects.filter(active=True)
+    types = Type.objects.filter(active=True)
     return render_to_response('variation/index.html',
         {'products': products,
          'qualities': qualities,
@@ -60,11 +60,11 @@ def detail(request, pk):
         images = Image.objects.filter(variation__pk=pk)
         color_id = product.color.order
         pattern_id = product.pattern.order
-        colors = Color.objects.all()
-        patterns = Pattern.objects.all()
+        colors = Color.objects.filter(active=True)
+        patterns = Pattern.objects.filter(active=True)
         sizes = Size.objects.all()
-        qualities = Quality.objects.all()
-        types = Type.objects.all()
+        qualities = Quality.objects.filter(active=True)
+        types = Type.objects.filter(active=True)
     except:
         return HttpResponse(404)
 
@@ -83,8 +83,8 @@ def detail(request, pk):
                     )
 
 def pattern_and_color(request):
-    colors = Color.objects.all()
-    patterns = Pattern.objects.all()
+    colors = Color.objects.filter(active=True)
+    patterns = Pattern.objects.filter(active=True)
 
     return render_to_response('variation/combos.html',
                              {'colors': colors,
