@@ -1,28 +1,41 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block pagetitle %}
-<legend> {% trans "Nyheter" %} </legend>
+   <div>
+    <span class=span3><legend> {% trans "Nyheter" %} </legend></span>
+    <span class=span8><legend> {% trans "Blog" %} </legend></span>
+  </div>
+<div style="clear: both;"></div>
+
 {% endblock %}
+{% block allcontent %}
+{% if news %}
+        {% for n in news %}
+<span class=span3>
+           <span><strong>{{ n.title }}</strong></span> | <small>( {{ n.created }} )</small>
+            <div class="news_body">
+                {{ n.body|safe|linebreaks }}
+            </div>
+    </span>
+        {% endfor %}
+    {% endif %}
 
-{% block sidebar %}
 
-{% endblock %}
-
-{% block content %}
 	{% if posts %}
 		{% for post in posts %}
-			<legend><a href="{{ post.slug }}/"> {{ post.title }} </a></legend>
-			<div class="post_meta ">
-				{{ post.created }}
-			</div> 
-			<div class="post_body">
-				{{ post.body|safe|linebreaks }}
-			</div> 
-			<div class="tags">
-				{% if tag in post.tags.all %}
-				{{ tag }} {% if not forloop.last %}, {% endif %}
-				{% endif %}
-			</div> 
+<span class=span8>
+    <strong><a href="{{ post.slug }}/"> {{ post.title }} </a></strong>
+                <small>| {{ post.created }} </small>
+                <hr/>
+                <div class="post_body">
+				    {{ post.body|safe|linebreaks }}
+			    </div>
+                <div class="tags">
+                    {% if tag in post.tags.all %}
+                    {{ tag }} {% if not forloop.last %}, {% endif %}
+                    {% endif %}
+                </div>
+        </span>
 		{% endfor %}
 	{% endif %}
 {% endblock %}

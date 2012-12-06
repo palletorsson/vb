@@ -62,11 +62,17 @@ def detail(request, pk):
         images = Image.objects.filter(variation__pk=pk)
         color_id = product.color.order
         pattern_id = product.pattern.order
-        colors = Color.objects.filter(active=True)
-        patterns = Pattern.objects.filter(active=True)
         sizes = Size.objects.all()
         qualities = Quality.objects.filter(active=True)
         types = Type.objects.filter(active=True)
+        if (product.article.quality.slug == 'plysch'):
+            colors = Color.objects.filter(active=True, order__gt=30)
+            print colors
+            patterns = Pattern.objects.filter(active=True, order__gt=30)
+        else:
+            colors = Color.objects.filter(active=True, order__lt=30)
+            patterns = Pattern.objects.filter(active=True, order__lt=30)
+
     except:
         return HttpResponse(404)
 

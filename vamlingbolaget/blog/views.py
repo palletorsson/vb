@@ -2,13 +2,15 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from models import Blog, Post
+from models import Blog, Post, New
 
 def index(request):
     posts = Post.objects.filter(active=True)
+    news = New.objects.filter(active=True)
 
     return render_to_response('blog/index.html', {
-        'posts': posts
+        'posts': posts,
+        'news': news
     }, context_instance=RequestContext(request))
     
 def detail(request, slug):
