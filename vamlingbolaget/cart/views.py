@@ -50,9 +50,8 @@ def addtocart(request):
         size = d['size']
         size_db = Size.objects.get(pk=size)
         quantity = int(d['quantity'])
-        print quantity
         cartitem_id = int(d['cartitem_id'])
-        add_or_edit = d['add_or_edit'];
+        add_or_edit = d['add_or_edit']
 
         cart_id = _cart_id(request)
 
@@ -63,7 +62,7 @@ def addtocart(request):
 
         # and item.pattern.name == pattern and item.size.name == size
 
-        if (cartitem_id):
+        if (cartitem_id and add_or_edit == 'edit'):
             cartitem = CartItem.objects.get(pk=cartitem_id)
             cartitem.pattern = pattern_db
             cartitem.size = size_db
