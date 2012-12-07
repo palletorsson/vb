@@ -13,7 +13,6 @@
 {% endblock %}
 
 {% block allcontent %}
-
     <div class="gallery_list">
         {%if galleries%}
             {%for status in statuses%}
@@ -22,7 +21,7 @@
                     {% if gallery.status = status %}
                         <div style="float: left; display: inline;">
                             <div class="overlay">&nbsp;{{gallery.name}}</div>
-                            <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" /></a>
+                            <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" title="Fotograf: {{feature_image.photographer.name}}"/></a>
                         </div>
                     {%endif%}
                 {%endfor%}
@@ -34,18 +33,18 @@
                 <table border="0" cellpadding="0" style="width: 800px;">
                     <tr>
                     <td valign="top" style="width: 200px;">
-                        <a href="{% version gallery.feature_image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
-                            <img src="{% version gallery.feature_image 'medium' %}"  style="width: 200px;" class="imgborder isfeatured" />
+                        <a href="{% version gallery.feature_image 'large' %}" title="Fotograf: {{image.photographer.name}}" rel="lightbox[{{gallery}}]">
+                            <img src="{% version gallery.feature_image 'medium' %}"  style="width: 200px; margin-top: 2px; margin-bottom: 2px;" class="imgborder isfeatured" />
                         </a>
-                    {%for image in images%}
-                        <a href="{% version image.image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
-                            <img src="{% version image.image 'medium' %}" style="width: 200px;" class="imgborder enlarge" />
-                        </a>    
-                        {% if forloop.counter == break1 or forloop.counter == break2 or forloop.counter == break3 %}
-                        </td>
-                        <td valign="top" style="width: 200px;">        
-                        {%endif%}
-                    {%endfor%}
+                        {%for image in images%}
+                            <a href="{% version image.image 'large' %}" title="Fotograf: {{image.photographer.name}} " rel="lightbox[{{gallery}}]">
+                                <img src="{% version image.image 'medium' %}" style="width: 200px; margin-top: 2px; margin-bottom: 2px;" class="imgborder enlarge" />
+                            </a>    
+                            {% if forloop.counter == break1 or forloop.counter == break2 or forloop.counter == break3 %}
+                                </td>
+                                <td valign="top" style="width: 200px;">        
+                            {%endif%}
+                        {%endfor%}
                         </td>
                      </tr>
                 </table>
