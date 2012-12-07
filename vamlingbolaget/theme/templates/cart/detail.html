@@ -3,7 +3,7 @@
 {% version model.field_name version_prefix %}
 {% load i18n %}
 {% block pagetitle %}
-	<legend>{% trans "Du ändrar nu din beställning av" %}: <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
+	<legend><a href="javascript:history.go(-1)">Shoppinglåda</a> / {% trans "Du ändrar nu din beställning av" %}: <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
 {% endblock %}
 
 
@@ -27,10 +27,6 @@
         <div style="clear: both;"></div>
 
 
-        <hr/>
-        <div class="span10">
-            {% trans "Plagget går att få i alla" %} <a href="/patternandcolor/"> {% trans "mönster och färger" %}</a>.
-        </div>
         <hr/>
     </div>
 
@@ -80,20 +76,14 @@
         <span style="padding-left: 10px;"><img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" /></span>
         <div style="clear: both;"></div>
         <hr/>
-        <div id="changetext">
-
-        </div>
-
-        <script>
-
-
-        </script>
+        <div id="changetext"></div>
         <hr/>
         <div style="clear: both;"></div>
         <div class="span6">
         </div>
         <div id='addtocart' style="display:block;">
         <span style="padding-left: 30px;">
+            <button class="btn btn-success" onclick="javascript:history.go(-1)" type="button">{% trans "Avbryt" %}</button></span>
             <button class="btn btn-success" type="button">{% trans "Uppdatera" %}</button></span>
         </div>
         <hr/>
