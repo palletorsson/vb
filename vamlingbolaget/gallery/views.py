@@ -17,7 +17,7 @@ def show_galleries(request):
 
 def show_gallery(request, key):
     gallery = Gallery.objects.get(pk=key)
-    images = gallery.image_set.all()
+    images = gallery.image_set.all().order_by('order')
     num = len(images) + 1 #all images plus the feature image
     col = int(num/4) #images per column
     remaining = num % 4
