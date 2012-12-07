@@ -270,10 +270,9 @@ top:-6px;">
           {% load news_extra %}
 
           {% for n in news %}
-          <strong>{{n }} {{n.title}}</strong> <small>({{n.publish_at}})</small>
-          <p>{{ n.body }}</p>
+            <strong>{{n }} {{n.title}}</strong> <small>({{n.publish_at}})</small>
+            <p>{{ n.body }}</p>
           {% endfor %}
-
       </div>
       <div class="span2">
               {% endblock %}
