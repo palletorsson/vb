@@ -85,8 +85,8 @@ def detail(request, pk):
                     )
 
 def pattern_and_color(request):
-    colors = Color.objects.filter(active=True)
-    patterns = Pattern.objects.filter(active=True)
+    colors = Color.objects.filter(active=True, quality=1)
+    patterns = Pattern.objects.filter(active=True, quality=1)
 
     return render_to_response('variation/combos.html',
                              {'colors': colors,
