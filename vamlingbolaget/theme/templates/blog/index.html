@@ -25,12 +25,9 @@
             <small>| ( {{ post.created }} ) </small>
                 <hr/>
                 <div class="post_body">
-				    {{ post.body|safe|linebreaks|truncatewords:50}}
+				    {{ post.body|safe|linebreaks|truncatewords:50}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
                     <div>
-                    <br/>
-                    <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a></strong>
                 </div>
-			    </div>
                 <div class="tags">
                     {% if tag in post.tags.all %}
                     {{ tag }} {% if not forloop.last %}, {% endif %}
