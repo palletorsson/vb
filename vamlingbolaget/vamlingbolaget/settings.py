@@ -264,11 +264,16 @@ TINYMCE_JS_URL = STATIC_ROOT  + 'js/tiny_mce/tiny_mce.js'
 #The URL of the TinyMCE javascript file.
 TINYMCE_JS_ROOT = STATIC_ROOT + 'js/tiny_mce'
 #The filesystem location of the TinyMCE files.
+
 TINYMCE_DEFAULT_CONFIG = {
-                            'plugins': "table,spellchecker,paste,searchreplace",
-                            'theme': "advanced",
-                            'mode': "exact",
-                             }
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'theme': "advanced",
+    'theme_advanced_toolbar_location' : "top",
+    'theme_advanced_toolbar_align' : "left",
+    'theme_advanced_statusbar_location' : "bottom",
+    'theme_advanced_resizing' : "true",
+    'convert_urls' : "false"
+         }
 #The default TinyMCE configuration to use. See the TinyMCE manual for all options. To set the configuration for a specific TinyMCE editor, see the mce_attrs parameter for the widget.
 TINYMCE_SPELLCHECKER= False
 #Whether to use the spell checker through the supplied view. You must add spellchecker to the TinyMCE plugin list yourself, it is not added automatically.
