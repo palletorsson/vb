@@ -25,7 +25,7 @@
             <small> ( {{ post.created }} ) </small>
                 <hr />
                 <div class="post_body">
-				    {{ post.body|safe|linebreaks|truncatewords:50}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
+				    {{ post.body|safe|linebreaks|truncatewords:150}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
                     <div>
                 </div>
                 <div class="tags">
