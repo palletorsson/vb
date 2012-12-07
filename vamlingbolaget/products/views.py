@@ -63,11 +63,11 @@ def detail(request, pk):
         qualities = Quality.objects.filter(active=True)
         types = Type.objects.filter(active=True)
         if (product.article.quality.slug == 'plysch'):
-            colors = Color.objects.filter(active=True, order__gt=30)
-            patterns = Pattern.objects.filter(active=True, order__gt=30)
+            colors = Color.objects.filter(active=True, order__gt=25)
+            patterns = Pattern.objects.filter(active=True, order__gt=25)
         else:
-            colors = Color.objects.filter(active=True, order__lt=30)
-            patterns = Pattern.objects.filter(active=True, order__lt=30)
+            colors = Color.objects.filter(active=True, order__lt=25)
+            patterns = Pattern.objects.filter(active=True, order__lt=25)
 
     except:
         return HttpResponse(404)

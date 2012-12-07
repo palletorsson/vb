@@ -19,6 +19,7 @@ class Variation(TimeStampedActivate):
     article = models.ForeignKey('Article')
     pattern = models.ForeignKey('Pattern')
     color = models.ForeignKey('Color')
+    order = models.IntegerField("order items", default=100)
 
     def get_images(self, pk):
         images = Image.objects.get(variation__pk=pk)
