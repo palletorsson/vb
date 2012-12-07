@@ -7,7 +7,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_display = ('active', 'name', 'description', 'user')
     list_display_links = ('name',)
     list_editable = ('active',)
-    list_filter = ('modified', 'created', 'active')
+    list_filter = ('modified', 'created', 'active', )
     class Media:
         js = (settings.STATIC_URL+'tiny_mce/tiny_mce_src.js',
               settings.STATIC_URL+"filebrowser/js/TinyMCEAdmin.js",)
@@ -31,10 +31,10 @@ class PostAdmin(admin.ModelAdmin):
 	})
     )
     search_fields = ['title','excerpt', 'body']
-    list_display = ('active', 'title', 'publish_at')
+    list_display = ('active', 'title', 'publish_at', 'blog')
     list_display_links = ('title',)
     list_editable = ('active', 'publish_at')
-    list_filter = ('modified', 'created', 'active')
+    list_filter = ('modified', 'created', 'active', 'blog')
 
 
 class NewsAdmin(admin.ModelAdmin):

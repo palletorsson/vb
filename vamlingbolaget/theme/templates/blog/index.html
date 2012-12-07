@@ -25,7 +25,12 @@
             <small> ( {{ post.created }} ) </small>
                 <hr />
                 <div class="post_body">
-				    {{ post.body|safe|linebreaks|truncatewords:150}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
+                    {% ifequal post.blog.id  1 %}
+                    {{ post.body|safe|linebreaks|truncatewords:150}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
+                    {% else %}
+                    {{ post.body|safe|linebreaks}}
+                    {% endifequal %}
+
                     <div>
                 </div>
                 <div class="tags">
@@ -37,4 +42,3 @@
 		{% endfor %}
 	{% endif %}
 {% endblock %}
-    
