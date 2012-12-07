@@ -30,20 +30,24 @@
             {%endfor%}
     </div>
         {%else%}
-                <div>
-                    <div style="height: 140px;width: 200px; float: left;overflow: hidden;margin:2px;">
-                    <a href="{% version gallery.feature_image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
-                        <img src="{% version gallery.feature_image 'medium' %}"  class="imgborder isfeatured" />
-                    </a>
-                    </div>
+                <table border="0" cellpadding="0" style="width: 800px;">
+                    <tr>
+                    <td valign="top" style="width: 200px;">
+                        <a href="{% version gallery.feature_image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
+                            <img src="{% version gallery.feature_image 'medium' %}"  style="width: 200px;" class="imgborder isfeatured" />
+                        </a>
                     {%for image in images%}
-                    <div style="height: 140px;width: 200px; float: left;overflow: hidden;margin: 2px;">
-                    <a href="{% version image.image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
-                        <img src="{% version image.image 'medium' %}"  class="imgborder enlarge" />
-                    </a>    
-                    </div>
+                        <a href="{% version image.image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
+                            <img src="{% version image.image 'medium' %}" style="width: 200px;" class="imgborder enlarge" />
+                        </a>    
+                        {% if forloop.counter == break1 or forloop.counter == break2 or forloop.counter == break3 %}
+                        </td>
+                        <td valign="top" style="width: 200px;">        
+                        {%endif%}
                     {%endfor%}
-                </div>
+                        </td>
+                     </tr>
+                </table>
         {%endif%}
     </div>
 

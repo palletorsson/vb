@@ -263,14 +263,10 @@ top:-6px;">
 
       <div class="span4">
          <strong> Nyheter </strong><br/>
-
-          {% load news_extra %}
-          {% show_news as news %}
           {% for n in news %}
-          <strong>{{n }} {{n.title}}</strong> <small>({{n.publish_at}})</small>
-          <p>{{ n.body }}</p>
+            <strong>{{n }} {{n.title}}</strong> <small>({{n.publish_at}})</small>
+            <p>{{ n.body }}</p>
           {% endfor %}
-
       </div>
       <div class="span2">
               {% endblock %}
