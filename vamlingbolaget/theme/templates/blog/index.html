@@ -23,6 +23,7 @@
     {% for post in posts %}
         <h3> {{ post.title }} </h3>
             <small> ( {{ post.created }} ) </small>
+                <hr />
                 <div class="post_body">
 				    {{ post.body|safe|linebreaks|truncatewords:50}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
                     <div>
@@ -32,6 +33,7 @@
                     {{ tag }} {% if not forloop.last %}, {% endif %}
                     {% endif %}
                 </div>
+                <hr />
 		{% endfor %}
 	{% endif %}
 {% endblock %}
