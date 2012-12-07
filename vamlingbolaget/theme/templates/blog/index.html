@@ -15,18 +15,16 @@
     {% for post in posts %}
                     {% ifequal post.blog.id 1 %}
                     <h3> {{ post.title }} </h3>
-                    <small> ( {{ post.created }} ) </small>
+                    <small> ( {{ post.publish_at }} ) </small>
                     <hr />
                     <div class="post_body">
                     {{ post.body|safe|linebreaks|truncatewords:150}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
                         <div>
                         </div>
                     {% else %}
-                        <h4> {{ post.title }} </h4>
-                        <small> ( {{ post.created }} ) </small>
+                        <h4> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h4>
                         <hr />
                         <div class="post_body">
-
                         {{ post.body|safe|linebreaks}}
                         <div>
                        </div>
