@@ -1,19 +1,3 @@
-/*
-//en instans
-CartItemModel = Backbone.Tastypie.Model.extend({
-    urlRoot: '/api/cart/cartitem/',
-    defaults: {
-        'label': 'no name yet'
-    }
-});
-
-//lista av instanser
-CartItemCollection = Backbone.Tastypie.Collection.extend({
-    urlRoot: '/api/cart/cartitem/',
-    model: CartItemModel
-})
-
-*/
 
 $('document').ready(function(){
 
@@ -36,8 +20,7 @@ $('document').ready(function(){
              $(this).attr('src', changesrc($(this), 'medium','thumbnail'))
              $(this).removeClass('isfeatured').addClass('enlarge');
              initgallery();
-        }); 
-        
+        });
     }
     //initgallery();
 
@@ -66,7 +49,7 @@ $('document').ready(function(){
     
     var set_first_page = function(){
         var wheight = $(window).height(),
-            fullheight = wheight-148;
+            fullheight = wheight-100;
         $('.spanfullscreen').css({'width':$(window).width(), 'background-color':'#fff','margin':0, 'height': fullheight, 'overflow':'hidden', 'padding':0 });
         $('.halffullscreen').css({'float':'left','width':($(window).width())/2, 'background-color':'#fff','margin':0, 'height': fullheight, 'overflow':'hidden', 'padding':0 });
         $('.halffullscreen img').css({'width':(($(window).width())/2), 'height': 'auto', 'margin':0, 'padding':0});

@@ -267,17 +267,17 @@ top:-6px;">
           {% trans "Vardagar" %} 11-18 <br/>
           {% trans "Lördagar" %}  <br/>
       </div>
+      {%if news %}
 
       <div class="span4">
          <strong>{% trans "Nyheter" %}</strong><br/>
-
           {% load news_extra %}
-
           {% for n in news %}
-            <strong>{{n }} {{n.title}}</strong> <small>({{n.publish_at}})</small>
+            <strong>{{n.title}}</strong> <small>({{n.publish_at}})</small>
             <p>{{ n.body }}</p>
           {% endfor %}
       </div>
+      {% endif %}
       <div class="span2">
               {% endblock %}
             {% get_language_info for LANGUAGE_CODE as lang %}
@@ -290,7 +290,6 @@ top:-6px;">
             </form>
       </div>
   </footer>
-
   <script src="{{ STATIC_URL }}js/cart.js" type="text/javascript"> </script>
   <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
     <!--<script src="{{ STATIC_URL }}js/shoppingcart.js"  type="text/javascript"></script>-->
