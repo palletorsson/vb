@@ -44,7 +44,7 @@ class Size(models.Model):
     Size used in Product Model         
     """
     name = models.CharField(max_length=10)
-    
+    quality = models.ForeignKey('Quality', default=1)
     def __unicode__(self):
         return unicode(self.name)
 
@@ -79,12 +79,14 @@ class Color(ChoiceBase):
     """
     Color used in Product Model         
     """
+    quality = models.ForeignKey('Quality', default=1)
     pass
 
 class Pattern(ChoiceBase):
     """
     Pattern used in Product Model         
     """
+    quality = models.ForeignKey('Quality', default=1)
     pass
 
 class Quality(ChoiceBase):
