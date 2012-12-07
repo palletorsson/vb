@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
+from tinymce import models as tinymce_models
 
 class PostManager(models.Manager):
     def get_visible(self):
@@ -63,7 +64,7 @@ class Post(TimeStampedActivate):
     title = models.CharField(max_length=255, 
                             help_text="Title if the post. Can be anything up to 255 characters.")
     slug = models.SlugField()
-    body = RichTextField()
+    body = tinymce_models.HTMLField()
     publish_at = models.DateTimeField(default=datetime.datetime.now(), 
                                      help_text="Date and time post should become visible")
     

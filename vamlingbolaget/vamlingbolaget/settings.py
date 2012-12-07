@@ -151,12 +151,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
     #"django.contrib.comments",
-    #'tagging',
-    #'mptt',
     'accounts',
-    #'zinnia',
     'filebrowser',
     'ckeditor',
+    'tinymce',
     'grappelli',
     'django.contrib.admin',
     'rosetta',
@@ -261,3 +259,19 @@ URL_FILEBROWSER_MEDIA = STATIC_URL + 'filebrowser/'
 PATH_FILEBROWSER_MEDIA = STATIC_ROOT + 'filebrowser/'
 URL_TINYMCE = STATIC_URL + 'tiny_mce/'
 PATH_TINYMCE = STATIC_ROOT + 'tiny_mce/'
+
+TINYMCE_JS_URL = STATIC_ROOT  + 'js/tiny_mce/tiny_mce.js'
+#The URL of the TinyMCE javascript file.
+TINYMCE_JS_ROOT = STATIC_ROOT + 'js/tiny_mce'
+#The filesystem location of the TinyMCE files.
+TINYMCE_DEFAULT_CONFIG = {
+                            'plugins': "table,spellchecker,paste,searchreplace",
+                            'theme': "advanced",
+                            'mode': "exact",
+                             }
+#The default TinyMCE configuration to use. See the TinyMCE manual for all options. To set the configuration for a specific TinyMCE editor, see the mce_attrs parameter for the widget.
+TINYMCE_SPELLCHECKER= False
+#Whether to use the spell checker through the supplied view. You must add spellchecker to the TinyMCE plugin list yourself, it is not added automatically.
+TINYMCE_COMPRESSOR = False
+#Whether to use the TinyMCE compressor, which gzips all Javascript files into a single stream. This makes the overall download size 75% smaller and also reduces the number of requests. The overall initialization time for TinyMCE will be reduced dramatically if you use this option.
+TINYMCE_FILEBROWSER =  True
