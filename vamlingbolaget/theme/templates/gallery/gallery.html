@@ -5,7 +5,7 @@
 
 {% block pagetitle %}
     {%if galleries %}
-        <!--legend > Galler{{ num_gallery|pluralize:"i,ier" }}</legend-->
+        <legend> {%trans "Gallerier" %}</legend>
     {%else%}
         <legend > <a href="/galleries/">{% trans "Alla gallerier" %}</a> / {{ gallery.name|title }}</legend>
     {%endif%}
@@ -17,7 +17,7 @@
     <div class="gallery_list">
         {%if galleries%}
             {%for status in statuses%}
-                <h3>{{status.name}}</h3>
+                <h4>{{status.name}}</h4>
                 {%for gallery in galleries%}
                     {% if gallery.status = status %}
                         <div style="float: left; display: inline;">
