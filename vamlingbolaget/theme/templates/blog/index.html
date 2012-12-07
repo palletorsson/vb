@@ -9,15 +9,7 @@
 {% block sidebar %}
 {% endblock %}
 {% block content %}
-{% if news %}
-    {% for n in news %}
-        <strong>{{ n.title }}</strong> | <small>( {{ n.created }} )</small>
-        <div class="news_body">
-            {{ n.body|safe|linebreaks }}
-        </div>
-    {% endfor %}
 
-{% endif %}
 <hr/>
 {% if posts %}
     {% for post in posts %}
