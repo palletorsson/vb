@@ -81,12 +81,11 @@
         <div style="clear: both;"></div>
         <div class="span6">
         </div>
-        <div id='addtocart' style="display:block;">
+        <div style="display:block;">
         <span style="padding-left: 30px;">
             <button class="btn btn-success" onclick="javascript:history.go(-1)" type="button">{% trans "Avbryt" %}</button></span>
-            <button class="btn btn-success" type="button">{% trans "Uppdatera" %}</button></span>
+            <button id='addtocart' class="btn btn-success" type="button">{% trans "Uppdatera" %}</button></span>
         </div>
-        <hr/>
     </div>
 
 <script>
@@ -137,13 +136,6 @@
             }
         })
 
-    var sku_number = $('#sku_number').text(),
-        cartitem_id = $('#cartitem_id').text(),
-        pattern_id = $('#pattern option:selected').val(),
-        color_id = +$('#color option:selected').val(),
-        size_id = $('#size option:selected').val(),
-        article_id = $('#article_pk option:selected').val(),
-        quantity = $('#quantity_pk option:selected').val();
 
 
     $(".changonselect").change(function () {
@@ -175,6 +167,13 @@
     var add_or_edit = 'edit';
 
     $("#addtocart").click(function() {
+		var sku_number = $('#sku_number').text(),
+			cartitem_id = $('#cartitem_id').text(),
+			pattern_id = $('#pattern option:selected').val(),
+			color_id = +$('#color option:selected').val(),
+			size_id = $('#size option:selected').val(),
+			article_id = $('#article_pk option:selected').val(),
+			quantity = $('#quantity_pk option:selected').val();
 
         $.ajax({
             type:"POST",
