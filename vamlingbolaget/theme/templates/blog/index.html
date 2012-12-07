@@ -25,12 +25,10 @@
             <small>| ( {{ post.created }} ) </small>
                 <hr/>
                 <div class="post_body">
-				    {{ post.body|safe|linebreaks|truncatewords:99 }}
+				    {{ post.body|safe|linebreaks|truncatewords:50}}
                     <div>
                     <br/>
-                    ...
-                    <br/>
-                    <a href="{{ post.slug }}/"> läs mer </a></strong>
+                    <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a></strong>
                 </div>
 			    </div>
                 <div class="tags">
