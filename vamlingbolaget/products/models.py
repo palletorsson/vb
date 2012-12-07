@@ -19,6 +19,7 @@ class Variation(TimeStampedActivate):
     article = models.ForeignKey('Article')
     pattern = models.ForeignKey('Pattern')
     color = models.ForeignKey('Color')
+    order = models.IntegerField("order items", default=100)
 
     def get_images(self, pk):
         images = Image.objects.get(variation__pk=pk)
@@ -43,7 +44,7 @@ class Size(models.Model):
     Size used in Product Model         
     """
     name = models.CharField(max_length=10)
-    
+    quality = models.ForeignKey('Quality', default=1)
     def __unicode__(self):
         return unicode(self.name)
 
@@ -78,12 +79,14 @@ class Color(ChoiceBase):
     """
     Color used in Product Model         
     """
+    quality = models.ForeignKey('Quality', default=1)
     pass
 
 class Pattern(ChoiceBase):
     """
     Pattern used in Product Model         
     """
+    quality = models.ForeignKey('Quality', default=1)
     pass
 
 class Quality(ChoiceBase):
@@ -100,7 +103,7 @@ class Article(TimeStampedActivate):
     """
     name = models.CharField(max_length=160)
     slug = models.SlugField(max_length=255, blank=True)
-    sku_number = models.CharField(max_length=10)
+    sku_number = models.CharField(max_length=10, unique=True)
     description = models.TextField()
     quality = models.ForeignKey('Quality')
     category = models.ForeignKey('Category')

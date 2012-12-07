@@ -28,7 +28,7 @@ l    <style type="text/css">
       }
       /* menu Logo vamlingoblaget  */
       .leftside{
-        height: 20px;
+        height: 24px;
         padding-left: 100px;
         padding-top: 16px;
         margin-right: 100px;
@@ -188,7 +188,7 @@ top:-6px;">
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="">
-                         <a href="/products/">{% trans "Kollektion" %}</a>
+                         <a href="/products/type/klanning/">{% trans "Kollektion" %}</a>
                     </li>
                     <li class="">
                         <a href="/shop/">{% trans "Butik" %}</a>
@@ -201,6 +201,9 @@ top:-6px;">
                     </li>
                     <li class="">
                         <a href="/galleries/">{% trans "Gallerier" %}</a>
+                    </li>
+                    <li class="">
+                        <a href="/order/">{% trans "Beställ" %}</a>
                     </li>
                     <li class="">
                     </li>
@@ -242,10 +245,10 @@ top:-6px;">
               <abbr title="Phone">Tel:</abbr>0498-498080 <br/>
               info@vamlingbolaget.com
           </address>
-          <strong>Öppettider:</strong><br/>
+          <strong>{% trans "Öppettider:" %}</strong><br/>
           <strong>27 juni-14 augusti </strong><br/>
-          Vardagar kl. 11-18 <br/>
-          Lördagar kl. 11-15 <br/>
+          {% trans "Vardagar" %} 11-18 <br/>
+          {% trans "Lördagar" %} 11-15 <br/>
           <a href="/about/"> Om oss vamlingbolaget</a>
       </div>
       <div class="span4">
@@ -257,12 +260,15 @@ top:-6px;">
               info@vamlingbolaget.com
           </address>
           <strong>Öppettider:</strong><br/>
-          Vardagar kl. 11-18 <br/>
-          Lördagar kl. 11-15 <br/>
+          {% trans "Vardagar" %} 11-18 <br/>
+          {% trans "Lördagar" %}  <br/>
       </div>
 
       <div class="span4">
-         <strong> Nyheter </strong><br/>
+         <strong>{% trans "Nyheter" %}</strong><br/>
+
+          {% load news_extra %}
+
           {% for n in news %}
             <strong>{{n }} {{n.title}}</strong> <small>({{n.publish_at}})</small>
             <p>{{ n.body }}</p>

@@ -11,6 +11,7 @@ def first_page(request):
     images = Image.objects.filter(gallery=gallery)
     news = New.objects.filter(active=True).order_by('-publish_at')[:2]
 
+
     return render_to_response('frontpage/first_page.html',
         {'frontpage': frontpage,
          'gallery' : gallery,

@@ -11,9 +11,9 @@ class VariationImageInline(admin.StackedInline):
 class VariationAdmin(admin.ModelAdmin):
     model = Variation
     inlines = [VariationImageInline,]
-    list_display = ('active', 'article', 'pattern','color',)
+    list_display = ('active', 'article', 'pattern', 'color', 'order',)
     list_display_links = ('article',)
-    list_editable = ('active',)
+    list_editable = ('active', 'order')
     list_filter = ('active', 'article',)
     search_fields = ['article']
     list_per_page = 20

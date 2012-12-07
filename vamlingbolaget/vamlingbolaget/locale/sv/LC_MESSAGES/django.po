@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-25 17:01+0100\n"
+"POT-Creation-Date: 2012-12-06 23:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: dashboard.py:28
 #: lib/python2.7/site-packages/admin_tools/dashboard/dashboards.py:224
@@ -27,9 +26,8 @@ msgstr ""
 #: dashboard.py:34
 #: lib/python2.7/site-packages/admin_tools/dashboard/dashboards.py:230
 #: lib/python2.7/site-packages/grappelli/dashboard/dashboards.py:145
-#, fuzzy
 msgid "Return to site"
-msgstr "Visa på siten"
+msgstr ""
 
 #: dashboard.py:35
 #: lib/python2.7/site-packages/admin_tools/dashboard/dashboards.py:231
@@ -234,9 +232,10 @@ msgstr ""
 #: lib/python2.7/site-packages/guardian/templates/admin/guardian/model/obj_perms_manage_user.html:10
 #: lib/python2.7/site-packages/rosetta/templates/rosetta/languages.html:7
 #: lib/python2.7/site-packages/rosetta/templates/rosetta/pofile.html:21
+#: vb/vamlingbolaget/admin_copies/change_form.html:21
 #: vb/vamlingbolaget/theme/static/admin_copies/change_form.html:21
 msgid "Home"
-msgstr "Hem"
+msgstr ""
 
 #: lib/python2.7/site-packages/admin_tools/dashboard/templates/admin/app_index.html:11
 #: lib/python2.7/site-packages/django/contrib/admin/templates/admin/app_index.html:11
@@ -258,9 +257,10 @@ msgstr ""
 #: lib/python2.7/site-packages/grappelli/templates/admin/app_index.html:31
 #: lib/python2.7/site-packages/grappelli/templates/admin/change_form.html:111
 #: lib/python2.7/site-packages/grappelli/templates/admin/index.html:45
+#: vb/vamlingbolaget/admin_copies/change_form.html:24
 #: vb/vamlingbolaget/theme/static/admin_copies/change_form.html:24
 msgid "Add"
-msgstr "Lägg till"
+msgstr ""
 
 #: lib/python2.7/site-packages/admin_tools/dashboard/templates/admin_tools/dashboard/modules/app_list.html:14
 #: lib/python2.7/site-packages/admin_tools/dashboard/templates/admin_tools/dashboard/modules/model_list.html:12
@@ -368,6 +368,7 @@ msgid "Greek"
 msgstr ""
 
 #: lib/python2.7/site-packages/django/conf/global_settings.py:59
+#: vb/vamlingbolaget/vamlingbolaget/settings.py:243
 msgid "English"
 msgstr ""
 
@@ -520,9 +521,8 @@ msgid "Punjabi"
 msgstr ""
 
 #: lib/python2.7/site-packages/django/conf/global_settings.py:97
-#, fuzzy
 msgid "Polish"
-msgstr "publisera"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/conf/global_settings.py:98
 msgid "Portuguese"
@@ -561,6 +561,7 @@ msgid "Serbian Latin"
 msgstr ""
 
 #: lib/python2.7/site-packages/django/conf/global_settings.py:107
+#: vb/vamlingbolaget/vamlingbolaget/settings.py:242
 msgid "Swedish"
 msgstr ""
 
@@ -982,9 +983,10 @@ msgstr ""
 #: lib/python2.7/site-packages/grappelli/templates/admin/object_history.html:14
 #: lib/python2.7/site-packages/grappelli/templates/reversion/revision_form.html:11
 #: lib/python2.7/site-packages/guardian/templates/admin/guardian/model/change_form.html:8
+#: vb/vamlingbolaget/admin_copies/change_form.html:34
 #: vb/vamlingbolaget/theme/static/admin_copies/change_form.html:34
 msgid "History"
-msgstr "Historia"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/admin/templates/admin/change_form.html:35
 #: lib/python2.7/site-packages/django/contrib/admin/templates/admin/edit_inline/stacked.html:9
@@ -994,9 +996,10 @@ msgstr "Historia"
 #: lib/python2.7/site-packages/mptt/admin.py:221
 #: lib/python2.7/site-packages/mptt/admin.py:223
 #: lib/python2.7/site-packages/zinnia/admin/entry.py:153
+#: vb/vamlingbolaget/admin_copies/change_form.html:35
 #: vb/vamlingbolaget/theme/static/admin_copies/change_form.html:35
 msgid "View on site"
-msgstr "Visa på siten"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/admin/templates/admin/change_form.html:46
 #: lib/python2.7/site-packages/django/contrib/admin/templates/admin/change_list.html:69
@@ -1008,11 +1011,12 @@ msgstr "Visa på siten"
 #: lib/python2.7/site-packages/grappelli/templates/admin/change_list_filter_sidebar.html:207
 #: lib/python2.7/site-packages/grappelli/templates/admin/login.html:31
 #: lib/python2.7/site-packages/grappelli/templates/admin/auth/user/change_password.html:40
+#: vb/vamlingbolaget/admin_copies/change_form.html:46
 #: vb/vamlingbolaget/theme/static/admin_copies/change_form.html:46
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] "Rätta till felet nedan"
-msgstr[1] "Rätta till felen nedan"
+msgstr[0] ""
+msgstr[1] ""
 
 #: lib/python2.7/site-packages/django/contrib/admin/templates/admin/change_list.html:60
 #: lib/python2.7/site-packages/grappelli/templates/admin/change_list.html:143
@@ -1871,9 +1875,8 @@ msgid "groups"
 msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/auth/models.py:232
-#, fuzzy
 msgid "username"
-msgstr "användare"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/auth/models.py:233
 msgid ""
@@ -1951,12 +1954,11 @@ msgstr ""
 #: lib/python2.7/site-packages/userena/tests/profiles/models.py:32
 #: vb/vamlingbolaget/accounts/models.py:13
 msgid "user"
-msgstr "användare"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/auth/models.py:261
-#, fuzzy
 msgid "users"
-msgstr "användare"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/auth/views.py:93
 msgid "Logged out"
@@ -2115,9 +2117,8 @@ msgstr ""
 #: lib/python2.7/site-packages/photologue/models.py:140
 #: lib/python2.7/site-packages/photologue/models.py:204
 #: lib/python2.7/site-packages/photologue/models.py:512
-#, fuzzy
 msgid "is public"
-msgstr "publisera"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/comments/models.py:62
 msgid ""
@@ -2255,11 +2256,10 @@ msgid "Preview your comment"
 msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/comments/templates/comments/preview.html:11
-#, fuzzy
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] "Rätta till felet nedan"
-msgstr[1] "Rätta till felen nedan"
+msgstr[0] ""
+msgstr[1] ""
 
 #: lib/python2.7/site-packages/django/contrib/comments/templates/comments/preview.html:16
 #: lib/python2.7/site-packages/zinnia/templates/comments/zinnia/entry/form.html:6
@@ -2328,10 +2328,8 @@ msgstr ""
 #: lib/python2.7/site-packages/zinnia/models.py:71
 #: lib/python2.7/site-packages/zinnia/models.py:116
 #: lib/python2.7/site-packages/zinnia/admin/entry.py:82
-#: vb/vamlingbolaget/basic/blog/models.py:16
-#: vb/vamlingbolaget/basic/blog/models.py:39
 msgid "title"
-msgstr "titel"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/flatpages/models.py:9
 #: lib/python2.7/site-packages/zinnia/models.py:120
@@ -3282,7 +3280,7 @@ msgstr ""
 #: lib/python2.7/site-packages/django/contrib/localflavor/es/es_provinces.py:16
 #, fuzzy
 msgid "Castello"
-msgstr "hej"
+msgstr "Hello"
 
 #: lib/python2.7/site-packages/django/contrib/localflavor/es/es_provinces.py:17
 msgid "Ciudad Real"
@@ -4301,9 +4299,8 @@ msgid "Down"
 msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/localflavor/ie/ie_counties.py:17
-#, fuzzy
 msgid "Dublin"
-msgstr "publisera"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/localflavor/ie/ie_counties.py:18
 msgid "Fermanagh"
@@ -5272,9 +5269,8 @@ msgid "Kuyavia-Pomerania"
 msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/localflavor/pl/pl_voivodeships.py:10
-#, fuzzy
 msgid "Lublin"
-msgstr "publisera"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/contrib/localflavor/pl/pl_voivodeships.py:11
 msgid "Lubusz"
@@ -6616,7 +6612,7 @@ msgstr ""
 
 #: lib/python2.7/site-packages/django/db/models/fields/files.py:321
 #: lib/python2.7/site-packages/filebrowser/settings.py:122
-#: vb/vamlingbolaget/gallery/models.py:20
+#: vb/vamlingbolaget/vamlingbolaget/grappelli.py:125
 msgid "Image"
 msgstr ""
 
@@ -6730,9 +6726,9 @@ msgid "Order"
 msgstr ""
 
 #: lib/python2.7/site-packages/django/forms/models.py:571
-#, fuzzy, python-format
+#, python-format
 msgid "Please correct the duplicate data for %(field)s."
-msgstr "Rätta till felet nedan"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/forms/models.py:575
 #, python-format
@@ -6747,9 +6743,8 @@ msgid ""
 msgstr ""
 
 #: lib/python2.7/site-packages/django/forms/models.py:589
-#, fuzzy
 msgid "Please correct the duplicate values below."
-msgstr "Rätta till felet nedan"
+msgstr ""
 
 #: lib/python2.7/site-packages/django/forms/models.py:849
 msgid "The inline foreign key did not match the parent instance primary key."
@@ -7375,18 +7370,22 @@ msgstr ""
 #: lib/python2.7/site-packages/filebrowser/settings.py:121
 #: lib/python2.7/site-packages/filebrowser/templates/filebrowser/include/tableheader.html:21
 #: lib/python2.7/site-packages/filebrowser/templates/filebrowser/include/tableheader.html:22
+#: vb/vamlingbolaget/vamlingbolaget/grappelli.py:124
 msgid "Folder"
 msgstr ""
 
 #: lib/python2.7/site-packages/filebrowser/settings.py:123
+#: vb/vamlingbolaget/vamlingbolaget/grappelli.py:126
 msgid "Video"
 msgstr ""
 
 #: lib/python2.7/site-packages/filebrowser/settings.py:124
+#: vb/vamlingbolaget/vamlingbolaget/grappelli.py:127
 msgid "Document"
 msgstr ""
 
 #: lib/python2.7/site-packages/filebrowser/settings.py:125
+#: vb/vamlingbolaget/vamlingbolaget/grappelli.py:128
 msgid "Audio"
 msgstr ""
 
@@ -7444,9 +7443,8 @@ msgstr ""
 
 #: lib/python2.7/site-packages/filebrowser/templates/filebrowser/createdir.html:23
 #: lib/python2.7/site-packages/filebrowser/templates/filebrowser/detail.html:47
-#, fuzzy
 msgid "Please correct the following errors."
-msgstr "Rätta till felet nedan"
+msgstr ""
 
 #: lib/python2.7/site-packages/filebrowser/templates/filebrowser/createdir.html:36
 #: lib/python2.7/site-packages/filebrowser/templates/filebrowser/upload.html:140
@@ -7705,9 +7703,8 @@ msgstr ""
 
 #: lib/python2.7/site-packages/grappelli/templates/admin/edit_inline/stacked.html:24
 #: lib/python2.7/site-packages/grappelli/templates/admin/edit_inline/tabular.html:64
-#, fuzzy
 msgid "View on Site"
-msgstr "Visa på siten"
+msgstr ""
 
 #: lib/python2.7/site-packages/grappelli/templates/admin/edit_inline/stacked.html:26
 #: lib/python2.7/site-packages/grappelli/templates/admin/edit_inline/tabular.html:66
@@ -7818,9 +7815,8 @@ msgstr ""
 #: lib/python2.7/site-packages/guardian/templates/admin/guardian/contrib/grappelli/obj_perms_manage.html:92
 #: lib/python2.7/site-packages/guardian/templates/admin/guardian/model/obj_perms_manage.html:27
 #: lib/python2.7/site-packages/guardian/templates/admin/guardian/model/obj_perms_manage.html:81
-#, fuzzy
 msgid "Please correct the errors below."
-msgstr "Rätta till felet nedan"
+msgstr ""
 
 #: lib/python2.7/site-packages/guardian/templates/admin/guardian/contrib/grappelli/obj_perms_manage.html:36
 #: lib/python2.7/site-packages/guardian/templates/admin/guardian/model/obj_perms_manage.html:31
@@ -8103,14 +8099,12 @@ msgid ""
 msgstr ""
 
 #: lib/python2.7/site-packages/photologue/models.py:135
-#, fuzzy
 msgid "date published"
-msgstr "publisera"
+msgstr ""
 
 #: lib/python2.7/site-packages/photologue/models.py:137
-#, fuzzy
 msgid "title slug"
-msgstr "titel"
+msgstr ""
 
 #: lib/python2.7/site-packages/photologue/models.py:138
 msgid "A \"slug\" is a unique URL-friendly title for an object."
@@ -8145,9 +8139,8 @@ msgid "gallery"
 msgstr ""
 
 #: lib/python2.7/site-packages/photologue/models.py:150
-#, fuzzy
 msgid "galleries"
-msgstr "kategorier"
+msgstr ""
 
 #: lib/python2.7/site-packages/photologue/models.py:190
 msgid "count"
@@ -8222,8 +8215,6 @@ msgid "An \"admin_thumbnail\" photo size has not been defined."
 msgstr ""
 
 #: lib/python2.7/site-packages/photologue/models.py:508
-#: vb/vamlingbolaget/basic/blog/models.py:17
-#: vb/vamlingbolaget/basic/blog/models.py:40
 msgid "slug"
 msgstr ""
 
@@ -8788,6 +8779,7 @@ msgstr ""
 #: lib/python2.7/site-packages/userena/forms.py:156
 #: lib/python2.7/site-packages/userena/templates/userena/profile_detail.html:34
 #: lib/python2.7/site-packages/zinnia/templates/comments/comment_notification_email.txt:2
+#: vb/vamlingbolaget/checkout/models.py:15
 #: vb/vamlingbolaget/theme/templates/userena/profile_detail.html:34
 msgid "Email"
 msgstr ""
@@ -8882,8 +8874,9 @@ msgid "The last date that the user was active."
 msgstr ""
 
 #: lib/python2.7/site-packages/userena/models.py:54
+#, fuzzy
 msgid "activation key"
-msgstr ""
+msgstr "mjau"
 
 #: lib/python2.7/site-packages/userena/models.py:58
 msgid "notification send"
@@ -8998,14 +8991,12 @@ msgid "Message"
 msgstr ""
 
 #: lib/python2.7/site-packages/userena/contrib/umessages/models.py:17
-#, fuzzy
 msgid "from user"
-msgstr "användare"
+msgstr ""
 
 #: lib/python2.7/site-packages/userena/contrib/umessages/models.py:20
-#, fuzzy
 msgid "to user"
-msgstr "användare"
+msgstr ""
 
 #: lib/python2.7/site-packages/userena/contrib/umessages/models.py:24
 msgid "latest message"
@@ -9053,7 +9044,6 @@ msgid "%(message)s"
 msgstr ""
 
 #: lib/python2.7/site-packages/userena/contrib/umessages/models.py:90
-#: vb/vamlingbolaget/basic/blog/models.py:42
 msgid "body"
 msgstr ""
 
@@ -9125,7 +9115,7 @@ msgstr ""
 #: lib/python2.7/site-packages/userena/templates/userena/activate_fail.html:4
 #: vb/vamlingbolaget/theme/templates/userena/activate_fail.html:4
 msgid "Account activation failed."
-msgstr ""
+msgstr "mjau"
 
 #: lib/python2.7/site-packages/userena/templates/userena/activate_fail.html:5
 #: vb/vamlingbolaget/theme/templates/userena/activate_fail.html:5
@@ -9240,7 +9230,7 @@ msgstr ""
 #: vb/vamlingbolaget/theme/templates/userena/profile_detail.html:15
 #: vb/vamlingbolaget/theme/templates/userena/profile_form.html:12
 msgid "View profile"
-msgstr "Visa profilen"
+msgstr ""
 
 #: lib/python2.7/site-packages/userena/templates/userena/email_form.html:10
 #: lib/python2.7/site-packages/userena/templates/userena/password_form.html:12
@@ -9708,21 +9698,18 @@ msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/models.py:77
 #: lib/python2.7/site-packages/zinnia/admin/forms.py:19
-#, fuzzy
 msgid "parent category"
-msgstr "kategori"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/models.py:102
-#: vb/vamlingbolaget/basic/blog/models.py:20
 msgid "category"
-msgstr "kategori"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/models.py:103
 #: lib/python2.7/site-packages/zinnia/models.py:125
 #: lib/python2.7/site-packages/zinnia/admin/forms.py:47
-#: vb/vamlingbolaget/basic/blog/models.py:21
 msgid "categories"
-msgstr "kategorier"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/models.py:112
 msgid "draft"
@@ -9733,9 +9720,8 @@ msgid "hidden"
 msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/models.py:114
-#, fuzzy
 msgid "published"
-msgstr "publisera"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/models.py:119
 msgid "used for illustration"
@@ -9771,9 +9757,8 @@ msgid "linkback enabled"
 msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/models.py:143
-#, fuzzy
 msgid "creation date"
-msgstr "skapad"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/models.py:145
 msgid "last update"
@@ -9792,9 +9777,8 @@ msgid "end publication"
 msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/models.py:151
-#, fuzzy
 msgid "date end publish"
-msgstr "publisera"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/models.py:153
 msgid "sites publication"
@@ -9876,9 +9860,8 @@ msgid "author(s)"
 msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/admin/entry.py:108
-#, fuzzy
 msgid "category(s)"
-msgstr "kategori"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/admin/entry.py:120
 msgid "tag(s)"
@@ -9985,9 +9968,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: lib/python2.7/site-packages/zinnia/admin/forms.py:20
-#, fuzzy
 msgid "No parent category"
-msgstr "kategori"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/admin/forms.py:34
 msgid "A category cannot be parent of itself."
@@ -9998,9 +9980,8 @@ msgstr ""
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/category_list.html:6
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/sitemap.html:52
 #: lib/python2.7/site-packages/zinnia/templatetags/zbreadcrumbs.py:53
-#, fuzzy
 msgid "Categories"
-msgstr "Kategorier"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/403.html:6
 msgid "Error 403"
@@ -10211,20 +10192,17 @@ msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/admin/zinnia/widgets/draft_entries.html:6
 #: lib/python2.7/site-packages/zinnia/templates/admin/zinnia/widgets/draft_entries.html:8
-#, fuzzy
 msgid "Draft entries"
-msgstr "kategorier"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/admin/zinnia/widgets/quickpost.html:6
 #: lib/python2.7/site-packages/zinnia/templates/admin/zinnia/widgets/quickpost.html:7
-#, fuzzy
 msgid "Quick publishing"
-msgstr "publisera"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/admin/zinnia/widgets/quickpost.html:10
-#, fuzzy
 msgid "Title"
-msgstr "titel"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/admin/zinnia/widgets/quickpost.html:34
 msgid "Save as draft"
@@ -10235,9 +10213,8 @@ msgid "Reset"
 msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/admin/zinnia/widgets/quickpost.html:36
-#, fuzzy
 msgid "Publish"
-msgstr "publisera"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/admin/zinnia/widgets/recent_comments.html:6
 #: lib/python2.7/site-packages/zinnia/templates/admin/zinnia/widgets/recent_comments.html:8
@@ -10281,11 +10258,10 @@ msgid "Comment preview"
 msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/comments/zinnia_entry_preview.html:10
-#, fuzzy
 msgid "Please correct following error."
 msgid_plural "Please correct following errors."
-msgstr[0] "Rätta till felet nedan"
-msgstr[1] "Rätta till felen nedan"
+msgstr[0] ""
+msgstr[1] ""
 
 #: lib/python2.7/site-packages/zinnia/templates/comments/zinnia_entry_preview.html:12
 msgid "Preview of the comment"
@@ -10457,16 +10433,14 @@ msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/category_list.html:4
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/category_list.html:11
-#, fuzzy
 msgid "Category list"
-msgstr "kategorier"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/category_list.html:28
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/sitemap.html:62
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/tags/categories.html:16
-#, fuzzy
 msgid "No categories yet."
-msgstr "kategorier"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_archive_day.html:17
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_archive_today.html:17
@@ -10580,9 +10554,8 @@ msgid "Latest entries for"
 msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_list.html:5
-#, fuzzy
 msgid "the category"
-msgstr "kategori"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_list.html:5
 msgid "the tag"
@@ -10598,9 +10571,8 @@ msgid "page"
 msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_list.html:20
-#, fuzzy
 msgid "Category"
-msgstr "kategori"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_list.html:20
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_search.html:5
@@ -10634,9 +10606,8 @@ msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_list.html:69
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_list.html:70
-#, fuzzy
 msgid "Edit the category"
-msgstr "kategori"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_list.html:76
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/entry_list.html:77
@@ -10720,9 +10691,8 @@ msgid "Sitemap"
 msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/sitemap.html:12
-#, fuzzy
 msgid "Entries per categories"
-msgstr "kategorier"
+msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/templates/zinnia/sitemap.html:33
 msgid "All the entries"
@@ -10835,75 +10805,181 @@ msgid "User cannot %s."
 msgstr ""
 
 #: lib/python2.7/site-packages/zinnia/xmlrpc/pingback.py:97
-#, fuzzy
 msgid "No title"
-msgstr "titel"
-
-#: vb/vamlingbolaget/basic/blog/models.py:36
-msgid "Draft"
 msgstr ""
 
-#: vb/vamlingbolaget/basic/blog/models.py:37
-msgid "Public"
+#: vb/vamlingbolaget/checkout/models.py:13
+msgid "Namn"
 msgstr ""
 
-#: vb/vamlingbolaget/basic/blog/models.py:43
-msgid "tease"
+#: vb/vamlingbolaget/checkout/models.py:14
+msgid "Efternamn"
 msgstr ""
 
-#: vb/vamlingbolaget/basic/blog/models.py:43
-msgid "Concise text suggested. Does not appear in RSS feed."
+#: vb/vamlingbolaget/checkout/models.py:16
+msgid "Telefonnummer"
 msgstr ""
 
-#: vb/vamlingbolaget/basic/blog/models.py:44
-msgid "status"
+#: vb/vamlingbolaget/checkout/models.py:17
+msgid "Gatuadress"
 msgstr ""
 
-#: vb/vamlingbolaget/basic/blog/models.py:45
-msgid "allow comments"
+#: vb/vamlingbolaget/checkout/models.py:18
+msgid "Postort"
 msgstr ""
 
-#: vb/vamlingbolaget/basic/blog/models.py:46
-msgid "publish"
-msgstr "publisera"
-
-#: vb/vamlingbolaget/basic/blog/models.py:47
-msgid "created"
-msgstr "skapad"
-
-#: vb/vamlingbolaget/basic/blog/models.py:48
-msgid "modified"
-msgstr "modifierad"
-
-#: vb/vamlingbolaget/basic/blog/models.py:54
-msgid "post"
+#: vb/vamlingbolaget/checkout/models.py:19
+msgid "Postnummer"
 msgstr ""
 
-#: vb/vamlingbolaget/basic/blog/models.py:55
-msgid "posts"
-msgstr "poster"
-
-#: vb/vamlingbolaget/basic/blog/models.py:87
-#: vb/vamlingbolaget/basic/blog/models.py:88
-msgid "blog roll"
+#: vb/vamlingbolaget/checkout/models.py:20
+msgid "Land"
 msgstr ""
 
-#: vb/vamlingbolaget/theme/templates/base.html:147
-msgid "Katten"
+#: vb/vamlingbolaget/checkout/models.py:21
+msgid "Meddelande"
 msgstr ""
 
-#: vb/vamlingbolaget/theme/templates/base.html:157
+#: vb/vamlingbolaget/checkout/models.py:22
+msgid "Ip"
+msgstr ""
+
+#: vb/vamlingbolaget/checkout/models.py:27
+msgid "Session key"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/base.html:191
+#: vb/vamlingbolaget/theme/templates/variation/index.html:6
 msgid "Kollektion"
 msgstr ""
 
-#: vb/vamlingbolaget/theme/templates/base.html:163
+#: vb/vamlingbolaget/theme/templates/base.html:194
+msgid "Butik"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/base.html:197
+#: vb/vamlingbolaget/theme/templates/base.html:265
 msgid "Nyheter"
 msgstr ""
 
-#: vb/vamlingbolaget/theme/templates/base.html:166
-msgid "Gallerier"
+#: vb/vamlingbolaget/theme/templates/base.html:200
+msgid "Om oss"
 msgstr ""
 
 #: vb/vamlingbolaget/theme/templates/base.html:203
-msgid "hello"
-msgstr "hej"
+msgid "Gallerier"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/base.html:245
+msgid "Öppettider:"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/base.html:247
+#: vb/vamlingbolaget/theme/templates/base.html:260
+msgid "Vardagar"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/base.html:248
+#: vb/vamlingbolaget/theme/templates/base.html:261
+msgid "Lördagar"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:5
+msgid "Kategorier"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:12
+msgid "Kvaliter"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:19
+msgid "Överskikt"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:21
+#: vb/vamlingbolaget/theme/templates/variation/combos.html:5
+msgid "Färger och Mönster"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/blog/index.html:5
+msgid "Nyheter och Blog"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:6
+msgid "Du editerar beställningspost"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:17
+msgid "Artikelnummer"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:19
+msgid "Kvalitet"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:21
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:31
+#: vb/vamlingbolaget/theme/templates/variation/index.html:19
+msgid "Pris"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:32
+msgid "Plagget går att få i alla"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:32
+msgid "mönster och färger"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:46
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:25
+msgid "Färg"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:57
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:28
+msgid "Mönster"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:68
+msgid "Storlek"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:4
+msgid "Din Shoppinglåda"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:13
+msgid "Antal"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:16
+msgid "Ta bort"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:19
+msgid "Ändra"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:22
+msgid "Artikel"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:7
+msgid "Fortsätt att utforska utbudet!"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:12
+msgid "Ordernummer"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:13
+msgid "En bekräftelse på din beställing har skickats till"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:15
+msgid "Vi hör av oss om vi har några frågor"
+msgstr ""
+
+#~ msgid "hello"
+#~ msgstr "Hello"

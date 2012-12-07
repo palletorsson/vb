@@ -1,9 +1,9 @@
-# -*- coding: utf8 -*- 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
-from cart.views import _cart_id, totalsum,  _new_cart_id
+from django.core import mail
+from cart.views import _cart_id, totalsum, _new_cart_id
             
 from cart.models import Cart
 from forms import CheckoutForm
@@ -27,27 +27,37 @@ def checkout(request):
 
             new_order.ip = request.META['REMOTE_ADDR']
             new_order.status = 'O'
-            msg = "> ORDER:\n"
+            name = request.POST['first_name']
+            l_name = request.POST['last_name']
+
+            msg = "> Order Vamlingbolaget:\n"
+            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
             i = 1
+            msg = u'Ditt Namn: %s  %s \n' % (name, l_name)
+            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
             for item in cartitems:
                 msg = msg + '>> ' + item.article.name + ' (' + item.article.sku_number + ') \n'
                 msg = msg + '>> i ' + item.pattern.name + ', ' + item.color.name + ' \n'
                 msg = msg + '>> Antal : ' + str(item.quantity) + ' \n'
                 msg = msg + '>> Pris per plagg: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
-
-            msg = msg + '------------------------------------------------------\n'
+            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
             msg = msg + '>> Frakt och Hantering: 40 SEK \n'
-            msg = msg + '------------------------------------------------------\n'
-            msg = msg + '>>> Totalpris: ' + str(totalprice) +  ' SEK \n'
-
+            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
+            msg = msg + '>>> Totalpris: %s SEK \n' %str(totalprice)
+            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
+            msg = msg + '>> En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
+            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
+            msg = msg + '>> Du betalar med postforskatt \n'
+            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
+            msg = msg + '> Tack!'
 
             new_order.order_number = random.randrange(0, 111111, 3)
             new_order.session_key = _cart_id(request)
             new_order.order = msg
             new_order.save()
-
-            send_mail('Din beställning från Vamlingbolaget', 'Tack för din beställning, den är som följer \n %s' %msg, '23ctest@gmail.com', [request.POST['email']])
+            to = [request.POST['email'],]
+            mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
             return HttpResponseRedirect('thanks/')
 

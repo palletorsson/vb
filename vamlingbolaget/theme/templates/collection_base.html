@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 {% load i18n %}
-
 {% block sidebar %}
     <ul class="" style="margin-left: -10px;">
-        <h5>Kategorier</h5>
+        <h5>{% trans "Kategorier" %}</h5>
         {% for type in types %}
             <li>
                 <a href="/products/type/{{type.slug}}"> {{ type.name }} </a>
             </li>
         {% endfor %}
         <br/>
-        <h5>Kvaliter</h5>
+        <h5>{% trans "Kvaliter" %}</h5>
         {% for quality in qualities %}
             <li>
                 <a href="/products/quality/{{quality.slug}}"> {{ quality.name }} </a>
             </li>
         {% endfor %}
+        <br/>
+        <h5>{% trans "Överskikt" %}</h5>
         <li>
              <a href="/patternandcolor/">{% trans "Färger och Mönster" %} </a>
         </li>
