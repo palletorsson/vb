@@ -2,7 +2,7 @@
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {% block pagetitle %}
-	<legend><a href="/products/">Kollektion</a> / {{ product.name }} </legend>
+	<legend><a href="/products/type/klanning/">Kollektion</a> / {{ product.article.name }} </legend>
 {% endblock %}
 
 
@@ -76,7 +76,7 @@
         <span style="padding-left: 10px;"><img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" /></span>
         <div style="clear: both;"></div>
         <hr/>
-        <div id="changetext">
+        <div class="small" id="changetext">
 
         </div>
 
@@ -212,10 +212,17 @@
             success: function(data){
                 var msg = data.message.msg,
                     _ = data.cartitem;
-                $("#changetext").text( msg + _.quantity +" "+ _.article + ". Mönster: " + _.pattern + " Färg: "+ _.color+" Storlek: "+ _.size);
+                $("#changetext")
+                  .html( msg +'<table>' +
+                        '<tr><th>Antal</th><th>Plagg</th><th>Mönster</th><th>Färg</th><th>Storlek</th></tr>' +
+                        '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ _.pattern+'</td>' +
+                        '<td>'+ _.color +'</td><td>'+ _.size+'</td></tr></table>' +
+                        'i din <a href="/cart/show/">shoppinglåda</a>')
+                  .css({'font-size':'11px'})
 
             }
         });
+
 
 
     });

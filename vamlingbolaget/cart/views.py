@@ -69,15 +69,16 @@ def addtocart(request):
             cartitem.color = color_db
             cartitem.quantity = quantity
             cartitem.save()
-            msg = u'Du har andrat till: '
-
+            msg = u'Du har andrat till: </br>'
+            print '0'
         elif (existing_cartitems):
             for item in existing_cartitems:
                 if (str(item.article.sku_number) == str(sku) and str(item.pattern.order) == str(pattern) and str(item.color.order) == str(color) and str(item.size.pk) == str(size)):
                     item.quantity = item.quantity + quantity
                     item.save()
-                    msg = u'Du la till ytterligare %s av denna %s och har nu: ' %(quantity, article_db.name)
+                    msg = u'Du la till ytterligare %s %s och har nu: <br/>' %(quantity, article_db.name)
                     quantity = item.quantity
+                    print '1'
                 else:
                     cartitem = CartItem.objects.create(cart = cart)
                     cartitem.article = article_db
@@ -86,7 +87,8 @@ def addtocart(request):
                     cartitem.color = color_db
                     cartitem.quantity = quantity
                     cartitem.save()
-                    msg = u'Du la till: '
+                    msg = u'Du har lagt till: <br/>'
+                    print '2'
 
         else:
             cartitem = CartItem.objects.create(cart = cart)
@@ -96,7 +98,8 @@ def addtocart(request):
             cartitem.color = color_db
             cartitem.quantity = quantity
             cartitem.save()
-            msg = u'Du la till: '
+            msg = u'Du har lagt till: <br/>'
+            print '3'
 
 
 

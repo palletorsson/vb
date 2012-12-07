@@ -3,7 +3,7 @@
 {% version model.field_name version_prefix %}
 {% load i18n %}
 {% block pagetitle %}
-	<legend>{% trans "Du editerar beställningspost" %} : <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
+	<legend>{% trans "Du ändrar nu din beställning av" %}: <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
 {% endblock %}
 
 
@@ -62,18 +62,18 @@
 	    <select  class="changonselect"  id='size'>
 		{% for size in sizes %}
 			<option value="{{ size.pk }}"
-            {% if size.order == cartitem.size.order %}
-            selected="selected"
-            {%endif%}
+                {% if size.order == 1 %}
+                   selected="selected"
+                {%endif%}
             > {% trans "Storlek" %}: {{ size.name }} </option>changonselect
 
 		{% endfor %}
 	    </select>
         <select  class="changonselect"  id='quantity_pk'>
-            <option {%if cartitem.quantity == 1 %} selected="selected" {%endif%} value="1">{% trans Antal %}: 1 </option>
-            <option {%if cartitem.quantity == 2 %} selected="selected" {%endif%} value="2">{% trans Antal %}: 2 </option>
-            <option {%if cartitem.quantity == 3 %} selected="selected" {%endif%} value="3">{% trans Antal %}: 3 </option>
-            <option {%if cartitem.quantity == 4 %} selected="selected" {%endif%} value="4">{% trans Antal %}: 4 </option>
+            <option {%if cartitem.quantity == 1 %} selected="selected" {%endif%} value="1">{% trans "Antal" %}: 1 </option>
+            <option {%if cartitem.quantity == 2 %} selected="selected" {%endif%} value="2">{% trans "Antal" %}: 2 </option>
+            <option {%if cartitem.quantity == 3 %} selected="selected" {%endif%} value="3">{% trans "Antal" %}: 3 </option>
+            <option {%if cartitem.quantity == 4 %} selected="selected" {%endif%} value="4">{% trans "Antal" %}: 4 </option>
         </select>
 
         </div>
@@ -94,7 +94,7 @@
         </div>
         <div id='addtocart' style="display:block;">
         <span style="padding-left: 30px;">
-            <button class="btn btn-success" type="button">{% trans Uppdatera %}</button></span>
+            <button class="btn btn-success" type="button">{% trans "Uppdatera" %}</button></span>
         </div>
         <hr/>
     </div>
@@ -169,7 +169,7 @@
         $(".changonselect option:selected").each(function () {
             str += $(this).text() + " ";
             if (once == 1) {
-            str += " och ";
+                str += " och ";
             }
             once = 2;
             pattern_id = $("#pattern").val();
@@ -178,7 +178,6 @@
             quantity = $("#quantity_pk").val();
             img = folder+color_id+"f_"+pattern_id+"m.jpg";
         });
-
         $("#changetext").text(str);
         $("#pattern_color_image").attr("src", img);
     });
