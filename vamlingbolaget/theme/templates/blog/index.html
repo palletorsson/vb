@@ -21,9 +21,8 @@
 <hr/>
 {% if posts %}
     {% for post in posts %}
-        <strong><a href="{{ post.slug }}/"> {{ post.title }} </a></strong>
+        <strong><a href="{{ post.slug }}/"> {{ post.title }} </a></strong><br/>
             <small>| ( {{ post.created }} ) </small>
-                <hr/>
                 <div class="post_body">
 				    {{ post.body|safe|linebreaks|truncatewords:50}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
                     <div>
