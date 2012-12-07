@@ -13,18 +13,26 @@
 <hr/>
 {% if posts %}
     {% for post in posts %}
-        <h3> {{ post.title }} </h3>
-            <small> ( {{ post.created }} ) </small>
-                <hr />
-                <div class="post_body">
-                    {% ifequal post.blog.id  1 %}
+                    {% ifequal post.blog.id 1 %}
+                    <h3> {{ post.title }} </h3>
+                    <small> ( {{ post.created }} ) </small>
+                    <hr />
+                    <div class="post_body">
                     {{ post.body|safe|linebreaks|truncatewords:150}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
+                        <div>
+                        </div>
                     {% else %}
-                    {{ post.body|safe|linebreaks}}
+                        <h4> {{ post.title }} </h4>
+                        <small> ( {{ post.created }} ) </small>
+                        <hr />
+                        <div class="post_body">
+
+                        {{ post.body|safe|linebreaks}}
+                        <div>
+                       </div>
+
                     {% endifequal %}
 
-                    <div>
-                </div>
                 <div class="tags">
                     {% if tag in post.tags.all %}
                     {{ tag }} {% if not forloop.last %}, {% endif %}
