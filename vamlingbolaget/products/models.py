@@ -100,7 +100,7 @@ class Article(TimeStampedActivate):
     """
     name = models.CharField(max_length=160)
     slug = models.SlugField(max_length=255, blank=True)
-    sku_number = models.CharField(max_length=10)
+    sku_number = models.CharField(max_length=10, unique=True)
     description = models.TextField()
     quality = models.ForeignKey('Quality')
     category = models.ForeignKey('Category')
