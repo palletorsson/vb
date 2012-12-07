@@ -25,7 +25,13 @@
             <small>| ( {{ post.created }} ) </small>
                 <hr/>
                 <div class="post_body">
-				    {{ post.body|safe|linebreaks }}
+				    {{ post.body|safe|linebreaks|truncatewords:99 }}
+                    <div>
+                    <br/>
+                    ...
+                    <br/>
+                    <a href="{{ post.slug }}/"> läs mer </a></strong>
+                </div>
 			    </div>
                 <div class="tags">
                     {% if tag in post.tags.all %}
