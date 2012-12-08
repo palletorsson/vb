@@ -160,7 +160,7 @@
         if (quality == 'plysch') {
             var value = $(this).val()
             console.log(value);
-            if (value < 29) {
+            if (value > 29) {
                 console.log(quality);
                 $("#color").children().removeAttr('selected');
                 $("#pattern").children().removeAttr('selected');
