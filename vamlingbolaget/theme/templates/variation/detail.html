@@ -159,15 +159,11 @@
         var quality = $(".quality").text();
         if (quality == 'plysch') {
             var value = $(this).val()
-            console.log(value);
-            if (value > 29) {
                 console.log(quality);
                 $("#color").children().removeAttr('selected');
                 $("#pattern").children().removeAttr('selected');
-
                 $("#color_"+value+"").attr('selected', 'selected');
                 $("#pattern_"+value+"").attr('selected', 'selected');
-            }
         }
         $('#fadeifchangeorder').fadeTo(500,0.6);
         var str = "Beställ "+"{{ product.article.name }}"+ " i ",
