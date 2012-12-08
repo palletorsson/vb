@@ -39,7 +39,7 @@
                 {% if color.order == product.color.order %}
                     selected="selected"
                 {%endif%}
-                id="color_{{color.order }}">
+                id="color_{{ color.order }}">
             Färg: {{ color.name }} </option>
         {% endfor %}
 	    </select> 	    
@@ -161,8 +161,8 @@
         if (quality == 'plysch') {
             var value = $(this).val();
                 console.log(value);
-                $("#color").children().removeAttr('selected');
-                $("#pattern").children().removeAttr('selected');
+                $("#color").children().prop("selected", false);
+                $("#pattern").children().prop("selected", false);
                 $("#color_"+value+"").attr('selected', 'selected');
                 $("#pattern_"+value+"").attr('selected', 'selected');
         }
