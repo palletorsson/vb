@@ -34,9 +34,9 @@ class ArticleAdmin(TranslationAdmin):
 class ColorAdmin(TranslationAdmin):
     model = Color
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name', 'order',)
+    list_display = ('active', 'name', 'order', 'quality',)
     list_display_links = ('name',)
-    list_editable = ('active', 'order',)
+    list_editable = ('active', 'order', 'quality',)
     list_filter = ('active',)
     ordering = ['order', 'name',]
 
@@ -44,14 +44,18 @@ class ColorAdmin(TranslationAdmin):
 class PatternAdmin(TranslationAdmin):
     model = Pattern
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name', 'order')
+    list_display = ('active', 'name', 'order', 'quality',)
     list_display_links = ('name',)
-    list_editable = ('active', 'order',)
+    list_editable = ('active', 'order', 'quality',)
     list_filter = ('active',)
     ordering = ['order', 'name',]
 
 class SizeAdmin(admin.ModelAdmin):
     model = Size
+    list_display = ('name', 'quality',)
+    list_display_links = ('name',)
+    list_editable = ('quality',)
+    list_filter = ('quality',)
 
 class QualityAdmin(TranslationAdmin):
     model = Quality

@@ -161,10 +161,10 @@
         if (quality == 'plysch') {
             var value = $(this).val();
                 console.log(value);
-                $("#color").children().prop("selected", false);
-                $("#pattern").children().prop("selected", false);
-                $("#color_"+value+"").attr('selected', 'selected');
-                $("#pattern_"+value+"").attr('selected', 'selected');
+                $("#color").children().find("option").removeAttr('selected')
+                $("#pattern").children().find("option").removeAttr('selected')
+                $("#color_"+value+"").attr('selected', true);
+                $("#pattern_"+value+"").attr('selected', true);
         }
         $('#fadeifchangeorder').fadeTo(500,0.6);
         var str = "Beställ "+"{{ product.article.name }}"+ " i ",
