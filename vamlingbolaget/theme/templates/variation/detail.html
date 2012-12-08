@@ -24,7 +24,7 @@
             <strong>{{ product.article.name }} </strong><br>
             Artikelnummer: <span id="sku_number">{{ product.article.sku_number }}</span><br/><br/>
 
-            Kvalitet: {{ product.article.quality }}<br>
+            Kvalitet: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span><br/>
             {{ product.article.quality.description }}
 
         </div>
@@ -38,7 +38,8 @@
 			<option value="{{ color.order }}"
                 {% if color.order == product.color.order %}
                     selected="selected"
-                {%endif%} >
+                {%endif%}
+                id="color_{{color.order }}">
             Färg: {{ color.name }} </option>
         {% endfor %}
 	    </select> 	    
@@ -49,7 +50,7 @@
             {% if pattern.order == product.pattern.order %}
                 selected="selected"
             {%endif%}
-            >
+            id="pattern_{{ pattern.order }}">
             Mönster: {{ pattern.name }}</option>
 		{% endfor %}
 	    </select>
@@ -155,10 +156,20 @@
 */
 
     $(".changonselect").change(function () {
+        var quality = $(".quality").text();
+        if (quality == 'plysch') {
+            var value = $(this).val()
+            console.log(value);
+            if (value < 29) {
+                console.log(quality);
+                $("#color").children().removeAttr('selected');
+                $("#pattern").children().removeAttr('selected');
 
+                $("#color_"+value+"").attr('selected', 'selected');
+                $("#pattern_"+value+"").attr('selected', 'selected');
+            }
+        }
         $('#fadeifchangeorder').fadeTo(500,0.6);
-
-
         var str = "Beställ "+"{{ product.article.name }}"+ " i ",
             folder = "{{MEDIA_URL}}uploads/120/",
             img = "";
@@ -169,7 +180,9 @@
                 if (once == 1) {
                 str += " och ";
             }
+
             once = 2;
+
             pattern_id = $("#pattern").val();
             color_id = $("#color").val();
             size_id = $("#size").val();
