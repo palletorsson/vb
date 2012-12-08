@@ -157,8 +157,9 @@
 
     $(".changonselect").change(function () {
         var quality = $(".quality").text();
+        console.log(quality);
         if (quality == 'plysch') {
-            var value = $(this).val()
+            var value = $(this).val();
                 console.log(quality);
                 $("#color").children().removeAttr('selected');
                 $("#pattern").children().removeAttr('selected');
