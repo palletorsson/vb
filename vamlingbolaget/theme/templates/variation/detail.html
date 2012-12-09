@@ -37,7 +37,7 @@
             {% for color in colors %}
             <img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="80" />
             <label class="radio inline">
-                <input type="radio" name="radio" id="optionsRadios1" value="{{ color.order }}" >
+                <input type="radio" name="radio" id="radio_{{ color.order }}" value="{{ color.order }}" >
             </label>
             {% endfor %}
 <br /> <input id="hidden_colorpattern" type="hidden" value="">
@@ -156,7 +156,7 @@
         })
 
 /*
-    var sku_number = $('#sku_number').text(),
+        var sku_number = $('#sku_number').text(),
         cart = $('#sku_number').text(),
         pattern_id = $('#pattern option:selected').val(),
         color_id = +$('#color option:selected').val(),
@@ -165,6 +165,10 @@
         quantity = $('#quantiy_pk option:selected').val();
 
 */
+        var first_color_id = "{{ product.color.order }}";
+        $('input[name="radio"]'+" #radio_"+first_color_id).attr('checked',true);
+        $('#hidden_colorpattern').val(first_color_id);
+
         $('input[name="radio"]').change(function () {
                 $('input[name="radio"]').click(function() {
                     $('#hidden_colorpattern').val(this.value);
