@@ -27,30 +27,47 @@ def checkout(request):
 
             new_order.ip = request.META['REMOTE_ADDR']
             new_order.status = 'O'
-            name = request.POST['first_name']
-            l_name = request.POST['last_name']
+            first_name = str(request.POST['first_name'])
+            last_name = str(request.POST['last_name'])
+            street = request.POST['street']
+            postcode = int(request.POST['postcode'])
+            city = request.POST['city']
+            if (request.POST['country']):
+                country = request.POST['country']
+            if (request.POST['message']):
+                message = request.POST['message']
 
-            msg = "> Order Vamlingbolaget:\n"
-            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
+            msg = "> Din order till Vamlingbolaget:\n"
+            msg = msg + '-------------------------------- *\n'
+            msg = msg + '> Din Adress ------------------------------------------------------------------------------------------ *\n'
+            msg = msg + u'%s %s \n' % (first_name, last_name)
+            msg = msg + u'%s \n' % (street)
+            msg = msg + u'%d %s \n' % (postcode, city)
+            if (country):
+                msg = msg + u'%s \n' % (country)
             i = 1
-            msg = u'Ditt Namn: %s  %s \n' % (name, l_name)
-            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
+            msg = msg + '> Din order ------------------------------------------------------------------------------------------- *\n'
             for item in cartitems:
-                msg = msg + '>> ' + item.article.name + ' (' + item.article.sku_number + ') \n'
-                msg = msg + '>> i ' + item.pattern.name + ', ' + item.color.name + ' \n'
-                msg = msg + '>> Antal : ' + str(item.quantity) + ' \n'
-                msg = msg + '>> Pris per plagg: ' + str(item.article.price) +  ' SEK \n'
+                msg = msg + 'plagg '+ str(i) + ': \n'
+                msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
+                msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
+                msg = msg + 'Pris per plagg: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
-            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
-            msg = msg + '>> Frakt och Hantering: 40 SEK \n'
-            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
-            msg = msg + '>>> Totalpris: %s SEK \n' %str(totalprice)
-            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
-            msg = msg + '>> En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
-            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
-            msg = msg + '>> Du betalar med postforskatt \n'
-            msg = msg + '------------------------------------------------------------------------------------------------------------*\n'
+            msg = msg + '------------------------------------------------------------------------------------------------------- *\n'
+            msg = msg + 'Frakt och Hantering: 50 SEK \n'
+            msg = msg + '------------------------------------------------------------------------------------------------------- *\n'
+            msg = msg + '> Totalpris: %s SEK \n' %str(totalprice)
+            msg = msg + '------------------------------------------------------------------------------------------------------- *\n'
+            msg = msg + '> En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
+            msg = msg + '------------------------------------------------------------------------------------------------------- *\n'
+            msg = msg + '> Du betalar med postforskatt \n'
+            msg = msg + '------------------------------------------------------------------------------------------------------- *\n'
+            if (message):
+                msg = msg + 'Din Meddelande ----------------------------------------------------------------------------------------- *\n'
+                msg = msg + u' %s \n' % (message)
+            msg = msg + '------------------------------------------------------------------------------------------------------- *\n'
             msg = msg + '> Tack!'
+
 
             new_order.order_number = random.randrange(0, 111111, 3)
             new_order.session_key = _cart_id(request)

@@ -119,7 +119,6 @@
                     <span class="label label-important">{{ form.street.errors }}</span>
                 </div>
             </div>
-
             <div class="control-group" id="city">
                 <label class="control-label" > <label for="id_city">{% trans "Postort" %}</label> </label>
                 {{ form.subject.city}}
@@ -128,9 +127,8 @@
                     <span class="label label-important">{{ form.city.errors }}</span>
                 </div>
             </div>
-
             <div class="control-group" id="postcode">
-                <label class="control-label" > <label for="id_postcode">{% trans "Postkod" %}</label> </label>
+                <label class="control-label" > <label for="id_postcode">{% trans "Postnummer" %}</label> </label>
                 {{ form.subject.postcode}}
                 {% if field.errors %}< li>{{ field.subject.errors|striptags }}< /li>{% endif %}
                 <div class="controls">
@@ -145,6 +143,11 @@
                 <div class="controls">
                     {{ form.country }}
                 </div>
+                <input id="your_order" type="hidden" value="{% trans 'Din beställning' %}">
+                <input id="your_adress" type="hidden" value="{% trans 'Din adress' %}">
+                <input id="your_production" type="hidden" value="{% trans 'En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg' %}">
+                <input id="your_post" type="hidden" value="{% trans 'Du betalar med postförskatt' %}">
+
             </div>
         </td>
         <td>

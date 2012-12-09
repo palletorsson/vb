@@ -4,7 +4,6 @@
     {% if order %}
         <legend> {{ message }} </legend>
     {% endif %}
-<a href="/products/">{% trans "Fortsätt att utforska utbudet!" %}</a>
 {% endblock %}
 
 {% block allcontent %}
@@ -14,4 +13,5 @@
         <pre>{{order.order}}</pre>
         <pre>{% trans "Vi hör av oss om vi har några frågor" %}. </pre>
     {% endif %}
+<a href="/products/">{% trans "Fortsätt att utforska utbudet!" %}</a>
 {% endblock %}
