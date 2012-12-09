@@ -24,7 +24,6 @@ def checkout(request):
         form = CheckoutForm(request.POST)
         if form.is_valid():
             new_order = form.save(commit=False)
-
             new_order.ip = request.META['REMOTE_ADDR']
             new_order.status = 'O'
             first_name = str(request.POST['first_name'])
@@ -34,8 +33,12 @@ def checkout(request):
             city = request.POST['city']
             if (request.POST['country']):
                 country = request.POST['country']
+            else:
+                country = 'none'
             if (request.POST['message']):
                 message = request.POST['message']
+            else:
+                message = 'none'
 
             msg = "> Din order till Vamlingbolaget:\n"
             msg = msg + '-------------------------------- *\n'
@@ -43,7 +46,7 @@ def checkout(request):
             msg = msg + u'%s %s \n' % (first_name, last_name)
             msg = msg + u'%s \n' % (street)
             msg = msg + u'%d %s \n' % (postcode, city)
-            if (country):
+            if (country != 'none'):
                 msg = msg + u'%s \n' % (country)
             i = 1
             msg = msg + '> Din order ------------------------------------------------------------------------------------------- *\n'
@@ -62,13 +65,11 @@ def checkout(request):
             msg = msg + '------------------------------------------------------------------------------------------------------- *\n'
             msg = msg + '> Du betalar med postforskatt \n'
             msg = msg + '------------------------------------------------------------------------------------------------------- *\n'
-            if (message):
+            if (message != 'none'):
                 msg = msg + 'Din Meddelande ----------------------------------------------------------------------------------------- *\n'
                 msg = msg + u' %s \n' % (message)
             msg = msg + '------------------------------------------------------------------------------------------------------- *\n'
             msg = msg + '> Tack!'
-
-
             new_order.order_number = random.randrange(0, 111111, 3)
             new_order.session_key = _cart_id(request)
             new_order.order = msg
