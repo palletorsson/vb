@@ -35,15 +35,12 @@
         <div class="span7">
         {% ifequal product.article.quality.name "Plysch" %}
             {% for color in colors %}
-
             <img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="80" />
             <label class="radio inline">
                 <input type="radio" name="radio" id="optionsRadios1" value="{{ color.order }}" >
             </label>
-
             {% endfor %}
 <br /> <input id="hidden_colorpattern" type="hidden" value="">
-
 
         {% else %}
 
@@ -83,17 +80,17 @@
         </select>
 
         </div>
+
+        {% if product.article.quality.name != "Plysch" %}
         <span style="padding-left: 10px;"><img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" /></span>
-        <div style="clear: both;"></div>
-        <hr/>
+            <div style="clear: both;"></div>
+            <hr/>
+        {% endif %}
+
         <div class="small" id="changetext">
 
         </div>
 
-        <script>
-
-
-        </script>
         <hr/>
         <div style="clear: both;"></div>
 
