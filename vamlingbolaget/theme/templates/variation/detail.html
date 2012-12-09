@@ -33,7 +33,21 @@
         <div style="clear: both;"></div>
         <hr/>
         <div class="span7">
-	    <select class="changonselect" id="color">
+        {% ifequal product.article.quality.name "plysch" %}
+            {% for color in colors %}
+
+            <img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="80" />
+            <label class="radio inline">
+                <input type="radio" name="radio" id="optionsRadios1" value="{{ color.order }}" >
+            </label>
+
+            {% endfor %}
+<br /> <input id="hidden_colorpattern" type="hidden" value="">
+
+
+        {% else %}
+
+        <select class="changonselect" id="color">
 		{% for color in colors %}
 			<option value="{{ color.order }}"
                 {% if color.order == product.color.order %}
@@ -54,7 +68,7 @@
             Mönster: {{ pattern.name }}</option>
 		{% endfor %}
 	    </select>
-
+            {% endifequal %}
 		</br>
 	    <select id='size'>
 		{% for size in sizes %}
@@ -154,18 +168,13 @@
         quantity = $('#quantiy_pk option:selected').val();
 
 */
+        $('input[name="radio"]').change(function () {
+                $('input[name="radio"]').click(function() {
+                    $('#hidden_colorpattern').val(this.value);
+                });
+        });
 
     $(".changonselect").change(function () {
-        var quality = $(".quality").text();
-        console.log(quality);
-        if (quality == 'plysch') {
-            var value = $(this).val();
-                console.log(value);
-                $("#color").children().find("option").removeAttr('selected')
-                $("#pattern").children().find("option").removeAttr('selected')
-                $("#color_"+value+"").attr('selected', true);
-                $("#pattern_"+value+"").attr('selected', true);
-        }
         $('#fadeifchangeorder').fadeTo(500,0.6);
         var str = "Beställ "+"{{ product.article.name }}"+ " i ",
             folder = "{{MEDIA_URL}}uploads/120/",
@@ -194,11 +203,19 @@
 
     $("#addtocart").click(function() {
         var sku_number = $('#sku_number').text(),
-            cart = $('#sku_number').text(),
-            pattern_id = $('#pattern option:selected').val(),
-            color_id = +$('#color option:selected').val(),
-            size_id = $('#size option:selected').val(),
-            article_id = $('#article_pk option:selected').val(),
+            cart = $('#sku_number').text();
+            var quality = $(".quality").text();
+            console.log(quality);
+            if (quality == 'plysch') {
+                pattern_id = $('#hidden_colorpattern').val();
+                color_id = $('#hidden_colorpattern').val();
+            } else {
+                pattern_id = $('#pattern option:selected').val();
+                color_id = $('#color option:selected').val();
+            }
+
+            size_id = $('#size option:selected').val();
+            article_id = $('#article_pk option:selected').val();
             quantity = $('#quantiy_pk option:selected').val();
 
         $.ajax({
