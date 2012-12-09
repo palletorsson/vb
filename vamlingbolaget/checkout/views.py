@@ -39,7 +39,7 @@ def checkout(request):
 
             msg = "> Din order till Vamlingbolaget:\n"
             msg = msg + '-------------------------------- *\n'
-            msg = msg + '> Din Adress ------------------------------------------------------------------------------------------ *\n'
+            msg = msg + '> Din adress ------------------------------------------------------------------------------------------ *\n'
             msg = msg + u'%s %s \n' % (first_name, last_name)
             msg = msg + u'%s \n' % (street)
             msg = msg + u'%d %s \n' % (postcode, city)
