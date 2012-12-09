@@ -1,7 +1,7 @@
 {% extends "collection_base.html" %}
 
 {% block pagetitle %}
-    <legend> Din Beställning </legend>
+    <legend> {% trans Din Beställning %}</legend>
 {% endblock %}
 
 {% block allcontent %}
@@ -10,19 +10,19 @@
     <thead>
     <tr>
         <th>
-                <span> Antal </span>
+                <span> {% trans Antal %}</span>
         </th>
         <th>
-                <span> Artikel </span>
+                <span> {% trans  Artikel %}</span>
         </th>
         <th>
-                <span> Färg </span>
+                <span>{% trans  Färg %}</span>
         </th>
         <th>
-                <span> Mönster </span>
+                <span>{% trans  Mönster %} </span>
         </th>
         <th>
-                <span> Pris </span>
+                <span>{% trans  Pris %}</span>
         </th>
     </tr>
     </thead>
@@ -66,7 +66,7 @@
         </tbody>
         <tbody>
         <th class="totalprice" colspan="4" style="text-align: right">
-            Total pris:
+            {% trans Total pris: %}
         </th>
         <th id="totalprice">
             {{ totalprice }} SEK
@@ -75,6 +75,5 @@
         </tbody>
     </tbody>
 </table>
-<legend>Dina uppgifter</legend>
-Visa adressen
+<legend>{% trans Dina uppgifter %}</legend>
 {% endblock %}

@@ -1,8 +1,9 @@
 {% extends "collection_base.html" %}
+{% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {% block pagetitle %}
-	<legend><a href="javascript:history.go(-1)">Kollektion</a> / {{ product.article.name }} </legend>
+	<legend><a href="javascript:history.go(-1)">{% trans Kollektion %}</a> / {{ product.article.name }} </legend>
 {% endblock %}
 
 
@@ -18,13 +19,12 @@
 
 
     <div class="span6">
-
         <div style="clear: both;"></div>
         <div class="span6">
             <strong>{{ product.article.name }} </strong><br>
-            Artikelnummer: <span id="sku_number">{{ product.article.sku_number }}</span><br/><br/>
+            {% trans Artikelnummer %}: <span id="sku_number">{{ product.article.sku_number }}</span><br/><br/>
 
-            Kvalitet: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span><br/>
+            {% trans Kvalitet %}: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span><br/>
             {{ product.article.quality.description }}
 
         </div>
@@ -32,17 +32,21 @@
 
         <div style="clear: both;"></div>
         <hr/>
-        <div class="span7">
-        {% ifequal product.article.quality.name "Plysch" %}
+        {% ifequal product.article.quality.name "plysch" %}
+            <div class="span12">
+
             {% for color in colors %}
-            <img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="80" />
+            <img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="90" />
             <label class="radio inline">
                 <input type="radio" name="radio" id="radio_{{ color.order }}" value="{{ color.order }}" >
             </label>
             {% endfor %}
-<br /> <input id="hidden_colorpattern" type="hidden" value="">
+            <br />
+            <input id="hidden_colorpattern" type="hidden" value="">
 
         {% else %}
+
+            <div class="span7">
 
         <select class="changonselect" id="color">
 		{% for color in colors %}
@@ -167,8 +171,8 @@
 */
         var first_color_id = "{{ product.color.order }}";
         $('input[name="radio"]'+" #radio_"+first_color_id).attr('checked',true);
-        $('#hidden_colorpattern').val(first_color_id);
 
+        $('#hidden_colorpattern').val(first_color_id);
         $('input[name="radio"]').change(function () {
                 $('input[name="radio"]').click(function() {
                     $('#hidden_colorpattern').val(this.value);
