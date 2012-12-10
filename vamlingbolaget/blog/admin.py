@@ -1,7 +1,8 @@
 from django.contrib import admin
 from models import Blog, Post, New
 from django.conf import settings
-
+from django.db import models
+from django import forms
 
 class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -9,6 +10,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
     list_editable = ('active',)
     list_filter = ('modified', 'created', 'active', )
+    formfield_overrides = { models.TextField: {'widget': forms.Textarea(attrs={'class':'ckeditor'})}, }
     class Media:
         js = (settings.STATIC_URL+'ckeditor/ckeditor.js',)
 
