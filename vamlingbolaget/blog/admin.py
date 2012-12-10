@@ -12,8 +12,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_editable = ('active',)
     list_filter = ('modified', 'created', 'active', )
 
-class PostAdmin(admin.ModelAdmin):
-    body = forms.CharField(widget=CKEditorWidget())
+class PostAdminForm(forms.ModelForm):
     prepopulated_fields = {"slug": ("title",)}
     fieldsets = (
         (None, {
@@ -61,6 +60,10 @@ list_display = ('active', 'title', 'publish_at')
 list_display_links = ('title',)
 list_editable = ('active', 'publish_at')
 list_filter = ('modified', 'created', 'active')
+
+class PostAdmin(admin.ModelAdmin):
+    form = PostAdminForm
+
 
 
 admin.site.register(Post, PostAdmin)
