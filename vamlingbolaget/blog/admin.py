@@ -2,6 +2,7 @@ from django.contrib import admin
 from models import Blog, Post, New
 from django.conf import settings
 
+
 class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('active', 'name', 'description', 'user')
@@ -9,8 +10,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_editable = ('active',)
     list_filter = ('modified', 'created', 'active', )
     class Media:
-        js = (settings.STATIC_URL+'tiny_mce/tiny_mce_src.js',
-              settings.STATIC_URL+"filebrowser/js/TinyMCEAdmin.js",)
+        js = (settings.STATIC_URL+'ckeditor/ckeditor.js',)
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}

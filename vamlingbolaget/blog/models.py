@@ -3,8 +3,7 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
-from taggit.managers import TaggableManager
-from tinymce import models as tinymce_models
+
 
 class PostManager(models.Manager):
     def get_visible(self):
