@@ -35,7 +35,8 @@ class PostAdminForm(forms.ModelForm):
     list_display_links = ('title',)
     list_editable = ('active', 'publish_at')
     list_filter = ('modified', 'created', 'active', 'blog')
-
+    class Media:
+        js = ('ckeditor/ckeditor.js',)
 
 class NewsAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
