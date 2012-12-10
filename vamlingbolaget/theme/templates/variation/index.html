@@ -13,7 +13,7 @@
 
                     {% with product.image_set.all|first as image %}
                         <div class="collection_list" >
-                            <img src="{% version image.image 'medium' %}" class="imgborder" width="180" />
+                            <img src="{% version image.image 'medium' %}" class="imgborder" width="200" />
                             <br/>
                             <span class='image_description'>
                                 {{ product.article.name }}<br/> {% trans "Pris" %} : {{ product.article.price }}
