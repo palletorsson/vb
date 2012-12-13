@@ -22,7 +22,9 @@
         <div style="clear: both;"></div>
         <div class="span6">
             <strong>{{ product.article.name }} </strong><br>
-            {% trans "Artikelnummer" %}: <span id="sku_number">{{ product.article.sku_number }}</span><br/><br/>
+            {% trans "Artikelnummer" %}: <span id="sku_number">{{ product.article.sku_number }}</span><br/>
+
+            <span id="art_description">{{ product.article.description }}</span><br/>
 
             {% trans "Kvalitet" %}: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span><br/>
             {{ product.article.quality.description }}
