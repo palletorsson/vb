@@ -6,7 +6,7 @@
 <div class="Small">( {{ post.created }} )</div>
 <br/>
 <div class="post_body">
-     {{ post.body|safe|linebreaks }}
+     {{ post.body|safe }}
 </div>
 <div class="tags">
     {% if tag in post.tags.all %}

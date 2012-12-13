@@ -17,14 +17,14 @@
                     <h3> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h3>
                     <hr />
                     <div class="post_body">
-                    {{ post.body|safe|linebreaks|truncatewords:150}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
+                    {{ post.body|safe|truncatewords:150}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
                         <div>
                         </div>
                     {% else %}
                         <h4> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h4>
                         <hr />
                         <div class="post_body">
-                        {{ post.body|safe|linebreaks}}
+                        {{ post.body|safe}}
                         <div>
                        </div>
 
