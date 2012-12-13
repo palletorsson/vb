@@ -17,7 +17,7 @@
                     <h3> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h3>
                     <hr />
                     <div class="post_body">
-                    {{ post.body|safe|truncatewords:150}}  <a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a>
+                    {{ post.body|safe|truncatewords:150}}  <br /> <h4><a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a></h4>
                         <div>
                         </div>
                     {% else %}
