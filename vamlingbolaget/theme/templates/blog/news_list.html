@@ -2,5 +2,7 @@
     <div>News</div>
     {% for n in news %}
     {{ n.title }}<br />
+    {{ n.body|safe|truncatewords:60}}
     {% endfor %}
+    <a href="/news/">>></a>
 </div>
