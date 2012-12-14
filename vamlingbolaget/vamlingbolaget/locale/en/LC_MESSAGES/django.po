@@ -10991,7 +10991,7 @@ msgstr "Opening hours"
 #: vb/vamlingbolaget/theme/templates/collection_base.html:5
 
 msgid "Kategorier"
-msgstr "kategorier"
+msgstr "Categories"
 
 #: vb/vamlingbolaget/theme/templates/collection_base.html:12
 
@@ -11000,7 +11000,7 @@ msgstr "Quality"
 
 #: vb/vamlingbolaget/theme/templates/collection_base.html:19
 msgid "Överskikt"
-msgstr ""
+msgstr "Overview"
 
 #: vb/vamlingbolaget/theme/templates/collection_base.html:21
 #: vb/vamlingbolaget/theme/templates/variation/combos.html:5

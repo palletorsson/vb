@@ -10856,7 +10856,7 @@ msgid "Efternamn"
 msgstr "First name"
 
 #: vb/vamlingbolaget/checkout/models.py:16
-#, fuzzy
+
 msgid "Telefonnummer"
 msgstr "Item number"
 
@@ -10872,7 +10872,6 @@ msgstr "City"
 
 #: vb/vamlingbolaget/checkout/models.py:19
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:131
-#, fuzzy
 msgid "Postnummer"
 msgstr "Item number"
 
@@ -10933,7 +10932,6 @@ msgstr "About Stickeri"
 
 #: vb/vamlingbolaget/theme/templates/base.html:185
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:4
-#, fuzzy
 msgid "Din shoppinglåda"
 msgstr "Your Shopping cart"
 
@@ -10945,7 +10943,6 @@ msgid "Kollektion"
 msgstr "Collection"
 
 #: vb/vamlingbolaget/theme/templates/base.html:199
-#, fuzzy
 msgid "Butiker"
 msgstr "Shop"
 
@@ -10987,23 +10984,23 @@ msgid "Lördagar"
 msgstr "Saturdays"
 
 #: vb/vamlingbolaget/theme/templates/base.html:267
-#, fuzzy
+
 msgid "Öppettider"
 msgstr "Opening hours"
 
 #: vb/vamlingbolaget/theme/templates/collection_base.html:5
-#, fuzzy
+
 msgid "Kategorier"
-msgstr "kategorier"
+msgstr "Categories"
 
 #: vb/vamlingbolaget/theme/templates/collection_base.html:12
-#, fuzzy
+
 msgid "Kvaliter"
 msgstr "Quality"
 
 #: vb/vamlingbolaget/theme/templates/collection_base.html:19
 msgid "Överskikt"
-msgstr ""
+msgstr "Overview"
 
 #: vb/vamlingbolaget/theme/templates/collection_base.html:21
 #: vb/vamlingbolaget/theme/templates/variation/combos.html:5
@@ -11011,7 +11008,7 @@ msgid "Färger och Mönster"
 msgstr "Colors and Patterns"
 
 #: vb/vamlingbolaget/theme/templates/blog/index.html:5
-#, fuzzy
+
 msgid "Nyheter och Blog"
 msgstr "News"
 
@@ -11020,7 +11017,7 @@ msgid "läs hela artikeln"
 msgstr "Read the full story"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:6
-#, fuzzy
+
 msgid "Du ändrar nu din beställning av"
 msgstr "You are editing you order"
 
@@ -11113,13 +11110,13 @@ msgstr "There is nothing in your shopping cart"
 
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:106
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:80
-#, fuzzy
+
 msgid "Börja utforska utbudet"
 msgstr "Continue to explore!"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:4
 #: vb/vamlingbolaget/theme/templates/checkout/summery.html:4
-#, fuzzy
+
 msgid "Din Beställning"
 msgstr "You are editing you order"
 
@@ -11136,7 +11133,7 @@ msgid "Förnamn"
 msgstr "First name"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:146
-#, fuzzy
+
 msgid "Din beställning"
 msgstr "You are editing you order"
 
@@ -11170,12 +11167,12 @@ msgid "Skicka Din Beställning"
 msgstr "Send Your Order"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:201
-#, fuzzy
+
 msgid "Börja utforska utbudet!"
 msgstr "Continue to explore!"
 
 #: vb/vamlingbolaget/theme/templates/checkout/thanks.html:11
-#, fuzzy
+
 msgid "Ordernummer"
 msgstr "Item number"
 
@@ -11197,7 +11194,7 @@ msgstr "Welcome to Vamlingbolaget"
 
 #: vb/vamlingbolaget/theme/templates/gallery/gallery.html:10
 #: vb/vamlingbolaget/theme/templates/variation/gallery.html:10
-#, fuzzy
+
 msgid "Alla gallerier"
 msgstr "All galleries"
 
@@ -11210,7 +11207,7 @@ msgid "Välkommen"
 msgstr "Welcome"
 
 #: vb/vamlingbolaget/theme/templates/variation/gallery.html:21
-#, fuzzy
+
 msgid "Featured galleries"
 msgstr "Featured galleries"
 
