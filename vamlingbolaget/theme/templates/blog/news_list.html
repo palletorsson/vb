@@ -1,8 +1,8 @@
-{% load i18n %}
+
 <div>
     {% for n in news %}
     {{ n.title }}<br />
     {{ n.body|safe|truncatewords:30}}
     {% endfor %}
-    <a href="/news/{{ n.slug }}/"> {% trans "läs hela artikeln" %} </a>
+    <a href="/news/"> >> </a>
 </div>
