@@ -30,9 +30,9 @@ l    <style type="text/css">
       /* menu Logo vamlingoblaget  */
       .leftside{
         height: 24px;
-        padding-left: 100px;
-        padding-top: 20px;
-        margin-right: 30px;
+        padding-left: 80px;
+        padding-top: 14px;
+        margin-right: 20px;
       }
 
       /* menu line beside logo vamlingbolaget */
@@ -43,7 +43,7 @@ l    <style type="text/css">
 
       /* the main menu text */
       .nav-collapse {
-          padding-top: 26px;
+          padding-top: 20px;
       }
 
       .flatpages{
@@ -95,11 +95,17 @@ l    <style type="text/css">
           text-transform: uppercase;
           padding-top: -10px;
       }
+
       .nav-to-right {
           padding-left: 100px;
           font-size: 12px;
-          top:3px;
+          top:14px;
       }
+      .nav-to-left {
+          top:12px;
+
+      }
+
 
       .brand {
           font-size: 12px
@@ -196,7 +202,8 @@ top:-6px;">
             <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" class="leftside"/>  <span class="leftsideline"> </span></a>
             <br />
             <div class="nav-collapse collapse">
-                <ul class="nav">
+
+                    <ul class="nav nav-to-left">
                     <li class="">
                          <a href="/products/type/klanning/">{% trans "Kollektion" %}</a>
                     </li>
@@ -206,6 +213,7 @@ top:-6px;">
                     <li class="">
                         <a href="/galleries/">{% trans "Gallerier" %}</a>
                     </li>
+                    </ul>
                     <ul class="nav nav-to-right">
                     <li class="">
                         <a href="/shop/">{% trans "Butiker" %}</a>
@@ -218,7 +226,7 @@ top:-6px;">
                         <a href="/order/">{% trans "Beställ" %}</a>
                     </li>
                     </ul>
-                </ul>
+
             </div>
           </div>
         </div>
