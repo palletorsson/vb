@@ -3,5 +3,5 @@
     {{ n.title }}<br />
     {{ n.body|safe|truncatewords:30}}
     {% endfor %}
-    <a href="/news/">>></a>
+    <a href="/news/{{ n.slug }}/"> {% trans "läs hela artikeln" %} </a>
 </div>
