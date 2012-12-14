@@ -32,7 +32,7 @@ l    <style type="text/css">
         height: 24px;
         padding-left: 100px;
         padding-top: 16px;
-        margin-right: 100px;
+        margin-right: 30px;
       }
 
       /* menu line beside logo vamlingbolaget */
@@ -94,6 +94,9 @@ l    <style type="text/css">
       .nav-collapse > ul {
           text-transform: uppercase;
           padding-top: -10px;
+      }
+      .nav-to-right {
+          padding-left: 100px;
       }
 
       .brand {
@@ -196,22 +199,23 @@ top:-6px;">
                          <a href="/products/type/klanning/">{% trans "Kollektion" %}</a>
                     </li>
                     <li class="">
-                        <a href="/shop/">{% trans "Butiker" %}</a>
+                        <a href="/news/">{% trans "Nyheter" %}</a>
                     </li>
                     <li class="">
-                        <a href="/news/">{% trans "Nyheter" %}</a>
+                        <a href="/galleries/">{% trans "Gallerier" %}</a>
+                    </li>
+                    <ul class="nav nav-to-right">
+                    <li class="">
+                        <a href="/shop/">{% trans "Butiker" %}</a>
                     </li>
                     <li class="">
                         <a href="/about/">{% trans "Om oss" %}</a>
                     </li>
                     <li class="">
-                        <a href="/galleries/">{% trans "Gallerier" %}</a>
-                    </li>
                     <li class="">
                         <a href="/order/">{% trans "Beställ" %}</a>
                     </li>
-                    <li class="">
-                    </li>
+                    </ul>
                 </ul>
             </div>
           </div>
