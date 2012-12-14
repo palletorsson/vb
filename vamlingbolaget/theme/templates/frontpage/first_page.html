@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 
 {% block stretchpage %}
-    <legend> Välkommen Vamlingbolaget </legend>
+    <legend> {% trans "Välkommen Vamlingbolaget" %} </legend>
     <div class="spanfullscreen">
             <!-- Carousel
           ================================================== -->

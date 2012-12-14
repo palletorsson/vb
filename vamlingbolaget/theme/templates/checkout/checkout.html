@@ -1,7 +1,7 @@
 {% extends "collection_base.html" %}
 {% load i18n %}
 {% block pagetitle %}
-    <legend> Din Beställning </legend>
+    <legend> {% trans "Din Beställning" %} </legend>
 {% endblock %}
 
 {% block allcontent %}
@@ -10,19 +10,19 @@
     <thead>
     <tr>
         <th>
-                <span> Antal </span>
+                <span> {% trans "Antal" %}  </span>
         </th>
         <th>
-                <span> Artikel </span>
+                <span> {% trans "Artikel" %}   </span>
         </th>
         <th>
-                <span> Färg </span>
+                <span> {% trans "Färg" %} </span>
         </th>
         <th>
-                <span> Mönster </span>
+                <span> {% trans "Mönster" %} </span>
         </th>
         <th>
-                <span> Pris </span>
+                <span> {% trans "Pris" %} </span>
         </th>
     </tr>
     </thead>
@@ -60,7 +60,7 @@
     {%if cartitems %}
     <tr>
         <td class="totalprice" colspan="4" style="text-align: right">
-            Leverans:
+            {% trans "Leverans" %}:
         </td>
         <td id="handling">
             {{ handling }}
@@ -68,7 +68,7 @@
     </tr>
     <tr>
         <th class="totalprice" colspan="4" style="text-align: right">
-            Total pris:
+            {% trans "Total pris" %} :
         </th>
         <th id="totalprice">
             {{ totalprice }} SEK
@@ -77,7 +77,7 @@
     {% else %}
         <tr id="empty">
             <td colspan="8">
-              Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
+                {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet" %}!</a>
             </td>
         </tr>
     {% endif %}
@@ -87,10 +87,10 @@
 <table id="" class="table table-striped table-bordered">
     <tr>
         <th>
-            Adressuppgifter
+            {% trans "Adressuppgifter" %}
         </th>
         <th>
-            Kontaktuppgifter
+            {% trans "Kontaktuppgifter" %}
         </th>
     </tr>
     <tr>
@@ -187,7 +187,7 @@
                 <label class="control-label" > </label>
                 {{ form.subject.post }}
                 <div class="controls">
-                    <img src="{{ STATIC_URL }}img/post.jpg" width="46px"/><span class="muted">Beställningen skicka med Postförskott </span>
+                    <img src="{{ STATIC_URL }}img/post.jpg" width="46px"/><span class="muted">{% trans "Beställningen skicka mot Postförskott" %} </span>
                 </div>
             </div>
             <input type="submit" class="btn" value="{% trans "Skicka Din Beställning" %}"  />
@@ -198,9 +198,9 @@
 </form>
 {% endif %}
 {% if not cartitems %}
-Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
+{% "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet!" %}</a>
 {% endif %}
-<div class="alert alert-success"> När du beställer via postorder tillkommer porto plus postförskottsavgift. Kostnaden uppgår till 50 kronor beroende på paketets vikt. Om vi har tyget i lager levererar vi inom tre veckor.
-    Du har öppet köp i en vecka och kan returnera plagget oanvänt inom en vecka från det att du hämtat ut det på posten. </div>
+<div class="alert alert-success"> {% trans "När du beställer via postorder tillkommer porto plus postförskottsavgift. Kostnaden uppgår till 50 kronor beroende på paketets vikt. Om vi har tyget i lager levererar vi inom tre veckor.
+    Du har öppet köp i en vecka och kan returnera plagget oanvänt inom en vecka från det att du hämtat ut det på posten" %}. </div>
 
 {% endblock %}

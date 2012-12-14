@@ -57,7 +57,7 @@
                     selected="selected"
                 {%endif%}
                 id="color_{{ color.order }}">
-            Färg: {{ color.name }} </option>
+            {% trans "Färg" %}: {{ color.name }} </option>
         {% endfor %}
 	    </select> 	    
 
@@ -68,21 +68,21 @@
                 selected="selected"
             {%endif%}
             id="pattern_{{ pattern.order }}">
-            Mönster: {{ pattern.name }}</option>
+            {% trans "Mönster" %}: {{ pattern.name }}</option>
 		{% endfor %}
 	    </select>
             {% endifequal %}
 		</br>
 	    <select id='size'>
 		{% for size in sizes %}
-			<option value="{{ size.pk }}" > Storlek: {{ size.name }} </option>
+			<option value="{{ size.pk }}" > {% trans "Storlek" %}: {{ size.name }} </option>
 		{% endfor %}
 	    </select>
         <select id='quantiy_pk'>
-            <option value="1" selected="selected">Antal : 1 </option>
-            <option value="2">Antal : 2 </option>
-            <option value="3">Antal : 3 </option>
-            <option value="4">Antal : 4 </option>
+            <option value="1" selected="selected">{% trans "Antal" %} : 1 </option>
+            <option value="2">{% trans "Antal" %} : 2 </option>
+            <option value="3">{% trans "Antal" %} : 3 </option>
+            <option value="4">{% trans "Antal" %} : 4 </option>
         </select>
 
         </div>
@@ -101,14 +101,14 @@
         <div style="clear: both;"></div>
 
         <div class="span6">
-        <h4> Pris: {{ product.article.price }} kr </h4>
+        <h4> {% trans "Pris" %}: {{ product.article.price }} kr </h4>
 
         </div>
 
 
         <div id='addtocart' style="display:block;">
         <span style="padding-left: 30px;">
-            <button class="btn btn-success" type="button">Lägg till i Köplista</button></span>
+            <button class="btn btn-success" type="button">{% trans "Lägg till i Köplista" %} </button></span>
         </div>
         <hr/>
     </div>

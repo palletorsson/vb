@@ -84,7 +84,7 @@
         {% endfor %}
         </tbody>
         <td class="totalprice" colspan="7" style="text-align: right">
-            Leverans:
+            {% trans "Leverans" %}:
         </td>
         <td id="handling">
             {{ handling }}
@@ -92,7 +92,7 @@
         </tr>
         <tr>
         <th class="totalprice" colspan="7" style="text-align: right">
-            Total pris:
+            {% trans "Totalpris" %}:
         </th>
         <th id="totalprice">
             {{ totalprice }} SEK
@@ -103,7 +103,7 @@
     {% else %}
     <tr id="empty">
         <td colspan="8">
-            Det ligger inget i din shoppinglåda än. <a href="/products/">Börja utforska utbudet!</a>
+            {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet" %}!</a>
         </td>
     </tr>
     </tbody>

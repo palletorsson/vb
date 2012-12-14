@@ -7,7 +7,7 @@
     {%if galleries %}
         <!--legend > Galler{{ num_gallery|pluralize:"i,ier" }}</legend-->
     {%else%}
-        <legend > <a href="/galleries/">Alla gallerier</a> / {{ gallery.name|title }}</legend>
+        <legend > <a href="/galleries/">{% trans "Alla gallerier" %}</a> / {{ gallery.name|title }}</legend>
     {%endif%}
     
 {% endblock %}
@@ -18,7 +18,7 @@
         {%if galleries%}
                 {%if fgalleries %}
                     <div class="gallery featured">
-                        <legend> Featured galleries </legend>
+                        <legend> {% trans "Featured galleries" %} </legend>
                         <div class="gallery_list">
                             {% for gallery in fgalleries %}
                             <div style="float: left; display: inline; margin-right: 5px; height: 200px; width: 300px; overflow: hidden;">
@@ -32,7 +32,7 @@
                 {%endif%}
                 {%if agalleries %}
                     <div class="gallery archive">
-                        <legend> Arkiv </legend>
+                        <legend> {% trans "Arkiv" %} </legend>
                         <div class="gallery_list">
                             {% for gallery in agalleries %}
                             <div style="float: left; display: inline;">
@@ -49,7 +49,7 @@
                 {%endif%}
                 {%if hgalleries %}
                     <div class="gallery history">
-                        <legend> Historiska </legend>
+                        <legend> {% trans "Historiska"  </legend>
                         <div class="gallery_list">
                             {% for gallery in hgalleries %}
                             <div style="float: left; display: inline;">

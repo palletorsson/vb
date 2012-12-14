@@ -14,19 +14,18 @@
         <div style="clear: both;"></div>
         <div class="span6">
             <strong>{{ cartitem.article.name }} </strong><br/>
+
             {% trans "Artikelnummer" %} :  <span id="sku_number">{{ cartitem.article.sku_number }}</span><br/><br/>
 
             {% trans "Kvalitet" %}:  {{ cartitem.article.quality }}<br/>
-            {{ cartitem.article.quality.description }}
+
+            <p class="small"> {{ cartitem.article.quality.description }}</p>
+
             <h4>{% trans "Pris" %}: {{ cartitem.article.price }} kr</h4>
 
         </div>
         <span style="padding-left: 40px;"><img src="{% version cartitem.article.file 'small' %} " >  </span>
-
-
         <div style="clear: both;"></div>
-
-
         <hr/>
     </div>
 

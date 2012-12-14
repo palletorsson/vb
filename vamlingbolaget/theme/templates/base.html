@@ -182,7 +182,7 @@ l    <style type="text/css">
               <ul class="nav pull-right">
                     <li>
                         <a id="token" href="/cart/show/" style="font-size: 11px;">
-                           Din shoppinglåda <img src="{{STATIC_URL}}img/box.png" width="25px" style="float:right; position:relative; padding-left: 5px; position:relative;
+                            {% trans "Din shoppinglåda" %} <img src="{{STATIC_URL}}img/box.png" width="25px" style="float:right; position:relative; padding-left: 5px; position:relative;
 top:-6px;">
                         </a>
                     </li>
@@ -251,10 +251,10 @@ top:-6px;">
               info@vamlingbolaget.com
           </address>
           <strong>{% trans "Öppettider:" %}</strong><br/>
-          <strong>27 juni-14 augusti </strong><br/>
+          <strong>27 {% trans "juni" %}-14 {% trans "augusti" %} </strong><br/>
           {% trans "Vardagar" %} 11-18 <br/>
           {% trans "Lördagar" %} 11-15 <br/>
-          <a href="/about/"> Om oss vamlingbolaget</a>
+          <a href="/about/"> {% trans "Om oss" %} Vamlingbolaget </a>
       </div>
       <div class="span4">
           <address>
@@ -264,7 +264,7 @@ top:-6px;">
               <abbr title="Phone">Tel:</abbr>08 - 640 31 37 <br/>
               stockholm@vamlinbolaget.com
           </address>
-          <strong>Öppettider:</strong><br/>
+          <strong>{% trans "Öppettider" %}:</strong><br/>
           {% trans "Vardagar" %} 11-18 <br/>
           {% trans "Lördagar" %} 11-15 <br/>
       </div>
