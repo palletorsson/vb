@@ -18,15 +18,12 @@
                     <hr />
                     <div class="post_body">
                     {{ post.body|safe|truncatewords:150}}  <br /> <h4><a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a></h4>
-                        <div>
                         </div>
                     {% else %}
-                        <h4> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h4>
-                        <hr />
+                        <blockquote><h4> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h4>
                         <div class="post_body">
                         {{ post.body|safe}}
-                        <div>
-                       </div>
+                        </div>
 
                     {% endifequal %}
 
