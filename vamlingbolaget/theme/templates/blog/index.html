@@ -24,9 +24,7 @@
                         <div class="post_body">
                         {{ post.body|safe}}
                         </div>
-
                     {% endifequal %}
-
                 <div class="tags">
                     {% if tag in post.tags.all %}
                     {{ tag }} {% if not forloop.last %}, {% endif %}
