@@ -21,7 +21,7 @@
                     {% if gallery.status = status %}
                         <div style="float: left; display: inline;">
                             <div class="overlay">&nbsp;{{gallery.name}}</div>
-                            <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" title="Fotograf: {{feature_image.photographer.name}}"/></a>
+                            <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" style="margin-left:8px;" title="Fotograf: {{feature_image.photographer.name}}"/></a>
                         </div>
                     {%endif%}
                 {%endfor%}
