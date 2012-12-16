@@ -41,18 +41,22 @@ def augment_quantity(self, quantity):
 def addtocart(request):
     if (request.method == 'POST'):
         d = request.POST
+        print d
         sku = d['article_sku']
         article_db = Article.objects.get(sku_number = sku)
-        colcount = len(d['color'])
-        color = d['color'][0]
+        color = d['color']
         color_db = Color.objects.get(order=color)
-        pattern = d['pattern'][0]
+        pattern = d['pattern']
         pattern_db = Pattern.objects.get(order=pattern)
-        if colcount > 1:
-            color2 = d['color'][1]
-            color_db2 = Color.objects.get(order=color2)
-            pattern2 = d['pattern'][1]
-            pattern_db2 = Pattern.objects.get(order=pattern2)            
+        col2 = int(d['color2'])
+        if(col2 == 0):
+            pass
+        else:
+            color2 = d['color2']
+            pattern2 = d['pattern2']
+            print "-------------"
+            color_db2 = Color.objects.get(order = color2)
+            pattern_db2 = Pattern.objects.get(order = pattern2)
         size = d['size']
         size_db = Size.objects.get(pk=size)
         quantity = int(d['quantity'])
@@ -73,9 +77,9 @@ def addtocart(request):
             cartitem.size = size_db
             cartitem.color = color_db
             cartitem.pattern = pattern_db
-            if(color_db2):
-                cartitem.color2 = color_db2
-                cartitem.pattern2 = pattern_db2                
+            if(col2 > 0):
+                cartitem.color_2 = color_db2
+                cartitem.pattern_2 = pattern_db2                
             cartitem.quantity = quantity
             cartitem.save()
             msg = u'Du har andrat till: </br>'
@@ -90,6 +94,9 @@ def addtocart(request):
                     cartitem = CartItem.objects.create(cart = cart)
                     cartitem.article = article_db
                     cartitem.pattern = pattern_db
+                    if(col2 > 0):
+                        cartitem.color_2 = color_db2
+                        cartitem.pattern_2 = pattern_db2                
                     cartitem.size = size_db
                     cartitem.color = color_db
                     cartitem.quantity = quantity
@@ -102,21 +109,45 @@ def addtocart(request):
             cartitem.pattern = pattern_db
             cartitem.size = size_db
             cartitem.color = color_db
+            if(col2 > 0):
+                cartitem.color_2 = color_db2
+                cartitem.pattern_2 = pattern_db2                
             cartitem.quantity = quantity
             cartitem.save()
             msg = u'Du har lagt till: <br/>'
 
-    returnjson = {
-            'cartitem': {
-                'article': article_db.name,
-                'sku' : sku,
-                'color': color_db.name,
-                'pattern': pattern_db.name,
-                'size': size_db.name,
-                'quantity': quantity,
-                },
-            'message': { 'msg' : msg  }
-        }
+    if(col2 > 0):
+        returnjson = {
+                'cartitem': {
+                    'article': article_db.name,
+                    'sku' : sku,
+                    'color': color_db.name,
+                    'pattern': pattern_db.name,
+                    'color': color_db.name,
+                    'pattern': pattern_db.name,
+                    'color2': color_db2.name,
+                    'pattern2': pattern_db2.name,
+                    'color': color_db.name,
+                    'pattern': pattern_db.name,
+                    'size': size_db.name,
+                    'quantity': quantity,
+                    },
+                'message': { 'msg' : msg  }
+            }
+    else:
+        returnjson = {
+                'cartitem': {
+                    'article': article_db.name,
+                    'sku' : sku,
+                    'color': color_db.name,
+                    'pattern': pattern_db.name,
+                    'color': color_db.name,
+                    'pattern': pattern_db.name,
+                    'size': size_db.name,
+                    'quantity': quantity,
+                    },
+                'message': { 'msg' : msg  }
+            }
 
     return_data = json.dumps(returnjson)
 

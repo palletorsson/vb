@@ -3,7 +3,7 @@
 {% version model.field_name version_prefix %}
 {% load i18n %}
 {% block pagetitle %}
-	<legend><a href="javascript:history.go(-1)">Din <s></s>hoppinglåda</a> / {% trans "Du ändrar nu din beställning av" %}: <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
+	<legend><a href="javascript:history.go(-1)">Din shoppinglåda</a> / {% trans "Du ändrar nu din beställning av" %}: <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
 {% endblock %}
 
 
@@ -29,7 +29,75 @@
         <hr/>
     </div>
 
+	{% if cartitem.article.quality.order == 2 or cartitem.article.quality.order == 4 %}
+            <div class="span12">
+            {% for color in colors %}
+				<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
+				<label class="radio inline">
+				<input type="radio" name="radio" id="radio_{{ color.order }}" value="{{ color.order }}" >
+				</label>
+            {% endfor %}
+            <br />
+            <input id="hidden_colorpattern" type="hidden" value="">
 
+<!----------------------------------9805 vandbar jacka------------------------>
+	{%elif cartitem.article.sku_number == '9805' %}
+    <div class="span6">
+        <div class="span7">
+	<h5> Utsidans mönster</h5>
+			<select class="changonselect" id="color">
+			{% for color in colors %}
+				<option value="{{ color.order }}"
+					{% if color.order == cartitem.color.order %}
+						selected="selected"
+					{%endif%}
+					">
+				Färg: {{ color.name }} </option>
+			{% endfor %}
+			</select> 	    
+	
+			<select class="changonselect" id='pattern'>
+				{% for pattern in patterns %}
+					<option value="{{ pattern.order }}"
+					{% if pattern.order == cartitem.pattern.order %}
+						selected="selected"
+					{%endif%}
+					">
+					Mönster: {{ pattern.name }}</option>
+				{% endfor %}
+			</select>
+			<img class="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
+				</div>
+				
+				<div class="span5">
+					<h5>Insidans mönster</h5>
+			<select class="changonselect" id="color2">
+			{% for color in colors %}
+				<option value="{{ color.order }}"
+					{% if color.order == cartitem.color_2.order %}
+						selected="selected"
+					{%endif%}
+					">
+				Färg: {{ color.name }} </option>
+			{% endfor %}
+			</select> 	    
+	
+			<select class="changonselect" id='pattern2'>
+			{% for pattern in patterns %}
+				<option value="{{ pattern.order }}"
+				{% if pattern.order == cartitem.pattern_2.order %}
+					selected="selected"
+				{%endif%}
+				">
+				Mönster: {{ pattern.name }}</option>
+			{% endfor %}
+			</select>
+			<img class="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" style="width:100px;" />
+				</div>
+	</div>
+			
+<!---------------------else--------------------------->
+	{%else%}
     <div class="span6">
         <div class="span7">
 	    <select class="changonselect" id="color">
@@ -52,8 +120,8 @@
             {% trans "Mönster" %}: {{ pattern.name }}</option>
 		{% endfor %}
 	    </select>
-
-		</br>
+{%endif%}
+		<div>
 	    <select  class="changonselect"  id='size'>
 		{% for size in sizes %}
 			<option value="{{ size.pk }}"
@@ -72,7 +140,11 @@
         </select>
 
         </div>
-        <span style="padding-left: 10px;"><img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" /></span>
+		{%if cartitem.article.sku_number != '9805'%}
+        <span style="padding-left: 10px;">
+			<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
+		</span>
+		{%endif%}
         <div style="clear: both;"></div>
         <hr/>
         <div id="changetext"></div>

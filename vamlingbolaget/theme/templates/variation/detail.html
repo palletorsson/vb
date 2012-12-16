@@ -13,8 +13,8 @@
         {% for image in images %}
             <img src="{% version image.image 'large' %}"  style="width: 360px;"/>
         {% endfor %}
-        </br>
-	<span style="width: 200px; margin:3px;"> {{ product.article.name }} i {{ product.color|lower }} {{ product.pattern|lower }}</span>
+        <br/>
+		<span style="width: 200px; margin:3px;"> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</span>
     </div>
 
 
@@ -30,78 +30,102 @@
             {{ product.article.quality.description }}
 
         </div>
-            <span style="padding-left: 40px;"><img src="{% version product.article.file 'small' %} " >  </span></br>
-
+        <span style="padding-left: 40px;">
+			<img src="{% version product.article.file 'small' %} " />
+		</span>
+		<br/>
         <div style="clear: both;"></div>
         <hr/>
-        {% ifequal product.article.quality.name "Plysch" %}
-            <div class="span12">
-
-            {% for color in colors %}
-				<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
-				<label class="radio inline">
-				<input type="radio" name="radio" id="radio_{{ color.order }}" value="{{ color.order }}" >
-				</label>
-            {% endfor %}
+  
+        {% if product.article.quality.order == 2 or product.article.quality.order == 4 %}
+			<div class="span12">
+				{% for color in colors %}
+					<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
+					<label class="radio inline">
+						<input type="radio" name="radio" id="radio_{{ color.order }}" value="{{ color.order }}" />
+					</label>
+				{% endfor %}
             <br />
             <input id="hidden_colorpattern" type="hidden" value="">
-
-		{%elifequal product.article.pk 123 %}
-				<div class="span7">
 	
-			<select class="changonselect" id="color">
-			{% for color in colors %}
-				<option value="{{ color.order }}"
-					{% if color.order == product.color.order %}
-						selected="selected"
-					{%endif%}
-					id="color_{{ color.order }}">
-				Färg: {{ color.name }} </option>
-			{% endfor %}
-			</select> 	    
-	
-			<select class="changonselect" id='pattern'>
-			{% for pattern in patterns %}
-				<option value="{{ pattern.order }}"
-				{% if pattern.order == product.pattern.order %}
-					selected="selected"
-				{%endif%}
-				id="pattern_{{ pattern.order }}">
-				Mönster: {{ pattern.name }}</option>
-			{% endfor %}
-			</select>
-		
+		{%elif product.article.sku_number == '9805' %}
+			<div class="span6">
+				<h5> Utsidans mönster</h5>
+				<select class="changonselect" id="color">
+					{% for color in colors %}
+						<option value="{{ color.order }}"
+							{% if color.order == product.color.order %}
+								selected="selected"
+							{%endif%}
+							">
+						{%trans "Färg"%} : {{ color.name }} </option>
+					{% endfor %}
+				</select> 	    
+				<select class="changonselect" id='pattern'>
+					{% for pattern in patterns %}
+						<option value="{{ pattern.order }}"
+						{% if pattern.order == product.pattern.order %}
+							selected="selected"
+						{%endif%}
+						">
+						{%trans "Mönster"%} : {{ pattern.name }}</option>
+					{% endfor %}
+				</select>
+				<img class="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" />
+			</div>
+				
+			<div class="span5">
+				<h5>Insidans mönster</h5>
+				<select class="changonselect" id="color2">
+					{% for color in colors %}
+						<option value="{{ color.order }}"
+							{% if color.order == product.color.order %}
+								selected="selected"
+							{%endif%}
+							">
+						{%trans "Färg"%} : {{ color.name }} </option>
+					{% endfor %}
+				</select> 	    
+				<select class="changonselect" id='pattern2'>
+					{% for pattern in patterns %}
+						<option value="{{ pattern.order }}"
+						{% if pattern.order == product.pattern.order %}
+							selected="selected"
+						{%endif%}
+						">
+						{%trans "Mönster"%} : {{ pattern.name }}</option>
+					{% endfor %}
+				</select>
+				<img class="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
+			</div>
 	    {% else %}
-
-            <div class="span7">
-
-        <select class="changonselect" id="color">
-		{% for color in colors %}
-			<option value="{{ color.order }}"
-                {% if color.order == product.color.order %}
-                    selected="selected"
-                {%endif%}
-                id="color_{{ color.order }}">
-            {% trans "Färg" %}: {{ color.name }} </option>
-        {% endfor %}
-	    </select> 	    
-
-	    <select class="changonselect" id='pattern'>
-		{% for pattern in patterns %}
-			<option value="{{ pattern.order }}"
-            {% if pattern.order == product.pattern.order %}
-                selected="selected"
-            {%endif%}
-            id="pattern_{{ pattern.order }}">
-            {% trans "Mönster" %}: {{ pattern.name }}</option>
-		{% endfor %}
-	    </select>
-            {% endifequal %}
-		</br>
+			<div class="span7">
+				<select class="changonselect" id="color">
+					{% for color in colors %}
+						<option value="{{ color.order }}"
+							{% if color.order == product.color.order %}
+								selected="selected"
+							{%endif%}
+							">
+						{% trans "Färg" %}: {{ color.name }} </option>
+					{% endfor %}
+				</select> 	    
+				<select class="changonselect" id='pattern'>
+					{% for pattern in patterns %}
+						<option value="{{ pattern.order }}"
+						{% if pattern.order == product.pattern.order %}
+							selected="selected"
+						{%endif%}
+						">
+						{% trans "Mönster" %}: {{ pattern.name }}</option>
+					{% endfor %}
+				</select>
+		{% endif %}
+		<br/>
 	    <select id='size'>
-		{% for size in sizes %}
-			<option value="{{ size.pk }}" > {% trans "Storlek" %}: {{ size.name }} </option>
-		{% endfor %}
+			{% for size in sizes %}
+				<option value="{{ size.pk }}" > {% trans "Storlek" %}: {{ size.name }} </option>
+			{% endfor %}
 	    </select>
         <select id='quantiy_pk'>
             <option value="1" selected="selected">{% trans "Antal" %} : 1 </option>
@@ -110,31 +134,34 @@
             <option value="4">{% trans "Antal" %} : 4 </option>
         </select>
 
-        </div>
+	</div>
 
-        {% if product.article.quality.name != "Plysch" %}
-        <span style="padding-left: 10px;"><img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" /></span>
-            <div style="clear: both;"></div>
-            <hr/>
+		
+		
+        {% if product.article.quality.order == 2 or product.article.quality.order == 4 or product.article.sku_number == '9805'%}
+			<br/>
+		{%else%}
+			<span style="padding-left: 10px;">
+				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" />
+			</span>
+			<div style="clear: both;"></div>
+			<hr/>
         {% endif %}
-
-        <div class="small" id="changetext">
-
-        </div>
-
+		
+        <div class="small" id="changetext"></div>
         <hr/>
         <div style="clear: both;"></div>
 
         <div class="span6">
-        <h4> {% trans "Pris" %}: {{ product.article.price }} kr </h4>
-
+	        <h4> {% trans "Pris" %}: {{ product.article.price }} kr </h4>
         </div>
 
 
         <div id='addtocart' style="display:block;">
-        <span style="padding-left: 30px;">
-            <button class="btn btn-success" type="button">{% trans "Lägg till i Köplista" %} </button></span>
-        </div>
+			<span style="padding-left: 30px;">
+				<button class="btn btn-success" type="button">{% trans "Lägg till i Köplista" %} </button>
+			</span>
+		</div>
         <hr/>
     </div>
 </div>
@@ -239,33 +266,26 @@
             size_id = $('#size option:selected').val(),
             article_id = $('#article_pk option:selected').val(),
             quantity = $('#quantiy_pk option:selected').val(),
-            patterns = [],
-			colors = [];
+            color = $('#color option:selected').val() || $('#hidden_colorpattern').val();
+			pattern= $('#pattern option:selected').val() || $('#hidden_colorpattern').val();
+			color2 = 0,
+			pattern2 = 0;
 			
-			console.log(quality);
-            if (quality == 'Plysch') {
-                patterns.push($('#hidden_colorpattern').val());
-                colors.push($('#hidden_colorpattern').val());
-            } else if(sku_number == 123){ //fill in proper article no for 2 patterned items
-                patterns.push($('#pattern option:selected').val());
-                patterns.push($('#pattern2 option:selected').val());
-                colors.push($('#color option:selected').val());
-                colors.push($('#color2 option:selected').val());
-			}
-			else {
-                patterns.push($('#pattern option:selected').val());
-                colors.push($('#color option:selected').val());
-            }
-
-
-			
+			console.log(sku_number);
+            
+			if(sku_number == 9805){ //fill in proper article no for 2 patterned items
+                color2 = $('#color2 option:selected').val(),
+                pattern2 = $('#pattern2 option:selected').val();
+			}	
         $.ajax({
             type:"POST",
             url:"/cart/addtocart/",
             data: {
                 article_sku: sku_number,
-                pattern: patterns,
-                color: colors,
+                color: color,
+                color2: color2,
+                pattern: pattern,
+	            pattern2: pattern2,
                 size: size_id,
                 csrfmiddlewaretoken: csrftoken,
                 cartitem_id: '0',
@@ -275,22 +295,27 @@
             success: function(data){
                 var msg = data.message.msg,
                     _ = data.cartitem;
-                $("#changetext")
-                  .html( msg +'<table>' +
-                        '<tr><th>Antal</th><th>Plagg</th><th>Mönster</th><th>Färg</th><th>Storlek</th></tr>' +
-                        '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ _.pattern+'</td>' +
-                        '<td>'+ _.color +'</td><td>'+ _.size+'</td></tr></table>' +
-                        'i din <a href="/cart/show/">shoppinglåda</a>')
-                  .css({'font-size':'11px'})
+				
+				if(color2 == 0) {
+					var coltext = _.color,
+						pattext = _.pattern;
+					
+				} else {
+					var coltext = _.color +' / '+_.color2,
+						pattext = _.pattern +' / '+_.pattern2;
+				}
+				$("#changetext")
+				  .html( msg +'<table>' +
+						'<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Plagg"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th><th>{%trans "Storlek"%}</th></tr>' +
+						'<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+						'<td>'+ _.size+'</td></tr></table>' +
+						'{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+			  .css({'font-size':'11px'})
 
             }
         });
 
-
-
     });
-
-    });
-
+});
 </script>
 {% endblock %}

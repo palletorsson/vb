@@ -42,12 +42,21 @@
         </td>
         <td>
             <div>
-                <span>{{ item.color }} </span>
+                <span>{{ item.color }}
+                {%if item.color_2%}
+                    / {{item.color_2}}
+                {%endif%}
+                </span>
             </div>
         </td>
         <td>
             <div>
-                <span>{{ item.pattern }}</span>
+                <span>{{ item.pattern }}
+                {%if item.pattern_2%}
+                    / {{item.pattern_2}}
+                {%endif%}
+                
+                </span>
             </div>
         </td>
         <td>

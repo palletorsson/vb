@@ -8,10 +8,10 @@ from gallery.models import *
 def first_page(request):
     variations = Variation.objects.filter(active=True).order_by('article__quality')
     images = Image.objects.all()
-    print images.image
+    #print images.image
     products = zip(variations, images)
     news = Post.objects.all()
-    print news
+    #print news
     return render_to_response('variation/first_page.html',
 							{'products': products,
 							'news': news,
@@ -57,10 +57,10 @@ def detail(request, pk):
         images = Image.objects.filter(variation__pk=pk)
         color_id = product.color.order
         pattern_id = product.pattern.order
-        qualities = Quality.objects.filter(active=True)
-        types = Type.objects.filter(active=True)
-        colors = Color.objects.filter(active=True, quality=product.article.quality)
-        patterns = Pattern.objects.filter(active=True, quality=product.article.quality)
+        qualities = Quality.objects.filter(active = True)
+        types = Type.objects.filter(active = True)
+        colors = Color.objects.filter(active=True, quality = product.article.quality)
+        patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
         sizes = Size.objects.filter(quality=product.article.quality)
     except:
         return HttpResponse(404)
