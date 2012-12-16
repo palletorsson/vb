@@ -43,10 +43,16 @@ def addtocart(request):
         d = request.POST
         sku = d['article_sku']
         article_db = Article.objects.get(sku_number = sku)
-        color = d['color']
+        colcount = len(d['color'])
+        color = d['color'][0]
         color_db = Color.objects.get(order=color)
-        pattern = d['pattern']
+        pattern = d['pattern'][0]
         pattern_db = Pattern.objects.get(order=pattern)
+        if colcount > 1:
+            color2 = d['color'][1]
+            color_db2 = Color.objects.get(order=color2)
+            pattern2 = d['pattern'][1]
+            pattern_db2 = Pattern.objects.get(order=pattern2)            
         size = d['size']
         size_db = Size.objects.get(pk=size)
         quantity = int(d['quantity'])
@@ -64,9 +70,12 @@ def addtocart(request):
 
         if (cartitem_id and add_or_edit == 'edit'):
             cartitem = CartItem.objects.get(pk=cartitem_id)
-            cartitem.pattern = pattern_db
             cartitem.size = size_db
             cartitem.color = color_db
+            cartitem.pattern = pattern_db
+            if(color_db2):
+                cartitem.color2 = color_db2
+                cartitem.pattern2 = pattern_db2                
             cartitem.quantity = quantity
             cartitem.save()
             msg = u'Du har andrat till: </br>'

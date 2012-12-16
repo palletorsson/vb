@@ -38,15 +38,40 @@
             <div class="span12">
 
             {% for color in colors %}
-            <img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
-            <label class="radio inline">
-                <input type="radio" name="radio" id="radio_{{ color.order }}" value="{{ color.order }}" >
-            </label>
+				<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
+				<label class="radio inline">
+				<input type="radio" name="radio" id="radio_{{ color.order }}" value="{{ color.order }}" >
+				</label>
             {% endfor %}
             <br />
             <input id="hidden_colorpattern" type="hidden" value="">
 
-        {% else %}
+		{%elifequal product.article.pk 123 %}
+				<div class="span7">
+	
+			<select class="changonselect" id="color">
+			{% for color in colors %}
+				<option value="{{ color.order }}"
+					{% if color.order == product.color.order %}
+						selected="selected"
+					{%endif%}
+					id="color_{{ color.order }}">
+				Färg: {{ color.name }} </option>
+			{% endfor %}
+			</select> 	    
+	
+			<select class="changonselect" id='pattern'>
+			{% for pattern in patterns %}
+				<option value="{{ pattern.order }}"
+				{% if pattern.order == product.pattern.order %}
+					selected="selected"
+				{%endif%}
+				id="pattern_{{ pattern.order }}">
+				Mönster: {{ pattern.name }}</option>
+			{% endfor %}
+			</select>
+		
+	    {% else %}
 
             <div class="span7">
 
@@ -210,28 +235,37 @@
 
     $("#addtocart").click(function() {
         var sku_number = $('#sku_number').text(),
-            cart = $('#sku_number').text();
-            var quality = $(".quality").text();
-            console.log(quality);
+            quality = $(".quality").text(),
+            size_id = $('#size option:selected').val(),
+            article_id = $('#article_pk option:selected').val(),
+            quantity = $('#quantiy_pk option:selected').val(),
+            patterns = [],
+			colors = [];
+			
+			console.log(quality);
             if (quality == 'Plysch') {
-                pattern_id = $('#hidden_colorpattern').val();
-                color_id = $('#hidden_colorpattern').val();
-            } else {
-                pattern_id = $('#pattern option:selected').val();
-                color_id = $('#color option:selected').val();
+                patterns.push($('#hidden_colorpattern').val());
+                colors.push($('#hidden_colorpattern').val());
+            } else if(sku_number == 123){ //fill in proper article no for 2 patterned items
+                patterns.push($('#pattern option:selected').val());
+                patterns.push($('#pattern2 option:selected').val());
+                colors.push($('#color option:selected').val());
+                colors.push($('#color2 option:selected').val());
+			}
+			else {
+                patterns.push($('#pattern option:selected').val());
+                colors.push($('#color option:selected').val());
             }
 
-            size_id = $('#size option:selected').val();
-            article_id = $('#article_pk option:selected').val();
-            quantity = $('#quantiy_pk option:selected').val();
 
+			
         $.ajax({
             type:"POST",
             url:"/cart/addtocart/",
             data: {
                 article_sku: sku_number,
-                pattern: pattern_id,
-                color: color_id,
+                pattern: patterns,
+                color: colors,
                 size: size_id,
                 csrfmiddlewaretoken: csrftoken,
                 cartitem_id: '0',
