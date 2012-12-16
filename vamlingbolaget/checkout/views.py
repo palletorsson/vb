@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.core import mail
 from cart.views import _cart_id, totalsum, _new_cart_id
 
-from cart.models import Cart
+from cart.models import Cart, CartItem
 from forms import CheckoutForm
 from models import Checkout
 import random
@@ -95,8 +95,12 @@ def thanks(request):
     except:
         order = 1
     if (order != 1):
-        cart = Cart.objects.filter(key = cart_id)
+        cart = Cart.objects.get(key = cart_id)
+        cartitems_key = cart.id
+        cartitems = CartItem.objects.filter(cart = cartitems_key)
+        cartitems.delete()
         cart.delete()
+
         _new_cart_id(request)
         message = "Tack for din order"
     else:
