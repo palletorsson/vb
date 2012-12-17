@@ -71,7 +71,7 @@ def addtocart(request):
         existing_cartitems = CartItem.objects.filter(cart=cart)
 
         # and item.pattern.name == pattern and item.size.name == size
-
+        update = False
         if (cartitem_id and add_or_edit == 'edit'):
             cartitem = CartItem.objects.get(pk=cartitem_id)
             cartitem.size = size_db
@@ -83,6 +83,7 @@ def addtocart(request):
             cartitem.quantity = quantity
             cartitem.save()
             msg = u'Du har andrat till: </br>'
+            
         elif (existing_cartitems):
             for item in existing_cartitems:
                 if (str(item.article.sku_number) == str(sku) and str(item.pattern.order) == str(pattern) and str(item.color.order) == str(color) and str(item.size.pk) == str(size)):
@@ -90,19 +91,19 @@ def addtocart(request):
                     item.save()
                     msg = u'Du la till ytterligare %s %s och har nu: <br/>' %(quantity, article_db.name)
                     quantity = item.quantity
-                    break
-                else:
-                    cartitem = CartItem.objects.create(cart = cart)
-                    cartitem.article = article_db
-                    cartitem.pattern = pattern_db
-                    if(color2 > 0):
-                        cartitem.color_2 = color_db2
-                        cartitem.pattern_2 = pattern_db2                
-                    cartitem.size = size_db
-                    cartitem.color = color_db
-                    cartitem.quantity = quantity
-                    cartitem.save()
-                    msg = u'Du har lagt till: <br/>'
+                    update = True
+            if update != True:
+                cartitem = CartItem.objects.create(cart = cart)
+                cartitem.article = article_db
+                cartitem.pattern = pattern_db
+                if(color2 > 0):
+                    cartitem.color_2 = color_db2
+                    cartitem.pattern_2 = pattern_db2                
+                cartitem.size = size_db
+                cartitem.color = color_db
+                cartitem.quantity = quantity
+                cartitem.save()
+                msg = u'Du har lagt till: <br/>'
 
         else:
             cartitem = CartItem.objects.create(cart = cart)
