@@ -239,8 +239,12 @@
             folder = "{{MEDIA_URL}}uploads/120/",
             img = "";
 
-        var once = 1;
-        $(".changonselect option:selected").each(function () {
+        var once = 1,
+			img,
+			img2,
+			pattern2_id = $("#pattern2").val() || null;
+        
+		$(".changonselect option:selected").each(function () {
                 str += $(this).text() + " ";
                 if (once == 1) {
                 str += " och ";
@@ -251,19 +255,20 @@
             var pattern_id = $("#pattern").val(),
 				color_id = $("#color").val(),
 				size_id = $("#size").val(),
-				img = folder+color_id+"f_"+pattern_id+"m.jpg",
-				pattern2_id = $("#pattern2").val() || null,
 				color2_id = $("#color2").val() || null;
 				
+			img = folder+color_id+"f_"+pattern_id+"m.jpg";
 			
 			if(pattern2_id){
-				img2 = folder+color_id2+"f_"+pattern2_id+"m.jpg",
-		        $("#pattern_color_image2").attr("src", img2);
+				img2 = folder+color2_id+"f_"+pattern2_id+"m.jpg";
 			}
         });
 
         $("#changetext").text(str);
         $("#pattern_color_image").attr("src", img);
+		if(pattern2_id){
+			$("#pattern_color_image2").attr("src", img2);
+		}
     });
 
     var add_or_edit = 'add';
