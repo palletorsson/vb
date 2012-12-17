@@ -42,7 +42,7 @@
 				{% for color in colors %}
 					<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
 					<label class="radio inline">
-						<input type="radio" name="radio" id="radio_{{ color.order }}" value="{{ color.order }}" />
+						<input type="radio" name="radio" {%if color_id == color.order %} checked="checked" {%endif%}  id="radio_{{ color.order }}" value="{{ color.order }}" />
 					</label>
 				{% endfor %}
             <br />
@@ -223,13 +223,13 @@
         quantity = $('#quantiy_pk option:selected').val();
 
 */
-        var first_color_id = "{{ product.color.order }}";
-        $('#radio_'+first_color_id).attr('checked','checked');
-
-        $('#hidden_colorpattern').val(first_color_id);
-        $('input[name=radio]').change(function () {
-			$('#hidden_colorpattern').val(this.value);
-        });
+        if($('#hidden_colorpattern')){
+			var first_color_id = "{{ product.color.order }}";
+			$('#hidden_colorpattern').val(first_color_id);
+			$('input[name=radio]').change(function () {
+				$('#hidden_colorpattern').val(this.value);
+			});
+		}
 
     $(".changonselect").change(function () {
         $('#fadeifchangeorder').fadeTo(500,0.6);
