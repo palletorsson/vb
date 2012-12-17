@@ -41,7 +41,6 @@ def augment_quantity(self, quantity):
 def addtocart(request):
     if (request.method == 'POST'):
         d = request.POST
-        print d
         sku = d['article_sku']
         article_db = Article.objects.get(sku_number = sku)
         color = d['color']
@@ -54,7 +53,6 @@ def addtocart(request):
         else:
             c2 = d['color2']
             p2 = d['pattern2']
-            print "-------------"
             color_db2 = Color.objects.get(order = c2)
             pattern_db2 = Pattern.objects.get(order = p2)
         size = d['size']
