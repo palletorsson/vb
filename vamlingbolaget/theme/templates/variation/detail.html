@@ -71,7 +71,7 @@
 						{%trans "Mönster"%} : {{ pattern.name }}</option>
 					{% endfor %}
 				</select>
-				<img class="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" />
+				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" />
 			</div>
 				
 			<div class="span5">
@@ -96,7 +96,7 @@
 						{%trans "Mönster"%} : {{ pattern.name }}</option>
 					{% endfor %}
 				</select>
-				<img class="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
+				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
 			</div>
 	    {% else %}
 			<div class="span7">
@@ -248,10 +248,18 @@
 
             once = 2;
 
-            pattern_id = $("#pattern").val();
-            color_id = $("#color").val();
-            size_id = $("#size").val();
-            img = folder+color_id+"f_"+pattern_id+"m.jpg";
+            var pattern_id = $("#pattern").val(),
+				color_id = $("#color").val(),
+				size_id = $("#size").val(),
+				img = folder+color_id+"f_"+pattern_id+"m.jpg",
+				pattern2_id = $("#pattern2").val() || null,
+				color2_id = $("#color2").val() || null;
+				
+			
+			if(pattern2_id){
+				img2 = folder+color_id2+"f_"+pattern2_id+"m.jpg",
+		        $("#pattern_color_image2").attr("src", img2);
+			}
         });
 
         $("#changetext").text(str);
@@ -277,6 +285,7 @@
                 color2 = $('#color2 option:selected').val(),
                 pattern2 = $('#pattern2 option:selected').val();
 			}	
+
         $.ajax({
             type:"POST",
             url:"/cart/addtocart/",
