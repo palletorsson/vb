@@ -1,4 +1,4 @@
-{% extends "collection_base.html" %}
+{% extends "collection_sbase.html" %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {% load i18n %}
@@ -10,7 +10,6 @@
 {% block allcontent %}
 <div class="row-fluid">{{ images.pk }}
     <div class="span5" >
-
         <div style="clear: both;"></div>
         <div class="span6">
             <strong>{{ cartitem.article.name }} </strong><br/>
@@ -24,36 +23,38 @@
             <h4>{% trans "Pris" %}: {{ cartitem.article.price }} kr</h4>
 
         </div>
-        <span style="padding-left: 40px;"><img src="{% version cartitem.article.file 'small' %} " >  </span>
+        <span style="padding-left: 40px;">
+			<img src="{% version cartitem.article.file 'small' %} " >
+		</span>
         <div style="clear: both;"></div>
         <hr/>
     </div>
 
-	{% if cartitem.article.quality.order == 2 or cartitem.article.quality.order == 4 %}
-            <div class="span12">
-            {% for color in colors %}
-				<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
-				<label class="radio inline">
-				<input type="radio" name="radio" {%if cartitem.color.order == color.order %} checked="checked" {%endif%} id="radio_{{ color.order }}" value="{{ color.order }}" >
-				</label>
-            {% endfor %}
-            <br />
-            <input id="hidden_colorpattern" type="hidden" value="">
-
+{% if cartitem.article.quality.order == 2 or cartitem.article.quality.order == 4 %}
+	<div class="span12">
+		{% for color in colors %}
+			<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
+			<label class="radio inline">
+			<input type="radio" name="radio" {%if cartitem.color.order == color.order %} checked="checked" {%endif%} id="radio_{{ color.order }}" value="{{ color.order }}" >
+			</label>
+		{% endfor %}
+		<br />
+		<input id="hidden_colorpattern" type="hidden" value="">
+	</div>
 <!----------------------------------9805 vandbar jacka------------------------>
-	{%elif cartitem.article.sku_number == '9805' %}
+{%elif cartitem.article.sku_number == '9805' %}
     <div class="span6">
         <div class="span7">
-	<h5> Utsidans mönster</h5>
+			<h5> Utsidans mönster</h5>
 			<select class="changonselect" id="color">
-			{% for color in colors %}
-				<option value="{{ color.order }}"
-					{% if color.order == cartitem.color.order %}
-						selected="selected"
-					{%endif%}
-					">
-				Färg: {{ color.name }} </option>
-			{% endfor %}
+				{% for color in colors %}
+					<option value="{{ color.order }}"
+						{% if color.order == cartitem.color.order %}
+							selected="selected"
+						{%endif%}
+						">
+					Färg: {{ color.name }} </option>
+				{% endfor %}
 			</select> 	    
 	
 			<select class="changonselect" id='pattern'>
@@ -67,70 +68,70 @@
 				{% endfor %}
 			</select>
 			<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
-				</div>
-				
-				<div class="span5">
-					<h5>Insidans mönster</h5>
+		</div>
+		<div class="span5">
+			<h5>Insidans mönster</h5>
 			<select class="changonselect" id="color2">
-			{% for color in colors %}
-				<option value="{{ color.order }}"
-					{% if color.order == cartitem.color_2.order %}
-						selected="selected"
-					{%endif%}
-					">
-				Färg: {{ color.name }} </option>
-			{% endfor %}
+				{% for color in colors %}
+					<option value="{{ color.order }}"
+						{% if color.order == cartitem.color_2.order %}
+							selected="selected"
+						{%endif%}
+						">
+					Färg: {{ color.name }} </option>
+				{% endfor %}
 			</select> 	    
 	
 			<select class="changonselect" id='pattern2'>
-			{% for pattern in patterns %}
-				<option value="{{ pattern.order }}"
-				{% if pattern.order == cartitem.pattern_2.order %}
-					selected="selected"
-				{%endif%}
-				">
-				Mönster: {{ pattern.name }}</option>
-			{% endfor %}
+				{% for pattern in patterns %}
+					<option value="{{ pattern.order }}"
+					{% if pattern.order == cartitem.pattern_2.order %}
+						selected="selected"
+					{%endif%}
+					">
+					Mönster: {{ pattern.name }}</option>
+				{% endfor %}
 			</select>
 			<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" style="width:100px;" />
-				</div>
+		</div>
 	</div>
 			
 <!---------------------else--------------------------->
-	{%else%}
+{%else%}
     <div class="span6">
         <div class="span7">
-	    <select class="changonselect" id="color">
-		{% for color in colors %}
-			<option value="{{ color.order }}"
-                {% if color.order == cartitem.color.order %}
-                    selected="selected"
-                {%endif%} >
-            {% trans "Färg" %}: {{ color.name }} </option>
-        {% endfor %}
-	    </select> 	    
-
-	    <select class="changonselect" id='pattern'>
-		{% for pattern in patterns %}
-			<option value="{{ pattern.order }}"
-            {% if pattern.order == cartitem.pattern.order %}
-                selected="selected"
-            {%endif%}
-            >
-            {% trans "Mönster" %}: {{ pattern.name }}</option>
-		{% endfor %}
-	    </select>
+			<select class="changonselect" id="color">
+				{% for color in colors %}
+					<option value="{{ color.order }}"
+						{% if color.order == cartitem.color.order %}
+							selected="selected"
+						{%endif%} >
+					{% trans "Färg" %}: {{ color.name }} </option>
+				{% endfor %}
+			</select> 	    
+	
+			<select class="changonselect" id='pattern'>
+				{% for pattern in patterns %}
+					<option value="{{ pattern.order }}"
+					{% if pattern.order == cartitem.pattern.order %}
+						selected="selected"
+					{%endif%}
+					>
+					{% trans "Mönster" %}: {{ pattern.name }}</option>
+				{% endfor %}
+			</select>
+		</div>
+	</div>
 {%endif%}
-		<div>
+	<div>
 	    <select  class="changonselect"  id='size'>
-		{% for size in sizes %}
-			<option value="{{ size.pk }}"
-                {% if size.order == 1 %}
-                   selected="selected"
-                {%endif%}
-            > {% trans "Storlek" %}: {{ size.name }} </option>changonselect
-
-		{% endfor %}
+			{% for size in sizes %}
+				<option value="{{ size.pk }}"
+					{% if size.order == 1 %}
+					   selected="selected"
+					{%endif%}
+				> {% trans "Storlek" %}: {{ size.name }} </option>changonselect
+			{% endfor %}
 	    </select>
         <select  class="changonselect"  id='quantity_pk'>
             <option {%if cartitem.quantity == 1 %} selected="selected" {%endif%} value="1">{% trans "Antal" %}: 1 </option>
@@ -138,26 +139,25 @@
             <option {%if cartitem.quantity == 3 %} selected="selected" {%endif%} value="3">{% trans "Antal" %}: 3 </option>
             <option {%if cartitem.quantity == 4 %} selected="selected" {%endif%} value="4">{% trans "Antal" %}: 4 </option>
         </select>
-
-        </div>
-		{%if cartitem.article.sku_number != '9805'%}
-        <span style="padding-left: 10px;">
-			<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
-		</span>
-		{%endif%}
-        <div style="clear: both;"></div>
-        <hr/>
-        <div id="changetext"></div>
-        <hr/>
-        <div style="clear: both;"></div>
-        <div class="span6">
-        </div>
-        <div style="display:block;">
+	</div>
+{%if cartitem.article.sku_number != '9805'%}
+	<span style="padding-left: 10px;">
+		<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
+	</span>
+{%endif%}
+	<div style="clear: both;"></div>
+	<hr/>
+	<div id="changetext"></div>
+	<hr/>
+	<div style="clear: both;"></div>
+	<div class="span6"></div>
+	<div style="display:block;">
         <span style="padding-left: 30px;">
-            <button class="btn btn-success" onclick="javascript:history.go(-1)" type="button">{% trans "Avbryt" %}</button></span>
-            <button id='addtocart' class="btn btn-success" type="button">{% trans "Uppdatera" %}</button></span>
-        </div>
+            <button class="btn btn-success" onclick="javascript:history.go(-1)" type="button">{% trans "Avbryt" %}</button>
+            <button id='addtocart' class="btn btn-success" type="button">{% trans "Uppdatera" %}</button>
+		</span>
     </div>
+</div>
 
 <script>
     $(function(){
