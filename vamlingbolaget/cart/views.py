@@ -193,10 +193,9 @@ def showcart(request):
 
 def editcartitem(request, key):
     cartitem = CartItem.objects.get(pk=key)
-    quality = cartitem.quantity
-    colors = Color.objects.filter(active=True, quality=quality)
-    patterns = Pattern.objects.filter(active=True, quality=quality)
-    sizes = Size.objects.filter(quality=quality)
+    colors = Color.objects.filter(active=True, quality = cartitem.article.quality)
+    patterns = Pattern.objects.filter(active=True, quality = cartitem.article.quality)
+    sizes = Size.objects.filter(quality=cartitem.article.quality)
     return render_to_response('cart/detail.html',
         {'cartitem': cartitem,
          'colors': colors,
