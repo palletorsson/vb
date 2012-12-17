@@ -39,6 +39,9 @@
   
         {% if product.article.quality.order == 2 or product.article.quality.order == 4 %}
 			Color_id: {{color_id}}
+			prod.color.order: {{product.color.order}}
+			prod.color.order: {{product.color}}
+			
 			<div class="span12">
 				{% for color in colors %}
 					<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
