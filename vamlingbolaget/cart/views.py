@@ -48,15 +48,15 @@ def addtocart(request):
         color_db = Color.objects.get(order=color)
         pattern = d['pattern']
         pattern_db = Pattern.objects.get(order=pattern)
-        col2 = int(d['color2'])
-        if(col2 == 0):
+        color2 = int(d['color2'])
+        if(color2 == 0):
             pass
         else:
-            color2 = d['color2']
-            pattern2 = d['pattern2']
+            c2 = d['color2']
+            p2 = d['pattern2']
             print "-------------"
-            color_db2 = Color.objects.get(order = color2)
-            pattern_db2 = Pattern.objects.get(order = pattern2)
+            color_db2 = Color.objects.get(order = c2)
+            pattern_db2 = Pattern.objects.get(order = p2)
         size = d['size']
         size_db = Size.objects.get(pk=size)
         quantity = int(d['quantity'])
@@ -71,18 +71,19 @@ def addtocart(request):
         existing_cartitems = CartItem.objects.filter(cart=cart)
 
         # and item.pattern.name == pattern and item.size.name == size
-
+        update = False
         if (cartitem_id and add_or_edit == 'edit'):
             cartitem = CartItem.objects.get(pk=cartitem_id)
             cartitem.size = size_db
             cartitem.color = color_db
             cartitem.pattern = pattern_db
-            if(col2 > 0):
+            if(color2 > 0):
                 cartitem.color_2 = color_db2
                 cartitem.pattern_2 = pattern_db2                
             cartitem.quantity = quantity
             cartitem.save()
             msg = u'Du har andrat till: </br>'
+            
         elif (existing_cartitems):
             for item in existing_cartitems:
                 if (str(item.article.sku_number) == str(sku) and str(item.pattern.order) == str(pattern) and str(item.color.order) == str(color) and str(item.size.pk) == str(size)):
@@ -90,18 +91,19 @@ def addtocart(request):
                     item.save()
                     msg = u'Du la till ytterligare %s %s och har nu: <br/>' %(quantity, article_db.name)
                     quantity = item.quantity
-                else:
-                    cartitem = CartItem.objects.create(cart = cart)
-                    cartitem.article = article_db
-                    cartitem.pattern = pattern_db
-                    if(col2 > 0):
-                        cartitem.color_2 = color_db2
-                        cartitem.pattern_2 = pattern_db2                
-                    cartitem.size = size_db
-                    cartitem.color = color_db
-                    cartitem.quantity = quantity
-                    cartitem.save()
-                    msg = u'Du har lagt till: <br/>'
+                    update = True
+            if update != True:
+                cartitem = CartItem.objects.create(cart = cart)
+                cartitem.article = article_db
+                cartitem.pattern = pattern_db
+                if(color2 > 0):
+                    cartitem.color_2 = color_db2
+                    cartitem.pattern_2 = pattern_db2                
+                cartitem.size = size_db
+                cartitem.color = color_db
+                cartitem.quantity = quantity
+                cartitem.save()
+                msg = u'Du har lagt till: <br/>'
 
         else:
             cartitem = CartItem.objects.create(cart = cart)
@@ -109,14 +111,14 @@ def addtocart(request):
             cartitem.pattern = pattern_db
             cartitem.size = size_db
             cartitem.color = color_db
-            if(col2 > 0):
+            if(color2 > 0):
                 cartitem.color_2 = color_db2
                 cartitem.pattern_2 = pattern_db2                
             cartitem.quantity = quantity
             cartitem.save()
             msg = u'Du har lagt till: <br/>'
 
-    if(col2 > 0):
+    if(color2 > 0):
         returnjson = {
                 'cartitem': {
                     'article': article_db.name,
@@ -193,16 +195,14 @@ def showcart(request):
 
 def editcartitem(request, key):
     cartitem = CartItem.objects.get(pk=key)
-    colors = Color.objects.all()
-    patterns = Pattern.objects.all()
+    colors = Color.objects.filter(active=True)
+    patterns = Pattern.objects.filter(active=True)
     sizes = Size.objects.all()
-    qualities = Quality.objects.all()
     return render_to_response('cart/detail.html',
         {'cartitem': cartitem,
          'colors': colors,
          'patterns': patterns,
          'sizes': sizes,
-         'qualities': qualities,
          },
         context_instance=RequestContext(request))
 

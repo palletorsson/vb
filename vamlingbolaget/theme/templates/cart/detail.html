@@ -66,7 +66,7 @@
 					Mönster: {{ pattern.name }}</option>
 				{% endfor %}
 			</select>
-			<img class="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
+			<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
 				</div>
 				
 				<div class="span5">
@@ -92,7 +92,7 @@
 				Mönster: {{ pattern.name }}</option>
 			{% endfor %}
 			</select>
-			<img class="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" style="width:100px;" />
+			<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" style="width:100px;" />
 				</div>
 	</div>
 			
@@ -207,32 +207,42 @@
             }
         })
 
-
-
     $(".changonselect").change(function () {
-
         $('#fadeifchangeorder').fadeTo(500,0.6);
-
-
         var str = "Uppdatera "+"{{ cartitem.article.name }}"+ " i ",
             folder = "{{MEDIA_URL}}uploads/120/",
             img = "";
 
-        var once = 1;
-        $(".changonselect option:selected").each(function () {
-            str += $(this).text() + " ";
-            if (once == 1) {
+        var once = 1,
+			img,
+			img2,
+			pattern2_id = $("#pattern2").val() || null;
+        
+		$(".changonselect option:selected").each(function () {
+                str += $(this).text() + " ";
+                if (once == 1) {
                 str += " och ";
             }
+
             once = 2;
-            pattern_id = $("#pattern").val();
-            color_id = $("#color").val();
-            size_id = $("#size").val();
-            quantity = $("#quantity_pk").val();
-            img = folder+color_id+"f_"+pattern_id+"m.jpg";
+
+            var pattern_id = $("#pattern").val(),
+				color_id = $("#color").val(),
+				size_id = $("#size").val(),
+				color2_id = $("#color2").val() || null;
+				
+			img = folder+color_id+"f_"+pattern_id+"m.jpg";
+			
+			if(pattern2_id){
+				img2 = folder+color2_id+"f_"+pattern2_id+"m.jpg";
+			}
         });
+
         $("#changetext").text(str);
-        $("#pattern_color_image").attr("src", img).attr('alt','Bild saknas');
+        $("#pattern_color_image").attr("src", img);
+		if(pattern2_id){
+			$("#pattern_color_image2").attr("src", img2);
+		}
     });
 
     var add_or_edit = 'edit';
