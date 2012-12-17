@@ -6,6 +6,7 @@ import random
 
 class Cart(models.Model):
     key = models.CharField(max_length = 50)
+
     def __unicode__(self):
         return '%s' %self.pk
 
@@ -23,16 +24,6 @@ class CartItem(models.Model):
 
     class Meta:
         ordering=['date_added']
-
-    def total(self):
-        return self.quantity * self.article.price
-    print total
-
-    def name(self):
-        return self.article.name
-    
-    def price(self):
-        return self.article.price * self.quantity
 
     def __unicode__(self):
         return "%s %s" % (self.quantity, self.article.name)

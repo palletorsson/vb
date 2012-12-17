@@ -14,7 +14,7 @@ class VariationAdmin(admin.ModelAdmin):
     list_display = ('active', 'article', 'pattern', 'color', 'order',)
     list_display_links = ('article',)
     list_editable = ('active', 'order')
-    list_filter = ('active', 'article',)
+    list_filter = ('active', 'article', 'pattern', 'color',)
     search_fields = ['article']
     list_per_page = 20
     ordering = ['active','article']
