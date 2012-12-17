@@ -7,7 +7,7 @@ import random
 class Cart(models.Model):
     key = models.CharField(max_length = 50)
     def __unicode__(self):
-        return '%s' %self.key
+        return '%s' %self.pk
 
 
 class CartItem(models.Model):
