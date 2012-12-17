@@ -81,8 +81,6 @@ class Color(ChoiceBase):
     Color used in Product Model         
     """
     quality = models.ForeignKey('Quality', default=1)
-    def __unicode__(self):
-        return u'%s %s' %(self.name, self.quality)
 
 
 class Pattern(ChoiceBase):
@@ -90,8 +88,6 @@ class Pattern(ChoiceBase):
     Pattern used in Product Model         
     """
     quality = models.ForeignKey('Quality', default=1)
-    def __unicode__(self):
-        return u'%s %s' %(self.name, self.quality)
 
 class Quality(ChoiceBase):
     """
