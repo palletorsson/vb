@@ -224,13 +224,11 @@
 
 */
         var first_color_id = "{{ product.color.order }}";
-        $('input[name="radio"]'+" #radio_"+first_color_id).attr('checked',true);
+        $('#radio_'+first_color_id).attr('checked','checked');
 
         $('#hidden_colorpattern').val(first_color_id);
-        $('input[name="radio"]').change(function () {
-                $('input[name="radio"]').click(function() {
-                    $('#hidden_colorpattern').val(this.value);
-                });
+        $('input[name=radio]').change(function () {
+			$('#hidden_colorpattern').val(this.value);
         });
 
     $(".changonselect").change(function () {
