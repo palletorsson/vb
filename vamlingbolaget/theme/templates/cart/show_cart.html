@@ -46,7 +46,7 @@
         </td>
         <td>
             <div>
-                <a href="remove : {{ item.article.id }}"><span class="icon-minus" id="{{ item.id }}"></span></a>
+                <a href="remove/{{ item.pk }}"><span class="icon-minus" id="{{ item.id }}"></span></a>
             </div>
         </td>
         <td>
@@ -62,7 +62,7 @@
         <td>
             <div>
                 <span>{{ item.color }}
-                {% if item.color_2 %}
+                {% if item.color_2 > 0 %}
                     / {{ item.color_2 }}
                 {%endif%}
                 </span>
@@ -71,7 +71,7 @@
         <td>
             <div>
                 <span>{{ item.pattern }}
-                {% if item.pattern_2 %}
+                {% if item.pattern_2 > 0 %}
                     / {{ item.pattern_2 }}
                 {%endif%}
                 </span>

@@ -1,5 +1,5 @@
 from django.db import models
-from products.models import * 
+from products.models import *
 import datetime
 import random
 
@@ -14,11 +14,11 @@ class Cart(models.Model):
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, default=1)
     article = models.ForeignKey(Article, default=1)
-    color = models.ForeignKey(Color, default=1)
-    color_2 = models.ForeignKey(Color, null=True)
-    pattern = models.ForeignKey(Pattern, default=1)
-    pattern_2 = models.ForeignKey(Pattern, null=True)
-    size = models.ForeignKey(Size, default=1)
+    color = models.SmallIntegerField(default=1)
+    color_2 = models.SmallIntegerField(default=0)
+    pattern = models.SmallIntegerField(default=1)
+    pattern_2 = models.SmallIntegerField(default=0)
+    size = models.SmallIntegerField(default=1)
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.PositiveIntegerField(default=1)
 

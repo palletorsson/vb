@@ -278,14 +278,12 @@
             article_id = $('#article_pk option:selected').val(),
             quantity = $('#quantiy_pk option:selected').val(),
             color = $('#color option:selected').val() || $('#hidden_colorpattern').val();
-			pattern= $('#pattern option:selected').val() || $('#hidden_colorpattern').val();
-			color2 = 0,
+		var	pattern= $('#pattern option:selected').val() || $('#hidden_colorpattern').val();
+		var	color2 = 0,
 			pattern2 = 0;
-			
-			console.log(sku_number);
-            
+
 			if(sku_number == 9805){ //fill in proper article no for 2 patterned items
-                color2 = $('#color2 option:selected').val(),
+                color2 = $('#color2 option:selected').val();
                 pattern2 = $('#pattern2 option:selected').val();
 			}	
 

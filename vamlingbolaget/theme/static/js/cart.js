@@ -53,7 +53,7 @@ $.ajaxSetup({
         if(confirm('Vill du ta bort denna post?')){
                 var id = $(this).attr('id');
                 $.ajax({
-                    url: '/cart/removefromcart/'+id,
+                    url: '/cart/removefromcart/'+ id,
                     csrfmiddlewaretoken: csrftoken,
                     contentType: "application/json",
                     success: function( data ) {
