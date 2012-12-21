@@ -43,8 +43,8 @@ def checkout(request):
             else:
                 message = 'none'
             i = 1
-            msg = "> Din order till Vamlingbolaget:\n"
-            msg = msg + '--------------------------------- *\n'
+            msg = "Din order till Vamlingbolaget:\n"
+            msg = msg + '--------------------------------- \n'
             msg = msg + 'Din order:\n'
             for item in cartitems:
                 msg = msg + 'plagg '+ str(i) + ': \n'
@@ -54,24 +54,25 @@ def checkout(request):
                 i = i + 1
             msg = msg + '\n'
             msg = msg + 'Frakt och hantering: 50 SEK \n'
-            msg = msg + '--------------------------------- *\n'
+            msg = msg + '--------------------------------- \n'
             msg = msg + 'Totalpris: %s SEK \n' %str(totalprice)
-            msg = msg + '--------------------------------- *\n'
-            msg = msg + 'Din adress:  *\n'
+            msg = msg + '--------------------------------- \n'
+            msg = msg + 'Din adress:  \n'
             msg = msg + u'%s %s \n' % (first_name, last_name)
             msg = msg + u'%s \n' % (street)
             msg = msg + u'%d %s \n' % (postcode, city)
             if (country != 'none'):
                 msg = msg + u'%s \n' % (country)
-
-            msg = msg + ' \n'
-            msg = msg + '* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
-            msg = msg + '* Du betalar med postforskatt \n'
+            msg = msg + '--------------------------------- \n'
             if (message != 'none'):
                 msg = msg + 'Din Meddelande:\n'
                 msg = msg + u' %s \n' % (message)
                 msg = msg + '\n'
-            msg = msg + '> Tack!'
+            msg = msg + '--------------------------------------------------------------------------------- \n'
+            msg = msg + ' \n'
+            msg = msg + '* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
+            msg = msg + '* Du betalar med postforskatt \n'
+            msg = msg + '- Tack!'
             new_order.order_number = random.randrange(0, 111111, 3)
             new_order.session_key = _cart_id(request)
             new_order.order = msg
