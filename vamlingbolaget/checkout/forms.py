@@ -2,7 +2,8 @@ from django import forms
 from models import Checkout
 
 class CheckoutForm(forms.ModelForm):
-    postcode  = forms.CharField(max_length=5, help_text='100 characters max.')
+    postcode  = forms.IntegerField(max_value=99999, help_text='max 5')
+
 
     def __init__(self, *args, **kwargs):
         super(CheckoutForm, self).__init__(*args, **kwargs)

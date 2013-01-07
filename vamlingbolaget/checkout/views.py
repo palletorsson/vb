@@ -50,6 +50,7 @@ def checkout(request):
                 msg = msg + 'plagg '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
                 msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
+                msg = msg + 'Storlek: ' + item.size.name + ' \n'
                 msg = msg + 'Pris per plagg: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
             msg = msg + '\n'
