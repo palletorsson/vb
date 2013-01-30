@@ -110,6 +110,16 @@ class Article(TimeStampedActivate):
     type = models.ForeignKey('Type')
     price = models.IntegerField()
     file = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg", ".gif", ".png"], blank=True, null=True)
+    discount = models.ForeignKey('Discount', blank=True, null=True)
+
+    def f_discount(self):
+        if (self.discount.type == 'P'):
+            f_discount = (self.price * (100-self.discount.discount)) / 100
+        else:
+            f_discount = self.price - self.discount.discount
+
+        return f_discount
+
 
     """
     def image_thumbnail(self, article):
@@ -128,4 +138,18 @@ class Article(TimeStampedActivate):
 
     def __unicode__(self):
         return unicode(self.name) + " (" + unicode(self.sku_number)+ ")"
-    
+
+TYPE_CHOICES = (
+    ('P', 'Procent'),
+    ('A', 'Amount')
+    )
+
+class Discount(models.Model):
+    title = models.CharField(max_length = 50)
+    reason = models.CharField(max_length = 255)
+    discount = models.IntegerField()
+    type = models.CharField(max_length=1, choices=TYPE_CHOICES, blank=True)
+    active = models.BooleanField("Active", default=True)
+
+    def __unicode__(self):
+        return unicode(self.title)

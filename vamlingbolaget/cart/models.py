@@ -27,4 +27,3 @@ class CartItem(models.Model):
 
     def __unicode__(self):
         return "%s %s" % (self.quantity, self.article.name)
-

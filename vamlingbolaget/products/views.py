@@ -8,15 +8,14 @@ from gallery.models import *
 def first_page(request):
     variations = Variation.objects.filter(active=True).order_by('article__quality')
     images = Image.objects.all()
-    #print images.image
     products = zip(variations, images)
     news = Post.objects.all()
-    #print news
     return render_to_response('variation/first_page.html',
 							{'products': products,
 							'news': news,
 							},
 							context_instance=RequestContext(request))
+
 
 def index(request):
     products = Variation.objects.filter(active=True).order_by('order', 'article__quality')
@@ -95,3 +94,4 @@ def quality(request, name):
 
 def category(request, name):
     pass
+
