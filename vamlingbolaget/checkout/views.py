@@ -27,10 +27,10 @@ def checkout(request):
             new_order = form.save(commit=False)
             new_order.ip = request.META['REMOTE_ADDR']
             new_order.status = 'O'
-            first_name = str(request.POST['first_name'])
-            last_name = str(request.POST['last_name'])
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
             street = request.POST['street']
-            postcode_str = str(request.POST['postcode'])
+            postcode_str = request.POST['postcode']
             postcode_str = postcode_str.replace(" ", "")
             postcode = int(postcode_str)
             city = request.POST['city']
