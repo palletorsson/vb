@@ -89,6 +89,19 @@ def pattern_and_color(request):
                              context_instance=RequestContext(request))
 
 
+def bargain(request):
+    products = Bargainbox.objects.filter(status='A')
+    return render_to_response('bargain/index.html',
+        {'products': products,},
+        context_instance=RequestContext(request))
+
+def bargain_detail(request, pk):
+    product = Bargainbox.objects.get(pk=pk)
+    return render_to_response('bargain/detail.html',
+        {'product': product,},
+        context_instance=RequestContext(request))
+
+
 def quality(request, name):
     pass
 

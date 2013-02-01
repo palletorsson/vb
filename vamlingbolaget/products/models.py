@@ -6,6 +6,9 @@ from filebrowser.fields import FileBrowseField
 from filebrowser.settings import ADMIN_THUMBNAIL
 from gallery.models import *
 import datetime
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, Adjust
+
 
 class TimeStampedActivate(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -153,3 +156,25 @@ class Discount(models.Model):
 
     def __unicode__(self):
         return unicode(self.title)
+
+
+
+STATUS = (
+    ('A', 'Active'),
+    ('E', 'Expired'),
+    )
+
+class Bargainbox(models.Model):
+    title = models.CharField(max_length=40)
+    description = models.TextField()
+    price = models.IntegerField()
+    created = models.DateTimeField(auto_now_add = True)
+    modified = models.DateTimeField(auto_now = True)
+    status = models.CharField(max_length=2, choices = STATUS)
+    image = models.ImageField(upload_to = 'bargins/')
+
+    def __unicode__(self):
+        return unicode(self.title)
+
+    class Meta:
+        ordering = ['-created', ]

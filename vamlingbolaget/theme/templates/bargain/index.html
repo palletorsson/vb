@@ -1,0 +1,24 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% block pagetitle %}
+    <legend>{% trans "FyndLåda" %}</legend>
+{% endblock %}
+
+{% block content %}
+        {% for product in products %}
+            <div class='image_wrapper'>
+                <a href="{{product.pk}}">
+                        <div class="collection_list" >
+                            <img src="{{ product.image.url }}" class="imgborder" width="200" />
+                            <span class='image_description'>
+                                {{ product.title }}<br/>
+                                {% trans "Pris" %} :
+                                {{ product.price }}
+                            </span>
+                        </div>
+                </a>
+            </div>
+        {% endfor %}
+{% endblock %}
