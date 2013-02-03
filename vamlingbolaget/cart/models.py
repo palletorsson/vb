@@ -27,3 +27,15 @@ class CartItem(models.Model):
 
     def __unicode__(self):
         return "%s %s" % (self.quantity, self.article.name)
+
+
+class BargainCartItem(models.Model):
+    cart = models.ForeignKey(Cart)
+    bargain = models.ForeignKey(Bargainbox)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=['date_added']
+
+    def __unicode__(self):
+        return "%s" % self.bargain.title

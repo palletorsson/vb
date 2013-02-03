@@ -14,13 +14,15 @@ def checkout(request):
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
+    bargains = cart.bargaincartitem_set.all()
     getnames(cartitems)
-    returntotal = totalsum(cartitems)
+    returntotal = totalsum(cartitems, bargains)
     totalprice = returntotal['totalprice']
     totalitems = returntotal['totalitems']
     handling = returntotal['handling']
     form = CheckoutForm()
     returntotal['form'] = form
+
     if request.method == 'POST':
         form = CheckoutForm(request.POST)
         if form.is_valid():
@@ -47,11 +49,14 @@ def checkout(request):
             msg = msg + '--------------------------------- \n'
             msg = msg + 'Din order:\n'
             for item in cartitems:
-                msg = msg + 'plagg '+ str(i) + ': \n'
+                msg = msg + 'product '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
                 msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
-                msg = msg + 'Storlek: ' + item.size.name + ' \n'
-                msg = msg + 'Pris per plagg: ' + str(item.article.price) +  ' SEK \n'
+                print item.article.type.order
+                if (item.article.type.order < 5):
+                    msg = msg + 'Storlek: ' + item.size.name + ' \n'
+
+                msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
             msg = msg + '\n'
             msg = msg + 'Frakt och hantering: 50 SEK \n'
@@ -89,6 +94,7 @@ def checkout(request):
         'totalitems': totalitems,
         'handling': handling,
         'cartitems': cartitems,
+        'bargains' : bargains,
         },
         context_instance=RequestContext(request))
 

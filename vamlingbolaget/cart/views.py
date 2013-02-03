@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from models import Cart, CartItem
+from models import Cart, CartItem, BargainCartItem
 from django.http import HttpResponse
-from products.models import Article, Color, Pattern, Size, Quality
+from products.models import Article, Color, Pattern, Size, Quality, Bargainbox
 import random
 from django.core import urlresolvers
 from models import CartItem
@@ -41,7 +41,6 @@ def augment_quantity(self, quantity):
 def addtocart(request):
     if (request.method == 'POST'):
         d = request.POST
-        print d
         sku = d['article_sku']
         article_db = Article.objects.get(sku_number = sku)
 
@@ -67,7 +66,6 @@ def addtocart(request):
 
         existing_cartitems = CartItem.objects.filter(cart=cart)
 
-        # and item.pattern.name == pattern and item.size.name == size
         update = False
         if (cartitem_id and add_or_edit == 'edit'):
             cartitem = CartItem.objects.get(pk=cartitem_id)
@@ -80,7 +78,7 @@ def addtocart(request):
             cartitem.quantity = quantity
             cartitem.save()
             msg = u'Du har andrat till: </br>'
-            
+
         elif (existing_cartitems):
             for item in existing_cartitems:
                 if (str(item.article.sku_number) == str(sku) and str(item.pattern) == str(pattern) and
@@ -116,52 +114,50 @@ def addtocart(request):
             cartitem.save()
             msg = u'Du har lagt till: <br/>'
 
-    color_db = Color.objects.get(order=color)
-    pattern_db = Pattern.objects.get(order=pattern)
-    size_db = Size.objects.get(pk=size)
+        color_db = Color.objects.get(order=color)
+        pattern_db = Pattern.objects.get(order=pattern)
+        size_db = Size.objects.get(pk=size)
 
-    if(color2 == 0):
-        pass
-    else:
-        color_db2 = Color.objects.get(order = color2)
-        pattern_db2 = Pattern.objects.get(order = pattern2)
+        if(color2 == 0):
+            pass
+        else:
+            color_db2 = Color.objects.get(order = color2)
+            pattern_db2 = Pattern.objects.get(order = pattern2)
 
+        if(color2 > 0):
+            returnjson = {
+                    'cartitem': {
+                        'article': article_db.name,
+                        'sku' : sku,
+                        'color': color_db.name,
+                        'pattern': pattern_db.name,
+                        'color': color_db.name,
+                        'pattern': pattern_db.name,
+                        'color2': color_db2.name,
+                        'pattern2': pattern_db2.name,
+                        'color': color_db.name,
+                        'pattern': pattern_db.name,
+                        'size': size_db.name,
+                        'quantity': quantity,
+                        },
+                    'message': { 'msg' : msg  }
+                }
+        else:
+            returnjson = {
+                    'cartitem': {
+                        'article': article_db.name,
+                        'sku' : sku,
+                        'color': color_db.name,
+                        'pattern': pattern_db.name,
+                        'color': color_db.name,
+                        'pattern': pattern_db.name,
+                        'size': size_db.name,
+                        'quantity': quantity,
+                        },
+                    'message': { 'msg' : msg  }
+                }
 
-
-    if(color2 > 0):
-        returnjson = {
-                'cartitem': {
-                    'article': article_db.name,
-                    'sku' : sku,
-                    'color': color_db.name,
-                    'pattern': pattern_db.name,
-                    'color': color_db.name,
-                    'pattern': pattern_db.name,
-                    'color2': color_db2.name,
-                    'pattern2': pattern_db2.name,
-                    'color': color_db.name,
-                    'pattern': pattern_db.name,
-                    'size': size_db.name,
-                    'quantity': quantity,
-                    },
-                'message': { 'msg' : msg  }
-            }
-    else:
-        returnjson = {
-                'cartitem': {
-                    'article': article_db.name,
-                    'sku' : sku,
-                    'color': color_db.name,
-                    'pattern': pattern_db.name,
-                    'color': color_db.name,
-                    'pattern': pattern_db.name,
-                    'size': size_db.name,
-                    'quantity': quantity,
-                    },
-                'message': { 'msg' : msg  }
-            }
-
-    return_data = json.dumps(returnjson)
+        return_data = json.dumps(returnjson)
 
     if request.method == 'GET':
         return_data = json.dumps({'msg' : 'nothing here'})
@@ -169,6 +165,41 @@ def addtocart(request):
     response = HttpResponse(return_data, mimetype="application/json")
     return response
 
+def add_bargain(request):
+    if request.POST:
+        d = request.POST
+        item = d['item']
+        bargain = Bargainbox.objects.get(pk=item)
+
+        cart_id = _cart_id(request)
+        cart, created = Cart.objects.get_or_create(key = cart_id)
+        cart.save()
+
+        existing_bargainitems = BargainCartItem.objects.filter(cart=cart)
+        print existing_bargainitems
+
+        inbox = False
+
+        for existingbargain in existing_bargainitems:
+            if bargain.pk == existingbargain.bargain.pk:
+                msg = u'Fyndet finns redan '
+                inbox = True
+
+        if inbox == False:
+            BargainCartItem.objects.create(bargain = bargain, cart=cart)
+            msg = u'Du har lagt till %s ' %bargain.title
+
+
+
+    returnjson = {
+            'cartitem': {
+                'title': bargain.title
+                },
+            'message': { 'msg' : msg }
+        }
+    return_data = json.dumps(returnjson)
+    response = HttpResponse(return_data, mimetype="application/json")
+    return response
 
 
 def show_product(request, article_slug):
@@ -197,9 +228,11 @@ def showcart(request):
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
-    returntotal = totalsum(cartitems)
+    bargains = cart.bargaincartitem_set.all()
+    returntotal = totalsum(cartitems, bargains)
     getnames(cartitems)
     returntotal['cartitems'] =  cartitems
+    returntotal['bargains'] =  bargains
     return render_to_response('cart/show_cart.html',
         returntotal,
         context_instance=RequestContext(request))
@@ -225,28 +258,60 @@ def editcartitem(request, key):
          },
         context_instance=RequestContext(request))
 
-def removefromcart(request, key):
-    cartitem = CartItem.objects.filter(id = int(key))
-    cartitem.delete()
+def removefromcart(request, key, type):
+    if type == 'bargain':
+        bargain= BargainCartItem.objects.filter(pk=int(key))
+        bargain.delete()
+    else:
+        cartitem = CartItem.objects.filter(id = int(key))
+        cartitem.delete()
+
+    print "------------"
     key = _cart_id(request)
     cart = Cart.objects.get(key=key)
     cartitems = cart.cartitem_set.all()
-    total = totalsum(cartitems)
+    bargains = cart.bargaincartitem_set.all()
+    total = totalsum(cartitems, bargains)
     return_data = json.dumps(total)
     response = HttpResponse(return_data, mimetype="application/json")
     return response
 
-def totalsum(cartitems):
+def removefromcartbargin(request, key):
+    bargaincartitem = BargainCartItem.objects.filter(id = int(key))
+    bargaincartitem.delete()
+    key = _cart_id(request)
+    cart = Cart.objects.get(key=key)
+    cartitems = cart.cartitem_set.all()
+    bargains = cart.bargaincartitem_set.all()
+    total = totalsum(cartitems, bargains)
+    return_data = json.dumps(total)
+    response = HttpResponse(return_data, mimetype="application/json")
+    return response
 
+def totalsum(cartitems, bargains):
     handling = 50
     temp_p = 0
     temp_q = 0
-    # transform cartitems
-    for item in cartitems:
-        temp_p = temp_p + item.article.price * item.quantity
+
+    if (cartitems):
+        for item in cartitems:
+            print  item.article.discount
+            c = item.article.f_discount
+            print c
+            if item.article.discount:
+                discount_price = f_discount(item.article)
+                temp_p = temp_p + discount_price * item.quantity
+            else:
+                temp_p = temp_p + item.article.price * item.quantity
+
         temp_q = temp_q + item.quantity
-        if (temp_p != 0):
-            temp_p = temp_p + handling
+
+    if (bargains):
+        for item in bargains:
+            temp_p = temp_p + item.bargain.price
+            temp_q = temp_q + 1
+
+    temp_p = temp_p + handling
 
     total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling}
     return total
@@ -260,3 +325,12 @@ def getnames(cartitems):
             item.color_2 = Color.objects.get(order=item.color_2)
             item.pattern_2 = Pattern.objects.get(order=item.pattern_2)
 
+
+def f_discount(item_article):
+    item = item_article
+    if (item.discount.type == 'P'):
+        price_discount = (item.price * (100-item.discount.discount)) / 100
+    else:
+        price_discount = item.price - item.discount.discount
+
+    return price_discount

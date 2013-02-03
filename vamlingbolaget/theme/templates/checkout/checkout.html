@@ -40,7 +40,7 @@
         <tr>
         <td>
             <div>
-                <span> {{ item.quantity }}</span>
+                <span> {{ item.quantity }} {% if item.article.type.order == 7 %} meter {%endif%} </span>
             </div>
         </td>
         <td>
@@ -69,17 +69,50 @@
         </td>
             <td>
                 <div>
-                    <span>{{ item.size }}</span>
+                    <span>{% if item.article.type.order == 7 or item.article.type.order == 6 %} - {%else%} {{ item.size }} {%endif%}</span>
                 </div>
             </td>
             <td>
             <div>
-                <span> {{ item.article.price }} </span>
+                {%if item.article.discount%}
+                <span class="discount"> {{ item.article.f_discount }} </span>
+                {%else%}
+                {{ item.article.price }}
+                {%endif%}
             </div>
         </td>
         {% endfor %}
     </tr>
-    {%if cartitems %}
+        {% for b in bargains %}
+        <tr>
+            <td>
+                <div>
+                    <span> 1</span>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <span> {{ b.bargain.title }} (Fynd)</span>
+                </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+
+            <td>
+                <div>
+                    <span> {{ b.bargain.price }} </span>
+                </div>
+            </td>
+            {% endfor %}
+
+        {%if cartitems %}
     <tr>
         <td class="totalprice" colspan="5" style="text-align: right">
             {% trans "Leverans" %}:

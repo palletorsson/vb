@@ -25,8 +25,10 @@
         <div class="span6">
 	        <h4> {% trans "Pris" %}: {{ product.price }} kr </h4>
         </div>
-        <div id='addtocart' style="display:block;">
+        <div id="addtocart" style="display:block;">
 			<span style="padding-left: 30px;">
+                <span class="hidden" id="pk">{{ product.pk }}</span>
+
 				<button class="btn btn-success" type="button">{% trans "Lägg till i Köplista" %} </button>
 			</span>
 		</div>
@@ -81,115 +83,20 @@
             }
         })
 
-/*
-        var sku_number = $('#sku_number').text(),
-        cart = $('#sku_number').text(),
-        pattern_id = $('#pattern option:selected').val(),
-        color_id = +$('#color option:selected').val(),
-        size_id = $('#size option:selected').val(),
-        article_id = $('#article_pk option:selected').val(),
-        quantity = $('#quantiy_pk option:selected').val();
-
-*/
-        if($('#hidden_colorpattern')){
-			var first_color_id = "{{ product.color.order }}";
-			$('#hidden_colorpattern').val(first_color_id);
-			$('input[name=radio]').change(function () {
-				$('#hidden_colorpattern').val(this.value);
-			});
-		}
-
-    $(".changonselect").change(function () {
-        $('#fadeifchangeorder').fadeTo(500,0.6);
-        var str = "Beställ "+"{{ product.article.name }}"+ " i ",
-            folder = "{{MEDIA_URL}}uploads/120/",
-            img = "";
-
-        var once = 1,
-			img,
-			img2,
-			pattern2_id = $("#pattern2").val() || null;
-        
-		$(".changonselect option:selected").each(function () {
-                str += $(this).text() + " ";
-                if (once == 1) {
-                str += " och ";
-            }
-
-            once = 2;
-
-            var pattern_id = $("#pattern").val(),
-				color_id = $("#color").val(),
-				size_id = $("#size").val(),
-				color2_id = $("#color2").val() || null;
-				
-			img = folder+color_id+"f_"+pattern_id+"m.jpg";
-			
-			if(pattern2_id){
-				img2 = folder+color2_id+"f_"+pattern2_id+"m.jpg";
-			}
-        });
-
-        $("#changetext").text(str);
-        $("#pattern_color_image").attr("src", img);
-		if(pattern2_id){
-			$("#pattern_color_image2").attr("src", img2);
-		}
-    });
-
-    var add_or_edit = 'add';
-
     $("#addtocart").click(function() {
-        var sku_number = $('#sku_number').text(),
-            quality = $(".quality").text(),
-            size_id = $('#size option:selected').val(),
-            article_id = $('#article_pk option:selected').val(),
-            quantity = $('#quantiy_pk option:selected').val(),
-            color = $('#color option:selected').val() || $('#hidden_colorpattern').val();
-		var	pattern= $('#pattern option:selected').val() || $('#hidden_colorpattern').val();
-		var	color2 = 0,
-			pattern2 = 0;
-
-			if(sku_number == 9805){ //fill in proper article no for 2 patterned items
-                color2 = $('#color2 option:selected').val();
-                pattern2 = $('#pattern2 option:selected').val();
-			}	
-
+            var item = $("#pk").text();
         $.ajax({
             type:"POST",
-            url:"/cart/addtocart/",
+            url:"/cart/addbargain/",
             data: {
-                article_sku: sku_number,
-                color: color,
-                color2: color2,
-                pattern: pattern,
-	            pattern2: pattern2,
-                size: size_id,
-                csrfmiddlewaretoken: csrftoken,
-                cartitem_id: '0',
-                quantity: quantity,
-                add_or_edit : add_or_edit
+               item : item
             },
             success: function(data){
                 var msg = data.message.msg,
                     _ = data.cartitem;
-				
-				if(color2 == 0) {
-					var coltext = _.color,
-						pattext = _.pattern;
-					
-				} else {
-					var coltext = _.color +' / '+_.color2,
-						pattext = _.pattern +' / '+_.pattern2;
-				}
 				$("#changetext")
-				  .html( msg +'<table>' +
-						'<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Plagg"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th><th>{%trans "Storlek"%}</th></tr>' +
-						'<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
-						'<td>'+ _.size+'</td></tr></table>' +
-						'{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+				  .html( msg +'{%trans " i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
 			  .css({'font-size':'11px'})
-
             }
         });
 

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block allcontent %}
-{%if cartitems %}
+{%if cartitems or bargains%}
     <table class="table table-bordered small">
     <thead>
     <tr>
@@ -35,18 +35,17 @@
         </th>
     </tr>
     </thead>
-
         <tbody>
         {% for item in cartitems %}
         <tr>
         <td>
             <div>
-                <span> {{ item.quantity }}</span>
+                <span> {{ item.quantity }} {% if item.article.type.order == 7 %} meter {%endif%} </span>
             </div>
         </td>
         <td>
             <div>
-                <a href="remove/{{ item.pk }}"><span class="icon-minus" id="{{ item.id }}"></span></a>
+                <a href="remove/{{ item.pk }}/cartitem/"><span class="icon-minus" id="{{ item.id }}"></span></a>
             </div>
         </td>
         <td>
@@ -70,25 +69,66 @@
         </td>
         <td>
             <div>
-                <span>{{ item.pattern }}
-                {% if item.pattern_2 > 0 %}
-                    / {{ item.pattern_2 }}
-                {%endif%}
+                <span>
+                    {{ item.pattern }}
+                    {% if item.pattern_2 > 0 %}
+                        / {{ item.pattern_2 }}
+                    {%endif%}
                 </span>
             </div>
         </td>
             <td>
                 <div>
-                    <span>{{ item.size }}</span>
+                    <span>{% if item.article.type.order == 7 or item.article.type.order == 6 %} - {%else%} {{ item.size }} {%endif%} </span>
                 </div>
             </td>
 
             <td>
             <div>
-                <span> {{ item.article.price }} </span>
+                {%if item.article.discount%}
+                <span class="discount"> {{ item.article.f_discount }} </span>
+                {%else%}
+                {{ item.article.price }}
+                {%endif%}
             </div>
         </td>
         {% endfor %}
+        {% for b in bargains %}
+        <tr>
+            <td>
+                <div>
+                    <span> 1</span>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a href="remove/{{ b.pk }}/bargain/"><span class="icon-minus" id="{{ b.id }}"></span></a>
+                </div>
+            </td>
+            <td>
+                <div> fynd </div>
+            </td>
+            <td>
+                <div>
+                    <span> {{ b.bargain.title }} </span>
+                </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+
+            <td>
+                <div>
+                    <span> {{ b.bargain.price }} </span>
+                </div>
+            </td>
+            {% endfor %}
         </tbody>
         <td class="totalprice" colspan="7" style="text-align: right">
             {% trans "Leverans" %}:

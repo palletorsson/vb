@@ -18,16 +18,11 @@
                             <span class='image_description'>
                                 {{ product.article.name }}<br/>
                                 {% trans "Pris" %} :
-
                                 {%if product.article.discount%}
-
                                     <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK
-
-
                                 {%else%}
                                     {{ product.article.price }}
                                 {%endif%}
-
                             </span>
                         </div>
                     {% endwith %}

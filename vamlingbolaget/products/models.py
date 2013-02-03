@@ -143,7 +143,7 @@ class Article(TimeStampedActivate):
         return unicode(self.name) + " (" + unicode(self.sku_number)+ ")"
 
 TYPE_CHOICES = (
-    ('P', 'Procent'),
+    ('P', 'Percent'),
     ('A', 'Amount')
     )
 
@@ -171,7 +171,7 @@ class Bargainbox(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     modified = models.DateTimeField(auto_now = True)
     status = models.CharField(max_length=2, choices = STATUS)
-    image = models.ImageField(upload_to = 'bargins/')
+    image = models.ImageField(upload_to = 'bargains/')
 
     def __unicode__(self):
         return unicode(self.title)
