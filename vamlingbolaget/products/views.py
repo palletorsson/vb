@@ -91,8 +91,12 @@ def pattern_and_color(request):
 
 def bargain(request):
     products = Bargainbox.objects.filter(status='A')
+    qualities = Quality.objects.filter(active=True)
+    types = Type.objects.filter(active=True)
     return render_to_response('bargain/index.html',
-        {'products': products,},
+        {'products': products,
+        'qualities': qualities,
+         'types': types,},
         context_instance=RequestContext(request))
 
 def bargain_detail(request, pk):

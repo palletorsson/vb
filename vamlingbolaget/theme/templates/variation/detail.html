@@ -11,7 +11,7 @@
 <div class="row-fluid">{{ images.pk }}
     <div class="span5" id="fadeifchangeorder">
         {% for image in images %}
-            <img src="{% version image.image 'large' %}"  style="width: 360px;"/>
+            <a href="{% version image.image 'large'%}" rel="lightbox"><img src="{% version image.image 'large' %}"   style="width: 360px;"/></a>
         {% endfor %}
         <br/>
 		<span style="width: 200px; margin:3px;"> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</span>
@@ -21,7 +21,7 @@
     <div class="span6">
         <div style="clear: both;"></div>
         <div class="span6">
-            <p><strong>{{ product.article.name }}   {{ product.article.type.order }}     </strong></p>
+            <p><strong>{{ product.article.name }}   </strong></p>
             <p> {% trans "Artikelnummer" %}: <span id="sku_number">{{ product.article.sku_number }}</p>
 
             <p id="art_description" class="small">{{ product.article.description }}</p>
@@ -127,10 +127,10 @@
            {%else%}
 
                 <select id='size'>
-			{% for size in sizes %}
-				<option value="{{ size.pk }}" > {% trans "Storlek" %}: {{ size.name }} </option>
-			{% endfor %}
-	    </select>
+                    {% for size in sizes %}
+                        <option value="{{ size.pk }}" > {% trans "Storlek" %}: {{ size.name }} </option>
+                    {% endfor %}
+        	    </select>
         {% endif %}
 
 
@@ -175,10 +175,10 @@
         <div class="span6">
 	        <h4>  {% trans "Pris" %} :
                 {%if product.article.discount%}
-                <span class="discount"> {{ product.article.f_discount }} </span>  SEK <br />
-                <span class="smaller">({% trans "tidgare pris" %}  {{ product.article.price }}  SEK) </span>
+                    <span class="discount"> {{ product.article.f_discount }} </span>  SEK <br />
+                    <span class="smaller">({% trans "tidgare pris" %}  {{ product.article.price }}  SEK) </span>
                 {%else%}
-                {{ product.article.price }}
+                    {{ product.article.price }}
                 {%endif%}</h4>
         </div>
 
@@ -291,6 +291,7 @@
 
     $("#addtocart").click(function() {
         var sku_number = $('#sku_number').text(),
+            product_type = {{product.article.type.order}},
             quality = $(".quality").text(),
             size_id = $('#size option:selected').val() || size_id_default,
             article_id = $('#article_pk option:selected').val(),
@@ -320,6 +321,7 @@
                 quantity: quantity,
                 add_or_edit : add_or_edit
             },
+
             success: function(data){
                 var msg = data.message.msg,
                     _ = data.cartitem;
@@ -332,14 +334,32 @@
 					var coltext = _.color +' / '+_.color2,
 						pattext = _.pattern +' / '+_.pattern2;
 				}
-				$("#changetext")
-				  .html( msg +'<table>' +
-						'<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th><th>{%trans "Storlek"%}</th></tr>' +
-						'<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
-						'<td>'+ _.size+'</td></tr></table>' +
-						'{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
-			  .css({'font-size':'11px'})
 
+                if(product_type == '7'){
+                    $("#changetext")
+                            .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Meter"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +' {{ product.article.quality|lower }}</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '</tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                            .css({'font-size':'11px'});
+                } else if (product_type == '6'){
+                    $("#changetext")
+                            .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '</tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                            .css({'font-size':'11px'});
+                } else{
+                    $("#changetext")
+                      .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th><th>{%trans "Storlek"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '<td>'+ _.size+'</td></tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                      .css({'font-size':'11px'});
+                }
             }
         });
 

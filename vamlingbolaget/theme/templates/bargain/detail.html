@@ -27,8 +27,6 @@
         </div>
         <div id="addtocart" style="display:block;">
 			<span style="padding-left: 30px;">
-                <span class="hidden" id="pk">{{ product.pk }}</span>
-
 				<button class="btn btn-success" type="button">{% trans "Lägg till i Köplista" %} </button>
 			</span>
 		</div>
@@ -84,7 +82,7 @@
         })
 
     $("#addtocart").click(function() {
-            var item = $("#pk").text();
+            var item = {{ product.pk }};
         $.ajax({
             type:"POST",
             url:"/cart/addbargain/",

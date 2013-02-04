@@ -51,9 +51,10 @@ $.ajaxSetup({
         e.stopPropagation();
         e.preventDefault();
         if(confirm('Vill du ta bort denna post?')){
-                var id = $(this).attr('id');
+                var id = $(this).attr('id'),
+                    my_url = $(this).parent('a').attr('href');
                 $.ajax({
-                    url: '/cart/removefromcart/'+ id,
+                    url: my_url,
                     csrfmiddlewaretoken: csrftoken,
                     contentType: "application/json",
                     success: function( data ) {

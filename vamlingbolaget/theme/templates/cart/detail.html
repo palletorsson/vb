@@ -261,6 +261,7 @@
 
     $("#addtocart").click(function() {
         var sku_number = $('#sku_number').text(),
+            product_type = {{cartitem.article.type.order}},
             cartitem_id = $('#cartitem_id').text(),
             quality = $(".quality").text(),
             size_id = $('#size option:selected').val() || size_id_default,
@@ -303,14 +304,32 @@
 					var coltext = _.color +' / '+_.color2,
 						pattext = _.pattern +' / '+_.pattern2;
 				}
-				$("#changetext")
-				  .html( msg +'<table>' +
-						'<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Plagg"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th><th>{%trans "Storlek"%}</th></tr>' +
-						'<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
-						'<td>'+ _.size+'</td></tr></table>' +
-						'{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
-			  .css({'font-size':'11px'})
+                if(product_type == '7'){
+                    $("#changetext")
+                            .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Meter"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +' {{ cartitem.article.quality|lower }}</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '</tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                            .css({'font-size':'11px'})
+                } else if (product_type == '6'){
+                    $("#changetext")
+                            .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '</tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                            .css({'font-size':'11px'});
+                }else{
 
+                    $("#changetext")
+                      .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Plagg"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th><th>{%trans "Storlek"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '<td>'+ _.size+'</td></tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                      .css({'font-size':'11px'})
+                }
             }
         });
 

@@ -52,7 +52,6 @@ def checkout(request):
                 msg = msg + 'product '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
                 msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
-                print item.article.type.order
                 if (item.article.type.order < 5):
                     msg = msg + 'Storlek: ' + item.size.name + ' \n'
 

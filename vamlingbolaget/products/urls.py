@@ -7,7 +7,7 @@ urlpatterns = patterns('products.views',
     url(r'^(?P<pk>\d+)/$', 'detail'),
     url(r'^type/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_type'),
     url(r'^quality/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_quality'),
-    url(r'^bargain/$', 'bargain'),
-    url(r'^bargain/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'bargain_detail'),
+    url(r'^bargain/$', 'bargain', name='bargains'),
+    url(r'^bargain/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'bargain_detail', name='bargain_detail'),
 
 )

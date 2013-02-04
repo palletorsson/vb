@@ -258,15 +258,15 @@ def editcartitem(request, key):
          },
         context_instance=RequestContext(request))
 
-def removefromcart(request, key, type):
+def removefromcart(request, pk, type):
+
     if type == 'bargain':
-        bargain= BargainCartItem.objects.filter(pk=int(key))
+        bargain= BargainCartItem.objects.filter(pk=pk)
         bargain.delete()
     else:
-        cartitem = CartItem.objects.filter(id = int(key))
+        cartitem = CartItem.objects.filter(pk=pk)
         cartitem.delete()
 
-    print "------------"
     key = _cart_id(request)
     cart = Cart.objects.get(key=key)
     cartitems = cart.cartitem_set.all()
@@ -276,17 +276,6 @@ def removefromcart(request, key, type):
     response = HttpResponse(return_data, mimetype="application/json")
     return response
 
-def removefromcartbargin(request, key):
-    bargaincartitem = BargainCartItem.objects.filter(id = int(key))
-    bargaincartitem.delete()
-    key = _cart_id(request)
-    cart = Cart.objects.get(key=key)
-    cartitems = cart.cartitem_set.all()
-    bargains = cart.bargaincartitem_set.all()
-    total = totalsum(cartitems, bargains)
-    return_data = json.dumps(total)
-    response = HttpResponse(return_data, mimetype="application/json")
-    return response
 
 def totalsum(cartitems, bargains):
     handling = 50
@@ -295,14 +284,13 @@ def totalsum(cartitems, bargains):
 
     if (cartitems):
         for item in cartitems:
-            print  item.article.discount
-            c = item.article.f_discount
-            print c
             if item.article.discount:
                 discount_price = f_discount(item.article)
                 temp_p = temp_p + discount_price * item.quantity
+                item.totalitemprice = discount_price * item.quantity
             else:
                 temp_p = temp_p + item.article.price * item.quantity
+                item.totalitemprice = item.article.price * item.quantity
 
         temp_q = temp_q + item.quantity
 
@@ -311,7 +299,8 @@ def totalsum(cartitems, bargains):
             temp_p = temp_p + item.bargain.price
             temp_q = temp_q + 1
 
-    temp_p = temp_p + handling
+    if temp_p > 0:
+        temp_p = temp_p + handling
 
     total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling}
     return total
