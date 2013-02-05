@@ -171,12 +171,12 @@
         <div class="small" id="changetext"></div>
         <hr/>
         <div style="clear: both;"></div>
-
         <div class="span6">
 	        <h4>  {% trans "Pris" %} :
                 {%if product.article.discount%}
-                    <span class="discount"> {{ product.article.f_discount }} </span>  SEK <br />
-                    <span class="smaller">({% trans "tidgare pris" %}  {{ product.article.price }}  SEK) </span>
+                <span class="discount"> {{ product.article.f_discount }} </span> SEK *<br />
+                    <span class="smaller">({% trans "tidigare pris" %}  {{ product.article.price }}  SEK) </span> <br />
+                    <span class="smaller"> * {{ product.article.discount.reason }} </span>
                 {%else%}
                     {{ product.article.price }}
                 {%endif%}</h4>
@@ -188,7 +188,7 @@
 				<button class="btn btn-success" type="button">{% trans "Lägg till i Köplista" %} </button>
 			</span>
 		</div>
-        <hr/>
+
     </div>
 </div>
 <script>
