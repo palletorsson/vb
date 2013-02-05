@@ -53,6 +53,9 @@ def by_quality(request, key):
 def detail(request, pk):
     try:
         product = Variation.objects.get(pk=pk)
+
+        products = Variation.objects.filter(article=product.article)
+
         images = Image.objects.filter(variation__pk=pk)
         color_id = product.color.order
         pattern_id = product.pattern.order
@@ -74,6 +77,7 @@ def detail(request, pk):
                    'types': types,
                    'color_id':color_id,
                    'pattern_id':pattern_id,
+                   'products': products,
                    },
                    context_instance=RequestContext(request)
                     )

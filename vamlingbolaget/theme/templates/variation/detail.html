@@ -191,6 +191,32 @@
 
     </div>
 </div>
+
+<hr>
+<h4> Fler produkter av {{ product.article.name }}  </h4>
+{% for product in products %}
+<div class='image_wrapper'>
+    <a href="/products/{{product.pk}}">
+
+        {% with product.image_set.all|first as image %}
+        <div class="collection_list" >
+            <img src="{% version image.image 'medium' %}" class="imgborder" width="200" />
+            <br/>
+                            <span class='image_description'>
+                                {{ product.article.name }}<br/>
+                                {% trans "Pris" %} :
+                                {%if product.article.discount%}
+                                    <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK
+                                {%else%}
+                                    {{ product.article.price }}
+                                {%endif%}
+                            </span>
+        </div>
+        {% endwith %}
+    </a>
+</div>
+{% endfor %}
+
 <script>
     $(function(){
         // using jQuery
