@@ -5,7 +5,7 @@ from models import *
 
 def show_galleries(request):
     galleries = Gallery.objects.filter(status__display_on_gallery_page = True)
-    statuses = GalleryStatus.objects.filter(display_on_gallery_page = True) 
+    statuses = GalleryStatus.objects.filter(display_on_gallery_page = True).order_by('order')
     num_galleries = galleries.count()
     return render_to_response('gallery/gallery.html',
         {'galleries': galleries,
