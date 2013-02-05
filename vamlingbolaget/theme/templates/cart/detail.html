@@ -139,7 +139,7 @@
             <option {%if cartitem.quantity == 3 %} selected="selected" {%endif%} value="3">{% trans "Antal" %}: 3 </option>
             <option {%if cartitem.quantity == 4 %} selected="selected" {%endif%} value="4">{% trans "Antal" %}: 4 </option>
         </select>
-	</div>
+	
 {%if cartitem.article.sku_number != '9805'%}
 	<span style="padding-left: 10px;">
 		<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
