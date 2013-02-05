@@ -1,164 +1,167 @@
 {% extends "collection_base.html" %}
+{% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
-{% load i18n %}
 {% block pagetitle %}
-	<legend><a href="javascript:history.go(-1)">Din shoppinglåda</a> / {% trans "Du ändrar nu din beställning av" %}: <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
+<legend><a href="javascript:history.go(-1)">Din shoppinglåda</a> / {% trans "Du ändrar nu din beställning av" %}: <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
 {% endblock %}
 
-
 {% block allcontent %}
-<div class="row-fluid">{{ images.pk }}
-    <div class="span5" >
-        <div style="clear: both;"></div>
-        <div class="span6">
-            <strong>{{ cartitem.article.name }} </strong><br/>
 
-            {% trans "Artikelnummer" %} :  <span id="sku_number">{{ cartitem.article.sku_number }}</span><br/><br/>
+<div class="span5" >
+    <h4> Du ändrar  {{ cartitem.article.name }} {% trans "i" %} <br /> {{ cartitem.color|lower }}   {{ cartitem.pattern|lower }}</h4>
+    <p> {% trans "Artikelnummer" %}: <span id="sku_number">{{ cartitem.article.sku_number }}</p>
+      <div style="padding-left: 10px;">
+			<img src="{% version cartitem.article.file 'small' %} " />
+		</div><br />
+    {% trans "Kvalitet" %}: <span class="quality" id="{{ cartitem.article.quality }}">{{ cartitem.article.quality }}</span><br />
 
-            {% trans "Kvalitet" %}:  {{ cartitem.article.quality }}<br/>
 
-            <p class="small"> {{ cartitem.article.quality.description }}</p>
+</div>
 
-            <h4>{% trans "Pris" %}: {{ cartitem.article.price }} kr</h4>
 
-        </div>
-        <span style="padding-left: 40px;">
-			<img src="{% version cartitem.article.file 'small' %} " >
-		</span>
-        <div style="clear: both;"></div>
-        <hr/>
-    </div>
-
-{% if cartitem.article.quality.order == 2 or cartitem.article.quality.order == 4 %}
-	<div class="span12">
-		{% for color in colors %}
-			<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
-			<label class="radio inline">
-			<input type="radio" name="radio" {%if cartitem.color.order == color.order %} checked="checked" {%endif%} id="radio_{{ color.order }}" value="{{ color.order }}" >
-			</label>
-		{% endfor %}
-		<br />
-		<input id="hidden_colorpattern" type="hidden" value="">
-	</div>
-<!----------------------------------9805 vandbar jacka------------------------>
-{%elif cartitem.article.sku_number == '9805' %}
-    <div class="span6">
-        <div class="span7">
-			<h5> Utsidans mönster</h5>
-			<select class="changonselect" id="color">
+<div class="span6">
+<div style="clear: both;"></div>
+        {% if cartitem.article.quality.order == 2 or cartitem.article.quality.order == 4 %}
+			<div class="span12">
 				{% for color in colors %}
-					<option value="{{ color.order }}"
-						{% if color.order == cartitem.color.order %}
+					<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" width="100" />
+					<label class="radio inline">
+						<input type="radio" name="radio" {%if color_id == color.order %} checked="checked" {%endif%}  id="radio_{{ color.order }}" value="{{ color.order }}" />
+					</label>
+				{% endfor %}
+            <br />
+            <input id="hidden_colorpattern" type="hidden" value="">
+                <!----------------------------------9805 vandbar jacka------------------------>
+		{%elif cartitem.article.sku_number == '9805' %}
+			<div class="span6">
+				<h5> Utsidans mönster</h5>
+				<select class="changonselect" id="color">
+					{% for color in colors %}
+						<option value="{{ color.order }}"
+							{% if color.order == cartitem.color.order %}
+								selected="selected"
+							{%endif%}
+							">
+						{%trans "Färg"%} : {{ color.name }} </option>
+					{% endfor %}
+				</select> 	    
+				<select class="changonselect" id='pattern'>
+					{% for pattern in patterns %}
+						<option value="{{ pattern.order }}"
+						{% if pattern.order == cartitem.pattern.order %}
 							selected="selected"
 						{%endif%}
 						">
-					Färg: {{ color.name }} </option>
-				{% endfor %}
-			</select> 	    
-	
-			<select class="changonselect" id='pattern'>
-				{% for pattern in patterns %}
-					<option value="{{ pattern.order }}"
-					{% if pattern.order == cartitem.pattern.order %}
-						selected="selected"
-					{%endif%}
-					">
-					Mönster: {{ pattern.name }}</option>
-				{% endfor %}
-			</select>
-			<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
-		</div>
-		<div class="span5">
-			<h5>Insidans mönster</h5>
-			<select class="changonselect" id="color2">
-				{% for color in colors %}
-					<option value="{{ color.order }}"
-						{% if color.order == cartitem.color_2.order %}
+						{%trans "Mönster"%} : {{ pattern.name }}</option>
+					{% endfor %}
+				</select>
+				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
+			</div>
+				
+			<div class="span6">
+				<h5>Insidans mönster</h5>
+				<select class="changonselect" id="color2">
+					{% for color in colors %}
+						<option value="{{ color.order }}"
+							{% if color.order == cartitem.color.order %}
+								selected="selected"
+							{%endif%}
+							">
+						{%trans "Färg"%} : {{ color.name }} </option>
+					{% endfor %}
+				</select> 	    
+				<select class="changonselect" id='pattern2'>
+					{% for pattern in patterns %}
+						<option value="{{ pattern.order }}"
+						{% if pattern.order == cartitem.pattern.order %}
 							selected="selected"
 						{%endif%}
 						">
-					Färg: {{ color.name }} </option>
-				{% endfor %}
-			</select> 	    
-	
-			<select class="changonselect" id='pattern2'>
-				{% for pattern in patterns %}
-					<option value="{{ pattern.order }}"
-					{% if pattern.order == cartitem.pattern_2.order %}
-						selected="selected"
-					{%endif%}
-					">
-					Mönster: {{ pattern.name }}</option>
-				{% endfor %}
-			</select>
-			<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" style="width:100px;" />
-		</div>
-	</div>
-			
-<!---------------------else--------------------------->
-{%else%}
-    <div class="span6">
-        <div class="span7">
-			<select class="changonselect" id="color">
-				{% for color in colors %}
-					<option value="{{ color.order }}"
-						{% if color.order == cartitem.color.order %}
+						{%trans "Mönster"%} : {{ pattern.name }}</option>
+					{% endfor %}
+				</select>
+				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" style="width:100px;" />
+			</div>
+            <br />
+	    {% else %}
+			<div class="span7">
+				<select class="changonselect" id="color">
+					{% for color in colors %}
+						<option value="{{ color.order }}"
+							{% if color.order == cartitem.color.order %}
+								selected="selected"
+							{%endif%}
+							">
+						{% trans "Färg" %}: {{ color.name }} </option>
+					{% endfor %}
+				</select> 	    
+				<select class="changonselect" id='pattern'>
+					{% for pattern in patterns %}
+						<option value="{{ pattern.order }}"
+						{% if pattern.order == cartitem.pattern.order %}
 							selected="selected"
-						{%endif%} >
-					{% trans "Färg" %}: {{ color.name }} </option>
-				{% endfor %}
-			</select> 	    
-	
-			<select class="changonselect" id='pattern'>
-				{% for pattern in patterns %}
-					<option value="{{ pattern.order }}"
-					{% if pattern.order == cartitem.pattern.order %}
-						selected="selected"
-					{%endif%}
-					>
-					{% trans "Mönster" %}: {{ pattern.name }}</option>
-				{% endfor %}
-			</select>
-		</div>
-	</div>
-{%endif%}
-	<div>
-	    <select  class="changonselect"  id='size'>
-			{% for size in sizes %}
-				<option value="{{ size.pk }}"
-					{% if size.order == 1 %}
-					   selected="selected"
-					{%endif%}
-				> {% trans "Storlek" %}: {{ size.name }} </option>changonselect
-			{% endfor %}
+						{%endif%}
+						">
+						{% trans "Mönster" %}: {{ pattern.name }}</option>
+					{% endfor %}
+				</select>
+		{% endif %}
+		<br/>
+                {%if cartitem.article.type.order == 7 or cartitem.article.type.order == 6  %}
+
+                {%else%}
+
+                <select id='size'>
+                    {% for size in sizes %}
+                    <option value="{{ size.pk }}" > {% trans "Storlek" %}: {{ size.name }} </option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+
 	    </select>
-        <select  class="changonselect"  id='quantity_pk'>
-            <option {%if cartitem.quantity == 1 %} selected="selected" {%endif%} value="1">{% trans "Antal" %}: 1 </option>
-            <option {%if cartitem.quantity == 2 %} selected="selected" {%endif%} value="2">{% trans "Antal" %}: 2 </option>
-            <option {%if cartitem.quantity == 3 %} selected="selected" {%endif%} value="3">{% trans "Antal" %}: 3 </option>
-            <option {%if cartitem.quantity == 4 %} selected="selected" {%endif%} value="4">{% trans "Antal" %}: 4 </option>
-        </select>
-	
-{%if cartitem.article.sku_number != '9805'%}
-	<span style="padding-left: 10px;">
-		<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
-	</span>
-{%endif%}
-	<div style="clear: both;"></div>
-	<hr/>
-	<div id="changetext"></div>
-	<hr/>
-	<div style="clear: both;"></div>
-	<div class="span6"></div>
-	<div style="display:block;">
+			{% if cartitem.article.type.order == 7 %}
+                <select id='quantiy_pk'>
+                    <option value="1" selected="selected">{% trans "Meter" %} : 1 </option>
+                    <option value="2">{% trans "Meter" %} : 2 </option>
+                    <option value="3">{% trans "Meter" %} : 3 </option>
+                    <option value="4">{% trans "Meter" %} : 4 </option>
+                    <option value="4">{% trans "Meter" %} : 5 </option>
+                    <option value="4">{% trans "Meter" %} : 6 </option>
+                </select>
+                {% else %}
+                <select id='quantiy_pk'>
+                    <option value="1" selected="selected">{% trans "Antal" %} : 1 </option>
+                    <option value="2">{% trans "Antal" %} : 2 </option>
+                    <option value="3">{% trans "Antal" %} : 3 </option>
+                    <option value="4">{% trans "Antal" %} : 4 </option>
+                </select>
+
+                {% endif %}
+
+	</div>
+
+		
+        {% if cartitem.article.quality.order == 2 or cartitem.article.quality.order == 4 or cartitem.article.sku_number == '9805'%}
+			<br/>
+		{%else%}
+			<span style="padding-left: 30px;">
+				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100" />
+			</span>
+			<div style="clear: both;"></div>
+			<hr/>
+        {% endif %}
+		
+        <div class="small" id="changetext"></div>
+        <hr/>
+                <div style="display:block;">
         <span style="padding-left: 30px;">
             <button class="btn btn-success" onclick="javascript:history.go(-1)" type="button">{% trans "Avbryt" %}</button>
             <button id='addtocart' class="btn btn-success" type="button">{% trans "Uppdatera" %}</button>
 		</span>
+                </div>        <hr/>
     </div>
 </div>
-
 <script>
     $(function(){
         // using jQuery
@@ -207,36 +210,45 @@
             }
         })
 
-    $(".changonselect").change(function () {
-        $('#fadeifchangeorder').fadeTo(500,0.6);
-        var str = "Uppdatera "+"{{ cartitem.article.name }}"+ " i ",
-            folder = "{{MEDIA_URL}}uploads/120/",
-            img = "";
+        var size_id_default = 1;
 
-        var once = 1,
-			img,
-			img2,
-			pattern2_id = $("#pattern2").val() || null;
-        
-		$(".changonselect option:selected").each(function () {
+        if($('#hidden_colorpattern')){
+			var first_color_id = "{{ cartitem.color.order }}";
+			$('#hidden_colorpattern').val(first_color_id);
+			$('input[name=radio]').change(function () {
+				$('#hidden_colorpattern').val(this.value);
+			});
+		}
+
+        $(".changonselect").change(function () {
+            var str = "Uppdatera "+"{{ cartitem.article.name }}"+ " i ",
+                    folder = "{{MEDIA_URL}}uploads/120/",
+                    img = "";
+
+            var once = 1,
+                    img,
+                    img2,
+                    pattern2_id = $("#pattern2").val() || null;
+
+            $(".changonselect option:selected").each(function () {
                 str += $(this).text() + " ";
                 if (once == 1) {
-                str += " och ";
-            }
+                    str += " och ";
+                }
 
-            once = 2;
+                once = 2;
 
-            var pattern_id = $("#pattern").val(),
-				color_id = $("#color").val(),
-				size_id = $("#size").val(),
-				color2_id = $("#color2").val() || null;
-				
-			img = folder+color_id+"f_"+pattern_id+"m.jpg";
-			
-			if(pattern2_id){
-				img2 = folder+color2_id+"f_"+pattern2_id+"m.jpg";
-			}
-        });
+                var pattern_id = $("#pattern").val(),
+                        color_id = $("#color").val(),
+                        size_id = $("#size").val(),
+                        color2_id = $("#color2").val() || null;
+
+                img = folder+color_id+"f_"+pattern_id+"m.jpg";
+
+                if(pattern2_id){
+                    img2 = folder+color2_id+"f_"+pattern2_id+"m.jpg";
+                }
+            });
 
         $("#changetext").text(str);
         $("#pattern_color_image").attr("src", img);
@@ -244,49 +256,84 @@
 			$("#pattern_color_image2").attr("src", img2);
 		}
     });
-		if($('#hidden_colorpattern')){
-			var first_color_id = "{{ product.color.order }}";
-			$('#hidden_colorpattern').val(first_color_id);
-			$('input[name=radio]').change(function () {
-				$('#hidden_colorpattern').val(this.value);
-			});
-		}
+
     var add_or_edit = 'edit';
 
     $("#addtocart").click(function() {
-		var sku_number = $('#sku_number').text(),
-			cartitem_id = $('#cartitem_id').text(),
-			pattern_id = $('#pattern option:selected').val(),
-			color_id = +$('#color option:selected').val(),
-			size_id = $('#size option:selected').val(),
-			article_id = $('#article_pk option:selected').val(),
-			quantity = $('#quantity_pk option:selected').val();
+        var sku_number = $('#sku_number').text(),
+            product_type = {{cartitem.article.type.order}},
+            cartitem_id = $('#cartitem_id').text(),
+            quality = $(".quality").text(),
+            size_id = $('#size option:selected').val() || size_id_default,
+            article_id = $('#article_pk option:selected').val(),
+            quantity = $('#quantiy_pk option:selected').val(),
+            color = $('#color option:selected').val() || $('#hidden_colorpattern').val();
+		var pattern= $('#pattern option:selected').val() || $('#hidden_colorpattern').val();
+		var color2 = 0;
+		var pattern2 = 0;
+
+			if(sku_number == 9805){ //fill in proper article no for 2 patterned items
+                color2 = $('#color2 option:selected').val(),
+                pattern2 = $('#pattern2 option:selected').val();
+			}	
 
         $.ajax({
             type:"POST",
             url:"/cart/addtocart/",
             data: {
                 article_sku: sku_number,
-                pattern: pattern_id,
-                color: color_id,
+                color: color,
+                color2: color2,
+                pattern: pattern,
+	            pattern2: pattern2,
                 size: size_id,
-                quantity: quantity,
+                csrfmiddlewaretoken: csrftoken,
                 cartitem_id: cartitem_id,
-                add_or_edit: add_or_edit,
-                csrfmiddlewaretoken: csrftoken
+                quantity: quantity,
+                add_or_edit : add_or_edit
             },
             success: function(data){
-                //var msg = data.message.msg,
-                //    _ = data.cartitem;
-                //$("#changetext").text( msg + _.quantity +" "+ _.article + ". Mönster: " + _.pattern + " Färg: "+ _.color+" Storlek: "+ _.size);
-                window.location.replace("/cart/show/");
+                var msg = data.message.msg,
+                    _ = data.cartitem;
+				
+				if(color2 == 0) {
+					var coltext = _.color,
+						pattext = _.pattern;
+					
+				} else {
+					var coltext = _.color +' / '+_.color2,
+						pattext = _.pattern +' / '+_.pattern2;
+				}
+                if(product_type == '7'){
+                    $("#changetext")
+                            .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Meter"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +' {{ cartitem.article.quality|lower }}</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '</tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                            .css({'font-size':'11px'})
+                } else if (product_type == '6'){
+                    $("#changetext")
+                            .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '</tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                            .css({'font-size':'11px'});
+                }else{
+
+                    $("#changetext")
+                      .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Plagg"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th><th>{%trans "Storlek"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '<td>'+ _.size+'</td></tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                      .css({'font-size':'11px'});
+                }
             }
         });
 
-
     });
-
-    });
-
+});
 </script>
-{% endblock %}ss
+{% endblock %}

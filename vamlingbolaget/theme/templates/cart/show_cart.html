@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block allcontent %}
-{%if cartitems %}
+{%if cartitems or bargains%}
     <table class="table table-bordered small">
     <thead>
     <tr>
@@ -35,18 +35,17 @@
         </th>
     </tr>
     </thead>
-
         <tbody>
         {% for item in cartitems %}
         <tr>
         <td>
             <div>
-                <span> {{ item.quantity }}</span>
+                <span> {{ item.quantity }} {% if item.article.type.order == 7 %} meter {%endif%} </span>
             </div>
         </td>
         <td>
             <div>
-                <a href="remove : {{ item.article.id }}"><span class="icon-minus" id="{{ item.id }}"></span></a>
+                <a href="{%url removefromcart item.pk 'cartitem'%}"><span class="icon-minus" id="{{ item.id }}"></span></a>
             </div>
         </td>
         <td>
@@ -62,7 +61,7 @@
         <td>
             <div>
                 <span>{{ item.color }}
-                {% if item.color_2 %}
+                {% if item.color_2 > 0 %}
                     / {{ item.color_2 }}
                 {%endif%}
                 </span>
@@ -70,31 +69,74 @@
         </td>
         <td>
             <div>
-                <span>{{ item.pattern }}
-                {% if item.pattern_2 %}
-                    / {{ item.pattern_2 }}
-                {%endif%}
+                <span>
+                    {{ item.pattern }}
+                    {% if item.pattern_2 > 0 %}
+                        / {{ item.pattern_2 }}
+                    {%endif%}
                 </span>
             </div>
         </td>
             <td>
                 <div>
-                    <span>{{ item.size }}</span>
+                    <span>{% if item.article.type.order == 7 or item.article.type.order == 6 %} - {%else%} {{ item.size }} {%endif%} </span>
                 </div>
             </td>
 
             <td>
             <div>
-                <span> {{ item.article.price }} </span>
+                {%if item.article.discount%}
+                    <span class="discount"> {{ item.article.f_discount }}  {%trans "SEK"%}</span>
+                {%elif item.article.type.order == 7 %}
+                    {{item.totalitemprice}} {%trans "SEK"%}
+                {%else%}
+                    {{ item.article.price }} {%trans "SEK"%}
+                {%endif%}
             </div>
         </td>
         {% endfor %}
+        {% for b in bargains %}
+        <tr>
+            <td>
+                <div>
+                    <span> 1</span>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a href="{%url removefromcart b.pk 'bargain'%}"><span class="icon-minus" id="{{ b.id }}"></span></a>
+                </div>
+            </td>
+            <td>
+                <div> fynd </div>
+            </td>
+            <td>
+                <div>
+                    <span> {{ b.bargain.title }} </span>
+                </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+
+            <td>
+                <div>
+                    <span> {{ b.bargain.price }} </span>
+                </div>
+            </td>
+            {% endfor %}
         </tbody>
         <td class="totalprice" colspan="7" style="text-align: right">
             {% trans "Leverans" %}:
         </td>
         <td id="handling">
-            {{ handling }}
+            {{ handling }}  {%trans "SEK"%}
         </td>
         </tr>
         <tr>
@@ -102,22 +144,22 @@
             {% trans "Totalpris" %}:
         </th>
         <th id="totalprice">
-            {{ totalprice }} SEK
+            {{ totalprice }}  {%trans "SEK"%}
         </th>
-    </tr>
+        </tr>
         </tbody>
 
     {% else %}
-    <tr id="empty">
-        <td colspan="8">
-            {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet" %}!</a>
-        </td>
-    </tr>
-    </tbody>
+        <tr id="empty">
+            <td colspan="8">
+                {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet" %}!</a>
+            </td>
+        </tr>
+        </tbody>
     {% endif %}
     </tbody>
 </table>
-{%if cartitems %}
+{%if cartitems or bargains%}
     <div style="text-align:right"><a href="/checkout/"><button class="btn btn-success" type="button">Beställ</button></a></div>
 {% endif %}
 

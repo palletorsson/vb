@@ -16,7 +16,13 @@
                             <img src="{% version image.image 'medium' %}" class="imgborder" width="200" />
                             <br/>
                             <span class='image_description'>
-                                {{ product.article.name }}<br/> {% trans "Pris" %} : {{ product.article.price }}
+                                {{ product.article.name }}<br/>
+                                {% trans "Pris" %} :
+                                {%if product.article.discount%}
+                                    <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK
+                                {%else%}
+                                    {{ product.article.price }}
+                                {%endif%}
                             </span>
                         </div>
                     {% endwith %}

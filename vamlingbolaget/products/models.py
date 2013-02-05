@@ -6,6 +6,9 @@ from filebrowser.fields import FileBrowseField
 from filebrowser.settings import ADMIN_THUMBNAIL
 from gallery.models import *
 import datetime
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, Adjust
+
 
 class TimeStampedActivate(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -110,6 +113,16 @@ class Article(TimeStampedActivate):
     type = models.ForeignKey('Type')
     price = models.IntegerField()
     file = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg", ".gif", ".png"], blank=True, null=True)
+    discount = models.ForeignKey('Discount', blank=True, null=True)
+
+    def f_discount(self):
+        if (self.discount.type == 'P'):
+            f_discount = (self.price * (100-self.discount.discount)) / 100
+        else:
+            f_discount = self.price - self.discount.discount
+
+        return f_discount
+
 
     """
     def image_thumbnail(self, article):
@@ -128,4 +141,40 @@ class Article(TimeStampedActivate):
 
     def __unicode__(self):
         return unicode(self.name) + " (" + unicode(self.sku_number)+ ")"
-    
+
+TYPE_CHOICES = (
+    ('P', 'Percent'),
+    ('A', 'Amount')
+    )
+
+class Discount(models.Model):
+    title = models.CharField(max_length = 50)
+    reason = models.CharField(max_length = 255)
+    discount = models.IntegerField()
+    type = models.CharField(max_length=1, choices=TYPE_CHOICES, blank=True)
+    active = models.BooleanField("Active", default=True)
+
+    def __unicode__(self):
+        return unicode(self.title)
+
+
+
+STATUS = (
+    ('A', 'Active'),
+    ('E', 'Expired'),
+    )
+
+class Bargainbox(models.Model):
+    title = models.CharField(max_length=40)
+    description = models.TextField()
+    price = models.IntegerField()
+    created = models.DateTimeField(auto_now_add = True)
+    modified = models.DateTimeField(auto_now = True)
+    status = models.CharField(max_length=2, choices = STATUS)
+    image = models.ImageField(upload_to = 'bargains/')
+
+    def __unicode__(self):
+        return unicode(self.title)
+
+    class Meta:
+        ordering = ['-created', ]

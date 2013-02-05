@@ -11,7 +11,7 @@
 <div class="row-fluid">{{ images.pk }}
     <div class="span5" id="fadeifchangeorder">
         {% for image in images %}
-            <img src="{% version image.image 'large' %}"  style="width: 360px;"/>
+            <a href="{% version image.image 'large'%}" rel="lightbox"><img src="{% version image.image 'large' %}"   style="width: 360px;"/></a>
         {% endfor %}
         <br/>
 		<span style="width: 200px; margin:3px;"> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</span>
@@ -21,7 +21,7 @@
     <div class="span6">
         <div style="clear: both;"></div>
         <div class="span6">
-            <p><strong>{{ product.article.name }} </strong></p>
+            <p><strong>{{ product.article.name }}   </strong></p>
             <p> {% trans "Artikelnummer" %}: <span id="sku_number">{{ product.article.sku_number }}</p>
 
             <p id="art_description" class="small">{{ product.article.description }}</p>
@@ -36,7 +36,7 @@
 		<br/>
         <div style="clear: both;"></div>
         <hr/>
-  
+
         {% if product.article.quality.order == 2 or product.article.quality.order == 4 %}
 			<div class="span12">
 				{% for color in colors %}
@@ -47,7 +47,7 @@
 				{% endfor %}
             <br />
             <input id="hidden_colorpattern" type="hidden" value="">
-	
+
 		{%elif product.article.sku_number == '9805' %}
 			<div class="span6">
 				<h5> Utsidans mönster</h5>
@@ -122,17 +122,37 @@
 				</select>
 		{% endif %}
 		<br/>
-	    <select id='size'>
-			{% for size in sizes %}
-				<option value="{{ size.pk }}" > {% trans "Storlek" %}: {{ size.name }} </option>
-			{% endfor %}
-	    </select>
-        <select id='quantiy_pk'>
-            <option value="1" selected="selected">{% trans "Antal" %} : 1 </option>
-            <option value="2">{% trans "Antal" %} : 2 </option>
-            <option value="3">{% trans "Antal" %} : 3 </option>
-            <option value="4">{% trans "Antal" %} : 4 </option>
-        </select>
+           {%if product.article.type.order == 7 or product.article.type.order == 6  %}
+
+           {%else%}
+
+                <select id='size'>
+                    {% for size in sizes %}
+                        <option value="{{ size.pk }}" > {% trans "Storlek" %}: {{ size.name }} </option>
+                    {% endfor %}
+        	    </select>
+        {% endif %}
+
+
+
+        {% if product.article.type.order == 7 %}
+                <select id='quantiy_pk'>
+                    <option value="1" selected="selected">{% trans "Meter" %} : 1 </option>
+                    <option value="2">{% trans "Meter" %} : 2 </option>
+                    <option value="3">{% trans "Meter" %} : 3 </option>
+                    <option value="4">{% trans "Meter" %} : 4 </option>
+                    <option value="4">{% trans "Meter" %} : 5 </option>
+                    <option value="4">{% trans "Meter" %} : 6 </option>
+                </select>
+        {% else %}
+                <select id='quantiy_pk'>
+                    <option value="1" selected="selected">{% trans "Antal" %} : 1 </option>
+                    <option value="2">{% trans "Antal" %} : 2 </option>
+                    <option value="3">{% trans "Antal" %} : 3 </option>
+                    <option value="4">{% trans "Antal" %} : 4 </option>
+                </select>
+
+        {% endif %}
 
 	</div>
 
@@ -151,9 +171,15 @@
         <div class="small" id="changetext"></div>
         <hr/>
         <div style="clear: both;"></div>
-
         <div class="span6">
-	        <h4> {% trans "Pris" %}: {{ product.article.price }} kr </h4>
+	        <h4>  {% trans "Pris" %} :
+                {%if product.article.discount%}
+                <span class="discount"> {{ product.article.f_discount }} </span> SEK *<br />
+                    <span class="smaller">({% trans "tidigare pris" %}  {{ product.article.price }}  SEK) </span> <br />
+                    <span class="smaller"> * {{ product.article.discount.reason }} </span>
+                {%else%}
+                    {{ product.article.price }}
+                {%endif%}</h4>
         </div>
 
 
@@ -162,7 +188,7 @@
 				<button class="btn btn-success" type="button">{% trans "Lägg till i Köplista" %} </button>
 			</span>
 		</div>
-        <hr/>
+
     </div>
 </div>
 <script>
@@ -213,16 +239,8 @@
             }
         })
 
-/*
-        var sku_number = $('#sku_number').text(),
-        cart = $('#sku_number').text(),
-        pattern_id = $('#pattern option:selected').val(),
-        color_id = +$('#color option:selected').val(),
-        size_id = $('#size option:selected').val(),
-        article_id = $('#article_pk option:selected').val(),
-        quantity = $('#quantiy_pk option:selected').val();
+        var size_id_default = 1;
 
-*/
         if($('#hidden_colorpattern')){
 			var first_color_id = "{{ product.color.order }}";
 			$('#hidden_colorpattern').val(first_color_id);
@@ -273,19 +291,18 @@
 
     $("#addtocart").click(function() {
         var sku_number = $('#sku_number').text(),
+            product_type = {{product.article.type.order}},
             quality = $(".quality").text(),
-            size_id = $('#size option:selected').val(),
+            size_id = $('#size option:selected').val() || size_id_default,
             article_id = $('#article_pk option:selected').val(),
             quantity = $('#quantiy_pk option:selected').val(),
             color = $('#color option:selected').val() || $('#hidden_colorpattern').val();
-			pattern= $('#pattern option:selected').val() || $('#hidden_colorpattern').val();
-			color2 = 0,
+		var	pattern= $('#pattern option:selected').val() || $('#hidden_colorpattern').val();
+		var	color2 = 0,
 			pattern2 = 0;
-			
-			console.log(sku_number);
-            
+
 			if(sku_number == 9805){ //fill in proper article no for 2 patterned items
-                color2 = $('#color2 option:selected').val(),
+                color2 = $('#color2 option:selected').val();
                 pattern2 = $('#pattern2 option:selected').val();
 			}	
 
@@ -304,6 +321,7 @@
                 quantity: quantity,
                 add_or_edit : add_or_edit
             },
+
             success: function(data){
                 var msg = data.message.msg,
                     _ = data.cartitem;
@@ -316,14 +334,32 @@
 					var coltext = _.color +' / '+_.color2,
 						pattext = _.pattern +' / '+_.pattern2;
 				}
-				$("#changetext")
-				  .html( msg +'<table>' +
-						'<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Plagg"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th><th>{%trans "Storlek"%}</th></tr>' +
-						'<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
-						'<td>'+ _.size+'</td></tr></table>' +
-						'{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
-			  .css({'font-size':'11px'})
 
+                if(product_type == '7'){
+                    $("#changetext")
+                            .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Meter"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +' {{ product.article.quality|lower }}</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '</tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                            .css({'font-size':'11px'});
+                } else if (product_type == '6'){
+                    $("#changetext")
+                            .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '</tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                            .css({'font-size':'11px'});
+                } else{
+                    $("#changetext")
+                      .html( msg +'<table>' +
+                            '<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th><th>{%trans "Storlek"%}</th></tr>' +
+                            '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
+                            '<td>'+ _.size+'</td></tr></table>' +
+                            '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+                      .css({'font-size':'11px'});
+                }
             }
         });
 
