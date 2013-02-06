@@ -1,10 +1,7 @@
-
-<div>
+<div xmlns="http://www.w3.org/1999/html">
     <ul>
     {% for n in news %}
-    <il>{{ n.title }}</il>
-    <a href="/news/"> >> </a>
+    <li>{{ n.title }} <a href="/news/"> >> </a></li>
     {% endfor %}
     </ul>
-
 </div>
