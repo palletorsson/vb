@@ -8,6 +8,8 @@ from cart.api import CartResource, CartItemResource
 from products.api import ArticleResource, ColorResource, PatternResource, SizeResource
 
 from django.contrib import admin
+from django.views.generic import TemplateView
+
 admin.autodiscover()
 
 v1_api = Api(api_name='v1')
@@ -21,6 +23,7 @@ v1_api.register(SizeResource())
 
 urlpatterns = patterns('',
 
+    url(r'^google[a-zA-Z0-9_.-]+/$', TemplateView.as_view(template_name="google612609a6d26fc452.html")),
     url(r'^$', 'frontpage.views.first_page', name='index'),
     url(r'^products/', include('products.urls')),
     url(r'^patternandcolor/$', 'products.views.pattern_and_color'),
@@ -42,6 +45,8 @@ urlpatterns = patterns('',
 
     url(r'^api/', include(v1_api.urls)),
     url(r'^i18n/', include('django.conf.urls.i18n'), name='i18n'),
+
+
 
 )
 
