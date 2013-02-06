@@ -6,7 +6,7 @@ register = template.Library()
 
 #@register.inclusion_tag('base.html')
 def show_news():
-    news = Post.objects.filter(active=True, blog=2).order_by('-publish_at')[:2]
+    news = Post.objects.filter(active=True, blog=2).order_by('-publish_at')[:4]
 
     return {'news': news}
 

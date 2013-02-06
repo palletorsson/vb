@@ -1,9 +1,10 @@
 
 <div>
+    <ul>
     {% for n in news %}
-    {{ n.title }}<br />
-
-    <span class="footer_news">{{ n.boy|safe|truncatewords:30 }}</span>
-    {% endfor %}
+    <il>{{ n.title }}</il>
     <a href="/news/"> >> </a>
+    {% endfor %}
+    </ul>
+
 </div>
