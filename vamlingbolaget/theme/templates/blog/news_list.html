@@ -1,7 +1,8 @@
 <div xmlns="http://www.w3.org/1999/html">
     <ul>
     {% for n in news %}
-    <li>{{ n.title }} <a href="/news/"> >> </a></li>
+    <li>{{ n.title }} <br/>
+        <span class="muted">{{n.publish_at}}</span><a href="/news/"> >> </a></li>
     {% endfor %}
     </ul>
 </div>
