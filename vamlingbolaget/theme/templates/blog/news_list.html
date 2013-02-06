@@ -2,7 +2,7 @@
     <ul style="margin-left: 0px;">
     {% for n in news %}
     <li>
-        {{ n.title }}<a href="/news/"> >> </a><br/>
+        {{ n.title }}<a href="/news/{{ n.slug }}"> >> </a><br/>
         <span class="muted">{{n.publish_at}}</span>
      </li>
     {% endfor %}
