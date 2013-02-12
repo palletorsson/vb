@@ -84,7 +84,7 @@ def checkout(request):
             new_order.save()
             to = [request.POST['email'], 'info@vamlingbolaget.com']
             mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
-            
+
             return HttpResponseRedirect('thanks/')
 
     return render_to_response('checkout/checkout.html', {
