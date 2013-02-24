@@ -23,7 +23,7 @@
                             {% for gallery in fgalleries %}
                             <div style="float: left; display: inline; margin-right: 5px; height: 200px; width: 300px; overflow: hidden;">
                                 <div class="overlay">&nbsp; {{gallery.name}}</div>
-                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" /></a>
+                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" alt="{{gallery.name}}" /></a>
                             </div>
                             {%endfor%}
                         </dl>
@@ -38,7 +38,7 @@
                             <div style="float: left; display: inline;">
                                 <a href="/gallery/{{gallery.pk}}" >
                                     <div class="overlay">&nbsp;{{gallery.name}}</div>
-                                    <img src="{% version gallery.feature_image 'medium' %}" />
+                                    <img src="{% version gallery.feature_image 'medium' %}" alt="{{gallery.name}}" />
                                     
                                 </a>
                             </div>
@@ -54,7 +54,7 @@
                             {% for gallery in hgalleries %}
                             <div style="float: left; display: inline;">
                                 <div class="overlay">&nbsp;{{gallery.name}}</div></a>
-                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" />
+                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" alt="{{gallery.name}}"/>
                                 
                             </div>
                             {%endfor%}
@@ -66,13 +66,13 @@
                 <div>
                     <div style="height: 200px;width: 300px; float: left;overflow: hidden;">
                     <a href="{% version gallery.feature_image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
-                        <img src="{% version gallery.feature_image 'medium' %}"  class="imgborder isfeatured" />
+                        <img src="{% version gallery.feature_image 'medium' %}" alt="{{gallery.name}}" class="imgborder isfeatured" />
                     </a>
                     </div>
                     {%for image in images%}
                     <div style="height: 200px;width: 300px; float: left;overflow: hidden;">
                     <a href="{% version image.image 'large' %}" title="{{image}}" rel="lightbox[{{gallery}}]">
-                        <img src="{% version image.image 'medium' %}"  class="imgborder enlarge" />
+                        <img src="{% version image.image 'medium' %}" alt="{{gallery.name}}" class="imgborder enlarge" />
                     </a>    
                     </div>
                     {%endfor%}

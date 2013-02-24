@@ -3,13 +3,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Vamlingbolaget | vamlingbolaget.com</title>
+    {%block title%}
+        <title>Vamlingbolaget | vamlingbolaget.com</title>
+        <meta name="description" content="Vamlingbolaget in Stockholm and Gotland, Sweden. Vackra kläder med rötter i Mah-jong och produktion på gotland. Vamlingbolaget startades 1983 när Kristina Torsson med familj flyttade in i ett f d mejeri i Vamlingbo på södra Gotland. Huvudbyggnaden innehåller idag en verkstad där 6-8 personer arbetar året runt med färgning av tyger, tillskärning och sömnad samt postorderexpedition.
+Vamlingbolaget." />
+    {%endblock%}
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Vamlingbolaget in Stockholm and Gotland, Sweden. Vackra kläder med rötter i Mah-jong och produktion på gotland. Vamlingbolaget startades 1983 när Kristina Torsson med familj flyttade in i ett f d mejeri i Vamlingbo på södra Gotland. Huvudbyggnaden innehåller idag en verkstad där 6-8 personer arbetar året runt med färgning av tyger, tillskärning och sömnad samt postorderexpedition.
-Vamlingbolaget.">
-    <meta name="author" content="Vamlingbolaget">
-    <meta name="keywords" content="Vamlingbolaget,vamlingbolaget.com,vamlingbolaget stockholm,vamlingbolaget gotland">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Vamlingbolaget" />
+    <meta name="keywords" content="Vamlingbolaget,vamlingbolaget.com,vamlingbolaget stockholm,vamlingbolaget gotland" />
     <!-- The styles -->
     <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
@@ -218,13 +220,13 @@ l    <style type="text/css">
               <ul class="nav pull-right">
                     <li>
                         <a id="token" href="/cart/show/" style="font-size: 12px;">
-                            {% trans "Din shoppinglåda" %} <img src="{{STATIC_URL}}img/box.png" width="25px" style="float:right; position:relative; padding-left: 5px; position:relative;
+                            {% trans "Din shoppinglåda" %} <img src="{{STATIC_URL}}img/box.png" alt="Vamlingbolaget shopping cart"width="25px" style="float:right; position:relative; padding-left: 5px; position:relative;
 top:-6px;">
                         </a>
                     </li>
               </ul>
             </div>
-            <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" alt="vamlingbolaget logo" class="leftside"/>  <span class="leftsideline"> </span></a>
+            <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" alt="Vamlingbolaget logo" class="leftside"/>  <span class="leftsideline"> </span></a>
             <br />
             <div class="nav-collapse collapse">
 
@@ -281,7 +283,7 @@ top:-6px;">
 {% block footer %}
    
   <footer>
-      <img src="{{ STATIC_URL }}img/orange_line.png" width="100%"/>  <br/>
+      <img src="{{ STATIC_URL }}img/orange_line.png" alt="footer div line" width="100%"/>  <br/>
       <div class="span4">
           <address>
               <strong>Vamlingbolaget</strong><br/>
@@ -324,8 +326,8 @@ top:-6px;">
                 {% csrf_token %}
                 <input name="next" type="hidden" value="{{ redirect_to }}" />
                 <input name="language" type="hidden" value=""  />
-                <img src="{{STATIC_URL}}img/english_flag.gif" class="change_lang" id="en"/>
-                <img src="{{STATIC_URL}}img/svensk_flagga.gif" class="change_lang" id="sv"/>
+                <img src="{{STATIC_URL}}img/english_flag.gif" alt="flag english" class="change_lang" id="en"/>
+                <img src="{{STATIC_URL}}img/svensk_flagga.gif" alt="flagga svensk"  class="change_lang" id="sv"/>
             </form>
       </div>
   </footer>

@@ -1,5 +1,9 @@
 
 {% extends "about_base.html" %}
+{%block title%}
+<title>Vamlingbolaget | {% block pagetitle %} </title>
+<meta name="description" content="{{ flatpage.title }}" />
+{%endblock%}
 {% block pagetitle %}
 <legend>{{ flatpage.title }}</legend>
 

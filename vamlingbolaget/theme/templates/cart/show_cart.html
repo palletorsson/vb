@@ -1,5 +1,9 @@
 {% extends "collection_base.html" %}
 {% load i18n %}
+{%block title%}
+<title>Vamlingbolaget | {% trans "Din beställning av " %} </title>
+<meta name="description" content={% trans "Din beställning av Vamlingbolagets produkter " %} />
+{%endblock%}
 {% block pagetitle %}
 <legend xmlns="http://www.w3.org/1999/html"> {% trans "Din shoppinglåda" %} </legend>
 {% endblock %}

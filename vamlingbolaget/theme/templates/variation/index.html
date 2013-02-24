@@ -11,10 +11,9 @@
         {% for product in products %}
             <div class='image_wrapper'>
                 <a href="/products/{{product.pk}}">
-
                     {% with product.image_set.all|first as image %}
                         <div class="collection_list" >
-                            <img src="{% version image.image 'medium' %}" class="imgborder" width="200" />
+                            <img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}" class="imgborder" width="200" />
                             <br/>
                             <span class='image_description'>
                                 {{ product.article.name }}<br/>
