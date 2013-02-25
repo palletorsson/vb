@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from filebrowser.sites import site
 from django.http import HttpResponse
+from django.views.generic.simple import redirect_to
 from tastypie.api import Api
 
 from cart.api import CartResource, CartItemResource
@@ -50,12 +51,22 @@ urlpatterns = patterns('',
 
 )
 
+
 urlpatterns += patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^theme/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_URL}),
-    (r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ", mimetype="text/plain"))
+    (r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ", mimetype="text/plain")),
+    (r'^index\.php$', redirect_to, {'url': '/'}),
+    (r'^nyheter\.php$', redirect_to, {'url': 'news/'}),
+    (r'^galleri_enter\.php$', redirect_to, {'url': 'galleries/'}),
+    (r'^farger\.php$', redirect_to, {'url': 'patternandcolor/'}),
+    (r'^butiker\.php$', redirect_to, {'url': 'shop/'}),
+    (r'^omoss\.php$', redirect_to, {'url': 'about/'}),
+    (r'^bestall\.php$', redirect_to, {'url': 'order/'}),
+    (r'^kontakt\.php$', redirect_to, {'url': 'shop/'}),
 
 )
+
 
 if 'rosetta' in settings.INSTALLED_APPS:
     urlpatterns += patterns('',
