@@ -327,7 +327,6 @@ top:-6px;">
       </div>
       <div class="span2">
               {% endblock %}
-            {% get_language_info for LANGUAGE_CODE as lang %}
             <form action="/i18n/setlang/" method="post" id="lang">
                 {% csrf_token %}
                 <input name="next" type="hidden" value="{{ redirect_to }}" />
