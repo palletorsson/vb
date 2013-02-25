@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from filebrowser.sites import site
-
+from django.http import HttpResponse
 from tastypie.api import Api
 
 from cart.api import CartResource, CartItemResource
@@ -53,6 +53,8 @@ urlpatterns = patterns('',
 urlpatterns += patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^theme/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_URL}),
+    (r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain"))
+
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:
