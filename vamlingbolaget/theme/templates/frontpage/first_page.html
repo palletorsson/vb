@@ -13,7 +13,7 @@
                 <div class="carousel-inner">
                   {%for image in images%}
                       <div class="item {% if forloop.first%} active {%endif%} spanfullscreen">
-                        <img src="{{MEDIA_URL}}{{image.image}}" name="{{image.name}}" alt=""/>
+                        <img src="{{MEDIA_URL}}{{image.image}}" alt="{{image.name}}" name="{{image.name}}" alt=""/>
                       </div>
                   {%endfor%}
                 </div>
