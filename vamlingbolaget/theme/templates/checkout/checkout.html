@@ -1,5 +1,5 @@
 {% extends "collection_base.html" %}
-
+{% load i18n %}
 {%block title%}
 <title>Vamlingbolaget | {% trans "Din Beställning" %}  </title>
 <meta name="description" content={% trans "Din Beställning av Vamlingbolagets produkter " %} />
@@ -7,7 +7,6 @@
 {% block extra_head %}
 
 {% endblock %}
-{% load i18n %}
 
 {% block pagetitle %}
     <legend> {% trans "Din Beställning" %} </legend>
