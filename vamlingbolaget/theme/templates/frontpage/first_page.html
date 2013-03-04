@@ -4,7 +4,7 @@
 {% version model.field_name version_prefix %}
 
 {% block stretchpage %}
-    <legend> {% trans "Välkommen Vamlingbolaget" %} </legend>
+    <h1> {% trans "Välkommen Vamlingbolaget" %} </h1>
     <div class="spanfullscreen">
             <!-- Carousel
           ================================================== -->
@@ -13,7 +13,9 @@
                 <div class="carousel-inner">
                   {%for image in images%}
                       <div class="item {% if forloop.first%} active {%endif%} spanfullscreen">
-                        <img src="{{MEDIA_URL}}{{image.image}}" name="{{image.name}}" alt=""/>
+                      <h2 class="imageoverlay">{{image.name}}</h2>
+                      <img src="{{MEDIA_URL}}{{image.image}}" alt="{{image.name}}" name="{{image.name}}" alt=""/>
+
                       </div>
                   {%endfor%}
                 </div>
@@ -22,11 +24,6 @@
               </div>
             </div>
     </div>
- 
- 
- 
- 
- 
  
     <script src="{{STATIC_URL}}js/bootstrap.js"></script>
     <script>

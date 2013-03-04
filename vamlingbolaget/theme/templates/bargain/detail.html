@@ -2,6 +2,11 @@
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
+{%block title%}
+    <title>Vamlingbolaget | {% trans "Fynd " %} | {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }} </title>
+    <meta name="description" content={% trans "Vamlingbolaget fynd" %} {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" %}/>
+{%endblock%}
+
 {% block pagetitle %}
 	<legend><a href="javascript:history.go(-1)">{% trans "Kollektion" %}</a> / {{ product.article.name }} </legend>
 {% endblock %}
@@ -10,7 +15,7 @@
 {% block allcontent %}
 <div class="row-fluid">
     <div class="span5">
-        <img src="{{ product.image.url }}"  style="width: 360px;"/>
+        <img src="{{ product.image.url }}"  alt=" {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" style="width: 360px;"/>
         <br/>
         <span style="width: 200px; margin:3px;"> {{ product.title }} </span>
     </div>

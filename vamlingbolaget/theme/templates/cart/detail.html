@@ -2,6 +2,12 @@
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
+
+{%block title%}
+    <title>Vamlingbolaget | {% trans "Ändra beställning av " %} {{ cartitem.article.name }} </title>
+    <meta name="description" content={% trans "Ändra beställning av Vamlingbolagets produkt " %} {{ cartitem.article.name }} />
+{%endblock%}
+
 {% block pagetitle %}
 <legend><a href="javascript:history.go(-1)">Din shoppinglåda</a> / {% trans "Du ändrar nu din beställning av" %}: <span id="cartitem_id" style="display: none;">{{ cartitem.id }}</span> {{ cartitem.article.name }} </legend>
 {% endblock %}
@@ -12,7 +18,7 @@
     <h4> Du ändrar  {{ cartitem.article.name }} {% trans "i" %} <br /> {{ cartitem.color|lower }}   {{ cartitem.pattern|lower }}</h4>
     <p> {% trans "Artikelnummer" %}: <span id="sku_number">{{ cartitem.article.sku_number }}</p>
       <div style="padding-left: 10px;">
-			<img src="{% version cartitem.article.file 'small' %} " />
+			<img src="{% version cartitem.article.file 'small' %} " alt="{{ cartitem.article.name }} {% trans "i" %} {{ cartitem.color|lower }}"/>
 		</div><br />
     {% trans "Kvalitet" %}: <span class="quality" id="{{ cartitem.article.quality }}">{{ cartitem.article.quality }}</span><br />
 

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
+{%block title%}
+<title>Vamlingbolaget |  {% trans "Färger och Mönster" %} </title>
+<meta name="description" content={% trans "Färger och Mönster" %} />
+{%endblock%}
 {% block allcontent %}
    <div class="span10">
     <legend><a href="javascript:history.go(-1)">{% trans "Kollektion" %} </a> / {% trans "Färger och Mönster" %}</legend>

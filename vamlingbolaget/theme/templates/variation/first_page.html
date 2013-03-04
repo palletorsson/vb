@@ -18,8 +18,8 @@
     <legend> {% trans "Välkommen" %} </legend>
         <div><img src="{{ STATIC_URL }}img/klanningar.jpg" />
         {% for product, image in products %}
-            <div><img src="{{ image.image_300.url }}" />
-            <a href="{{product.pk}}"> {{ product.name }} </a>
+            <div><img src="{{ image.image_300.url }}" alt="{{ product.name }}" />
+            <a href="{{product.pk}}/"> {{ product.name }} </a>
             {{ product.article.price }}
             </hr></div></br>
         {% endfor %}

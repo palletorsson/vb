@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% load i18n %}
+
+{%block title%}
+    <title>Vamlingbolaget | {% trans "Nyheter och Blog" %}  </title>
+    <meta name="description" content={% trans "Vamlingbolaget nyheter och blogg, alla nyheter." %} />
+{%endblock%}
+
 {% block pagetitle %}
    <div>
     <span ><legend> {% trans "Nyheter och Blog" %} </legend></span>
