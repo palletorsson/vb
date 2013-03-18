@@ -12,6 +12,7 @@
 {% endblock %}
 
 {% block allcontent %}
+    {% if gallery %}
     <div class="gallery_list">
         <table border="0" cellpadding="0" style="width: 960px;">
             <tr>
@@ -33,5 +34,9 @@
         </table>
         <a href="/products/type/klanning/">{% trans "Till shoppen" %} </a>
     </div>
+    {%else%}
 
+        <p>{%trans "Kollektionen kommer inom kort"%}.</p>
+
+    {%endif%}
 {% endblock %}
