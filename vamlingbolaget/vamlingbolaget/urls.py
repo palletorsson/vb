@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^$', 'frontpage.views.first_page', name='index'),
     url(r'^products/', include('products.urls')),
     url(r'^patternandcolor/$', 'products.views.pattern_and_color'),
+    url(r'^collection/(?P<key>[a-zA-Z0-9_.-]+)/$', 'gallery.views.show_gallery'),
     url(r'^galleries/$', 'gallery.views.show_galleries'),
     url(r'^gallery/(?P<key>[a-zA-Z0-9_.-]+)/$', 'gallery.views.show_gallery'),
     (r'^tinymce/', include('tinymce.urls')),
@@ -47,10 +48,7 @@ urlpatterns = patterns('',
     url(r'^api/', include(v1_api.urls)),
     url(r'^i18n/', include('django.conf.urls.i18n'), name='i18n'),
 
-
-
 )
-
 
 urlpatterns += patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),

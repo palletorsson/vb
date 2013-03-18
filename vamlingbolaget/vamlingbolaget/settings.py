@@ -79,6 +79,7 @@ STATICFILES_DIRS = (
     
 )
 
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
@@ -179,6 +180,7 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'gunicorn',
+    'haystack',
     #'photologue',
     #Our Apps
     'products',

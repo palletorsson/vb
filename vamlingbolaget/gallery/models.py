@@ -18,6 +18,7 @@ class GalleryStatus(models.Model):
     order = models.IntegerField()
     display_on_gallery_page = models.BooleanField(default = True)
     display_on_index_page = models.BooleanField(default = False)
+    display_on_collection_page = models.BooleanField(default = False)
     order = models.SmallIntegerField(blank=True, null=True)
     
     def __unicode__(self):

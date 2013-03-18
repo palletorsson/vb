@@ -16,7 +16,13 @@ def show_galleries(request):
     )
 
 def show_gallery(request, key):
-    gallery = Gallery.objects.get(pk=key)
+    if key == 'new':
+        gallery = Gallery.objects.get(status__display_on_collection_page=True)
+        template='gallery/collection.html'
+    else:
+        gallery = Gallery.objects.get(pk=key)
+        template='gallery/gallery.html'
+
     images = gallery.image_set.all().order_by('order')
     num = len(images) + 1 #all images plus the feature image
     col = int(num/4) #images per column
@@ -40,7 +46,7 @@ def show_gallery(request, key):
         break3 = break3+3            
     
    
-    return render_to_response('gallery/gallery.html',
+    return render_to_response(template,
         {'gallery': gallery,
          'num_gallery' : 1,
          'images':images,

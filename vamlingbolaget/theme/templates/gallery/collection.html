@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load fb_versions %}
+{% load i18n %}
+{%block title%}
+<title>Vamlingbolaget |  {%trans "Kollektion" %} </title>
+<meta name="description" content={%trans "Vamlingbolaget kollektion" %} />
+{%endblock%}
+{% version model.field_name version_prefix %}
+
+{% block pagetitle %}
+        <legend> {%trans "Vår senaste kollektion" %}</legend>
+{% endblock %}
+
+{% block allcontent %}
+    <div class="gallery_list">
+        <table border="0" cellpadding="0" style="width: 960px;">
+            <tr>
+            <td valign="top" style="width: 240px;">
+                <a href="{% version gallery.feature_image 'large' %}" title="{{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " rel="lightbox[{{gallery}}]">
+                    <img src="{% version gallery.feature_image 'medium' %}"  style="width: 200px; margin-top: 2px; margin-bottom: 2px;" class="imgborder isfeatured" />
+                </a>
+                {%for image in images%}
+                    <a href="{% version image.image 'large' %}" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " rel="lightbox[{{gallery}}]">
+                        <img src="{% version image.image 'medium' %}" style="width: 200px; margin-top: 2px; margin-bottom: 2px;" class="imgborder enlarge" />
+                    </a>
+                    {% if forloop.counter == break1 or forloop.counter == break2 or forloop.counter == break3 %}
+                        </td>
+                        <td valign="top" style="width: 240px;">
+                    {%endif%}
+                {%endfor%}
+                </td>
+             </tr>
+        </table>
+        <a href="/products/type/klanning/">{% trans "Till shoppen" %} </a>
+    </div>
+
+{% endblock %}

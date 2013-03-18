@@ -36,9 +36,9 @@
             {%endfor%}
     </div>
         {%else%}
-                <table border="0" cellpadding="0" style="width: 800px;">
+                <table border="0" cellpadding="0" style="width: 960px;">
                     <tr>
-                    <td valign="top" style="width: 200px;">
+                    <td valign="top" style="width: 240px;">
                         <a href="{% version gallery.feature_image 'large' %}" title="{{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " rel="lightbox[{{gallery}}]">
                             <img src="{% version gallery.feature_image 'medium' %}"  style="width: 200px; margin-top: 2px; margin-bottom: 2px;" class="imgborder isfeatured" />
                         </a>
@@ -48,7 +48,7 @@
                             </a>    
                             {% if forloop.counter == break1 or forloop.counter == break2 or forloop.counter == break3 %}
                                 </td>
-                                <td valign="top" style="width: 200px;">        
+                                <td valign="top" style="width: 240px;">
                             {%endif%}
                         {%endfor%}
                         </td>
