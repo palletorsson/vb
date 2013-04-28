@@ -33,8 +33,6 @@ def checkout(request):
             last_name = request.POST['last_name']
             street = request.POST['street']
             postcode_str = request.POST['postcode']
-            postcode_str = postcode_str.replace(" ", "")
-            postcode = int(postcode_str)
             city = request.POST['city']
             if (request.POST['country']):
                 country = request.POST['country']
