@@ -177,14 +177,6 @@
                     {{ form.street.errors }}
                 </div>
             </div>
-            <div class="control-group" id="city">
-                <label class="control-label" > <label for="id_city">{% trans "Postort" %}  * </label> </label>
-                {{ form.subject.city}}
-                <div class="controls">
-                    {{ form.city }}
-                    {{ form.city.errors }}
-                </div>
-            </div>
             <div class="control-group" id="postcode">
                 <label class="control-label" > <label for="id_postcode">{% trans "Postnummer" %} * </label> </label>
                 {{ form.subject.postcode}}
@@ -192,6 +184,14 @@
                 <div class="controls">
                     {{ form.postcode }}
                     {{ form.postcode.errors }}
+                </div>
+            </div>
+            <div class="control-group" id="city">
+                <label class="control-label" > <label for="id_city">{% trans "Postort" %}  * </label> </label>
+                {{ form.subject.city}}
+                <div class="controls">
+                    {{ form.city }}
+                    {{ form.city.errors }}
                 </div>
             </div>
 
