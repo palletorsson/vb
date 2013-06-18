@@ -13,7 +13,7 @@
                 <div class="carousel-inner">
                   {%for image in images%}
                       <div class="item {% if forloop.first%} active {%endif%} spanfullscreen">
-                      <h2 class="imageoverlay">{{image.name}}</h2>
+                      <h2 class="imageoverlay"></h2>
                       <img src="{{MEDIA_URL}}{{image.image}}" alt="{{image.name}}" name="{{image.name}}" alt=""/>
 
                       </div>
@@ -29,8 +29,10 @@
     <script>
       $(document).ready(function(){
         $('.carousel').carousel(
-          {interval:10000}
+          {interval:2000}
         )
       });
+
+
     </script>
 {% endblock %}
