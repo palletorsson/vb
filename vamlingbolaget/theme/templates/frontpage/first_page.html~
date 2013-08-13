@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+
+{% block stretchpage %}
+    <h1> {% trans "Välkommen Vamlingbolaget" %} </h1>
+    <div class="spanfullscreen">
+            <!-- Carousel
+          ================================================== -->
+            <div class="bs-docs-example">
+              <div id="myCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                  {%for image in images%}
+                      <div class="item {% if forloop.first%} active {%endif%} spanfullscreen">
+                      <h2 class="imageoverlay"></h2>
+                      <img src="{{MEDIA_URL}}{{image.image}}" alt="{{image.name}}" name="{{image.name}}" alt=""/>
+
+                      </div>
+                  {%endfor%}
+                </div>
+                <div class="left" style="height: 100%;postition:absolute; top:0;left: 0; width: 150px;background: red;"><a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a></div>
+                <div class="right" style="height: 100%;postition:absolute; top:0; width: 50px;background: red;"><a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a></div>
+              </div>
+            </div>
+    </div>
+ 
+    <script src="{{STATIC_URL}}js/bootstrap.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('.carousel').carousel(
+          {interval:2000}
+        )
+      });
+
+
+    </script>
+{% endblock %}
