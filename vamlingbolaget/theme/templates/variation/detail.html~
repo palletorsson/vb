@@ -128,7 +128,7 @@
 				</select>
 		{% endif %}
 		<br/>
-           {%if product.article.type.order == 7 %}
+           {%if product.article.type.order == 7 or product.article.type.order == 6  %}
 
            {%else%}
 
