@@ -308,8 +308,7 @@ top:-6px;">
               <abbr title="Phone">Tel:</abbr>0498-498080 <br/>
               info@vamlingbolaget.com
           </address>
-          <strong>{% trans "Öppettider Maj:" %}</strong><br/>
-          {% trans "Vardagar" %} 11.00 - 17.00<br/>
+          <strong>{% trans "Öppettider" %}</strong><br/>
           <a href="/about/"> {% trans "Om oss" %} Vamlingbolaget </a>
       </div>
       <div class="span4">
@@ -320,7 +319,7 @@ top:-6px;">
               <abbr title="Phone">Tel:</abbr>08 - 640 31 37 <br/>
               stockholm@vamlingbolaget.com
           </address>
-          <strong>{% trans "Öppettider" %} Maj:</strong><br/>
+          <strong>{% trans "Öppettider" %} </strong><br/>
           {% trans "Vardagar" %} 11.00 - 18.00 <br/>
           {% trans "Lördagar" %} 11.00 - 15.00 <br/><br/><br/><br/><br/>
       </div>
