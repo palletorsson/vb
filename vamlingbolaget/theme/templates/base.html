@@ -158,7 +158,6 @@ Vamlingbolaget." />
 
       footer {
          font-size: 10px;
-		 padding-top: 80px;
       }
       
       .change_lang{
@@ -204,6 +203,10 @@ Vamlingbolaget." />
           left: 100px;
           top: 600px;
       }
+
+	.spacer {
+		margin-top: 40px; 
+	}
 
     </style>
 
@@ -301,7 +304,7 @@ top:-6px;">
 {% block footer %}
    
   <footer>
-      <img src="{{ STATIC_URL }}img/orange_line.png" alt="footer div line" width="100%"/>  <br/>
+      <div class="spacer"> </div>
       <div class="span4">
           <address>
               <strong>Vamlingbolaget</strong><br/>

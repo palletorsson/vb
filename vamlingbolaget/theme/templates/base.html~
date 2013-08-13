@@ -204,6 +204,10 @@ Vamlingbolaget." />
           top: 600px;
       }
 
+	.spacer {
+		margin-top: 40px; 
+	}
+
     </style>
 
 
@@ -300,7 +304,7 @@ top:-6px;">
 {% block footer %}
    
   <footer>
-     <br/>   <br/>   <br/>
+      <div class="spacer"> </div>
       <div class="span4">
           <address>
               <strong>Vamlingbolaget</strong><br/>
