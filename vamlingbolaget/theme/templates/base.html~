@@ -300,7 +300,7 @@ top:-6px;">
 {% block footer %}
    
   <footer>
-     <br/>
+     <br/>   <br/>   <br/>
       <div class="span4">
           <address>
               <strong>Vamlingbolaget</strong><br/>
