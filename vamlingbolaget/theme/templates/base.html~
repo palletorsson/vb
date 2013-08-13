@@ -300,7 +300,7 @@ top:-6px;">
 {% block footer %}
    
   <footer>
-      <img src="{{ STATIC_URL }}img/orange_line.png" alt="footer div line" width="100%"/>  <br/>
+     <br/>
       <div class="span4">
           <address>
               <strong>Vamlingbolaget</strong><br/>
@@ -309,7 +309,7 @@ top:-6px;">
               info@vamlingbolaget.com
           </address>
           <strong>{% trans "Öppettider" %}</strong><br/>
-          <a href="/about/"> {% trans "Om oss" %} Vamlingbolaget </a>
+          <a href="/shops/"> {% trans "Om oss" %} Vamlingbolaget </a>
       </div>
       <div class="span4">
           <address>
