@@ -22,7 +22,7 @@
                 </a>
                 {%for image in images%}
                     <a href="{% version image.image 'large' %}" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " rel="lightbox[{{gallery}}]">
-                        <img src="{% version image.image 'medium' %}"  title="{{image.name}}" style="width: 240px; margin-top: 2px; margin-bottom: 2px;" class="imgborder enlarge" />
+                        <img src="{% version image.image 'medium' %}" style="width: 240px; margin-top: 2px; margin-bottom: 2px;" class="imgborder enlarge" />
                     </a>
                     {% if forloop.counter == break1 or forloop.counter == break2 or forloop.counter == break3 %}
                         </td>
