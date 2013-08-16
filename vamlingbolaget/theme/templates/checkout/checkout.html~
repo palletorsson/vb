@@ -72,7 +72,7 @@
         </td>
             <td>
                 <div>
-                    <span>{% if item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%}</span>
+                    <span>{% if item.article.type.order == 7 or item.article.type.order == 6 %} - {%else%} {{ item.size }} {%endif%}</span>
                 </div>
             </td>
             <td>
