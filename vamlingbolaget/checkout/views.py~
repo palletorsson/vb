@@ -47,7 +47,7 @@ def checkout(request):
             msg = msg + '--------------------------------- \n'
             msg = msg + 'Din order:\n'
             for item in cartitems:
-                msg = msg + 'product '+ str(i) + ': \n'
+                msg = msg + 'produkt '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
                 msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
                 if (item.article.type.order < 5):

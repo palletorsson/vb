@@ -50,7 +50,7 @@ def checkout(request):
                 msg = msg + 'produkt '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
                 msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
-                if (item.article.type.order < 5):
+                if (item.article.categories.order < 3):
                     msg = msg + 'Storlek: ' + item.size.name + ' \n'
 
                 msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
