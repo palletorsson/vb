@@ -49,7 +49,13 @@ def checkout(request):
             for item in cartitems:
                 msg = msg + 'produkt '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
-                msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
+                print item.pattern_2
+                if (item.pattern_2 != 0):
+				    msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' (utsida)\n'
+				    msg = msg + 'och ' + item.pattern_2.name + ', ' + item.color_2.name + ' (insida)\n'
+                else:
+					msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
+					
                 if (item.article.category.order < 3):
                     msg = msg + 'Storlek: ' + item.size.name + ' \n'
 
