@@ -7,6 +7,6 @@
 {% block allcontent %}
    <div class="span10">
     <legend><a href="javascript:history.go(-1)">{% trans "Kollektion" %} </a> / {% trans "Färger och Mönster" %}</legend>
-	<img src="/media/uploads/ckd/2013/09/04/fargskala_ny_ratttext.jpg" alt="Patterns and Colors">
+	<img src="/media/uploads/ckd/2013/08/22/fargskalahemsidamedsvart.jpg" alt="Patterns and Colors">
 {% endblock %}
 
