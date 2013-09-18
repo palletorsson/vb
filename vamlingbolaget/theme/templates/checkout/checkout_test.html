@@ -246,13 +246,18 @@
                 <label class="control-label" > </label>
 				
                 {{ form.subject.post }}
-			<input type=hidden name="paymentmethod" id="id_paymentmethod" value="P">
-
+				Välj betalsätt: <select name="paymentmethod" id="id_paymentmethod">
+                    <option value="" selected="selected">---------</option>
+                    <option value="P">Betal via Postförskott</option>
+                    <option value="C">Betal med Kort</option>
+                </select>
                         {{ form.paymentmethod.errors }}
                 <div class="controls">
                     <img src="{{ STATIC_URL }}img/post.jpg" width="46px"/>
 					<span class="muted">{% trans "Beställningen skicka mot Postförskott" %} </span>
-                </div>
+
+
+Efter genomförd betalning kommer du att skickas tillbaks till oss och ditt köp kommer att bekräftas.               </div>
             </div>
             <input type="submit" class="btn" value="{% trans "Skicka Din Beställning" %}"  />
         </th>
