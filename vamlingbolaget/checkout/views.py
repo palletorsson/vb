@@ -175,18 +175,20 @@ def success(request):
                 cart.delete()
                 _new_cart_id(request)
                 message = "Tack for din order"
-                #to = [order.email, 'info@vamlingbolaget.com']
-                #mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                to = [order.email, 'info@vamlingbolaget.com']
+                mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.order, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+
+                return render_to_response('checkout/thanks.html', {
+                    'order': order,
+                    'message': message
+                }, context_instance=RequestContext(request))
+
             else:
                 message = u"Igen aktuell order funnen."
                 return render_to_response('checkout/thanks.html', {
                     'message': message
                 }, context_instance=RequestContext(request))
 
-            return render_to_response('checkout/thanks.html', {
-                'order': order,
-                'message': message
-            }, context_instance=RequestContext(request))
 
         else:
             message = u"Igen aktuell order funnen."
