@@ -167,7 +167,7 @@ def success(request):
                   order = Checkout.objects.get(payex_key=orderref)
             except:
                 order = 1
-            if (order != 1 and order.session_key == cart_id):
+            if (order != 1):
                 cart = Cart.objects.get(key = cart_id)
                 cartitems_key = cart.id
                 cartitems = CartItem.objects.filter(cart = cartitems_key)
