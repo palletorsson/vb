@@ -135,7 +135,10 @@
 
                 <select id='size'>
                     {% for size in sizes %}
-                        <option value="{{ size.pk }}" > {% trans "Storlek" %}: {{ size.name }} </option>
+                        <option value="{{ size.pk }}"
+						{% if size.pk == 3 %}
+							selected="selected"
+						{%endif%} "> {% trans "Storlek" %}: {{ size.name }} </option>
                     {% endfor %}
         	    </select>
         {% endif %}
