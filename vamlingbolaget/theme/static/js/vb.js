@@ -69,7 +69,7 @@ $('#fadeifchangeorder').fadeTo(500,0.6);
 
 var article_name =  $('#articlename').text();
 var str = "Beställ "+article_name+ " i ",
-    folder = "{{MEDIA_URL}}uploads/120/",
+    folder = "/media/uploads/120/",
     img = "";
 
 var once = 1,
