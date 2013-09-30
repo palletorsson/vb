@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{%block title%}
+<title>Vamlingbolaget | 404 </title>
+<meta name="description" content={% trans "Vamlingbolagets 404" %} />
+{%endblock%}
+{% block pagetitle %}
+        {% trans "Vamlingbolagets 404" %}
+{% endblock %}
+
+{% block allcontent %}
+     <ul>
+        <li>
+         The 404 or Not Found error message is a HTTP standard response code indicating that the client was able to communicate with the server, but the server could not find what was requested. <br/>
+        </li>
+        <li>
+         404 error eller error 404 är en standardfelkod i HTTP-protokollet som betecknar att webbsidan som efterfrågats inte finns eller inte kan hittas.
+        </li>
+     </ul>
+{% endblock %}
