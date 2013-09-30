@@ -85,7 +85,7 @@
 
             <select class="changonselectupdate" id='pattern2'>
                 {% for pattern in patterns %}
-                    <option value="{{ pattern.order }}"
+                    <option value="{{ pattern2.order }}"
                     {% if pattern.order == cartitem.pattern2.order %}
                         selected="selected"
                     {%endif%}
@@ -95,7 +95,7 @@
             </select>
             <select class="changonselectupdate" id="color2">
                 {% for color in colors %}
-                    <option value="{{ color.order }}"
+                    <option value="{{ color2.order }}"
                         {% if color.order == cartitem.color2.order %}
                             selected="selected"
                         {%endif%}
