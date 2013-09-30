@@ -292,7 +292,7 @@ def totalsum(cartitems, bargains):
                 temp_p = temp_p + item.article.price * item.quantity
                 item.totalitemprice = item.article.price * item.quantity
 
-        temp_q = temp_q + item.quantity
+            temp_q = temp_q + item.quantity
 
     if (bargains):
         for item in bargains:
