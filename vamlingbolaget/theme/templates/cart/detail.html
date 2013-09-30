@@ -82,17 +82,6 @@
              <img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" style="width:100px;" />
 		</td>
         <td>
-
-            <select class="changonselectupdate" id='pattern2'>
-                {% for pattern in patterns %}
-                    <option value="{{ pattern_2.order }}"
-                    {% if pattern.order == cartitem.pattern_2.order %}
-                        selected="selected"
-                    {%endif%}
-                    ">
-                    {%trans "Mönster Insida"%} : {{ pattern.name }}</option>
-                {% endfor %}
-            </select>
             <select class="changonselectupdate" id="color2">
                 {% for color in colors %}
                     <option value="{{ color_2.order }}"
@@ -103,6 +92,17 @@
                     {%trans "Färg Insida"%} : {{ color.name }} </option>
                 {% endfor %}
             </select>
+            <select class="changonselectupdate" id='pattern2'>
+                {% for pattern in patterns %}
+                    <option value="{{ pattern_2.order }}"
+                    {% if pattern.order == cartitem.pattern_2.order %}
+                        selected="selected"
+                    {%endif%}
+                    ">
+                    {%trans "Mönster Insida"%} : {{ pattern.name }}</option>
+                {% endfor %}
+            </select>
+
                <img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" style="width:100px;" />
 
         </td>
