@@ -250,14 +250,13 @@ def editcartitem(request, key):
     colors = Color.objects.filter(active=True, quality = cartitem.article.quality)
     patterns = Pattern.objects.filter(active=True, quality = cartitem.article.quality)
     sizes = Size.objects.filter(quality=cartitem.article.quality)
-    quantity = cartitem.quantity
+
 
     return render_to_response('cart/detail.html',
         {'cartitem': cartitem,
          'colors': colors,
          'patterns': patterns,
          'sizes': sizes,
-         'quantity': quantity,
          },
         context_instance=RequestContext(request))
 
