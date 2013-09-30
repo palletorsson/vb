@@ -85,8 +85,8 @@
 
             <select class="changonselectupdate" id='pattern2'>
                 {% for pattern in patterns %}
-                    <option value="{{ pattern2.order }}"
-                    {% if pattern.order == cartitem.pattern2.order %}
+                    <option value="{{ pattern_2.order }}"
+                    {% if pattern.order == cartitem.pattern_2.order %}
                         selected="selected"
                     {%endif%}
                     ">
@@ -95,15 +95,15 @@
             </select>
             <select class="changonselectupdate" id="color2">
                 {% for color in colors %}
-                    <option value="{{ color2.order }}"
-                        {% if color.order == cartitem.color2.order %}
+                    <option value="{{ color_2.order }}"
+                        {% if color.order == cartitem.color_2.order %}
                             selected="selected"
                         {%endif%}
                         ">
                     {%trans "Färg Insida"%} : {{ color.name }} </option>
                 {% endfor %}
             </select>
-               <img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color2.order }}f_{{ cartitem.pattern2.order }}m.jpg" style="width:100px;" />
+               <img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" style="width:100px;" />
 
         </td>
         {% else %}
@@ -142,7 +142,13 @@
             {%else%}
                 <select class="changonselectupdate" id='size'>
                 {% for size in sizes %}
-                <option value="{{ size.pk }}" > {% trans "Storlek" %}: {{ size.name }} </option>
+                <option value="{{ size.pk }}"
+                           {% if size.order == cartitem.size.order %}
+                            selected="selected"
+                        {%endif%}
+                        ">
+
+                        {% trans "Storlek" %}: {{ size.name }} </option>
                 {% endfor %}
                 </select>
             {% endif %}
