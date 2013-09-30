@@ -60,7 +60,7 @@
 		<!----------------------------------9805 vandbar jacka------------------------>
 		<td>
              <h5> {% trans "Utsida" %} </h5>
-				<select class="changonselect" id="color">
+				<select class="changonselectupdate" id="color">
 					{% for color in colors %}
 						<option value="{{ color.order }}"
 							{% if color.order == cartitem.color.order %}
@@ -70,7 +70,7 @@
 						{%trans "Färg"%} : {{ color.name }} </option>
 					{% endfor %}
 				</select>
-				<select class="changonselect" id='pattern'>
+				<select class="changonselectupdate" id='pattern'>
 					{% for pattern in patterns %}
 						<option value="{{ pattern.order }}"
 						{% if pattern.order == cartitem.pattern.order %}
@@ -84,7 +84,7 @@
 		</td>
         <td>
            <h5>{% trans "Insida" %}</h5>
-				<select class="changonselect" id="color2">
+				<select class="changonselectupdate" id="color2">
 					{% for color in colors %}
 						<option value="{{ color.order }}"
 							{% if color.order == cartitem.color_2.order %}
@@ -94,7 +94,7 @@
 						{%trans "Färg"%} : {{ color.name }} </option>
 					{% endfor %}
 				</select>
-				<select class="changonselect" id='pattern2'>
+				<select class="changonselectupdate" id='pattern2'>
 					{% for pattern in patterns %}
 						<option value="{{ pattern.order }}"
 						{% if pattern.order == cartitem.pattern_2.order %}
