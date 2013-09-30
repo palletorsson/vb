@@ -23,19 +23,19 @@
         <div>
             <span> {% if cartitem.article.type.order == 7 %}
             <select class="changonselectupdate" id='quantiy_pk'>
-                <option value="1" selected="selected"> {% trans "Meter" %}: 1 </option>
-                <option value="2"> {% trans "Meter" %}: 2 </option>
-                <option value="3"> {% trans "Meter" %}: 3 </option>
-                <option value="4"> {% trans "Meter" %}: 4 </option>
-                <option value="5"> {% trans "Meter" %}: 5 </option>
-                <option value="6"> {% trans "Meter" %}: 6 </option>
+                <option value="1" {%if cartitem.quantity == 1 %} selected="selected" {%endif%}> {% trans "Meter" %}: 1 </option>
+                <option value="2" {%if cartitem.quantity == 2 %} selected="selected" {%end if%}> {% trans "Meter" %}: 2 </option>
+                <option value="3" {%if cartitem.quantity == 3 %} selected="selected" {%endif%}> {% trans "Meter" %}: 3 </option>
+                <option value="4" {%if cartitem.quantity == 4 %} selected="selected" {%endif%}> {% trans "Meter" %}: 4 </option>
+                <option value="5" {%if cartitem.quantity == 5 %} selected="selected" {%endif%}> {% trans "Meter" %}: 5 </option>
+                <option value="6" {%if cartitem.quantity == 6 %} selected="selected" {%endif%}> {% trans "Meter" %}: 6 </option>
             </select>
             {% else %}
             <select class="changonselectupdate"  id='quantiy_pk'>
-                <option value="1" selected="selected"> {% trans "Antal" %}: 1 </option>
-                <option value="2"> {% trans "Antal" %}: 2 </option>
-                <option value="3"> {% trans "Antal" %}: 3 </option>
-                <option value="4"> {% trans "Antal" %}: 4 </option>
+                <option value="1" {%if cartitem.quantity == 1 %} selected="selected" {%endif%}> {% trans "Antal" %}: 1 </option>
+                <option value="2" {%if cartitem.quantity == 2 %} selected="selected" {%endif%}> {% trans "Antal" %}: 2 </option>
+                <option value="3" {%if cartitem.quantity == 3 %} selected="selected" {%endif%}> {% trans "Antal" %}: 3 </option>
+                <option value="4" {%if cartitem.quantity == 4 %} selected="selected" {%endif%}> {% trans "Antal" %}: 4 </option>
             </select>
             {% endif %}
         </span>
