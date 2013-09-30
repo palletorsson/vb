@@ -59,51 +59,52 @@
         {%elif cartitem.article.sku_number == '9805' %}
 		<!----------------------------------9805 vandbar jacka------------------------>
 		<td>
-              <select class="changonselectupdate" id="color">
-                {% for color in colors %}
-                    <option value="{{ color.order }}"
-                        {% if color.order == cartitem.color.order %}
-                            selected="selected"
-                        {%endif%}
-                        ">
-                    {%trans "Färg Utsida"%} : {{ color.name }} </option>
-                {% endfor %}
-            </select>
-            <select class="changonselectupdate" id='pattern'>
-                {% for pattern in patterns %}
-                    <option value="{{ pattern.order }}"
-                    {% if pattern.order == cartitem.pattern.order %}
-                        selected="selected"
-                    {%endif%}
-                    ">
-                    {%trans "Mönster Utsida"%} : {{ pattern.name }}</option>
-                {% endfor %}
-            </select>
-             <img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" style="width:100px;" />
+             <h5> Utsidans mönster</h5>
+				<select class="changonselect" id="color">
+					{% for color in colors %}
+						<option value="{{ color.order }}"
+							{% if color.order == product.color.order %}
+								selected="selected"
+							{%endif%}
+							">
+						{%trans "Färg"%} : {{ color.name }} </option>
+					{% endfor %}
+				</select>
+				<select class="changonselect" id='pattern'>
+					{% for pattern in patterns %}
+						<option value="{{ pattern.order }}"
+						{% if pattern.order == product.pattern.order %}
+							selected="selected"
+						{%endif%}
+						">
+						{%trans "Mönster"%} : {{ pattern.name }}</option>
+					{% endfor %}
+				</select>
+				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" />
 		</td>
         <td>
-            <select class="changonselectupdate" id="color2">
-                {% for color in colors %}
-                    <option value="{{ color_2.order }}"
-                        {% if color.order == cartitem.color_2.order %}
-                            selected="selected"
-                        {%endif%}
-                        ">
-                    {%trans "Färg Insida"%} : {{ color.name }} </option>
-                {% endfor %}
-            </select>
-            <select class="changonselectupdate" id='pattern2'>
-                {% for pattern in patterns %}
-                    <option value="{{ pattern_2.order }}"
-                    {% if pattern.order == cartitem.pattern_2.order %}
-                        selected="selected"
-                    {%endif%}
-                    ">
-                    {%trans "Mönster Insida"%} : {{ pattern.name }}</option>
-                {% endfor %}
-            </select>
-
-               <img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" style="width:100px;" />
+           <h5>Insidans mönster</h5>
+				<select class="changonselect" id="color2">
+					{% for color in colors %}
+						<option value="{{ color.order }}"
+							{% if color.order == product.color.order %}
+								selected="selected"
+							{%endif%}
+							">
+						{%trans "Färg"%} : {{ color.name }} </option>
+					{% endfor %}
+				</select>
+				<select class="changonselect" id='pattern2'>
+					{% for pattern in patterns %}
+						<option value="{{ pattern.order }}"
+						{% if pattern.order == product.pattern.order %}
+							selected="selected"
+						{%endif%}
+						">
+						{%trans "Mönster"%} : {{ pattern.name }}</option>
+					{% endfor %}
+				</select>
+				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
 
         </td>
         {% else %}
