@@ -93,8 +93,8 @@ def addtocart(request):
                 cartitem.article = article_db
                 cartitem.pattern = pattern
                 if(color2 > 0):
-                    cartitem.color_2 = color
-                    cartitem.pattern_2 = pattern
+                    cartitem.color_2 = color2
+                    cartitem.pattern_2 = pattern2
                 cartitem.size = size
                 cartitem.color = color
                 cartitem.quantity = quantity
