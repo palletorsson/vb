@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_error.html" %}
 
 {%block title%}
 <title>Vamlingbolaget | 500 </title>
@@ -6,11 +6,11 @@
 
 {%endblock%}
 {% block pagetitle %}
-        {% trans "Vamlingbolagets 500" %}
+      <legend>  {% trans "Vamlingbolagets 500" %} </legend>
 {% endblock %}
 
 {% block allcontent %}
-<div>
+<div class="alert alert-error">
      <ul>
         <li>
          500: Internal Server Error
