@@ -80,7 +80,7 @@
 						{%trans "Mönster"%} : {{ pattern.name }}</option>
 					{% endfor %}
 				</select>
-				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg"  />
+				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100"  />
 		</td>
         <td>
            <h5>{% trans "Insida" %}</h5>
@@ -104,7 +104,7 @@
 						{%trans "Mönster"%} : {{ pattern.name }}</option>
 					{% endfor %}
 				</select>
-				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" />
+				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" width="100"  />
 
         </td>
         {% else %}
@@ -133,7 +133,7 @@
             </select>
         </td>
         <td>
-            <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" />
+            <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" width="100"  />
         </td>
         {% endif %}
 
