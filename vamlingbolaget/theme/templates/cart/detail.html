@@ -16,7 +16,7 @@
 <br /><blockquote><strong>{% trans "Artikel" %}: <span id="articleupdate"> {{ cartitem.article.name }}  ( {{ cartitem.article.sku_number }} ) </span>{% trans "i" %}  {{ cartitem.article.quality }}</strong></blockquote>
      <div class="hidden product_type">{{cartitem.article.type.order}}</div>
         <div class="hidden sku_number">{{ cartitem.article.sku_number }}</div>
-<table class="table table-bordered small">
+<table class="table table-bordered">
     <tbody>
         <tr>
               <td>
@@ -133,7 +133,7 @@
             </select>
         </td>
         <td>
-            <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" class="sample"   />
+            <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" class="sample" />
         </td>
         {% endif %}
 
@@ -175,7 +175,7 @@
                     <span>
                         <button id='changecart' class="btn btn-success" type="button">{% trans "Uppdatera" %}</button>
                     </span>
-                </div
+                </div>
             </td>
         </tr>
    </tbody>
