@@ -140,15 +140,15 @@
         <td>
             <div>
             {%if cartitem.article.type.order == 7  %}
+
             {%else%}
                 <select class="changonselectupdate" id='size'>
                 {% for size in sizes %}
                 <option value="{{ size.pk }}"
-                           {% if size.order == cartitem.size.order %}
-                            selected="selected"
-                        {%endif%}
-                        ">
-
+							{% if size.pk == cartitem.size.pk %}
+								selected="selected"
+							{%endif%}
+							">
                         {% trans "Storlek" %}: {{ size.name }} </option>
                 {% endfor %}
                 </select>
