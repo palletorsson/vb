@@ -42,14 +42,14 @@
         </div>
     </td>
         <td width="100">
-            <img src="{% version cartitem.article.file 'large' %} " alt="{{ cartitem.article.name }} {% trans "i" %} {{ cartitem.color|lower }}" width="180"/>
+            <img src="{% version cartitem.article.file 'large' %} " alt="{{ cartitem.article.name }} {% trans "i" %} {{ cartitem.color|lower }}" width="140"/>
         </td>
 
         {% if cartitem.article.quality.order == 2 or cartitem.article.quality.order == 4 %}
         <!----------------------------------machester och plysch ------------------------>
         <td>
             {% for color in colors %}
-                <img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" class="sample" width="180"/>
+                <img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" class="sample" width="140"/>
                 <label class="radio inline">
                     <input type="radio" name="radio" {%if color_id == color.order %} checked="checked" {%endif%}  id="radio_{{ color.order }}" value="{{ color.order }}" />
                 </label>
@@ -80,7 +80,7 @@
 						{%trans "Mönster"%} : {{ pattern.name }}</option>
 					{% endfor %}
 				</select>
-				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" class="sample"  width="180"/>
+				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" class="sample"  width="140"/>
 		</td>
         <td>
            <h5>{% trans "Insida" %}</h5>
@@ -104,7 +104,7 @@
 						{%trans "Mönster"%} : {{ pattern.name }}</option>
 					{% endfor %}
 				</select>
-				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" class="sample"  width="180"/>
+				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color_2.order }}f_{{ cartitem.pattern_2.order }}m.jpg" class="sample"  width="140"/>
 
         </td>
         {% else %}
@@ -133,7 +133,7 @@
             </select>
         </td>
         <td width="100">
-            <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" class="sample" width="180" />
+            <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ cartitem.color.order }}f_{{ cartitem.pattern.order }}m.jpg" class="sample" width="140" />
         </td>
         {% endif %}
 
