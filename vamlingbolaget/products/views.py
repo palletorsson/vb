@@ -4,6 +4,7 @@ from django.template import RequestContext
 from models import *
 from blog.models import Post
 from gallery.models import *
+from django.http import Http404
 
 def first_page(request):
     variations = Variation.objects.filter(active=True).order_by('article__quality')
@@ -65,7 +66,7 @@ def detail(request, pk):
         patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
         sizes = Size.objects.filter(quality=product.article.quality)
     except:
-        return HttpResponse(404)
+        raise Http404
 
     return render_to_response('variation/detail.html',
                               {'product': product,
