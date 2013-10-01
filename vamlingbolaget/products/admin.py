@@ -57,6 +57,12 @@ class SizeAdmin(admin.ModelAdmin):
     list_editable = ('quality',)
     list_filter = ('quality',)
 
+class PatternAndColorAdmin(admin.ModelAdmin):
+    model = PatternAndColor
+    list_display = ('name', 'color', 'pattern', 'quality',)
+    list_display_links = ('name',)
+    list_filter = ('quality',)
+
 class QualityAdmin(TranslationAdmin):
     model = Quality
     prepopulated_fields = {"slug": ("name",)}
@@ -87,6 +93,7 @@ class CategoryAdmin(TranslationAdmin):
 admin.site.register(Variation, VariationAdmin)    
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Size, SizeAdmin)
+admin.site.register(PatternAndColor, PatternAndColorAdmin)
 admin.site.register(Color, ColorAdmin)
 admin.site.register(Pattern, PatternAdmin)
 admin.site.register(Quality, QualityAdmin)

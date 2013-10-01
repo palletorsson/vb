@@ -93,6 +93,14 @@ def pattern_and_color(request):
                               },
                              context_instance=RequestContext(request))
 
+def colorpatterntest(request):
+    colorsandpattern = PatternAndColor.objects.filter(active=True, quality=1)
+
+    return render_to_response('variation/colorandpatterntest.html',
+                             {'colorsandpattern': colorsandpattern,
+                              },
+                             context_instance=RequestContext(request))
+
 
 def bargain(request):
     products = Bargainbox.objects.filter(status='A')

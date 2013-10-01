@@ -100,6 +100,8 @@ class Quality(ChoiceBase):
     class Meta:
         verbose_name_plural = 'Qualies'
 
+
+
 class Article(TimeStampedActivate):
     """
     Article are related to Product.         
@@ -178,3 +180,15 @@ class Bargainbox(models.Model):
 
     class Meta:
         ordering = ['-created', ]
+
+
+class PatternAndColor(models.Model):
+    """
+    Need to build active colors and pattern combination
+    """
+    name = models.CharField(max_length=160)
+    color = models.ForeignKey('Color')
+    pattern = models.ForeignKey('Pattern')
+    quality = models.ForeignKey('Quality')
+    order = models.IntegerField("order items", unique=True)
+    active = models.BooleanField("Active", default=True)
