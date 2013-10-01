@@ -1,0 +1,23 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{%block title%}
+    <title>Vamlingbolaget | {% trans "Kollektion" %} </title>
+    <meta name="description" content={% trans "Vamlingbolaget kollektion " %} " %}/>
+{%endblock%}
+
+
+{% block pagetitle %}
+	<legend><a href="javascript:history.go(-1)">{% trans "Kollektion" %}</a> / {% trans "Varan finns inte i din varukorg" %}. </legend>
+{% endblock %}
+
+
+{% block allcontent %}
+<div class="row-fluid">
+    {% trans "Varan finns inte i din varukorg" %}.
+</div>
+
+
+
+{% endblock %}

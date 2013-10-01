@@ -7,11 +7,12 @@ import random
 from django.core import urlresolvers
 from models import CartItem
 from django.core.urlresolvers import reverse
-
+from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from forms import CartForm
 import json
+
 
 CART_ID_SESSION_KEY = 'cart_id'
 
@@ -228,6 +229,7 @@ def showcart(request):
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
+
     bargains = cart.bargaincartitem_set.all()
     returntotal = totalsum(cartitems, bargains)
     getnames(cartitems)
@@ -239,45 +241,74 @@ def showcart(request):
 
 
 def editcartitem(request, key):
-    cartitem = CartItem.objects.get(pk=key)
-    cartitem.color = Color.objects.get(order=cartitem.color)
-    cartitem.pattern = Pattern.objects.get(order=cartitem.pattern)
-    cartitem.size = Size.objects.get(id=cartitem.size)
-    if cartitem.color_2 != 0:
-        cartitem.color_2 = Color.objects.get(order=cartitem.color_2)
-        cartitem.pattern_2 = Pattern.objects.get(order=cartitem.pattern_2)
 
-    colors = Color.objects.filter(active=True, quality = cartitem.article.quality)
-    patterns = Pattern.objects.filter(active=True, quality = cartitem.article.quality)
-    sizes = Size.objects.filter(quality=cartitem.article.quality)
+    try:
+        cartitem = CartItem.objects.get(pk=key)
+    except CartItem.DoesNotExist:
+        cartitem = None
+
+    listed = isincart(request, key, cartitem)
+
+    if (listed == True):
+        cartitem.color = Color.objects.get(order=cartitem.color)
+        cartitem.pattern = Pattern.objects.get(order=cartitem.pattern)
+        cartitem.size = Size.objects.get(id=cartitem.size)
+        if cartitem.color_2 != 0:
+            cartitem.color_2 = Color.objects.get(order=cartitem.color_2)
+            cartitem.pattern_2 = Pattern.objects.get(order=cartitem.pattern_2)
+
+        colors = Color.objects.filter(active=True, quality = cartitem.article.quality)
+        patterns = Pattern.objects.filter(active=True, quality = cartitem.article.quality)
+        sizes = Size.objects.filter(quality=cartitem.article.quality)
 
 
-    return render_to_response('cart/detail.html',
-        {'cartitem': cartitem,
-         'colors': colors,
-         'patterns': patterns,
-         'sizes': sizes,
-         },
-        context_instance=RequestContext(request))
+        return render_to_response('cart/detail.html',
+            {'cartitem': cartitem,
+             'colors': colors,
+             'patterns': patterns,
+             'sizes': sizes,
+             },
+            context_instance=RequestContext(request))
+    else:
+        return redirect('/cart/show/')
 
 def removefromcart(request, pk, type):
+    try:
+        if type == 'bargain':
+            cartitem = BargainCartItem.objects.get(pk=pk)
+        else:
+            cartitem = CartItem.objects.get(pk=pk)
+    except CartItem.DoesNotExist:
+        cartitem = None
 
-    if type == 'bargain':
-        bargain= BargainCartItem.objects.filter(pk=pk)
-        bargain.delete()
-    else:
-        cartitem = CartItem.objects.filter(pk=pk)
+    listed = isincart(request, pk, cartitem)
+
+    if (listed == True):
         cartitem.delete()
+        key = _cart_id(request)
+        cart = Cart.objects.get(key=key)
+        cartitems = cart.cartitem_set.all()
+        bargains = cart.bargaincartitem_set.all()
+        total = totalsum(cartitems, bargains)
+        return_data = json.dumps(total)
+        response = HttpResponse(return_data, mimetype="application/json")
+        return response
+    else:
+        return redirect('/cart/show/')
 
+def isincart(request, key, cartitem):
     key = _cart_id(request)
     cart = Cart.objects.get(key=key)
     cartitems = cart.cartitem_set.all()
-    bargains = cart.bargaincartitem_set.all()
-    total = totalsum(cartitems, bargains)
-    return_data = json.dumps(total)
-    response = HttpResponse(return_data, mimetype="application/json")
-    return response
+    listed = False
+    for item in cartitems:
+        if (str(item) == str(cartitem)):
+            listed = True
 
+    if(listed):
+        return True
+    else:
+        return False
 
 def totalsum(cartitems, bargains):
     handling = 50
