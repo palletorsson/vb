@@ -423,4 +423,4 @@ set_first_page();
     });
 
 
-}); // --- end document ready function
+}); // --- end document readyfunction
