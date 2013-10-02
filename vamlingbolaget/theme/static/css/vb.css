@@ -225,3 +225,8 @@ img.pattern_color_image {
     height: 300px
 }
 
+.tab-content {
+    background-color: #ffffff;
+    position:relative;
+    top:-20px;
+}

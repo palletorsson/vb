@@ -236,33 +236,65 @@
     </div>
         </td>
     </tr>
+</table>
+<table>
     <tr>
-        <th>
-        </th>
-        <th style="text-align: right">
-		
 
-            <div class="control-group" id="postal">
-                <label class="control-label" > </label>
-				
+        <td width="50%">
+        </td>
+            <td>
+            <div class="span6 right">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active" ><a href="#post" data-toggle="tab">{% trans "Betala med kort" %}</a></li>
+                    <li><a href="#card" data-toggle="tab">{% trans "Betala via postförskott" %}</a></li>
+                </ul>
+
                 {{ form.subject.post }}
-				Välj betalsätt: <select name="paymentmethod" id="id_paymentmethod">
-                    <option value="" selected="selected">---------</option>
-                    <option value="P">Betal via Postförskott</option>
-                    <option value="C">Betal med Kort</option>
-                </select>
-                        {{ form.paymentmethod.errors }}
-                <div class="controls">
-                    <img src="{{ STATIC_URL }}img/post.jpg" width="46px"/>
-					<span class="muted">{% trans "Beställningen skicka mot Postförskott" %} </span>
+                <input type=hidden name="paymentmethod" id="id_paymentmethod" value="C">
+                {{ form.paymentmethod.errors }}
 
+                <div class="tab-content">
+                    <div class="tab-pane active" id="post">
+                          <div class="span4">
+                              <br/>
+                              {% trans "Efter genomförd betalning kommer du att skickas tillbaks till oss och ditt köp kommer att bekräftas" %}.
+                          </div>
 
-Efter genomförd betalning kommer du att skickas tillbaks till oss och ditt köp kommer att bekräftas.               </div>
-            </div>
-            <input type="submit" class="btn" value="{% trans "Skicka Din Beställning" %}"  />
-        </th>
+                              <br/>
+                              <input type="submit" class="btn" value="{% trans "Betala" %}"  />
+                    </div>
+                    <div class="tab-pane" id="card">
+                          <div class="span4">
+                              <br/>
+                              <img src="{{ STATIC_URL }}img/post.jpg" width="50px"/>
+                          </div>
+ <br/>
+                              <input type="submit" class="btn" value="{% trans "Skicka Din Beställning" %}"  />
+                        </div>
+                    </div>
+                </div>
+          </div>
+          </td>
+
     </tr>
 </table>
+
+<script>
+  $( document ).ready(function() {
+    $('#myTab a').click(function (e) {
+
+        e.preventDefault();
+
+         $(this).tab('show');
+    })
+  });
+
+
+</script>
+
+
+				
+
 </form>
 {% endif %}
 {% if not cartitems %}
