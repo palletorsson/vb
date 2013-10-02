@@ -215,7 +215,8 @@ img.sample{
 }
 
 img.pattern_color_image {
-    cursor:pointer
+    cursor:pointer;
+    width:60px
 }
 
 .footer {
