@@ -245,8 +245,8 @@
             <td>
             <div class="span6 right">
                 <ul class="nav nav-tabs" id="myTab">
-                    <li class="active" ><a href="#post" data-toggle="tab">{% trans "Betala med kort" %}</a></li>
-                    <li><a href="#card" data-toggle="tab">{% trans "Betala via postförskott" %}</a></li>
+                    <li class="active" ><a href="#post" data-toggle="tab" id="C">{% trans "Betala med kort" %}</a></li>
+                    <li><a href="#card" data-toggle="tab" id="P">{% trans "Betala via postförskott" %}</a></li>
                 </ul>
 
                 {{ form.subject.post }}
@@ -282,10 +282,9 @@
 <script>
   $( document ).ready(function() {
     $('#myTab a').click(function (e) {
-
         e.preventDefault();
-
          $(this).tab('show');
+         $('input[name="paymentmethod"]').val(this.id);
     })
   });
 
