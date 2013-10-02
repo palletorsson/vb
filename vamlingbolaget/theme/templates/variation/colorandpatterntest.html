@@ -13,55 +13,13 @@
     <hr/>
     <button class="open_dialog btn btn-inverse">Fler färger och mönster</button>
 </div>
-<div class="colors_and_patterns">
+<div class="color_and_pattern_choose">
 <br/>
     {% for item in colorsandpattern %}
         <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="60" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
-
     {% endfor  %}
 </div>
-
-
         <input type="hidden" id="pattern" name="pattern" value="0" >
         <input type="hidden" id="color" name="color" value="0">
-<script>
-
-$('document').ready(function(){
-    var open = 0;
-    $(".colors_and_patterns").hide();
-
-     $(".open_dialog").click(function(e) {
-        $(".colors_and_patterns").toggle(200);
-        if (open == 0) {
-            $(".open_dialog").text('Stäng fler färger och mönster');
-            open = 1;
-        } else {
-            $(".open_dialog").text('Fler färger och mönster');
-            open = 0;
-        }
-     });
-
-    $(".pattern_color_image").click(function(e) {
-      e.stopPropagation();
-      var colorandpattern = this.id.split("_");
-      var color = colorandpattern[0];
-      var pattern = colorandpattern[1];
-      var color_name = colorandpattern[2];
-      var pattern_name = colorandpattern[3];
-      image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="80"> '+ color_name + ' ' +pattern_name+ ' ';
-      $(".selectedpatternandcolor").html(image_url);
-
-      $('input[name="pattern"]').val(pattern);
-      $('input[name="color"]').val(color);
-
-
-
-    });
-
-});
-
-
-
-</script>
 {% endblock %}
 

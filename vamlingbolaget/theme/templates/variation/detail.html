@@ -106,27 +106,23 @@
 				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
 			</div>
 	    {% else %}
-			<div class="span7">
-				<select class="changonselect" id="color">
-					{% for color in colors %}
-						<option value="{{ color.order }}"
-							{% if color.order == product.color.order %}
-								selected="selected"
-							{%endif%}
-							">
-						{% trans "Färg" %}: {{ color.name }} </option>
-					{% endfor %}
-				</select> 	    
-				<select class="changonselect" id='pattern'>
-					{% for pattern in patterns %}
-						<option value="{{ pattern.order }}"
-						{% if pattern.order == product.pattern.order %}
-							selected="selected"
-						{%endif%}
-						">
-						{% trans "Mönster" %}: {{ pattern.name }}</option>
-					{% endfor %}
-				</select>
+        <div class="span12">
+            <div class="selectedpatternandcolor">
+                <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" />
+            </div>
+            <div>
+                <button class="open_dialog btn btn-inverse">Fler färger och mönster</button>
+            </div>
+            <div class="color_and_pattern_choose">
+            <br/>
+                {% for item in colorsandpattern %}
+                    <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="60" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+                {% endfor  %}
+            </div>
+            <input type="hidden" id="pattern" name="pattern" value="0" >
+            <input type="hidden" id="color" name="color" value="0">
+
+
 		{% endif %}
 		<br/>
            {%if product.article.type.order == 7 %}
@@ -168,7 +164,7 @@
 
 		
 		
-        {% if product.article.quality.order == 2 or product.article.quality.order == 4 or product.article.sku_number == '9805'%}
+        {% if product.article.quality.order == 1 or product.article.quality.order == 2 or product.article.quality.order == 4 or product.article.sku_number == '9805'%}
 			<br/>
 		{%else%}
 			<span style="padding-left: 10px;">

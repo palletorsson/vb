@@ -76,20 +76,21 @@ $('document').ready(function(){
     
     set_first_page();
     /*
-    $('.spanfullscreen').each(function(){ 
+    $('.spanfullscreen').each(function(){
             img = $(this).find('img'),
             p = $(this).find('p');
-            
+
         $(this).css({'width':$(window).width(), 'background-color':'#000','margin':0, 'height': fullheight, 'overflow':'hidden' });
         $(this).find('br').remove(); //hack to remove space
-        
+
         p.css({'margin':0});
-        
+
         $('.halffullscreen').css('width')
             img = $(this).find('img'),
             img.css({'height': fullheight, 'width':'auto'})
-    
+
     });
     */
-    
+
+
 });

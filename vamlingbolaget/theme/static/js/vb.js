@@ -118,9 +118,9 @@ var sku_number = $('#sku_number').text(),
     size_id = $('#size option:selected').val() || size_id_default,
     article_id = $('#article_pk option:selected').val(),
     quantity = $('#quantiy_pk option:selected').val(),
-    color = $('#color option:selected').val() || $('#hidden_colorpattern').val(),
+    color = $('#color').val() || $('#color option:selected').val() || $('#hidden_colorpattern').val(),
     the_price = $("#the_price").text(),
-    pattern = $('#pattern option:selected').val() || $('#hidden_colorpattern').val(),
+    pattern = $('#pattern').val() || $('#pattern option:selected').val() || $('#hidden_colorpattern').val(),
     color2 = 0,
     pattern2 = 0;
 
@@ -383,4 +383,44 @@ $('.change_lang').click(function(){
 set_first_page();
 
 // --- end of welcome page animation
+// choose color and pattern logic
+    var open = 0;
+
+    $(".color_and_pattern_choose").hide();
+
+     $(".open_dialog").click(function(e) {
+        $(".color_and_pattern_choose").toggle(200);
+        if (open == 0) {
+            $(".open_dialog").text('Stäng fler färger och mönster');
+            open = 1;
+        } else {
+            $(".open_dialog").text('Fler färger och mönster');
+            open = 0;
+        }
+     });
+
+    $(".pattern_color_image").click(function(e) {
+      e.stopPropagation();
+      var colorandpattern = this.id.split("_");
+      var color = colorandpattern[0];
+      var pattern = colorandpattern[1];
+      var color_name = colorandpattern[2];
+      var pattern_name = colorandpattern[3];
+      image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="80"> '+ color_name + ' ' +pattern_name+ ' ';
+      $(".selectedpatternandcolor").html(image_url);
+
+      $('input[name="pattern"]').val(pattern);
+      $('input[name="color"]').val(color);
+
+
+    });
+
+    // payment method logic
+    $('#myTab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+        $('input[name="paymentmethod"]').val(this.id);
+    });
+
+
 }); // --- end document ready function

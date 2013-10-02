@@ -279,21 +279,6 @@
     </tr>
 </table>
 
-<script>
-  $( document ).ready(function() {
-    $('#myTab a').click(function (e) {
-        e.preventDefault();
-         $(this).tab('show');
-         $('input[name="paymentmethod"]').val(this.id);
-    })
-  });
-
-
-</script>
-
-
-				
-
 </form>
 {% endif %}
 {% if not cartitems %}

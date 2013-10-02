@@ -65,6 +65,7 @@ def detail(request, pk):
         colors = Color.objects.filter(active=True, quality = product.article.quality)
         patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
         sizes = Size.objects.filter(quality=product.article.quality)
+        colorsandpattern = PatternAndColor.objects.filter(active=True, quality=1)
     except:
         raise Http404
 
@@ -79,6 +80,7 @@ def detail(request, pk):
                    'color_id':color_id,
                    'pattern_id':pattern_id,
                    'products': products,
+                   'colorsandpattern': colorsandpattern,
                    },
                    context_instance=RequestContext(request)
                     )
