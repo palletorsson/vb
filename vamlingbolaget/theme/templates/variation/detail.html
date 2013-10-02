@@ -109,11 +109,12 @@
 
             <div class="span12">
             <div class="selectedpatternandcolor span3">
+                <br/>
                 <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" width="100" />
             </div>
 
             <div class="color_and_pattern_choose span9">
-            <br/>
+                {% trans "Välj färg / mönster" %} <br/>
                 {% for item in colorsandpattern %}
                     <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="60" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
                 {% endfor  %}
