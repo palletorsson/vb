@@ -386,7 +386,7 @@ set_first_page();
 // choose color and pattern logic
     var open = 0;
 
-    $(".color_and_pattern_choose").hide();
+    // $(".color_and_pattern_choose").hide();
 
      $(".open_dialog").click(function(e) {
         $(".color_and_pattern_choose").toggle(200);
