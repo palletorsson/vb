@@ -406,7 +406,7 @@ set_first_page();
       var pattern = colorandpattern[1];
       var color_name = colorandpattern[2];
       var pattern_name = colorandpattern[3];
-      image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="80"> '+ color_name + ' ' +pattern_name+ ' ';
+      image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="80"> <br />'+ color_name + ' ' +pattern_name+ ' ';
       $(".selectedpatternandcolor").html(image_url);
 
       $('input[name="pattern"]').val(pattern);
