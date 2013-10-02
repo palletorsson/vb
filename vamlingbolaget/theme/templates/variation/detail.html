@@ -120,8 +120,8 @@
                     <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
                 {% endfor  %}
             </div>
-            <input type="hidden" id="pattern" name="pattern" value="0" >
-            <input type="hidden" id="color" name="color" value="0">
+            <input type="hidden" id="pattern" name="pattern" value="{{ product.pattern.order }}" >
+            <input type="hidden" id="color" name="color" value="{{ product.color.order }}">
 
             <div style="clear: both;"></div>
 			<hr/>
