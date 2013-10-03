@@ -371,7 +371,7 @@ $('.overlay').each(function(){
 
 var set_first_page = function(){
     var wheight = $(window).height(),
-        fullheight = wheight-116;
+        fullheight = wheight-126;
     $('.spanfullscreen').css({'width':$(window).width(), 'background-color':'#fff','margin':0, 'height': fullheight, 'overflow':'hidden', 'padding':0 });
     $('.halffullscreen').css({'float':'left','width':($(window).width())/2, 'background-color':'#fff','margin':0, 'height': fullheight, 'overflow':'hidden', 'padding':0 });
     $('.halffullscreen img').css({'width':(($(window).width())/2), 'height': 'auto', 'margin':0, 'padding':0});

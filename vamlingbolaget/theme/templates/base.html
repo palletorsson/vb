@@ -15,7 +15,7 @@ Vamlingbolaget." %} />
     <!-- The styles -->
     <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+
     <link href="{{ STATIC_URL }}css/vb.css" rel="stylesheet">
     <style type="text/css">
 
@@ -57,42 +57,51 @@ Vamlingbolaget." %} />
                                   </blockquote>
                     </li>
               </ul>
-
             </div>
-            <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" alt="Vamlingbolaget logo" class="leftside"/>  <span class="leftsideline"> </span></a>
-            <br />
-            <div class="nav-collapse collapse">
 
-                    <ul class="nav nav-to-left">
-                    <li class="">
-                         <a href="/collection/new/">{% trans "Kollektion" %}</a>
-                    </li>
-                    <li class="">
-                        <a href="/products/type/klanning/">{% trans "Shop" %}</a>
-                    </li>
-                    <li class="">
-                        <a href="/news/">{% trans "Nyheter" %}</a>
-                    </li>
-                    </ul>
-                    <ul class="nav nav-to-right">
-                    <li class="">
-                        <a href="/galleries/">{% trans "Bildgallerier" %}</a>
-                    </li>
-                        <li class="">
-                            <a href="/shops/">{% trans "Butiker" %}</a>
-                        </li>
-                    <li class="">
-                        <a href="/about/">{% trans "Om oss" %}</a>
-                    </li>
-                    <li class="">
-                    <li class="">
-                        <a href="/order/">{% trans "Beställ" %}</a>
-                    </li>
-					<li class="">
-                        <a href="/newsletter/">{% trans "Nyhetsbrev" %}</a>
-                    </li>
-                    </ul>
-                   <ul class="nav pull-right upp">
+            <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" alt="Vamlingbolaget logo" class="leftside"/></a>
+            <table class="nav">
+                    <tr>
+                        <td>
+                            <div class="nav-collapse collapse">
+                                <ul class="nav">
+                                    <li class="">
+                                         <a href="/collection/new/">{% trans "Kollektion" %}</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="/products/type/klanning/">{% trans "Shop" %}</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="/news/">{% trans "Nyheter" %}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="nav-collapse collapse pull-right nav_smaller_size">
+                            <ul class="nav">
+                            <li class="">
+                                <a href="/galleries/">{% trans "Bildgallerier" %}</a>
+                            </li>
+                                <li class="">
+                                    <a href="/shops/">{% trans "Butiker" %}</a>
+                                </li>
+                            <li class="">
+                                <a href="/about/">{% trans "Om oss" %}</a>
+                            </li>
+                            <li class="">
+                            <li class="">
+                                <a href="/order/">{% trans "Beställ" %}</a>
+                            </li>
+                            <li class="">
+                                <a href="/newsletter/">{% trans "Nyhetsbrev" %}</a>
+                            </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+
+                <ul class="nav pull-right upp">
                     <li>
                         <a id="token" href="/cart/show/" >
 
@@ -178,12 +187,12 @@ Vamlingbolaget." %} />
       </div>
 
   </footer>
-    <span class="hidden" id="widget_text_start" >{% trans "Tillagt" %}</span>
-    <span class="hidden" id="widget_size" >{% trans "Storlek" %}</span>
-    <span class="hidden" id="widget_exist" >{% trans "Det finns" %}</span>
-    <span class="hidden" id="widget_text_end" >{% trans "av denna artikel" %}</span>
-    <span class="hidden" id="widget_text_in" >{% trans "i" %}</span>
-    <span class="hidden" id="widget_text_remove" >{% trans "Vill du ta bort denna post?" %}</span>
+    <div class="hidden" id="widget_text_start" >{% trans "Tillagt" %}</div>
+    <div class="hidden" id="widget_size" >{% trans "Storlek" %}</div>
+    <div class="hidden" id="widget_exist" >{% trans "Det finns" %}</div>
+    <div class="hidden" id="widget_text_end" >{% trans "av denna artikel" %}</div>
+    <div class="hidden" id="widget_text_in" >{% trans "i" %}</div>
+    <div class="hidden" id="widget_text_remove" >{% trans "Vill du ta bort denna post?" %}</div>
 
 
 
