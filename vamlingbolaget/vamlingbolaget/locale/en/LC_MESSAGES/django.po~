@@ -10967,7 +10967,7 @@ msgstr "Images galleries"
 
 #: vb/vamlingbolaget/theme/templates/base.html:211
 msgid "Nyhetsbrev"
-msgstr "News Letter"
+msgstr "NewsLetter"
 
 
 #: vb/vamlingbolaget/theme/templates/base.html:253
@@ -11153,7 +11153,7 @@ msgstr "Continue to explore!"
 #: vb/vamlingbolaget/theme/templates/checkout/summery.html:4
 
 msgid "Din Beställning"
-msgstr "You are editing you order"
+msgstr "You order"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:90
 msgid "Adressuppgifter"
@@ -11166,11 +11166,6 @@ msgstr "Contact Information"
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:99
 msgid "Förnamn"
 msgstr "First name"
-
-#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:146
-
-msgid "Din beställning"
-msgstr "You are editing you order"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:147
 msgid "Din adress"

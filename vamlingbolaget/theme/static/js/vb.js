@@ -152,6 +152,7 @@ $.ajax({
     var widgetSize = $('#widget_size').text();
     var widgetExist = $('#widget_exist').text();
     var widgetTextend = $('#widget_text_end').text();
+    var widgetTextin = $('#widget_text_in').text();
 
 	if(color2 === 0) {
 		var coltext = _.color,
@@ -180,8 +181,8 @@ $.ajax({
 	    $("#changetext").animate({
 	      height:'150px'
 	    });
-	    $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ':'+_.article +' </strong></li>' +
-		     '<li> i '+ coltext +', '+ pattext +' </li>' +
+	    $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ': '+_.article +' </strong></li>' +
+		     '<li> ' +widgetTextin+' '+ coltext +', '+ pattext +' </li>' +
 		     '<li>' +widgetSize+': '+ _.size +' </li>' +
 		     '<li>'+widgetExist+' '+ _.quantity +' '+widgetTextend+' </li> ' +
 		     '</ul><div>').fadeIn();
@@ -292,7 +293,8 @@ $("#changecart").click(function() {
 $('.icon-minus').click(function(e){
     e.stopPropagation();
     e.preventDefault();
-    if(confirm('Vill du ta bort denna post?')){
+    var rm_message = $('#widget_text_remove').text();
+    if(confirm(rm_message)){
             var id = $(this).attr('id'),
                 my_url = $(this).parent('a').attr('href');
             $.ajax({
