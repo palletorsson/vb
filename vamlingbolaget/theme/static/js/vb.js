@@ -148,6 +148,10 @@ $.ajax({
     success: function(data){
 	var msg = data.message.msg,
 	    _ = data.cartitem;
+    var widgetTextstart = $('#widget_text_start').text();
+    var widgetSize = $('#widget_size').text();
+    var widgetExist = $('#widget_exist').text();
+    var widgetTextend = $('#widget_text_end').text();
 
 	if(color2 === 0) {
 		var coltext = _.color,
@@ -155,7 +159,8 @@ $.ajax({
 	} else {
 		var coltext = _.color +' / '+_.color2,
 		pattext = _.pattern +' / '+_.pattern2;
-	}
+
+		}
 
 	if(product_type == '7'){
 	    $("#changetext")
@@ -175,11 +180,10 @@ $.ajax({
 	    $("#changetext").animate({
 	      height:'150px'
 	    });
-	    $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> Tilllagt: ' +
-		     ''+ _.article +' </strong></li>' +
+	    $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ':'+_.article +' </strong></li>' +
 		     '<li> i '+ coltext +', '+ pattext +' </li>' +
-		     '<li> Storlek: '+ _.size +' </li>' +
-		     '<li> Det finns '+ _.quantity +' av denna artikel. </li> ' +
+		     '<li>' +widgetSize+': '+ _.size +' </li>' +
+		     '<li>'+widgetExist+' '+ _.quantity +' '+widgetTextend+' </li> ' +
 		     '</ul><div>').fadeIn();
 
 	    $("#changetext").delay(10000).fadeOut(1000);

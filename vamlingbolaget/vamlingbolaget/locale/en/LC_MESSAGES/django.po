@@ -10961,6 +10961,15 @@ msgstr "Galleries"
 msgid "Beställ"
 msgstr "Order"
 
+#: vb/vamlingbolaget/theme/templates/base.html:211
+msgid "Bildgallerier"
+msgstr "Images galleries"
+
+#: vb/vamlingbolaget/theme/templates/base.html:211
+msgid "Nyhetsbrev"
+msgstr "News Letter"
+
+
 #: vb/vamlingbolaget/theme/templates/base.html:253
 msgid "Öppettider:"
 msgstr "Opening hours"
@@ -10984,14 +10993,36 @@ msgid "Lördagar"
 msgstr "Saturdays"
 
 #: vb/vamlingbolaget/theme/templates/base.html:267
-
 msgid "Öppettider"
 msgstr "Opening hours"
 
-#: vb/vamlingbolaget/theme/templates/collection_base.html:5
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "Summa"
+msgstr "Sum"
 
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "Plagg"
+msgstr "Art."
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "Tillagt"
+msgstr "Added"
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "Det finns"
+msgstr "Now you have"
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "av denna artikel"
+msgstr "of this article"
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:5
 msgid "Kategorier"
 msgstr "Categories"
+
+#: other
+msgid "Vår senaste kollektion"
+msgstr "Our last collection"
 
 #: vb/vamlingbolaget/theme/templates/collection_base.html:12
 
@@ -11008,7 +11039,6 @@ msgid "Färger och Mönster"
 msgstr "Colors and Patterns"
 
 #: vb/vamlingbolaget/theme/templates/blog/index.html:5
-
 msgid "Nyheter och Blog"
 msgstr "News"
 

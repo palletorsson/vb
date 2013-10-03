@@ -7,11 +7,9 @@
     <meta name="description" content={% trans "Vamlingbolaget kollektion " %} {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" %}/>
 {%endblock%}
 
-
 {% block pagetitle %}
 	<legend><a href="javascript:history.go(-1)">{% trans "Kollektion" %}</a> / {{ product.article.name }} </legend>
 {% endblock %}
-
 
 {% block allcontent %}
 <div class="row-fluid">{{ images.pk }}
@@ -166,7 +164,6 @@
         {% endif %}
 
 
-
         {% if product.article.type.order == 8 %}
                 <select id='quantiy_pk'>
                     <option value="1" selected="selected">{% trans "Meter" %} : 1 </option>
@@ -183,9 +180,7 @@
                     <option value="3">{% trans "Antal" %} : 3 </option>
                     <option value="4">{% trans "Antal" %} : 4 </option>
                 </select>
-
         {% endif %}
-
 	</div>
 
 		
