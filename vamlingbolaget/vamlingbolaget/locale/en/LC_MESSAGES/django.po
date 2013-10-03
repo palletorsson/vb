@@ -11038,6 +11038,11 @@ msgstr "Overview"
 msgid "Färger och Mönster"
 msgstr "Colors and Patterns"
 
+#: vb/vamlingbolaget/theme/templates/variation/combos.html:5
+msgid "lilla kissen"
+msgstr "litle cat"
+
+
 #: vb/vamlingbolaget/theme/templates/blog/index.html:5
 msgid "Nyheter och Blog"
 msgstr "News"
@@ -11148,7 +11153,7 @@ msgstr "Continue to explore!"
 #: vb/vamlingbolaget/theme/templates/checkout/summery.html:4
 
 msgid "Din Beställning"
-msgstr "You are editing you order"
+msgstr "You order"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:90
 msgid "Adressuppgifter"
@@ -11161,11 +11166,6 @@ msgstr "Contact Information"
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:99
 msgid "Förnamn"
 msgstr "First name"
-
-#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:146
-
-msgid "Din beställning"
-msgstr "You are editing you order"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:147
 msgid "Din adress"

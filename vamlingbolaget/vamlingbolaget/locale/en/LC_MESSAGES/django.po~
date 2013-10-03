@@ -11005,10 +11005,6 @@ msgid "Plagg"
 msgstr "Art."
 
 #: vb/vamlingbolaget/theme/templates/base.html:267
-msgid "av denna artikel"
-msgstr "of this article"
-
-#: vb/vamlingbolaget/theme/templates/base.html:267
 msgid "Tillagt"
 msgstr "Added"
 
@@ -11041,6 +11037,11 @@ msgstr "Overview"
 #: vb/vamlingbolaget/theme/templates/variation/combos.html:5
 msgid "Färger och Mönster"
 msgstr "Colors and Patterns"
+
+#: vb/vamlingbolaget/theme/templates/variation/combos.html:5
+msgid "lilla kissen"
+msgstr "litle cat"
+
 
 #: vb/vamlingbolaget/theme/templates/blog/index.html:5
 msgid "Nyheter och Blog"
