@@ -228,7 +228,7 @@
 
         {% with product.image_set.all|first as image %}
         <div class="collection_list" >
-            <img src="{% version image.image 'medium' %}" alt="{{ product.article.name }}" class="imgborder" style="width:200px;"  />
+            <img src="{% version image.image 'medium' %}" alt="{{ product.article.name }}" class="imgborder"  />
             <br/>
             <span class='image_description'>
                 {{ product.article.name }}<br/>
