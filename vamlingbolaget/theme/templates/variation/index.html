@@ -13,7 +13,7 @@
                 <a href="/products/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
                     {% with product.image_set.all|first as image %}
                         <div class="collection_list" >
-                            <img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}" class="imgborder" style="width:200px;" />
+                            <img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}" class="imgborder" style="width:180px;" />
                             <br/>
                             <span class='image_description'>
                                 {{ product.article.name }}<br/>
