@@ -14,14 +14,9 @@ Vamlingbolaget." %} />
     <meta name="keywords" content="Vamlingbolaget,vamlingbolaget.com,vamlingbolaget stockholm,vamlingbolaget gotland" />
     <!-- The styles -->
     <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-
+    <link href="{{ STATIC_URL }}css/bootstrap_new.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/vb.css" rel="stylesheet">
-    <style type="text/css">
-
-    </style>
-
-
     <!-- The scripts -->
 
    <script type="text/javascript"
@@ -32,95 +27,92 @@ Vamlingbolaget." %} />
 	<script src="{{ STATIC_URL }}js/backbone.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/lightbox.js" type="text/javascript"> </script>
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
-  </head>
- <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
+ </head>
+ <body data-spy="scroll" data-target=".bs-docs-sidebar">
     <!-- Navbar ================================================== -->
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
+    <div class="navbar navbar-default navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container_first">
+
+                  <ul class="nav pull-left">
+                    <li>
+                        <form action="/i18n/setlang/" method="post" id="lang" class="form-flag">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}" />
+                            <input name="language" type="hidden" value=""  />
+                            <img src="{{STATIC_URL}}img/english_flag.gif" alt="flag english" class="change_lang" id="en"/>
+                            <img src="{{STATIC_URL}}img/svensk_flagga.gif" alt="flagga svensk"  class="change_lang" id="sv"/>
+                        </form>
+                    </li>
+                  </ul>
+                      <li class="nav pull-right">
+                            <a id="token" href="/cart/show/" >
+                                {% trans "Shoppinglåda" %} <img src="{{STATIC_URL}}img/box.png" style="width:30px;" alt="Vamlingbolaget shopping cart" class="">
+                                {% load cart_tags %}
+                                {% cart_total %}
+                            </a>
+
+
+                      </li>
+                </ul>
+            </div>
+
+          </div>
 
           <div class="navbar-inner">
+            <div class="container ">
 
-            <div class="flatpages pull-right">
-              <ul class="nav pull-left">
-                    <li>
-                           <blockquote>
-                <form action="/i18n/setlang/" method="post" id="lang" class="form-flag">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ redirect_to }}" />
-                <input name="language" type="hidden" value=""  />
-                <img src="{{STATIC_URL}}img/english_flag.gif" alt="flag english" class="change_lang" id="en"/>
-                <img src="{{STATIC_URL}}img/svensk_flagga.gif" alt="flagga svensk"  class="change_lang" id="sv"/>
-                </form>
-                                  </blockquote>
-                    </li>
-              </ul>
-            </div>
+                <a href="/" class="navbar-brand"><img src="{{ STATIC_URL }}img/vb_logo.png" alt="Vamlingbolaget logo" class="leftside" /></a>
 
-            <a class="brand" href="/"><img src="{{ STATIC_URL }}img/vb_logo.png" alt="Vamlingbolaget logo" class="leftside"/></a>
-            <table class="nav">
-                    <tr>
-                        <td>
-                            <div class="nav-collapse collapse">
-                                <ul class="nav">
-                                    <li class="">
-                                         <a href="/collection/new/">{% trans "Kollektion" %}</a>
-                                    </li>
-                                    <li class="">
-                                        <a href="/products/type/klanning/">{% trans "Shop" %}</a>
-                                    </li>
-                                    <li class="">
-                                        <a href="/news/">{% trans "Nyheter" %}</a>
-                                    </li>
+                <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+                        <span class = "icon-bar"></span>
+                        <span class = "icon-bar"></span>
+                        <span class = "icon-bar"></span>
+                </button>
+
+
+                <div class = "collapse navbar-collapse navHeaderCollapse pull-left">
+
+                     <ul class = "nav navbar-nav navbar-right">
+                        <li>
+                             <a href="/collection/new/">{% trans "Kollektion" %}</a>
+                        </li>
+                        <li>
+                            <a href="/products/type/klanning/">{% trans "Shop" %}</a>
+                        </li>
+                        <li>
+                            <a href="/news/">{% trans "Nyheter" %}</a>
+                        </li>
+
+                         <li class="">
+                            <a href="/galleries/">{% trans "Bildgallerier" %}</a>
+                        </li>
+                         <li class = "dropdown">
+
+                                <a href="/about/" class = "dropdown-toggle spacer" data-toggle = "dropdown">{% trans "Om oss" %}<b class = "caret"></b></a>
+
+
+                                <ul class = "dropdown-menu">
+                                        <li><a href="/about/">{% trans "Om oss" %}</a></li>
+                                        <li><a href="/shops/">{% trans "Butiker" %}</a></li>
+                                        <li><a href="/order/">{% trans "Beställ" %}</a></li>
+                                        <li><a href="/newsletter/">{% trans "Nyhetsbrev" %}</a></li>
                                 </ul>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="nav-collapse collapse pull-right nav_smaller_size">
-                            <ul class="nav">
-                            <li class="">
-                                <a href="/galleries/">{% trans "Bildgallerier" %}</a>
-                            </li>
-                                <li class="">
-                                    <a href="/shops/">{% trans "Butiker" %}</a>
-                                </li>
-                            <li class="">
-                                <a href="/about/">{% trans "Om oss" %}</a>
-                            </li>
-                            <li class="">
-                            <li class="">
-                                <a href="/order/">{% trans "Beställ" %}</a>
-                            </li>
-                            <li class="">
-                                <a href="/newsletter/">{% trans "Nyhetsbrev" %}</a>
-                            </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
 
-                <ul class="nav pull-right upp">
-                    <li>
-                        <a id="token" href="/cart/show/" >
-
-                            {% trans "Din shoppinglåda" %} <img src="{{STATIC_URL}}img/box.png" style="width:30px;" alt="Vamlingbolaget shopping cart">
-                            <br>
-                            <div> {% load cart_tags %}
-                            {% cart_total %}
-
-                        </div> </a>
+                        </li>
 
 
-                    </li>
-              </ul>
 
+
+                    </ul>
+                </div>
             </div>
           </div>
-        </div>
-      </div>
+
+
     </div>
+
 {% block stretchpage %}
     <div class="container content"> <!--this is for the left margin -->
       <div id="changetext"></div>
@@ -128,8 +120,8 @@ Vamlingbolaget." %} />
         {% block pagetitle %} {% endblock %}
         {% block pagedesc %} {% endblock %}
       </div>
-      
-    {% block allcontent %} 
+
+    {% block allcontent %}
       <div class="span2">
            {% block sidebar %}
 
@@ -196,7 +188,7 @@ Vamlingbolaget." %} />
 
 
 
-
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
   <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
 
  </body>

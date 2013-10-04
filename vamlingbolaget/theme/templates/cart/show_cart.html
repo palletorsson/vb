@@ -54,12 +54,13 @@
         </td>
         <td>
             <div>
-                <a href="{%url removefromcart item.pk 'cartitem'%}"><span class="icon-minus" id="{{ item.id }}"></span></a>
+                <a href="{%url removefromcart item.pk 'cartitem'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>
+
             </div>
         </td>
         <td>
             <div>
-                <a href="/cart/edititem/{{ item.id }}/"><span class="icon-edit"> </span></a>
+                <a href="/cart/edititem/{{ item.id }}/"><i class="icon-edit glyphicon glyphicon-edit"> </i></a>
             </div>
         </td>
         <td>
@@ -116,7 +117,7 @@
             </td>
             <td>
                 <div>
-                    <a href="{%url removefromcart b.pk 'bargain'%}"><span class="icon-minus" id="{{ b.id }}"></span></a>
+                    <a href="{%url removefromcart b.pk 'bargain'%}"><i class="icon-minus" id="{{ b.id }}"></i></a>
                 </div>
             </td>
             <td>
