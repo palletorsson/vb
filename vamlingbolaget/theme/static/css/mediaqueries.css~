@@ -177,16 +177,16 @@
 @media (max-width: 440px) {
 
 	body {
-		background-color: #fff // red;
+		background-color: red;
 		padding-left: 0px;
 		padding-right: 0px;
 	}
 	.container {
-		  background: #fff; //red;
+		  background: red;
 	}
 
 	.leftside {
-		width: 260px;
+		width: 180px;
 		left:10px;
 		padding-left: 3px;
 		padding-top: 20px;
