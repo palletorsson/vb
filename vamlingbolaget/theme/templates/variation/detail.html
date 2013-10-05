@@ -13,9 +13,9 @@
 
 {% block allcontent %}
 <div class="row-fluid">{{ images.pk }}
-    <div class="span5" id="fadeifchangeorder">
+    <div class="span4 img_container" id="fadeifchangeorder">
         {% for image in images %}
-            <a href="{% version image.image 'large'%}" rel="lightbox"><img src="{% version image.image 'large' %}"  alt="{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" style="width: 360px;"/></a>
+            <a href="{% version image.image 'large'%}" rel="lightbox"><img src="{% version image.image 'large' %}"  alt="{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" /></a>
         {% endfor %}
         <br/>
 		<span style="width: 200px; margin:3px;"> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</span>

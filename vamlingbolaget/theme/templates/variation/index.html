@@ -3,17 +3,17 @@
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {% block pagetitle %}
-    <legend>{% trans "Kollektion" %}</legend>
+    <legend>{% trans "Shop" %}</legend>
 {% endblock %}
 
 {% block content %}
 
         {% for product in products %}
-            <div class='image_wrapper'>
+             <div class="collection_list img_container" >
                 <a href="/products/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
                     {% with product.image_set.all|first as image %}
-                        <div class="collection_list" >
-                            <img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}" class="imgborder" />
+
+                            <img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}"  />
                             <br/>
                             <span class='image_description'>
                                 {{ product.article.name }}<br/>
@@ -24,7 +24,7 @@
                                     {{ product.article.price }} SEK
                                 {%endif%}
                             </span>
-                        </div>
+
                     {% endwith %}
                 </a>
             </div>

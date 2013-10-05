@@ -58,14 +58,14 @@
 
   }
   .container_first {
-padding-right: 15px;
-padding-left: 15px;
-padding-bottom: 30px;
-margin-right: 1px;
-margin-left: 1px;
-   border-bottom: 1px solid #e5e5e5;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 30px;
+    margin-right: 1px;
+    margin-left: 1px;
+       border-bottom: 1px solid #e5e5e5;
 
-}
+    }
 
   .scrollable {
       overflow: auto;
@@ -129,12 +129,19 @@ text-shadow: 0 1px 0 #eeeeee;
   ul.query{ padding-left: -15px;}
 
 
-  .collection_list {
-      float: left;
-      height: 300px;
-      margin: 3px;
-      width: 164px;
-  }
+.collection_list {
+  float:left;
+  width:200px;
+}
+
+.collection_list img {
+    width: 100%;
+}
+
+
+.img_container img {
+    width:96%;
+}
 
   .gallery_list{
       float:left;
@@ -308,49 +315,233 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
 }
 
 
-@media (max-width: 1100px) {
-  .leftside{
-    width: 180px;
-    padding-left: 3px;
-    padding-top: 4px;
-    margin-right: 1px;
-  }
-
-
-}
 
 @media (max-width: 1200px) {
+  .container {
+      background: #fff;
+  }
+
+
+   .img_container img {
+        width:98%;
+    }
+
   .leftside{
-    width: 160px;
+    width: 200px;
     padding-left: 3px;
     padding-top: 4px;
     margin-right: 1px;
   }
+   .img_container img {
+        width:96%;
+    }
+
+  .collection_list {
+  float:left;
+  width:35%;
+
+    }
+
+   .span2 {
+    width: 200px;
+    float:left;
+    }
+   .span4 {
+    width:33%;
+    float:left;
+    }
+
+
+   .span9 {
+    float:left;
+    }
+
 }
 
+@media (min-width: 768px) and (max-width: 979px) {
+  body {
+        background-color: #fff;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+  .container {
+      background: #fff;
+  }
 
-
-@media (max-width: 940px) {
   .leftside{
     position:absolute;
     top:4px;
-    left:140px;
-    width: 180px;
-    padding-left: 3px;
-    padding-top: 4px;
+    left:160px;
+    width:180px;
+    padding-left: 30px;
+    padding-top: 10px;
     margin-right: 1px;
   }
+  .container{
+    margin-left:0;
+    width: 100%;
+    max-width: 100%;
+  }
+      .content {
+        margin-top: 0px;
+        min-height: 450px;
+    }
+   .img_container img {
+        width:98%;
+    }
+
+   .img_container img {
+        width:96%;
+    }
+
+
+  .collection_list {
+  float:left;
+  width:40%;
+
+    }
+
+   .span2 {
+    width: 200px;
+    float:left;
+    margin-left: 0;
+    }
+
+    .span2 ul{
+        padding-left:0;
+    }
+
+
+   .span9 {
+    float:left;
+    }
+
+
+
+}
+
+@media (max-width: 767px) {
+ body {
+
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+     .container {
+          background: #fff;
+      }
+      .leftside{
+            position:absolute;
+            top:4px;
+            left:20px;
+            width:300px;
+            padding-left: 3px;
+            padding-top: 10px;
+            margin-right: 1px;
+      }
+      .nav {
+        padding-top: 30px;
+      }
+
+
+      .container{
+           margin-left:0;
+      }
+      .content {
+        margin-top: 0px;
+        min-height: 450px;
+    }
+
+      .navbar-inner{
+        min-width: 330px;
+      }
+      .content {
+        margin-top: 0px;
+        min-height: 450px;
+    }
+    a {
+        font-size:18px;
+    }
+    .navbar .nav > li > a {
+        color: #0000FF;
+        text-shadow: 0 1px 0 #EEEEEE;
+    }
+    .dropdown-menu{
+        min-width: 260px;
+    }
+
+   .img_container img {
+        width:98%;
+    }
+
+  .collection_list {
+  float:left;
+  width:33%;
+    }
+
+   .img_container img {
+        width:96%;
+    }
+
+
+  .collection_list {
+  float:left;
+  width:40%;
+
+    }
+
+   .span2 {
+    width: 200px;
+    float:left;
+    }
+
+   .span9 {
+    float:left;
+    }
+
 }
 
 @media (max-width: 440px) {
-  .leftside{
-    width: 180px;
-    padding-left: 3px;
-    padding-top: 4px;
-    margin-right: 1px;
-  }
+
+    body {
+        background-color: #fff;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .container {
+          background: #fff;
+    }
+
+    .leftside {
+        width: 230px;
+        left:10px;
+        padding-left: 3px;
+        padding-top: 20px;
+        margin-right: 1px;
+    }
+
+    .nav{
+        padding-top:0;
+    }
+    .nav > li {
+        border-bottom: 1px solid #ccc;
+    }
+    .navbar-collapse {
+        width: 100%;
+        padding-left: 35px; /*to compensate for bootstrap -15 px left-margin*/
+        padding-right: 20px; /*to compensate for bootstrap -15 px left-margin*/
+    }
+    .imgborder {
+         width:100px;
+    }
+
+    .img_container {
+        width:98%;
+    }
+    .span4 {
+        width:100%;
+        float:left;
+    }
+
+
 }
 
-.imgborder {
- width:160px;
-}
