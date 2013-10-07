@@ -23,6 +23,7 @@ Vamlingbolaget." %} />
         <!--<![endif]-->
        <!--[if (lt IE 9)]><!-->
           <script src="{{ STATIC_URL }}js/css3media.js" type="text/javascript"> </script>
+       <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
         <!--<![endif]-->
 
 
@@ -219,8 +220,11 @@ Vamlingbolaget." %} />
     <div class="hidden" id="widget_text_remove" >{% trans "Vill du ta bort denna post?" %}</div>
 
 
+        <!--[if (gt IE 9)|!(IE)]><!-->
+          <script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
+        <!--<![endif]-->
 
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
+
   <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
 
  </body>
