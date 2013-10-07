@@ -53,8 +53,8 @@ Vamlingbolaget." %} />
                             {% csrf_token %}
                             <input name="next" type="hidden" value="{{ redirect_to }}" />
                             <input name="language" type="hidden" value=""  />
-                            <img src="{{STATIC_URL}}img/english_flag.gif" alt="flag english" class="change_lang" /> <!--<span class="change_lang" id="en"> En </span> |-->
-                            <img src="{{STATIC_URL}}img/svensk_flagga.gif" alt="flagga svensk"  class="change_lang" /> <!--span class="change_lang" id="sv"> Sv </span-->
+                            <img src="{{STATIC_URL}}img/english_flag.gif" alt="flag english" id="en" class="change_lang" /> <!--<span class="change_lang" id="en"> En </span> |-->
+                            <img src="{{STATIC_URL}}img/svensk_flagga.gif" alt="flagga svensk"  id="sv"  class="change_lang" /> <!--span class="change_lang" id="sv"> Sv </span-->
                         </form>
                     </li>
                   </ul>
