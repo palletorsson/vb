@@ -368,7 +368,8 @@ var set_first_page = function(){
         $('.spanfullscreen img').css({'width':($(window).width()), 'height': 'auto', 'margin':0, 'padding':0});
 
     if (wwidth < 440){
-        $('.spanfullscreen').height('300px');
+
+        $('.spanfullscreen').height(($(window).height())/2-10);
     }
 
 
