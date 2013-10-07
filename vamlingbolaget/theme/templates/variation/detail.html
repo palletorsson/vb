@@ -103,7 +103,7 @@
 				</select>
 				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
 			</div>
-        {% elif product.article.quality.order == 1 %}
+        {% elif product.article.quality.order == 1 or product.article.quality.order == 3 %}
             {% trans "Välj färg / mönster" %} <br/>
 
 			<hr/>
