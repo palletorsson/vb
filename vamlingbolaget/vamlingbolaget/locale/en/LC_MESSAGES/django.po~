@@ -10940,6 +10940,11 @@ msgstr "Shopping cart"
 
 msgid "Välj färg / mönster"
 msgstr "Choose color / pattern"
+
+
+msgid "Lägg till i Shoppinglåda"
+msgstr "Add to shopping cart"
+
  
 
 #: vb/vamlingbolaget/theme/templates/base.html:196
@@ -11066,6 +11071,10 @@ msgstr "Read the full story"
 
 msgid "Du ändrar nu din beställning av"
 msgstr "You are editing your order"
+
+msgid "Du ändrar nu din beställning"
+msgstr "You are editing your order"
+
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:18
 #: vb/vamlingbolaget/theme/templates/variation/detail.html:25
