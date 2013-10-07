@@ -356,8 +356,9 @@ $('.overlay').each(function(){
 var set_first_page = function(){
      var wheight = $(window).height(),
      wwidth = $(window).width(),
-        fullheight = wheight-100;
-    console.log(wheight)
+     fullheight = wheight-100;
+
+
 
 
 
@@ -365,7 +366,12 @@ var set_first_page = function(){
         $('.halffullscreen').css({'float':'left','width':($(window).width())/2, 'background-color':'#fff','margin':0, 'height': fullheight +'px', 'overflow':'hidden', 'padding':0 });
         $('.halffullscreen img').css({'width':(($(window).width())/2), 'height': 'auto', 'margin':0, 'padding':0});
         $('.spanfullscreen img').css({'width':($(window).width()), 'height': 'auto', 'margin':0, 'padding':0});
-   
+
+    if (wwidth < 440){
+        $('.spanfullscreen').height('300px');
+    }
+
+
     $('.carousel-control').show()
 }
 
