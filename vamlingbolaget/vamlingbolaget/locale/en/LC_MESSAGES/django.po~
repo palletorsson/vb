@@ -10933,7 +10933,14 @@ msgstr "About Stickeri"
 #: vb/vamlingbolaget/theme/templates/base.html:185
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:4
 msgid "Din shoppinglåda"
-msgstr "Your Shopping cart"
+msgstr "Your shopping cart"
+
+msgid "Shoppinglåda"
+msgstr "Shopping cart"
+
+msgid "Välj färg / mönster"
+msgstr "Choose color / pattern"
+ 
 
 #: vb/vamlingbolaget/theme/templates/base.html:196
 #: vb/vamlingbolaget/theme/templates/variation/combos.html:5
@@ -11009,6 +11016,10 @@ msgid "Tillagt"
 msgstr "Added"
 
 #: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "i"
+msgstr "in"
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
 msgid "Det finns"
 msgstr "Now you have"
 
@@ -11054,7 +11065,7 @@ msgstr "Read the full story"
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:6
 
 msgid "Du ändrar nu din beställning av"
-msgstr "You are editing you order"
+msgstr "You are editing your order"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:18
 #: vb/vamlingbolaget/theme/templates/variation/detail.html:25
@@ -11065,6 +11076,12 @@ msgstr "Item number"
 #: vb/vamlingbolaget/theme/templates/variation/detail.html:29
 msgid "Kvalitet"
 msgstr "Quality"
+
+
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:29
+msgid "Vill du ta bort denna post?"
+msgstr "Do you want to remove this post?"
+
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:24
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:34

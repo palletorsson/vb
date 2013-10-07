@@ -163,24 +163,21 @@ $.ajax({
 
 		}
 
-	if(product_type == '7'){
-	    $("#changetext")
-		    .html( msg +'<table>' +
-		    '<tr><th>­­­­{%trans "Meter"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th></tr>' +
-		    '<tr><td>'+_.quantity+'</td><td>'+ _.article +' {{ product.article.quality|lower }}</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
-		    '</tr></table>' +
-		    '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>').css({'font-size':'11px'});
-	} else if (product_type == '6'){
-	    $("#changetext")
-		    .html( msg +'<table>' +
-		    '<tr><th>­­­­{%trans "Antal"%}</th><th>{%trans "Produkt"%}</th><th>{%trans "Färg"%}</th><th>{%trans "Mönster"%}</th></tr>' +
-		    '<tr><td>'+_.quantity+'</td><td>'+ _.article +'</td></td><td>'+ coltext +'</td><td>'+ pattext+'</td>' +
-		    '</tr></table>' +
-		    '{%trans "i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>').css({'font-size':'11px'});
+     $("#changetext").animate({
+              height:'150px'
+            });
+	if(product_type == '8'){ // meter
+	      $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ': '+_.article +' </strong></li>' +
+		     '<li> ' +widgetTextin+' '+ coltext +', '+ pattext +' </li>' +
+		     '<li>'+widgetExist+' '+ _.quantity +' '+widgetTextend+' </li> ' +
+		     '</ul><div>').fadeIn();
+	} else if (product_type == '7'){ //
+	      $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ': '+_.article +' </strong></li>' +
+		     '<li> ' +widgetTextin+' '+ coltext +', '+ pattext +' </li>' +
+		     '<li>'+widgetExist+' '+ _.quantity +' '+widgetTextend+' </li> ' +
+		     '</ul><div>').fadeIn();
 	} else {
-	    $("#changetext").animate({
-	      height:'150px'
-	    });
+
 	    $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ': '+_.article +' </strong></li>' +
 		     '<li> ' +widgetTextin+' '+ coltext +', '+ pattext +' </li>' +
 		     '<li>' +widgetSize+': '+ _.size +' </li>' +

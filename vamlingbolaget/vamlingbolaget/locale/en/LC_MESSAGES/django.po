@@ -10933,7 +10933,19 @@ msgstr "About Stickeri"
 #: vb/vamlingbolaget/theme/templates/base.html:185
 #: vb/vamlingbolaget/theme/templates/cart/show_cart.html:4
 msgid "Din shoppinglåda"
-msgstr "Your Shopping cart"
+msgstr "Your shopping cart"
+
+msgid "Shoppinglåda"
+msgstr "Shopping cart"
+
+msgid "Välj färg / mönster"
+msgstr "Choose color / pattern"
+
+
+msgid "Lägg till i Shoppinglåda"
+msgstr "Add to shopping cart"
+
+ 
 
 #: vb/vamlingbolaget/theme/templates/base.html:196
 #: vb/vamlingbolaget/theme/templates/variation/combos.html:5
