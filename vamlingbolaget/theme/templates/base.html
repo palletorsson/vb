@@ -15,14 +15,15 @@ Vamlingbolaget." %} />
     <!-- The styles -->
     <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap_new.css" rel="stylesheet">
-
-
     <link href="{{ STATIC_URL }}css/vb.css" rel="stylesheet">
 
-        <!--[if (gt IE 9)|!(IE)]><!--> <link href="{{ STATIC_URL }}css/mediaqueries.css" rel="stylesheet">
+        <!--[if (gt IE 9)|!(IE)]><!-->
+          <link href="{{ STATIC_URL }}css/mediaqueries.css" rel="stylesheet">
           <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
-
-      <!--<![endif]-->
+        <!--<![endif]-->
+       <!--[if (lt IE 9)]><!-->
+          <script src="{{ STATIC_URL }}js/css3media.js" type="text/javascript"> </script>
+        <!--<![endif]-->
 
 
 
@@ -40,7 +41,7 @@ Vamlingbolaget." %} />
 	<script src="{{ STATIC_URL }}js/backbone.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/lightbox.js" type="text/javascript"> </script>
-	<script src="{{ STATIC_URL }}js/css3media.js" type="text/javascript"> </script>
+
 
 
  </head>
