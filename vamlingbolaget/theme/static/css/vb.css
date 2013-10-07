@@ -263,7 +263,8 @@ img.pattern_color_image {
 .footer {
     background: #F5F5F5;
     border-top: 1px solid #e5e5e5;
-    margin:50px 0px; padding:0px;
+    padding-top:15px;
+    margin:50px 0px;
     height: 300px;
     font-size: 12px;
 
@@ -281,9 +282,9 @@ img.pattern_color_image {
 }
 
 select {
-width: 220px;
-background-color: #ffffff;
-border: 1px solid #cccccc;
+    width: 220px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
 }
 
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
