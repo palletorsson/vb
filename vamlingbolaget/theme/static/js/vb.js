@@ -354,13 +354,18 @@ $('.overlay').each(function(){
 
 
 var set_first_page = function(){
-    var wheight = $(window).height(),
-        fullheight = wheight-123;
-    $('.spanfullscreen').css({'width':$(window).width(), 'background-color':'#fff','margin':0, 'height': fullheight, 'overflow':'hidden', 'padding':0 });
-    $('.halffullscreen').css({'float':'left','width':($(window).width())/2, 'background-color':'#fff','margin':0, 'height': fullheight, 'overflow':'hidden', 'padding':0 });
-    $('.halffullscreen img').css({'width':(($(window).width())/2), 'height': 'auto', 'margin':0, 'padding':0});
-    $('.spanfullscreen img').css({'width':($(window).width()), 'height':  fullheight, 'margin':0, 'padding':0});
+     var wheight = $(window).height(),
+     wwidth = $(window).width(),
+        fullheight = wheight-100;
+    console.log(wheight)
 
+
+
+        $('.spanfullscreen').css({'width':$(window).width(), 'background-color':'#fff','margin':0, 'height': fullheight +'px', 'overflow':'hidden', 'padding':0 });
+        $('.halffullscreen').css({'float':'left','width':($(window).width())/2, 'background-color':'#fff','margin':0, 'height': fullheight +'px', 'overflow':'hidden', 'padding':0 });
+        $('.halffullscreen img').css({'width':(($(window).width())/2), 'height': 'auto', 'margin':0, 'padding':0});
+        $('.spanfullscreen img').css({'width':($(window).width()), 'height': 'auto', 'margin':0, 'padding':0});
+   
     $('.carousel-control').show()
 }
 
