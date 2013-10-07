@@ -47,9 +47,9 @@ Vamlingbolaget." %} />
           <div class="navbar-inner hidden-phone">
             <div class="container_first">
 
-                  <ul class="nav pull-left ">
+                  <ul class="nav pull-left">
                     <li>
-                        <form action="/i18n/setlang/" method="post" id="lang" class="form-flag">
+                        <form action="/i18n/setlang/" method="post" id="lang" >
                             {% csrf_token %}
                             <input name="next" type="hidden" value="{{ redirect_to }}" />
                             <input name="language" type="hidden" value=""  />
@@ -160,12 +160,16 @@ Vamlingbolaget." %} />
     {% endblock %}
   </div>
 {% endblock %}
+
 {% block footer %}
 
   <footer>
-      <div class="footer"> <br/>
-          <div class="span1"> </div>
-              <div class="span4">
+      <div class="footer">
+
+          <div class="span1">
+          </div>
+
+          <div class="span4">
               <address>
                   <strong>Vamlingbolaget</strong><br/>
                   623 31 Burgsvik<br/>
@@ -175,6 +179,7 @@ Vamlingbolaget." %} />
               <strong>{% trans "Öppettider" %}</strong><br/>
               <a href="/shops/"> {% trans "Om oss" %} Vamlingbolaget </a>
           </div>
+
           <div class="span4">
               <address>
                   <strong>Vamlingbolaget Stockholm </strong><br/>
@@ -192,18 +197,16 @@ Vamlingbolaget." %} />
              <strong>{% trans "Nyheter" %}</strong><br/>
               {% load news_extra %}
               {% show_news %}
-
           </div>
 
 
-          </div>
-          <div class="span2">
-                  {% endblock %}
-
-          </div>
       </div>
 
   </footer>
+ {% endblock %}
+
+
+
     <div class="hidden" id="widget_text_start" >{% trans "Tillagt" %}</div>
     <div class="hidden" id="widget_size" >{% trans "Storlek" %}</div>
     <div class="hidden" id="widget_exist" >{% trans "Det finns" %}</div>
