@@ -113,7 +113,7 @@ $("#addtocart").click(function() {
 var add_or_edit = 'add';
 
 var sku_number = $('#sku_number').text(),
-    product_type = $('#product_type'),
+    product_type = $('#product_type').text(),
     quality = $(".quality").text(),
     size_id = $('#size option:selected').val() || size_id_default,
     article_id = $('#article_pk option:selected').val(),
@@ -166,21 +166,10 @@ $.ajax({
      $("#changetext").animate({
               height:'150px'
             });
-	if(product_type == '8'){ // meter
-	      $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ': '+_.article +' </strong></li>' +
-		     '<li> ' +widgetTextin+' '+ coltext +', '+ pattext +' </li>' +
-		     '<li>'+widgetExist+' '+ _.quantity +' '+widgetTextend+' </li> ' +
-		     '</ul><div>').fadeIn();
-	} else if (product_type == '7'){ //
-	      $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ': '+_.article +' </strong></li>' +
-		     '<li> ' +widgetTextin+' '+ coltext +', '+ pattext +' </li>' +
-		     '<li>'+widgetExist+' '+ _.quantity +' '+widgetTextend+' </li> ' +
-		     '</ul><div>').fadeIn();
-	} else {
+
 
 	    $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ': '+_.article +' </strong></li>' +
 		     '<li> ' +widgetTextin+' '+ coltext +', '+ pattext +' </li>' +
-		     '<li>' +widgetSize+': '+ _.size +' </li>' +
 		     '<li>'+widgetExist+' '+ _.quantity +' '+widgetTextend+' </li> ' +
 		     '</ul><div>').fadeIn();
 
@@ -194,7 +183,6 @@ $.ajax({
 	    var new_price = parseInt(the_price) + parseInt(old_price);
 	    $('#widget_total').text(new_price);
 
-	}
     }
 });
 
