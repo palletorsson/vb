@@ -65,22 +65,11 @@ def checkout_test(request):
                     msg = msg + 'och ' + item.pattern_2.name + ', ' + item.color_2.name + ' (insida)\n'
                 else:
                     msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
-
-                if (item.article.category.order < 4):
+                if (item.article.category.order < 3):
                     msg = msg + 'Storlek: ' + item.size.name + ' \n'
-                elif (item.article.category.order == 5):
-                    msg = msg + 'Antal meter: ' + str(item.quantity) + ' \n'
-                else:
-                    pass
 
-                if (item.article.category.order < 4):
-                    msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
-                elif (item.article.category.order == 5):
-                    msg = msg + 'Pris per meter: ' + str(item.article.price) +  ' SEK \n'
-                else:
-                    msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
+                msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
-
             msg = msg + '\n'
             msg = msg + 'Frakt och hantering: 50 SEK \n'
             msg = msg + '--------------------------------- \n'
@@ -222,6 +211,7 @@ def thanks(request):
     print _cart_id
     try:
         order = Checkout.objects.get(session_key=cart_id)
+        print order
     except:
         order = 1
     if (order != 1):
@@ -283,27 +273,19 @@ def checkout(request):
             for item in cartitems:
                 msg = msg + 'produkt '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
+                print item.pattern_2
                 if (item.pattern_2 != 0):
                     msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' (utsida)\n'
                     msg = msg + 'och ' + item.pattern_2.name + ', ' + item.color_2.name + ' (insida)\n'
                 else:
                     msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
 
-                if (item.article.category.order < 4):
+                if (item.article.category.order < 3):
                     msg = msg + 'Storlek: ' + item.size.name + ' \n'
-                elif (item.article.category.order == 5):
-                    msg = msg + 'Antal meter: ' + str(item.quantity) + ' \n'
-                else:
-                    pass
 
-                if (item.article.category.order < 4):
-                    msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
-                elif (item.article.category.order == 5):
-                    msg = msg + 'Pris per meter: ' + str(item.article.price) +  ' SEK \n'
-                else:
-                    msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
+                msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
-
+            msg = msg + '\n'
             msg = msg + 'Frakt och hantering: 50 SEK \n'
             msg = msg + '--------------------------------- \n'
             msg = msg + 'Totalpris: %s SEK \n' %str(totalprice)
