@@ -207,10 +207,9 @@ def cancel(request):
 
 def thanks(request):
     cart_id = _cart_id(request)
-    print _cart_id
+
     try:
         order = Checkout.objects.get(session_key=cart_id)
-        print order
     except:
         order = 1
     if (order != 1):
@@ -279,11 +278,23 @@ def checkout(request):
                 else:
                     msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
 
-                if (item.article.category.order < 3):
+                if (item.article.category.order < 4):
                     msg = msg + 'Storlek: ' + item.size.name + ' \n'
+                elif (item.article.category.order == 5):
+                    msg = msg + 'Antal meter: ' + str(item.quantity) + ' \n'
+                else:
+                    msg = msg
 
-                msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
+                if (item.article.category.order < 4):
+                    msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
+                elif (item.article.category.order == 5):
+                    msg = msg + 'Pris per meter: ' + str(item.article.price) +  ' SEK \n'
+                else:
+                    msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
+
                 i = i + 1
+
+
             msg = msg + '\n'
             msg = msg + 'Frakt och hantering: 50 SEK \n'
             msg = msg + '--------------------------------- \n'
