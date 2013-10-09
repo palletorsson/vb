@@ -65,11 +65,22 @@ def checkout_test(request):
                     msg = msg + 'och ' + item.pattern_2.name + ', ' + item.color_2.name + ' (insida)\n'
                 else:
                     msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
-                if (item.article.category.order < 3):
-                    msg = msg + 'Storlek: ' + item.size.name + ' \n'
 
-                msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
+                if (item.article.category.order < 4):
+                    msg = msg + 'Storlek: ' + item.size.name + ' \n'
+                elif (item.article.category.order == 5):
+                    msg = msg + 'Antal meter: ' + str(item.quantity) + ' \n'
+                else:
+                    pass
+
+                if (item.article.category.order < 4):
+                    msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
+                elif (item.article.category.order == 5):
+                    msg = msg + 'Pris per meter: ' + str(item.article.price) +  ' SEK \n'
+                else:
+                    msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
+
             msg = msg + '\n'
             msg = msg + 'Frakt och hantering: 50 SEK \n'
             msg = msg + '--------------------------------- \n'
