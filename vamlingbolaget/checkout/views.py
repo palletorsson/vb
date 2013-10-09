@@ -160,7 +160,6 @@ def success(request):
 
     if orderref:
         response = service.complete(orderRef=orderref)
-
         if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0'):
             cart_id = _cart_id(request)
             try:
