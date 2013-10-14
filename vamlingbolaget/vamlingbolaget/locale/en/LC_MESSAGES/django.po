@@ -11205,6 +11205,18 @@ msgstr ""
 msgid "Betalningsvillkor"
 msgstr "Payment terms"
 
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Se våra betalvillkor här"
+msgstr "Payment terms"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Om vi har tyget i lager levererar vi inom tre veckor"
+msgstr "If we have the fabric in stock, we deliver within three weeks"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Du har öppet köp i en vecka och kan returnera plagget oanvänt inom en vecka från det att du hämtat ut det på posten"
+msgstr "For more information click payment term link:"
+
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:149
 msgid "Du betalar mot postförskatt"
 msgstr "The order is payed on delivery"
@@ -11228,11 +11240,6 @@ msgstr "Send Your Order"
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
 msgid "När du beställer via postorder tillkommer porto plus postförskottsavgift"
 msgstr "Send Your Order"
-
-#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:201
-
-msgid "Börja utforska utbudet!"
-msgstr "Continue to explore!"
 
 #: vb/vamlingbolaget/theme/templates/checkout/thanks.html:11
 

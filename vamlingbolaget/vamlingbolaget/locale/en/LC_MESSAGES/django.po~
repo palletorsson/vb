@@ -11198,9 +11198,24 @@ msgid "Din adress"
 msgstr "Your adress"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
-msgid ""
-"En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg"
+msgid "En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg"
 msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Betalningsvillkor"
+msgstr "Payment terms"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Se våra betalvillkor här"
+msgstr "Payment terms"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Om vi har tyget i lager levererar vi inom tre veckor"
+msgstr "If we have the fabric in stock, we deliver within three weeks"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Du har öppet köp i en vecka och kan returnera plagget oanvänt inom en vecka från det att du hämtat ut det på posten"
+msgstr "For more information click payment term link:"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:149
 msgid "Du betalar mot postförskatt"
@@ -11222,10 +11237,26 @@ msgstr "The order is payed on delivery"
 msgid "Skicka Din Beställning"
 msgstr "Send Your Order"
 
-#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:201
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
+msgid "När du beställer via postorder tillkommer porto plus postförskottsavgift"
+msgstr "Send Your Order"
 
-msgid "Börja utforska utbudet!"
-msgstr "Continue to explore!"
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
+msgid "Betala via postförskott"
+msgstr "Pay by cash on delivery"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
+msgid "Betala med kort"
+msgstr "Pay by card"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
+msgid "Efter genomförd betalning kommer du att skickas tillbaks till oss och ditt köp kommer att bekräftas"
+msgstr "After successful payment you will be sent back to us and your purchase will be confirmed"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
+msgid "Kostnaden uppgår till 50 kronor beroende på paketets vikt"
+msgstr ""
+
 
 #: vb/vamlingbolaget/theme/templates/checkout/thanks.html:11
 
