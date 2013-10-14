@@ -9,4 +9,5 @@ vamlingbolaget/.idea
 vamlingbolaget/vb.komodoproject
 vamlingbolaget/db/*
 vamlingbolaget/cart/migrations/
-vamlingbolaget/vamlingbolaget/locale/
+vamlingbolaget/vamlingbolaget/locale/*
+vamlingbolaget/vamlingbolaget/locale/en/LC_MESSAGES/*
