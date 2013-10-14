@@ -11198,9 +11198,12 @@ msgid "Din adress"
 msgstr "Your adress"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
-msgid ""
-"En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg"
+msgid "En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg"
 msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Betalningsvillkor"
+msgstr "Payment terms"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:149
 msgid "Du betalar mot postförskatt"
@@ -11220,6 +11223,10 @@ msgstr "The order is payed on delivery"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
 msgid "Skicka Din Beställning"
+msgstr "Send Your Order"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
+msgid "När du beställer via postorder tillkommer porto plus postförskottsavgift"
 msgstr "Send Your Order"
 
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:201
