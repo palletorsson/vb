@@ -11241,23 +11241,6 @@ msgstr "Send Your Order"
 msgid "När du beställer via postorder tillkommer porto plus postförskottsavgift"
 msgstr "Send Your Order"
 
-#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
-msgid "Betala via postförskott"
-msgstr "Pay by cash on delivery"
-
-#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
-msgid "Betala med kort"
-msgstr "Pay by card"
-
-#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
-msgid "Efter genomförd betalning kommer du att skickas tillbaks till oss och ditt köp kommer att bekräftas"
-msgstr "After successful payment you will be sent back to us and your purchase will be confirmed"
-
-#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
-msgid "Kostnaden uppgår till 50 kronor beroende på paketets vikt"
-msgstr ""
-
-
 #: vb/vamlingbolaget/theme/templates/checkout/thanks.html:11
 
 msgid "Ordernummer"
