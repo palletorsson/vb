@@ -255,22 +255,33 @@
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="post">
-                          <div class="span4">
-                              <br/>
-                              {% trans "Efter genomförd betalning kommer du att skickas tillbaks till oss och ditt köp kommer att bekräftas" %}.
+                          <div>
+                              <br />
+                              <i>{% trans "Efter genomförd betalning kommer du att skickas tillbaks till oss och ditt köp kommer att bekräftas" %}.</i>
+                                <br /><br />
                           </div>
 
-                              <br/>
-                              <input type="submit" class="btn" value="{% trans "Betala" %}"  />
+                                <div>
+                              <div class="span3">
+                                <div class="paymentimg"> <img src="/media/uploads/mastercard_white_140.gif" /> <img src="/media/uploads/verified_visa_white_140.gif" /><img src="/media/uploads/payments_processed_by.jpg" /></div>
+                              </div>
+
+                              <div class="span2">
+                                 <blockquote> <input type="submit" class="btn btn-success" value="{% trans "Betala med kort" %}"  /></blockquote>
+                             </div>
+                          </div>
+                         <div style="clear: both;"></div>
+
                     </div>
                     <div class="tab-pane" id="card">
-                          <div class="span4">
-                              <br/>
-                              <img src="{{ STATIC_URL }}img/post.jpg" width="50px"/>
+                          <div class="span3">
+                              <img src="{{ STATIC_URL }}img/post.jpg" width="50px"/> {% trans "Betala via postförskott" %}
                           </div>
- <br/>
-                              <input type="submit" class="btn" value="{% trans "Skicka Din Beställning" %}"  />
-                        </div>
+
+                          <div class="span2">
+                              <blockquote> <input type="submit" class="btn btn-success" value="{% trans "Skicka Din Beställning" %}"  /> </blockquote>
+                          </div>
+
                     </div>
                 </div>
           </div>
