@@ -11,3 +11,5 @@ vamlingbolaget/db/*
 vamlingbolaget/cart/migrations/
 vamlingbolaget/vamlingbolaget/locale/*
 vamlingbolaget/vamlingbolaget/locale/en/LC_MESSAGES/*
+*.po*
+*.mo*
