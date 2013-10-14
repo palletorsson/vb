@@ -37,6 +37,10 @@
 		float:left;
 	}
 
+    .paywidth {
+        width:0%;
+    }
+
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
@@ -94,6 +98,9 @@
 	.span9 {
 		float:left;
 	}
+	.paywidth {
+        width:0%;
+    }
 
 }
 
@@ -172,6 +179,9 @@
 	.span9 {
 		float:left;
 	}
+	.paywidth {
+        width:0%;
+    }
 }
 
 @media (max-width: 440px) {
@@ -216,5 +226,7 @@
 		width:100%;
 		float:left;
 	}
+
+
 
 }
