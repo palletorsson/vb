@@ -155,52 +155,58 @@
     </tr>
     <tr>
         <td>
-            <div class="control-group" id="first_name">
-                <label class="control-label" > <label for="id_first_name">{% trans "Förnamn" %} * </label> </label>
+            <div class="form-group" id="first_name">
+                <label class="col-lg-3 control-label" > <label for="id_first_name">{% trans "Förnamn" %} </label> </label>
                 {{ form.subject.first_name}}
-                <div class="controls">
-                    {{ form.first_name }}
+
+                 <div class="col-lg-9">
+                    {{ form.first_name }} *
                     {{ form.first_name.errors }}
                 </div>
             </div>
-            <div class="control-group" id="last_name">
-             <label class="control-label" > <label for="id_last_name">{% trans "Efternamn" %} * </label> </label>
+            <div class="">
+
+
+
+            <div class="form-group" id="last_name">
+             <label class="col-lg-3 control-label" > <label for="id_last_name">{% trans "Efternamn" %} </label> </label>
                 {{ form.subject.last_name}}
-                <div class="controls">
+                 <div class="col-lg-9">
                     {{ form.last_name }}
-                    {{ form.last_name.errors }}
+                    {{ form.last_name.errors }} *
                 </div>
             </div>
-            <div class="control-group" id="street">
-                <label class="control-label" > <label for="id_street">{% trans "Gatuadress" %} * </label> </label>
+            <div class="form-group" id="street">
+                <label class="col-lg-3 control-label" > <label for="id_street">{% trans "Gatuadress" %}  </label> </label>
                 {{ form.subject.street}}
-                <div class="controls">
+                 <div class="col-lg-9">
                     {{ form.street }}
-                    {{ form.street.errors }}
+                    {{ form.street.errors }} *
                 </div>
             </div>
-            <div class="control-group" id="postcode">
-                <label class="control-label" > <label for="id_postcode">{% trans "Postnummer" %} * </label> </label>
+            <div class="form-group" id="city">
+                <label class="col-lg-3 control-label" > <label for="id_city">{% trans "Postort" %}</label> </label>
+                {{ form.subject.city}}
+                 <div class="col-lg-9">
+                    {{ form.city }}
+                    {{ form.city.errors }} *
+                </div>
+            </div>
+            <div class="form-group" id="postcode">
+                <label class="col-lg-3 control-label" > <label for="id_postcode">{% trans "Postnummer" %}</label> </label>
                 {{ form.subject.postcode}}
                 {% if field.errors %}< li>{{ field.subject.errors|striptags }}< /li>{% endif %}
-                <div class="controls">
+                <div class="col-lg-9">
                     {{ form.postcode }}
-                    {{ form.postcode.errors }}
-                </div>
-            </div>
-            <div class="control-group" id="city">
-                <label class="control-label" > <label for="id_city">{% trans "Postort" %}  * </label> </label>
-                {{ form.subject.city}}
-                <div class="controls">
-                    {{ form.city }}
-                    {{ form.city.errors }}
+                    {{ form.postcode.errors }} *
                 </div>
             </div>
 
+
             <div class="control-group" id="country">
-                <label class="control-label" > <label for="id_country">{% trans "Land" %}</label></label>
+                <label class="col-lg-3 control-label" > <label for="id_country">{% trans "Land" %} </label> </label>
                 {{ form.subject.country}}
-                <div class="controls">
+                  <div class="col-lg-9">
                     {{ form.country }}
                 </div>
                 <input id="your_order" type="hidden" value="{% trans 'Din beställning' %}">
@@ -213,26 +219,26 @@
         <td>
 
     <div class="control-group" id="email">
-        <label class="control-label" > <label for="id_email">{% trans "Email" %}  * </label></label>
+        <label class="col-lg-3  control-label" > <label for="id_email">{% trans "Email" %} </label></label>
         {{ form.subject.email}}
-        <div class="controls">
+         <div class="col-lg-9">
             {{ form.email }}
-            {{ form.email.errors }}
+            {{ form.email.errors }} *
         </div>
     </div>
 
     <div class="control-group" id="phone">
-        <label class="control-label" > <label for="id_phone">{% trans "Telefon" %} * </label></label>
+        <label class="col-lg-3 control-label" > <label for="id_phone">{% trans "Telefon" %} </label></label>
         {{ form.subject.phone}}
-        <div class="controls">
+         <div class="col-lg-9">
             {{ form.phone }}
-            {{ form.phone.errors }}
+            {{ form.phone.errors }} *
         </div>
     </div>
     <div class="control-group" id="message">
-        <label class="control-label" > <label for="id_message">{% trans "Meddelande till beställning" %}</label></label>
+        <label class="col-lg-3 control-label" > <label for="id_message">{% trans "Meddelande till beställning" %}  </label></label>
         {{form.subject.message}}
-        <div class="controls">
+         <div class="col-lg-9">
             {{ form.message }}
         </div>
     </div>
@@ -265,8 +271,12 @@
 {% if not cartitems %}
 {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet!" %}</a>
 {% endif %}
-<div class="alert alert-success"> När du beställer via postorder tillkommer porto plus postförskottsavgift. Kostnaden uppgår till 50 kronor beroende på paketets vikt. Om vi har tyget i lager levererar vi inom tre veckor.
-    Du har öppet köp i en vecka och kan returnera plagget oanvänt inom en vecka från det att du hämtat ut det på posten. </div>
+<div class="alert alert-success">
+    {% trans "När du beställer via postorder tillkommer porto plus postförskottsavgift" %}.
+    {% trans "Kostnaden uppgår till 50 kronor beroende på paketets vikt" %}. {% trans "Om vi har tyget i lager levererar vi inom tre veckor" %}.
+    {% trans "Du har öppet köp i en vecka och kan returnera plagget oanvänt inom en vecka från det att du hämtat ut det på posten." %}  <br />
+    <a href="/paymentterms/"> {% trans "Se våra betalvillkor här" %} </a>
+</div>
 
 
 {% endblock %}

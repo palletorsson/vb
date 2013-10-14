@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://127.0.0.1:8000/admin/posts/post/2/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Change post | Django site admin</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="NONE,NOARCHIVE">
+    <!-- STYLESHEETS -->
+    
+    
+        <link href="./Change post   Django site admin_files/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="./Change post   Django site admin_files/screen.css" rel="stylesheet" type="text/css" media="screen">
+        
+            <link href="./Change post   Django site admin_files/output.css" rel="stylesheet" type="text/css" media="screen">
+        
+    
+
+    <!-- EXTRASTYLES -->
+    
+    <!-- JAVASCRIPTS -->
+    
+    
+        <script type="text/javascript">window.__admin_media_prefix__ = "/theme/static/grappelli/";</script>
+        <script type="text/javascript" charset="utf-8">
+            // GLOBALS
+            var grappelli = {},
+                ADMIN_URL = "/admin/",
+                MODEL_URL_ARRAY = {"1": {"pk": 1, "app": "auth", "model": "permission"}, "2": {"pk": 2, "app": "auth", "model": "group"}, "3": {"pk": 3, "app": "auth", "model": "user"}, "4": {"pk": 4, "app": "contenttypes", "model": "contenttype"}, "5": {"pk": 5, "app": "sessions", "model": "session"}, "6": {"pk": 6, "app": "sites", "model": "site"}, "7": {"pk": 7, "app": "posts", "model": "blog"}, "8": {"pk": 8, "app": "posts", "model": "post"}, "9": {"pk": 9, "app": "admin", "model": "logentry"}, "10": {"pk": 10, "app": "images", "model": "imagecollection"}, "11": {"pk": 11, "app": "images", "model": "photographer"}, "12": {"pk": 12, "app": "images", "model": "image"}, "13": {"pk": 13, "app": "related", "model": "related"}, "14": {"pk": 14, "app": "south", "model": "migrationhistory"}, "15": {"pk": 15, "app": "tastypie", "model": "apiaccess"}, "16": {"pk": 16, "app": "tastypie", "model": "apikey"}, "17": {"pk": 17, "app": "home", "model": "home"}},
+                DATE_FORMAT = "%Y-%m-%d",
+                TIME_FORMAT = "%H:%M:%S",
+                DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S";
+        </script>
+        <!-- jQuery, jQuery-UI -->
+        <script src="./Change post   Django site admin_files/jquery-1.7.2.min.js" type="text/javascript"></script>
+        <script src="./Change post   Django site admin_files/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
+        
+            <!-- Grappelli Minified -->
+            <script src="./Change post   Django site admin_files/grappelli.min.js" type="text/javascript"></script>
+        
+        <script type="text/javascript" charset="utf-8">
+            (function($) {
+                $(document).ready(function() {
+                    $("#grp-navigation .grp-collapse").grp_collapsible();
+                });
+            })(grp.jQuery);
+        </script>
+    
+    
+    <script type="text/javascript" src="./Change post   Django site admin_files/saved_resource"></script>
+    <script type="text/javascript" charset="utf-8">
+        (function($) {
+            $(document).ready(function() {
+                grappelli.initDateAndTimePicker();
+                $("#grp-content-container .grp-group").grp_collapsible_group();
+                $("#grp-content-container .grp-collapse").grp_collapsible({
+                    on_init: function(elem, options) {
+                        // open collapse (and all collapse parents) in case of errors
+                        if (elem.find("ul.errorlist").length > 0) {
+                            elem.removeClass("grp-closed")
+                                .addClass("grp-open");
+                            elem.parents(".grp-collapse")
+                                .removeClass("grp-closed")
+                                .addClass("grp-open");
+                        }
+                    }
+                });
+                var related_lookup_fields_fk = [];
+                var related_lookup_fields_m2m = [];
+                var related_lookup_fields_generic = [];
+                var autocomplete_fields_fk = [];
+                var autocomplete_fields_m2m = [];
+                var autocomplete_fields_generic = [];
+                $.each(related_lookup_fields_fk, function() {
+                    $("#id_" + this).grp_related_fk({lookup_url:"/grappelli/lookup/related/"});
+                });
+                $.each(related_lookup_fields_m2m, function() {
+                    $("#id_" + this).grp_related_m2m({lookup_url:"/grappelli/lookup/m2m/"});
+                });
+                $.each(related_lookup_fields_generic, function() {
+                    var content_type = "#id_" + this[0],
+                        object_id = "#id_" + this[1];
+                    $(object_id).grp_related_generic({content_type:content_type, object_id:object_id, lookup_url:"/grappelli/lookup/related/"});
+                });
+                $.each(autocomplete_fields_fk, function() {
+                    $("#id_" + this).grp_autocomplete_fk({
+                        lookup_url:"/grappelli/lookup/related/",
+                        autocomplete_lookup_url:"/grappelli/lookup/autocomplete/"
+                    });
+                });
+                $.each(autocomplete_fields_m2m, function() {
+                    $("#id_" + this).grp_autocomplete_m2m({
+                        lookup_url:"/grappelli/lookup/m2m/",
+                        autocomplete_lookup_url:"/grappelli/lookup/autocomplete/"
+                    });
+                });
+                $.each(autocomplete_fields_generic, function() {
+                    var content_type = "#id_" + this[0],
+                        object_id = "#id_" + this[1];
+                    $(object_id).grp_autocomplete_generic({
+                        content_type:content_type,
+                        object_id:object_id,
+                        lookup_url:"/grappelli/lookup/related/",
+                        autocomplete_lookup_url:"/grappelli/lookup/autocomplete/"
+                    });
+                });
+                $("a#grp-open-all").bind("click", function(){
+                    $("#grp-content .grp-collapse-handler").each(function() {
+                        $(this).parent(".grp-collapse").removeClass("grp-closed").addClass("grp-open");
+                    });   
+                });
+                $("a#grp-close-all").bind("click", function(){
+                    $("#grp-content .grp-collapse-handler").each(function() {
+                        $(this).parent(".grp-collapse").removeClass("grp-open").addClass("grp-closed");
+                    });
+                });
+                // HACK: get rid of currently/change with URL–fields. F**K!!!
+                $('p.url').each(function() {
+                    $(this).find("a").remove();
+                    var text = $(this).html();
+                    text = text.replace(/^\w*: /, "");
+                    text = text.replace(/<br>.*: /, "");
+                    $(this).html(text);
+                });
+                // HACK: rearrange inlines
+                $('div.grp-group').each(function() {
+                    var placeholder = $("fieldset.placeholder."+$(this).attr("id"));
+                    $(placeholder).replaceWith($(this));
+                });
+            });
+        })(grp.jQuery);
+    </script>
+    <script type="text/javascript" src="./Change post   Django site admin_files/core.js"></script>
+<script type="text/javascript" src="./Change post   Django site admin_files/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="./Change post   Django site admin_files/jquery.js"></script>
+<script type="text/javascript" src="./Change post   Django site admin_files/jquery.init.js"></script>
+<script type="text/javascript" src="./Change post   Django site admin_files/actions.js"></script>
+<script type="text/javascript" src="./Change post   Django site admin_files/urlify.js"></script>
+<script type="text/javascript" src="./Change post   Django site admin_files/prepopulate.js"></script>
+<script type="text/javascript" src="./Change post   Django site admin_files/tiny_mce.js"></script>
+<script type="text/javascript" src="./Change post   Django site admin_files/saved_resource(1)"></script>
+<script type="text/javascript" src="./Change post   Django site admin_files/calendar.js"></script>
+<script type="text/javascript" src="./Change post   Django site admin_files/DateTimeShortcuts.js"></script>
+
+    <!-- EXTRAHEAD -->
+    
+                    
+                    <script type="text/javascript">
+                        (function($){
+                            $(function(){
+                                try {
+                                    // focus on first form-field
+                                    $("#id_title, #id_title_0")
+                                    .eq(0).focus();
+                                } catch(e) {}
+                            });
+                        }(grp.jQuery));
+                    </script>
+                
+<link rel="stylesheet" href="http://127.0.0.1:8000/theme/static/tiny_mce/themes/simple/skins/default/ui.css"></head>
+<body class="posts-post grp-change-form">
+    <div id="grp-container">
+
+        <!-- HEADER -->
+        <header id="grp-header" class="">
+            
+
+                <!-- NAVIGATION -->
+                <div id="grp-navigation">
+                    <h1 id="grp-admin-title">Grappelli</h1>
+                    
+                        <ul id="grp-user-tools">
+                            <!-- Userlinks -->
+                            
+                                <!-- Username -->
+                                <li class="grp-user-options-container grp-collapse grp-closed">
+                                    <a href="javascript://" class="user-options-handler grp-collapse-handler">admin</a>
+                                    <ul class="grp-user-options">
+                                        <!-- Change Password -->
+                                        
+                                            
+                                            
+                                                <li><a href="http://127.0.0.1:8000/admin/password_change/">
+                                            
+                                            Change password</a></li>
+                                        
+                                        <!-- Logout -->
+                                        
+                                        
+                                            <li><a href="http://127.0.0.1:8000/admin/logout/">
+                                        
+                                        Log out</a></li>
+                                    </ul>
+                                </li>
+                                <!-- JS tests -->
+                                
+                                
+                                <!-- Documentation -->
+                                
+                                
+                            
+                        </ul>
+                    
+                    <!-- Nav-Global -->
+                    
+                </div>
+                
+                <!-- CONTEXT NAVIGATION -->
+                <div id="grp-context-navigation">
+                    <nav id="grp-breadcrumbs" class="">
+                        <header style="display:none"><h1>Breadcrumbs</h1></header>
+                        
+    
+        <ul>
+            <li><a href="http://127.0.0.1:8000/admin/">Home</a></li>
+            <li><a href="http://127.0.0.1:8000/admin/posts/">Posts</a></li>
+            <li><a href="http://127.0.0.1:8000/admin/posts/post/">Posts</a></li>
+            <li>Hacknight Stockholm 2012, make all - a report</li>
+        </ul>
+    
+
+                    </nav>
+                    <nav id="grp-page-tools">
+                        <header style="display:none"><h1>Page Tools</h1></header>
+                        
+    
+        <ul>
+            <li><a href="javascript://" class="grp-tool" id="grp-open-all" title="Open All Items">&nbsp;</a></li>
+            <li><a href="javascript://" class="grp-tool" id="grp-close-all" title="Close All Items">&nbsp;</a></li>
+        </ul>
+    
+
+                    </nav>
+                </div>
+            
+        </header>
+
+        <!-- CONTENT -->
+        <article id="grp-content" class="">
+            
+            <!-- MESSAGES -->
+            
+
+            <!-- CONTENT TITLE -->
+            <header id="grp-content-title">
+                
+                <h1>Change post</h1>
+                
+    
+        
+            <ul class="grp-object-tools">
+                
+                    <li><a href="http://127.0.0.1:8000/admin/posts/post/2/history/">History</a></li>
+                    
+                
+            </ul>
+        
+    
+
+            </header>
+
+            <!-- CONTENT-CONTAINER -->
+            <div id="grp-content-container">
+                
+    <form enctype="multipart/form-data" action="" method="post" id="post_form"><input type="hidden" name="csrfmiddlewaretoken" value="YrwLizEPtxmRCLtFsG2Iyitq04QoNQAx"> 
+        <div>
+            <!-- Popup Hidden Field -->
+            
+            
+            <!-- No Submit-Row on Top -->
+
+            <!-- Errors -->
+            
+            
+            <!-- Fieldsets -->
+            
+                
+                    
+<fieldset class="grp-module "><div class="grp-row grp-cells-1 title "><div class="l-2c-fluid l-d-4"><div class="c-1"><label for="id_title" class="required">Title</label></div><div class="c-2"><input class="vTextField" id="id_title" maxlength="255" name="title" type="text" value="Hacknight Stockholm 2012, make all - a report"><p class="grp-help">Title if the post. Can be anything up to 255 characters.</p></div></div></div><div class="grp-row grp-cells-1 slug "><div class="l-2c-fluid l-d-4"><div class="c-1"><label for="id_slug" class="required">Slug</label></div><div class="c-2"><input class="vTextField" id="id_slug" maxlength="50" name="slug" type="text" value="hacknight-stockholm-2012-make-all-a-report"></div></div></div><div class="grp-row grp-cells-1 excerpt "><div class="l-2c-fluid l-d-4"><div class="c-1"><label for="id_excerpt" class="required">Excerpt</label></div><div class="c-2"><textarea class="vLargeTextField" cols="40" id="id_excerpt" name="excerpt" rows="10">Hacknight Stockholm 2012, make all - a report Organization: Sparvn&amp;auml;stet in collaboration with the National Museum of Science Dates: August 15 - 17 2012 Location: National Museum of Science Website: http://make-all.se/ Limitations: The project is limited to one night and two days and to the theme of open technologies, net politics and social change</textarea></div></div></div><div class="grp-row grp-cells-1 html_text "><div class="l-2c-fluid l-d-4"><div class="c-1"><label for="id_html_text" class="required">Html text</label></div><div class="c-2"><textarea class="vLargeTextField" cols="40" id="id_html_text" name="html_text" rows="10" style="display: none;" aria-hidden="true">&lt;p&gt;hej&lt;/p&gt;</textarea><span id="id_html_text_container" class="mceEditor defaultSimpleSkin"><table cellpadding="0" cellspacing="0" class="mceLayout" style="width: 758px; height: 118px;"><tbody><tr><td><div class="mceIframeContainer"><iframe id="id_html_text_ifr" src="javascript:""" frameborder="0" allowtransparency="true" title="Rich Text Area" style="width: 100%; height: 100px; display: block;"></iframe></div></td></tr><tr class="last"><td class="mceToolbar mceLast" align="center"><table id="id_html_text_tools1" class="mceToolbar Enabled" cellpadding="0" cellspacing="0" align="" role="presentation" tabindex="-1" aria-disabled="false" aria-pressed="false"><tbody><tr><td class="mceToolbarStart mceToolbarStartButton"><span><!-- IE --></span></td><td style="position: relative"><a role="button" id="id_html_text_bold" href="javascript:;" class="mceButton mceButtonEnabled mce_bold" onmousedown="return false;" onclick="return false;" aria-labelledby="id_html_text_bold_voice" title="Bold (Ctrl+B)"><span class="mceIcon mce_bold"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="id_html_text_bold_voice">Bold (Ctrl+B)</span></a></td><td style="position: relative"><a role="button" id="id_html_text_italic" href="javascript:;" class="mceButton mceButtonEnabled mce_italic" onmousedown="return false;" onclick="return false;" aria-labelledby="id_html_text_italic_voice" title="Italic (Ctrl+I)"><span class="mceIcon mce_italic"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="id_html_text_italic_voice">Italic (Ctrl+I)</span></a></td><td style="position: relative"><a role="button" id="id_html_text_underline" href="javascript:;" class="mceButton mceButtonEnabled mce_underline" onmousedown="return false;" onclick="return false;" aria-labelledby="id_html_text_underline_voice" title="Underline (Ctrl+U)"><span class="mceIcon mce_underline"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="id_html_text_underline_voice">Underline (Ctrl+U)</span></a></td><td style="position: relative"><a role="button" id="id_html_text_strikethrough" href="javascript:;" class="mceButton mceButtonEnabled mce_strikethrough" onmousedown="return false;" onclick="return false;" aria-labelledby="id_html_text_strikethrough_voice" title="Strikethrough"><span class="mceIcon mce_strikethrough"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="id_html_text_strikethrough_voice">Strikethrough</span></a></td><td style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical" tabindex="-1"></span></td><td style="position: relative"><a role="button" id="id_html_text_undo" href="javascript:;" class="mceButton mceButtonEnabled mce_undo" onmousedown="return false;" onclick="return false;" aria-labelledby="id_html_text_undo_voice" title="Undo (Ctrl+Z)"><span class="mceIcon mce_undo"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="id_html_text_undo_voice">Undo (Ctrl+Z)</span></a></td><td style="position: relative"><a role="button" id="id_html_text_redo" href="javascript:;" class="mceButton mceButtonEnabled mce_redo" onmousedown="return false;" onclick="return false;" aria-labelledby="id_html_text_redo_voice" title="Redo (Ctrl+Y)"><span class="mceIcon mce_redo"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="id_html_text_redo_voice">Redo (Ctrl+Y)</span></a></td><td style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical" tabindex="-1"></span></td><td style="position: relative"><a role="button" id="id_html_text_cleanup" href="javascript:;" class="mceButton mceButtonEnabled mce_cleanup" onmousedown="return false;" onclick="return false;" aria-labelledby="id_html_text_cleanup_voice" title="Cleanup Messy Code"><span class="mceIcon mce_cleanup"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="id_html_text_cleanup_voice">Cleanup Messy Code</span></a></td><td style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical" tabindex="-1"></span></td><td style="position: relative"><a role="button" id="id_html_text_insertunorderedlist" href="javascript:;" class="mceButton mceButtonEnabled mce_insertunorderedlist" onmousedown="return false;" onclick="return false;" aria-labelledby="id_html_text_insertunorderedlist_voice" title="Insert/Remove Bulleted List" aria-pressed="false"><span class="mceIcon mce_insertunorderedlist"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="id_html_text_insertunorderedlist_voice">Insert/Remove Bulleted List</span></a></td><td style="position: relative"><a role="button" id="id_html_text_insertorderedlist" href="javascript:;" class="mceButton mceButtonEnabled mce_insertorderedlist" onmousedown="return false;" onclick="return false;" aria-labelledby="id_html_text_insertorderedlist_voice" title="Insert/Remove Numbered List" aria-pressed="false"><span class="mceIcon mce_insertorderedlist"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="id_html_text_insertorderedlist_voice">Insert/Remove Numbered List</span></a></td><td class="mceToolbarEnd mceToolbarEndButton"><span><!-- IE --></span></td></tr></tbody></table></td></tr></tbody></table></span><script type="text/javascript">tinyMCE.init({"relative_urls": false, "spellchecker_languages": "Afrikaans=af,Arabic=ar,Azerbaijani=az,Bulgarian=bg,Belarusian=be,Bengali=bn,Breton=br,Bosnian=bs,Catalan=ca,Czech=cs,Welsh=cy,Danish=da,German=de,Greek=el,+English / British English=en,Esperanto=eo,Spanish / Argentinian Spanish / Mexican Spanish / Nicaraguan Spanish / Venezuelan Spanish=es,Estonian=et,Basque=eu,Persian=fa,Finnish=fi,French=fr,Frisian=fy,Irish=ga,Galician=gl,Hebrew=he,Hindi=hi,Croatian=hr,Hungarian=hu,Interlingua=ia,Indonesian=id,Icelandic=is,Italian=it,Japanese=ja,Georgian=ka,Kazakh=kk,Khmer=km,Kannada=kn,Korean=ko,Luxembourgish=lb,Lithuanian=lt,Latvian=lv,Macedonian=mk,Malayalam=ml,Mongolian=mn,Norwegian Bokmal=nb,Nepali=ne,Dutch=nl,Norwegian Nynorsk=nn,Punjabi=pa,Polish=pl,Portuguese / Brazilian Portuguese=pt,Romanian=ro,Russian=ru,Slovak=sk,Slovenian=sl,Albanian=sq,Serbian / Serbian Latin=sr,Swedish=sv,Swahili=sw,Tamil=ta,Telugu=te,Thai=th,Turkish=tr,Tatar=tt,Udmurt=ud,Ukrainian=uk,Urdu=ur,Vietnamese=vi,Simplified Chinese / Traditional Chinese=zh", "elements": "id_html_text", "language": "en", "file_browser_callback": "djangoFileBrowser", "directionality": "ltr", "theme": "simple", "strict_loading_mode": 1, "mode": "exact"})</script></div></div></div><div class="grp-row grp-cells-1 the_text "><div class="l-2c-fluid l-d-4"><div class="c-1"><label for="id_the_text" class="required">The text</label></div><div class="c-2"><textarea class="vLargeTextField" cols="40" id="id_the_text" name="the_text" rows="10">&lt;h2&gt; Hacknight Stockholm 2012, make all - a report &lt;/h2&gt;
+
+&lt;p&gt;Intro We at the hackerspace Sparvn&amp;auml;stet decided to organize a hacknight, the first of its kind in Stockholm. A hacknight is an open, self-organized, independent and free creative technology event, conference and around the clock workshop all in one. The hacknight that we decided to name &amp;ldquo;make all&amp;rdquo; took its blueprint from hacknights organized annually by the hackerspace Forskningsavdelningen in Malm&amp;ouml;.&lt;/p&gt; &lt;div id="hacknight_1"&gt;&lt;/div&gt;
+
+&lt;p&gt;Similar community events, such as conferences and conventions link groups and individuals from different backgrounds including arts, politics and technology to the extended hacker community and discourse. One example is the Chaos Communication Congress held each year in Germany. The Congress offers talks, workshops and community activities on a wide range of hacker topics and could be described as having an exploratory (critical-creative) attitude towards technology.&lt;/p&gt;
+
+&lt;p&gt;Events like these play an important part in the culture of hackers and developers, as they offer an opportunity to meet like-minded people and exchange experiences, perspectives and knowledge. They lay the foundation for the continuation and expansion of the hacking community and enable the flow of the latest ideas, hacks and skills. In the wider context the events contribute to the discussion and understanding of the impact of technological development in society.&lt;/p&gt;
+
+&lt;p&gt;Over two days and one nights in August 2012 we realized our around the clock hacknight &amp;ldquo;make all&amp;rdquo; at the National Museum of Science.&lt;/p&gt;
+
+&lt;p&gt;The broader aim of the project was to create a public event of learning and experimenting with open technologies. We also aimed to spark discussions around crucial issues of network society and net politics like privacy, identity and security. Another specific aim was to create a space where the existing extended network of Swedish hackerspaces could come together and manifest.&lt;/p&gt;
+
+&lt;p&gt;Net politics The first step was to apply for funding from the Swedish Internet Infrastructure Foundation. Even though the application was rejected in the end, it stated our initial intention.&lt;/p&gt;
+
+&lt;p&gt;- Large amounts of personal data are being transmitted, copied and stored in the global network without the everyday user being able to understand the consequences and process of it.&lt;/p&gt;
+
+&lt;p&gt;- We believe that this constitutes a knowledge gap and that it can be seen as preventing a democratic development in society. If people are to be able to understand how technology affects their lives they must have the chance to find out how the underlying systems work.&lt;/p&gt;
+
+&lt;p&gt;- We believe that it is democratically crucial to create conversations and develop understanding, visions and practice regarding the policies and laws of the net. A good and physically graspable way to inform and learn is to experiment together.&lt;/p&gt;
+
+&lt;p&gt;We want to explore net politics, where power imbalance between different actors and interests on the Internet are considered with the networked user in mind. The power differences between more resourceful players, such as governments or large corporations create trust issues and a divide in network society when compared with ordinary citizens as technology users.&lt;/p&gt;
+
+&lt;p&gt;A way to level these differences is to increase awareness and the general network literacy by information campaigns, self-organized learning and active exploration of networked systems. Thus &amp;ldquo;make all&amp;rdquo; was to be such an event to aid the leveling the playing field of the net. This is something that also can be seen as a continued goal of the work of Sparvn&amp;auml;stet and the hacker community at large.&lt;/p&gt;
+
+&lt;p&gt;In the application we pointed out how connected technologies come with rules and laws imposed on the network users. These regulations are the company policies of for example Facebook and Google services, as well as laws and agreements like Sopa, Pipa and Acta that potentially enable a new level of monitoring capabilities and truncation of freedom of expression. These regulations affect both the user&amp;rsquo;s digital and physical identity and the data associated with them, while our digital lives are handed to the cloud. Without knowledge, better alternatives and power we are often bystanders in processes where our personal data is the core.&lt;/p&gt;
+
+&lt;p&gt;The following statement summarizes the discussion as we try to explain the purpose of &amp;ldquo;make all&amp;rdquo; to a local newspaper:&lt;/p&gt;
+
+&lt;p&gt;- Now that technologies are increasingly part of our lives it is more important than ever with free and open systems. It is about power. If you are dependent on the technology that you do not understand you put control over your life in the hands of others. Therefore it is necessary to consider how these systems really work in practice to be able to relate critically and in the end build better solutions.&lt;/p&gt;
+
+&lt;p&gt;Basically, the primary objective of the event has a net political agenda. But this is something that the player that we collaborated with does not regard as equally important.&lt;/p&gt;
+
+&lt;p&gt;National Museum of Science and Nils Olander After the application was rejected our group was still determined to carry out the project. The biggest hurdle was to find a suitable and sufficient location in Stockholm. We knew the curator Nils Olander at National Museum of Science from before, and after good initial email conversations about the possibility for the museum to host such an event we decided to meet. The meeting was held at the museum in March, where we decided to go through with the hacknight.&lt;/p&gt;
+
+&lt;p&gt;We crystallized the event further at consecutive meetings held at the museum. The basic deal was that we provide our network and organize the event and the museum provide the venue with tables and chairs, toilets and outdoor space for food and extended workshop environments, technical staff, presentation possibilities and internet access.&lt;/p&gt;
+
+&lt;p&gt;For us it was crucial to keep the event open and free of charge. Even if that went against the normal way the museum would handle such an event, this could be resolved by letting people into the event through a passageway not leading in to the main museum exhibition.&lt;/p&gt;
+
+&lt;p&gt;Nils Olander did all the heavy lifting at the museum. He was a key person as he was very committed to making the event happen, he resolved the internal politics and was active in helping out with bits and pieces of the actual event. He communicated back and forth with the museum offices on our behalf. The offices seem to be excited about the project but at the same time a little worried about their image and how it would look to have hackers organize an event at their premises.&lt;/p&gt;
+
+&lt;p&gt;The internal politics of the museum can be seen in light of their willingness to realize the event and handle the risk of being associated with the bad name given to hacking.&lt;/p&gt;
+
+&lt;p&gt;An interesting aspect was the difference in their press release and the information we gave on the website of the event. The press release of the museum emphasized experimenting and was formulated to make the event look cuter:&lt;/p&gt;
+
+&lt;p&gt;- An event for all curious people who are fascinated by disassembling, assembling, and figuring out how things work.&lt;/p&gt;
+
+&lt;p&gt;While we on the &amp;ldquo;make all&amp;rdquo; homepage indicate a strong relation between technical exploration and politics:&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Because the technology you don't understand owns you. The technology that is unexplored owns us. &amp;ldquo;&lt;/p&gt;
+
+&lt;p&gt;Behind the scenes in the corridors of the museum the word hack was discussed and it was questioned whether it would fit their image or not. But ultimately, the museum was able to let it pass into the press release, probably by emphasizing experimentation. One particular word was dropped from the press release, lock picking. While it did not make it into the press release, the lock picking station was totally open at the event itself and also one of the most popular ones. Something that points to the process of institutional policy and also a difference between what an institution is willing to say and what they are willing to let happen.&lt;/p&gt;
+
+&lt;p&gt;It should also be noted that we did not question this peculiarity. We felt pragmatic and the time was getting short for the press release to be sent. The internal discussion of the museum that was a bit fragmented by an institutional summer disconnection had slowed down the process. The approaching event made a resolution necessary and therefore disparities were solved with a smile. Differences in opinion could be resolved for the time being but would still remain problematic. The tension could be explained by the museums anxiety of being associated with hacking as an unpredictable force. This is kind of key because it obscures the real participatory potential of the net that seems to call all of us as potential hackers (net artists) and essentially what Sparvn&amp;auml;stet is aiming at. I will return to these issues of institutional anxiety and participatory potential later because this difference appears to be a major theme of my research.&lt;/p&gt;
+
+&lt;p&gt;Estimating work and extended network. We considered the project to be very feasible both because we were determined to make it happen, but also because our extended network seemed to be interested in participating both as guests, volunteers, speakers and workshop facilitators. With the help of the active community involved we felt that the possibility to make this a high quality event was solid.&lt;/p&gt;
+
+&lt;p&gt;Two of us had to work full-time for two weeks divided over four months to make the project happen. Jenny was among those who shouldered this responsibility. To run the actual event we needed about eight people taken from core members of Sparvn&amp;auml;stet and also volunteers in our extended networks for things like providing hardware and cooking.&lt;/p&gt;
+
+&lt;p&gt;We planned everything on Tuesdays at our weekly meetings at Hemliga Tr&amp;auml;dg&amp;aring;rden in Midsommarkransen, Stockholm and also on specific days by appointment. Central to the planning was the Sparvn&amp;auml;set IRC channel. Tasks could be divided and feedback from meetings with the museum could be handled in the channel. Persons in the group used their network to contact lecturers and workshop facilitators and we made a call for volunteers in our extended circle.&lt;/p&gt;
+
+&lt;p&gt;We invited people from other cities to give lectures or workshops. We paid their tickets out of our own pockets and also opened up the informal economy of lending apartments.&lt;/p&gt;
+
+&lt;p&gt;To further spread the event we published a website at make-all.se and blogged about the event at sparvnastet.org. We advertised the event via personal e-mail, various IRC channels and to tech-related groups such as GeekGirl. We also reached out to a larger audience through invitations and information at services like Facebook and Twitter. The museum made a press release and public announcements on the museum website.&lt;/p&gt;
+
+&lt;p&gt;Before the event one of us was interviewed on national radio, a small notice appeared in one of the national newspapers and there was also a longer interview in Stockholm fria tidning. Some presentations were streamed and also accessible after the event.&lt;/p&gt;
+
+&lt;p&gt;With lectures on anonymization and net politics, workshops in Arduino, lock picking and web development for activists, open tables for exploring techniques and sharing knowledge &amp;ldquo;make-all&amp;rdquo; was a way to manifest and open up the extended creative hacker culture in Sweden.&lt;/p&gt;
+
+&lt;p&gt;A practical Intensity - the actual event&lt;/p&gt;
+
+&lt;p&gt;I will now share some of my diary-notes from the actual event. People from Sparvn&amp;auml;set are named by their IRC nicknames. &lt;/p&gt;
+
+&lt;p&gt;The event is self-organized. Nobody except the staff of the museum is paid and people work and participate on a voluntary basis. It is part of the logic to keep the event open and free of charge. The fact that money is not involved helps create a non-hierarchical structure and seems to make it easy for people to join. &lt;/p&gt;
+
+&lt;p&gt;Thursday In this big assemblage of people and technology, movement is needed. I begin with taking the public transport to the museum with a lot of things that were prepared in the weeks before: the sponsored Arduinos, LED-throwies kit, Wallman kits, the hand painted &amp;ldquo;make all&amp;rdquo; flag, a Go-board, walkie talkies, a print frame for the &amp;ldquo;make all&amp;rdquo; logo and color for t-shirt printing, soldering stations, an old laptop to be used for streaming, and so on.&lt;/p&gt;
+
+&lt;p&gt;Halfway there I meet up with other Sparvn&amp;auml;stet members, Map and Jenny and they help me carry everything. At the museum we meet up with Nils Olander and the museum technician, and the group begins to work setting it all up. Coordination is minimal and informal, no division of tasks is needed, and things just get done.&lt;/p&gt;
+
+&lt;p&gt;I feel the power of the networked agency, we interact in sync, almost as in a trance, filling in where other left of, almost dancing and in professional collaboration.&lt;/p&gt;
+
+&lt;p&gt;The space is an old white painted stable with pillars and chandeliers in the high ceilings. By arranging chairs and tables we divide the room into two parts: one part is dedicated to open projects and workshops and the other to presentations at the stage. It is a conscious division between the more formal and a more informal sphere to open the room for a range of activities. There is a flow that comes from the moment. Spirit, resources and ambition. We &amp;ldquo;make all&amp;rdquo; happen easily, because there is skill and determination.&lt;/p&gt;
+
+&lt;p&gt;The large batch of Club Mate, the hacker beverage that has a great symbolic significance, is lost somewhere between Germany and Stockholm. We hope that it will find its way in time tomorrow.&lt;/p&gt;
+
+&lt;p&gt;Friday Cat fetches me by car in the morning to go pick up Adis with the party tents. At the museum we unpack the sponsored Arduino kits with great joy. Continuing on where we left of yesterday, we set up the party tent in the yard and soldering stations, Map tests the streaming possibilities, Cat makes another trip by car to get the food for the event that Suss has prepared.&lt;/p&gt;
+
+&lt;p&gt;Back at the museum Byo hooks up every table with power and plugs. 4zm set up an old Amiga computer for some old school games. Map writes a small program to control the programmable light. I set up a projector to project some visuals. Suss starts preparations for food. The whole place boils with initiative. The lost Club Mate arrives. We get an email from someone who will give some Android phones for all to play with, Map sets up his time-lapse equipment and Adis a server to hand streaming. The crazy assemblage of the event comes together over a special kind of confidence and concentrated fun.&lt;/p&gt;
+
+&lt;p&gt;When the first guests arrive at six o&amp;rsquo;clock everything is kind of set. First up is Dee who just adds to the group. She unpacks an Eggbot, a Raspberry pie and a bunch of other fun stuff from a giant suitcase on one of the large tables in the middle of the room. She starts to assemble the Eggbot that can print on round things. People from the Malm&amp;ouml; and G&amp;ouml;teborg hackerspaces arrive, setting up their projects; some more shady. More people from Sparvn&amp;auml;stet join. Hanging out is mixed with individual projects, Vojd makes software for an Arduino instrument, Jwalk and others fold paper space origami, a homemade Geiger meter clicks on the table, 4zm repairs the joystick port of the Amiga computer with help from others. With a sleeping bag I find one of the corners in the room, lazily watching the continued fun that continues into the night before I fall asleep.&lt;/p&gt;
+
+&lt;p&gt;Saturday Wake up, numb body, hard floor. There were around 20 people at the pre-hack last night; even if the turnout was not too large the people who showed up lived it up. Nils from the museum who also slept over is very happy about all the people that bring initiative.&lt;/p&gt;
+
+&lt;p&gt;The main day of the event starts slow and we become increasingly concerned about the turnout, the moment of truth. But people are really starting to pour in after lunch. 4zm presents &amp;ldquo;make all&amp;rdquo; and we open the official program. The first talk is by Snuggl on graphics processing units (GPUs), shaders and floating-point calculations and how the OpenGL API works. We then continue with a packed Arduino workshop held by Hedvig Kamp and a web publishing workshop for activists held by Plan. On the white pillars in the large room, there is a hacker quiz; any means to win is encouraged. Outside in the courtyard the party tent is busy with various kinds of activities during the event, screen printing t-shirts, kids learning soldering by making LED-throwies, an ad-hoc circuit bending workshop, other random projects and food.&lt;/p&gt;
+
+&lt;p&gt;Initiated people take part in various activities, but although few in numbers, some of the ordinary museum visitors is struggling to find a way to engage, one or two even turning at the entrance. As organizers, we fail a bit because the pedagogical explanation that we have is not enough to motivate the uncommitted and to close the gap. It&amp;rsquo;s hard to bridge the knowledge divide with information or instructions because of the limited attention span, anxiety and skill-level of the non-initiated visitor.&lt;/p&gt;
+
+&lt;p&gt;A slightly older and curious man asks what he can do and how the event works beyond talks. The workshops are open and relatively easy to engage in if you have some basic skills and interest. The open table area creates small groups that engage in their own or collaborative projects. It is clear that it is important to come prepared and motivated in order to engage in practical matter directly. &amp;ldquo;make all&amp;rdquo; provides a span of low and high threshold activities.&lt;/p&gt;
+
+&lt;p&gt;The way to learn here is to touch and explore things as they are in front of you. Getting there can be a struggle. In this way the children&amp;rsquo;s attitude can lead the way. Some children play with a robot bug on the floor, I can see that they commit totally, lost in activity and play. As a contrast, others get lost in the ideas of the ordinary museum visitor and look for specific directions and instructions of what to do. The situation is an allegory on how to learn by exploring, of institutional fail, imposing of lost guidance and how unprepared un-readiness separates the visitor from the event.&lt;/p&gt;
+
+&lt;p&gt;The talks continue into the afternoon with an introduction by Phyx about locks and how keys work. After this many people gather around the lock picking table to have a go at the locks. The lock picking really works as a great example of a low threshold activity, as all you have to do is just join in.&lt;/p&gt;
+
+&lt;p&gt;As evening approaches Martin Millnert gives a talk on how the backbone of internet works and Andreas Jonsson talks about the Tor project with a joint workshop of how to set up a Tor relay. Submarine and Monki make a practical workshop on how to make 3D objects cardboard models side by side with a workshop on how to hack public transport NFC (Near Field Communication) cards. The NFC workshop is a good example of a high threshold activity as special hardware, software, a laptop and special knowledge is needed. As with many hacking explorations, the exploration is done in a legal gray zone.&lt;/p&gt;
+
+&lt;p&gt;The lecture program ends late in the evening with a less technical presentation by Monki on the so-called Hot Line riots. In 1982, a bug in the phone system was used to create unauthorized hotlines. Spontaneous gatherings of young adults in the inner city of Stockholm lead to confrontations with the police. 30 years later the Hot Line riots can be put in perspective of the current technological context and networked disturbance like the so-called Instagram riots in G&amp;ouml;teborg in 2012.&lt;/p&gt;
+
+&lt;p&gt;The people from the circuit bending workshop suddenly enter the stage and hold a noise concert. The high volume of this concert gradually leads to people vacating the premises and most of the inner circle hit the &amp;ldquo;make all&amp;rdquo; party at Solna HQ. Others are left to close for the night.&lt;/p&gt;
+
+&lt;p&gt;Sunday We pick up our stuff. Everybody at Sparvn&amp;auml;stet seem very happy with how &amp;ldquo;make all&amp;rdquo; went down. It was a success and the event attracted around 250 participants, a very versatile and fun crowd. An evaluation with the museum is scheduled for later. At a brief meeting we decide to continue with a series of workshops on the art of exploitation and Arduino.&lt;/p&gt;
+
+&lt;p&gt;Commentary Bridge the gap An interesting way to think about &amp;ldquo;make all&amp;rdquo; is to look at it from the dichotomy of the private and the public and follow sometimes conflicting oscillations between the museum and Sparvn&amp;auml;stet. How the semi-private community of Sparvn&amp;auml;stet when it makes the event, expands into a public space. And how the public museum makes a reversed journey into the semi-private community of Sparvn&amp;auml;stets extended network. In this process the manifest and the hidden come into play as strategies to smooth the transition between the practical hacker event and the public image of it. One example is how the process of decoding the hacker context makes certain things and activities available but still concealed at the actual event. With the process of decoding, semi-private discourses can be preserved in the public event. The practical event as a manifestation in space enables a big range of activities and possibilities where the informal and the formal coexist.&lt;/p&gt;
+
+&lt;p&gt;The activities are seen from different perspectives and are dependent on the level of skill and interest a person has. There are things that could never be part of the program but that are part of the event as a hidden informal possibility. One example is the chance to explore the gray zone of the NFC workshop. Although these hidden possibilities are necessary for the event to be successful and fun for the more initiated crowd, they do not fit the formal program. On the other side of the spectrum we as organizers need to help with the decoding, to bridge the gap and lower the threshold in order to reach a larger audience. At the same time we know that too much explanation or public light may cause some people not to show up. It is a fine balance.&lt;/p&gt;
+
+&lt;p&gt;In the evaluation after the event, Sparvn&amp;auml;stet reflected on the difficulties in handling the various skill and interest levels of the crowd. There is a difference in how people engage the space: by guidance or spontaneously, from a distance or close, with a consumer / voyeur attitude or with participatory engagement. Initiated persons who know the codes of engagement were compared with the people from the general public where a certain amount of explanation was required.&lt;/p&gt;
+
+&lt;p&gt;As organizers one goal had been to see if we could increase the willingness to engage, but in this regard Sparvn&amp;auml;stet expressed a shortcoming. We were not always able to bridge the knowledge divide. As there was a limited time window for pedagogical explanation, lost translation was inevitable in some cases. We concluded that information could have been better, but were still unsure if this would reduce the gap and motivate people to start exploring.&lt;/p&gt;
+
+&lt;p&gt;The relationship between pedagogical explanation and participation is one of the realizations of the overall objective defined in the application. We stated that the event would give people new skills and enable decisions on how to use the Internet in a more informed way. The event provided this to a large extent through talks combined with workshops for practical implementation.&lt;/p&gt;
+
+&lt;p&gt;Hacker agency The frustration of not being able to bridge the knowledge gap can be seen in light of yet another convergence, how the public usually interprets the hacker agency. Public media describes hacking as a illegal malicious activity. In fact hacker exploration is vital for democratization and participation processes in a technology dependent society, because it questions otherwise hidden agendas and processes. Without the perspective and knowledge of the hacker our society would be more closed.&lt;/p&gt;
+
+&lt;p&gt;Sparvn&amp;auml;stet opens up a closed community but in the process has to try to convince the public of this point of view. We want to create an acceptance for hacker culture and identity but also maintain its radical nature.&lt;/p&gt;
+
+&lt;p&gt;One strategy to smoothen a potential conflict with the public is shown in how the museum handles and cutifies the press release (as described above). The museum rubs the edges of exploration off to make the event more acceptable in the public eye.&lt;/p&gt;
+
+&lt;p&gt;Different strategies from manifest messages to withdrawal tactics are used to try to make the meeting between the hackers and the public happen, oscillating between frustration and vision.&lt;/p&gt;
+
+&lt;p&gt;Also in regard to the private / public, hidden / manifest discussion Sparvn&amp;auml;stet acknowledged the possibility to ignore public media. We didn't want to focus on a negative image, but to focus as much as possible on the more initiated process and interpretation of the hacker agency. This is a semi-private positioning where Sparvn&amp;auml;stet does not feel the need to explain and where the withdrawal is seen as an opportunity to open up a more internal dialog. The pedagogical process of explanation in this case opens up for vulnerability and possible misunderstanding.&lt;/p&gt;
+
+&lt;p&gt;The ideological conflict around the word hacker did break through in a radio interview that we decided to participate in one day before the event. The interviewer really confirmed the general notion of the hacker with a question about the supposed malicious intent of hackers. Vojd from Sparvn&amp;auml;stet answered that a hacker is someone who creates and starts important processes through exploration.&lt;/p&gt;
+
+&lt;p&gt;This is one example of how the discourse of creativity is established and how norms of creativity and the transgressive nature of creativity come into conflict.&lt;/p&gt;
+
+&lt;p&gt;Hacking and creativity The process of hacking can be seen as creating a path in a field of possibilities. Make a smooth space out of a striated space, to use the words of Gilles Deleuze and F&amp;eacute;lix Guattari from Mille Plateaus (1980). The hack, literally, bridges a space of possibilities that was not possible prior to the hack.&lt;/p&gt;
+
+&lt;p&gt;Creativity like this changes spatial possibilities. The rearrangement will sometimes contest the power within the space. To clean the space and divide it between safe zones of private and public property, an entrepreneurial smoothing can be put into motion, perfect from the point of view of the liberal innovator and the maker. But there is also a more transgressive creativity where conflicts, grey zones, on different levels enable the making of a smoother path for the hacker and net activist. &lt;/p&gt;
+
+&lt;p&gt; Hackers and makers With &amp;ldquo;make all&amp;rdquo; two different genealogies were established. The museum seems to use &amp;ldquo;make all&amp;rdquo; as a project where they can test their agenda to establish a science center with experimental workshops and produce maker fairs. Sparvn&amp;auml;stet wants to manifest the hacker community and also has a political agenda relating to social change and network awareness. The genealogies actually add to two different conflicting narratives. On one hand, the hacker and net-activist aiming for social change, on the other the maker and entrepreneur questing for innovation.&lt;/p&gt;
+
+&lt;p&gt;In the maker agency, social change seems to be a supplement. In the agency of the hacker it seems to be an essential pathway. The maker agency is of a more moderate character because it can exist without any conflicts to existing powers. The hacker is an information freedom anarchist and opposes and goes into conflict with systems that restricts the user&amp;rsquo;s freedom.&lt;/p&gt;
+
+&lt;p&gt;It might be to overstate the difference but it is substantial how the maker and the hacker are used as agencies. In relation to the public, the maker seems to be more open and maybe nice however also with strategies to make things and processes private property. On the other hand the hacker seems to be more private but also surrounded by strategies to make information and things more public and open. Perhaps there are two different motions here, one inward and one outward between the public and the private.&lt;/p&gt;
+
+&lt;p&gt;This idea must be refined later but the maker could be seen as a vehicle of cleaning processes where the conflicts are put aside. This then produces an non-political agency that can easily be made part of a liberal public.&lt;/p&gt;
+
+&lt;p&gt;The conflict is solved temporarily by the concrete nature of the event with experimentation and exploration as the common denominator. Between the two narratives praxis establishes a middle ground as it is seen as key to bridging knowledge: by exploration, in the workshop, at the workstation, probing, tinker, making - hacking.&lt;/p&gt;
+
+&lt;p&gt;To explain these differences was important, but to strategically ignore them was key to making the event happen. Knowing the temporal nature of the event, it was possible to do so, however continued collaboration with the museum was to be more of a stretch. This is something I will return to later as Sparvn&amp;auml;stet and the museum consider more collaboration.&lt;/p&gt;
+
+&lt;p&gt;Workload On the event floor and during the process of realizing event I felt trust and confidence in the group, who worked without any explicit hierarchy like a distributed network. The voluntary and self-organizing model seems to be very efficient, and the project was a large assembly of skills and a great accomplishment.&lt;/p&gt;
+
+&lt;p&gt;In retrospect Sparvn&amp;auml;stet concluded that the work-pressure for the persons who took main responsibility was sometimes a bit too hard. In ad hoc organizations key figures have to step up and sometimes shoulder the responsibility in an un-proportional way. While it can be rewarding to lead, we agreed that strategies for sharing this responsibility could have been better.&lt;/p&gt;
+
+&lt;p&gt;When a small group of thoughtful and committed people decide to make something happen, anything is possible to accomplish. At the same time the members of the group are dependent on one another. It is possible to create intensity but in the process rest is also necessary. The low redundancy/high dependency level is a risk factor in such projects and models of organization as well as a stress factor for the most involved individuals.&lt;/p&gt;
+
+&lt;p&gt;Issues At the retrospect with the museum we all seem to agree that we want to make &amp;ldquo;make-all&amp;rdquo; an annual event. This however was a temporary success. It turns out that we are not able to combine the radical nature of the Sparvn&amp;auml;stet principle with the maker path of the museum.&lt;/p&gt;
+
+&lt;p&gt;How can we interpret this and further iterate the relationship between the maker and the hacker? This can be compared to, for example, how free software was turned into &amp;ldquo;open source&amp;rdquo;. I also want to explore strategies of privatization and public exploitation, especially in regard to the artist agency. One example is baiting people with openness and common processes.&lt;/p&gt;
+
+&lt;p&gt;Although the ad-hoc organization model works, we concluded that the strategies for sharing responsibility should have been better. The division of tasks in voluntary work can be unclear. Is it possible to find a way to even out the burden and reward without putting control mechanism in place that stifle the easy way to join? This could add to the overall question of my research on how to create and scale distributed knowledge models. Do organizations that depend heavily on key persons need another kind of model or can this limitation be resolved by my further exploration?&lt;/p&gt;
+
+&lt;p&gt;To expand this question to a wider context of work and art: the voluntary nature of our engagement should be noted as being possible because we get our income from other sources. Voluntarism in creative industries can be a way to exploit mostly young people. How does voluntarism relate to the models I am exploring?&lt;/p&gt;
+
+&lt;p&gt;The event had a relatively differentiated crowd, but 100% of the talks were held by men and up to 60% of the workshops were facilitated by men. We put in special effort into finding female speakers, but it was difficult. How can we find more concrete ways to actively create more diversity?&lt;/p&gt;
+
+&lt;p&gt;In relation to the installations that are specified as the final outcome of my artist research, is there a contradiction in the participatory format of &amp;ldquo;make all&amp;rdquo;? My method is performative; meaning that I will engage in the practice rather than represent it. But in making installations, does that mean that I have to I step out of the circle of participation?&lt;/p&gt;
+
+&lt;p&gt; Keywords Information, hacking, Internet, workshops, education, knowledge dissemination, DIY, hackspace&lt;/p&gt;
+
+&lt;p&gt;To Share Hedvigs lecture notes. Images. The time-lapse. Streaming riot.&lt;/p&gt;
+
+&lt;p&gt;Links http://hacknight.se/index2.html http://piratepad.net/Innovativkultur http://www.makerspace.se/ http://cybernormer.se/2012/08/&lt;/p&gt;
+
+&lt;p&gt;Q:\thinkpad_backup\104___08&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;</textarea></div></div></div><div class="grp-row grp-cells-1 author "><div class="l-2c-fluid l-d-4"><div class="c-1"><label for="id_author" class="required">Author</label></div><div class="c-2"><select id="id_author" name="author"><option value="">---------</option><option value="1" selected="selected">admin</option></select><a href="http://127.0.0.1:8000/admin/auth/user/add/" class="add-another" id="add_id_author" onclick="return showAddAnotherPopup(this);"><img src="./Change post   Django site admin_files/icon_addlink.gif" width="10" height="10" alt="Add Another"></a><p class="grp-help">you are posting.</p></div></div></div><div class="grp-row grp-cells-1 publish_at "><div class="l-2c-fluid l-d-4"><div class="c-1"><label for="id_publish_at_0" class="required">Publish at</label></div><div class="c-2"><p class="datetime"><input class="vDateField hasDatepicker" id="id_publish_at_0" name="publish_at_0" size="10" type="text" value="2013-10-09"><button type="button" class="ui-datepicker-trigger"></button><br><input class="vTimeField hasTimepicker" id="id_publish_at_1" name="publish_at_1" size="8" type="text" value="16:00:54"><button type="button" class="ui-timepicker-trigger"></button></p><p class="grp-help">Date and time post should become visible</p></div></div></div><div class="grp-row grp-cells-1 active "><div class="l-2c-fluid l-d-4"><div class="c-1">&nbsp;</div><div class="c-2"><input checked="checked" id="id_active" name="active" type="checkbox"><label for="id_active" class="vCheckboxLabel">Active</label><p class="grp-help">Controls whether or not this item is visable on the site.</p></div></div></div><div class="grp-row grp-cells-1 blog "><div class="l-2c-fluid l-d-4"><div class="c-1"><label for="id_blog" class="required">Blog</label></div><div class="c-2"><select id="id_blog" name="blog"><option value="">---------</option><option value="1" selected="selected">thusblog</option></select><a href="http://127.0.0.1:8000/admin/posts/blog/add/" class="add-another" id="add_id_blog" onclick="return showAddAnotherPopup(this);"><img src="./Change post   Django site admin_files/icon_addlink.gif" width="10" height="10" alt="Add Another"></a><p class="grp-help">What blog does the post belong to?</p></div></div></div><div class="grp-row grp-cells-1 type "><div class="l-2c-fluid l-d-4"><div class="c-1"><label for="id_type" class="required">Type</label></div><div class="c-2"><select id="id_type" name="type"><option value="">---------</option><option value="C">Case</option><option value="P">Project</option><option value="D">Definition</option><option value="W" selected="selected">Workshops</option><option value="1">Pages</option></select></div></div></div></fieldset>
+                
+            
+            
+            
+            
+            <!-- Inlines -->
+            
+                
+            
+            
+            
+            
+            <!-- Submit-Row -->
+            
+<footer class="grp-module grp-submit-row grp-fixed-footer">
+    <header style="display:none"><h1>Submit Options</h1></header>
+    <ul>
+        
+            <li class="grp-float-left"><a href="http://127.0.0.1:8000/admin/posts/post/2/delete/" class="grp-button grp-delete-link">Delete</a></li>
+        
+        
+        	<li><input type="submit" value="Save" class="grp-button grp-default" name="_save"></li>
+        
+        
+        
+        	<li><input type="submit" value="Save and add another" class="grp-button" name="_addanother"></li>
+        
+        
+        	<li><input type="submit" value="Save and continue editing" class="grp-button" name="_continue"></li>
+        
+    </ul>
+</footer>
+
+            
+            
+            
+            <!-- JS for prepopulated fields -->
+            
+
+<script type="text/javascript">
+(function($) {
+    var field;
+
+
+})(grp.jQuery);
+</script>
+
+            
+        </div>
+    </form>
+
+            </div>
+
+        </article>
+        
+        <!-- FOOTER -->
+        
+
+    </div>
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div><div id="ui-timepicker" class="module" style="position: absolute; display: none;"></div></body></html>
