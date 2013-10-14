@@ -1,0 +1,8 @@
+
+.timeline_horisontal_cel_name {
+	width:20px;
+	height:5px;
+	border-left: 1px solid #EEEEEE;
+	border-top: 1px solid #EEEEEE;
+	border-right: 1px solid #EEEEEE;
+}
