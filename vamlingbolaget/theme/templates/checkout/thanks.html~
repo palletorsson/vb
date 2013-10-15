@@ -19,7 +19,7 @@
     {% endif %}
 
         <legend> <a href="/products/">{% trans "Fortsätt att utforska utbudet!" %}</a> </legend>
-		: {{ message }} 
+		:{{ message }} 
 
 
 {% endblock %}
