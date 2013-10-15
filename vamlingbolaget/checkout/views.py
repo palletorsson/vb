@@ -155,6 +155,7 @@ def success(request):
     )
     try:
         orderref = request.GET.get('orderRef', None)
+        print orderref
     except:
         pass
 
@@ -163,7 +164,8 @@ def success(request):
         if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0'):
             cart_id = _cart_id(request)
             try:
-                  order = Checkout.objects.get(payex_key=orderref)
+                order = Checkout.objects.get(payex_key=orderref)
+                print order
             except:
                 order = 1
             if (order != 1):
