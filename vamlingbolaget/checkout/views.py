@@ -180,7 +180,7 @@ def success(request):
                 order = Checkout.objects.get(payex_key=orderref)
             except:
                 order = 1
-            if (order != 1 and order.status == 'P'):
+            if (order != 1 and order.status == 'O'):
                 cart = Cart.objects.get(key = cart_id)
                 cartitems_key = cart.id
                 cartitems = CartItem.objects.filter(cart = cartitems_key)
@@ -205,7 +205,7 @@ def success(request):
                 }, context_instance=RequestContext(request))
 
             else:
-                message = u"Igen aktuell order funnen."
+                message = u"Shoppa vidare"
                 return render_to_response('checkout/thanks.html', {
                     'message': message
                 }, context_instance=RequestContext(request))
