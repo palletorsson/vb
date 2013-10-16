@@ -99,7 +99,7 @@ def checkout_test(request):
             order_numb = random.randrange(0, 111111, 3)
             new_order.order_number = order_numb
             msg = msg + '--------------------------------------------------------------------------------- \n'
-            msg = msg + 'Ditt ordernummer: '+ str(order_numb)
+            msg = msg + 'Ditt ordernummer: '+ str(order_numb) +'\n'
 
             new_order.session_key = _cart_id(request)
 
@@ -138,8 +138,8 @@ def checkout_test(request):
                 )
 
                 PayExRefKey = response['orderRef']
+
                 new_order.payex_key = PayExRefKey
-                msg = msg + 'Ditt PayEx referensnummer: '+ str(PayExRefKey)
                 new_order.order = msg
                 new_order.save()
                 return HttpResponseRedirect(response['redirectUrl'])
@@ -164,7 +164,7 @@ def success(request):
     )
     try:
         orderref = request.GET.get('orderRef', None)
-        print orderref
+
     except:
         pass
 
@@ -184,6 +184,12 @@ def success(request):
                 cart.delete()
                 _new_cart_id(request)
                 message = "Tack for din order"
+                try:
+                    transnumber = response['transactionNumber']
+                    order.order = order.order + 'PayEx transaktion: ' + str(transnumber)
+                    order.save()
+                except:
+                    pass
                 #to = [order.email, 'info@vamlingbolaget.com']
                 #mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.order, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
@@ -281,7 +287,7 @@ def checkout(request):
             for item in cartitems:
                 msg = msg + 'produkt '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
-                print item.pattern_2
+
                 if (item.pattern_2 != 0):
                     msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' (utsida)\n'
                     msg = msg + 'och ' + item.pattern_2.name + ', ' + item.color_2.name + ' (insida)\n'
