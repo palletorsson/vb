@@ -187,7 +187,7 @@ def success(request):
                 try:
                     transnumber = response['transactionNumber']
                     order.order = order.order + 'PayEx transaktion: ' + str(transnumber) + '\n'
-                    order.order = order.order + 'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
+                    order.order = order.order + 'kontakta garna oss pa telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
                     order.save()
                 except:
                     pass
@@ -207,7 +207,7 @@ def success(request):
 
 
         else:
-            message = u"Du genomförde inte ditt köp."
+            message = u"Du genomforde inte ditt kop."
             return render_to_response('checkout/thanks.html', {
                 'message': message
             }, context_instance=RequestContext(request))
