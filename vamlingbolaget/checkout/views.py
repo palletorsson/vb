@@ -1,3 +1,5 @@
+#-*-coding:utf-8-*-
+
 from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -24,6 +26,7 @@ def checkout_test(request):
     handling = returntotal['handling']
     form = CheckoutForm()
     returntotal['form'] = form
+
 
     if request.method == 'POST':
         form = CheckoutForm(request.POST)
@@ -151,6 +154,7 @@ def checkout_test(request):
         'handling': handling,
         'cartitems': cartitems,
         'bargains' : bargains,
+
         },
         context_instance=RequestContext(request))
 
@@ -207,9 +211,10 @@ def success(request):
 
 
         else:
-            message = u"- Betalningen avslogs eller stoppades."
+            message = u"- Betalningen avslog eller avbröts."
             return render_to_response('checkout/thanks.html', {
-                'message': message
+                'message': message,
+                'cancel':1,
             }, context_instance=RequestContext(request))
     else:
         message = "Skicka en order eller utforska utbudet"
@@ -239,7 +244,7 @@ def thanks(request):
         _new_cart_id(request)
         message = "Tack for din order"
     else:
-        message = "Skicka en order"
+        message = u"Lägg till något i din shoppinglåda och gör en beställning."
         return render_to_response('checkout/thanks.html', {
             'message': message
         }, context_instance=RequestContext(request))
@@ -349,5 +354,6 @@ def checkout(request):
         'handling': handling,
         'cartitems': cartitems,
         'bargains' : bargains,
+
         },
         context_instance=RequestContext(request))
