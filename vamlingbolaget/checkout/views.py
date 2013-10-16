@@ -186,7 +186,8 @@ def success(request):
                 message = "Tack for din order"
                 try:
                     transnumber = response['transactionNumber']
-                    order.order = order.order + 'PayEx transaktion: ' + str(transnumber)
+                    order.order = order.order + 'PayEx transaktion: ' + str(transnumber) + '\n'
+                    order.order = order.order + 'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
                     order.save()
                 except:
                     pass
