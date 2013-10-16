@@ -180,7 +180,7 @@ def success(request):
                 order = Checkout.objects.get(payex_key=orderref)
             except:
                 order = 1
-            if (order != 1):
+            if (order != 1 and order.status == 'P'):
                 cart = Cart.objects.get(key = cart_id)
                 cartitems_key = cart.id
                 cartitems = CartItem.objects.filter(cart = cartitems_key)
@@ -192,6 +192,7 @@ def success(request):
                     transnumber = response['transactionNumber']
                     order.order = order.order + 'PayEx transaktion: ' + str(transnumber) + '\n'
                     order.order = order.order + 'Om du vill kontakta oss pa telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
+                    order.status = 'P'
                     order.save()
                 except:
                     pass
