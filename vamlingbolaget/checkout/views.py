@@ -180,6 +180,13 @@ def success(request):
                 order = Checkout.objects.get(payex_key=orderref)
             except:
                 order = 1
+
+            if (order == 1):
+                message = u'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
+                return render_to_response('checkout/thanks.html', {
+                    'message': message,
+                }, context_instance=RequestContext(request))
+
             if (order != 1 and order.status == 'O'):
                 cart = Cart.objects.get(key = cart_id)
                 cartitems_key = cart.id
@@ -214,7 +221,15 @@ def success(request):
 
 
         else:
-            message = u"- Betalningen avslog eller avbröts."
+            try:
+                order = Checkout.objects.get(payex_key=orderref)
+            except:
+                order = 1
+
+            if(order == 1):
+                message = u"- Det finns inte någon sådan beställning"
+            else:
+                message = u"- Betalningen avslogs eller avbröts."
             return render_to_response('checkout/thanks.html', {
                 'message': message,
                 'cancel':1,
