@@ -18,8 +18,9 @@
         <pre>{% trans "Vi hör av oss om vi har några frågor" %}. </pre>
     {% endif %}
 
-        <legend> <a href="/products/">{% trans "Fortsätt att utforska utbudet!" %}</a> </legend>
-		: {{ message }} 
+        <legend> <a href="/products/">{% trans "Fortsätt att utforska utbudet!" %}</a>
+            {% trans "eller går till er" %} <a href="/cart/show/" id="token">  {% trans "Shoppinglåda" %} </a></legend>
+		: {{ message }}
 
 
 {% endblock %}
