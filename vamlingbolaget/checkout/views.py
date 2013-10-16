@@ -99,7 +99,7 @@ def checkout_test(request):
             order_numb = random.randrange(0, 111111, 3)
             new_order.order_number = order_numb
             msg = msg + '--------------------------------------------------------------------------------- \n'
-            msg = msg + 'Ditt ordernummer: '+ order_numb
+            msg = msg + 'Ditt ordernummer: '+ str(order_numb)
 
             new_order.session_key = _cart_id(request)
 
@@ -139,7 +139,7 @@ def checkout_test(request):
 
                 PayExRefKey = response['orderRef']
                 new_order.payex_key = PayExRefKey
-                msg = msg + 'Ditt PayEx referensnummer: '+ PayExRefKey
+                msg = msg + 'Ditt PayEx referensnummer: '+ str(PayExRefKey)
                 new_order.order = msg
                 new_order.save()
                 return HttpResponseRedirect(response['redirectUrl'])
