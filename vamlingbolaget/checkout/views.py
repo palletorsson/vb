@@ -228,8 +228,13 @@ def success(request):
 
             if(order == 1):
                 message = u"- Det finns inte någon sådan beställning"
+                return render_to_response('checkout/thanks.html', {
+                'message': message,
+                }, context_instance=RequestContext(request))
+
             else:
                 message = u"- Betalningen avslogs eller avbröts."
+
             return render_to_response('checkout/thanks.html', {
                 'message': message,
                 'cancel':1,
