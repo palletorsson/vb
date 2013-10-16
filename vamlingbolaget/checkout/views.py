@@ -89,10 +89,12 @@ def checkout_test(request):
             msg = msg + '--------------------------------------------------------------------------------- \n'
             msg = msg + ' \n'
             msg = msg + '* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
+
             if (paymentmethod == 'P'):
                 msg = msg + '* Du betalar med postforskatt. \n'
             if (paymentmethod == 'C'):
                 msg = msg + '* Du har valt kortbetalning. \n'
+
             msg = msg + '- Tack!\n'
             order_numb = random.randrange(0, 111111, 3)
             new_order.order_number = order_numb
