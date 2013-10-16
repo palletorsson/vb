@@ -207,7 +207,7 @@ def success(request):
 
 
         else:
-            message = u"Betalningen avslogs eller stoppas."
+            message = u"- Betalningen avslogs eller stoppades."
             return render_to_response('checkout/thanks.html', {
                 'message': message
             }, context_instance=RequestContext(request))
