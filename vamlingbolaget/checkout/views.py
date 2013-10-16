@@ -207,7 +207,7 @@ def success(request):
 
 
         else:
-            message = u"Igen aktuell order funnen."
+            message = u"Du genomförde inte ditt köp."
             return render_to_response('checkout/thanks.html', {
                 'message': message
             }, context_instance=RequestContext(request))
