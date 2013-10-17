@@ -145,6 +145,7 @@ def checkout_test(request):
 
                 new_order.payex_key = PayExRefKey
                 new_order.order = msg
+                new_order.message = new_order.message + '\n' + '1 :Payment Log: Payment request sent.'
                 new_order.save()
                 return HttpResponseRedirect(response['redirectUrl'])
 
@@ -196,10 +197,12 @@ def success(request):
                 cart.delete()
                 _new_cart_id(request)
                 message = "Tack for din order"
+                order.message = order.message + '\n' + u'Log Success: old cart removed'
 
                 try:
                     transnumber = response['transactionNumber']
                     order.order = order.order + 'PayEx transaktion: ' + str(transnumber) + '\n'
+                    order.message = order.message + '\n' + '2: Log Success, PayEx transaktion: ' + str(transnumber) + '\n'
                 except:
                     pass
                 #to = [order.email, 'info@vamlingbolaget.com']
@@ -207,6 +210,7 @@ def success(request):
 
                 order.order = order.order + u'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
                 order.status = 'P'
+                order.message = order.message + '\n' + u'3: Log Success: Mail sent to mail adress' + order.email
                 order.save()
 
                 return render_to_response('checkout/thanks.html', {
@@ -232,8 +236,9 @@ def success(request):
                 return render_to_response('checkout/thanks.html', {
                 'message': message,
                 }, context_instance=RequestContext(request))
-
             else:
+                order.message = order.message + '\n' + u'3: Cancel log: u"- Betalningen avslogs eller avbröts.'
+                order.save()
                 message = u"- Betalningen avslogs eller avbröts."
 
             return render_to_response('checkout/thanks.html', {
@@ -259,14 +264,11 @@ def thanks(request):
     except:
         order = 1
     if (order != 1):
-        cart = Cart.objects.get(key = cart_id)
-        cartitems_key = cart.id
-        cartitems = CartItem.objects.filter(cart = cartitems_key)
-        cartitems.delete()
-        cart.delete()
-
+        order,message = order.message + '\n' + '4: Log Thanks: thank you message displayed.'
+        order.save()
         _new_cart_id(request)
         message = "Tack for din order"
+
     else:
         message = u"Lägg till något i din shoppinglåda och gör en beställning."
         return render_to_response('checkout/thanks.html', {
@@ -405,8 +407,7 @@ def payexCallback(request):
         order = 1
 
     if (order != 1):
-        order.message = order.message + 'PayEx transaktionNumber: ' + str(transactionNumber) + ' orderRef: ' + str(orderRef) +'\n'
-        order.message = order.message + str(raw_request)
+        order.message = order.message + '\n' + '4; Payex callback Log: PayEx transaktionNumber: ' + str(transactionNumber) + ' orderRef: ' + str(orderRef) +'\n'
         order.save()
 
     return HttpResponse(status=200)
