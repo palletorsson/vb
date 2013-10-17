@@ -238,7 +238,7 @@ def success(request):
                 'message': message,
                 }, context_instance=RequestContext(request))
             else:
-                order.message = order.message + '\n' + u'3: Cancel log: u"- Betalningen avslogs eller avbröts.'
+                order.message = order.message + '\n' + u'2: Cancel log: "- Betalningen avslogs eller avbröts.'
 
                 order.save()
                 message = u"- Betalningen avslogs eller avbröts."
