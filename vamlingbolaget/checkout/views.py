@@ -385,7 +385,7 @@ def checkout(request):
 def payexCallback(request):
     #  transactionRef =<String(32)>&transactionNumber=<Integer(7-9)>&orderRef=<String(32)>
     raw_request = request
-    print raw_request
+
     try:
         transactionRef = request.GET['transactionRef']
     except:
@@ -397,16 +397,16 @@ def payexCallback(request):
     try:
         orderRef = request.GET['orderRef']
     except:
-        orderRef = 0
+        orderRef = 'None'
 
-
-    print transactionRef, transactionNumber, orderRef
     try:
         order = Checkout.objects.get(payex_key=orderRef)
     except:
         order = 1
+
     if (order != 1):
         order.message = order.message + 'PayEx transaktionNumber: ' + str(transactionNumber) + ' orderRef: ' + str(orderRef) +'\n'
+        order.message = order.message + str(raw_request)
         order.save()
 
     return HttpResponse(status=200)
