@@ -387,15 +387,15 @@ def payexCallback(request):
     raw_request = request
     print raw_request
     try:
-        transactionRef = request['transactionRef']
+        transactionRef = request.GET['transactionRef']
     except:
         transactionRef = 'None'
     try:
-        transactionNumber = request['transactionNumber']
+        transactionNumber = request.GET['transactionNumber']
     except:
         transactionNumber = 0
     try:
-        orderRef = request['orderRef']
+        orderRef = request.GET['orderRef']
     except:
         orderRef = 0
 
