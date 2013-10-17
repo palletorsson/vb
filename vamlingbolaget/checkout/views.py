@@ -145,8 +145,8 @@ def checkout_test(request):
 
                 new_order.payex_key = PayExRefKey
                 new_order.order = msg
-                new_order.message = new_order.message + '\n' + '1 :Payment Log: Payment request sent.'
-                print new_order.message
+                new_order.message = new_order.message + '\n' + u'1 :Payment Log: Payment request sent.'
+                print 'message: ' + new_order.message
                 new_order.save()
                 return HttpResponseRedirect(response['redirectUrl'])
 
