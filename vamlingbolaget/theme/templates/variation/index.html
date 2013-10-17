@@ -15,7 +15,7 @@
 
                             <img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}"  />
                             <br/>
-                            <span class='image_description'>
+                            <div class='image_description'>
                                 {{ product.article.name }}<br/>
                                 {% trans "Pris" %} :
                                 {%if product.article.discount%}
@@ -23,7 +23,7 @@
                                 {%else%}
                                     {{ product.article.price }} SEK
                                 {%endif%}
-                            </span>
+                            </div>
 
                     {% endwith %}
                 </a>
