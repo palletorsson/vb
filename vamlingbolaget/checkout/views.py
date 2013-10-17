@@ -383,11 +383,23 @@ def checkout(request):
         context_instance=RequestContext(request))
 
 def payexCallback(request):
+    #  transactionRef =<String(32)>&transactionNumber=<Integer(7-9)>&orderRef=<String(32)>
     raw_request = request
     print raw_request
-    transactionRef = request['transactionRef']
-    transactionNumber = request['transactionNumber']
-    orderRef = request['orderRef']
+    try:
+        transactionRef = request['transactionRef']
+    except:
+        transactionRef = 'None'
+    try:
+        transactionNumber = request['transactionNumber']
+    except:
+        transactionNumber = 0
+    try:
+        orderRef = request['orderRef']
+    except:
+        orderRef = 0
+
+
     print transactionRef, transactionNumber, orderRef
     try:
         order = Checkout.objects.get(payex_key=orderRef)
