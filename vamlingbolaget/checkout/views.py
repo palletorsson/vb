@@ -380,3 +380,6 @@ def checkout(request):
 
         },
         context_instance=RequestContext(request))
+
+def payexCallback(request):
+    pass

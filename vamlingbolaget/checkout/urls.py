@@ -6,6 +6,7 @@ urlpatterns = patterns('checkout.views',
     url(r'thanks/', 'thanks'),
     url(r'success/', 'success'),
     url(r'cancel/', 'cancel'),
+    url(r'payexCallback/', 'payexCallback'),
 )
 
 

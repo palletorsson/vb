@@ -5,16 +5,13 @@
 		background: #fff; // yellow;
 	}
 
-	.img_container img {
-		width:98%;
-	}
-
 	.leftside{
 		width: 250px;
 		padding-left: 3px;
 		padding-top: 4px;
 		margin-right: 1px;
 	}
+
 	.img_container img {
 		width:96%;
 	}
@@ -71,9 +68,6 @@
 		margin-top: 0px;
 		min-height: 450px;
 	}
-	.img_container img {
-		width:98%;
-	}
 
 	.img_container img {
 		width:96%;
@@ -129,6 +123,7 @@
 	.container{
 	   margin-left:0;
 	}
+
 	.content {
 		margin-top: 0px;
 		min-height: 450px;
@@ -152,9 +147,6 @@
 		min-width: 260px;
 	}
 
-	.img_container img {
-		width:98%;
-	}
 
 	.collection_list {
 		float:left;
