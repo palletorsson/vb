@@ -227,10 +227,10 @@
     <a href="/products/{{product.pk}}">
 
         {% with product.image_set.all|first as image %}
-        <div class="collection_list img_container" >
-            <img src="{% version image.image 'medium' %}" alt="{{ product.article.name }}" class="imgborder"  />
+             <div class="collection_list img_container" >
+            <img src="{% version image.image 'medium' %}" alt="{{ product.article.name }}"  />
             <br/>
-            <span class='image_description'>
+            <div class='image_description'>
                 {{ product.article.name }}<br/>
                 {% trans "Pris" %} :
                 {%if product.article.discount%}
@@ -238,7 +238,7 @@
                 {%else%}
                     {{ product.article.price }}
                 {%endif%}
-            </span>
+            </div>
         </div>
         {% endwith %}
     </a>
