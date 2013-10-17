@@ -210,7 +210,7 @@ def success(request):
 
                 order.order = order.order + u'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
                 order.status = 'P'
-                order.message = order.message + '\n' + u'4: Log Success: Mail sent to mail adress' + order.email
+                order.message = order.message + '\n' + u'4: Log Success: Mail sent to mail adress : ' + order.email
 
                 order.save()
 
