@@ -4,6 +4,7 @@ from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.core import mail
 from cart.views import _cart_id, totalsum, _new_cart_id, getnames
@@ -382,4 +383,18 @@ def checkout(request):
         context_instance=RequestContext(request))
 
 def payexCallback(request):
-    pass
+    raw_request = request
+    print raw_request
+    transactionRef = request['transactionRef']
+    transactionNumber = request['transactionNumber']
+    orderRef = request['orderRef']
+    print transactionRef, transactionNumber, orderRef
+    try:
+        order = Checkout.objects.get(payex_key=orderRef)
+    except:
+        order = 1
+    if (order != 1):
+        order.message = order.message + 'PayEx transaktionNumber: ' + str(transactionNumber) + ' orderRef: ' + str(orderRef) +'\n'
+        order.save()
+
+    return HttpResponse(status=200)
