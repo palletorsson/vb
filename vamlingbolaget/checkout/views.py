@@ -398,7 +398,7 @@ def checkout(request):
 def payexCallback(request):
     #  transactionRef =<String(32)>&transactionNumber=<Integer(7-9)>&orderRef=<String(32)>
     # also check the ip
-    # ip = request.META['REMOTE_ADDR']
+    ip = request.META['REMOTE_ADDR']
     raw_request = request
 
     try:
@@ -420,8 +420,8 @@ def payexCallback(request):
         order = 1
 
     if (order != 1):
-        order.message = order.message + '\n' + '4; Payex callback Log: PayEx transaktionNumber: ' + str(transactionNumber) + ' orderRef: ' + str(orderRef) +'\n'
-        print order.message
+        order.message = order.message + '\n' + '4; Payex callback Log: PayEx transaktionNumber, transactionRef: ' + str(transactionNumber) + ', ' + str(transactionRef) + ' orderRef: ' + str(orderRef) + ', from ip: '+ ip + '\n'
+
         order.save()
 
     return HttpResponse(status=200)
