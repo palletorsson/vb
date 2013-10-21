@@ -184,7 +184,7 @@ def success(request):
 
     if orderref:
         response = service.complete(orderRef=orderref)
-        if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0' and ip == '82.115.146.10'):
+        if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0' and ip == '81.94.172.6'):
             cart_id = _cart_id(request)
             try:
                 order = Checkout.objects.get(payex_key=orderref)
