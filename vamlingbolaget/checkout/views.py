@@ -178,6 +178,7 @@ def success(request):
 
     try:
         ip = request.META['REMOTE_ADDR']
+        print ip
     except:
         ip = 'None'
 
