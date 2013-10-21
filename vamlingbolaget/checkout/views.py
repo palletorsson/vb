@@ -162,6 +162,8 @@ def checkout_test(request):
 
 def success(request):
     # if payex Transaction was successfully performed
+    # ip = request.META['REMOTE_ADDR']
+    # add to main check
 
     service = PayEx(
         merchant_number=settings.PAYEX_MERCHANT_NUMBER,
@@ -174,9 +176,14 @@ def success(request):
     except:
         pass
 
+    try:
+        ip = request.META['REMOTE_ADDR']
+    except:
+        ip = 'None'
+
     if orderref:
         response = service.complete(orderRef=orderref)
-        if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0'):
+        if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0' and ip == '82.115.146.10'):
             cart_id = _cart_id(request)
             try:
                 order = Checkout.objects.get(payex_key=orderref)
@@ -389,6 +396,8 @@ def checkout(request):
 
 def payexCallback(request):
     #  transactionRef =<String(32)>&transactionNumber=<Integer(7-9)>&orderRef=<String(32)>
+    # also check the ip
+    # ip = request.META['REMOTE_ADDR']
     raw_request = request
 
     try:
