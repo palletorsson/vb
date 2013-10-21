@@ -164,7 +164,7 @@ def success(request):
     # if payex Transaction was successfully performed
     # ip = request.META['REMOTE_ADDR']
     # add to main check
-    print request
+    # print request
 
     service = PayEx(
         merchant_number=settings.PAYEX_MERCHANT_NUMBER,
@@ -185,6 +185,7 @@ def success(request):
 
     if orderref:
         response = service.complete(orderRef=orderref)
+        print response
         if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0' and ip == '81.94.172.6'):
             cart_id = _cart_id(request)
             try:
