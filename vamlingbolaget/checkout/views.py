@@ -164,6 +164,7 @@ def success(request):
     # if payex Transaction was successfully performed
     # ip = request.META['REMOTE_ADDR']
     # add to main check
+    print request
 
     service = PayEx(
         merchant_number=settings.PAYEX_MERCHANT_NUMBER,
