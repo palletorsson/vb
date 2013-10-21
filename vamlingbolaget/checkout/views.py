@@ -179,14 +179,12 @@ def success(request):
 
     try:
         ip = request.META['REMOTE_ADDR']
-        print ip
     except:
         ip = 'None'
 
     if orderref:
         response = service.complete(orderRef=orderref)
-        print response
-        if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0' and ip == '81.94.172.6'):
+        if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0'):
             cart_id = _cart_id(request)
             try:
                 order = Checkout.objects.get(payex_key=orderref)
