@@ -67,6 +67,7 @@ def detail(request, pk):
         patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
         sizes = Size.objects.filter(quality=product.article.quality)
         colorsandpattern = PatternAndColor.objects.filter(active=True, quality=quality)
+        print colorsandpattern
 
     except:
         raise Http404
