@@ -213,8 +213,8 @@ def success(request):
                     order.message = order.message + '\n' + '3: Log Success, PayEx transaktion: ' + str(transnumber)
                 except:
                     pass
-                #to = [order.email, 'info@vamlingbolaget.com']
-                #mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.order, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                to = [order.email, 'info@vamlingbolaget.com']
+                mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.order, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
                 order.order = order.order + u'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
                 order.status = 'P'
