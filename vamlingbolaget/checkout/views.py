@@ -263,7 +263,16 @@ def success(request):
 
 
 def cancel(request):
-    # fill the form with the same info
+    cart_id = _cart_id(request)
+    try:
+        order = Checkout.objects.get(session_key=cart_id)
+    except:
+        order = 1
+    if(order == 1):
+        pass
+    else:
+        order.delete()
+
     return HttpResponseRedirect('/checkout/')
 
 def thanks(request):
@@ -275,7 +284,6 @@ def thanks(request):
         order = 1
     if (order != 1):
         order.message = order.message + '\n' + '5: Log Thanks: thank you message displayed.'
-
         order.save()
         _new_cart_id(request)
         message = "Tack for din order"
