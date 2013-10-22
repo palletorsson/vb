@@ -19,7 +19,7 @@ def first_page(request):
 
 
 def index(request):
-    products = Variation.objects.filter(active=True, order__lte=100).order_by('article__quality', 'order')
+    products = Variation.objects.filter(active=True, order__lte=100).order_by('-article__quality', 'order')
     qualities = Quality.objects.filter(active=True)
     types = Type.objects.filter(active=True)
     return render_to_response('variation/index.html',
