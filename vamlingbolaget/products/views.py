@@ -62,6 +62,7 @@ def detail(request, pk):
         pattern_id = product.pattern.order
         qualities = Quality.objects.filter(active = True)
         quality = product.article.quality.order
+        print quality
         types = Type.objects.filter(active = True)
         colors = Color.objects.filter(active=True, quality = product.article.quality)
         patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
