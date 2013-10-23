@@ -29,6 +29,9 @@ def _cart_id(request):
         request.session[CART_ID_SESSION_KEY] = _generate_cart_id()
     return request.session[CART_ID_SESSION_KEY]
 
+def _rest_cart_id(request):
+    request.session[CART_ID_SESSION_KEY] = ''
+
 def _new_cart_id(request):
     request.session[CART_ID_SESSION_KEY] = _generate_cart_id()
 

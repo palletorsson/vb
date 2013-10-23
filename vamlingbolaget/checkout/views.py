@@ -111,14 +111,14 @@ def checkout(request):
             msg = msg + 'Ditt ordernummer: '+ str(order_numb) +'\n'
 
             new_order.session_key = _cart_id(request)
-
+            print new_order.session_key
             new_order.paymentmethod = paymentmethod
 
             if (paymentmethod == 'P'):
                 new_order.order = msg
                 new_order.save()
-                to = [request.POST['email'], 'info@vamlingbolaget.com']
-                mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                #to = [request.POST['email'], 'info@vamlingbolaget.com']
+                #mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
                 return HttpResponseRedirect('thanks/')
 
             if (paymentmethod == 'C'):
@@ -283,6 +283,7 @@ def cancel(request):
 
 def thanks(request):
     cart_id = _cart_id(request)
+    print cart_id
 
     try:
         order = Checkout.objects.get(session_key=cart_id)
