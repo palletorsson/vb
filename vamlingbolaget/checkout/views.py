@@ -15,7 +15,7 @@ from models import Checkout
 import random
 from payex.service import PayEx
 
-def checkout_test(request):
+def checkout(request):
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
@@ -75,7 +75,7 @@ def checkout_test(request):
                 msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
             msg = msg + '\n'
-            
+
             if (totalprice > 3000):
                 msg = msg + 'Frakt och hantering: 0 SEK \n'
             else:
@@ -154,7 +154,7 @@ def checkout_test(request):
                 new_order.save()
                 return HttpResponseRedirect(response['redirectUrl'])
 
-    return render_to_response('checkout/checkout_test.html', {
+    return render_to_response('checkout/checkout.html', {
         'form': form,
         'totalprice': totalprice,
         'totalitems': totalitems,
@@ -304,7 +304,7 @@ def thanks(request):
         'message': message
     }, context_instance=RequestContext(request))
 
-def checkout(request):
+def checkout_POD(request):
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()

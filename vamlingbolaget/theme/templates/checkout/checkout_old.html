@@ -13,12 +13,13 @@
 {% endblock %}
 
 {% block allcontent %}
+
 {%if cartitems %}
     <table class="table table-bordered table-striped" >
     <thead>
     <tr>
         <th>
-                <span> {% trans "Antal" %}  </span>
+                <span> {% trans "Antal" %} </span>
         </th>
         <th>
                 <span> {% trans "Artikel" %}   </span>
@@ -43,7 +44,7 @@
         <tr>
         <td>
             <div>
-                <span> {{ item.quantity }} {% if item.article.type.order == 7 %} meter {%endif%} </span>
+                <span> {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span>
             </div>
         </td>
         <td>
@@ -72,15 +73,17 @@
         </td>
             <td>
                 <div>
-                    <span>{% if item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%}</span>
+                    <span>{% if item.article.type.order == 8 or  item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%}</span>
                 </div>
             </td>
             <td>
             <div>
                 {%if item.article.discount%}
-                <span class="discount"> {{ item.article.f_discount }} </span>
+                <span class="discount"> {{ item.article.f_discount }} {%trans "SEK"%} </span>
+                {%elif item.article.type.order == 8 %}
+                    {{item.totalitemprice}} {%trans "SEK"%}
                 {%else%}
-                {{ item.article.price }}
+                {{ item.article.price }} {%trans "SEK"%}
                 {%endif%}
             </div>
         </td>
@@ -121,7 +124,7 @@
             {% trans "Leverans" %}:
         </td>
         <td id="handling">
-            {{ handling }}
+            {{ handling }}  {%trans "SEK"%}
         </td>
     </tr>
     <tr>
@@ -129,7 +132,7 @@
             {% trans "Total pris" %} :
         </th>
         <th id="totalprice">
-            {{ totalprice }} SEK
+            {{ totalprice }}  {%trans "SEK"%}
         </th>
     </tr>
     {% else %}
@@ -242,60 +245,28 @@
     </div>
         </td>
     </tr>
-</table>
-<table>
     <tr>
+        <th>
+        </th>
+        <th style="text-align: right">
+		
 
-        <td class="paywidth">
-        </td>
-            <td>
-            <div class="span6 right ">
-                <ul class="nav nav-tabs" id="myTab">
-                    <li class="active" ><a href="#post" data-toggle="tab" id="C">{% trans "Betala med kort" %}</a></li>
-                    <li><a href="#card" data-toggle="tab" id="P">{% trans "Betala via postförskott" %}</a></li>
-                </ul>
-
+            <div class="control-group" id="postal">
+                <label class="control-label" > </label>
+				
                 {{ form.subject.post }}
-                <input type=hidden name="paymentmethod" id="id_paymentmethod" value="C">
-                {{ form.paymentmethod.errors }}
+			<input type=hidden name="paymentmethod" id="id_paymentmethod" value="P">
 
-                <div class="tab-content">
-                    <div class="tab-pane active" id="post">
-                          <div>
-                              <br />
-                              <i>{% trans "Efter genomförd betalning kommer du att skickas tillbaks till oss och ditt köp kommer att bekräftas" %}. <a href="http://www.payex.se" alt="PayEx link">PayEx </a>{% trans "hanterar betalningen" %}. </i>
-                                <br /><br />
-                          </div>
-
-                                <div>
-                              <div class="span3">
-                                <div class="paymentimg"> <img src="/media/uploads/mastercard_white_140.gif" /> <img src="/media/uploads/verified_visa_white_140.gif" /><img src="/media/uploads/payments_processed_by.jpg" /></div>
-                              </div>
-
-                              <div class="span2">
-                                 <blockquote> <input type="submit" class="btn btn-success" value="{% trans "Betala med kort" %}"  /></blockquote>
-                             </div>
-                          </div>
-                         <div style="clear: both;"></div>
-
-                    </div>
-                    <div class="tab-pane" id="card">
-                          <div class="span3">
-                              <img src="{{ STATIC_URL }}img/post.jpg" width="50px"/> {% trans "Betala via postförskott" %}
-                          </div>
-
-                          <div class="span2">
-                              <blockquote> <input type="submit" class="btn btn-success" value="{% trans "Skicka Din Beställning" %}"  /> </blockquote>
-                          </div>
-
-                    </div>
+                        {{ form.paymentmethod.errors }}
+                <div class="controls">
+                    <img src="{{ STATIC_URL }}img/post.jpg" style="width:46px;" />
+					<span class="muted">{% trans "Beställningen skicka mot Postförskott" %} </span>
                 </div>
-          </div>
-          </td>
-
+            </div>
+            <input type="submit" class="btn" value="{% trans "Skicka Din Beställning" %}"  />
+        </th>
     </tr>
 </table>
-
 </form>
 {% endif %}
 {% if not cartitems %}
@@ -307,4 +278,6 @@
     {% trans "Du har öppet köp i en vecka och kan returnera plagget oanvänt inom en vecka från det att du hämtat ut det på posten" %}  .<br />
     <a href="/paymentterms/"> {% trans "Se våra betalvillkor här" %} </a>
 </div>
+
+
 {% endblock %}
