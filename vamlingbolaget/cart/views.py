@@ -311,7 +311,6 @@ def isincart(request, key, cartitem):
         return False
 
 def totalsum(cartitems, bargains):
-    handling = 50
     temp_p = 0
     temp_q = 0
 
@@ -332,7 +331,11 @@ def totalsum(cartitems, bargains):
             temp_p = temp_p + item.bargain.price
             temp_q = temp_q + 1
 
-    if temp_p > 0:
+    if (temp_p < 50 or temp_p > 2999):
+        handling = 0
+        temp_p = temp_p + handling
+    else:
+        handling = 50
         temp_p = temp_p + handling
 
     total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling}
