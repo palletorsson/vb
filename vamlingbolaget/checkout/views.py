@@ -115,6 +115,7 @@ def checkout(request):
             new_order.paymentmethod = paymentmethod
 
             if (paymentmethod == 'P'):
+                new_order.order = msg
                 new_order.save()
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
                 mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
@@ -287,6 +288,7 @@ def thanks(request):
         order = Checkout.objects.get(session_key=cart_id)
     except:
         order = 1
+        print order
     if (order != 1):
         order.message = order.message + '\n' + '5: Log Thanks: thank you message displayed.'
         order.save()
