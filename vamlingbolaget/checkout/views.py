@@ -75,7 +75,12 @@ def checkout_test(request):
                 msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
             msg = msg + '\n'
-            msg = msg + 'Frakt och hantering: 50 SEK \n'
+            
+            if (totalprice > 3000):
+                msg = msg + 'Frakt och hantering: 0 SEK \n'
+            else:
+                msg = msg + 'Frakt och hantering: 50 SEK \n'
+
             msg = msg + '--------------------------------- \n'
             msg = msg + 'Totalpris: %s SEK \n' %str(totalprice)
             msg = msg + '--------------------------------- \n'
