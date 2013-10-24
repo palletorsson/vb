@@ -10858,7 +10858,7 @@ msgstr "First name"
 #: vb/vamlingbolaget/checkout/models.py:16
 
 msgid "Telefonnummer"
-msgstr "Item number"
+msgstr "Phone number"
 
 #: vb/vamlingbolaget/checkout/models.py:17
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:115
@@ -10873,7 +10873,7 @@ msgstr "City"
 #: vb/vamlingbolaget/checkout/models.py:19
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:131
 msgid "Postnummer"
-msgstr "Item number"
+msgstr "Zip code"
 
 #: vb/vamlingbolaget/checkout/models.py:20
 #: vb/vamlingbolaget/theme/templates/checkout/checkout.html:141
@@ -11079,7 +11079,7 @@ msgstr "You are editing your order"
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:18
 #: vb/vamlingbolaget/theme/templates/variation/detail.html:25
 msgid "Artikelnummer"
-msgstr "Item number"
+msgstr "Article number"
 
 #: vb/vamlingbolaget/theme/templates/cart/detail.html:20
 #: vb/vamlingbolaget/theme/templates/variation/detail.html:29
@@ -11261,7 +11261,7 @@ msgstr " "
 #: vb/vamlingbolaget/theme/templates/checkout/thanks.html:11
 
 msgid "Ordernummer"
-msgstr "Item number"
+msgstr "Order number"
 
 #: vb/vamlingbolaget/theme/templates/checkout/thanks.html:12
 msgid "En bekräftelse på din beställing har skickats till"
