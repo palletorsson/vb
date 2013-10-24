@@ -100,7 +100,7 @@ def checkout(request):
             msg = msg + '* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
 
             if (paymentmethod == 'P'):
-                msg = msg + '* Du betalar med postforskatt. \n'
+                msg = msg + '* Du betalar med postförskott. \n'
             if (paymentmethod == 'C'):
                 msg = msg + '* Du har valt kortbetalning. \n'
 
