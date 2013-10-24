@@ -2,6 +2,8 @@
 *.log
 *.pot
 *.pyc
+*.po*
+*.mo*
 local_settings.py
 /env
 
@@ -10,3 +12,11 @@ vamlingbolaget/vb.komodoproject
 vamlingbolaget/db/*
 vamlingbolaget/cart/migrations/
 vamlingbolaget/vamlingbolaget/locale/*
+vamlingbolaget/vamlingbolaget/locale/en/LC_MESSAGES/*
+vamlingbolaget/vamlingbolaget/locale/en/LC_MESSAGES/django.po
+vamlingbolaget/vamlingbolaget/locale/en/LC_MESSAGES/django.mo
+vamlingbolaget/vamlingbolaget/locale/en/LC_MESSAGES/django.po~
+vamlingbolaget/vamlingbolaget/locale/en/LC_MESSAGES/django.mo~
+
+
+
