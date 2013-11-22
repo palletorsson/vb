@@ -18,7 +18,7 @@
         <br/>
         <h5>{% trans "Översikt" %}</h5>
         <li>
-             <a href="/colorsandpatterns/">{% trans "Färger och Mönster" %} </a>
+             <a href="/patternandcolor/">{% trans "Färger och Mönster" %} </a>
         </li>
         <br/>
         <h5>{% trans "Samarbeten" %}</h5>
