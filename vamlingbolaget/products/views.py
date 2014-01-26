@@ -30,7 +30,7 @@ def index(request):
                              context_instance=RequestContext(request))
 
 def by_type(request, key):
-    products = Variation.objects.filter(article__type__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
+    products = Variation.objects.filter(article__category__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     return render_to_response('variation/index.html',
@@ -42,7 +42,6 @@ def by_type(request, key):
 
 def by_quality(request, key):
     products = Variation.objects.filter(article__quality__slug__contains = key, order__lte=100, active=True).order_by('order', 'article__quality')
-    print products
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     return render_to_response('variation/index.html',
