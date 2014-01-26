@@ -21,7 +21,7 @@ def first_page(request):
 def index(request):
     products = Variation.objects.filter(active=True, order__lte=100).order_by('-article__quality', 'order')
     qualities = Quality.objects.filter(active=True)
-    types = Type.objects.filter(active=True)
+    types = Category.objects.filter(active=True)
     return render_to_response('variation/index.html',
                              {'products': products,
                               'qualities': qualities,
@@ -32,7 +32,7 @@ def index(request):
 def by_type(request, key):
     products = Variation.objects.filter(article__type__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
     qualities = Quality.objects.filter(active=True)
-    types = Type.objects.filter(active=True)
+    types = Category.objects.filter(active=True)
     return render_to_response('variation/index.html',
              {'products': products,
               'qualities': qualities,
@@ -43,7 +43,7 @@ def by_type(request, key):
 def by_quality(request, key):
     products = Variation.objects.filter(article__quality__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
     qualities = Quality.objects.filter(active=True)
-    types = Type.objects.filter(active=True)
+    types = Category.objects.filter(active=True)
     return render_to_response('variation/index.html',
         {'products': products,
          'qualities': qualities,
