@@ -11,9 +11,11 @@
         <br/>
         <h5>{% trans "Kvaliter" %}</h5>
         {% for quality in qualities %}
-            <li>
-                <a href="/products/quality/{{quality.slug}}"> {{ quality.name }} </a>
-            </li>
+            {% if quality.order == 11 or quality.order == 10 or quality.order == 9 or quality.order == 1   %}
+                <li>
+                    <a href="/products/quality/{{quality.slug}}"> {{ quality.name }} </a>
+                </li>
+            {% endif %}
         {% endfor %}
         <br/>
         <h5>{% trans "Översikt" %}</h5>
