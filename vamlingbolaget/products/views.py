@@ -66,7 +66,7 @@ def detail(request, pk):
         colors = Color.objects.filter(active=True, quality = product.article.quality)
         patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
         sizes = Size.objects.filter(quality=product.article.quality)
-        if (pk == 5):
+        if (product.article.quality.order == 5):
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=3)
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
