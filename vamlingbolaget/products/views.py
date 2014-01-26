@@ -41,17 +41,9 @@ def by_type(request, key):
 
 
 def by_quality(request, key):
-    if (key == 'manchester'):
-        products = Variation.objects.filter(article__quality__order__in = [3, 6, 7, 8], order__lte=100, active=True).order_by('order', 'article__quality')
-    elif (key == 'silkestrika'):
-        products = Variation.objects.filter(article__quality__order__in = [1, 5], order__lte=100, active=True).order_by('order', 'article__quality')
-
-    else:
-        products = Variation.objects.filter(article__quality__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
-
+    products = Variation.objects.filter(article__quality__slug__contains = key, order__lte=100, active=True).order_by('order', 'article__quality')
+    print products
     qualities = Quality.objects.filter(active=True)
-
-
     types = Category.objects.filter(active=True)
     return render_to_response('variation/index.html',
         {'products': products,
