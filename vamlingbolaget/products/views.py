@@ -41,7 +41,7 @@ def by_type(request, key):
 
 
 def by_quality(request, key):
-    if (key == 'manchster'):
+    if (key == 'manchester'):
         products = Variation.objects.filter(article__quality__order__in = [3, 6, 7, 8], order__lte=100, active=True).order_by('order', 'article__quality')
     elif (key == 'silkestrika'):
         products = Variation.objects.filter(article__quality__order__in = [1, 5], order__lte=100, active=True).order_by('order', 'article__quality')
