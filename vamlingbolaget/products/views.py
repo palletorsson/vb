@@ -67,7 +67,7 @@ def detail(request, pk):
         patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
         sizes = Size.objects.filter(quality=product.article.quality)
         if (product.article.quality.order == 5):
-            colorsandpattern = PatternAndColor.objects.filter(active=True, quality__order=1)
+            colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
 
