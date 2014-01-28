@@ -18,7 +18,7 @@
             <a href="{% version image.image 'large'%}" rel="lightbox"><img src="{% version image.image 'large' %}"  alt="{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" /></a>
         {% endfor %}
         <br/>
-		 <div class='image_description'> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</div>
+		 <div> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</div>
     </div>
 
 
@@ -182,7 +182,7 @@
                 </select>
         {% endif %}
 	</div>
-        {% if product.article.quality.order == 2 or product.article.quality.order == 9 or product.article.quality.order == 1  or product.article.quality.order == 4 or product.article.sku_number == '9805' or product.article.quality.order == 10 %}
+        {% if product.article.quality.order == 2 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 1  or product.article.quality.order == 4 or product.article.sku_number == '9805' or product.article.quality.order == 10 %}
 			<br/>
 		{%else%}
 			<span style="padding-left: 10px;">
