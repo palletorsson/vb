@@ -61,13 +61,13 @@ def detail(request, pk):
         color_id = product.color.order
         pattern_id = product.pattern.order
         qualities = Quality.objects.filter(active = True)
-
+        print  product.article.quality.order
         types = Type.objects.filter(active = True)
         colors = Color.objects.filter(active=True, quality = product.article.quality)
         patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
         sizes = Size.objects.filter(quality=product.article.quality)
         if (product.article.quality.order == 5):
-            colorsandpattern = PatternAndColor.objects.filter(active=True, quality=3)
+            colorsandpattern = PatternAndColor.objects.filter(active=True, quality__order=1)
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
 
