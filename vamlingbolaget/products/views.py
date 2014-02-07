@@ -68,7 +68,6 @@ def detail(request, pk):
 
         if (product.article.quality.order == 13):
             sizes = Size.objects.filter(quality__pk = 1)
-            print sizes
         else:
             sizes = Size.objects.filter(quality=product.article.quality)
 
