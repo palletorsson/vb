@@ -252,7 +252,10 @@
             <div class="span6 right ">
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="active" ><a href="#post" data-toggle="tab" id="C">{% trans "Betala med kort" %}</a></li>
+                    {% if sweden %}
+
                     <li><a href="#card" data-toggle="tab" id="P">{% trans "Betala via postförskott" %}</a></li>
+                       {% endif %}
                 </ul>
 
                 {{ form.subject.post }}
@@ -279,6 +282,7 @@
                          <div style="clear: both;"></div>
 
                     </div>
+                    {% if sweden %}
                     <div class="tab-pane" id="card">
                           <div class="span3">
                               <img src="{{ STATIC_URL }}img/post.jpg" width="50px"/> {% trans "Betala via postförskott" %}
@@ -289,6 +293,7 @@
                           </div>
 
                     </div>
+                    {% endif %}
                 </div>
           </div>
           </td>

@@ -21,10 +21,14 @@ def checkout(request):
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
     getnames(cartitems)
-    returntotal = totalsum(cartitems, bargains)
+
+
+    returntotal = totalsum(cartitems, bargains, request)
     totalprice = returntotal['totalprice']
     totalitems = returntotal['totalitems']
     handling = returntotal['handling']
+    sweden = returntotal['se']
+
     form = CheckoutForm()
     returntotal['form'] = form
 
@@ -162,6 +166,7 @@ def checkout(request):
         'handling': handling,
         'cartitems': cartitems,
         'bargains' : bargains,
+        'sweden': sweden,
 
         },
         context_instance=RequestContext(request))

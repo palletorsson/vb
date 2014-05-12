@@ -13,7 +13,7 @@ def cart_total(context):
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
-    returntotal = totalsum(cartitems, bargains)
+    returntotal = totalsum(cartitems, bargains, request)
     total = returntotal['totalprice']
     numbers = returntotal['totalitems']
     return { 'total': total, 'numbers': numbers }

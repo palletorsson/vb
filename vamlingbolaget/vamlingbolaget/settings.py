@@ -52,6 +52,7 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(ROOT_DIR, 'media'),
 
 
+IP_DATA = os.path.join(ROOT_DIR, '/GeoIP.dat'),
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -125,6 +126,7 @@ MIDDLEWARE_CLASSES = (
     'johnny.middleware.QueryCacheMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_geoip.middleware.LocationMiddleware',
 )
 
 CACHES = {
@@ -171,6 +173,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'rosetta',
     'modeltranslation',
+    'django_geoip',
     #installed apps
     'taggit',
     'tastypie',

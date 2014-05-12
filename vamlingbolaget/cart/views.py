@@ -12,6 +12,10 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from forms import CartForm
 import json
+import pygeoip
+from vamlingbolaget.settings import ROOT_DIR
+
+
 
 
 CART_ID_SESSION_KEY = 'cart_id'
@@ -234,7 +238,7 @@ def showcart(request):
     cartitems = cart.cartitem_set.all()
 
     bargains = cart.bargaincartitem_set.all()
-    returntotal = totalsum(cartitems, bargains)
+    returntotal = totalsum(cartitems, bargains, request)
     getnames(cartitems)
     returntotal['cartitems'] =  cartitems
     returntotal['bargains'] =  bargains
@@ -313,7 +317,7 @@ def isincart(request, key, cartitem):
     else:
         return False
 
-def totalsum(cartitems, bargains):
+def totalsum(cartitems, bargains, request):
     temp_p = 0
     temp_q = 0
 
@@ -334,14 +338,28 @@ def totalsum(cartitems, bargains):
             temp_p = temp_p + item.bargain.price
             temp_q = temp_q + 1
 
-    if (temp_p < 50 or temp_p > 2999):
-        handling = 0
+    gi = pygeoip.GeoIP(ROOT_DIR+'/GeoIP.dat')
+    ip_ = request.META['REMOTE_ADDR']
+    country = gi.country_code_by_addr(ip_)
+    if (country == 'SE'):
+        handling = 100
+        if (temp_q > 3):
+            handling = 200
+        if (temp_p > 3000):
+            handling = 0
         temp_p = temp_p + handling
-    else:
-        handling = 50
-        temp_p = temp_p + handling
+        se = True
 
-    total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling}
+    else:
+        handling = 100
+        if (temp_q > 3):
+            handling = 200
+        temp_p = temp_p + handling
+        se = False
+
+
+
+    total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling, 'se': se}
     return total
 
 def getnames(cartitems):
