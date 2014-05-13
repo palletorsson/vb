@@ -80,10 +80,8 @@ def checkout(request):
                 i = i + 1
             msg = msg + '\n'
 
-            if (totalprice > 3000):
-                msg = msg + 'Frakt och hantering: 0 SEK \n'
-            else:
-                msg = msg + 'Frakt och hantering: 50 SEK \n'
+            msg = msg + 'Frakt och hantering: '+ str(handling) +' SEK \n'
+
 
             msg = msg + '--------------------------------- \n'
             msg = msg + 'Totalpris: %s SEK \n' %str(totalprice)
@@ -122,7 +120,8 @@ def checkout(request):
                 new_order.order = msg
                 new_order.save()
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
-                mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                print msg
+                #mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
                 return HttpResponseRedirect('thanks/')
 
             if (paymentmethod == 'C'):
@@ -167,7 +166,6 @@ def checkout(request):
         'cartitems': cartitems,
         'bargains' : bargains,
         'sweden': sweden,
-
         },
         context_instance=RequestContext(request))
 
