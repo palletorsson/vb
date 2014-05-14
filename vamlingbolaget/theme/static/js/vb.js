@@ -304,7 +304,6 @@ $('.icon-minus').click(function(e){
     }
 });
 
-
 // --- setup welcome page animation
 
 var changesrc = function(me, from, to){
@@ -424,6 +423,27 @@ set_first_page();
         e.preventDefault();
         $(this).tab('show');
         $('input[name="paymentmethod"]').val(this.id);
+       
+        handel_el = $('#handling'); 
+        handel_el_value = handel_el.text().trim(); 
+        
+        sum = $('#totalprice');
+        sum_el = $('#totalprice')
+        sum_value = sum_el.html().trim(); 
+       
+        sum_value = sum_value.substring(0, sum_value.length - 4); 
+         
+        if (this.id == 'P') {
+			if(parseInt(handel_el_value) == 80) { 
+				handel_el.html(parseInt(handel_el_value)+40)
+				sum_el.html((parseInt(sum_value)+40) + ' SEK')
+			}
+		} else {
+			if(parseInt(handel_el_value) == 120) { 
+				handel_el.html(parseInt(handel_el_value)-40)
+				sum_el.html((parseInt(sum_value)-40) + ' SEK')
+			}
+		}
     });
 
 
