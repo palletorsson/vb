@@ -337,26 +337,32 @@ def totalsum(cartitems, bargains, request):
         for item in bargains:
             temp_p = temp_p + item.bargain.price
             temp_q = temp_q + 1
+    try:
+        gi = pygeoip.GeoIP(ROOT_DIR+'/GeoIP.dat')
+        ip_ = request.META['REMOTE_ADDR']
+        country = gi.country_code_by_addr(ip_)
+    except:
+        country = 'SE'
 
-    gi = pygeoip.GeoIP(ROOT_DIR+'/GeoIP.dat')
-    ip_ = request.META['REMOTE_ADDR']
-    ip_ = '109.58.147.4'
-    country = gi.country_code_by_addr(ip_)
     if (country == 'SE'):
-        handling = 100
-        if (temp_q > 3):
-            handling = 150
-        if (temp_p > 3000):
-            handling = 0
-        temp_p = temp_p + handling
         se = True
 
+        if (temp_q > 3):
+            handling = 120
+        elif (temp_p > 3000):
+            handling = 0
+        else:
+            handling = 80
+        temp_p = temp_p + handling
+
     else:
-        handling = 100
+        se = False
         if (temp_q > 3):
             handling = 200
+        else:
+            handling = 100
         temp_p = temp_p + handling
-        se = False
+
 
     total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling, 'se': se}
     return total
