@@ -349,7 +349,7 @@ def totalsum(cartitems, bargains, request):
 
         if (temp_q > 3):
             handling = 120
-        elif (temp_p > 3000):
+        elif (temp_p > 3000 or temp_p < 11):
             handling = 0
         else:
             handling = 80
