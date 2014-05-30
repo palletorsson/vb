@@ -103,7 +103,7 @@
 				</select>
 				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
 			</div>
-        {% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 %}
+        {% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
             {% trans "Välj färg / mönster" %} <br/>
 
 			<hr/>
@@ -170,8 +170,8 @@
                     <option value="2">{% trans "Meter" %} : 2 </option>
                     <option value="3">{% trans "Meter" %} : 3 </option>
                     <option value="4">{% trans "Meter" %} : 4 </option>
-                    <option value="4">{% trans "Meter" %} : 5 </option>
-                    <option value="4">{% trans "Meter" %} : 6 </option>
+                    <option value="5">{% trans "Meter" %} : 5 </option>
+                    <option value="6">{% trans "Meter" %} : 6 </option>
                 </select>
         {% else %}
                 <select id='quantiy_pk'>
