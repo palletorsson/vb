@@ -70,7 +70,7 @@ def detail(request, pk):
         else:
             sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
 
-        if (product.article.quality.order == 5) :
+        if (product.article.quality.order == 5 or product.article.quality.order == 14) :
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
