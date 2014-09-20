@@ -149,7 +149,10 @@ def checkout(request):
                     cancelUrl='http://www.vamlingbolaget.com/checkout/cancel'
                 )
 
-                PayExRefKey = response['orderRef']
+                try:
+                    PayExRefKey = response['orderRef']
+                except: 
+                    PayExRefKey = 1
 
                 new_order.payex_key = PayExRefKey
                 new_order.order = msg
@@ -441,3 +444,4 @@ def payexCallback(request):
         order.save()
 
     return HttpResponse(status=200)
+
