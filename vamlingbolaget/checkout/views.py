@@ -56,6 +56,8 @@ def checkout(request):
             i = 1
             products = 'Vamlingbolaget: '
             articles = 'Artikel nummer: '
+            payex_articles = ''
+            payex_products = ''
             msg = "Din order till Vamlingbolaget:\n"
             msg = msg + '--------------------------------- \n'
             msg = msg + 'Din order:\n'
@@ -65,6 +67,8 @@ def checkout(request):
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
                 products = products + item.article.name
                 articles = articles + item.article.sku_number
+                payex_products = payex_products + item.article.name
+                payex_articles = payex_articles + item.article.sku_number
                 if (i != cart_numberofitems):
                     products = products + ', '
                     articles = articles + ', '
@@ -79,6 +83,12 @@ def checkout(request):
                 msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
             msg = msg + '\n'
+
+            if len(payex_products) > 30:
+                payex_products = "Vamlingbolaget"
+
+            if len(payex_articles) > 30:
+                payex_articles = "Flera artiklar"
 
             msg = msg + 'Frakt och hantering: '+ str(handling) +' SEK \n'
 
@@ -139,8 +149,8 @@ def checkout(request):
                     currency='SEK',
                     vat='2500',
                     orderID=new_order.order_number,
-                    productNumber=products,
-                    description=articles,
+                    productNumber=payex_products,
+                    description=payex_articles,
                     clientIPAddress=new_order.ip,
                     clientIdentifier='USERAGENT=test&username=testuser',
                     additionalValues='',
