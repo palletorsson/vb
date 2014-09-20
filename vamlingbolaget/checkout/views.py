@@ -72,6 +72,8 @@ def checkout(request):
                 if (i != cart_numberofitems):
                     products = products + ', '
                     articles = articles + ', '
+                    payex_products = payex_products + ', '
+                    payex_articles = payex_articles + ', '
                 if (item.pattern_2 != 0):
                     msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' (utsida)\n'
                     msg = msg + 'och ' + item.pattern_2.name + ', ' + item.color_2.name + ' (insida)\n'
