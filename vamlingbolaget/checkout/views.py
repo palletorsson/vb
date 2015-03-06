@@ -20,10 +20,11 @@ def checkout(request):
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
+    #voucher = cart.vouchercart_set.all()
     getnames(cartitems)
 
 
-    returntotal = totalsum(cartitems, bargains, request)
+    returntotal = totalsum(cartitems, bargains, request) #, voucher)
     totalprice = returntotal['totalprice']
     totalitems = returntotal['totalitems']
     handling = returntotal['handling']
@@ -45,6 +46,7 @@ def checkout(request):
             street = request.POST['street']
             postcode = request.POST['postcode']
             city = request.POST['city']
+
             if (request.POST['country']):
                 country = request.POST['country']
             else:
@@ -79,7 +81,7 @@ def checkout(request):
                     msg = msg + 'och ' + item.pattern_2.name + ', ' + item.color_2.name + ' (insida)\n'
                 else:
                     msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
-                if (item.article.type.order < 7):
+                if (item.article.type.order < 7 or item.article.type.order == 9):
                     msg = msg + 'Storlek: ' + item.size.name + ' \n'
 
                 msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
@@ -132,7 +134,7 @@ def checkout(request):
                 new_order.order = msg
                 new_order.save()
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
-                mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                #mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
                 return HttpResponseRedirect('thanks/')
 
             if (paymentmethod == 'C'):
@@ -180,6 +182,7 @@ def checkout(request):
         'cartitems': cartitems,
         'bargains' : bargains,
         'sweden': sweden,
+        #'voucher': voucher,
         },
         context_instance=RequestContext(request))
 
