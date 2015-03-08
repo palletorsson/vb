@@ -325,8 +325,7 @@ def thanks(request):
         message = "Tack for din order"
     else:
         message = u"Lägg till något i din shoppinglåda och gör en beställning."
-        
-    
+ 
     return render_to_response('checkout/thanks.html', {
         'order': order,
         'message': message
