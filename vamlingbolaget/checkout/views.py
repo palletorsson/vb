@@ -142,7 +142,7 @@ def checkout(request):
                 new_order.order = msg
                 new_order.save()
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
-                mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                #mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
                 return HttpResponseRedirect('thanks/')
 
             if (paymentmethod == 'C'):
@@ -313,14 +313,10 @@ def thanks(request):
     cart_id = _cart_id(request)
     print cart_id
     try:
-        order = Checkout.objects.get(session_key=cart_id)
+        order = Checkout.objects.filter(session_key=cart_id)[0]
     except:
        order = 1
-    if (order == 1):
-		try:
-			order = Checkout.objects.filter(session_key=cart_id)[0]
-		except:
-			order = 1
+   
        
     if (order != 1):
         order.message = order.message + '\n' + '5: Log Thanks: thank you message displayed.'
