@@ -311,12 +311,11 @@ def cancel(request):
 
 def thanks(request):
     cart_id = _cart_id(request)
-    print cart_id
+
     try:
         order = Checkout.objects.filter(session_key=cart_id)[0]
     except:
        order = 1
-   
        
     if (order != 1):
         order.message = order.message + '\n' + '5: Log Thanks: thank you message displayed.'
