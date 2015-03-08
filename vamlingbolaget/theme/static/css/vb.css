@@ -161,6 +161,10 @@ margin-right: -49px;
     margin:5px;
 }
 
+.voucher_show {
+	display:none; 
+}
+
 .img_container img {
     width:100%;
 }
