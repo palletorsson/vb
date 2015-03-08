@@ -4,10 +4,18 @@
     <ul class="hidden-phone">
         <h5>{% trans "Kategorier" %}</h5>
         {% for type in types %}
-            <li>
-                <a href="/products/type/{{type.slug}}"> {{ type.name }} </a>
-            </li>
+    		{% if type.slug == 'bargain'%}
+				<li>
+					<a href="/products/{{type.slug}}"> {{ type.name }} </a>
+				</li>
+			{%else%}
+				<li>
+					<a href="/products/type/{{type.slug}}"> {{ type.name }} </a>
+				</li>
+			{% endif %}
         {% endfor %}
+        
+        
         <br/>
         <h5>{% trans "Kvaliter" %}</h5>
         {% for quality in qualities %}

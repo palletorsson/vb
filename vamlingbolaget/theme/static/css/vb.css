@@ -147,6 +147,11 @@ text-shadow: 0 1px 0 #eeeeee;
 	overflow: hidden
 }
 
+.label-success {
+background-color: #5cb85c;
+margin-right: -49px;
+}
+
 .collection_list img {
     width: 100%;
 }

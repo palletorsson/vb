@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from models import Cart, CartItem, BargainCartItem
+from models import Cart, CartItem, BargainCartItem, VoucherCart
 from django.http import HttpResponse
 from products.models import Article, Color, Pattern, Size, Quality, Bargainbox
 import random
@@ -14,8 +14,7 @@ from forms import CartForm
 import json
 import pygeoip
 from vamlingbolaget.settings import ROOT_DIR
-
-
+import operator
 
 
 CART_ID_SESSION_KEY = 'cart_id'
@@ -231,17 +230,31 @@ def show_product(request, article_slug):
             request.session.set_test_cookie()
             return render_to_response("variation/detail.html", locals(), context_instance=RequestContext(request))
 
-
+def voucher(request, pk):
+	pk = pk.lower()
+	if pk == 'vi-rabatt':
+		key = _cart_id(request)
+		cart, created = Cart.objects.get_or_create(key=key)
+		voucher, created = VoucherCart.objects.get_or_create(cart = cart)
+		voucher.save()
+		print key
+	else: 
+		print 'fel kod'
+		
+	return redirect('/cart/show/')
+	
 def showcart(request):
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
-
     bargains = cart.bargaincartitem_set.all()
-    returntotal = totalsum(cartitems, bargains, request)
+    voucher = cart.vouchercart_set.all()
+    returntotal = totalsum(cartitems, bargains, request, voucher)
     getnames(cartitems)
     returntotal['cartitems'] =  cartitems
     returntotal['bargains'] =  bargains
+    returntotal['voucher'] = voucher
+  
     return render_to_response('cart/show_cart.html',
         returntotal,
         context_instance=RequestContext(request))
@@ -317,11 +330,16 @@ def isincart(request, key, cartitem):
     else:
         return False
 
-def totalsum(cartitems, bargains, request):
+def totalsum(cartitems, bargains, request, voucher):
     temp_p = 0
     temp_q = 0
-
-    if (cartitems):
+    
+    if voucher:
+		ordered = sorted(cartitems, key=operator.attrgetter('article.price'))
+		ordered[0].article.oldprice = int(ordered[0].article.price)
+		ordered[0].article.price = int(ordered[0].article.price * 0.85)
+	
+    if (cartitems):			
         for item in cartitems:
             if item.article.discount:
                 discount_price = f_discount(item.article)

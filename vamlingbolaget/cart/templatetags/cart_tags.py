@@ -1,6 +1,5 @@
 from django import template
 from django.templatetags.static import register
-
 from cart.models import Cart
 from cart.views import _cart_id, totalsum
 
@@ -13,7 +12,8 @@ def cart_total(context):
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
-    returntotal = totalsum(cartitems, bargains, request)
+    voucher = cart.vouchercart_set.all()
+    returntotal = totalsum(cartitems, bargains, request, voucher)
     total = returntotal['totalprice']
     numbers = returntotal['totalitems']
     return { 'total': total, 'numbers': numbers }

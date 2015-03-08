@@ -20,11 +20,11 @@ def checkout(request):
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
-    #voucher = cart.vouchercart_set.all()
+    voucher = cart.vouchercart_set.all()
     getnames(cartitems)
 
 
-    returntotal = totalsum(cartitems, bargains, request) #, voucher)
+    returntotal = totalsum(cartitems, bargains, request, voucher)
     totalprice = returntotal['totalprice']
     totalitems = returntotal['totalitems']
     handling = returntotal['handling']
@@ -65,7 +65,7 @@ def checkout(request):
             msg = msg + 'Din order:\n'
             cart_numberofitems = len(cartitems)
             for item in cartitems:
-                msg = msg + 'produkt '+ str(i) + ': \n'
+                msg = msg + 'Produkt '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
                 products = products + item.article.name
                 articles = articles + item.article.sku_number
@@ -87,6 +87,14 @@ def checkout(request):
                 msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
                 i = i + 1
             msg = msg + '\n'
+
+            for item in bargains:
+                msg = msg + 'Produkt '+ str(i) + str(': fynd ') + ': \n'
+                msg = msg +  str(1) + ' st ' + str(item.bargain.title) + ' : ' + str(item.bargain.price)  + ' SEK \n' 
+                msg = msg + '- ' + str(item.bargain.description)  + ': \n'            
+                i = i + 1
+            msg = msg + '\n'
+
 
             if len(payex_products) > 30:
                 payex_products = "Vamlingbolaget"
@@ -182,7 +190,7 @@ def checkout(request):
         'cartitems': cartitems,
         'bargains' : bargains,
         'sweden': sweden,
-        #'voucher': voucher,
+        'voucher': voucher,
         },
         context_instance=RequestContext(request))
 
@@ -303,23 +311,26 @@ def cancel(request):
 
 def thanks(request):
     cart_id = _cart_id(request)
-
+    print cart_id
     try:
         order = Checkout.objects.get(session_key=cart_id)
     except:
-        order = 1
+       order = 1
+    if (order == 1):
+		try:
+			order = Checkout.objects.filter(session_key=cart_id)[0]
+		except:
+			order = 1
+       
     if (order != 1):
         order.message = order.message + '\n' + '5: Log Thanks: thank you message displayed.'
         order.save()
         _new_cart_id(request)
         message = "Tack for din order"
-
     else:
         message = u"Lägg till något i din shoppinglåda och gör en beställning."
-        return render_to_response('checkout/thanks.html', {
-            'message': message
-        }, context_instance=RequestContext(request))
-
+        
+    print order       
     return render_to_response('checkout/thanks.html', {
         'order': order,
         'message': message

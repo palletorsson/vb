@@ -103,6 +103,7 @@
                 {%elif item.article.type.order == 8 %}
                     {{item.totalitemprice}} {%trans "SEK"%}
                 {%else%}
+                {% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} {%trans "SEK"%}	</span><br/> {%endif%} 
                     {{ item.article.price }} {%trans "SEK"%}
                 {%endif%}
             </div>
@@ -155,6 +156,7 @@
             {{ handling }}  {%trans "SEK"%}
         </td>
         </tr>
+
         <tr>
         <th class="totalprice" colspan="8" style="text-align: right">
             {% trans "Totalpris" %}:
@@ -163,6 +165,33 @@
             {{ totalprice }}  {%trans "SEK"%}
         </th>
         </tr>
+        <tr>
+			
+
+          <th class="voucher" colspan="8" style="text-align: right">
+			{%if voucher %}
+				Vocuher: 
+            {% else %}
+				{% trans "Voucher" %} 
+			{% endif %}
+          </th>
+          
+           <th id="totalprice" colspan="8">
+			{%if voucher %}
+				<span class="label label-success">15% på dyraste plagget </span>
+            {% else %}
+            <div class="form-group">
+               <div class="input-group">
+					<input type="text" id="id_voucher" name="voucher" maxlength="10" class="form-control">
+					<button type="button" class="btn btn-success btn-sm  btn-number" id="vocher-plus">
+						  <span class="glyphicon glyphicon-plus"></span>
+					 </button>
+              </div>
+            </div>
+              {% endif %}
+          </th>
+        </tr>
+
         </tbody>
 
     {% else %}

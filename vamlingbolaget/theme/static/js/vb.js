@@ -304,6 +304,25 @@ $('.icon-minus').click(function(e){
     }
 });
 
+$('#vocher-plus').click(function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    var key = $('#id_voucher').val();
+    $('#id_voucher').val("");
+    my_url = "/cart/voucher/" + key;
+            $.ajax({
+                url: my_url,
+                csrfmiddlewaretoken: csrftoken,
+                contentType: "application/json",
+                success: function( data ) {
+					window.location.href = "/cart/show/"
+                }
+
+        })
+ 
+});
+
+
 // --- setup welcome page animation
 
 var changesrc = function(me, from, to){
