@@ -296,15 +296,16 @@ def removefromcart(request, pk, type):
     try:
         if type == 'bargain':
             cartitem = BargainCartItem.objects.get(pk=pk)
+            
         else:
             cartitem = CartItem.objects.get(pk=pk)
     except CartItem.DoesNotExist:
         cartitem = None
 
+    cartitem.delete()
     listed = isincart(request, pk, cartitem)
 
     if (listed == True):
-        cartitem.delete()
         key = _cart_id(request)
         cart = Cart.objects.get(key=key)
         cartitems = cart.cartitem_set.all()
