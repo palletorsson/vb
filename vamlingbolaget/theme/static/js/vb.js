@@ -374,10 +374,7 @@ $('.overlay').each(function(){
 var set_first_page = function(){
      var wheight = $(window).height(),
      wwidth = $(window).width(),
-     fullheight = wheight-100;
-
-
-
+     fullheight = wheight+200;
 
 
         $('.spanfullscreen').css({'width':$(window).width(), 'background-color':'#fff','margin':0, 'height': fullheight +'px', 'overflow':'hidden', 'padding':0 });
