@@ -167,18 +167,16 @@ Vamlingbolaget." %} />
   <footer>
 
       <div class="container footer">
-          <div class="span3">
+          <div class="span5">
               <address>
                   <strong>Vamlingbolaget</strong><br/>
                   623 31 Burgsvik<br/>
                   <abbr title="Phone">Tel:</abbr> 0498-498080 <br/>
                   info@vamlingbolaget.com
               </address>
-              <strong>{% trans "Öppettider" %}</strong><br/>
-              <a href="/shops/"> {% trans "Om oss" %} Vamlingbolaget </a>
-          </div>
+                     </div>
 
-          <div class="span3">
+          <div class="span5">
               <address>
                   <strong>Vamlingbolaget Stockholm </strong><br/>
                   Åsögatan 112 <br/>
@@ -189,35 +187,7 @@ Vamlingbolaget." %} />
               <strong>{% trans "Öppettider" %} </strong><br/>
               {% trans "Vardagar" %} 11.00 - 18.00 <br/>
               {% trans "Lördagar" %} 11.00 - 15.00 <br/><br/>
-               <strong>Extra {% trans "Öppettider" %} i advent</strong><br/>
-              {% trans "Lördagar" %} 11.00 - 16.00 <br/>
-              {% trans "Söndagar" %} 12.00 - 16.00 <br/><br/>
-          </div>
-
-
-          <div class="span3">
-             <strong>{% trans "Vamlingbolaget" %}</strong><br/>
-            <div class="no_padding">
-                 <ul>
-                    <li> <a href="/collection/new/">{% trans "Kollektion" %}</a></li>
-                    <li> <a href="/products/">{% trans "Shop" %}</a></li>
-                    <li> <a href="/news/">{% trans "Nyheter" %}</a></li>
-                    <li> <a href="/cart/show/" > {% trans "Shoppinglåda" %}</a></li>
-                    <li> <a href="/galleries/">{% trans "Bildgallerier" %}</a></li>
-                    <li> <a href="/about/">{% trans "Om oss" %}</a></li>
-                    <li> <a href="/shops/">{% trans "Butiker" %}</a></li>
-                    <li> <a href="/order/">{% trans "Beställ" %}</a></li>
-                    <li> <a href="/newsletter/">{% trans "Nyhetsbrev" %}</a></li>
-                </ul>
-            </div>
-          </div>
-
-          <div class="span2">
-             <strong>{% trans "Nyheter" %}</strong><br/>
-              {% load news_extra %}
-              {% show_news %}
-          </div>
-
+           </div>
   </footer>
  {% endblock %}
 {% endblock %}
