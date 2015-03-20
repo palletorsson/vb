@@ -192,3 +192,10 @@ class PatternAndColor(models.Model):
     quality = models.ForeignKey('Quality')
     order = models.IntegerField("order items", unique=True)
     active = models.BooleanField("Active", default=True)
+
+    def __unicode__(self):
+        return unicode(self.name)
+
+    class Meta:
+        ordering = ['-pattern', '-color',]
+
