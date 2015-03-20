@@ -197,5 +197,5 @@ class PatternAndColor(models.Model):
         return unicode(self.name)
 
     class Meta:
-        ordering = ['-pattern', '-color',]
+        ordering = ['-color', '-pattern',]
 
