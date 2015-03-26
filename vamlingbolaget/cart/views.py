@@ -336,7 +336,7 @@ def totalsum(cartitems, bargains, request, voucher):
     temp_q = 0
     
     if voucher:
-		ordered = sorted(cartitems, key=operator.attrgetter('article.price'))
+		ordered = sorted(cartitems, key=operator.attrgetter('article.price'), reverse=True) 
 		ordered[0].article.oldprice = int(ordered[0].article.price)
 		ordered[0].article.price = int(ordered[0].article.price * 0.85)
 	
