@@ -295,6 +295,9 @@ img.pattern_color_image {
  overflow-y: scroll;
  height:200px;
 }
+.floating {
+ float:right;
+}
 
 .footer {
     background: #fff;

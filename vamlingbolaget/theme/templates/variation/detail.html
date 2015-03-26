@@ -29,9 +29,13 @@
 
 		<div class="span7">
 		
-			<div class="span8">
-				<div class="span5">
-					
+			<div>
+				<div >
+				<span class="floating">			
+					<span style="padding-left: 20px;">
+						<img src="{% version product.article.file 'small' %} " />
+					</span>
+				</span>		
 					<p><strong><span id="articlename">{{ product.article.name }}</span>   </strong></p>
 					<p> {% trans "Artikelnummer" %}: <span id="sku_number">{{ product.article.sku_number }}</p>
 
@@ -39,13 +43,10 @@
 
 					{% trans "Kvalitet" %}: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span><br/>
 					{{ product.article.quality.description }}
+				
 				</div>
 				
-				<div class="span2">			
-					<span style="padding-left: 20px;">
-						<img src="{% version product.article.file 'small' %} " />
-					</span>
-				</div>
+		
 
 			<br/>
 			
@@ -119,10 +120,10 @@
 					</div>
 				<!-- else if quality is Silky jersey or silkjersey-children etc -->
 				{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
-					
+					<strong>{% trans "Välj färg / mönster" %}</strong> <hr/>
 
-					<div class="span10">
-						<strong>{% trans "Välj färg / mönster" %}</strong> <hr/>
+					<div class="span12">
+						
 					<div class="selectedpatternandcolor span2">
 						<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" /><br/>
 						{{ product.color.name }} {{ product.pattern.name }}
@@ -214,7 +215,8 @@
 			<hr/>
 
 			<div style="clear: both;"></div>
-			<div class="span6">
+			<hr/>
+			<div class="span3">
 				<h4>  {% trans "Pris" %} :
 					{%if product.article.discount%}
 					<span class="discount"> {{ product.article.f_discount }} </span> SEK *<br />
@@ -226,7 +228,7 @@
 			</div>
 
 
-			<div id='addtocart' style="display:block;">
+			<div class="span3" id='addtocart' style="display:block;">
 				<span style="padding-left: 30px;">
 					<button class="btn btn-success" type="button">{% trans "Lägg till i Shoppinglåda" %} </button>
 				</span>
