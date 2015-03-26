@@ -293,6 +293,7 @@ img.pattern_color_image {
 }
 .color_and_pattern_choose {
  overflow-y: scroll;
+ height:200px;
 }
 
 .footer {
