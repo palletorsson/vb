@@ -338,6 +338,7 @@ def totalsum(cartitems, bargains, request, voucher):
     if voucher:
 		try:
 			ordered = sorted(cartitems, key=operator.attrgetter('article.price'), reverse=True) 
+			print ordered
 			ordered[0].article.oldprice = int(ordered[0].article.price)
 			ordered[0].article.price = int(ordered[0].article.price * 0.85)
 		except:
