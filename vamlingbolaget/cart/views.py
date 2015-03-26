@@ -335,7 +335,7 @@ def totalsum(cartitems, bargains, request, voucher):
     temp_p = 0
     temp_q = 0
     
-    if voucher:
+    if (voucher and cartitems):
 		try:
 			ordered = sorted(cartitems, key=operator.attrgetter('article.price'), reverse=True) 
 			print ordered
