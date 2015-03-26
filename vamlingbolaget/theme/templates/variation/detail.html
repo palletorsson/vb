@@ -12,17 +12,19 @@
 {% endblock %}
 
 {% block allcontent %}
-<div class="row-fluid">{{ images.pk }}
+<div class="row-fluid">
     <div class="span4 img_container" id="fadeifchangeorder">
         {% for image in images %}
-            <a href="{% version image.image 'large'%}" rel="lightbox"><img src="{% version image.image 'large' %}"  alt="{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" /></a>
+         <a href="{% version image.image 'large'%}" rel="lightbox">
+			 <img src="{% version image.image 'large' %}"  alt="{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" />
+		 </a>
         {% endfor %}
         <br/>
-		 <div> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</div>
+		<div> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</div>
     </div>
 
 
-    <div class="span6">
+    <div class="span7">
         <div style="clear: both;"></div>
         <div class="span6">
             <p><strong><span id="articlename">{{ product.article.name }}</span>   </strong></p>
@@ -41,116 +43,120 @@
         <div style="clear: both;"></div>
         <div class="hidden product_type">{{product.article.type.order}}</div>
         <hr/>
-        <!-- this for checkboxes -->
-        {% if product.article.quality.order == 2 or product.article.quality.order == 4 %}
-			<div class="span12">
-				{% for color in colors %}
-					<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" style="width:100px;"  />
-					<label class="radio inline">
-						<input type="radio" name="radio" {%if color_id == color.order %} checked="checked" {%endif%}  id="radio_{{ color.order }}" value="{{ color.order }}" />
-					</label>
-				{% endfor %}
-            <br />
-            <input id="hidden_colorpattern" type="hidden" value="">
-
-		{%elif product.article.sku_number == '9805' %}
-			<div class="span6">
-				<h5> Utsidans mönster</h5>
-				<select class="changonselect" id="color">
+        <!-- diffrence start: -->
+			<!-- if quality is Velour or Quilted -->
+			{% if product.article.quality.order == 2 or product.article.quality.order == 4 %}
+				<div class="span12">
 					{% for color in colors %}
-						<option value="{{ color.order }}"
-							{% if color.order == product.color.order %}
+						<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" style="width:100px;"  />
+						<label class="radio inline">
+							<input type="radio" name="radio" {%if color_id == color.order %} checked="checked" {%endif%}  id="radio_{{ color.order }}" value="{{ color.order }}" />
+						</label>
+					{% endfor %}
+				<br />
+				<input id="hidden_colorpattern" type="hidden" value="">
+
+			<!-- if article is the "Reversible zip jacket" -->
+			{%elif product.article.sku_number == '9805' %}
+				<div class="span6">
+					<h5> Utsidans mönster</h5>
+					<select class="changonselect" id="color">
+						{% for color in colors %}
+							<option value="{{ color.order }}"
+								{% if color.order == product.color.order %}
+									selected="selected"
+								{%endif%}
+								">
+							{%trans "Färg"%} : {{ color.name }} </option>
+						{% endfor %}
+					</select> 	    
+					<select class="changonselect" id='pattern'>
+						{% for pattern in patterns %}
+							<option value="{{ pattern.order }}"
+							{% if pattern.order == product.pattern.order %}
 								selected="selected"
 							{%endif%}
 							">
-						{%trans "Färg"%} : {{ color.name }} </option>
-					{% endfor %}
-				</select> 	    
-				<select class="changonselect" id='pattern'>
-					{% for pattern in patterns %}
-						<option value="{{ pattern.order }}"
-						{% if pattern.order == product.pattern.order %}
-							selected="selected"
-						{%endif%}
-						">
-						{%trans "Mönster"%} : {{ pattern.name }}</option>
-					{% endfor %}
-				</select>
-				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
-			</div>
+							{%trans "Mönster"%} : {{ pattern.name }}</option>
+						{% endfor %}
+					</select>
+					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
+				</div>
+					
+				<div class="span5">
+					<h5>Insidans mönster</h5>
+					<select class="changonselect" id="color2">
+						{% for color in colors %}
+							<option value="{{ color.order }}"
+								{% if color.order == product.color.order %}
+									selected="selected"
+								{%endif%}
+								">
+							{%trans "Färg"%} : {{ color.name }} </option>
+						{% endfor %}
+					</select> 	    
+					<select class="changonselect" id='pattern2'>
+						{% for pattern in patterns %}
+							<option value="{{ pattern.order }}"
+							{% if pattern.order == product.pattern.order %}
+								selected="selected"
+							{%endif%}
+							">
+							{%trans "Mönster"%} : {{ pattern.name }}</option>
+						{% endfor %}
+					</select>
+					<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
+				</div>
+			<!-- else if quality is Silky jersey or silkjersey-children etc -->
+			{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
 				
-			<div class="span5">
-				<h5>Insidans mönster</h5>
-				<select class="changonselect" id="color2">
-					{% for color in colors %}
-						<option value="{{ color.order }}"
-							{% if color.order == product.color.order %}
+
+				<div class="span12">
+					<strong>{% trans "Välj färg / mönster" %}</strong> <hr/>
+				<div class="selectedpatternandcolor span3">
+					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" /><br/>
+					{{ product.color.name }} {{ product.pattern.name }}
+				</div>
+				<div class="color_and_pattern_choose span7">
+					{% for item in colorsandpattern %}
+						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+					{% endfor  %}
+				</div>
+				<input type="hidden" id="pattern" name="pattern" value="{{ product.pattern.order }}" >
+				<input type="hidden" id="color" name="color" value="{{ product.color.order }}">
+
+				<div style="clear: both;"></div>
+				<hr/>
+
+			<!-- else -->
+			{% else %}
+				<div class="span7">
+					<select class="changonselect" id="color">
+						{% for color in colors %}
+							<option value="{{ color.order }}"
+								{% if color.order == product.color.order %}
+									selected="selected"
+								{%endif%}
+								">
+							{% trans "Färg" %}: {{ color.name }} </option>
+						{% endfor %}
+					</select>
+					<select class="changonselect" id='pattern'>
+						{% for pattern in patterns %}
+							<option value="{{ pattern.order }}"
+							{% if pattern.order == product.pattern.order %}
 								selected="selected"
 							{%endif%}
 							">
-						{%trans "Färg"%} : {{ color.name }} </option>
-					{% endfor %}
-				</select> 	    
-				<select class="changonselect" id='pattern2'>
-					{% for pattern in patterns %}
-						<option value="{{ pattern.order }}"
-						{% if pattern.order == product.pattern.order %}
-							selected="selected"
-						{%endif%}
-						">
-						{%trans "Mönster"%} : {{ pattern.name }}</option>
-					{% endfor %}
-				</select>
-				<img id="pattern_color_image2" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;" />
-			</div>
-        {% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
-            {% trans "Välj färg / mönster" %} <br/>
-
-			<hr/>
-
-            <div class="span12">
-            <div class="selectedpatternandcolor span3">
-                <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" /><br/>
-                {{ product.color.name }} {{ product.pattern.name }}
-            </div>
-            <div class="color_and_pattern_choose span9">
-                {% for item in colorsandpattern %}
-                    <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
-                {% endfor  %}
-            </div>
-            <input type="hidden" id="pattern" name="pattern" value="{{ product.pattern.order }}" >
-            <input type="hidden" id="color" name="color" value="{{ product.color.order }}">
-
-            <div style="clear: both;"></div>
-			<hr/>
-
-
-	    {% else %}
-			<div class="span7">
-				<select class="changonselect" id="color">
-					{% for color in colors %}
-						<option value="{{ color.order }}"
-							{% if color.order == product.color.order %}
-								selected="selected"
-							{%endif%}
-							">
-						{% trans "Färg" %}: {{ color.name }} </option>
-					{% endfor %}
-				</select>
-				<select class="changonselect" id='pattern'>
-					{% for pattern in patterns %}
-						<option value="{{ pattern.order }}"
-						{% if pattern.order == product.pattern.order %}
-							selected="selected"
-						{%endif%}
-						">
-						{% trans "Mönster" %}: {{ pattern.name }}</option>
-					{% endfor %}
-				</select>
+							{% trans "Mönster" %}: {{ pattern.name }}</option>
+						{% endfor %}
+					</select>
+		<!-- end of endif -->
 		{% endif %}
 		<br/>
-           {%if product.article.type.order == 8 or product.article.type.order == 7 %}
-
+   	    <!-- if type is Accessories & sheet or Piece-goods -->
+	    {%if product.article.type.order == 8 or product.article.type.order == 7 %}
+	    <!-- else show size  -->
            {%else%}
 
                 <select id='size'>
@@ -163,7 +169,7 @@
         	    </select>
         {% endif %}
 
-
+   	    <!-- if type is  Piece-goods (metervara) -->
         {% if product.article.type.order == 8 %}
                 <select id='quantiy_pk'>
                     <option value="1" selected="selected">{% trans "Meter" %} : 1 </option>
@@ -181,7 +187,9 @@
                     <option value="4">{% trans "Antal" %} : 4 </option>
                 </select>
         {% endif %}
+        
 	</div>
+	   	    <!-- if type is  Piece-goods (metervara) -->
         {% if product.article.quality.order == 2 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 1  or product.article.quality.order == 4 or product.article.sku_number == '9805' or product.article.quality.order == 10  or product.article.quality.order == 14 %}
 			<br/>
 		{%else%}
