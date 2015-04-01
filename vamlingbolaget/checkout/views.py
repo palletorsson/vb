@@ -89,9 +89,11 @@ def checkout(request):
             msg = msg + '\n'
 
             for item in bargains:
+                payex_products = "Vamlingbolaget"
+                payex_articles = "Reavaror"        
                 msg = msg + 'Produkt '+ str(i) + str(': fynd ') + ': \n'
                 msg = msg +  str(1) + u' st ' +  item.bargain.title + ' : ' + str(item.bargain.price)  + ' SEK \n' 
-                msg = msg + u' (' + item.bargain.description  + ' ) \n'            
+                msg = msg + u' ( ' + item.bargain.description  + ' ) \n'            
                 i = i + 1
             msg = msg + '\n'
 
