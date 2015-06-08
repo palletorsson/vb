@@ -234,21 +234,25 @@ def success(request):
                 }, context_instance=RequestContext(request))
 
             if (order != 1 and order.status == 'O'):
-                cart = Cart.objects.get(key = cart_id)
-                cartitems_key = cart.id
-                cartitems = CartItem.objects.filter(cart = cartitems_key)
-                cartitems.delete()
-                cart.delete()
+                try:
+                    cart = Cart.objects.get(key = cart_id)
+                    cartitems_key = cart.id
+                    cartitems = CartItem.objects.filter(cart = cartitems_key)
+                    cartitems.delete()
+                    cart.delete()
+                    order.message = order.message + '\n' + u'2: Log Success: old cart removed'
+                except:
+                    order.message = order.message + '\n' + u'2: old cart not found '
+                     
                 _new_cart_id(request)
                 message = "Tack for din order"
-                order.message = order.message + '\n' + u'2: Log Success: old cart removed'
-
                 try:
                     transnumber = response['transactionNumber']
                     order.order = order.order + 'PayEx transaktion: ' + str(transnumber) + '\n'
                     order.message = order.message + '\n' + '3: Log Success, PayEx transaktion: ' + str(transnumber)
                 except:
-                    pass
+                    order.message = order.message + '\n' + '3: Log Success, PayEx not found'
+
                 to = [order.email, 'info@vamlingbolaget.com']
                 mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.order, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
