@@ -142,6 +142,7 @@ def checkout(request):
 
             if (paymentmethod == 'P'):
                 new_order.order = msg
+                new_order.message = new_order.message + '\n' + '________________'+ '\n' + u'1 :Log: Mail order, Thanks.'
                 new_order.save()
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
                 mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
@@ -209,7 +210,7 @@ def success(request):
     )
     try:
         orderref = request.GET.get('orderRef', None)
-
+        order.message = order.message + '\n' + u'1.1: orderref' + orderref
     except:
         pass
 
@@ -220,12 +221,18 @@ def success(request):
 
     if orderref:
         response = service.complete(orderRef=orderref)
+        order.message = order.message + '\n' + response + '\n'
+
         if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0'):
+            order.message = order.message + '\n' + u'1.5: status Ok and transactionStatus 0'
+            
             cart_id = _cart_id(request)
             try:
                 order = Checkout.objects.get(payex_key=orderref)
+                order.message = order.message + '\n' + u'1.7: checkout found with the payex_key: ' +  orderref + 'cartid: ' + cart_id
             except:
                 order = 1
+                order.message = order.message + '\n' + u'1.7: no checkout found with the payex_key: ' +  orderref
 
             if (order == 1):
                 message = u'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
@@ -245,22 +252,26 @@ def success(request):
                     order.message = order.message + '\n' + u'2: old cart not found '
                      
                 _new_cart_id(request)
-                message = "Tack for din order"
+
                 try:
                     transnumber = response['transactionNumber']
                     order.order = order.order + 'PayEx transaktion: ' + str(transnumber) + '\n'
                     order.message = order.message + '\n' + '3: Log Success, PayEx transaktion: ' + str(transnumber)
+                    order.status = 'P'                  
                 except:
-                    order.message = order.message + '\n' + '3: Log Success, PayEx not found'
+                    order.message = order.message + '\n' + '3: Log Fail, PayEx transaktion not found: ' + str(transnumber)
 
-                to = [order.email, 'info@vamlingbolaget.com']
-                mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.order, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                try:
+                    to = [order.email, 'info@vamlingbolaget.com']
+                    mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.order, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                    order.order = order.order + u'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
+                    order.message = order.message + '\n' + u'4: Log Success: Mail sent to mail adress : ' + order.email
+                    order.save()
+                except: 
+                    order.message = order.message + '\n' + u'4: Log Fail: Mail not sent to mail adress : ' + order.email
 
-                order.order = order.order + u'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
-                order.status = 'P'
-                order.message = order.message + '\n' + u'4: Log Success: Mail sent to mail adress : ' + order.email
 
-                order.save()
+                message = "Tack for din order"
 
                 return render_to_response('checkout/thanks.html', {
                     'order': order,
@@ -281,12 +292,14 @@ def success(request):
                 order = 1
 
             if(order == 1):
+                order.message = order.message + '\n' + u'2: Cancel log: - det fanns ingen beställning att avbryta'
+
                 message = u"- Det finns inte någon sådan beställning"
                 return render_to_response('checkout/thanks.html', {
                 'message': message,
                 }, context_instance=RequestContext(request))
             else:
-                order.message = order.message + '\n' + u'2: Cancel log: "- Betalningen avslogs eller avbröts.'
+                order.message = order.message + '\n' + u'2: Cancel log: - Betalningen avslogs eller avbröts.'
                 order.status = 'C'
                 order.save()
                 message = u"- Betalningen avslogs eller avbröts."
