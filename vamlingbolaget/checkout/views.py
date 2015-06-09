@@ -221,10 +221,8 @@ def success(request):
 
     if orderref:
         response = service.complete(orderRef=orderref)
-        order.message = order.message + '\n' + response + '\n'
-
+        
         if (response['status']['errorCode'] == 'OK' and response['transactionStatus'] == '0'):
-            order.message = order.message + '\n' + u'1.5: status Ok and transactionStatus 0'
             
             cart_id = _cart_id(request)
             try:
