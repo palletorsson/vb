@@ -125,8 +125,8 @@ var sku_number = $('#sku_number').text(),
     pattern2 = 0;
 
 if (sku_number == 9805) { //fill in proper article no for 2 patterned items
-	color2 = $('#color2 option:selected').val();
-	pattern2 = $('#pattern2 option:selected').val();
+	color2 = $('#color2').val();
+	pattern2 = $('#pattern2').val();
 	}
 
 $.ajax({
