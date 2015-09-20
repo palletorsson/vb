@@ -47,6 +47,11 @@ def checkout(request):
             postcode = request.POST['postcode']
             city = request.POST['city']
 
+            if (request.POST['phone']):
+                phone = request.POST['phone']
+            else:
+                phone = 'none'
+
             if (request.POST['country']):
                 country = request.POST['country']
             else:
@@ -117,6 +122,11 @@ def checkout(request):
             if (country != 'none'):
                 msg = msg + u'%s \n' % (country)
             msg = msg + '--------------------------------- \n'
+
+            if (phone != 'none'):
+                msg = msg + u'Ditt telefonnummer: %s \n' % (phone)
+                msg = msg + '--------------------------------- \n'
+
             if (message != 'none'):
                 msg = msg + 'Din Meddelande:\n'
                 msg = msg + u' %s \n' % (message)
@@ -227,7 +237,7 @@ def success(request):
             cart_id = _cart_id(request)
             try:
                 order = Checkout.objects.get(payex_key=orderref)
-                order.message = order.message + '\n' + u'1.7: checkout found with the payex_key: ' +  orderref + 'cartid: ' + cart_id
+                order.message = order.message + '\n' + u'1.7: checkout found with the payex_key: ' +  orderref + '\n' + 'cartid: ' + cart_id
             except:
                 order = 1
                 order.message = order.message + '\n' + u'1.7: no checkout found with the payex_key: ' +  orderref
