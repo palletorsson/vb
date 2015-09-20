@@ -427,12 +427,9 @@ set_first_page();
       var pattern_name = colorandpattern[3];
 	  var image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="120"> <br />'+ color_name + ' ' +pattern_name+ ' ';
 
-      console.log(e.target);
-      console.log($(this).hasClass('inside'));
-
+      
       if ($(this).hasClass("inside")) {
-		console.log('INSIDE'); 	
-      	$("#selectedpatternandcolor_inside").html(image_url);
+		$("#selectedpatternandcolor_inside").html(image_url);
         $('input[name="pattern_2"]').val(pattern);
         $('input[name="color_2"]').val(color);
 	  } else {
