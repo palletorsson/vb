@@ -429,7 +429,7 @@ set_first_page();
 
       
       if ($(e.target).hasClass("inside")) {
-      	$("#selectedpatternandcolor_inside").html(image_url);
+      	$(".selectedpatternandcolor_inside").html(image_url);
         $('input[name="pattern_2"]').val(pattern);
         $('input[name="color_2"]').val(color);
 	  } else {
