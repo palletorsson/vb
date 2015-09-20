@@ -425,13 +425,14 @@ set_first_page();
       var pattern = colorandpattern[1];
       var color_name = colorandpattern[2];
       var pattern_name = colorandpattern[3];
-      image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="120"> <br />'+ color_name + ' ' +pattern_name+ ' ';
+	  var image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="120"> <br />'+ color_name + ' ' +pattern_name+ ' ';
 
       console.log(e.target);
-      console.log($(this));
+      console.log($(this).hasClass('inside');
 
       if ($(this).hasClass("inside")) {
-      	$(".selectedpatternandcolor_inside").html(image_url);
+		console.log('INSIDE');
+      	$("#selectedpatternandcolor_inside").html(image_url);
         $('input[name="pattern_2"]').val(pattern);
         $('input[name="color_2"]').val(color);
 	  } else {
