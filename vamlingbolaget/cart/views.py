@@ -54,7 +54,7 @@ def addtocart(request):
         color = d['color']
         pattern = d['pattern']
         color2 = int(d['color2'])
-        print color2
+        #print color2
         if(color2 == 0):
             pass
         else:
@@ -142,8 +142,6 @@ def addtocart(request):
                         'pattern': pattern_db.name,
                         'color2': color_db2.name,
                         'pattern2': pattern_db2.name,
-                        'color': color_db.name,
-                        'pattern': pattern_db.name,
                         'size': size_db.name,
                         'quantity': quantity,
                         },

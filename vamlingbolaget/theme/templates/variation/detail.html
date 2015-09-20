@@ -76,8 +76,10 @@
 
 				<!-- if article is the "Reversible zip jacket" -->
 				{%elif product.article.sku_number == '9805' %}
-					<div class="span6">
-						<h5> Utsidans mönster</h5>
+				<strong>{% trans "Välj färg / mönster" %}</strong> <hr/>
+					
+					<div class="span12">
+						<h5> Välj Utsidans mönster</h5>
 							<div class="outside">
 							<div class="selectedpatternandcolor span2">
 						<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" /><br/>
@@ -94,7 +96,7 @@
 					<div style="clear: both;"></div>
 					<hr/>
 							</div> 
-<h5> Insidans mönster</h5>
+<h5> Välj Insidans mönster</h5>
 							<div class="inside">
 <div id="selectedpatternandcolor_inside" class="selectedpatternandcolor_inside span2">
 						<img id="pattern_color_image inside" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" /><br/>
