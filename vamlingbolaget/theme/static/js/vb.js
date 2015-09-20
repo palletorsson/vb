@@ -428,7 +428,7 @@ set_first_page();
       image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="120"> <br />'+ color_name + ' ' +pattern_name+ ' ';
 
       
-      if ($(e.target).hasClass("inside")) {
+      if ($(this).hasClass("inside")) {
       	$(".selectedpatternandcolor_inside").html(image_url);
         $('input[name="pattern_2"]').val(pattern);
         $('input[name="color_2"]').val(color);
