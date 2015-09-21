@@ -46,12 +46,12 @@ def checkout(request):
             street = request.POST['street']
             postcode = request.POST['postcode']
             city = request.POST['city']
-
+            sms = request.POST['sms']
             if (request.POST['phone']):
                 phone = request.POST['phone']
             else:
                 phone = 'none'
-
+  
             if (request.POST['country']):
                 country = request.POST['country']
             else:
@@ -132,13 +132,16 @@ def checkout(request):
                 msg = msg + u' %s \n' % (message)
                 msg = msg + '\n'
             msg = msg + '--------------------------------------------------------------------------------- \n'
-            msg = msg + ' \n'
             msg = msg + '* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
 
             if (paymentmethod == 'P'):
                 msg = msg + u'* Du betalar med postförskott. \n'
             if (paymentmethod == 'C'):
                 msg = msg + u'* Du har valt kortbetalning. \n'
+
+            if (sms == 'yes'):
+                msg = msg + '--------------------------------------------------------------------------------- \n'
+                msg = msg + u'* Du får en sms-avisering. \n'
 
             msg = msg + '- Tack!\n'
             order_numb = random.randrange(0, 111111, 3)
@@ -155,7 +158,7 @@ def checkout(request):
                 new_order.message = new_order.message + '\n' + '________________'+ '\n' + u'1 :Log: Mail order, Thanks.'
                 new_order.save()
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
-                mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                #mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
                 return HttpResponseRedirect('thanks/')
 
             if (paymentmethod == 'C'):

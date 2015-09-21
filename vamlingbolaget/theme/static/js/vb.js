@@ -392,6 +392,15 @@ var set_first_page = function(){
     $('.carousel-control').show()
 }
 
+$('#sms-checkbox').click(function () {
+	var sms_val = $('input[name=sms]').val()
+    if (sms_val == 'no') {
+	    $('input[name=sms]').val('yes')
+    } else {
+	    $('input[name=sms]').val('no')
+	}
+ 
+});
 
 $('.change_lang').click(function(){
     var val = $(this).attr('id');
@@ -402,7 +411,7 @@ $('.change_lang').click(function(){
 set_first_page();
 
 // --- end of welcome page animation
-// choose color and pattern logic
+// choose color and pattern logict
     var open = 0;
 
     // $(".color_and_pattern_choose").hide();

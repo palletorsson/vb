@@ -246,7 +246,21 @@
             {{ form.phone }}
             {{ form.phone.errors }} *
         </div>
+	</div>
 
+    <div class="control-group" id="sms">
+        <label class="col-lg-3 control-label" > 
+			<label for="sms">{% trans "Sms-avisering" %} </label>
+		</label>
+         <div class="col-lg-9">
+  			
+			<input type="checkbox" id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> Jag vill ha Sms-avisering <br>
+            <input type="hidden" name="sms" id="id_sms" value="yes">
+	</div>
+			
+	</div>
+					<div style="clear: both;"></div>
+<br>
     <div class="control-group" id="message">
         <label class="col-lg-3 control-label" > <label for="id_message">{% trans "Meddelande till beställning" %}  </label></label>
         {{form.subject.message}}
