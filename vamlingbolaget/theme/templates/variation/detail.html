@@ -162,6 +162,8 @@
 			<!-- end of endif -->
 			{% endif %}
 			<br/>
+
+					<div class="span7">
 			<!-- if type is Accessories & sheet or Piece-goods -->
 			{%if product.article.type.order == 8 or product.article.type.order == 7 %}
 			<!-- else show size  -->
@@ -192,7 +194,7 @@
 			{% else %}
 <span class="input-group">
   <span class="input-group-addon"> {% trans "Antal" %} </span>
-					<select id='quantiy_pk'>
+					<select id='quantiy_pk' class="form-control">
 						<option value="1" selected="selected"> 1 </option>
 						<option value="2"> 2 </option>
 						<option value="3"> 3 </option>
@@ -216,6 +218,7 @@
 			{% endif %}
 
 
+					</div>
 			<div style="clear: both;"></div>
 			<hr/>
 			<div class="span3">
