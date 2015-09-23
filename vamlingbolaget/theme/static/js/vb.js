@@ -443,11 +443,12 @@ set_first_page();
         $('input[name="color_2"]').val(color);
 	  } else {
 	   $(".selectedpatternandcolor").html(image_url);
+       $('input[name="pattern"]').val(pattern);
+       $('input[name="color"]').val(color);
 	  }
 	  
       
-      $('input[name="pattern"]').val(pattern);
-      $('input[name="color"]').val(color);
+
 
     });
 
