@@ -14,7 +14,7 @@
                     {% with product.image_set.all|first as image %}
 
                             <div class="force_image"><img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
-                            <br/>
+                            
                             <div class='image_description'>
                                 {{ product.article.name }}<br/>
                                 {% trans "Pris" %} :

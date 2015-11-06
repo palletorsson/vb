@@ -125,6 +125,10 @@
 		width:240px;
 	}
 
+	.img_container {
+	  margin: 2px;
+	}
+
 	.nav {
 		padding-top: 30px;
 	}
@@ -181,17 +185,24 @@
 	}
 	.container {
 		  background: #fff; //red;
+	
+		margin:0;
+		padding:0;
 	}
 
 
 	.span9 {
-        width: 440px;
+        width: 100%;
     }
 
+	.img_container {
+	  margin: 0px;
+	}
 
 	.collection_list {
 		float:left;
-		width:40%;
+		width:50%;
+		margin:0:
 	}
 
 	.leftside {
@@ -214,7 +225,15 @@
 		 width:100px;
 	}
 
-
+	.image_description {
+	  padding: 2px;
+	  white-space: normal; 
+	  overflow: hidden;
+	}
+	.force_image {
+	  height: 275px;
+	  overflow: hidden;
+	}
 
 	.span4 {
 		width:100%;
