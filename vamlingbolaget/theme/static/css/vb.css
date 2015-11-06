@@ -266,15 +266,21 @@ margin-right: -49px;
 
 
 .textonimage {
-	position: absolute;
-	bottom: 20px;
-	left: 20px;
-	background-color: white;
-	filter: alpha(opacity=70);
-	-moz-opacity: 0.8;
-	-khtml-opacity: 0.8;
-	opacity: 0.8;
-	padding: 4px;
+position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: white;
+  filter: alpha(opacity=70);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+  padding: 4px;
+	-webkit-transform: skew(-20deg);
+	   -moz-transform: skew(-20deg);
+	     -o-transform: skew(-20deg);
+	transform: skew(-20deg);
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 .shop_icon {

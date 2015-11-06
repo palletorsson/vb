@@ -118,13 +118,11 @@
     }
 
 	.leftside{
-		position:absolute;
-		top:4px;
-		left:16px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin: auto;		
 		width:240px;
-		padding-left: 60px;
-		padding-top: 10px;
-		margin-right: 1px;
 	}
 
 	.nav {
@@ -198,10 +196,6 @@
 
 	.leftside {
 		width: 220px;
-		left: 12px;
-		padding-left: 60px;
-		padding-top: 20px;
-		margin-right: 1px;
 	}
 
 	
