@@ -16,7 +16,7 @@
                             <div class="force_image"><img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
                             <span class="hidden-xs"><br/></span>
                             <div class='image_description'>
-                                {{ product.article.name }}<br/>
+                               <span class="artname"> {{ product.article.name }}</span><br/>
                                 <span class="hidden-xs">{% trans "Pris" %} :</span>
                                 {%if product.article.discount%}
                                     <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK

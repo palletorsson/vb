@@ -221,6 +221,12 @@
 	.price{
 		font-size: 16px;
 	}
+	.artname{
+		font-weight:bold;
+		  font-size: 16px;
+		  font-style: italic;
+		  letter-spacing: 1px;
+	}
 	.navbar-collapse {
 		width: 100%;
 		padding-left: 35px; /*to compensate for bootstrap -15 px left-margin*/
@@ -237,7 +243,7 @@
       height:95px;
 	}
 	.force_image {
-	  height: 235px;
+	  height: 251px;
 	  overflow: hidden;
 	}
 
