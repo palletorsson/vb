@@ -265,6 +265,40 @@ margin-right: -49px;
   }
 
 
+.textonimage {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	background-color: white;
+	filter: alpha(opacity=70);
+	-moz-opacity: 0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+	padding: 4px;
+}
+
+.shop_icon {
+    width: 60px;
+	padding-left: 20px;
+    float:left; 
+}
+
+.women_image {
+	height:200px; 
+	background-image:url(http://www.vamlingbolaget.com/media/uploads/mars_15/dsc_7463.jpg);
+    background-size: cover;
+    border: 1px solid red;
+    margin:-20px; 
+}
+
+.men_image {
+	height:200px; 
+	background-image:url(http://www.vamlingbolaget.com/media/uploads/mars_15/dsc_8122_copy.jpg);
+    background-size: cover;
+    border: 1px solid red;
+    margin:-20px; 
+
+}
 
 .form-flag {
     margin-top: 2px;
@@ -338,6 +372,9 @@ vertical-align: middle;
 border-radius: 4px;
 }
 
+.input-group .form-control {
+width: 10%;
+}
 textarea {
 height:260px
 }

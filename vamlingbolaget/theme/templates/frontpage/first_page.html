@@ -4,31 +4,63 @@
 {% version model.field_name version_prefix %}
 
 {% block stretchpage %}
+    
+<div class="hidden-xs">
+    <!-- Carousel for larger screens -->
     <div class="spanfullscreen">
-            <!-- Carousel
-          ================================================== -->
-            <div class="bs-docs-example">
-              <div id="myCarousel" class="carousel slide">
-                <div class="carousel-inner" >
-                  {%for image in images%}
-                      <div class="item {% if forloop.first%} active {%endif%} spanfullscreen">
-                      <h2 class="imageoverlay"></h2>
-                                 <a href="/products/"><img src="{{MEDIA_URL}}{{image.image}}" alt="{{image.name}}" name="{{image.name}}" alt=""/></a>
-
-                      </div>
-                  {%endfor%}
-                </div>
-                <div class="left"  ><a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a></div>
-                <div class="right" ><a class="right carousel-control"  href="#myCarousel" data-slide="next">&rsaquo;</a></div>
-              </div>
-            </div>
+		<div class="bs-docs-example">
+			<div id="myCarousel" class="carousel slide">
+				<div class="carousel-inner" >
+				  	{%for image in images%}
+				    <div class="item {% if forloop.first%} active {%endif%} spanfullscreen">
+				 
+				      	<a href="/products/type/kvinna/"><img src="{{MEDIA_URL}}{{image.image}}" alt="{{image.name}}" name="{{image.name}}"/></a>
+				    </div>
+					{%endfor%}
+				</div>
+				<div class="left"  ><a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a></div>
+				<div class="right" ><a class="right carousel-control"  href="#myCarousel" data-slide="next">&rsaquo;</a></div>
+		  	</div>
+		</div>
     </div>
+</div>
 
+<div class = "visible-xs">
+    <!-- vis mobile --> 
+	<div class="list-group">
 
- <footer>
-<div style="clear:both;"></div>
+		<a href="/products/type/kvinna/" class="list-group-item"> 
+			<div class="women_image">
+				<div class="textonimage"> DAM </div> 
+		    </div>
+			</a>
+	 <hr>
+		<a href="/products/man/" class="list-group-item">
+			<div class="men_image">
+				<div class="textonimage"> HERR </div> 
+		    </div></a>
+	</div>
+	<div class="list-group">
+	  <a href="/cart/show/" class="list-group-item"> {% trans "Shoppinglåda" %}</a>
+	</div>
+	<hr>
+	<div class="list-group">
+		<a href="/collection/new/" class="list-group-item">{% trans "Kollektion" %}</a>
+		<a href="/products/type/kvinna/" class="list-group-item">{% trans "Shop" %}</a>
+		<hr>
+		<a href="/news/" class="list-group-item">{% trans "Nyheter" %}</a>
+		<a href="/galleries/" class="list-group-item">{% trans "Bildgallerier" %}</a>
+		<hr>
+		<a href="/about/" class="list-group-item">{% trans "Om oss" %}</a>
+		<a href="/shops/" class="list-group-item">{% trans "Butiker" %}</a>
+		<a href="/order/" class="list-group-item">{% trans "Beställ" %}</a>
+		<a href="/newsletter/" class="list-group-item">{% trans "Nyhetsbrev" %}</a>                           
+	</div>
+</div> <!--- vis mobile ends --> 
 
-      <div class="container footer "  style="margin-top:10px;">
+<footer>
+	<div style="clear:both;"></div>
+      <div class="container footer" style="margin-top:10px;">
           <div class="span5">
               <address>
                   <strong>Vamlingbolaget</strong><br/>
@@ -50,13 +82,8 @@
               </address>
 
           </div>
-
-
-
-
       </div>
-
-  </footer>
+ </footer>
     <script>
       $(document).ready(function(){
         $('.carousel').carousel(

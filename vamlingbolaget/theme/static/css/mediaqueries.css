@@ -41,7 +41,6 @@
 
 @media (min-width: 768px) and (max-width: 979px) {
 	body {
-		background-color: #fff;
 		padding-left: 0px;
 		padding-right: 0px;
 	}
@@ -101,29 +100,33 @@
         width:0%;
     }
 
+
 }
 
 @media (max-width: 767px) {
 	body {
 		padding-left: 0px;
-		padding-right: 0px;
+		padding-right: 0px 
 	}
 
 	.container {
 		background: #fff; // green;
 	}
+
 	.span9 {
         width: 700px;
     }
+
 	.leftside{
 		position:absolute;
 		top:4px;
 		left:20px;
-		width:300px;
-		padding-left: 3px;
+		width:260px;
+		padding-left: 60px;
 		padding-top: 10px;
 		margin-right: 1px;
 	}
+
 	.nav {
 		padding-top: 30px;
 	}
@@ -152,10 +155,6 @@
 	.dropdown-menu{
 		min-width: 260px;
 	}
-
-
-
-
 
 	.collection_list {
 		float:left;
@@ -199,12 +198,13 @@
 
 	.leftside {
 		width: 260px;
-		left:10px;
-		padding-left: 3px;
+		left: 20px;
+		padding-left: 60px;
 		padding-top: 20px;
 		margin-right: 1px;
 	}
 
+	
 	.nav{
 		padding-top:0;
 	}
