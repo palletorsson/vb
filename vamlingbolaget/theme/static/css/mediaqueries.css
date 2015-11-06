@@ -201,7 +201,7 @@
 
 	.collection_list {
 		float:left;
-		width:49%;
+		width:50%;
 		margin:0:
 	}
 
@@ -209,12 +209,17 @@
 		width: 220px;
 	}
 
-	
-	.nav{
+	.pagetitle{
+		padding-left:20px;
+	}
+		.nav{
 		padding-top:0;
 	}
 	.nav > li {
 		border-bottom: 1px solid #ccc;
+	}
+	.price{
+		font-size: 16px;
 	}
 	.navbar-collapse {
 		width: 100%;
@@ -229,10 +234,10 @@
 	  padding: 2px;
 	  white-space: normal; 
 	  overflow: hidden;
-      height:100px;
+      height:95px;
 	}
 	.force_image {
-	  height: 275px;
+	  height: 235px;
 	  overflow: hidden;
 	}
 

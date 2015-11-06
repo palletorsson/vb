@@ -14,14 +14,14 @@
                     {% with product.image_set.all|first as image %}
 
                             <div class="force_image"><img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
-                            <br/>
+                            <span class="hidden-xs"><br/></span>
                             <div class='image_description'>
                                 {{ product.article.name }}<br/>
-                                {% trans "Pris" %} :
+                                <span class="hidden-xs">{% trans "Pris" %} :</span>
                                 {%if product.article.discount%}
                                     <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK
                                 {%else%}
-                                    {{ product.article.price }} SEK
+                                    <span class="price">{{ product.article.price }} SEK</span>
                                 {%endif%}
                             </div>
 
