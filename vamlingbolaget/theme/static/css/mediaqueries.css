@@ -201,7 +201,7 @@
 
 	.collection_list {
 		float:left;
-		width:50%;
+		width:49%;
 		margin:0:
 	}
 
@@ -229,6 +229,7 @@
 	  padding: 2px;
 	  white-space: normal; 
 	  overflow: hidden;
+      height:100px;
 	}
 	.force_image {
 	  height: 275px;
