@@ -23,27 +23,28 @@
 			 </a>
 			{% endfor %}
 			<br/>
-			<div> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</div>
+			<div class="hidden-xs"> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</div>
 		</div>
 
 
 		<div class="span7">
-		
 			<div>
-				<div >
+				<div>
 				<span class="floating">			
-					<span style="padding-left: 20px;">
+					<span style="padding-left: 20px;" class="hidden-xs">
 						<img src="{% version product.article.file 'small' %} " />
 					</span>
-				</span>		
-					<p><strong><span id="articlename">{{ product.article.name }}</span> -
+				</span>	
+					<p><h3 id="articlename">{{ product.article.name }} <span class="detailPrice">
 					{%if product.article.discount%}
-					<span class="discount"> {{ product.article.f_discount }} </span> SEK *<br />
+					<span class="discount"> {{ product.article.f_discount }} </span> :- *<br />
 						<span class="smaller">({% trans "tidigare pris" %} </span>  <span id="the_price"> {{ product.article.price }} </span>    <span class="smaller">SEK) <br />
 					   * {{ product.article.discount.reason }} </span>
+
 					{%else%}
-						<span id="the_price"> {{ product.article.price }} </span>SEK
-					{%endif%}  </strong></p>
+						<span id="the_price"> {{ product.article.price }} :-</span>
+					{%endif%}  </span></p></h3>
+
 					<p> {% trans "Artikelnummer" %}: <span id="sku_number">{{ product.article.sku_number }}</p>
 
 					<p id="art_description" class="small">{{ product.article.description }}</p>

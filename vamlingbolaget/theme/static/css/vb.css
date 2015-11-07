@@ -158,6 +158,12 @@ background-color: #5cb85c;
 margin-right: -49px;
 }
 
+.detailPrice {
+  font-weight: normal;
+  line-height: 1;
+  color: #666;
+  font-size: 18px;
+}
 .collection_list img {
     width: 100%;
 }
