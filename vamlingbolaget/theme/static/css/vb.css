@@ -141,7 +141,30 @@ text-shadow: 0 1px 0 #eeeeee;
 
 
 .collection_list {
+  float:left;
   width:200px;
+}
+
+.detailPrice {
+  font-weight: normal;
+  line-height: 1;
+  color: #666;
+  font-size: 26px;
+  position: relative;
+  top: -48px;
+  left: 240px;
+  background-color: white;
+  filter: alpha(opacity=70);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+  padding: 4px;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
+  transform: skew(-20deg);
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 .image_description {
@@ -157,27 +180,6 @@ background-color: #5cb85c;
 margin-right: -49px;
 }
 
-.detailPrice {
-  font-weight: normal;
-  line-height: 1;
-  color: #666;
-  font-size: 26px;
-  position: relative;
-  top: -48px;
-  left: 150px;
-  background-color: white;
-  filter: alpha(opacity=70);
-  -moz-opacity: 0.8;
-  -khtml-opacity: 0.8;
-  opacity: 0.8;
-  padding: 4px;
-  -webkit-transform: skew(-20deg);
-  -moz-transform: skew(-20deg);
-  -o-transform: skew(-20deg);
-  transform: skew(-20deg);
-  letter-spacing: 2px;
-  font-weight: bold;
-}
 
 .collection_list img {
     width: 100%;
