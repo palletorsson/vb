@@ -22,6 +22,17 @@
 				 <img src="{% version image.image 'large' %}"  alt="{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" />
 			 </a>
 			{% endfor %}
+
+			<div class="detailPrice">
+					{%if product.article.discount%}
+					<span class="discount"> {{ product.article.f_discount }} </span> :- *<br />
+						<span class="smaller">({% trans "tidigare pris" %} </span>  <span id="the_price"> {{ product.article.price }} </span>    <span class="smaller">SEK) <br />
+					   * {{ product.article.discount.reason }} </span>
+
+					{%else%}
+						<span id="the_price"> {{ product.article.price }} :-</span>
+					{%endif%}  </div>
+
 			<br/>
 			<div class="hidden-xs"> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</div>
 		</div>
@@ -35,15 +46,8 @@
 						<img src="{% version product.article.file 'small' %} " />
 					</span>
 				</span>	
-					<p><h3 id="articlename">{{ product.article.name }} <span class="detailPrice">
-					{%if product.article.discount%}
-					<span class="discount"> {{ product.article.f_discount }} </span> :- *<br />
-						<span class="smaller">({% trans "tidigare pris" %} </span>  <span id="the_price"> {{ product.article.price }} </span>    <span class="smaller">SEK) <br />
-					   * {{ product.article.discount.reason }} </span>
-
-					{%else%}
-						<span id="the_price"> {{ product.article.price }} :-</span>
-					{%endif%}  </span></p></h3>
+					<p><h3 id="articlename">{{ product.article.name }} 
+						</p></h3>
 
 					<p> {% trans "Artikelnummer" %}: <span id="sku_number">{{ product.article.sku_number }}</p>
 
@@ -222,18 +226,6 @@
 					</div>
 			<div style="clear: both;"></div>
 			<hr/>
-			<div class="span3">
-				<h4>  {% trans "Pris" %} :
-					{%if product.article.discount%}
-					<span class="discount"> {{ product.article.f_discount }} </span> SEK *<br />
-						<span class="smaller">({% trans "tidigare pris" %} </span>  <span id="the_price"> {{ product.article.price }} </span>    <span class="smaller">SEK) <br />
-					   * {{ product.article.discount.reason }} </span>
-					{%else%}
-						<span id="the_price"> {{ product.article.price }} </span>SEK
-					{%endif%}</h4>
-			</div>
-
-
 			<div class="span3" id='addtocart' style="display:block;">
 				<span style="padding-left: 30px;">
 					<button class="btn btn-success" style="z-index: 66" type="button">{% trans "Lägg till i Shoppinglåda" %} </button>
