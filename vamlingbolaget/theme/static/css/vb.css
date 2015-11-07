@@ -145,6 +145,10 @@ text-shadow: 0 1px 0 #eeeeee;
   width:200px;
 }
 
+.addtocart {
+   margin-left: -3px;
+}
+
 .detailPrice {
   font-weight: normal;
   line-height: 1;

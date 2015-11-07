@@ -252,7 +252,21 @@
 		width:100%;
 		float:left;
 	}
+	.input-group {
+		width:295px;
+	}
 
+	.input-group .input-group-addon {
+		width:75px;
+	}
+
+	.input-group .form-control {
+		width:220px;
+	}
+
+   .btn-block{
+		margin-right:9px;
+	}
 
 
 }
