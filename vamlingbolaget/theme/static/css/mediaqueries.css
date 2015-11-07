@@ -268,5 +268,17 @@
 		margin-right:9px;
 	}
 
+	.gallery_table{
+	 	width: 100%;
+	}
 
+	.gallery_td{
+	 	width: 25%;
+	}
+
+	.gallery_img{
+		width: 100%; /*width of what? container or image?*/ 
+		margin-top: 2px; 
+		margin-bottom: 2px;
+	}
 }
