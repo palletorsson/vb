@@ -25,7 +25,7 @@
                     {% if gallery.status = status %}
                         <div style="float: left; display: inline;">
                             <div class="overlay">&nbsp;{{gallery.name}}</div>
-                            <div style="width:300px; height: 190px; overflow: hidden;">
+                            <div class="galleries_list">
                                 <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" style="margin-left:8px;width: 300px;" title="Fotograf: {{feature_image.photographer.name}}"/></a>
                             </div>
                         </div>
@@ -36,19 +36,19 @@
             {%endfor%}
     </div>
         {%else%}
-                <table border="0" cellpadding="0" style="width: 960px;">
+                <table border="0" cellpadding="0" class="gallery_table">
                     <tr>
                     <td valign="top" style="width: 240px;">
                         <a href="{% version gallery.feature_image 'large' %}" title="{{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " rel="lightbox[{{gallery}}]">
-                            <img src="{% version gallery.feature_image 'medium' %}"  style="width: 240px; margin-top: 2px; margin-bottom: 2px;" class="imgborder isfeatured" />
+                            <img src="{% version gallery.feature_image 'medium' %}" class="imgborder isfeatured gallery_img" />
                         </a>
                         {%for image in images%}
                             <a href="{% version image.image 'large' %}" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " rel="lightbox[{{gallery}}]">
-                                <img src="{% version image.image 'medium' %}" style="width: 240px; margin-top: 2px; margin-bottom: 2px;" class="imgborder enlarge" />
+                                <img src="{% version image.image 'medium' %}" class="imgborder enlarge gallery_img" />
                             </a>    
                             {% if forloop.counter == break1 or forloop.counter == break2 or forloop.counter == break3 %}
                                 </td>
-                                <td valign="top" style="width: 240px;">
+                                <td valign="top" class="gallery_td">
                             {%endif%}
                         {%endfor%}
                         </td>
