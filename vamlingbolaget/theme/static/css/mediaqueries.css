@@ -281,4 +281,8 @@
 		margin-top: 2px; 
 		margin-bottom: 2px;
 	}
+	.flatpages_container img{
+		width:100% !important;
+		height: auto !important;
+	}
 }
