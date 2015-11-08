@@ -285,4 +285,12 @@
 		width:100% !important;
 		height: auto !important;
 	}
+
+	.flatpages_container p {
+		padding-left:10px;
+	}
+
+	.flatpages_container h4 {
+		padding-left:10px;
+	}
 }
