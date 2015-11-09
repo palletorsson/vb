@@ -331,15 +331,20 @@ position: absolute;
 }
 
 .mobile_article_img {
-	height: 150px;
+	height: auto;
+	width: 100px;
     float:left;
 	padding-left: 4px;
 	padding-right: 8px;
 }
 
 .mobile_cart_article_div {
-
-    
+    float:left;
+    height: 150px;
+	width: auto;
+}
+.article_info_div {
+	width:400px
 }
 
 .women_image {
