@@ -182,6 +182,7 @@ text-shadow: 0 1px 0 #eeeeee;
   transform: skew(-20deg);
   letter-spacing: 2px;
   font-weight: bold;
+  width:160px;
 }
 
 .image_description {
@@ -208,9 +209,9 @@ margin-right: -49px;
 }
 
 .voucher_show {
+ display: none; 
 
 }
-
 .img_container img {
     width:100%;
 }
@@ -327,6 +328,18 @@ position: absolute;
     width: 60px;
 	padding-left: 20px;
     float:left; 
+}
+
+.mobile_article_img {
+	height: 150px;
+    float:left;
+	padding-left: 4px;
+	padding-right: 8px;
+}
+
+.mobile_cart_article_div {
+
+    
 }
 
 .women_image {
@@ -506,3 +519,4 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
 	height: 190px; 
 	overflow: hidden;
 }
+
