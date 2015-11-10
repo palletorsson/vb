@@ -308,6 +308,8 @@
   		font-size: 12px;        
 
 	}
-
+.lb-outerContainer {
+	width: 100%; height: auto;
+}
 
 }
