@@ -1,0 +1,302 @@
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{%if cartitems or bargains%}
+	{% for item in cartitems %}  
+	<div class="controls controls-row">
+		<div class="mobile_cart_article_div"> 
+			<img class="mobile_article_img" src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans 'i' %} {{ item.color|lower }}" /> 
+		</div>
+		<h5>
+			<strong> {{ item.article }} i {{item.article.quality|lower}} 
+				<small>
+					<span> | <a href="{%url removefromcart item.pk 'cartitem'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>  </span>
+					<span> | <a href="/cart/edititem/{{ item.id }}/"><i class="icon-edit glyphicon glyphicon-edit"> </i></a> </span>
+				</small>
+			</strong>
+		</h5>
+		<hr/>
+		<div class="article_info_div">
+			<small>
+				<span> {% trans "Antal" %} : {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span><br>
+				<span> {% trans "Mönster" %} :
+
+						{{ item.pattern }}
+						{% if item.pattern_2 > 0 %}
+							/ {{ item.pattern_2 }}
+						{%endif%}
+				</span>
+				<br/>
+				<span> {% trans "Färg" %} : 			
+				{{ item.color }}
+				{% if item.color_2 > 0 %}
+					/ {{ item.color_2 }}
+				{%endif%}
+				</span>
+				<br/>
+				<span> {% trans "Storlek" %} : {% if item.article.type.order == 8 or  item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%}  </span>
+				<br/>
+				<span> {% trans "Pris" %} :  
+					{%if item.article.discount%}
+						<span class="discount"> {{ item.article.f_discount }}  {%trans "SEK"%}</span>
+					{%elif item.article.type.order == 8 %}
+						{{item.totalitemprice}} {%trans "SEK"%}
+					{%else%}
+						{% if item.article.oldprice %} 
+							<span style=" text-decoration: line-through;" >{{item.article.oldprice}} {%trans "SEK"%}	</span>
+							<br/> 
+						{%endif%} 
+						{{ item.article.price }} {%trans "SEK"%}
+					{%endif%}
+				</span>
+			</small>
+		</div> <!--article_info_div-->
+	</div> <!--controls controls-row-->
+	<hr/>
+	{% endfor %}
+
+	{% for b in bargains %}
+		<a href="{%url removefromcart b.pk 'bargain'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ b.id }}"></i></a>
+		<span> {{ b.bargain.title }}  </span>
+		{% trans "Antal" %} : 1
+		<span> {{ b.bargain.description }} </span>
+		<span> {{ b.bargain.price }} </span>
+    {% endfor %}
+	<hr/>    
+	<div class="totalprice" colspan="8" style="text-align: right">
+		{% trans "Leverans" %}:
+		<span id="handling">
+			{{ handling }}  {%trans "SEK"%}
+		</span>
+	</div>
+	<hr>
+	<div class="totalprice" colspan="8" style="text-align: right">
+		{% trans "Totalpris" %}:	
+		<span id="totalprice">
+			{{ totalprice }}  {%trans "SEK"%}
+		</span>
+	</div>
+
+	<hr>
+
+	<div class="voucher_show">
+		
+		<div class="voucher" colspan="8" style="text-align: right">
+			{%if voucher %}
+				Rabattkod / Voucher: 
+			{% else %}
+				Rabattkod / Voucher: 
+			{% endif %}
+		</div>
+
+		<div id="totalprice" colspan="8">
+			{%if voucher %}
+				<span class="label label-success">15% på dyraste plagget </span>
+			{% else %}
+
+				<div class="form-group">
+				   <div class="input-group">
+						<input type="text" id="id_voucher" name="voucher" maxlength="10" class="form-control">
+						<button type="button" class="btn btn-success btn-sm  btn-number" id="vocher-plus">
+							  OK
+						 </button>
+				   </div>
+				</div>
+		    {% endif %}
+	 	</div>
+	</div> <!-- end class voucher -->
+	{% else %}
+	<div id="empty">
+		<div colspan="8">
+			{% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet" %}!</a>
+		</div>
+	</div>
+	{% endif %}
+	<form action="" method="post" class="form-horizontal" id="order_form">{% csrf_token %}
+		<div class="table table-striped table-bordered">
+		   <div class="col-lg-12 control-label"> 
+				<h3>
+				    {% trans "Adressuppgifter" %}
+				</h3>
+		
+				<hr>
+				<div class="form-group" id="first_name">
+				    <label class="col-lg-12 control-label" > <label for="id_first_name">{% trans "Förnamn" %} </label> </label>
+				    {{ form.subject.first_name}}
+
+				     <div class="col-lg-12">
+				        {{ form.first_name }} *
+				        {{ form.first_name.errors }}
+				    </div>
+				</div>
+				
+				<div class="form-group" id="last_name">
+				<label class="col-lg-3 control-label" > <label for="id_last_name">{% trans "Efternamn" %} </label> </label>
+					{{ form.subject.last_name}}
+					 <div class="col-lg-9">
+					    {{ form.last_name }}
+					    {{ form.last_name.errors }} *
+					</div>
+			    </div>
+
+				<div class="form-group" id="street">
+				    <label class="col-lg-3 control-label" > <label for="id_street">{% trans "Gatuadress" %}  </label> </label>
+				    {{ form.subject.street}}
+				     <div class="col-lg-9">
+				        {{ form.street }}
+				        {{ form.street.errors }} *
+				    </div>
+				</div>
+
+				<div class="form-group" id="postcode">
+				    <label class="col-lg-3 control-label" > <label for="id_postcode">{% trans "Postnummer" %}</label> </label>
+				    {{ form.subject.postcode}}
+				    {% if field.errors %}< li>{{ field.subject.errors|striptags }}< /li>{% endif %}
+				    <div class="col-lg-9">
+				        {{ form.postcode }}
+				        {{ form.postcode.errors }} *
+				    </div>
+				</div>
+
+				<div class="form-group" id="city">
+				    <label class="col-lg-3 control-label" > <label for="id_city">{% trans "Postort" %}</label> </label>
+				    {{ form.subject.city}}
+				     <div class="col-lg-9">
+				        {{ form.city }}
+				        {{ form.city.errors }} *
+				    </div>
+				</div>
+
+				<div class="control-group" id="country">
+				    <label class="col-lg-3 control-label" > <label for="id_country">{% trans "Land" %} </label> </label>
+				    {{ form.subject.country}}
+				      <div class="col-lg-9">
+				        {{ form.country }}
+				    </div>
+				</div>
+				
+				<hr>
+			    <input id="your_order" type="hidden" value="{% trans 'Din beställning' %}">
+			    <input id="your_adress" type="hidden" value="{% trans 'Din adress' %}">
+			    <input id="your_production" type="hidden" value="{% trans 'En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg' %}">
+			    <input id="your_post" type="hidden" value="{% trans 'Du betalar mot postförskatt' %}">		    
+			</div> <!-- end class col-lg-12 control-label -->
+		   
+		  	<div class="col-lg-12 control-label"> 
+				<div>
+					<h3> {% trans "Kontaktuppgifter" %} </h3>
+				</div>
+	
+				<hr>
+
+				<div class="control-group" id="email">
+					<label class="col-lg-3  control-label" > <label for="id_email">{% trans "Email" %} </label></label>
+					{{ form.subject.email}}
+					 <div class="col-lg-9">
+						{{ form.email }}
+						{{ form.email.errors }} *
+					</div>
+				</div>
+
+				<div class="control-group" id="phone">
+					<label class="col-lg-3 control-label" > <label for="id_phone">{% trans "Telefon" %} </label></label>
+					{{ form.subject.phone}}
+					 <div class="col-lg-9">
+						{{ form.phone }}
+						{{ form.phone.errors }} *
+					</div>
+				</div>
+
+				<div class="control-group" id="sms">
+					<label class="col-lg-3 control-label" > 
+						<label for="sms">{% trans "Sms-avisering" %} </label>
+					</label>
+					 <div class="col-lg-9">
+			  			
+						<input type="checkbox" id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> Jag vill ha Sms-avisering <br>
+						<input type="hidden" name="sms" id="id_sms" value="yes">
+					</div>
+				</div>
+
+				<hr>
+
+				<div class="control-group" id="message">
+					<label class="col-lg-3 control-label" > <label for="id_message">{% trans "Meddelande till beställning" %}  </label></label>
+					{{form.subject.message}}
+					 <div class="col-lg-9">
+						{{ form.message }}
+					</div>
+				</div>
+			</div> <!-- end col-lg-12 control-label -->			
+		</div> <!-- end class table table-striped table-bordered -->
+		
+		<div class="paywidth">
+
+		    <div class="span6 right">
+
+		        <ul class="nav nav-tabs" id="myTab">
+		            <li class="active">
+						<a href="#mobile_card" data-toggle="tab" id="C">{% trans "Betala med kort" %}</a>
+					</li>
+		            <li>
+						<a href="#mobile_post" data-toggle="tab" id="P">{% trans "Betala via postförskott" %}</a>
+					</li>
+		        </ul>
+
+		        {{ form.subject.post }}
+			        <input type=hidden name="paymentmethod" id="id_paymentmethod" value="C">
+		        {{ form.paymentmethod.errors }}
+
+		        <div class="tab-content">
+		            
+					<div class="tab-pane active" id="mobile_card">
+		                <div>
+		                  <br />
+		                  <i>{% trans "Efter genomförd betalning kommer du att skickas tillbaks till oss och ditt köp kommer att bekräftas" %}. 
+						  <a href="http://www.payex.se" alt="PayEx link">PayEx </a>{% trans "hanterar betalningen" %}. </i>
+		                  <br /><br />
+		                </div>
+		             
+					  	<div class="span3">
+							<div class="paymentimg"> 
+							<img src="/media/uploads/mastercard_white_140.gif" /> 
+							<img src="/media/uploads/verified_visa_white_140.gif" />
+							<img src="/media/uploads/payments_processed_by.jpg" />
+							</div>
+					 	</div>
+
+				         <div class="span2">
+							<hr>
+				         	<blockquote> <input type="submit" class="btn btn-success" value="{% trans "Betala med kort" %}"  /></blockquote>
+				         </div>
+
+		            </div> <!-- end tabplan 1 -->
+		      
+				     <div class="tab-pane" id="mobile_post">
+						   <br>
+				           <div class="span3">
+				                  <img src="{{ STATIC_URL }}img/post.jpg" width="50px"/> {% trans "Betala via postförskott" %}
+				           </div>
+
+				           <div class="span2">
+								<hr>
+								<blockquote><input type="submit" class="btn btn-success" value="{% trans "Skicka Din Beställning" %}"  /> </blockquote>
+				           </div>
+					  </div>
+
+				 </div> <!-- end class tab-content -->
+
+		    </div> <!-- end class span6 right -->
+
+		</div> <!-- end class paywidth -->
+	</form>  
+	<div style="clear: both;"></div>
+	{% if not cartitems %}
+		{% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet!" %}</a>
+	{% endif %}
+
+	<div class="alert alert-success">
+		<a href="/paymentterms/"> {% trans "Se våra betalvillkor här" %} </a>
+	</div>
+
+

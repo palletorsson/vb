@@ -97,7 +97,7 @@
 		float:left;
 	}
 	.paywidth {
-        width:90%;
+        width:100%;
     }
 
 
@@ -174,6 +174,7 @@
 	.paywidth {
         width:100%;
     }
+
 }
 
 @media (max-width: 440px) {
@@ -296,4 +297,17 @@
 	footer {
 		padding-left:10px;
 	}
+   .paywidth {
+        width:120%;
+    }
+	#P {
+  		font-size: 12px;        
+
+	}
+	#C {
+  		font-size: 12px;        
+
+	}
+
+
 }
