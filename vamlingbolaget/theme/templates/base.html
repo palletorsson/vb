@@ -14,28 +14,27 @@ Vamlingbolaget." %} />
     <meta name="keywords" content="Vamlingbolaget,vamlingbolaget.com,vamlingbolaget stockholm,vamlingbolaget gotland" />
 	<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/vamlingbolaget.ico"/>
     <!-- The styles -->
+
+     
     <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap_new.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/vb.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/mediaqueries.css" rel="stylesheet">
-       <!--[if (lt IE 9)]><!-->
-          <script src="{{ STATIC_URL }}js/css3media.js" type="text/javascript"> </script>
-         	<script src="{{ STATIC_URL }}js/respond.min.js" type="text/javascript"> </script>
-        <!--<![endif]-->
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.3.min.js"></script>
+	<!--[if (lt IE 9)]><!-->
+	<script src="{{ STATIC_URL }}js/css3media.js" type="text/javascript"> </script>
+	<script src="{{ STATIC_URL }}js/respond.min.js" type="text/javascript"> </script>
+    <!--<![endif]-->
 
 
     <!-- The scripts -->
-
-   <script type="text/javascript"
-            src="{{ STATIC_URL }}js/jquery-1.8.3.min.js">
-    </script>
+   
       {% block extra_head %}{% endblock %}
 	<script src="{{ STATIC_URL }}js/underscore.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/backbone.js" type="text/javascript"> </script>
 	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>
-	<script src="{{ STATIC_URL }}js/lightbox.js" type="text/javascript"> </script>
- </head>
+</head>
 
  <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
@@ -158,8 +157,8 @@ Vamlingbolaget." %} />
                   <abbr title="Phone">Tel:</abbr> 0498-498080 <br/>
                   info@vamlingbolaget.com
               </address>
-                     </div>
-
+          </div>
+	
           <div class="span5">
               <address>
                   <strong>Vamlingbolaget Stockholm </strong><br/>
@@ -172,6 +171,18 @@ Vamlingbolaget." %} />
               {% trans "Vardagar" %} 11.00 - 18.00 <br/>
               {% trans "Lördagar" %} 11.00 - 15.00 <br/><br/>
            </div>
+          <ul class="visible-xs">
+            <li>
+                <form action="/i18n/setlang/" method="post" id="lang_bottom" >
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}" />
+                    <input name="language" type="hidden" value=""  />
+                    <img src="{{STATIC_URL}}img/english_flag.gif" alt="flag english" id="en" class="change_lang" /> 
+                    <img src="{{STATIC_URL}}img/svensk_flagga.gif" alt="flagga svensk"  id="sv"  class="change_lang" />
+                </form>
+            </li>
+          </ul>
+
   </footer>
  {% endblock %}
 {% endblock %}
@@ -186,14 +197,12 @@ Vamlingbolaget." %} />
 
 
 
-          <script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
-
-
-  <script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
-
-
+	<script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
+	<script src="{{ STATIC_URL }}js/lightbox.js" type="text/javascript"> </script>
         
 </div>
 </div>
+ 
  </body>
 </html>
