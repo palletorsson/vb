@@ -165,7 +165,13 @@
         </th>
         <th id="totalprice">
             {{ totalprice }}  {%trans "SEK"%}
-        </th>
+        </th></tr>
+
+ <tr>
+        <th id="totalprice" colspan="9" style="text-align: right">  
+		<div style="text-align:right"><a href="/checkout/"><button class="btn btn-success" type="button">{% trans "Beställ" %}</button></a></div>
+	    </th>
+
         </tr>
         <tr class="voucher_show">
 			
@@ -190,8 +196,11 @@
 					 </button>
               </div>
             </div>
+
               {% endif %}
+
           </th>
+
         </tr>
 
         </tbody>
@@ -207,6 +216,7 @@
     </tbody>
 </table>
 </div>
+
 <div class = "visible-xs">
 {%if cartitems or bargains%}
 {% for item in cartitems %}  
@@ -236,13 +246,13 @@
 				</span><br>
 				<span> {% trans "Storlek" %} : {% if item.article.type.order == 8 or  item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%}  </span><br>
 				<span> {% trans "Pris" %} :  {%if item.article.discount%}
-								    <span class="discount"> {{ item.article.f_discount }}  {%trans "SEK"%}</span>
-								{%elif item.article.type.order == 8 %}
-								    {{item.totalitemprice}} {%trans "SEK"%}
-								{%else%}
-								{% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} {%trans "SEK"%}	</span><br/> {%endif%} 
-								    {{ item.article.price }} {%trans "SEK"%}
-								{%endif%}
+				<span class="discount"> {{ item.article.f_discount }}  {%trans "SEK"%}</span>
+					{%elif item.article.type.order == 8 %}
+						{{item.totalitemprice}} {%trans "SEK"%}
+					{%else%}
+						{% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} {%trans "SEK"%}	</span><br/> {%endif%} 
+				    {{ item.article.price }} {%trans "SEK"%}
+					{%endif%}
 				</span>
 			</small>
 		
@@ -317,6 +327,4 @@
     <div style="text-align:right"><a href="/checkout/"><button class="btn btn-success" type="button">{% trans "Beställ" %}</button></a></div>
     <br>
 {% endif %}
-
-
 {% endblock %}
