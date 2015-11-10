@@ -18,8 +18,8 @@
 	<div class="span12">
 		<div class="span4 img_container" id="fadeifchangeorder">
 			{% for image in images %}
-			 <a href="{% version image.image 'large'%}" rel="lightbox">
-				 <img src="{% version image.image 'large' %}"  alt="{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" />
+			 <a href="{% version image.image 'large'%}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
+				 <img src="{% version image.image 'large' %}"   alt="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
 			 </a>
 			{% endfor %}
 
@@ -226,7 +226,7 @@
 					</div>
 			<div style="clear: both;"></div>
 			<hr/>
-			<div class="span3" id='addtocart' style="display:block;">
+			<div class="span3" id='addtocart' style="display:block;" class="addtocart">
 				<span style="padding-left: 30px;">
 					<button class="btn btn-success btn-lg btn-block" style="z-index: 66" type="button">{% trans "Lägg till i Shoppinglåda" %} </button>
 				</span>
