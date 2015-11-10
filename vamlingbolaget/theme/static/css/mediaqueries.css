@@ -97,7 +97,7 @@
 		float:left;
 	}
 	.paywidth {
-        width:0%;
+        width:90%;
     }
 
 
@@ -172,7 +172,7 @@
 		float:left;
 	}
 	.paywidth {
-        width:0%;
+        width:100%;
     }
 }
 
@@ -291,6 +291,9 @@
 	}
 
 	.flatpages_container h4 {
+		padding-left:10px;
+	}
+	footer {
 		padding-left:10px;
 	}
 }
