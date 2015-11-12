@@ -156,7 +156,7 @@
 			<!-- else show size  -->
 		{%else%}
 			<span class="input-group">
-	  		<span class="input-group-addon"> {% trans "Storlek" %}: </span>
+	  		<span class="input-group-addon class="sellect_margin""> {% trans "Storlek" %}: </span>
 				<select class="form-control" id='size'>
 					{% for size in sizes %}
 						<option value="{{ size.pk }}"
@@ -169,7 +169,7 @@
 		{% endif %}
 		<!-- if type is  Piece-goods (metervara) -->
 		{% if product.article.type.order == 8 %}
-			<select id='quantiy_pk'>
+			<select id='quantiy_pk' class="sellect_margin">
 				<option value="1" selected="selected">{% trans "Meter" %} : 1 </option>
 				<option value="2">{% trans "Meter" %} : 2 </option>
 				<option value="3">{% trans "Meter" %} : 3 </option>
@@ -190,7 +190,7 @@
 		{% endif %}
 
 			
-		<!-- if type is  Piece-goods (metervara) -->
+		<!-- if type is Piece-goods (metervara) -->
 		{% if product.article.quality.order == 2 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 1  or product.article.quality.order == 4 or product.article.sku_number == '9805' or product.article.quality.order == 10  or product.article.quality.order == 14 %}
 		<br/>
 		{%else%}

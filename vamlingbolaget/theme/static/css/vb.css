@@ -290,7 +290,9 @@ margin-right: -49px;
       cursor: pointer;
   }
 
-
+.sellect_margin {
+  margin-bottom: 10px
+}
 
   .change_lang{
     cursor: pointer;
