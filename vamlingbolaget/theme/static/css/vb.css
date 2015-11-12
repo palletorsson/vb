@@ -233,10 +233,14 @@ text-shadow: 0 1px 0 #eeeeee;
   margin-bottom: 4px;
 }
 
+
 .selectedpatternandcolor {
 	width: 118px;
 }
 
+.minihead {
+	font-weight: bold; 
+}
 
 .label-success {
 background-color: #5cb85c;
