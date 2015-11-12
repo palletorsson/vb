@@ -9,17 +9,15 @@
 {% block content %}
 
         {% for product in products %}
-             <div class="collection_list img_container" >
+             <div class="collection_list img_container article_background" >
                 <a href="/products/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
                     {% with product.image_set.all|first as image %}
 
                             <div class="force_image"><img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
-                            <span class="hidden-xs"><br/></span>
                             <div class='image_description'>
                                <span class="artname"> {{ product.article.name }}</span><br/>
-                                <span class="hidden-xs">{% trans "Pris" %} :</span>
                                 {%if product.article.discount%}
-                                    <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK
+                                    <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) :-
                                 {%else%}
                                     <span class="price">{{ product.article.price }} SEK</span>
                                 {%endif%}
