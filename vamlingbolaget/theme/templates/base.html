@@ -43,7 +43,7 @@ Vamlingbolaget." %} />
           <div class="navbar-inner hidden-phone">
             <div class="container_first">
 
-                  <ul class="nav pull-left">
+                  <ul class="nav pull-left flags">
                     <li>
                         <form action="/i18n/setlang/" method="post" id="lang" >
                             {% csrf_token %}
@@ -58,7 +58,7 @@ Vamlingbolaget." %} />
                       <ul class="nav pull-right">
                            <li>
                             <a id="token" href="/cart/show/" >
-											{% trans "Shoppinglåda" %} <img src="{{STATIC_URL}}img/box.png" style="width:30px;" alt="Vamlingbolaget shopping cart" class="">
+								{% trans "Shoppinglåda" %} <img src="{{STATIC_URL}}img/box.png" style="width:30px;" alt="Vamlingbolaget shopping cart" class="">
                                 {% load cart_tags %}
                                 {% cart_total %}
                             </a>
@@ -68,11 +68,13 @@ Vamlingbolaget." %} />
           </div>
           <div class="navbar-inner">
             <div class="container">
-<span class = "visible-xs">
+
+				<span class = "visible-xs">
 					  <a id="token" href="/cart/show/" >
 						<img src="{{STATIC_URL}}img/box.png"  alt="Vamlingbolaget shopping cart" class="shop_icon">
 					  </a>
-					</span> 
+				</span> 
+
                 <a href="/" class="navbar-brand"><img src="{{ STATIC_URL }}img/vb_logo.png" alt="Vamlingbolaget logo" class="leftside" /></a>
                 <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
                         <span class = "icon-bar"></span>
@@ -82,9 +84,9 @@ Vamlingbolaget." %} />
 
                 <div class = "collapse navbar-collapse navHeaderCollapse pull-left">
 
-                     <ul class = "nav navbar-nav navbar-right nav-list">
+                     <ul class = "nav navbar-nav navbar-right nav-list mainnav">
                         <li>
-                             <a href="/collection/new/">{% trans "Kollektion" %}<!--span class="visible-phone pull-right small"><i class="glyphicon glyphicon-chevron-right mini"></i></span--></a>
+                             <a href="/collection/new/">{% trans "Kollektion" %}</a>
                         </li>
                         <li>
                             <a href="/products/type/kvinna/">{% trans "Shop" %}</a>

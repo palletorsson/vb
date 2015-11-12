@@ -36,9 +36,29 @@
   text-transform: uppercase;
   }
 
+	.flags {
+		margin-top: 4px;
+	}
+
+
+	.navbar-nav {
+		margin-top: 19px;
+	}
+	
+
+	.nav > li > a {
+	padding: 1px 15px;
+	}
+
+	. {
+	padding: 10px 15px;
+	}
+
+
    a {
    color: black;
    }
+
    a:hover {
    text-decoration:none;
    }
