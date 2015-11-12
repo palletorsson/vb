@@ -107,9 +107,7 @@
 			{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
 				<div class="selectedpatternandcolor span2 less_span">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
-					<hr/>
 					{{ product.color.name }} {{ product.pattern.name }}
-                    <hr/>    
 				</div>
 				<div class="color_and_pattern_choose span5">
 					{% for item in colorsandpattern %}
@@ -145,7 +143,7 @@
 					{% endfor %}
 				</select>
 		{% endif %} <!-- end of endif patterns-->
-
+<hr/>			
 		<div class="minihead">
 			{% trans "Stolek" %} / {% trans "Antal" %} :
 		</div> 
@@ -224,7 +222,6 @@ Fler produkter av {{ product.article.name }}
 	{% for product in products %}
 	<div class='image_wrapper'>
 		<a href="/products/{{product.pk}}">
-
 		    {% with product.image_set.all|first as image %}
 		         <div class="collection_list img_container" >
 		        <img src="{% version image.image 'medium' %}" alt="{{ product.article.name }}"  />
@@ -242,7 +239,6 @@ Fler produkter av {{ product.article.name }}
 		    {% endwith %}
 		</a>
 	</div>
-
 	{% endfor %}
 </div>
 
