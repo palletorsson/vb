@@ -224,6 +224,20 @@ text-shadow: 0 1px 0 #eeeeee;
 	overflow: hidden
 }
 
+
+	.articlehead {
+	   margin-right:10px; 
+	   font-size: 18px;  
+	}
+
+.article_hr {
+  margin-bottom: 4px;
+}
+
+.selectedpatternandcolor .span2 {
+	width: 118px;
+}
+
 .label-success {
 background-color: #5cb85c;
 margin-right: -49px;
