@@ -36,6 +36,11 @@
   text-transform: uppercase;
   }
 
+
+	.navbar-brand {
+		padding: 15px 1px;
+	}
+
 	.flags {
 		margin-top: 4px;
 	}
