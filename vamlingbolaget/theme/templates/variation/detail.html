@@ -107,7 +107,7 @@
 					<div style="clear: both;"></div>
 				</div> 
 			<!-- else if quality is Silky jersey or silkjersey-children etc -->
-			{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 or product.article.quality.order == 3 %}
+			{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
 				<div class="selectedpatternandcolor span2">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
 					{{ product.color.name }} {{ product.pattern.name }}
@@ -124,6 +124,14 @@
 		
 			<!-- else -->
 			{% else %}
+
+			<div class="selectedpatternandcolor span2">
+				<span style="padding-left: 10px;">
+					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:200px;"  />
+				</span>
+			</div>
+
+			<div class="selectedpatternandcolor span5">
 				<select class="changonselect" id="color">
 					{% for color in colors %}
 						<option value="{{ color.order }}"
@@ -145,6 +153,8 @@
 						 {{ pattern.name }}</option>
 					{% endfor %}
 				</select>
+
+				</div>
 		{% endif %} <!-- end of endif patterns-->
 		<hr/>			
 		<div class="minihead">
