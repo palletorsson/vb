@@ -195,11 +195,10 @@ text-shadow: 0 1px 0 #eeeeee;
   font-weight: normal;
   line-height: 1;
   color: #666;
-  font-size: 26px;
+  font-size: 23px;
+  padding-top: 12px; 
   position: relative;
-  top: -48px;
-  left: 140px;
-  background-color: white;
+  background-color: rgb(250, 250, 255);
   filter: alpha(opacity=70);
   -moz-opacity: 0.8;
   -khtml-opacity: 0.8;
@@ -234,7 +233,7 @@ text-shadow: 0 1px 0 #eeeeee;
   margin-bottom: 4px;
 }
 
-.selectedpatternandcolor .span2 {
+.selectedpatternandcolor {
 	width: 118px;
 }
 

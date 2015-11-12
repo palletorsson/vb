@@ -16,27 +16,12 @@
 
 {% block allcontent %}
 	<div class="span12">
-		<div class="span4 img_container" id="fadeifchangeorder">
+		<div class="span4 img_container article_background" id="fadeifchangeorder">
 			{% for image in images %}
 			 <a href="{% version image.image 'large'%}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
 				 <img src="{% version image.image 'large' %}" alt="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
 			 </a>
 			{% endfor %}
-
-			<div class="detailPrice">
-				{%if product.article.discount%}
-				<span class="discount"> {{ product.article.f_discount }} </span> :- *<br />
-					<span class="smaller">({% trans "tidigare pris" %} </span>  <span id="the_price"> {{ product.article.price }} </span>    <span class="smaller">SEK) <br />
-				   * {{ product.article.discount.reason }} </span>
-
-				{%else%}
-					<span id="the_price"> {{ product.article.price }} :-</span>
-				{%endif%}  </div>
-				<br/>
-			<div class="hidden-xs"> 
-				<h4>{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</h4>
-				<hr>
-			</div>
 		</div>
 
 
@@ -47,7 +32,21 @@
 					</span>	
 					<span class="articlehead">
 						<span id="articlename" >
-							{{ product.article.name }} <small>	| <span id="the_price"> {{ product.article.price }} :-</span> </small>
+							{{ product.article.name }} 
+							<small>	| 
+								<span class="detailPrice">
+									{%if product.article.discount%}
+										<span class="discount"> {{ product.article.f_discount }} </span> :- * <br />
+										<span class="smaller">({% trans "tidigare pris" %} </span>  
+										<span id="the_price"> {{ product.article.price }} </span>    
+										<span class="smaller"> :-) <br />
+				   						* {{ product.article.discount.reason }} </span>
+
+									{%else%}
+									<span id="the_price"> {{ product.article.price }} :-</span>
+									{%endif%}  
+								</span>
+ 							</small>
 							<hr class="article_hr"> 
 						</span>
 					</span>	
@@ -76,8 +75,7 @@
 
 				<!-- if article is the "Reversible zip jacket" -->
 				{%elif product.article.sku_number == '9805' %}
-				<strong>{% trans "Välj färg / mönster" %}</strong> <hr/>
-					
+				<strong>{% trans "Välj färg / mönster" %}</strong> <hr/>			
 					<div class="span12">
 						<h5> Välj Utsidans mönster</h5>
 							<div class="outside">
@@ -111,13 +109,12 @@
 					<input type="hidden" id="color2" name="color_2" value="{{ product.color.order }}">
 
 					<div style="clear: both;"></div>
-					<hr/>
-							</div> 
+				
+					</div> 
 
 				<!-- else if quality is Silky jersey or silkjersey-children etc -->
 				{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
-					<strong>{% trans "Välj färg / mönster" %}</strong> <hr/>
-
+					<strong>{% trans "Välj färg / mönster" %} :  <div class="select_text"> {{ product.color.name }} {{ product.pattern.name }} </div> </strong> <hr/>
 					<div class="span12">
 						
 					<div class="selectedpatternandcolor span2">
@@ -163,7 +160,7 @@
 			{% endif %}
 			<br/>
 
-					<div class="span7">
+			<div class="span7">
 			<!-- if type is Accessories & sheet or Piece-goods -->
 			{%if product.article.type.order == 8 or product.article.type.order == 7 %}
 			<!-- else show size  -->
