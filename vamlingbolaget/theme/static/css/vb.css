@@ -152,6 +152,7 @@
   .nav-to-left {
       padding-right:20px;
   }
+
 .navbar .nav > li > a {
 color: #2d2d2d;
 text-shadow: 0 1px 0 #eeeeee;
@@ -217,12 +218,21 @@ text-shadow: 0 1px 0 #eeeeee;
     padding: 2px;
     margin-top: 6px;
 	margin-left: 10px;
-	margin-bottom: 4px; 	
+	margin-bottom: 4px;
+	margin-right: 4px; 	
     white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden
 }
 
+.image_description_detail {
+    padding: 4px;
+    margin-top: 6px;
+	margin-left: 10px;
+	margin-bottom: 4px;
+	margin-right: 4px; 	
+	overflow: hidden
+}
 
 	.articlehead {
 	   margin-right:10px; 

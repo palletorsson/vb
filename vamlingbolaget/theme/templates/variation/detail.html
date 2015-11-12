@@ -21,9 +21,13 @@
 			 <a href="{% version image.image 'large'%}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
 				 <img src="{% version image.image 'large' %}" alt="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
 			 </a>
+		
+			<div id="art_description" class="image_description_detail"> - {{ product.article.description }} 
+			
+	        </div>
+
 			{% endfor %}
 		</div>
-
 		<div class="span7">
 			<span class="articlehead">
 				<span id="articlename" >
@@ -40,14 +44,18 @@
 							<span id="the_price"> {{ product.article.price }} :-</span>
 							{%endif%}  
 						</span>
-						<span class="pull-right"> | ({% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}) </span>
+						<span class="pull-right"> | ({% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}
+			| {% trans "Kvalitet" %}: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }} | </p> </span>
 					</small>
 					<hr class="article_hr"> 
 				</span>
 			</span>	
+			<div style="clear: both;"></div>
 			<div class="minihead">
 				{% trans "Färg" %} / {% trans "Mönster" %} :
 			</div> 
+			<div style="clear: both;"></div>
+		
 			<hr/>					
 			<!-- diffrence start patterns: -->
 			<!-- if quality is Velour or Quilted -->
@@ -99,10 +107,11 @@
 			{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
 				<div class="selectedpatternandcolor span2 less_span">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
-					<br/>
+					<hr/>
 					{{ product.color.name }} {{ product.pattern.name }}
+                    <hr/>    
 				</div>
-				<div class="color_and_pattern_choose span6">
+				<div class="color_and_pattern_choose span5">
 					{% for item in colorsandpattern %}
 						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
 					{% endfor  %}
@@ -198,43 +207,44 @@
 				<button class="btn btn-success btn-lg btn-block" style="z-index: 66" type="button">Add to shopping cart </button>
 			</span>
 		</div>
-		<br/>
 		<div style="clear: both;"></div>
-		<strong>{% trans "Detaljer" %}</strong> <hr/>			
-		<div class="span5">		
-			<p> | {% trans "Artikelnummer" %}: <span id="sku_number">{{ product.article.sku_number }}
-			| {% trans "Kvalitet" %}: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }} | </p>
-			<p id="art_description" class="small"> - {{ product.article.description }} </p>
-	        <p> - {{ product.article.quality.description }} </p>
-		</div>   
-		<div style="clear: both;"></div>
-	</div> <!-- end span7 -->
+		<div class="minihead">
+			{% trans "Detaljer" %} :
+		</div> 
+		<hr/>
+
+		<span> {{ product.article.quality.description }} </span> 
+		</div> <!-- end span7 -->
 	</div> <!-- end span12 -->
 
-<hr>
-<h4> Fler produkter av {{ product.article.name }}  </h4>
-{% for product in products %}
-<div class='image_wrapper'>
-    <a href="/products/{{product.pk}}">
+<div class="span12" > 
+<hr/>
+Fler produkter av {{ product.article.name }}  
+<hr/>
+	{% for product in products %}
+	<div class='image_wrapper'>
+		<a href="/products/{{product.pk}}">
 
-        {% with product.image_set.all|first as image %}
-             <div class="collection_list img_container" >
-            <img src="{% version image.image 'medium' %}" alt="{{ product.article.name }}"  />
-            <br/>
-            <div>
-                {{ product.article.name }}<br/>
-                {% trans "Pris" %} :
-                {%if product.article.discount%}
-                    <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK
-                {%else%}
-                    {{ product.article.price }}
-                {%endif%}
-            </div>
-        </div>
-        {% endwith %}
-    </a>
+		    {% with product.image_set.all|first as image %}
+		         <div class="collection_list img_container" >
+		        <img src="{% version image.image 'medium' %}" alt="{{ product.article.name }}"  />
+		        <br/>
+		        <div>
+		            {{ product.article.name }}<br/>
+		            {% trans "Pris" %} :
+		            {%if product.article.discount%}
+		                <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK
+		            {%else%}
+		                {{ product.article.price }}
+		            {%endif%}
+		        </div>
+		    </div>
+		    {% endwith %}
+		</a>
+	</div>
+
+	{% endfor %}
 </div>
-{% endfor %}
 
 
 {% endblock %}
