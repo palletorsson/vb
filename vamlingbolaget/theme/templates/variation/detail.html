@@ -219,9 +219,9 @@
 	</div> <!-- end span12 -->
 
 <div class="span12" > 
-<hr/>
-Fler produkter av {{ product.article.name }}  
-<hr/>
+	<hr/>
+	<strong>Fler produkter av {{ product.article.name }} </strong>  
+	<hr/>
 	{% for product in products %}
 	<div class='image_wrapper'>
 		<a href="/products/{{product.pk}}">
@@ -241,9 +241,11 @@ Fler produkter av {{ product.article.name }}
 		    </div>
 		    {% endwith %}
 		</a>
+	
 	</div>
 	{% endfor %}
-</div>
 
+</div>
+</div>
 
 {% endblock %}
