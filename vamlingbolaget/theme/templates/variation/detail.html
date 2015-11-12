@@ -125,13 +125,13 @@
 			<!-- else -->
 			{% else %}
 
-			<div class="selectedpatternandcolor span2">
+			<div class="selectedpatternandcolor span3">
 				<span style="padding-left: 10px;">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:200px;"  />
 				</span>
 			</div>
 
-			<div class="selectedpatternandcolor span5">
+			<div class="selectedpatternandcolor span4">
 				<select class="changonselect" id="color">
 					{% for color in colors %}
 						<option value="{{ color.order }}"
@@ -142,7 +142,6 @@
 						{% trans "Färg" %}: {{ color.name }} </option>
 					{% endfor %}
 				</select>
-				{% trans "Mönster" %}:
 				<select class="changonselect" id='pattern'>
 					{% for pattern in patterns %}
 						<option value="{{ pattern.order }}"
