@@ -19,49 +19,44 @@
 		<div class="span4 img_container" id="fadeifchangeorder">
 			{% for image in images %}
 			 <a href="{% version image.image 'large'%}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
-				 <img src="{% version image.image 'large' %}"   alt="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
+				 <img src="{% version image.image 'large' %}" alt="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
 			 </a>
 			{% endfor %}
 
 			<div class="detailPrice">
-					{%if product.article.discount%}
-					<span class="discount"> {{ product.article.f_discount }} </span> :- *<br />
-						<span class="smaller">({% trans "tidigare pris" %} </span>  <span id="the_price"> {{ product.article.price }} </span>    <span class="smaller">SEK) <br />
-					   * {{ product.article.discount.reason }} </span>
+				{%if product.article.discount%}
+				<span class="discount"> {{ product.article.f_discount }} </span> :- *<br />
+					<span class="smaller">({% trans "tidigare pris" %} </span>  <span id="the_price"> {{ product.article.price }} </span>    <span class="smaller">SEK) <br />
+				   * {{ product.article.discount.reason }} </span>
 
-					{%else%}
-						<span id="the_price"> {{ product.article.price }} :-</span>
-					{%endif%}  </div>
-
-			<br/>
-			<div class="hidden-xs"> {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</div>
+				{%else%}
+					<span id="the_price"> {{ product.article.price }} :-</span>
+				{%endif%}  </div>
+				<br/>
+			<div class="hidden-xs"> 
+				<h4>{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}</h4>
+				<hr>
+			</div>
 		</div>
 
 
 		<div class="span7">
 			<div>
 				<div>
-				<span class="floating">			
-					<span style="padding-left: 20px;" class="hidden-xs">
-						<img src="{% version product.article.file 'small' %} " />
-					</span>
-				</span>	
-					<p><h3 id="articlename">{{ product.article.name }} 
-						</p></h3>
+					<span class="floating">			
+					</span>	
+					<span class="articlehead">
+						<span id="articlename" >
+							{{ product.article.name }} <small>	| <span id="the_price"> {{ product.article.price }} :-</span> </small>
+							<hr class="article_hr"> 
+						</span>
+					</span>	
 
-					<p> {% trans "Artikelnummer" %}: <span id="sku_number">{{ product.article.sku_number }}</p>
-
-					<p id="art_description" class="small">{{ product.article.description }}</p>
-
-					{% trans "Kvalitet" %}: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span><br/>
-					{{ product.article.quality.description }}
-				
+					<p> | {% trans "Artikelnummer" %}: <span id="sku_number">{{ product.article.sku_number }}
+					| {% trans "Kvalitet" %}: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }} | </p>
+					<p id="art_description" class="small"> - {{ product.article.description }} </p>
+                    <p> - {{ product.article.quality.description }} </p>   
 				</div>
-				
-		
-
-			<br/>
-			
 			</div>
 			<div style="clear: both;"></div>
 			<div class="hidden product_type">{{product.article.type.order}}</div>
