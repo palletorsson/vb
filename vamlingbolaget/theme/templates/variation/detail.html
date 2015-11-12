@@ -156,7 +156,7 @@
 			<!-- else show size  -->
 		{%else%}
 			<span class="input-group">
-	  		<span class="input-group-addon class="sellect_margin""> {% trans "Storlek" %}: </span>
+	  		<span class="input-group-addon sellect_margin"> {% trans "Storlek" %}: </span>
 				<select class="form-control" id='size'>
 					{% for size in sizes %}
 						<option value="{{ size.pk }}"
