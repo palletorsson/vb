@@ -127,11 +127,11 @@
 
 			<div class="selectedpatternandcolor span3">
 				<span style="padding-left: 10px;">
-					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:200px;"  />
+					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:180px;"  /
 				</span>
 			</div>
 
-			<div class="selectedpatternandcolor span4">
+			<div class="selectedpatternandcolor span3">
 				<select class="changonselect" id="color">
 					{% for color in colors %}
 						<option value="{{ color.order }}"
@@ -153,7 +153,9 @@
 					{% endfor %}
 				</select>
 
-				</div>
+			</div>
+			<div style="clear: both;"></div>
+		
 		{% endif %} <!-- end of endif patterns-->
 		<hr/>			
 		<div class="minihead">
