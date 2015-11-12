@@ -108,7 +108,7 @@
 				</div> 
 			<!-- else if quality is Silky jersey or silkjersey-children etc -->
 			{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
-				<div class="selectedpatternandcolor span2 less_span">
+				<div class="selectedpatternandcolor span2">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
 					{{ product.color.name }} {{ product.pattern.name }}
 				</div>
