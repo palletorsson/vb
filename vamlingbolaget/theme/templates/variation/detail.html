@@ -31,6 +31,7 @@
 		<div class="span7">
 			<span class="articlehead">
 				<span id="articlename" >
+					<input id="article_pk" type="hidden" value="{{ product.article.pk }}">
 					{{ product.article.name }} 
 					<small>	| 
 						<span class="detailPrice">
@@ -41,11 +42,13 @@
 								<span class="smaller"> :-) <br />
 		   						* {{ product.article.discount.reason }} </span>
 							{%else%}
-							<span id="the_price"> {{ product.article.price }} :-</span>
+							<span id="the_price"> {{ product.article.price }}</span> :-
 							{%endif%}  
 						</span>
-						<span class="pull-right"> | ({% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}
-			| {% trans "Kvalitet" %}: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }} | </p> </span>
+						<span class="pull-right"> | ({% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span>
+						<span>| {% trans "Kvalitet" %}: 
+						<span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span>  
+						<span> | </span> 
 					</small>
 					<hr class="article_hr"> 
 				</span>
@@ -143,7 +146,7 @@
 					{% endfor %}
 				</select>
 		{% endif %} <!-- end of endif patterns-->
-<hr/>			
+		<hr/>			
 		<div class="minihead">
 			{% trans "Stolek" %} / {% trans "Antal" %} :
 		</div> 
