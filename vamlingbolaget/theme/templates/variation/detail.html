@@ -155,8 +155,8 @@
 		{%if product.article.type.order == 8 or product.article.type.order == 7 %}
 			<!-- else show size  -->
 		{%else%}
-			<span class="input-group">
-	  		<span class="input-group-addon sellect_margin"> {% trans "Storlek" %}: </span>
+			<span class="input-group sellect_margin">
+	  		<span class="input-group-addon"> {% trans "Storlek" %}: </span>
 				<select class="form-control" id='size'>
 					{% for size in sizes %}
 						<option value="{{ size.pk }}"
