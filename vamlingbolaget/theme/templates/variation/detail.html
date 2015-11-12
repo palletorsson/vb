@@ -60,65 +60,59 @@
 			<div style="clear: both;"></div>
 			<div class="hidden product_type">{{product.article.type.order}}</div>
 			<hr/>
-			<!-- diffrence start: -->
+			<strong>{% trans "Välj färg / mönster" %}</strong> <hr/>			
+				<div class="span12">
+				<!-- diffrence start patterns: -->
 				<!-- if quality is Velour or Quilted -->
 				{% if product.article.quality.order == 2 or product.article.quality.order == 4 %}
-					<div class="span12">
-						{% for color in colors %}
-							<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" style="width:100px;"  />
-							<label class="radio inline">
-								<input type="radio" name="radio" {%if color_id == color.order %} checked="checked" {%endif%}  id="radio_{{ color.order }}" value="{{ color.order }}" />
-							</label>
-						{% endfor %}
-					<br />
-					<input id="hidden_colorpattern" type="hidden" value="">
+					{% for color in colors %}
+						<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" style="width:100px;"  />
+						<label class="radio inline">
+							<input type="radio" name="radio" {%if color_id == color.order %} checked="checked" {%endif%}  id="radio_{{ color.order }}" value="{{ color.order }}" />
+						</label>
+					{% endfor %}
+				
+				<input id="hidden_colorpattern" type="hidden" value="">
 
-				<!-- if article is the "Reversible zip jacket" -->
-				{%elif product.article.sku_number == '9805' %}
-				<strong>{% trans "Välj färg / mönster" %}</strong> <hr/>			
-					<div class="span12">
-						<h5> Välj Utsidans mönster</h5>
-							<div class="outside">
-							<div class="selectedpatternandcolor span2">
-						<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" /><br/>
+				{%elif product.article.sku_number == '9805' %}	<!-- if article is the "Reversible zip jacket" -->
+				<h5> Välj Utsidans mönster</h5>
+				<div class="outside">
+					<div class="selectedpatternandcolor span2">
+						<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
+						<br/>
 						{{ product.color.name }} {{ product.pattern.name }}
 					</div>
 					<div class="color_and_pattern_choose span6">
 						{% for item in colorsandpattern %}
-							<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
 						{% endfor  %}
 					</div>
 					<input type="hidden" id="pattern" name="pattern" value="{{ product.pattern.order }}" >
 					<input type="hidden" id="color" name="color" value="{{ product.color.order }}">
-
 					<div style="clear: both;"></div>
 					<hr/>
-							</div> 
-<h5> Välj Insidans mönster</h5>
-							<div class="inside">
-<div id="selectedpatternandcolor_inside" class="selectedpatternandcolor_inside span2">
-						<img id="pattern_color_image inside" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" /><br/>
+				</div> 
+				<h5> Välj Insidans mönster</h5>
+					<div class="inside">
+						<div id="selectedpatternandcolor_inside" class="selectedpatternandcolor_inside span2">
+						<img id="pattern_color_image inside" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
+						<br/>
 						{{ product.color.name }} {{ product.pattern.name }}
-					</div>
-					<div class="color_and_pattern_choose span6">
-						{% for item in colorsandpattern %}
-							<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image inside" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
-						{% endfor  %}
-					</div>
-					<input type="hidden" id="pattern2" name="pattern_2" value="{{ product.pattern.order }}" >
-					<input type="hidden" id="color2" name="color_2" value="{{ product.color.order }}">
-
-					<div style="clear: both;"></div>
-				
+						</div>
+						<div class="color_and_pattern_choose span6">
+							{% for item in colorsandpattern %}
+								<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image inside" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+							{% endfor  %}
+						</div>
+						<input type="hidden" id="pattern2" name="pattern_2" value="{{ product.pattern.order }}" >
+						<input type="hidden" id="color2" name="color_2" value="{{ product.color.order }}">
+						<div style="clear: both;"></div>
 					</div> 
-
 				<!-- else if quality is Silky jersey or silkjersey-children etc -->
 				{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
-					<strong>{% trans "Välj färg / mönster" %} :  <div class="select_text"> {{ product.color.name }} {{ product.pattern.name }} </div> </strong> <hr/>
-					<div class="span12">
-						
-					<div class="selectedpatternandcolor span2">
-						<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" /><br/>
+					<div class="selectedpatternandcolor span2 less_span">
+						<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
+						<br/>
 						{{ product.color.name }} {{ product.pattern.name }}
 					</div>
 					<div class="color_and_pattern_choose span6">
@@ -130,37 +124,37 @@
 					<input type="hidden" id="color" name="color" value="{{ product.color.order }}">
 
 					<div style="clear: both;"></div>
-					<hr/>
-
+			
 				<!-- else -->
 				{% else %}
-					<div class="span7">
-						<select class="changonselect" id="color">
-							{% for color in colors %}
-								<option value="{{ color.order }}"
-									{% if color.order == product.color.order %}
-										selected="selected"
-									{%endif%}
-									">
-								{% trans "Färg" %}: {{ color.name }} </option>
-							{% endfor %}
-						</select>
-{% trans "Mönster" %}:
-						<select class="changonselect" id='pattern'>
-							{% for pattern in patterns %}
-								<option value="{{ pattern.order }}"
-								{% if pattern.order == product.pattern.order %}
+					<select class="changonselect" id="color">
+						{% for color in colors %}
+							<option value="{{ color.order }}"
+								{% if color.order == product.color.order %}
 									selected="selected"
 								{%endif%}
 								">
-								 {{ pattern.name }}</option>
-							{% endfor %}
-						</select>
-			<!-- end of endif -->
-			{% endif %}
-			<br/>
-
-			<div class="span7">
+							{% trans "Färg" %}: {{ color.name }} </option>
+						{% endfor %}
+					</select>
+					{% trans "Mönster" %}:
+					<select class="changonselect" id='pattern'>
+						{% for pattern in patterns %}
+							<option value="{{ pattern.order }}"
+							{% if pattern.order == product.pattern.order %}
+								selected="selected"
+							{%endif%}
+							">
+							 {{ pattern.name }}</option>
+						{% endfor %}
+					</select>
+			{% endif %} <!-- end of endif patterns-->
+			</div> <!-- end of endif span12 -->
+				
+			<strong> {% trans "Storlek" %} / {% trans "Antal" %}  </strong> 		
+			<hr/>			
+			<div class="span12">
+			
 			<!-- if type is Accessories & sheet or Piece-goods -->
 			{%if product.article.type.order == 8 or product.article.type.order == 7 %}
 			<!-- else show size  -->
