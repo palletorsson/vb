@@ -107,7 +107,7 @@
 					<div style="clear: both;"></div>
 				</div> 
 			<!-- else if quality is Silky jersey or silkjersey-children etc -->
-			{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
+			{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 or product.article.quality.order == 3 %}
 				<div class="selectedpatternandcolor span2">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
 					{{ product.color.name }} {{ product.pattern.name }}
@@ -191,7 +191,7 @@
 
 			
 		<!-- if type is Piece-goods (metervara) -->
-		{% if product.article.quality.order == 2 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 1  or product.article.quality.order == 4 or product.article.sku_number == '9805' or product.article.quality.order == 10  or product.article.quality.order == 14 %}
+		{% if product.article.quality.order == 2 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 1  or product.article.quality.order == 4 or product.article.sku_number == '9805' or product.article.quality.order == 10  or product.article.quality.order == 14 or product.article.quality.order == 3 %}
 		<br/>
 		{%else%}
 			<span style="padding-left: 10px;">
