@@ -202,7 +202,7 @@
 
 			
 		<!-- if type is Piece-goods (metervara) -->
-		{% if product.article.quality.order == 2 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 1  or product.article.quality.order == 4 or product.article.sku_number == '9805' or product.article.quality.order == 10  or product.article.quality.order == 14 or product.article.quality.order == 3 %}
+		{% if product.article.quality.order == 2 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 1  or product.article.quality.order == 4 or product.article.sku_number == '9805' or product.article.quality.order == 10  or product.article.quality.order == 14 or product.article.quality.order == 3 or product.article.quality.order == 6 %}
 		<br/>
 		{%else%}
 			<span style="padding-left: 10px;">
@@ -220,6 +220,7 @@
 			</span>
 		</div>
 		<div style="clear: both;"></div>
+		<br>
 		<div class="minihead">
 			{% trans "Detaljer" %} :
 		</div> 
