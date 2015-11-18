@@ -68,7 +68,7 @@
 	            {%if item.article.discount%}
 	            <span class="discount"> {{ item.article.f_discount }} </span>
 	            {%else%}
-	              {% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} {%trans "SEK"%}	</span><br/> {%endif%} 
+	              {% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}}	</span><br/> {%endif%} 
 	            {{ item.article.price }}
 	            {%endif%}
 	        </div>
@@ -98,7 +98,7 @@
 	        </td>
 	        <td>
 	            <div>
-	                <span> {{ b.bargain.price }}  {%trans "SEK"%} </span>
+	                <span> {{ b.bargain.price }}  </span>
 	            </div>
 	        </td>
 	        {% endfor %}

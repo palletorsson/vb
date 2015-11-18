@@ -101,12 +101,12 @@
             <td>
             <div>
                 {%if item.article.discount%}
-                    <span class="discount"> {{ item.article.f_discount }}  {%trans "SEK"%}</span>
+                    <span class="discount"> {{ item.article.f_discount }}  </span>
                 {%elif item.article.type.order == 8 %}
-                    {{item.totalitemprice}} {%trans "SEK"%}
+                    {{item.totalitemprice}} 
                 {%else%}
-                {% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} {%trans "SEK"%}	</span><br/> {%endif%} 
-                    {{ item.article.price }} {%trans "SEK"%}
+                {% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} 	</span><br/> {%endif%} 
+                    {{ item.article.price }}
                 {%endif%}
             </div>
         </td>
@@ -262,7 +262,7 @@
         {% for b in bargains %}
 <div class="controls controls-row">
 	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px; 
-	margin:10px;"> </div>
+	marginpx;"> </div>
 		</div>
 	   		<h5>
 				<strong> {%trans "REA"%} <small>
