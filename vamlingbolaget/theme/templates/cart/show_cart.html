@@ -262,7 +262,7 @@
         {% for b in bargains %}
 <div class="controls controls-row">
 	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px; 
-	margin:4px;"> </div>
+	margin:8px;"> </div>
 		</div>
 	   		<h5>
 				<strong> {%trans "REA"%} <small>
@@ -273,7 +273,7 @@
 			<div class="article_info_div">
 				<small>
 				<span> {% trans "Antal" %} : 1 </span> <br/>
-				<span> {{ b.bargain.description }} </span> <br/>
+				<span> {%trans "Artikel"%} : {{ b.bargain.description }} </span> <br/>
 				<span> {% trans "Pris" %} : {{ b.bargain.price }} {%trans "SEK"%} </span>
 				</small>
 				<hr>
