@@ -56,11 +56,24 @@
 	{% endfor %}
 
 	{% for b in bargains %}
-		<a href="{%url removefromcart b.pk 'bargain'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ b.id }}"></i></a>
-		<span> {{ b.bargain.title }}  </span>
-		{% trans "Antal" %} : 1
-		<span> {{ b.bargain.description }} </span>
-		<span> {{ b.bargain.price }} </span>
+	<div class="controls controls-row">
+	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px; 
+	margin:8px;"> </div>
+		</div>
+	   		<h5>
+				<strong> {%trans "REA"%} <small>
+					<span> | <a href="{%url removefromcart b.pk 'bargain'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ b.id }}"></i></a></span></small>
+				</strong>
+			</h5>
+			<hr>
+			<div class="article_info_div">
+				<small>
+				<span> {% trans "Antal" %} : 1 </span> <br/>
+				<span> {%trans "Artikel"%} : {{ b.bargain.description }} </span> <br/>
+				<span> {% trans "Pris" %} : {{ b.bargain.price }} {%trans "SEK"%} </span>
+				</small>
+				<hr>
+			</div>
     {% endfor %}
 	<hr/>    
 	<div class="totalprice" colspan="8" style="text-align: right">
