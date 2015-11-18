@@ -260,6 +260,9 @@
 		<hr>
         {% endfor %}
         {% for b in bargains %}
+<div class="controls controls-row">
+	<div class="mobile_cart_article_div"> X </div>
+		</div>
 	   		<h5>
 				<strong> {%trans "REA"%} <small>
 					<span> | <a href="{%url removefromcart b.pk 'bargain'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ b.id }}"></i></a></span></small>
@@ -267,9 +270,11 @@
 			</h5>
 			<hr>
 			<div class="article_info_div">
+				<small>
 				<span> {% trans "Antal" %} : 1 </span> <br/>
 				<span> {{ b.bargain.description }} </span> <br/>
 				<span> {% trans "Pris" %} : {{ b.bargain.price }} {%trans "SEK"%} </span>
+				</small>
 				<hr>
 			</div>
 		            
