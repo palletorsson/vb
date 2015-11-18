@@ -261,15 +261,15 @@
         {% endfor %}
         {% for b in bargains %}
 	   		<h5>
-				<strong> {{ item.article }} i {{item.article.quality|lower}} <small>
-					<span> | <a href="{%url removefromcart b.pk 'bargain'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ b.id }}"></i></a>  </span>
+				<strong> {%trans "REA"%} <small>
+					<span> | <a href="{%url removefromcart b.pk 'bargain'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ b.id }}"></i></a></span></small>
 				</strong>
 			</h5>
 			<hr>
 			<div class="article_info_div">
 				<span> {% trans "Antal" %} : 1 </span> <br/>
 				<span> {{ b.bargain.description }} </span> <br/>
-				<span> {{ b.bargain.price }} {%trans "SEK"%} </span>
+				<span> {% trans "Pris" %} : {{ b.bargain.price }} {%trans "SEK"%} </span>
 				<hr>
 			</div>
 		            
