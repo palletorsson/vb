@@ -98,7 +98,7 @@
 	        </td>
 	        <td>
 	            <div>
-	                <span> {{ b.bargain.price }} </span>
+	                <span> {{ b.bargain.price }}  {%trans "SEK"%} </span>
 	            </div>
 	        </td>
 	        {% endfor %}
@@ -116,7 +116,7 @@
 		{% endif %}
 		<tr>
 			<td class="totalprice" colspan="5" style="text-align: right">
-			    {% trans "Leverans" %}:
+			    {% trans "Leverans" %} :
 			</td>
 			<td id="handling">
 			    {{ handling }}
@@ -128,7 +128,7 @@
 			    {% trans "Total pris" %} :
 			</th>
 			<th id="totalprice">
-			    {{ totalprice }} SEK
+			    {{ totalprice }} {%trans "SEK"%}
 			</th>
 		</tr>
    		{%else%}
