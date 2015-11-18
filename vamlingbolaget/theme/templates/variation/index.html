@@ -9,7 +9,7 @@
 {% block content %}
 
         {% for product in products %}
-             <div class="collection_list img_container article_background" >
+             <div class="collection_list img_container" >
                 <a href="/products/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
                     {% with product.image_set.all|first as image %}
 
