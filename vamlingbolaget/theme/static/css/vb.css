@@ -1,5 +1,6 @@
   body {
       font-family: "Century Gothic", Verdana, Arial, Helvetica, sans-serif;
+      font-size: 1em;
   }
 
   body html {
@@ -252,10 +253,7 @@ margin-right: -49px;
     margin:7px;
 }
 
-.rea_img {
-	width:80px; 
-	margin:4px;
-} 
+
 
 .voucher_show {
  display: none; 
