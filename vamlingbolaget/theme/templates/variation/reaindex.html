@@ -1,0 +1,32 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% block pagetitle %}
+    <legend>{% trans "Shop" %}</legend>
+{% endblock %}
+
+{% block content %}
+
+        {% for product in products %}
+             <div class="collection_list img_container" >
+                <a href="/products/rea/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
+                    {% with product.image_set.all|first as image %}
+
+                            <div class="force_image"><img src="{{ product.image.url }}" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
+                            <div class='image_description'>
+                               <span class="artname"> {{ product.article.name }}</span><br/>
+                                {%if product.article.discount%}
+                                    <span class="discount"> {{ product.article.f_discount }} </span> ( {{ product.article.price }}) :-
+                                {%else%}
+                                    <span class="price"> <span class="discount"> {{ product.rea_price }} SEK </span>  ( ▼ <span style="text-decoration: line-through;">  {{ product.article.price }}</span> SEK ) </span>
+                                {%endif%}
+                            </div>
+
+                    {% endwith %}
+                </a>
+            </div>
+        {% endfor %}
+{% endblock %}
+
+

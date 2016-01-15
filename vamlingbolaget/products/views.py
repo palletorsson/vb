@@ -6,6 +6,12 @@ from blog.models import Post
 from gallery.models import *
 from django.http import Http404
 
+import requests
+import json
+import requests
+import httplib
+
+
 def first_page(request):
     variations = Variation.objects.filter(active=True).order_by('article__quality')
     images = Image.objects.all()
@@ -19,7 +25,7 @@ def first_page(request):
 
 
 def index(request):
-    products = Variation.objects.filter(active=True, order__lte=100).order_by('-article__quality', 'order')
+    products = Variation.objects.filter(active=True, order__lte=100).order_by('-article__quality', '-order')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     return render_to_response('variation/index.html',
@@ -28,6 +34,19 @@ def index(request):
                               'types': types,
                               },
                              context_instance=RequestContext(request))
+
+def reaindex(request):
+    products = ReaArticle.objects.filter(status='A').order_by('-article__quality')
+    print products
+    qualities = Quality.objects.filter(active=True)
+    types = Category.objects.filter(active=True)
+    return render_to_response('variation/reaindex.html',
+                             {'products': products,
+                              'qualities': qualities,
+                              'types': types,
+                              },
+                             context_instance=RequestContext(request))
+
 
 def by_type(request, key):
     products = Variation.objects.filter(article__category__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
@@ -41,7 +60,7 @@ def by_type(request, key):
 
 
 def by_quality(request, key):
-    products = Variation.objects.filter(article__quality__slug__contains = key, order__lte=100, active=True).order_by('order', 'article__quality')
+    products = Variation.objects.filter(article__quality__slug__contains = key, order__lte=100, active=True).order_by('-order', 'article__quality')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     return render_to_response('variation/index.html',
@@ -74,6 +93,7 @@ def detail(request, pk):
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
+        
 
     except:
         raise Http404
@@ -90,6 +110,19 @@ def detail(request, pk):
                    'pattern_id':pattern_id,
                    'products': products,
                    'colorsandpattern': colorsandpattern,
+                   },
+                   context_instance=RequestContext(request)
+                    )
+
+def readetail(request, pk):
+    try:
+        reaArticle = ReaArticle.objects.get(pk=pk)
+
+    except:
+        raise Http404
+
+    return render_to_response('variation/readetail.html',
+                   {'product': reaArticle,
                    },
                    context_instance=RequestContext(request)
                     )
@@ -126,6 +159,13 @@ def bargain(request):
 def bargain_detail(request, pk):
     product = Bargainbox.objects.get(pk=pk)
     return render_to_response('bargain/detail.html',
+        {'product': product,},
+        context_instance=RequestContext(request))
+
+def reaarticle(request, pk):
+    product = rea__Article.objects.get(pk=pk)
+    product.stock = get_stockquantity(product)
+    return render_to_response('rea/detail.html',
         {'product': product,},
         context_instance=RequestContext(request))
 
