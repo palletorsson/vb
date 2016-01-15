@@ -20,6 +20,7 @@ class VariationAdmin(admin.ModelAdmin):
     ordering = ['active','article']
 
 
+
 class ArticleAdmin(TranslationAdmin):
     model = Article
     prepopulated_fields = {"slug": ("name",)}
@@ -30,6 +31,17 @@ class ArticleAdmin(TranslationAdmin):
     search_fields = ['sku_number', 'name']
     list_per_page = 20
     ordering = ['active', 'name']
+
+class ReaArticleAdmin(admin.ModelAdmin):
+    model = ReaArticle
+    list_display = ('id', 'status','stockquantity', 'article', 'rea_price', 'pattern', 'color', 'quality', 'category', 'size','description', )
+    list_display_links = ('article', )
+    list_editable = ('status', )
+    list_filter = ('status',)
+    search_fields = ['sku_number',]
+    list_per_page = 4
+    ordering = ['status', 'id', ]
+
 
 class ColorAdmin(TranslationAdmin):
     model = Color
@@ -92,6 +104,7 @@ class CategoryAdmin(TranslationAdmin):
 
 admin.site.register(Variation, VariationAdmin)    
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(ReaArticle, ReaArticleAdmin)
 admin.site.register(Size, SizeAdmin)
 admin.site.register(PatternAndColor, PatternAndColorAdmin)
 admin.site.register(Color, ColorAdmin)
