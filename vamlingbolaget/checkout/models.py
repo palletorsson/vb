@@ -28,6 +28,7 @@ class Checkout(models.Model):
     message = models.TextField(_("Meddelande"), blank=True)
     ip = models.CharField(_("Ip"), max_length=255,blank=True)
     order = models.TextField(blank=True)
+    payment_log = models.TextField(blank=True)
     payex_key = models.CharField(_("Payex key"), max_length=34, blank=True)
     post = models.BooleanField()
     paymentmethod = models.CharField(_("Betalning"), max_length=1, choices=PAYMENT_METHOD)
