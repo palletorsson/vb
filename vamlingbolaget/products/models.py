@@ -8,7 +8,7 @@ from gallery.models import *
 import datetime
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Adjust
-
+#from products.fortnox import get_headers, get_art_temp, get_articles, get_article, create_article, update_article
 
 class TimeStampedActivate(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -181,6 +181,28 @@ class Bargainbox(models.Model):
     class Meta:
         ordering = ['-created', ]
 
+    
+class ReaArticle(models.Model):
+    article = models.ForeignKey('Article')
+    pattern = models.ForeignKey('Pattern')
+    color = models.ForeignKey('Color')
+    quality = models.ForeignKey('Quality')
+    category = models.ForeignKey('Category')
+    size = models.ForeignKey('Size')
+    description = models.TextField()
+    json = models.TextField(blank=True, null=True)
+    rea_price = models.IntegerField()
+    created = models.DateTimeField(auto_now_add = True)
+    modified = models.DateTimeField(auto_now = True)
+    status = models.CharField(max_length=2, choices = STATUS)
+    stockquantity = models.IntegerField()
+    image = models.ImageField(upload_to = 'bargains/')
+ 
+    def __unicode__(self):
+        return unicode(self.article)
+ 
+    class Meta:
+        ordering = ['-created', ]
 
 class PatternAndColor(models.Model):
     """
