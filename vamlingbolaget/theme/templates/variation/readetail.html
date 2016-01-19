@@ -17,38 +17,39 @@
 {% block allcontent %}
 	<div class="span12">
 		<div class="span4 img_container article_background" >
-	
 			 <a href="{{ product.image.url }}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
 				 <img src="{{ product.image.url }}" alt="REA : {{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
 			 </a>
-		
-
+	
 			<div id="art_description" class="image_description_detail"> - {{ product.article.description }} 
 			
 	        </div>
 
 		</div>
+
 		<div class="span7">
 			<span class="articlehead">
 				<span id="articlename" >
 					<input id="article_pk" type="hidden" value="{{ product.article.pk }}">
 					<input id="rea_pk" type="hidden" value="{{ product.pk }}">
 					REA : {{ product.article.name }} 
-					<small>	| 
-						<span class="detailPrice">
-								<span class="discount" id="the_price"> {{ product.rea_price }} </span> :- 
-								<span class="smaller">  *({% trans "tidigare pris" %} 
-									<span > {{ product.article.price }}  :-) </span>  
-								</span>  
+					| 
+						<span>
+								<span class="discount" id="the_price"> Nu:  {{ product.rea_price }}  :-  | </span>
+								  ({% trans "tidigare pris" %} :  {{ product.article.price }}  :-)   
 								<br />	   				 
 						</span>
-						<span class="smaller pull-right"> | {% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span>
-						<span class="smaller" >| {% trans "Kvalitet" %}: 
-						<span class="smaller quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span>  
-						<span> | </span> 
-					</small>
+					
 					<hr/> 
+                    <blockquote>
+                        <span>{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span> <br/>
+						<span>{% trans "Kvalitet" %}: <span id="{{ product.article.quality }}">{{ product.article.quality }}</span>  <br/>
+
+                        <span> {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }}</span>  <br/>
+                        <span>  {% trans "Storlek" %}: {{ product.size }}</span>  
+						<hr>						
 						<span> {{ product.description }} </span> 
+					</blockquote>
 					<hr/>
 				</span>
 			</span>	
