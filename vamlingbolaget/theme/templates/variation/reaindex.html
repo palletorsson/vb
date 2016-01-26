@@ -15,7 +15,7 @@
 
                             <div class="force_image"><img src="{{ product.image.url }}" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
                             <div class='image_description'>
-                               <span class="artname"> {{ product.article.name }}</span><br/>
+                               <span class="artname"> {{ product.article.name }} {% trans "i" %} {{ product.size }} </span><br/>
                                 {%if product.article.discount%}
                                     <span class="discount"> {{ product.article.f_discount }} </span> ( {{ product.article.price }}) :-
                                 {%else%}
