@@ -120,18 +120,21 @@ def checkout(request):
             
             # Secondly loop the rea items
             order_json['rea_item'] = {}
-            for item in rea_items:
-                payex_products = "Vamlingbolaget"
-                payex_articles = "Reavaror"        
-                msg = msg + 'Produkt '+ str(i) + str(': rea ') + ': \n'
-                msg = msg +  str(1) + u' st ' +  item.reaArticle.article.name + ' (Rea) : ' + str(item.reaArticle.rea_price)  + ' SEK \n' 
-                msg = msg + u' ( ' + item.reaArticle.description  + ' ) \n'            
-                i = i + 1
-                item.id = u'1234'
-                order_json['rea_item']['quantity'] = str(1.00)
-                order_json['rea_item']['article'] = item.reaArticle.article.sku_number
+            try:
+                for item in rea_items:
+                    payex_products = "Vamlingbolaget"
+                    payex_articles = "Reavaror"        
+                    msg = msg + 'Produkt '+ str(i) + str(': rea ') + ': \n'
+                    msg = msg +  str(1) + u' st ' +  item.reaArticle.article.name + ' (Rea) : ' + str(item.reaArticle.rea_price)  + ' SEK \n' 
+                    msg = msg + u' ( ' + item.reaArticle.description  + ' ) \n'            
+                    i = i + 1
+                    item.id = u'1234'
+                    order_json['rea_item']['quantity'] = str(1.00)
+                    order_json['rea_item']['article'] = item.reaArticle.article.sku_number
                
-            msg = msg + '\n'
+                msg = msg + '\n'
+            except: 
+                pass
 
             # and lastly bargins (this is actuality an old model we can consider removing)
             order_json['bargains'] = {}
@@ -534,7 +537,12 @@ def cleanCartandSetStock(request):
      
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
-    rea_items = cart.reacartitem_set.all()
+
+    try: 
+        rea_items = cart.reacartitem_set.all()
+    except: 
+        pass
+
     voucher = cart.vouchercart_set.all()   
 
     # update rea stock internalty 
@@ -558,7 +566,11 @@ def cleanCartandSetStock(request):
     # remove all caritem from that cart and the cart 
     cartitems.delete() 
     bargains.delete()
-    rea_items.delete()
+    try: 
+        rea_items.delete()
+    except:
+        pass 
+
     voucher.delete()
     cart.delete()
     return 1
