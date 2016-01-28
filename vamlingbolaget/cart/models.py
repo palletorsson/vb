@@ -28,6 +28,15 @@ class CartItem(models.Model):
     def __unicode__(self):
         return "%s %s" % (self.quantity, self.article.name)
 
+class VoucherCart(models.Model):
+    cart = models.ForeignKey(Cart, default=1, unique=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=['date_added']
+
+    def __unicode__(self):
+        return "%s" % self.cart
 
 class BargainCartItem(models.Model):
     cart = models.ForeignKey(Cart)
@@ -39,3 +48,15 @@ class BargainCartItem(models.Model):
 
     def __unicode__(self):
         return "%s" % self.bargain.title
+
+
+class ReaCartItem(models.Model):
+    cart = models.ForeignKey(Cart)
+    reaArticle = models.ForeignKey(ReaArticle)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=['date_added']
+
+    def __unicode__(self):
+        return "%s" % self.reaArticle.description
