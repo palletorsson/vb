@@ -358,7 +358,7 @@ def success(request):
 
                 try:
                     to = [order.email, 'info@vamlingbolaget.com']
-                    mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.order, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                    mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.message, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
                     order.message = order.message + u'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
                     order.payment_log = order.payment_log + '\n' + u'4: Log Success: Mail sent to mail adress : ' + order.email
                     order.save()
