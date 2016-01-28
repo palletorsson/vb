@@ -3,16 +3,24 @@
 {%block title%}
 <title>Vamlingbolaget | {% trans "pacsoft " %}  </title>
 <meta name="description" content={% trans "Tack för din Beställning av Vamlingbolagets produkter " %} />
+
 {%endblock%}
 
 
 {% block allcontent %}
 <h3>Add address and click action button</h3>
 <div>
-    <textarea class="address" rows="30" cols="100">
+    <textarea class="input_address" id="input_address" rows="30" cols="100"> 
     </textarea>
+
 </div>
 <br>
-<button type="button" class="btn btn-default" id="send_adress">Action</button>
+
+<button type="button" class="btn btn-default address_button" id="add_adress">Add</button>
+<br>
+<div >
+<h3 class="target_address" id="target_address" > </h3>
+</div>
+
 
 {% endblock %}

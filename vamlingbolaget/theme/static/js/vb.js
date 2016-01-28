@@ -63,6 +63,7 @@ if($('#hidden_colorpattern')){
         $('#hidden_colorpattern').val(this.value);
     });
 }
+
 $(".changonselect").change(function () {
 
 $('#fadeifchangeorder').fadeTo(500,0.6);
@@ -80,7 +81,7 @@ var once = 1,
 $(".changonselect option:selected").each(function () {
 	str += $(this).text() + " ";
 	if (once == 1) {
-	str += " och ";
+		str += " och ";
     }
 
     once = 2;
@@ -110,82 +111,112 @@ $("#pattern_color_image").attr("src", img);
 
 $("#addtocart").click(function() {
 
-var add_or_edit = 'add';
 
-var sku_number = $('#sku_number').text(),
-    product_type = $('#product_type').text(),
-    quality = $(".quality").text(),
-    size_id = $('#size option:selected').val() || size_id_default,
-    article_id = $('#article_pk option:selected').val(),
-    quantity = $('#quantiy_pk option:selected').val(),
-    color = $('#color').val() || $('#color option:selected').val() || $('#hidden_colorpattern').val(),
-    the_price = $("#the_price").text(),
-    pattern = $('#pattern').val() || $('#pattern option:selected').val() || $('#hidden_colorpattern').val(),
-    color2 = 0,
-    pattern2 = 0;
+	var add_or_edit = 'add';
 
-if (sku_number == 9805) { //fill in proper article no for 2 patterned items
-	color2 = $('#color2').val();
-	pattern2 = $('#pattern2').val();
+	var sku_number = $('#sku_number').text(),
+		product_type = $('#product_type').text(),
+		quality = $(".quality").text(),
+		size_id = $('#size option:selected').val() || size_id_default,
+		article_id = $('#article_pk').val(),
+		quantity = $('#quantiy_pk option:selected').val(),
+		color = $('#color').val() || $('#color option:selected').val() || $('#hidden_colorpattern').val(),
+		the_price = $("#the_price").text(),
+		pattern = $('#pattern').val() || $('#pattern option:selected').val() || $('#hidden_colorpattern').val(),
+		color2 = 0,
+		pattern2 = 0;
+
+	console.log(sku_number, product_type, quality, size_id + "art_n" + article_id, quantity, color, the_price, pattern) 
+
+	if (sku_number == 9805) { //fill in proper article no for 2 patterned items
+		color2 = $('#color2').val();
+		pattern2 = $('#pattern2').val();
 	}
 
-$.ajax({
-    type:"POST",
-    url:"/cart/addtocart/",
-    data: {
-	article_sku: sku_number,
-	color: color,
-	color2: color2,
-	pattern: pattern,
-	pattern2: pattern2,
-	size: size_id,
-	csrfmiddlewaretoken: csrftoken,
-	cartitem_id: '0',
-	quantity: quantity,
-	add_or_edit : add_or_edit
-    },
+	$.ajax({
+		type:"POST",
+		url:"/cart/addtocart/",
+		data: {
+		article_sku: sku_number,
+		color: color,
+		color2: color2,
+		pattern: pattern,
+		pattern2: pattern2,
+		size: size_id,
+		csrfmiddlewaretoken: csrftoken,
+		cartitem_id: '0',
+		quantity: quantity,
+		add_or_edit : add_or_edit
+		},
+		
+		success: function(data){
+		var msg = data.message.msg,
+			_ = data.cartitem;
+		var widgetTextstart = $('#widget_text_start').text();
+		var widgetSize = $('#widget_size').text();
+		var widgetExist = $('#widget_exist').text();
+		var widgetTextend = $('#widget_text_end').text();
+		var widgetTextin = $('#widget_text_in').text();
 
-    success: function(data){
-	var msg = data.message.msg,
-	    _ = data.cartitem;
-    var widgetTextstart = $('#widget_text_start').text();
-    var widgetSize = $('#widget_size').text();
-    var widgetExist = $('#widget_exist').text();
-    var widgetTextend = $('#widget_text_end').text();
-    var widgetTextin = $('#widget_text_in').text();
+		if(color2 === 0) {
+			var coltext = _.color,
+			pattext = _.pattern;
+		} else {
+			var coltext = _.color +' / '+_.color2,
+			pattext = _.pattern +' / '+_.pattern2;
 
-	if(color2 === 0) {
-		var coltext = _.color,
-		pattext = _.pattern;
-	} else {
-		var coltext = _.color +' / '+_.color2,
-		pattext = _.pattern +' / '+_.pattern2;
+			}
+
+		 $("#changetext").animate({
+		          height:'150px'
+		        });
+
+			$("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ': '+_.article +' </strong></li>' +
+				 '<li> ' +widgetTextin+' '+ coltext +', '+ pattext +' </li>' +
+				 '<li>'+widgetExist+' '+ _.quantity +' '+widgetTextend+' </li> ' +
+				 '</ul><div>').fadeIn();
+
+			$("#changetext").delay(6000).fadeOut(1000);
+
+			var old_quantity = $("#widget_quantity").text();
+			var new_quantity = parseInt(quantity) + parseInt(old_quantity);
+			$('#widget_quantity').text(new_quantity);
+
+			var old_price = $("#widget_total").text();
+			var new_price = parseInt(the_price) + parseInt(old_price);
+			$('#widget_total').text(new_price);
 
 		}
+	});
 
-     $("#changetext").animate({
-              height:'150px'
-            });
-
-
-	    $("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ': '+_.article +' </strong></li>' +
-		     '<li> ' +widgetTextin+' '+ coltext +', '+ pattext +' </li>' +
-		     '<li>'+widgetExist+' '+ _.quantity +' '+widgetTextend+' </li> ' +
-		     '</ul><div>').fadeIn();
-
-	    $("#changetext").delay(10000).fadeOut(1000);
-
-	    var old_quantity = $("#widget_quantity").text();
-	    var new_quantity = parseInt(quantity) + parseInt(old_quantity);
-	    $('#widget_quantity').text(new_quantity);
-
-	    var old_price = $("#widget_total").text();
-	    var new_price = parseInt(the_price) + parseInt(old_price);
-	    $('#widget_total').text(new_price);
-
-    }
 });
 
+$("#addreatocart").click(function() {
+	var item = $('#rea_pk').val();
+	the_price = $("#the_price").text(),
+    $.ajax({
+        type:"POST",
+        url:"/cart/addrea/",
+        data: {
+           item : item
+        },
+        success: function(data){
+            var msg = data.message.msg,
+                _ = data.cartitem;
+			$("#changetext").html('<div class=\"alert alert-success\"> <ul><li> <strong> + ' + msg + '</strong></li></ul></div>').fadeIn();
+            if (msg != "Fyndet finns redan ") { 
+			    var old_quantity = $("#widget_quantity").text();
+				var new_quantity = 1 + parseInt(old_quantity);
+				$('#widget_quantity').text(new_quantity);
+
+				var old_price = $("#widget_total").text();
+				var new_price = parseInt(the_price) + parseInt(old_price);
+
+				$('#widget_total').text(new_price);
+			}
+			$("#changetext").delay(5000).fadeOut(1000);
+        }
+    });
 });
 // edit cart
 
@@ -454,19 +485,22 @@ set_first_page();
 
     // payment method logic
     $('#myTab a').click(function (e) {
+
         e.preventDefault();
         $(this).tab('show');
-        $('input[name="paymentmethod"]').val(this.id);
-       
+        
+
+		$('input[name="paymentmethod"]').val(this.id);
+		
         handel_el = $('#handling'); 
         handel_el_value = handel_el.text().trim(); 
-        
+
         sum = $('#totalprice');
         sum_el = $('#totalprice')
         sum_value = sum_el.html().trim(); 
        
         sum_value = sum_value.substring(0, sum_value.length - 4); 
-         
+        
         if (this.id == 'P') {
 			if(parseInt(handel_el_value) == 80) { 
 				handel_el.html(parseInt(handel_el_value)+40)
@@ -479,6 +513,15 @@ set_first_page();
 			}
 		}
     });
+
+    // for pacsoft autoaddress 
+	$(".address_button").click(function() {
+
+		var input_address = $('.input_address').val();
+        console.log(input_address); 
+		$("#target_address").text(input_address); 
+
+	}); 
 
 
 }); // --- end document readyfunction
