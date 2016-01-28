@@ -25,7 +25,11 @@ def checkout(request):
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
-    rea_items = cart.reacartitem_set.all()
+    try: 
+        rea_items = cart.reacartitem_set.all()
+    except: 
+        pass 
+
     voucher = cart.vouchercart_set.all()
     getnames(cartitems)
 
