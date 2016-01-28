@@ -13,7 +13,8 @@ def cart_total(context):
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
     voucher = cart.vouchercart_set.all()
-    returntotal = totalsum(cartitems, bargains, request, voucher)
+    rea = cart.reacartitem_set.all()
+    returntotal = totalsum(cartitems, bargains, request, voucher, rea)
     total = returntotal['totalprice']
     numbers = returntotal['totalitems']
     return { 'total': total, 'numbers': numbers }
