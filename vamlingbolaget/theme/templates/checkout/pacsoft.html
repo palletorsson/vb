@@ -1,0 +1,18 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{%block title%}
+<title>Vamlingbolaget | {% trans "pacsoft " %}  </title>
+<meta name="description" content={% trans "Tack för din Beställning av Vamlingbolagets produkter " %} />
+{%endblock%}
+
+
+{% block allcontent %}
+<h3>Add address and click action button</h3>
+<div>
+    <textarea class="address" rows="30" cols="100">
+    </textarea>
+</div>
+<br>
+<button type="button" class="btn btn-default" id="send_adress">Action</button>
+
+{% endblock %}

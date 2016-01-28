@@ -1,0 +1,21 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% block pagetitle %}
+    <legend>{% trans "Admin info" %}</legend>
+{% endblock %}
+
+{% block allcontent %}
+
+	{% if user.is_authenticated %}
+
+        {% for order in orders %}
+
+            '{{ order.art }}' ,  ' {{ order.pattern }}' , '{{ order.color }}' , '{{ order.size }}' <br>
+          
+	    {% endfor %}
+
+	{% endif %}
+
+{% endblock %}
