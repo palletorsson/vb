@@ -16,7 +16,7 @@ import random
 from payex.service import PayEx
 from fortnox.fortnox import get_headers, get_art_temp, json_update, update_article, CreateCostumer, searchCustomer, customerExistOrCreate, updateCostumer, createOrder, create_invoice_rows
 import json
-from bson import json_util
+
 
 # --> from /checkout/ pay --> with card | on delivery   
 def checkout(request):
