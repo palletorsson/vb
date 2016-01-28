@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from models import Cart, CartItem, BargainCartItem, VoucherCart
+from models import Cart, CartItem, BargainCartItem, VoucherCart, ReaCartItem
 from django.http import HttpResponse
-from products.models import Article, Color, Pattern, Size, Quality, Bargainbox
+from products.models import Article, Color, Pattern, Size, Quality, Bargainbox, ReaArticle
 import random
 from django.core import urlresolvers
 from models import CartItem
@@ -138,8 +138,6 @@ def addtocart(request):
                         'sku' : sku,
                         'color': color_db.name,
                         'pattern': pattern_db.name,
-                        'color': color_db.name,
-                        'pattern': pattern_db.name,
                         'color2': color_db2.name,
                         'pattern2': pattern_db2.name,
                         'size': size_db.name,
@@ -152,8 +150,6 @@ def addtocart(request):
                     'cartitem': {
                         'article': article_db.name,
                         'sku' : sku,
-                        'color': color_db.name,
-                        'pattern': pattern_db.name,
                         'color': color_db.name,
                         'pattern': pattern_db.name,
                         'size': size_db.name,
@@ -181,7 +177,7 @@ def add_bargain(request):
         cart.save()
 
         existing_bargainitems = BargainCartItem.objects.filter(cart=cart)
-        print existing_bargainitems
+
 
         inbox = False
 
@@ -206,6 +202,42 @@ def add_bargain(request):
     response = HttpResponse(return_data, mimetype="application/json")
     return response
 
+def add_rea(request):
+    if request.POST:
+        d = request.POST
+        item = d['item']
+        print item
+        rea = ReaArticle.objects.get(pk=item)
+
+        cart_id = _cart_id(request)
+        cart, created = Cart.objects.get_or_create(key = cart_id)
+        cart.save()
+
+        existing_reaitems = ReaCartItem.objects.filter(cart=cart)
+       
+        inbox = False
+
+        for  existing_reaitems in existing_reaitems:
+            if rea.pk == existing_reaitems.reaArticle.pk:
+                msg = u'Fyndet finns redan '
+                 
+                inbox = True
+
+        if inbox == False:
+            ReaCartItem.objects.create(reaArticle=rea, cart=cart)
+            msg = u'Du har lagt till %s ' %rea.article.name
+
+
+
+    returnjson = {
+            'cartitem': {
+                'title': rea.article.name
+                },
+            'message': { 'msg' : msg }
+        }
+    return_data = json.dumps(returnjson)
+    response = HttpResponse(return_data, mimetype="application/json")
+    return response
 
 def show_product(request, article_slug):
     a = get_object_or_404(Article, slug=article_slug)
@@ -246,13 +278,15 @@ def showcart(request):
     cart, created = Cart.objects.get_or_create(key=key)
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
+    rea = cart.reacartitem_set.all()
     voucher = cart.vouchercart_set.all()
-    returntotal = totalsum(cartitems, bargains, request, voucher)
+    returntotal = totalsum(cartitems, bargains, request, voucher, rea)
     getnames(cartitems)
     returntotal['cartitems'] =  cartitems
     returntotal['bargains'] =  bargains
     returntotal['voucher'] = voucher
-  
+    returntotal['rea'] = rea
+
     return render_to_response('cart/show_cart.html',
         returntotal,
         context_instance=RequestContext(request))
@@ -294,7 +328,9 @@ def removefromcart(request, pk, type):
     try:
         if type == 'bargain':
             cartitem = BargainCartItem.objects.get(pk=pk)
-            
+        elif type == 'rea': 
+            cartitem = ReaCartItem.objects.get(pk=pk)
+            print cartitem
         else:
             cartitem = CartItem.objects.get(pk=pk)
     except CartItem.DoesNotExist:
@@ -329,7 +365,7 @@ def isincart(request, key, cartitem):
     else:
         return False
 
-def totalsum(cartitems, bargains, request, voucher):
+def totalsum(cartitems, bargains, request, voucher, rea):
     temp_p = 0
     temp_q = 0
     
@@ -358,6 +394,12 @@ def totalsum(cartitems, bargains, request, voucher):
         for item in bargains:
             temp_p = temp_p + item.bargain.price
             temp_q = temp_q + 1
+
+    if (rea):
+        for item in rea:
+            temp_p = temp_p + item.reaArticle.rea_price
+            temp_q = temp_q + 1
+
     try:
         gi = pygeoip.GeoIP(ROOT_DIR+'/GeoIP.dat')
         ip_ = request.META['REMOTE_ADDR']
