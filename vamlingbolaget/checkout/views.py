@@ -263,7 +263,7 @@ def checkout(request):
                     PayExRefKey = 1
 
                 new_order.payex_key = PayExRefKey
-                new_order.order = msg
+                new_order.message = msg
                 new_order.payment_log = '* Card payment Log - Payment request sent, payEx key: ' + str(PayExRefKey) 
                 new_order.order = order_json 
                 new_order.save()
