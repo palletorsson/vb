@@ -35,18 +35,40 @@ def index(request):
                               },
                              context_instance=RequestContext(request))
 
+SIZES = ('XSmall', 'Small', 'Medium', 'XLarge', 'XXLarge','XXXLarge', )
+
+
 def reaindex(request):
     products = ReaArticle.objects.filter(status='A').order_by('-article__quality')
     print products
     qualities = Quality.objects.filter(active=True)
-    types = Category.objects.filter(active=True)
+    types = Category.objects.filter(active=True) 
+    rea = "true"
+    sizes = SIZES
+
     return render_to_response('variation/reaindex.html',
                              {'products': products,
                               'qualities': qualities,
                               'types': types,
+                              'rea': rea, 
+                              'sizes': sizes, 
                               },
                              context_instance=RequestContext(request))
 
+def rea_by_size(request, key):
+    products = ReaArticle.objects.filter(size__name = key, status='A')
+    print products
+    qualities = Quality.objects.filter(active=True)
+    types = Category.objects.filter(active=True)
+    rea = "true"
+    sizes = SIZES
+    return render_to_response('variation/reaindex.html',
+             {'products': products,
+              'qualities': qualities,
+              'types': types,
+              'rea': rea, 
+              'sizes': sizes, },
+        context_instance=RequestContext(request))
 
 def by_type(request, key):
     products = Variation.objects.filter(article__category__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
@@ -99,8 +121,9 @@ def detail(request, pk):
         raise Http404
 
     return render_to_response('variation/detail.html',
-                              {'product': product,
-                               'images': images,
+                   {
+				   'product': product,
+                   'images': images,
                    'colors': colors,
                    'patterns': patterns,
                    'sizes': sizes,
@@ -112,7 +135,7 @@ def detail(request, pk):
                    'colorsandpattern': colorsandpattern,
                    },
                    context_instance=RequestContext(request)
-                    )
+                   )
 
 def readetail(request, pk):
     try:
