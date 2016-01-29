@@ -57,7 +57,6 @@ def reaindex(request):
 
 def rea_by_size(request, key):
     products = ReaArticle.objects.filter(size__name = key, status='A')
-    print products
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     rea = "true"
