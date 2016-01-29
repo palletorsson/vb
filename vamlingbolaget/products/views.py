@@ -165,8 +165,10 @@ def bargain_detail(request, pk):
 def reaarticle(request, pk):
     product = rea__Article.objects.get(pk=pk)
     product.stock = get_stockquantity(product)
+    reatype = "rea"
     return render_to_response('rea/detail.html',
-        {'product': product,},
+        {'product': product,
+         'reatype': reatype,},
         context_instance=RequestContext(request))
 
 

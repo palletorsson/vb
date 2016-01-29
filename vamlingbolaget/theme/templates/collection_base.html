@@ -2,6 +2,18 @@
 {% load i18n %}
 {% block sidebar %}
     <ul class="hidden-phone">
+
+        {% if rea == 'true' %}
+		<h5>Rea Filter</h5> 
+		<h6>{% trans "Storlek" %}</h6> 
+
+         {% for size in sizes %}
+                    <a href="/products/rea/size/{{size}}"> {{ size }} </a>
+         {% endfor %}
+
+        
+		{% endif %}
+        <hr>
         <h5>{% trans "Kategorier" %}</h5>
         {% for type in types %}
     		{% if type.slug == 'bargain'%}
@@ -14,7 +26,8 @@
 				</li>
 			{% endif %}
         {% endfor %}
-        
+
+
         
         <br/>
         <h5>{% trans "Kvaliter" %}</h5>
@@ -26,6 +39,8 @@
             {% endif %}
         {% endfor %}
         <br/>
+
+
         <h5>{% trans "Översikt" %}</h5>
         <li>
              <a href="/colorsandpatterns/">{% trans "Färger och Mönster" %} </a>

@@ -19,7 +19,7 @@
                                 {%if product.article.discount%}
                                     <span class="discount"> {{ product.article.f_discount }} </span> ( {{ product.article.price }}) :-
                                 {%else%}
-                                    <span class="price"> <span class="discount"> {{ product.rea_price }} SEK </span>  ( ▼ <span style="text-decoration: line-through;">  {{ product.article.price }}</span> SEK ) </span>
+                                    <span class="price"> <span class="discount"> {{ product.rea_price }} SEK </span>  ( ▼ <span style="text-decoration: line-through;">  {{ product.article.price }}</span> SEK ) <br> ( +{{ product.stockquantity }} ) </span>
                                 {%endif%}
                             </div>
 
