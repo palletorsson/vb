@@ -40,7 +40,6 @@ SIZES = ('XSmall', 'Small', 'Medium', 'XLarge', 'XXLarge','XXXLarge', )
 
 def reaindex(request):
     products = ReaArticle.objects.filter(status='A').order_by('-article__quality')
-    print products
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True) 
     rea = "true"

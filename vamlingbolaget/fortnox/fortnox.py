@@ -3,7 +3,7 @@ import json
 import requests
 import httplib
 from local_fortnox import get_headers
-local_tests = False; 
+local_tests = True; 
 
 # Fortnox
 # Value helper function
