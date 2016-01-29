@@ -626,7 +626,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     try: 
         order = createOrder(headers, customer_order)
         new_order.payment_log = new_order.payment_log +  '\n' + 'Order created in Fortnox: ' +  str(order)
-   except: 
+    except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order not created' 
  
     new_order.save()
