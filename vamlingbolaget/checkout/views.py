@@ -596,12 +596,20 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     # To make an Fortnox order we need a Custumer
     # first check if customer exist 
     # and update or create customer and get customer number back and log
-    customer_no = customerExistOrCreate(headers, customer)
-    new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer: ' +  str(customer_no)
+    try: 
+        customer_no = customerExistOrCreate(headers, customer)
+        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer: ' +  str(customer_no)
+    except: 
+        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved' 
+        new_order.save()
 
     # Creat the order part of the json from order_json and log 
-    invoice_rows = create_invoice_rows(order_json)
-    comments = "payexid: " + unicode(new_order.payex_key) + "\n" + "Email :" + unicode(new_order.message)
+    try: 
+        invoice_rows = create_invoice_rows(order_json)
+        comments = "payexid: " + unicode(new_order.payex_key) + "\n" + "Email :" + unicode(new_order.message)
+    except: 
+        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order json not resolved' 
+        new_order.save()
 
     # add addtional information to json
     orderid_ = new_order.order_number 
@@ -615,8 +623,12 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
                 }
             })  
     # send the json order, log and save the order 
-    order = createOrder(headers, customer_order)
-    new_order.payment_log = new_order.payment_log +  '\n' + 'Order created in Fortnox: ' +  str(order)
+    try: 
+        order = createOrder(headers, customer_order)
+        new_order.payment_log = new_order.payment_log +  '\n' + 'Order created in Fortnox: ' +  str(order)
+   except: 
+        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order not created' 
+ 
     new_order.save()
     cleanCartandSetStock(request)
     return 1  
