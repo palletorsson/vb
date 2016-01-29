@@ -590,6 +590,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
                 "ZipCode": new_order.postcode,
                 "Email": unicode(new_order.email),
                 "Phone1": new_order.phone,
+                "SalesAccount": "3012",
             }
         })
 
