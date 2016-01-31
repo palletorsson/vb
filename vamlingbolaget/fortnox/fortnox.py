@@ -207,15 +207,18 @@ def customerExistOrCreate(headers, customer):
         print customer 
         print customer_dict  
 
-    try: 
-        if(customer_exist == False):
+    if(customer_exist == False):
+        try: 
             customer_response_id = CreateCostumer(headers, customer)
             if local_tests == True: 
                 print "id, is none " 
                 print customer_response_id
             return customer_response_id
-        
-        else: 
+        except: 
+            customer_response = "Create error: " + str(customer_response)
+       
+    if(customer_exist != False):
+        try:
             url = customer_exist
             #the returning result is customer id  
             customer_response_id = updateCostumer(headers, customer, url) 
@@ -223,8 +226,9 @@ def customerExistOrCreate(headers, customer):
                 print "id: " 
                 print customer_response_id
             return customer_response_id
-    except: 
-        customer_response = "Error update or create" 
+        except: 
+            customer_response = "Update error: " + str(customer_response)
+
     return customer_response
 
 def createOrder(headers, customer_order):
