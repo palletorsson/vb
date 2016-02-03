@@ -411,7 +411,7 @@ def create_order_test():
 
 if local_tests == True: 
     print "Running Tests: "
-    #update_customer_test()
+    create_order_test()
     print "End Testing --- " 
 
 
