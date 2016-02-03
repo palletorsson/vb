@@ -604,6 +604,11 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved' 
         new_order.save()
 
+    try:
+         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved ' +  str(customer_no)
+    except: 
+        pass
+   
     # Creat the order part of the json from order_json and log 
     try: 
         invoice_rows = create_invoice_rows(order_json)
