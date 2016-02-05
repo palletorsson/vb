@@ -35,11 +35,13 @@ def index(request):
                               },
                              context_instance=RequestContext(request))
 
-SIZES = ('XSmall', 'Small', 'Medium', 'XLarge', 'XXLarge','XXXLarge', )
+SIZES = ('XSmall', 'Small', 'Medium', 'Large', 'XLarge','XXLarge', )
 
 
 def reaindex(request):
-    products = ReaArticle.objects.filter(status='A').order_by('-article__quality')
+
+    products = ReaArticle.objects.filter(status='A').order_by('-article__name')
+
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True) 
     rea = "true"
