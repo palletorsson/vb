@@ -57,7 +57,7 @@ def reaindex(request):
                              context_instance=RequestContext(request))
 
 def rea_by_size(request, key):
-    products = ReaArticle.objects.filter(size__name = key, status='A')
+    products = ReaArticle.objects.filter(size__name = key, status='A').order_by('article__name')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     rea = "true"
