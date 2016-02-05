@@ -579,7 +579,11 @@ def cleanCartandSetStock(request):
 # Run after order when customer is send to conferm url /thanks/
 def fortnoxOrderandCostumer(request, new_order, order_json):
     fullname = unicode(new_order.first_name) + " " + unicode(new_order.last_name)
-    order_json = json.loads(order_json)
+    try: 
+        order_json = json.loads(order_json)
+    except: 
+        pass 
+
     headers = get_headers()
 
     customer = json.dumps({
@@ -599,15 +603,10 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     # and update or create customer and get customer number back and log
     try: 
         customer_no = customerExistOrCreate(headers, customer)
-        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer: ' +  str(customer_no)
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved' 
         new_order.save()
 
-    try:
-        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved ' +  str(customer_no)
-    except: 
-        pass
    
     # Creat the order part of the json from order_json and log 
     try: 

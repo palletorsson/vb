@@ -3,6 +3,7 @@ import json
 import requests
 import httplib
 from local_fortnox import get_headers
+
 local_tests = True; 
 
 # Fortnox
@@ -165,7 +166,7 @@ def formatCustomer(customer):
 
 # Update customer
 def updateCostumer(headers, customer, customer_url):
-
+    return_this = "-"
     isdict = type(customer) is dict 
     if (isdict): 
         if local_tests == True:  
@@ -181,20 +182,25 @@ def updateCostumer(headers, customer, customer_url):
             data = customer
         )
 
-        if local_tests == True:  
-            print "Printing the result for update Customer: "
-            print r.content
-
-        result = json.loads(r.content)
-
-        if local_tests == True: 
-            print "Update customer"
-            print result['Customer']["CustomerNumber"]
-        
-        return result['Customer']["CustomerNumber"]
-
     except requests.exceptions.RequestException as e:
         return('HTTP Request failed')
+
+    if local_tests == True:  
+        print "Printing the result for update Customer: "
+        print r.content
+
+    try:    
+        result = json.loads(r.content)
+    except: 
+        result = r.content
+
+    return_this = result['Customer']["CustomerNumber"]
+
+    if local_tests == True: 
+        print "Update customer"
+        print result['Customer']["CustomerNumber"]
+        
+    return return_this
 
 # Create or update customer
 def customerExistOrCreate(headers, customer):
@@ -211,7 +217,7 @@ def customerExistOrCreate(headers, customer):
         try: 
             customer_response_id = CreateCostumer(headers, customer)
             if local_tests == True: 
-                print "id, is none " 
+                print "id: " 
                 print customer_response_id
             return customer_response_id
         except: 
