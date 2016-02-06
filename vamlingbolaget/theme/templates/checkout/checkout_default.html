@@ -1,29 +1,10 @@
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
-{%if cartitems or bargains %}
+{%if cartitems or bargains or rea %}
 <table class="table table-bordered table-striped" >
 	<thead>
-	<tr>
-	    <th>
-	            <span> {% trans "Antal" %}  </span>
-	    </th>
-	    <th>
-	            <span> {% trans "Artikel" %}   </span>
-	    </th>
-	    <th>
-	            <span> {% trans "Färg" %} </span>
-	    </th>
-	    <th>
-	            <span> {% trans "Mönster" %} </span>
-	    </th>
-	    <th>
-	        <span> {% trans "Storlek" %} </span>
-	    </th>
-	    <th width="100px">
-	            <span> {% trans "Pris" %} </span>
-	    </th>
-	</tr>
+		{% include "checkout/table_head.html" %}
 	</thead>
 
 	<tbody>
@@ -102,7 +83,53 @@
 	            </div>
 	        </td>
 	        {% endfor %}
-	    {%if cartitems or bargains %}
+
+
+		{% for item in rea %}
+        <tr>
+        <td>
+            <div>
+                <span> 1 </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span> {{ item.reaArticle.article.name }} i {{item.reaArticle.article.quality|lower}} <span class="discount"> (REA) </span>  </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span>{{ item.reaArticle.color }}
+                {% if item.reaArticle.color_2 > 0 %}
+                    / {{ item.reaArticle.color_2 }}
+                {%endif%}
+                </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span>
+                    {{ item.reaArticle.pattern }}
+                    {% if item.reaArticle.pattern_2 > 0 %}
+                        / {{ item.reaArticle.pattern_2 }}
+                    {%endif%}
+                </span>
+            </div>
+        </td>
+            <td>
+                <div>
+                    <span>{{ item.reaArticle.size }} </span>
+                </div>
+            </td>
+
+            <td>
+            <div>
+           	<span class="discount"> {{ item.reaArticle.rea_price }} </span>(<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} </span>)</span>
+            </div>
+        </td>
+        {% endfor %}
+       
+	    {%if cartitems or bargains or rea %}
 
 	    {%if voucher %}
 		<tr class="voucher_show">
