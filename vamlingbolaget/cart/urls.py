@@ -6,5 +6,7 @@ urlpatterns = patterns('cart.views',
     url(r'^remove/(?P<pk>[a-zA-Z0-9_.-]+)/(?P<type>[a-zA-Z0-9_.-]+)/$', 'removefromcart',  name='removefromcart'),
     url(r'^voucher/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'voucher',  name='voucher'),
     url(r'^edititem/(?P<key>[a-zA-Z0-9_.-]+)/$', 'editcartitem',  name='editcartitem'),
+    url(r'^addrea/$', 'add_rea'),
     url(r'^addbargain/$', 'add_bargain'),
+    
 )
