@@ -5,6 +5,7 @@ from models import *
 from blog.models import Post
 from gallery.models import *
 from django.http import Http404
+from fortnox.fortnox import get_headers, get_articles
 
 import requests
 import json
@@ -200,4 +201,14 @@ def quality(request, name):
 
 def category(request, name):
     pass
+
+def allArticles(request): 
+    headers = get_headers()
+    articles = get_articles(headers)
+
+    return render_to_response('variation/admin_view.html', {
+        'articles': articles
+    }, context_instance=RequestContext(request))
+
+
 

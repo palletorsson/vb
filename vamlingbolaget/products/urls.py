@@ -13,5 +13,6 @@ urlpatterns = patterns('products.views',
     url(r'^bargain/$', 'bargain', name='bargains'),
     url(r'^bargain/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'bargain_detail', name='bargain_detail'),
     url(r'^patternandcolortest/$', 'colorpatterntest'),
+    url(r'^articles_admin/$', 'allArticles'),
 
 )

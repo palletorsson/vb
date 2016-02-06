@@ -273,6 +273,18 @@ def get_articles(headers):
     return response_data
  
 
+def get_articles(headers):
+    # Articles (GET https://api.fortnox.se/3/articles)
+
+    try:
+        r = requests.get(
+            url="https://api.fortnox.se/3/articles",
+            headers = headers,
+        )
+        return r.content
+    except requests.exceptions.RequestException as e:
+        print('HTTP Request failed')
+
 def get_article(headers, article_num):
     # Article (GET https://api.fortnox.se/3/articles/TR01)
     article_num = get_art_temp()
