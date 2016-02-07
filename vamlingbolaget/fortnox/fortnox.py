@@ -287,7 +287,7 @@ def get_articles(headers):
 
 def get_article(headers, article_num):
     # Article (GET https://api.fortnox.se/3/articles/TR01)
-    article_num = get_art_temp()
+
     try:
         r = requests.get(
             url="https://api.fortnox.se/3/articles/"+ article_num ,

@@ -10,5 +10,17 @@
 {% block allcontent %}
 {% if user.is_authenticated %}
 	{{ articles }}
+
+{% for art in articles %}
+    { {{ art }} },
+
+{% endfor %}
+
+<br>
+<br>
+<br>
+
+{{ check_art }}
+
 {% endif %}
 {% endblock %}

@@ -211,4 +211,27 @@ def allArticles(request):
     }, context_instance=RequestContext(request))
 
 
+# to show all articels
+def allArt(request):
+    articles = Article.objects.filter(active = True).order_by('name')
+    print articles
 
+    headers = get_headers()
+    check_art = []
+    for art in articles: 
+        res = get_article(headers, str(art.sku_number)) 
+        print art.sku_number
+        res = json.loads(res)
+        print res
+        try:
+            print res["ErrorInformation"]["Error"]
+            check_art.append("error: " + str(art.sku_number) + " " + unicode(art.name))
+        except:  
+            print res['Article']['ArticleNumber']
+            check_art.append("ok: " + unicode(res['Article']['ArticleNumber']) + " is the same " + str(art.sku_number))
+
+    
+
+    return render_to_response('variation/admin_view.html', {
+        'articles': articles
+    }, context_instance=RequestContext(request))
