@@ -5,9 +5,9 @@ from models import *
 from blog.models import Post
 from gallery.models import *
 from django.http import Http404
-from fortnox.fortnox import get_headers, get_articles
+from fortnox.fortnox import get_headers, get_articles, get_article
 
-import requests
+
 import json
 import requests
 import httplib
@@ -233,5 +233,6 @@ def allArt(request):
     
 
     return render_to_response('variation/admin_view.html', {
-        'articles': articles
+        'articles': articles, 
+        'check_art': check_art
     }, context_instance=RequestContext(request))
