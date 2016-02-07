@@ -287,10 +287,12 @@ def get_articles(headers):
 
 def get_article(headers, article_num):
     # Article (GET https://api.fortnox.se/3/articles/TR01)
+    art_int = int(article_num)
+    art_int_str = str(article_num)
 
     try:
         r = requests.get(
-            url="https://api.fortnox.se/3/articles/"+ article_num ,
+            url="https://api.fortnox.se/3/articles/"+ art_int_str ,
             headers = headers,
         )
         return r.content

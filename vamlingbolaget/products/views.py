@@ -219,10 +219,15 @@ def allArt(request):
     headers = get_headers()
     check_art = []
     for art in articles: 
-        res = get_article(headers, str(art.sku_number)) 
-        print art.sku_number
+        try: 
+            sku_num = int(art.sku_number)
+            sku_num = str(sku_num)
+        except: 
+            sku_num = art.sku_number 
+         
+        res = get_article(headers, sku_num) 
         res = json.loads(res)
-        print res
+        
         try:
             print res["ErrorInformation"]["Error"]
             check_art.append("error: " + str(art.sku_number) + " " + unicode(art.name))
