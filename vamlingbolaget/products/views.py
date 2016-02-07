@@ -225,7 +225,7 @@ def allArt(request):
         except: 
             sku_num = art.sku_number 
          
-        res = get_article(headers, sku_num) 
+        res = get_article(headers, str(sku_num)) 
         res = json.loads(res)
         
         try:
