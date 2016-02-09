@@ -5,14 +5,27 @@
 
         {% if rea == 'true' %}
 		<h5>Rea Filter</h5> 
-		<h6>{% trans "Storlek" %}</h6> 
+		<h6>{% trans "Filter" %} : {% trans "Storlek" %}</h6> 
 
          {% for size in sizes %}
-                    <a href="/products/rea/size/{{size}}"> {{ size }} </a>
+                    <a href="/products/rea/size/{{size}}"> {{ size }} </a> | 
          {% endfor %}
 
-        
+		<h6>{% trans "Filter" %} : {% trans "Typ" %}</h6> 
+
+
+         {% for t in atypes %}
+                    <a href="/products/rea/type/{{t.order}}"> {{ t }} </a> | 
+         {% endfor %}
+
 		{% endif %}
+        <hr>
+
+		<li>
+			<a href="/products/rea/" class="discount"> REA </a>
+		</li>  
+        <hr>
+            <h5>{% trans "Ordinarie Sortiment:" %}</h5>      
         <hr>
         <h5>{% trans "Kategorier" %}</h5>
         {% for type in types %}

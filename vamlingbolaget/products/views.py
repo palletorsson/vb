@@ -45,6 +45,8 @@ def reaindex(request):
 
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True) 
+    atypes = Type.objects.filter(order__lte=5, active=True)
+
     rea = "true"
     sizes = SIZES
 
@@ -52,6 +54,7 @@ def reaindex(request):
                              {'products': products,
                               'qualities': qualities,
                               'types': types,
+                              'atypes': atypes,
                               'rea': rea, 
                               'sizes': sizes, 
                               },
@@ -61,15 +64,36 @@ def rea_by_size(request, key):
     products = ReaArticle.objects.filter(size__name = key, status='A').order_by('article__name')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
+    atypes = Type.objects.filter(order__lte=5, active=True)
     rea = "true"
     sizes = SIZES
     return render_to_response('variation/reaindex.html',
              {'products': products,
               'qualities': qualities,
               'types': types,
+              'atypes': atypes,
               'rea': rea, 
               'sizes': sizes, },
         context_instance=RequestContext(request))
+
+
+def rea_by_type(request, key):
+
+    products = ReaArticle.objects.filter(article__type__order = key, status='A').order_by('article__name')
+    qualities = Quality.objects.filter(active=True)
+    types = Category.objects.filter(active=True)
+    atypes = Type.objects.filter(order__lte=5, active=True)
+    rea = "true"
+    sizes = SIZES
+    return render_to_response('variation/reaindex.html',
+             {'products': products,
+              'qualities': qualities,
+              'types': types,
+              'atypes': atypes,
+              'rea': rea, 
+              'sizes': sizes, },
+        context_instance=RequestContext(request))
+
 
 def by_type(request, key):
     products = Variation.objects.filter(article__category__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
