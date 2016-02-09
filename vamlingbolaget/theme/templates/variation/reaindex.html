@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-{% lazy_paginate products %}
+
 {% paginate products %}
         {% for product in products %}
              <div class="collection_list img_container" >
@@ -29,7 +29,24 @@
                 </a>
             </div>
         {% endfor %}
-{% show_more %}
+<div>
+<nav>
+  <ul class="pagination"><li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li>
+ {% show_pages %} 
+ <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+
+ </ul>
+</nav>
+</div>
 {% endblock %}
 
 
