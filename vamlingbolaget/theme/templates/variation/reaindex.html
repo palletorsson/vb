@@ -10,25 +10,7 @@
 {% block content %}
 
 {% paginate products %}
-<div>
-<nav class="page_num">
-  <ul class="pagination"><li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li>
 
- {% show_pages %} 
- <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-
- </ul>
-</nav>
-</div>
 
         {% for product in products %}
              <div class="collection_list img_container" >
