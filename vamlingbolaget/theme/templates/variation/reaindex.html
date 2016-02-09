@@ -10,8 +10,6 @@
 {% block content %}
 
 {% paginate products %}
-{% lazy_paginate products %}
-
         {% for product in products %}
              <div class="collection_list img_container" >
                 <a href="/products/rea/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
@@ -34,14 +32,23 @@
 <div>
 
 
-{% show_more %}
+<nav  class="page_num">
+  <ul class="pagination"><li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li>
+ {% show_pages %} 
+ <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
 
-{% endblock %}
-
-{% block js %}
-    {{ block.super }}
-    <script src="{{ STATIC_URL }}/js/endless-pagination.js"></script>
-    <script>$.endlessPaginate();</script>
+ </ul>
+</nav>
+</div>
 {% endblock %}
 
 
