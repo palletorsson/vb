@@ -125,8 +125,8 @@ def checkout(request):
                     payex_products = "Vamlingbolaget"
                     payex_articles = "Reavaror"        
                     msg = msg + 'Produkt '+ str(i) + str(': rea ') + ': \n'
-                    msg = msg +  str(1) + u' st ' +  item.reaArticle.article.name + ' (Rea) : ' + str(item.reaArticle.rea_price)  + ' SEK \n' 
-                    msg = msg + u' ( ' + item.reaArticle.description  + ' ) \n'            
+                    msg = msg +  str(1) + u' st ' +  item.reaArticle.article.name + ' (Rea) : ' + str(item.reaArticle.rea_price)  + ' SEK \n'  
+                    msg = msg + 'i ' + item.reaArticle.pattern.name + ', ' + item.reaArticle.color.name + ' \n'            
                     i = i + 1
                     item.id = u'1234'
                     order_json['rea_item']['quantity'] = str(1.00)
