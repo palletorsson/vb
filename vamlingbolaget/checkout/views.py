@@ -611,7 +611,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     # Creat the order part of the json from order_json and log 
     try: 
         invoice_rows = create_invoice_rows(order_json)
-        comments = "payexid: " + unicode(new_order.payex_key) + "\n" + "Email :" + unicode(new_order.message)
+        comments = "payexid: " + unicode(new_order.payex_key)
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order json not resolved' 
         new_order.save()
