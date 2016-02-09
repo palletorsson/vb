@@ -2,12 +2,13 @@
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
+{% load endless %}
 {% block pagetitle %}
     <legend>{% trans "Shop" %}</legend>
 {% endblock %}
 
 {% block content %}
-
+{% paginate products %}
         {% for product in products %}
              <div class="collection_list img_container" >
                 <a href="/products/rea/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
@@ -27,6 +28,23 @@
                 </a>
             </div>
         {% endfor %}
+<div><nav>
+  <ul class="pagination"><li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li>
+ {% show_pages %} 
+ <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+
+ </ul>
+</nav>
+</div>
 {% endblock %}
 
 
