@@ -196,8 +196,8 @@ class ReaArticle(models.Model):
     modified = models.DateTimeField(auto_now = True)
     status = models.CharField(max_length=2, choices = STATUS)
     stockquantity = models.IntegerField()
-    image = models.ImageField(upload_to = 'bargains/')
- 
+    image = FileBrowseField("Image", max_length=200, directory="bargains/", extensions=[".jpg", ".jpeg", ".gif", ".png"], blank=True, null=True)
+  
     def __unicode__(self):
         return unicode(self.article)
  
