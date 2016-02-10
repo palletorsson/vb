@@ -15,7 +15,7 @@
                 <a href="/products/rea/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
                     {% with product.image_set.all|first as image %}
 
-                            <div class="force_image"><img src="{{ product.image.url }}" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
+                            <div class="force_image"><img src="{% version product.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
                             <div class='image_description'>
                                <span class="artname"> {{ product.article.name }} {% trans "i" %} {{ product.size }} </span><br/>
  															{{ product.pattern }} , {{ product.color }} <br/>
