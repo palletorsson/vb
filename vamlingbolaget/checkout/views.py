@@ -127,7 +127,7 @@ def checkout(request):
                     msg = msg + 'Produkt '+ str(i) + str(': rea ') + ': \n'
                     msg = msg +  str(1) + u' st ' +  item.reaArticle.article.name + ' (Rea) : ' + str(item.reaArticle.rea_price)  + ' SEK \n'  
                     msg = msg + 'i ' + item.reaArticle.pattern.name + ', ' + item.reaArticle.color.name + ' \n' 
-                    msg = msg + 'Storlek ' + item.reaArticle.size.name + ' \n'            
+                    msg = msg + 'Storlek' + item.reaArticle.size.name + ' \n'            
                     i = i + 1
                     item.id = u'1234'
                     order_json['rea_item']['quantity'] = str(1.00)
@@ -441,7 +441,7 @@ def thanks(request):
         except:
             print "order info not ok"
                  
-        _new_cart_id(request)
+
         message = "Tack for din order"
     else:
         message = u"Lägg till något i din shoppinglåda och gör en beställning."
@@ -534,35 +534,34 @@ def cleanCartandSetStock(request):
     # get items 
     key = _cart_id(request)
     cart = Cart.objects.get(key = key)
+    
     cartitems_key = cart.id 
-     
+  
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
 
+    print bargains 
+
+    # update rea stock internalty 
     try: 
         rea_items = cart.reacartitem_set.all()
+        print "starting..."
+        for item in rea_items: 
+            print "loop !"
+            current_stock = item.reaArticle.stockquantity
+            new_stock = current_stock - 1
+            item.reaArticle.stockquantity = new_stock
+            if (current_stock == 1):
+                item.reaArticle.status = 'E'
+            item.reaArticle.save()
     except: 
         pass
 
+
+
     voucher = cart.vouchercart_set.all()   
 
-    # update rea stock internalty 
-    for item in rea_items: 
-        current_stock = item.reaArticle.stockquantity
-        new_stock = current_stock - 1
-        item.reaArticle.stockquantity = new_stock
-        if (current_stock == 1):
-           item.reaArticle.status = 'E'
-        item.reaArticle.save()
-
-		# update stock at fortnox - for the future
-        #try: 
-        #    data = json_update(art, new_stock) 
-        #    print data
-        #    fortnox_respons = update_article(art, data, headers)
-        #    print fortnox_respons
-        #except:
-        #    pass
+	
 
     # remove all caritem from that cart and the cart 
     cartitems.delete() 
@@ -574,6 +573,8 @@ def cleanCartandSetStock(request):
 
     voucher.delete()
     cart.delete()
+    # create a new cart
+    _new_cart_id(request)
     return 1
 
 
@@ -636,8 +637,12 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order not created' 
  
     new_order.save()
+    # set the new stock 
     cleanCartandSetStock(request)
     return 1  
+
+
+
 
 # to show all checkouts
 def admin_view(request):
@@ -685,4 +690,14 @@ def pacsoft(request):
     return render_to_response('checkout/pacsoft.html',
         message,
         context_instance=RequestContext(request))
+
+
+
+def testingRemoveStock(request):
+    message = cleanCartandSetStock(request)
+
+    return render_to_response('checkout/tests.html', {
+        'message': message
+    }, context_instance=RequestContext(request))
+
 
