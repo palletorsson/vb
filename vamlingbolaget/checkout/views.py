@@ -516,13 +516,32 @@ def fortnox(request):
         order.payment_log = order.payment_log +  '\n' + 'Fortnox callback Log: order id: ' + str(order_id) + ', from ip: '+ ip 
         if (ip == order.ip):
              order.payment_log = order.payment_log +  '\n' + 'Fortnox callback Log: ip from order to order is the same'
+             order.save()
         else: 
              order.payment_log = order.payment_log +  '\n' + 'Fortnox callback Log: ip from order to order is not the same'
-        order.save()
+             order.save()
 
-        json_order = order.order 
-    
-        fortnoxOrderandCostumer(request, order, json_order)
+
+        # create order in fortnox
+        print "fortnox"
+        try: 
+            json_order = order.order         
+            fortnoxOrderandCostumer(request, order, json_order)
+            order.payment_log = order.payment_log +  '\n' + 'fornox order is ok'
+            order.save()
+        except: 
+            order.payment_log = order.payment_log +  '\n' + 'something wrong with fortnox'
+            order.save()
+
+        # set the new stock
+        print "stock" 
+        try: 
+            ccss = cleanCartandSetStock(request)
+            order.payment_log = order.payment_log +  '\n' + 'cleaning cart'
+            order.save()
+        except: 
+            order.payment_log = order.payment_log +  '\n' + 'error cleaning cart'
+            order.save()
 
         return HttpResponse(status=200)
     else: 
@@ -531,7 +550,7 @@ def fortnox(request):
 
 # clean cart and chang stockquanity TODO Make this happen after each fortnox is done.
 def cleanCartandSetStock(request): 
-    # get items 
+    # get cart, key and items 
     key = _cart_id(request)
     cart = Cart.objects.get(key = key)
     
@@ -540,12 +559,9 @@ def cleanCartandSetStock(request):
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
 
-    print bargains 
-
     # update rea stock internalty 
     try: 
         rea_items = cart.reacartitem_set.all()
-        print "starting..."
         for item in rea_items: 
             print "loop !"
             current_stock = item.reaArticle.stockquantity
@@ -557,11 +573,7 @@ def cleanCartandSetStock(request):
     except: 
         pass
 
-
-
     voucher = cart.vouchercart_set.all()   
-
-	
 
     # remove all caritem from that cart and the cart 
     cartitems.delete() 
@@ -573,7 +585,8 @@ def cleanCartandSetStock(request):
 
     voucher.delete()
     cart.delete()
-    # create a new cart
+
+    # create a clean new cart
     _new_cart_id(request)
     return 1
 
@@ -605,6 +618,8 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     # and update or create customer and get customer number back and log
     try: 
         customer_no = customerExistOrCreate(headers, customer)
+        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer: ' +  str(customer_no)
+        new_order.save()
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved' 
         new_order.save()
@@ -635,14 +650,12 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         new_order.payment_log = new_order.payment_log +  '\n' + 'Order created in Fortnox: ' +  str(order)
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order not created' 
- 
+        new_order.save()
+
+    # save create new blank order  
     new_order.save()
-    # set the new stock 
-    cleanCartandSetStock(request)
+
     return 1  
-
-
-
 
 # to show all checkouts
 def admin_view(request):
