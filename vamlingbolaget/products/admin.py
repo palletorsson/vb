@@ -34,9 +34,9 @@ class ArticleAdmin(TranslationAdmin):
 
 class ReaArticleAdmin(admin.ModelAdmin):
     model = ReaArticle
-    list_display = ('id', 'status','stockquantity', 'article', 'rea_price', 'pattern', 'color', 'quality', 'category', 'size','description', )
+    list_display = ('id', 'status','stockquantity', 'article', 'rea_price', 'pattern', 'color', 'quality', 'category', 'size', 'description', 'image')
     list_display_links = ('article', )
-    list_editable = ('status', )
+    list_editable = ('status', 'image')
     list_filter = ('status', 'article',)
     search_fields = ['sku_number', 'article',]
     list_per_page = 4
