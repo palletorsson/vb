@@ -18,9 +18,9 @@
                             <div class="force_image"><img src="{{ product.image.url }}" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
                             <div class='image_description'>
                                <span class="artname"> {{ product.article.name }} {% trans "i" %} {{ product.size }} </span><br/>
-
+ 															{{ product.pattern }} , {{ product.color }} <br/>
                                 {%if product.article.discount%}
- 															{{ product.pattern}} , {{ product.color }} </span><br/>
+
                                     <span class="discount"> {{ product.article.f_discount }} </span> ( {{ product.article.price }}) :-
                                 {%else%}
                                     <span class="price"> <span class="discount"> {{ product.rea_price }} SEK </span>  ( ▼ <span style="text-decoration: line-through;">  {{ product.article.price }}</span> SEK ) <br> ( {{ product.stockquantity }} {% trans "Finns" %} ) </span>
