@@ -9,13 +9,34 @@
 
 {% block allcontent %}
 {% if user.is_authenticated %}
-<ul>
+
+
+<table>
 {% for art in articles %}
-    <li> {{ art.article.name }}, {{ art.pattern.name }}, {{ art.color.name }}, {{ art.size.name }}, {{ art.stockquantity }}, {{ art.status }} </ul>
+  <tr>
+    <td> {{ art.article.name }} </td> 
+	<td>{{ art.pattern.name }} </td> 
+	<td> {{ art.color.name }} </td> 
+	<td>{{ art.size.name }} </td> 
+	<td>{{ art.stockquantity }} </td>
+    <td>{{ art.status }}</td>   
+  </tr>
 {% endfor %}
 
-</ul>
+</table>
 
 {% endif %}
 {% endblock %}
+
+<table style="width:100%">
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td> 
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td> 
+    <td>94</td>
+  </tr>
 
