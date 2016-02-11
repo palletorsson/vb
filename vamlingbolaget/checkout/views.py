@@ -683,6 +683,64 @@ def admin_view(request):
         'orders': orders
     }, context_instance=RequestContext(request))
 
+
+# to show all checkouts
+def rea_admin_views(request, limit):
+    orders = Checkout.objects.all().order_by('-id')[:limit] 
+
+    for order in orders:
+        rea = None
+        try:
+            start = order.message.index('Produkt 1: ') + len('Produkt 1: ')
+            end = order.message.index( ' :', start )
+
+            if (len(order.message[start:end]) < 120):
+                rea = order.message[start:end]
+        except: 
+            pass
+
+        if (rea == 'rea'): 
+            try:
+                start = order.message.index(' rea : ') + len(' rea : ')
+                end = order.message.index( ' : ', start )
+                if (len(order.message[start:end]) < 120):
+                    order.art = order.message[start:end].rstrip('\n')           
+            except: 
+                pass
+ 
+            try:
+                start = order.message.index('Storlek') + len('Storlek')
+                end = order.message.index( 'Frakt', start )
+                if (len(order.message[start:end]) < 120):
+                    order.size = order.message[start:end].rstrip('\n') 
+
+            except: 
+                pass
+
+            try:
+                start = order.message.index('i ') + len('i ')
+                end = order.message.index( ', ', start )
+                if (len(order.message[start:end]) < 120):
+                    order.pattern = order.message[start:end].rstrip('\n')     
+            except: 
+                pass
+
+            try:
+                start = order.message.index(', ') + len(', ')
+                end = order.message.index( 'Storlek', start )
+                if (len(order.message[start:end]) < 120):
+                    order.color = order.message[start:end].rstrip('\n')     
+            except: 
+                pass
+
+        order.message = order.message[86:]
+        order.message = order.message[:100] 
+   
+    return render_to_response('checkout/rea_admin_view.html', {
+        'orders': orders, 
+    }, context_instance=RequestContext(request))
+
+
 def pacsoft(request): 
     message = "add adress"
 
