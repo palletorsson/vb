@@ -644,8 +644,8 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     return 1  
 
 # to show all checkouts
-def admin_view(request):
-    orders = Checkout.objects.all()    
+def admin_view(request, limit):
+    orders = Checkout.objects.all().order_by('-id')[:limit]   
     for order in orders:
         try:
             start = order.order.index(' st ') + len(' st ')
