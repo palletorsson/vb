@@ -127,7 +127,7 @@ def checkout(request):
                     msg = msg + 'Produkt '+ str(i) + str(': rea ') + ': \n'
                     msg = msg +  str(1) + u' st ' +  item.reaArticle.article.name + ' (Rea) : ' + str(item.reaArticle.rea_price)  + ' SEK \n'  
                     msg = msg + 'i ' + item.reaArticle.pattern.name + ', ' + item.reaArticle.color.name + ' \n' 
-                    msg = msg + 'Storlek' + item.reaArticle.size.name + ' \n'            
+                    msg = msg + 'Storlek ' + item.reaArticle.size.name + ' \n'            
                     i = i + 1
                     item.id = u'1234'
                     order_json['rea_item']['quantity'] = str(1.00)
@@ -330,25 +330,7 @@ def success(request):
 
             # remove the old cart and cart items if status is Order 
             if (order != 1 and order.status == 'O'):
-                try:
-                    cart = Cart.objects.get(key = cart_id)
-                    cartitems_key = cart.id 
-                    cartitems = CartItem.objects.filter(cart = cartitems_key)
-                    cartitems.delete() 
-
-                    # need to count down the reaitems 
-                    # for each rea order count stock down logcally, save, 
-                    # addtionally dubble check that aginst the fortnox 
- 
-                    cart.delete()
-                  
-                    order.payment_log = order.payment_log + '\n' + u'2: Log Success: old cart removed'
-                except:
-                    order.payment_log = order.payment_log + '\n' + u'2: Log Error: old cart not found or already removed'
-
-                # create a new cart id      
-                _new_cart_id(request)
-
+                
                 try:
                     transnumber = response['transactionNumber']
                     order.message = order.message + 'PayEx transaktion: ' + str(transnumber) + '\n'
@@ -436,13 +418,14 @@ def thanks(request):
        
     if (order != 1):
         try: 
-            order.payment_log = order.payment_log + '\n' + "* Sending thanks message"
+            order.payment_log = order.payment_log + "* Sending thanks message" + '\n'
             order.save()
         except:
-            print "order info not ok"
-                 
-
+            order.payment_log = order.payment_log + "* can find order" + '\n'
+            order.save()    
+              
         message = "Tack for din order"
+
     else:
         message = u"Lägg till något i din shoppinglåda och gör en beställning."
  
@@ -536,8 +519,8 @@ def fortnox(request):
         # set the new stock
         print "stock" 
         try: 
-            ccss = cleanCartandSetStock(request)
-            order.payment_log = order.payment_log +  '\n' + 'cleaning cart'
+            cleanCartandSetStock(request)
+            order.payment_log = order.payment_log +  '\n' + 'cleaning cart' 
             order.save()
         except: 
             order.payment_log = order.payment_log +  '\n' + 'error cleaning cart'
@@ -548,7 +531,7 @@ def fortnox(request):
         return HttpResponseRedirect('/')
 
 
-# clean cart and chang stockquanity TODO Make this happen after each fortnox is done.
+# clean cart and chang stockquanity 
 def cleanCartandSetStock(request): 
     # get cart, key and items 
     key = _cart_id(request)
@@ -624,11 +607,14 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved' 
         new_order.save()
 
+    comments = "payexid: " + unicode(new_order.payex_key)
+    print comments
    
     # Creat the order part of the json from order_json and log 
     try: 
         invoice_rows = create_invoice_rows(order_json)
-        comments = "payexid: " + unicode(new_order.payex_key)
+        new_order.payment_log = new_order.payment_log +  '\n' + str(invoice_rows)
+        new_order.save()
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order json not resolved' 
         new_order.save()
