@@ -39,16 +39,18 @@ def json_update(articleNumber, QuantityInStock):
     return data_
 
 def create_invoice_rows(order_json):
-    try: 
-        order_json = json.dumps(order_json)
-    except: 
-        pass 
     print "from create invoice rows"
     print order_json
-    order_json = formatJson(order_json)
+    order_json_f = formatJson(order_json)
     print order_json
 
-    order_json = json.loads(order_json)
+    try: 
+        order_json = json.loads(order_json) 
+        print "unformat"
+    except: 
+        order_json_f = json.loads(order_json)
+        print "format"
+
     print order_json
 
     invoicerows = []
