@@ -758,8 +758,7 @@ def testingRemoveStock(request):
     }, context_instance=RequestContext(request))
 
 
-def consumOrder(request, order_id):
-    
+def consumOrder(request, order_id, force):
     if request.user.is_authenticated():  
         try:   
             order = Checkout.objects.get(order_number=order_id) 
@@ -776,9 +775,16 @@ def consumOrder(request, order_id):
             if (len(seekorder) == 0):
                 order_json = order.order
                 resp = fortnoxOrderandCostumer(request, order, order_json)
+
         except: 
             seekorder = "None"
 
+        if (force == '9'): 
+            print "inforce order"
+            order_json = order.order
+            resp = fortnoxOrderandCostumer(request, order, order_json)
+        else: 
+            print "no force"
 
     else: 
         order = "you are not admin"
