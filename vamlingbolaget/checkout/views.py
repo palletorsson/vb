@@ -759,6 +759,7 @@ def testingRemoveStock(request):
 
 
 def consumOrder(request, order_id):
+    
     if request.user.is_authenticated():  
         try:   
             order = Checkout.objects.get(order_number=order_id) 
@@ -776,7 +777,7 @@ def consumOrder(request, order_id):
                 order_json = order.order
                 resp = fortnoxOrderandCostumer(request, order, order_json)
         except: 
-            print "nop"
+            seekorder = "None"
 
 
     else: 
@@ -791,10 +792,10 @@ def consumOrder(request, order_id):
 def readOrders(request, key):
 
     if request.user.is_authenticated():  
-     
+           
         headers = get_headers()
         seekorders = getOrders(headers)
-
+        
     else: 
         seekorders = "you are not admin"
 
