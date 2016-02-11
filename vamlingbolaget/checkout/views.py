@@ -14,7 +14,7 @@ from forms import CheckoutForm
 from models import Checkout
 import random
 from payex.service import PayEx
-from fortnox.fortnox import get_headers, get_art_temp, json_update, update_article, CreateCostumer, searchCustomer, customerExistOrCreate, updateCostumer, createOrder, create_invoice_rows
+from fortnox.fortnox import get_headers, get_art_temp, json_update, update_article, CreateCostumer, searchCustomer, customerExistOrCreate, updateCostumer, seekOrder, createOrder, create_invoice_rows, getOrders
 import json
 
 
@@ -755,6 +755,52 @@ def testingRemoveStock(request):
 
     return render_to_response('checkout/tests.html', {
         'message': message
+    }, context_instance=RequestContext(request))
+
+
+def consumOrder(request, order_id):
+    if request.user.is_authenticated():  
+        try:   
+            order = Checkout.objects.get(order_number=order_id) 
+
+        except: 
+            order = "no order with that id"
+        try:
+            # check if these is and order  
+            fullname = unicode(order.first_name) + " " + unicode(order.last_name)
+            headers = get_headers()
+            seekorder = seekOrder(headers, fullname)
+            seekorder = json.loads(seekorder)
+            seekorder = seekorder['Invoices']  
+            if (len(seekorder) == 0):
+                order_json = order.order
+                resp = fortnoxOrderandCostumer(request, order, order_json)
+        except: 
+            print "nop"
+
+
+    else: 
+        order = "you are not admin"
+
+    return render_to_response('checkout/consumorder.html', {
+        'order': order, 
+        'seekorder': seekorder
+    }, context_instance=RequestContext(request))
+
+
+def readOrders(request, key):
+
+    if request.user.is_authenticated():  
+     
+        headers = get_headers()
+        seekorders = getOrders(headers)
+
+    else: 
+        seekorders = "you are not admin"
+
+    return render_to_response('checkout/orders.html', {
+        'order': seekorders, 
+        'seekorder': seekorders
     }, context_instance=RequestContext(request))
 
 

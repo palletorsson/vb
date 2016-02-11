@@ -11,6 +11,8 @@ urlpatterns = patterns('checkout.views',
     url(r'admin/(?P<limit>[a-zA-Z0-9_.-]+)/$', 'admin_view'),
     url(r'pacsoft/$', 'pacsoft'),
     url(r'tests/$', 'testingRemoveStock'),
+    url(r'seekorders/(?P<key>[a-zA-Z0-9_.-]+)/$', 'readOrders'),
+    url(r'consumorder/(?P<order_id>[a-zA-Z0-9_.-]+)/$', 'consumOrder'),
 )
 
 

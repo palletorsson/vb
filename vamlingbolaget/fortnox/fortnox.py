@@ -237,6 +237,34 @@ def customerExistOrCreate(headers, customer):
 
     return customer_response
 
+#look for order (invoice)
+
+def getOrders(headers):
+    # Invoices (GET https://api.fortnox.se/3/invoices)
+
+    try:
+        r = requests.get(
+            url="https://api.fortnox.se/3/invoices",
+            headers = headers,
+        )
+    except requests.exceptions.RequestException as e:
+        print('HTTP Request failed')
+    return r.content
+
+
+def seekOrder(headers, custumer_name):
+    # Invoices (GET https://api.fortnox.se/3/invoices/203)
+
+    try:
+        r = requests.get(
+            url="https://api.fortnox.se/3/invoices?customername="+str(custumer_name), 
+            headers = headers,
+        )
+
+    except requests.exceptions.RequestException as e:
+        print('HTTP Request failed')
+    return r.content
+
 def createOrder(headers, customer_order):
     try:
         r = requests.post(
