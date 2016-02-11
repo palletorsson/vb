@@ -43,10 +43,13 @@ def create_invoice_rows(order_json):
         order_json = json.dumps(order_json)
     except: 
         pass 
-
+    print "from create invoice rows"
+    print order_json
     order_json = formatJson(order_json)
-    
+    print order_json
+
     order_json = json.loads(order_json)
+    print order_json
 
     invoicerows = []
 
@@ -76,6 +79,7 @@ def create_invoice_rows(order_json):
 		        "ArticleNumber": 2, 
 		      })
 
+    print invoicerows
     return invoicerows   
                 
 
