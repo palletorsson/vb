@@ -48,7 +48,7 @@ def create_invoice_rows(order_json):
         order_json = json.loads(order_json) 
         print "unformat"
     except: 
-        order_json_f = json.loads(order_json)
+        order_json = json.loads(order_json_f)
         print "format"
 
     print order_json
