@@ -761,7 +761,7 @@ def testingRemoveStock(request):
 def consumOrder(request, order_id, force):
     if request.user.is_authenticated():  
         try:   
-            order = Checkout.objects.get(order_number=order_id) 
+            order =  Checkout.objects.filter(order_number=order_id).order_by('-id')[0] 
 
         except: 
             order = "no order with that id"
