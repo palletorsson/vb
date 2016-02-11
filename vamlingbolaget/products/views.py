@@ -265,3 +265,12 @@ def allArt(request):
         'articles': articles, 
         'check_art': check_art
     }, context_instance=RequestContext(request))
+
+def allreaArt(request):
+    reaarticles = ReaArticle.objects.all().order_by('status')
+    
+    return render_to_response('variation/admin_rea_art.html', {
+        'articles': reaarticles, 
+
+    }, context_instance=RequestContext(request))
+

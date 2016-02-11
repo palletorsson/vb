@@ -16,4 +16,5 @@ urlpatterns = patterns('products.views',
     url(r'^patternandcolortest/$', 'colorpatterntest'),
     url(r'^articles_admin/$', 'allArticles'),
     url(r'^allart_admin/$', 'allArt'),
+    url(r'^allart_rea/$', 'allreaArt'),
 )
