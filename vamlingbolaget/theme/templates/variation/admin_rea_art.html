@@ -9,12 +9,12 @@
 
 {% block allcontent %}
 {% if user.is_authenticated %}
-
+<ul>
 {% for art in articles %}
-     {{ art.article.name }}, {{ art.pattern.name }}, {{ art.color.name }}, {{ art.stockquantity }}, {{ art.status }} |
+    <li> {{ art.article.name }}, {{ art.pattern.name }}, {{ art.color.name }}, {{ art.size.name }}, {{ art.stockquantity }}, {{ art.status }} </ul>
 {% endfor %}
 
-
+</ul>
 
 {% endif %}
 {% endblock %}
