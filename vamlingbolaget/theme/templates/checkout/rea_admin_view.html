@@ -12,9 +12,10 @@
 
 <ul>
 {% for order in orders %}
-<li>   {{ order.art }}  {{ order.size }}  {{ order.pattern }}  {{ order.color  }}</li>
+<li>   {{ order.first_name }} {{ order.last_name }}  : {{ order.art }}  {{ order.size }}  {{ order.pattern }}  {{ order.color  }}</li>
 
 
+    
 {% endfor %}
 <ul>
 <br>
