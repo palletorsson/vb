@@ -1,7 +1,14 @@
 
+@media (min-width: 1200px)
+	.span2 {
+	  width: 120px;
+	}
+}
+
 
 @media (max-width: 1200px) {
-	.container {
+
+   	.container {
 		background: #fff; // yellow;
 	}
 
@@ -23,6 +30,7 @@
 		width: 200px;
 		float:left;
 	}
+
 	.span4 {
 		width:33%;
 		float:left;
@@ -81,6 +89,7 @@
 		float:left;
 		width:40%;
 	}
+
 
 	.span2 {
 		width: 200px;
@@ -228,6 +237,7 @@
 	.artname{
 		  font-size: 17px;
 		 }
+
 	.navbar-collapse {
 		width: 100%;
 		padding-left: 35px; /*to compensate for bootstrap -15 px left-margin*/
@@ -242,7 +252,6 @@
 		padding-top:6px;
 	  white-space: normal; 
 	  overflow: hidden;
-      height:90px;
 	}
 	.force_image {
 	  height: 260px;
