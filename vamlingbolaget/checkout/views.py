@@ -740,6 +740,40 @@ def rea_admin_views(request, limit):
         'orders': orders, 
     }, context_instance=RequestContext(request))
 
+def rea_admin_total(request, limit):
+    orders = Checkout.objects.all().order_by('-id')[:limit] 
+    total = 0
+    for order in orders:
+        rea = None
+
+        try:
+            start = order.message.index('Produkt 1: ') + len('Produkt 1: ')
+            end = order.message.index( ' :', start )
+
+            if (len(order.message[start:end]) < 120):
+                rea = order.message[start:end]
+        except: 
+            pass
+
+
+        if (rea == 'rea'): 
+            try:
+                start = order.message.index('Totalpris: ') + len('Totalpris: ')
+                end = order.message.index( ' SEK', start )
+                if (len(order.message[start:end]) < 120):
+                    order.price = order.message[start:end].rstrip('\n')           
+            except: 
+                pass
+        total = total + int(order.price)
+        print total 
+
+     
+ 
+   
+    return render_to_response('checkout/rea_admin_total.html', {
+        'total': total, 
+    }, context_instance=RequestContext(request))
+
 
 def pacsoft(request): 
     message = "add adress"
@@ -783,6 +817,7 @@ def consumOrder(request, order_id, force):
             print "inforce order"
             order_json = order.order
             resp = fortnoxOrderandCostumer(request, order, order_json)
+            print resp
         else: 
             print "no force"
 
