@@ -760,6 +760,7 @@ def rea_admin_total(request, limit):
         if(email == old_email): 
             rea = 'allready'
             print "copy" 
+            tempprice = 0
 
         old_email = email
 
@@ -772,6 +773,7 @@ def rea_admin_total(request, limit):
                     print tempprice       
             except: 
                 tempprice = 0
+
         total = total + int(tempprice)
         print total 
 
