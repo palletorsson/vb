@@ -761,10 +761,11 @@ def rea_admin_total(request, limit):
                 start = order.message.index('Totalpris: ') + len('Totalpris: ')
                 end = order.message.index( ' SEK', start )
                 if (len(order.message[start:end]) < 120):
-                    order.price = order.message[start:end].rstrip('\n')           
+                    tempprice = order.message[start:end].rstrip('\n')    
+                    print tempprice       
             except: 
-                pass
-        total = total + int(order.price)
+                tempprice = 0
+        total = total + int(tempprice)
         print total 
 
      
