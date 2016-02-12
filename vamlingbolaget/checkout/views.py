@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.core import mail
 from cart.views import _cart_id, totalsum, _new_cart_id, getnames 
-
+from products.models import ReaArticle
 from cart.models import Cart, CartItem
 from forms import CheckoutForm
 from models import Checkout
