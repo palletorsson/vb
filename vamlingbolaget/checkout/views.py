@@ -743,7 +743,9 @@ def rea_admin_views(request, limit):
 def rea_admin_total(request, limit):
     orders = Checkout.objects.all().order_by('-id')[:limit] 
     total = 0
+    old_email = 'first'
     for order in orders:
+        email = order.email
         rea = None
 
         try:
@@ -755,6 +757,11 @@ def rea_admin_total(request, limit):
         except: 
             pass
 
+        if(email == old_email): 
+            rea = 'allready'
+            print "copy" 
+
+        old_email = email
 
         if (rea == 'rea'): 
             try:
