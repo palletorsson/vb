@@ -42,7 +42,7 @@ def create_invoice_rows(order_json):
     print "from create invoice rows"
     print order_json
     order_json_f = formatJson(order_json)
-    print order_json
+    print order_json_f
 
     try: 
         order_json = json.loads(order_json) 
