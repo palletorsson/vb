@@ -396,6 +396,13 @@ position: absolute;
 	width:400px
 }
 
+.rea_image {
+	height:200px; 
+	background-image:url(http://www.vamlingbolaget.com/media/uploads/abjhvajcajcvaz_copy.jpg);
+    background-size: cover;
+    border: 1px solid red;
+    margin:-20px; 
+}
 .women_image {
 	height:200px; 
 	background-image:url(http://www.vamlingbolaget.com/media/uploads/mars_15/dsc_7463.jpg);
