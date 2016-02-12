@@ -742,8 +742,16 @@ def rea_admin_views(request, limit):
 
 def rea_admin_total(request, limit):
     orders = Checkout.objects.all().order_by('-id')[:limit] 
+    reaart = ReaArticle.objects.all()
+    rtotal = 0
+
+    for art in reaart: 
+        p = art.rea_price 
+        rtotal = rtotal + p
+
     total = 0
     old_email = 'first'
+
     for order in orders:
         email = order.email
         rea = None
@@ -773,15 +781,14 @@ def rea_admin_total(request, limit):
                     print tempprice       
             except: 
                 tempprice = 0
-
+                
         total = total + int(tempprice)
-        print total 
-
-     
+        print total
  
    
     return render_to_response('checkout/rea_admin_total.html', {
         'total': total, 
+        'rtotal': rtotal, 
     }, context_instance=RequestContext(request))
 
 
