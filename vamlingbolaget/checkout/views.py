@@ -504,12 +504,18 @@ def fortnox(request):
              order.payment_log = order.payment_log +  '\n' + 'Fortnox callback Log: ip from order to order is not the same'
              order.save()
 
+        # get all item in the cat
+        try:
+            the_items = getCartItems(request)
+            print the_items
+        except:
+            print "somethting wrong with th items"
 
         # create order in fortnox
         print "fortnox"
         try: 
             json_order = order.order         
-            fortnoxOrderandCostumer(request, order, json_order)
+            fortnoxOrderandCostumer(request, order, the_items)
             order.payment_log = order.payment_log +  '\n' + 'fornox order is ok'
             order.save()
         except: 
@@ -519,7 +525,8 @@ def fortnox(request):
         # set the new stock
         print "stock" 
         try: 
-            cleanCartandSetStock(request)
+            cleanCartandSetStock(request, the_items)
+
             order.payment_log = order.payment_log +  '\n' + 'cleaning cart' 
             order.save()
         except: 
@@ -532,32 +539,29 @@ def fortnox(request):
 
 
 # clean cart and chang stockquanity 
-def cleanCartandSetStock(request): 
+def cleanCartandSetStock(request, the_items): 
+     
     # get cart, key and items 
-    key = _cart_id(request)
-    cart = Cart.objects.get(key = key)
-    
-    cartitems_key = cart.id 
-  
-    cartitems = cart.cartitem_set.all()
-    bargains = cart.bargaincartitem_set.all()
 
     # update rea stock internalty 
+    cartitems = the_items['cartitems'] 
+    bargains = the_items['bargains'] 
+    voucher = the_items['voucher']  
+    rea_items = the_items['rea_items'] 
+
     try: 
-        rea_items = cart.reacartitem_set.all()
         for item in rea_items: 
             print "loop !"
             current_stock = item.reaArticle.stockquantity
             new_stock = current_stock - 1
             item.reaArticle.stockquantity = new_stock
+
             if (current_stock == 1):
                 item.reaArticle.status = 'E'
             item.reaArticle.save()
     except: 
-        pass
-
-    voucher = cart.vouchercart_set.all()   
-
+        print "clean wrong"
+ 
     # remove all caritem from that cart and the cart 
     cartitems.delete() 
     bargains.delete()
@@ -571,6 +575,7 @@ def cleanCartandSetStock(request):
 
     # create a clean new cart
     _new_cart_id(request)
+
     return 1
 
 
@@ -634,6 +639,8 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     try: 
         order = createOrder(headers, customer_order)
         new_order.payment_log = new_order.payment_log +  '\n' + 'Order created in Fortnox: ' +  str(order)
+        new_order.save()
+
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order not created' 
         new_order.save()
@@ -744,6 +751,8 @@ def rea_admin_total(request, limit):
     orders = Checkout.objects.all().order_by('-id')[:limit] 
     reaart = ReaArticle.objects.all()
     rtotal = 0
+    l = len(orders)
+    name = ''
 
     for art in reaart: 
         p = art.rea_price 
@@ -784,11 +793,17 @@ def rea_admin_total(request, limit):
                 
         total = total + int(tempprice)
         print total
+
+        l = l - 1 
+        print l
+        if (l < 2): 
+            name = order.first_name    
  
    
     return render_to_response('checkout/rea_admin_total.html', {
         'total': total, 
         'rtotal': rtotal, 
+        'name': name
     }, context_instance=RequestContext(request))
 
 

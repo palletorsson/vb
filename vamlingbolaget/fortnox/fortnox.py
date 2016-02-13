@@ -39,46 +39,34 @@ def json_update(articleNumber, QuantityInStock):
     return data_
 
 def create_invoice_rows(order_json):
-    print "from create invoice rows"
     print order_json
-    order_json_f = formatJson(order_json)
-    print order_json_f
-
-    try: 
-        order_json = json.loads(order_json) 
-        print "unformat"
-    except: 
-        print "cound not create on unformat"  
-
-    try: 
-        order_json = json.loads(order_json_f)
-        print "format"
-    except: 
-        print "cound not create on format"  
-
-    print order_json
-
+    cartitems = order_json['cartitems'] 
+    rea_items = order_json['rea_items'] 
     invoicerows = []
+    print "hello invoice rows"
+    print rea_items
 
-    for item in order_json:
-        try: 
-           qu = str(order_json[item]['quantity'])
-           ok = 1
-        except:
-           ok = 0 
-           
-        try: 
-           art = str(order_json[item]['article'])
-           ok = 1
-        except:
-           ok = 0
-           
-
-        if (ok == 1):
+    try: 
+        for item in cartitems: 
+            print str(item.quantity)
             invoicerows.append({
-		        "DeliveredQuantity": qu,
-		        "ArticleNumber": art, 
-		      })
+		        "DeliveredQuantity": int(item.quantity),
+		        "ArticleNumber": int(item.article.sku_number), 
+		     })
+    except: 
+        print "no item"
+
+    try: 
+        for item in rea_items: 
+
+            print str(item.reaArticle.article.sku_number)
+            invoicerows.append({
+		        "DeliveredQuantity": 1,
+		        "ArticleNumber": int(item.reaArticle.article.sku_number), 
+		     })
+    except: 
+        print "no rea item"
+
 
     # this is postal fee 
     invoicerows.append({
@@ -87,7 +75,7 @@ def create_invoice_rows(order_json):
 		      })
 
     print invoicerows
-    return invoicerows   
+    return invoicerows    
                 
 
 # Interact with API
