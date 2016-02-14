@@ -858,10 +858,19 @@ def consumOrder(request, order_id, force):
             headers = get_headers()
             seekorder = seekOrder(headers, fullname)
             seekorder = json.loads(seekorder)
-            seekorder = seekorder['Invoices']  
+
+            seekorder = seekorder['Invoices']
+
+            # get all item in the cat
+            try:
+                the_items = getCartItems(request)
+                print the_items
+            except:
+                print "somethting wrong with th items"
+
             if (len(seekorder) == 0):
                 order_json = order.order
-                resp = fortnoxOrderandCostumer(request, order, order_json)
+                resp = fortnoxOrderandCostumer(request, order, the_items)
 
         except: 
             seekorder = "None"
@@ -869,7 +878,7 @@ def consumOrder(request, order_id, force):
         if (force == '9'): 
             print "inforce order"
             order_json = order.order
-            resp = fortnoxOrderandCostumer(request, order, order_json)
+            resp = fortnoxOrderandCostumer(request, order,  the_items)
             print resp
         else: 
             print "no force"
