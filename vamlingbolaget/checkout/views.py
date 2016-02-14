@@ -578,6 +578,23 @@ def cleanCartandSetStock(request, the_items):
 
     return 1
 
+def getCartItems(request):
+
+    key = _cart_id(request)
+    cart = Cart.objects.get(key = key)
+    cartitems_key = cart.id 
+
+    cartitems = cart.cartitem_set.all()
+    bargains = cart.bargaincartitem_set.all()
+    voucher = cart.vouchercart_set.all()   
+    try: 
+        rea_items = cart.reacartitem_set.all()
+        #ret = append(rea_items)
+    except: 
+        print "clean wrong"
+
+    allitems = {'cartitems': cartitems, 'bargains': bargains, 'voucher': voucher, 'rea_items': rea_items}
+    return allitems
 
 # Run after order when customer is send to conferm url /thanks/
 def fortnoxOrderandCostumer(request, new_order, order_json):
