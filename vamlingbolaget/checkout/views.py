@@ -497,6 +497,8 @@ def fortnox(request):
         # fortnox log 
    
         order.payment_log = order.payment_log +  '\n' + 'Fortnox callback Log: order id: ' + str(order_id) + ', from ip: '+ ip 
+        order.save()
+       
         if (ip == order.ip):
              order.payment_log = order.payment_log +  '\n' + 'Fortnox callback Log: ip from order to order is the same'
              order.save()
@@ -524,6 +526,7 @@ def fortnox(request):
 
         # set the new stock
         print "stock" 
+        print the_items
         try: 
             cleanCartandSetStock(request, the_items)
 
