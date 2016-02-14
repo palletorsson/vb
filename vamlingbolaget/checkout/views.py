@@ -782,6 +782,7 @@ def rea_admin_total(request, limit):
     old_email = 'first'
 
     for order in orders:
+        tempprice = 0
         email = order.email
         rea = None
 
