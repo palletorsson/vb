@@ -847,11 +847,18 @@ def testingRemoveStock(request):
 
 def consumOrder(request, order_id, force):
     if request.user.is_authenticated():  
+        # get all item in the cat
+        try:
+            the_items = getCartItems(request)
+            print the_items
+        except:
+            print "somethting wrong with the items"
+
         try:   
             order =  Checkout.objects.filter(order_number=order_id).order_by('-id')[0] 
-
         except: 
             order = "no order with that id"
+
         try:
             # check if these is and order  
             fullname = unicode(order.first_name) + " " + unicode(order.last_name)
@@ -860,13 +867,6 @@ def consumOrder(request, order_id, force):
             seekorder = json.loads(seekorder)
 
             seekorder = seekorder['Invoices']
-
-            # get all item in the cat
-            try:
-                the_items = getCartItems(request)
-                print the_items
-            except:
-                print "somethting wrong with th items"
 
             if (len(seekorder) == 0):
                 order_json = order.order
