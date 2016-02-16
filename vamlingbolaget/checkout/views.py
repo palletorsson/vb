@@ -626,7 +626,8 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     # and update or create customer and get customer number back and log
     try: 
         customer_no = customerExistOrCreate(headers, customer)
-        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer: ' +  str(customer_no)
+        print customer_no
+        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer ok'
         new_order.save()
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved' 
@@ -638,7 +639,8 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     # Creat the order part of the json from order_json and log 
     try: 
         invoice_rows = create_invoice_rows(order_json)
-        new_order.payment_log = new_order.payment_log +  '\n' + str(invoice_rows)
+        print invoice_rows
+        new_order.payment_log = new_order.payment_log +  '\n' +  'Invoice_rows worked ' 
         new_order.save()
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order json not resolved' 
