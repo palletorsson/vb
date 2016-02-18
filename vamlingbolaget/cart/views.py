@@ -15,7 +15,7 @@ import json
 import pygeoip
 from vamlingbolaget.settings import ROOT_DIR
 import operator
-
+from fortnox.fortnox import get_headers, searchCustomer
 
 CART_ID_SESSION_KEY = 'cart_id'
 
@@ -449,3 +449,18 @@ def f_discount(item_article):
         price_discount = item.price - item.discount.discount
 
     return price_discount
+
+
+# I want to handel customer here
+def customer_email(request, email):
+    name = ''
+    print email
+    headers = get_headers()
+    customer = searchCustomer(headers, name, email) 
+
+    return render_to_response('cart/admin_customer.html', {
+        'customer': customer, 
+    }, context_instance=RequestContext(request))
+
+
+

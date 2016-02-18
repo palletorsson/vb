@@ -7,6 +7,7 @@ urlpatterns = patterns('cart.views',
     url(r'^voucher/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'voucher',  name='voucher'),
     url(r'^edititem/(?P<key>[a-zA-Z0-9_.-]+)/$', 'editcartitem',  name='editcartitem'),
     url(r'^addrea/$', 'add_rea'),
+    url(r'^admin_customer/(?P<email>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/$', 'customer_email'),
     url(r'^addbargain/$', 'add_bargain'),
     
 )
