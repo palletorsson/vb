@@ -74,8 +74,7 @@ def create_invoice_rows(order_json):
 		        "ArticleNumber": 2, 
 		      })
 
-    print invoicerows
-    return invoicerows    
+    return invoicerows   
                 
 
 # Interact with API
@@ -89,14 +88,7 @@ def searchCustomer(headers, name, email):
         )
         response = r.content
         response_exist_json = json.loads(response)
-        if local_tests == True:  
-            print "Search responce "
-            print r.content            
-            print "Customer url: "
-            try:
-                print response_exist_json['Customers'][0]['@url']
-            except: 
-                print "no url"
+
         if (response_exist_json['MetaInformation']['@TotalResources'] > 0): 
             return response_exist_json['Customers'][0]['@url']
         else:  
@@ -131,9 +123,7 @@ def CreateCostumer(headers, customer):
     isdict = type(customer) is dict 
 
     if (isdict): 
-        if local_tests == True:  
-            print "customer is a dict" 
-            print customer['Customer']  
+        print "is dict" 
     else:      
        customer = formatJson(customer)
 
@@ -152,9 +142,9 @@ def CreateCostumer(headers, customer):
     except: 
         result = r.content
 
-    return_this = result['Customer']['CustomerNumber']
+    customer_response = result['Customer']['CustomerNumber']
 
-    return return_this
+    return customer_response
 
  
 def formatCustomer(customer): 
@@ -168,12 +158,10 @@ def formatCustomer(customer):
 
 # Update customer
 def updateCostumer(headers, customer, customer_url):
-    return_this = "-"
+
     isdict = type(customer) is dict 
     if (isdict): 
-        if local_tests == True:  
-            print "customer is a dict" 
-            print customer['Customer']  
+        print "is dict" 
     else:      
        customer = formatJson(customer)
      
@@ -187,40 +175,27 @@ def updateCostumer(headers, customer, customer_url):
     except requests.exceptions.RequestException as e:
         return('HTTP Request failed')
 
-    if local_tests == True:  
-        print "Printing the result for update Customer: "
-        print r.content
-
     try:    
         result = json.loads(r.content)
     except: 
         result = r.content
 
-    return_this = result['Customer']['CustomerNumber']
-
-    if local_tests == True: 
-        print "Update customer"
-        print result['Customer']['CustomerNumber']
+    customer_response = result['Customer']['CustomerNumber']
         
-    return return_this
+    return customer_response
 
 # Create or update customer
 def customerExistOrCreate(headers, customer):
     customer_dict = json.loads(customer)
     # see if custumer exist, 
     customer_exist = searchCustomer(headers, customer_dict['Customer']['Name'], customer_dict['Customer']['Email']) 
-    if local_tests == True:    
-        print "does customer exist?:"
-        print customer_exist 
-        print customer 
-        print customer_dict  
+    print "searchCustomer" 
+    print customer_exist
 
     if(customer_exist == False):
         try: 
             customer_response_id = CreateCostumer(headers, customer)
-            if local_tests == True: 
-                print "id: " 
-                print customer_response_id
+            print  "cust id new: " + str(customer_response_id)  
             return customer_response_id
         except: 
             customer_response = "Create error: " + str(customer_response)
@@ -229,10 +204,8 @@ def customerExistOrCreate(headers, customer):
         try:
             url = customer_exist
             #the returning result is customer id  
-            customer_response_id = updateCostumer(headers, customer, url) 
-            if local_tests == True: 
-                print "id: " 
-                print customer_response_id
+            customer_response_id = updateCostumer(headers, customer, url)
+            print  "cost id old: " + str(customer_response_id)   
             return customer_response_id
         except: 
             customer_response = "Update error: " + str(customer_response)
