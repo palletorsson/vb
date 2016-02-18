@@ -127,9 +127,22 @@ def extractCustmer(customer_meta):
 
 # Create customer
 def CreateCostumer(headers, customer): 
-    if local_tests == True:   
-        print "customer json" 
-        print customer 
+    print "geloo from create cust"    
+
+    isdict = type(customer) is dict 
+    if (isdict): 
+        if local_tests == True:  
+            print "customer is a dict" 
+            print customer['Customer']  
+    else:      
+       customer = formatJson(customer)
+
+    try:
+        if local_tests == True:   
+            print "customer json" 
+            print customer 
+    except:
+        pass 
 
     customer = formatJson(customer) 
 
