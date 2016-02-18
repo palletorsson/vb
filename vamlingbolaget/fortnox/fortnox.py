@@ -139,20 +139,25 @@ def CreateCostumer(headers, customer):
             headers = headers,
             data = customer
         )
+    except requests.exceptions.RequestException as e:
+        return('HTTP Request failed')
+       
+    customer = json.loads(r.content)
+
+    try: 
         if local_tests == True: 
             print "Customer Created: "
             print r.content
             print customer
 
-        customer = json.loads(r.content)
-
         if local_tests == True: 
             print "The custumer number"
             print customer['Customer']["CustomerNumber"]
+    except:
+        pass
 
-        return customer['Customer']["CustomerNumber"]
-    except requests.exceptions.RequestException as e:
-        return('HTTP Request failed')
+    return customer['Customer']["CustomerNumber"]
+
  
 def formatCustomer(customer): 
     customer = json.dumps({
