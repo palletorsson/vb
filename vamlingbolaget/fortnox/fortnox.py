@@ -142,7 +142,13 @@ def CreateCostumer(headers, customer):
     except requests.exceptions.RequestException as e:
         return('HTTP Request failed')
        
-    customer = json.loads(r.content)
+
+    try:    
+        result = json.loads(r.content)
+    except: 
+        result = r.content
+
+    return_this = result['Customer']["CustomerNumber"]
 
     try: 
         if local_tests == True: 
@@ -156,7 +162,7 @@ def CreateCostumer(headers, customer):
     except:
         pass
 
-    return customer['Customer']["CustomerNumber"]
+    return return_this
 
  
 def formatCustomer(customer): 
