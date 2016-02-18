@@ -16,6 +16,8 @@ import pygeoip
 from vamlingbolaget.settings import ROOT_DIR
 import operator
 from fortnox.fortnox import get_headers, searchCustomer
+from django.contrib.auth.decorators import login_required
+
 
 CART_ID_SESSION_KEY = 'cart_id'
 
@@ -451,12 +453,19 @@ def f_discount(item_article):
     return price_discount
 
 
+
 # I want to handel customer here
+@login_required
 def customer_email(request, email):
-    name = ''
-    print email
-    headers = get_headers()
-    customer = searchCustomer(headers, name, email) 
+
+    if request.user.is_superuser:    
+        name = ''
+        print email
+        headers = get_headers()
+        customer = searchCustomer(headers, name, email) 
+    else:
+        customer = 'you not admin'
+
 
     return render_to_response('cart/admin_customer.html', {
         'customer': customer, 
