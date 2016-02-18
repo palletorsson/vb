@@ -185,9 +185,17 @@ def updateCostumer(headers, customer, customer_url):
     return customer_response
 
 # Create or update customer
-def customerExistOrCreate(headers, customer):
+def customerExistOrCreate(headers, customer, order): 
+
+    isdict = type(customer) is dict 
+    if (isdict): 
+        print "is dict"
+    else:      
+       customer = formatJson(customer)
+
     customer_dict = json.loads(customer)
-    # see if custumer exist, 
+
+    # see if custumer exist
     customer_exist = searchCustomer(headers, customer_dict['Customer']['Name'], customer_dict['Customer']['Email']) 
     print "searchCustomer" 
     print customer_exist
