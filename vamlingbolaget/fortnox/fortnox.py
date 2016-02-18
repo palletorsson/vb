@@ -127,9 +127,9 @@ def extractCustmer(customer_meta):
 
 # Create customer
 def CreateCostumer(headers, customer): 
-    print "geloo from create cust"    
 
     isdict = type(customer) is dict 
+
     if (isdict): 
         if local_tests == True:  
             print "customer is a dict" 
@@ -137,14 +137,6 @@ def CreateCostumer(headers, customer):
     else:      
        customer = formatJson(customer)
 
-    try:
-        if local_tests == True:   
-            print "customer json" 
-            print customer 
-    except:
-        pass 
-
-    customer = formatJson(customer) 
 
     try:
         r = requests.post(
@@ -154,26 +146,13 @@ def CreateCostumer(headers, customer):
         )
     except requests.exceptions.RequestException as e:
         return('HTTP Request failed')
-       
 
     try:    
         result = json.loads(r.content)
     except: 
         result = r.content
 
-    return_this = result['Customer']["CustomerNumber"]
-
-    try: 
-        if local_tests == True: 
-            print "Customer Created: "
-            print r.content
-            print customer
-
-        if local_tests == True: 
-            print "The custumer number"
-            print customer['Customer']["CustomerNumber"]
-    except:
-        pass
+    return_this = result['Customer']['CustomerNumber']
 
     return return_this
 
@@ -217,11 +196,11 @@ def updateCostumer(headers, customer, customer_url):
     except: 
         result = r.content
 
-    return_this = result['Customer']["CustomerNumber"]
+    return_this = result['Customer']['CustomerNumber']
 
     if local_tests == True: 
         print "Update customer"
-        print result['Customer']["CustomerNumber"]
+        print result['Customer']['CustomerNumber']
         
     return return_this
 
