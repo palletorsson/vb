@@ -24,10 +24,12 @@
                 {%for gallery in galleries%}
                     {% if gallery.status = status %}
                         <div style="float: left; display: inline;">
-                            <div class="overlay">&nbsp;{{gallery.name}}</div>
+
                             <div class="galleries_list">
-                                <a href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" style="margin-left:8px;width: 300px;" title="Fotograf: {{feature_image.photographer.name}}"/></a>
+                                <a class="gallery_img" href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}"  title="Fotograf: {{feature_image.photographer.name}}"/></a>
+
                             </div>
+                            <div class="gallery_title">&nbsp;{{gallery.name}}</div>
                         </div>
                     {%endif%}
                 {%endfor%}

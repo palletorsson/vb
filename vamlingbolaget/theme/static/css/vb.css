@@ -562,22 +562,37 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
     margin-left;0px;
     padding-left:0px;
 }
-.gallery_table{
+
+.gallery_table {
  	width: 960px;
 }
 
-.gallery_td{
+.gallery_td {
  	width: 240px;
 }
 
-.gallery_img{
-	width: 240px; 
-	margin-top: 2px; 
-	margin-bottom: 2px;
+.gallery_img {
+  width: 360px;
+  height: 210px; 
+  
 }
+.gallery_img img{
+  border: solid 1px #ccc;
+  box-shadow: 2px 2px 2px #999;
+  
+}
+
+.gallery_title  {
+	margin-left: 4px; 
+    font-size: 14px; 
+    margin: 8px; 
+    margin-bottom: 13px; 
+}
+
 .galleries_list {
-	width:300px; 
+	width: 340px; 
 	height: 190px; 
 	overflow: hidden;
+    margin-bottom: 10px; 
 }
 
