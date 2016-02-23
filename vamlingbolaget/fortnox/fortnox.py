@@ -68,11 +68,6 @@ def create_invoice_rows(order_json):
         print "no rea item"
 
 
-    # this is postal fee 
-    invoicerows.append({
-		        "DeliveredQuantity": 1,
-		        "ArticleNumber": 2, 
-		      })
 
     return invoicerows   
                 
