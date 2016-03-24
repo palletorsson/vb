@@ -4,7 +4,6 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from models import Project, Media, File, Kanban
 import json
-import dropbox
 import contextlib
 import os
 import time
