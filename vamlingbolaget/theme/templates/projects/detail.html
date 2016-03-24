@@ -34,8 +34,15 @@
 <div class="col-xs-7 col-sm-7">
     <h4>Media</h4>
        <hr>
-        <span> <h5> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }} </h5> <a href="{{m.link}}"><img src="{{ f.link }}" class="img-responsive" alt="Responsive image"> </a>   
+       
+       {% for m in media %}
+         <span> <h5> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }} </h5> <a href="{{m.link}}"><img src="{{ f.link }}" class="img-responsive" alt="Responsive image"> </a>   
+ 
+	   {% endfor %}  
+	  
   </div>
+  <div class="col-xs-4 col-sm-4">
+
 
     <div class="col-xs-12 col-sm-11">
 	<h4 id="toggle_todo">Do To</h4>
