@@ -23,7 +23,7 @@ def index(request):
 
 def detail(request, pk):
     temp_int = 1
-    Project = Project.objects.get(pk=pk)
+    project = Project.objects.get(pk=pk)
     files = File.objects.filter(Project=Project)
     media = Media.objects.filter(Project=Project)
     kanban = Kanban.objects.filter(Project=Project)
