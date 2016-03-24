@@ -35,13 +35,13 @@
 <div class="scroll col-xs-12 col-sm-11">
     <h4>Media</h4>
        <hr>
-       
-       {% for m in media %}
-	  <span class="floating" > <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }}  
-	   <a href="{{m.link}}"> <img src="{{m.link}}" class="thumbnail" style="width:200px;"> </a>  
+       <div class="img_scroll">
+	{% for m in media %}
+	  <span class="gallery_list" > <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }}  
+	   <a href="{{m.link}}"> <img src="{{m.link}}" class="thumbnail" style="height:200px;"> </a>  
 	   </span>
-	   {% endfor %}  
-	 
+	{% endfor %}   
+       </div> 
   </div>
   <div class="col-xs-4 col-sm-4">
 
