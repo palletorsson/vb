@@ -21,16 +21,6 @@
        </il>
  </ul>
   </div>
-<div class="col-xs-3 col-sm-3">
-    <h4>Media</h4>
-       <hr>
-       <ul>
-       {% for m in media %}
-           <li class="list-group-item"> <h5> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }} </h5> <a href="{{m.link}}"><img src="{{m.link}}" class="thumbnail">   </a>       
-	   {% endfor %}  
-	   </ul>
-  </div>
-  <div class="col-xs-4 col-sm-4">
     <h4>Texts</h4>
        <hr>
        <ul class="list-group">
@@ -41,6 +31,15 @@
 	   </ul>
   </div>
 
+<div class="col-xs-7 col-sm-7">
+    <h4>Media</h4>
+       <hr>
+       <ul>
+       {% for m in media %}
+           <li class="list-group-item"> <h5> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }} </h5> <a href="{{m.link}}"><img src="{{m.link}}" class="thumbnail">   </a>       
+	   {% endfor %}  
+	   </ul>
+  </div>
 
     <div class="col-xs-12 col-sm-11">
 	<h4 id="toggle_todo">Do To</h4>
