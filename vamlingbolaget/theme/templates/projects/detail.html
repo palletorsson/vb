@@ -5,7 +5,7 @@
 
 
 {% block pagetitle %}
-	<legend> <a href="/campaigns/">Campaigns</a> /  {{campaign}}  ({{ campaign.prio }} {{ campaign.active }})</legend>
+	<legend> <a href="/campaigns/">Campaigns</a> /  {{project}}  ({{ project.prio }} {{ project.active }})</legend>
 {% endblock %}
 
 {% block allcontent %}
@@ -17,7 +17,7 @@
     <hr> 
  <ul>
           <li class="list-group-item">
-    		{{campaign.description}}
+    		{{project.description}}
        </il>
  </ul>
   </div>

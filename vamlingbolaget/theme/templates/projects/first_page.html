@@ -9,7 +9,7 @@
 
 	<legend> Initited Campaigns </legend>
     {% if campaigns %}
-		{% for camp in campaigns %}
+		{% for camp in project %}
 		<ul class="list-group">
 		  <a href= "{{camp.pk}}" >
 			  <li class="list-group-item">
@@ -25,8 +25,8 @@
   {% endif %}
 
 	<legend> Public Campaigns </legend>
-    {% if campaigns_public %}
-		{% for camp in campaigns_public %}
+    {% if project_public %}
+		{% for camp in project_public %}
 		<ul class="list-group">
 		  <a href= "{{camp.pk}}" >
 			  <li class="list-group-item">
@@ -43,8 +43,8 @@
   {% if user.is_authenticated %}  
 	<legend> <small> Campaigns Archive </small> </legend>
 
-    {% if campaigns_archive %}
-		{% for camp in campaigns_expired %}
+    {% if project_archive %}
+		{% for camp in project_expired %}
 		<ul class="list-group">
 		  <a href= "{{camp.pk}}" >
 			  <li class="list-group-item">
