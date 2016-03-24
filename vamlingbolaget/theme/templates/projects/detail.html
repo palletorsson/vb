@@ -31,15 +31,17 @@
 	   </ul>
   </div>
 
-<div class="col-xs-7 col-sm-7">
+<div class="col-xs-7 col-sm-">
     <h4>Media</h4>
        <hr>
        
        {% for m in media %}
-         <span> <h5> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }} </h5> <a href="{{m.link}}"><img src="{{ f.link }}" class="img-responsive" alt="Responsive image"> </a>   
- 
+	  <span> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }}  
+	   <a href="{{m.link}}"> <img src="{{m.link}}" class="thumbnail" style="width:200px;"> </a>  
+	   </span>
+
 	   {% endfor %}  
-	  
+	 
   </div>
   <div class="col-xs-4 col-sm-4">
 
