@@ -121,7 +121,7 @@ def detail(request, pk):
     try:
         product = Variation.objects.get(pk=pk)
 
-        products = Variation.objects.filter(article=product.article)
+        products = Variation.objects.filter(article=product.article).order_by('color')
 
         images = Image.objects.filter(variation__pk=pk)
         color_id = product.color.order
