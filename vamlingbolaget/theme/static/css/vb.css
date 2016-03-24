@@ -21,6 +21,15 @@
     margin-right: 10px;
   }
 
+.outer_scroll {
+    overflow: scroll;
+    height: 210px;
+    width: 800px;
+}
+.img_scroll {
+    width: 10000px;
+     } 
+     
 
   /* menu line beside logo vamlingbolaget */
   .leftsideline{
