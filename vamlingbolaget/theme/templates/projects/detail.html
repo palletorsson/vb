@@ -36,10 +36,9 @@
        <hr>
        
        {% for m in media %}
-	  <span> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }}  
+	  <span class="floating" > <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }}  
 	   <a href="{{m.link}}"> <img src="{{m.link}}" class="thumbnail" style="width:200px;"> </a>  
 	   </span>
-
 	   {% endfor %}  
 	 
   </div>
