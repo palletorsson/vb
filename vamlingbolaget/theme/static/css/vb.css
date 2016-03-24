@@ -32,7 +32,12 @@
      } 
 
 .text_over {
-	text-overflow: ellipsis;
+line-height: 1em;
+    height: 2em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
   /* menu line beside logo vamlingbolaget */
