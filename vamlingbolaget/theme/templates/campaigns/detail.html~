@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+
+
+
+{% block pagetitle %}
+	<legend> <a href="/campaigns/">Campaigns</a> /  {{campaign}}  ({{ campaign.prio }} {{ campaign.active }})</legend>
+{% endblock %}
+
+{% block allcontent %}
+<div class="container">
+<div class="row">
+  <div class="col-xs-4 col-sm-4">
+  {% if user.is_authenticated %}
+	<h4>Description</h4>
+    <hr> 
+ <ul>
+          <li class="list-group-item">
+    		{{campaign.description}}
+       </il>
+ </ul>
+  </div>
+<div class="col-xs-3 col-sm-3">
+    <h4>Media</h4>
+       <hr>
+       <ul>
+       {% for m in media %}
+           <li class="list-group-item"> <h5> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }} </h5> <a href="{{m.link}}"><img src="{{m.link}}" class="thumbnail">   </a>       
+	   {% endfor %}  
+	   </ul>
+  </div>
+  <div class="col-xs-4 col-sm-4">
+    <h4>Texts</h4>
+       <hr>
+       <ul class="list-group">
+       {% for f in files %}
+			<li class="list-group-item"><a href="{{ f.link }}"> <span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{ f.title }}  </a></li>
+		  
+	  	{% endfor %}
+	   </ul>
+  </div>
+
+
+    <div class="col-xs-12 col-sm-11">
+	<h4 id="toggle_todo">Do To</h4>
+       <hr>
+      {% for k in kanban %}
+	<div class="" id="todo"> 
+		<iframe src="{{k.link}}" width="100%" height="600px">
+	</div>
+	{% endfor %}
+  </div>
+
+<script type="javascript">
+$('document').ready(function(){
+	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+			
+	$('#toggle_todo').on( 'click', function(){
+			if(	$('#todo').is(':hidden'){
+				$('#todo').show();
+			}else{
+				$('#todo').hide();
+			}
+		}
+	); 
+});
+</script>
+
+{% else %}
+<h4>loggin to see Synopsis</h4>
+{% endif %}
+
+</div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+{% endblock %}
