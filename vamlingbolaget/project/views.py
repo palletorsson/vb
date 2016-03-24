@@ -24,9 +24,9 @@ def index(request):
 def detail(request, pk):
     temp_int = 1
     project = Project.objects.get(pk=pk)
-    files = File.objects.filter(Project=Project)
-    media = Media.objects.filter(Project=Project)
-    kanban = Kanban.objects.filter(Project=Project)
+    files = File.objects.filter(project=project)
+    media = Media.objects.filter(project=project)
+    kanban = Kanban.objects.filter(project=project)
        
     return render_to_response('projects/detail.html',
 							{'project': project,
