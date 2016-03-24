@@ -38,7 +38,7 @@
        <div class="outer_scroll">
 	       <div class="img_scroll">
 		{% for m in media %}
-		  <span class="gallery_list" > <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }}  
+		  <span class="gallery_list" ><small> {{ m.title }} </small>  
 		   <a href="{{m.link}}"> <img src="{{m.link}}" class="thumbnail" style="height:200px;"> </a>  
 		   </span>
 		{% endfor %}   
