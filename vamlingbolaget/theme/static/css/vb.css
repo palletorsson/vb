@@ -30,7 +30,10 @@
 .img_scroll {
     width: 10000px;
      } 
-     
+
+.text_over {
+	text-overflow: ellipsis;
+}
 
   /* menu line beside logo vamlingbolaget */
   .leftsideline{
