@@ -62,7 +62,10 @@
 			<hr/>					
 			<!-- diffrence start patterns: -->
 			<!-- if quality is Velour or Quilted -->
-			{% if product.article.quality.order == 2 or product.article.quality.order == 4 %}
+			<!-- hard coded change on server -->
+			{% if product.article.quality.order == 4 %}
+			<!-- hard coded change on server -->
+
 				{% for color in colors %}
 					<img src="{{ MEDIA_URL }}/uploads/120/{{ color.order }}f_{{ color.order }}m.jpg" style="width:100px;"  />
 					<label class="radio inline">
@@ -107,13 +110,14 @@
 					<div style="clear: both;"></div>
 				</div> 
 			<!-- else if quality is Silky jersey or silkjersey-children etc -->
-			{% elif product.article.quality.order == 1 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 %}
+			<!-- hard coded change on server hot fix-->
+			{% elif product.article.quality.order == 1 or product.article.quality.order == 2 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 or product.article.quality.order == 16 or product.article.quality.order == 17 or product.article.quality.order == 18 or product.article.quality.order == 19 %}
+			<!-- hard coded change on server -->
+
 				<div class="selectedpatternandcolor span2">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
 					{{ product.color.name }} {{ product.pattern.name }}
 				</div>
-				<div class="color_and_pattern_choose span5">
-					{% for item in colorsandpattern %}
 						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
 					{% endfor  %}
 				</div>
@@ -129,7 +133,7 @@
 				<span style="padding-left: 10px;">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:180px;"  /
 				</span>
-			</div>
+			</div>     
 
 			<div class="selectedpatternandcolor span3">
 				<select class="changonselect" id="color">
@@ -201,16 +205,24 @@
 		{% endif %}
 
 			
-		<!-- if type is Piece-goods (metervara) -->
-		{% if product.article.quality.order == 2 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 1  or product.article.quality.order == 4 or product.article.sku_number == '9805' or product.article.quality.order == 10  or product.article.quality.order == 14 or product.article.quality.order == 3 or product.article.quality.order == 8 %}
-		<br/>
-		{%else%}
-			<span style="padding-left: 10px;">
+
+		<!-- hard coded change on server hot fix-->
+		{% if product.article.quality.order == 7 or product.article.quality.order == 6 %}
+
+         <span style="padding-left: 10px;">  
+               
 				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:100px;"  />
+      
+
 			</span>
 			<div style="clear: both;"></div>
 			<hr/>
 			<div id="select_text"> </div>
+
+		<!-- hard coded change on server hot fix-->
+
+		{%else%}
+			<br/>		
 		{% endif %}
 		<div style="clear: both;"></div>
 		<hr/>
@@ -247,7 +259,7 @@
 		            {%if product.article.discount%}
 		                <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK
 		            {%else%}
-		                {{ product.article.price }}
+		                {{ product.article.price }} SEK
 		            {%endif%}
 		        </div>
 		    </div>
