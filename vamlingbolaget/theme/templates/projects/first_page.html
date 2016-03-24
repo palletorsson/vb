@@ -7,9 +7,9 @@
 {% block allcontent %}
   {% if user.is_authenticated %}
 
-	<legend> Initited Campaigns </legend>
-    {% if campaigns %}
-		{% for camp in project %}
+	<legend> Initited Projects </legend>
+    {% if projects %}
+		{% for camp in projects %}
 		<ul class="list-group">
 		  <a href= "{{camp.pk}}" >
 			  <li class="list-group-item">
@@ -20,11 +20,11 @@
 		</ul>
 		{% endfor  %}
     {% else %}
-        <p> no initiate campaigns </p>
+        <p> no initiate projects </p>
     {% endif %}
   {% endif %}
 
-	<legend> Public Campaigns </legend>
+	<legend> Public Projects </legend>
     {% if project_public %}
 		{% for camp in project_public %}
 		<ul class="list-group">
