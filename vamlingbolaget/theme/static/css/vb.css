@@ -22,9 +22,10 @@
   }
 
 .outer_scroll {
-    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
     height: 240px;
-    width: 800px;
+    width: 1000px;
 }
 .img_scroll {
     width: 10000px;
