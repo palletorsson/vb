@@ -40,8 +40,8 @@
 		<h4>Selected Media</h4>
 		   <hr>
 		   {% for m in media %}
-		   <span> <h5> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }} </h5> <a href="{{m.link}}"><img src="{{ m.link }}" class="img-responsive" alt="Responsive image"> </a>       
-		   {% endfor %}  
+		   <span>  <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> :  {{ m.title }}  <a href="{{m.link}}"><img src="{{ m.link }}" class="img-responsive" alt="Responsive image"> </a>  </span>    
+		   {% endfor %} 
 	  </div>
 
 	{% endif %}  
