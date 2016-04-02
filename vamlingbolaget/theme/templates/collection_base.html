@@ -17,17 +17,12 @@
          {% for t in atypes %}
                     <a href="/products/rea/type/{{t.order}}"> {{ t }} </a> | 
          {% endfor %}
+        <hr>
 
 		{% endif %}
-        <hr>
 
-		<li>
-			<a href="/products/rea/" class="discount"> REA </a>
-		</li>  
-        <hr>
-            <h5>{% trans "Ordinarie Sortiment:" %}</h5>      
-        <hr>
-        <h5>{% trans "Kategorier" %}</h5>
+
+        <h5>..</h5>
         {% for type in types %}
     		{% if type.slug == 'bargain'%}
 				<li>
@@ -43,7 +38,7 @@
 
         
         <br/>
-        <h5>{% trans "Kvaliter" %}</h5>
+        <h5>..</h5>
         {% for quality in qualities %}
             {% if quality.order == 11 or quality.order == 10 or quality.order == 9 or quality.order == 1   %}
                 <li>
@@ -53,8 +48,11 @@
         {% endfor %}
         <br/>
 
+		<li>
+			<a href="/products/rea/" class="discount"> REA </a>
+		</li>  
 
-        <h5>{% trans "Översikt" %}</h5>
+        <h5>..</h5>
         <li>
              <a href="/colorsandpatterns/">{% trans "Färger och Mönster" %} </a>
              <a href="/linemodels/">{% trans "Modeller" %} </a>
@@ -65,5 +63,6 @@
         <li>
             <a href="/stickeri/">{% trans "Stickeri" %} </a>
         </li>
+
     </ul>
 {% endblock %}
