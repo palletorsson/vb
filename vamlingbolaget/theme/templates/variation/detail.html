@@ -220,13 +220,13 @@
 		<div style="clear: both;"></div>
 		<br>
 		<div>
-			{% trans "Detaljer" %} : | <div class="pull-right"> <span> {% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span>
+			<div class="pull-right"> | <span> {% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span>
 						<span>| {% trans "Kvalitet" %}: <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span> </div> 
 						
 		</div> 
-		<hr/>
 
-		<span> {{ product.article.quality.description }} </span> 
+		<hr>
+		<span> {% trans "Detaljer" %} :  {{ product.article.quality.description }} </span> 
       
 		</div> <!-- end span7 -->
 	</div> <!-- end span12 -->
