@@ -160,22 +160,22 @@
 		{% endif %} <!-- end of endif patterns-->
 					
 	
-		<hr/>			
 		<!-- if type is Accessories & sheet or Piece-goods -->
 		{%if product.article.type.order == 8 or product.article.type.order == 7 %}
 			<!-- else show size  -->
-	<input type="hidden" id="quantity" name="quantity" value="1">
+	        <input type="hidden" id="quantity" name="quantity" value="1">
 		{%else%}
-				<div> 
-                 .. 
-				 {% for size in sizes %}
-					<span  class="select_size {% if size.pk  == 3 %} size_active {%endif%}" id="{{ size.pk }}">{{ size.name }}</span>  | 
-				 {% endfor %}
-				</div>
-				<input type="hidden" id="size" name="size" value="3" >
-				<input type="hidden" id="quantity" name="quantity" value="1">
-				<hr>
+			<div> 
+             .. 
+			 {% for size in sizes %}
+				<span  class="select_size {% if size.pk  == 3 %} size_active {%endif%}" id="{{ size.pk }}">{{ size.name }}</span>  | 
+			 {% endfor %}
+			</div>
+			<input type="hidden" id="size" name="size" value="3" >
+			<input type="hidden" id="quantity" name="quantity" value="1">
+			<hr>
 		{% endif %}
+
 		<!-- if type is  Piece-goods (metervara) -->
 		{% if product.article.type.order == 8 %}
 			 ..
