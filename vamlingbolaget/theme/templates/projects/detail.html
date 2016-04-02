@@ -19,21 +19,23 @@
 	   <li class="list-group-item">
 			{{project.description}}
 	   </il>
-       <hr>
-       Find files here: <a href="https://www.dropbox.com/home/vamlingbolaget%20Team%20Folder/{{project.folder}}" alt="{{project.folder}}">dropbox/{{project.folder}}</a>
+       
 
 	 </ul>
   </div>
   <div class="col-xs-6 col-sm-6">
-    <h4>Texts</h4>
+    <h4>Texts and Project folfer</h4>
        <hr>
        <ul>
        {% for f in files %}
 			<li class="list-group-item"><a href="{{ f.link }}"> <span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{ f.title }}  </a></li>  
 	  	{% endfor %}
 	   </ul>
+       <hr>
+       Find project folder here: <a href="https://www.dropbox.com/home/vamlingbolaget%20Team%20Folder/{{project.folder}}" alt="{{project.folder}}">dropbox/{{project.folder}}</a>
   </div>
 </div>
+<hr>
 <div class="row">
 	{% if media %}
 	<div class="col-xs-12 col-sm-12">
