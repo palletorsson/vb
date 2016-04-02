@@ -254,7 +254,7 @@ text-shadow: 0 1px 0 #eeeeee;
 
 .articlehead {
    margin-right:10px; 
-   font-size: 18px;  
+   text-transform: uppercase;  
 }
 
 .article_hr {
@@ -263,7 +263,6 @@ text-shadow: 0 1px 0 #eeeeee;
 
 #article_pk {
   text-transform: uppercase;
-  font-size: 1em;
 }
 
 .selectedpatternandcolor {
