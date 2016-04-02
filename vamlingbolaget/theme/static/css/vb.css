@@ -110,7 +110,7 @@ line-height: 1em;
     height: 240px;
   }
 
-  coll_menu_ul {
+  .coll_menu_ul {
     font-size: 1em;
   }
   .navbar-inner {
