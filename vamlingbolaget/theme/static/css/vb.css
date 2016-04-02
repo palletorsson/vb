@@ -261,6 +261,10 @@ text-shadow: 0 1px 0 #eeeeee;
   margin-bottom: 4px;
 }
 
+#article_pk {
+  text-transform: uppercase;
+  font-size: 1em;
+}
 
 .selectedpatternandcolor {
 	width: 118px;
