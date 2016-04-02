@@ -230,6 +230,28 @@ text-shadow: 0 1px 0 #eeeeee;
   padding-top: 12px; 
 }
 
+.size_active {
+   color:red; 
+   text-decoration: underline; 
+}
+
+
+.add-to-cart-buttom {
+  background-color: black;
+  width:300px; 
+  filter: alpha(opacity=70);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+  padding: 4px;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
+  transform: skew(-20deg);
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
 .image_description {
     padding: 2px;
     margin-top: 6px;

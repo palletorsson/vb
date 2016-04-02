@@ -158,47 +158,35 @@
 			<div style="clear: both;"></div>
 		
 		{% endif %} <!-- end of endif patterns-->
-		<hr/>			
-		<div>
-			{% trans "Storlek" %} / {% trans "Antal" %} :
-		</div> 
+					
+	
 		<hr/>			
 		<!-- if type is Accessories & sheet or Piece-goods -->
 		{%if product.article.type.order == 8 or product.article.type.order == 7 %}
 			<!-- else show size  -->
 		{%else%}
-			<span class="input-group sellect_margin">
-	  		<span class="input-group-addon"> {% trans "Storlek" %}: </span>
-				<select class="form-control" id='size'>
-					{% for size in sizes %}
-						<option value="{{ size.pk }}"
-						{% if size.pk == 3 %}
-							selected="selected"
-						{%endif%} "> {{ size.name }} </option>
-					{% endfor %}
-				</select>
-			</span>
+				<div> 
+                 .. 
+				 {% for size in sizes %}
+					<span  class="select_size {% if size.pk  == 3 %} size_active {%endif%}" id="{{ size.pk }}">{{ size.name }}</span>  | 
+				 {% endfor %}
+				</div>
+				<input type="hidden" id="size" name="size" value="3" >
+				<input type="hidden" id="quantity" name="quantity" value="1">
+				<hr>
 		{% endif %}
 		<!-- if type is  Piece-goods (metervara) -->
 		{% if product.article.type.order == 8 %}
-			<select id='quantiy_pk' class="sellect_margin">
-				<option value="1" selected="selected">{% trans "Meter" %} : 1 </option>
-				<option value="2">{% trans "Meter" %} : 2 </option>
-				<option value="3">{% trans "Meter" %} : 3 </option>
-				<option value="4">{% trans "Meter" %} : 4 </option>
-				<option value="5">{% trans "Meter" %} : 5 </option>
-				<option value="6">{% trans "Meter" %} : 6 </option>
-			</select>
+			 ..
+				<span class="select_size" id="1"> 1 meter </span> | 
+				<span class="select_size" id="2"> 2 meter </span> | 
+				<span class="select_size" id="3"> 3 meter </span> | 
+				<span class="select_size" id="4"> 4 meter </span> | 
+				<span class="select_size" id="5"> 5 meter </span> | 
+				<span class="select_size" id="6"> 6 meter </span> | 
+					
 		{% else %}
-			<span class="input-group">
-				<span class="input-group-addon"> {% trans "Antal" %} </span>
-					<select id='quantiy_pk' class="form-control">
-						<option value="1" selected="selected"> 1 </option>
-						<option value="2"> 2 </option>
-						<option value="3"> 3 </option>
-						<option value="4"> 4 </option>
-					</select>
-			</span>
+			
 		{% endif %}
 
 			

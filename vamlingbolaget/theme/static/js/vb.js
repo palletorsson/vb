@@ -478,11 +478,23 @@ set_first_page();
        $('input[name="pattern"]').val(pattern);
        $('input[name="color"]').val(color);
 	  }
-	  
-      
-
 
     });
+
+
+    $(".select_size").click(function(e) {
+      e.stopPropagation();
+      var size_id = this.id; 
+      var ok = $('input[name="size"]').val(size_id);;
+    
+	  $('.select_size').removeClass('size_active');
+  var $this = $(this);
+    if (!$this.hasClass('size_active')) {
+        $this.addClass('size_active');
+    }
+    e.preventDefault();
+    });
+
 
     // payment method logic
     $('#myTab a').click(function (e) {
