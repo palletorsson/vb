@@ -104,6 +104,11 @@ line-height: 1em;
     padding-right: 10px;
   }
 
+  .img-responsive {
+    float: left;
+    padding-right: 10px;
+  }
+
   .navbar-inner {
 
       background-color: #F8F8FF;
