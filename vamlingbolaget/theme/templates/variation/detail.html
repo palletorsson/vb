@@ -45,10 +45,7 @@
 							<span id="the_price"> {{ product.article.price }}</span> :-
 							{%endif%}  
 						</span>
-						<span class="pull-right"> | {% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span>
-						<span>| {% trans "Kvalitet" %}: 
-						<span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span>  
-						<span> | </span> 
+						
 					</small>
 					<hr class="article_hr"> 
 				</span>
@@ -239,6 +236,10 @@
 		<hr/>
 
 		<span> {{ product.article.quality.description }} </span> 
+        <span class="pull-right"> | {% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span>
+						<span>| {% trans "Kvalitet" %}: 
+						<span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span>  
+						<span> | </span> 
 		</div> <!-- end span7 -->
 	</div> <!-- end span12 -->
 
