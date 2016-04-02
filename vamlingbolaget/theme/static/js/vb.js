@@ -463,7 +463,7 @@ set_first_page();
       var colorandpattern = this.id.split("_");
       var color = colorandpattern[0];
       var pattern = colorandpattern[1];
-      var color_name selectedpatternandcolor_text= colorandpattern[2];
+      var color_name = colorandpattern[2];
       var pattern_name = colorandpattern[3];
 	  var image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="120"> <br />'+ color_name + ' ' +pattern_name+ ' ';
       var txt = color_name + ' ' +pattern_name 
