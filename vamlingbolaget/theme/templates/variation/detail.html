@@ -52,7 +52,7 @@
 			</span>	
 			<div style="clear: both;"></div>
 			<div class="minihead">
-				{% trans "Färg" %} / {% trans "Mönster" %} :
+				{% trans "Färg" %} / {% trans "Mönster" %} : <span class="selectedpatternandcolor"> {{ product.color.name }} {{ product.pattern.name }} </span>
 			</div> 
 			<div style="clear: both;"></div>
 		
@@ -77,8 +77,8 @@
 			<div class="outside">
 				<div class="selectedpatternandcolor span2">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
-					<br/>
-					{{ product.color.name }} {{ product.pattern.name }}
+				
+					
 				</div>
 				<div class="color_and_pattern_choose span5">
 					{% for item in colorsandpattern %}
