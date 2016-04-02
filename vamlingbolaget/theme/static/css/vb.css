@@ -107,6 +107,7 @@ line-height: 1em;
   .img-responsive {
     float: left;
     padding-right: 10px;
+    height: 240px;
   }
 
   .navbar-inner {
