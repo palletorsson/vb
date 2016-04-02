@@ -225,6 +225,8 @@ text-shadow: 0 1px 0 #eeeeee;
 }
 
 .detailPrice {
+  font-weight: normal;
+  font-size: 12px;
   padding-top: 12px; 
 }
 
