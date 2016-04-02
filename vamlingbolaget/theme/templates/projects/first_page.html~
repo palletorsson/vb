@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+
+
+
+{% block allcontent %}
+  {% if user.is_authenticated %}
+
+	<legend> Initited Projects </legend>
+    {% if projects %}
+		{% for camp in projects %}
+		<ul class="list-group">
+		  <a href= "{{camp.pk}}" >
+			  <li class="list-group-item">
+				<span class="badge">Prio: {{ camp.prio }}</span>
+				<strong><span class="label label-primary">Until: {{ camp.when }}</span> -- {{camp.prio}}: {{camp}} | </strong>{{ camp.description|truncatewords:10 }} ... 
+			  </li>
+		  </a>
+		</ul>
+		{% endfor  %}
+    {% else %}
+        <p> no initiate projects </p>
+    {% endif %}
+  {% endif %}
+
+	<legend> Public Projects </legend>
+    {% if project_public %}
+		{% for camp in project_public %}
+		<ul class="list-group">
+		  <a href= "{{camp.pk}}" >
+			  <li class="list-group-item">
+				<span class="badge">Prio: {{ camp.prio }}</span>
+				<strong><span class="label label-primary">Until: {{ camp.when }}</span> -- {{camp.prio}}: {{camp}} | </strong>{{ camp.description|truncatewords:10 }} ... 
+			  </li>
+		  </a>
+		</ul>
+		{% endfor  %}
+    {% else %}
+        <p> no public campaigns </p>
+    {% endif %}
+	
+  {% if user.is_authenticated %}  
+	<legend> <small> Campaigns Archive </small> </legend>
+
+    {% if project_archive %}
+		{% for camp in project_expired %}
+		<ul class="list-group">
+		  <a href= "{{camp.pk}}" >
+			  <li class="list-group-item">
+				<span class="badge">Prio: {{ camp.prio }}</span>
+				<strong><span class="label label-primary">Until: {{ camp.when }}</span> -- {{camp.prio}}: {{camp}} | </strong>{{ camp.description|truncatewords:10 }} ... 
+			  </li>
+		  </a>
+		</ul>
+		{% endfor  %}
+    {% else %}
+        <p> no archived campaigns </p>
+    {% endif %}
+  {% endif %}
+{% endblock %}
