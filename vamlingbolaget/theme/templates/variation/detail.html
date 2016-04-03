@@ -52,7 +52,7 @@
 			</span>	
 			<div style="clear: both;"></div>
 			<div>
-				{% trans "Färg" %} / {% trans "Mönster" %} : <span class="selectedpatternandcolor_text"> {{ product.color.name }} {{ product.pattern.name }} </span>
+				{% trans "Välj" %} {% trans "Färg" %} / {% trans "Mönster" %} : <span class="selectedpatternandcolor_text"> {{ product.color.name }} {{ product.pattern.name }} </span>
 			</div> 
 			<div style="clear: both;"></div>
 		
@@ -166,9 +166,9 @@
 	        <input type="hidden" id="quantity" name="quantity" value="1">
 		{%else%}
 			<div> 
-             .. 
+             {% trans "Välj" %} .. 
 			 {% for size in sizes %}
-				<span  class="select_size {% if size.pk  == 3 %} size_active {%endif%}" id="{{ size.pk }}">{{ size.name }}</span>  | 
+				<span  class="select_size {% if size.pk  == 3 %} size_active {%endif%}" id="{{ size.pk }}">_{{ size.name }}_</span>  | 
 			 {% endfor %}
 			</div>
 			<input type="hidden" id="size" name="size" value="3" >
@@ -178,7 +178,7 @@
 
 		<!-- if type is  Piece-goods (metervara) -->
 		{% if product.article.type.order == 8 %}
-			 ..
+			 {% trans "Välj" %} ..
 				<span class="select_size" id="1"> 1 meter </span> | 
 				<span class="select_size" id="2"> 2 meter </span> | 
 				<span class="select_size" id="3"> 3 meter </span> | 
