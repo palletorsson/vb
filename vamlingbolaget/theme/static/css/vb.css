@@ -233,10 +233,12 @@ text-shadow: 0 1px 0 #eeeeee;
 .select_size {
    padding-left: 6px; 
    padding-right: 6px; 
+   background-color: #FFFAFA;
 }
 
 .size_active {
    color:red; 
+   font-size: 14px; 
    text-decoration: underline; 
 }
 
