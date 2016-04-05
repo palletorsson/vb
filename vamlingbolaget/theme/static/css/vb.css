@@ -230,6 +230,11 @@ text-shadow: 0 1px 0 #eeeeee;
   padding-top: 12px; 
 }
 
+.select_size {
+   padding-left: 6px; 
+   padding-right: 6px; 
+}
+
 .size_active {
    color:red; 
    text-decoration: underline; 
