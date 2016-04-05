@@ -231,9 +231,13 @@ text-shadow: 0 1px 0 #eeeeee;
 }
 
 .select_size {
-   padding-left: 6px; 
-   padding-right: 6px; 
+   padding-left: 10px; 
+   padding-right: 10px; 
    background-color: #FFFAFA;
+}
+.select_size a:hover { 
+    font-size: 14px; 
+    cursor:pointer; 
 }
 
 .size_active {
