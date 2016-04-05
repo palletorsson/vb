@@ -168,7 +168,7 @@
 			<div> 
              {% trans "Välj" %} .. 
 			 {% for size in sizes %}
-				<span  class="select_size {% if size.pk  == 3 %} size_active {%endif%}" id="{{ size.pk }}">_{{ size.name }}_</span>  | 
+				<span  class="select_size {% if size.pk  == 3 %} size_active {%endif%}" id="{{ size.pk }}">{{ size.name }}</span>  | 
 			 {% endfor %}
 			</div>
 			<input type="hidden" id="size" name="size" value="3" >
