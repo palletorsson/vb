@@ -15,5 +15,3 @@ urlpatterns = patterns('checkout.views',
     url(r'seekorders/(?P<key>[a-zA-Z0-9_.-]+)/$', 'readOrders'),
     url(r'consumorder/(?P<order_id>[a-zA-Z0-9_.-]+)/(?P<force>[a-zA-Z0-9_.-]+)/$', 'consumOrder'),
 )
-
-
