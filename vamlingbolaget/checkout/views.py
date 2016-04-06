@@ -16,7 +16,8 @@ import random
 from payex.service import PayEx
 from fortnox.fortnox import get_headers, get_art_temp, json_update, update_article, CreateCostumer, searchCustomer, customerExistOrCreate, updateCostumer, seekOrder, createOrder, create_invoice_rows, getOrders
 import json
-
+import time
+import datetime
 
 # --> from /checkout/ pay --> with card | on delivery   
 def checkout(request):
@@ -414,7 +415,7 @@ def thanks(request):
     try:
         order = Checkout.objects.filter(session_key=cart_id)[0]
     except:
-       order = 1
+        order = 1
        
     if (order != 1):
         try: 
@@ -476,6 +477,7 @@ def payexCallback(request):
 
 
 def fortnox(request): 
+
     try:
         ip = request.META['REMOTE_ADDR']
     except:
@@ -509,12 +511,10 @@ def fortnox(request):
         # get all item in the cat
         try:
             the_items = getCartItems(request)
-            print the_items
         except:
             print "somethting wrong with th items"
 
         # create order in fortnox
-        print "fortnox"
         try: 
             json_order = order.order         
             fortnoxOrderandCostumer(request, order, the_items)
@@ -525,8 +525,6 @@ def fortnox(request):
             order.save()
 
         # set the new stock
-        print "stock" 
-        print the_items
         try: 
             cleanCartandSetStock(request, the_items)
 
@@ -543,7 +541,7 @@ def fortnox(request):
 
 # clean cart and chang stockquanity 
 def cleanCartandSetStock(request, the_items): 
-     
+ 
     # get cart, key and items 
 
     # update rea stock internalty 
@@ -554,7 +552,6 @@ def cleanCartandSetStock(request, the_items):
 
     try: 
         for item in rea_items: 
-            print "loop !"
             current_stock = item.reaArticle.stockquantity
             new_stock = current_stock - 1
             item.reaArticle.stockquantity = new_stock
@@ -601,11 +598,13 @@ def getCartItems(request):
 
 # Run after order when customer is send to conferm url /thanks/
 def fortnoxOrderandCostumer(request, new_order, order_json):
+
     fullname = unicode(new_order.first_name) + " " + unicode(new_order.last_name)
     try: 
         order_json = json.loads(order_json)
     except: 
         pass 
+
     customer_no = '0'
 
     headers = get_headers()
@@ -632,13 +631,24 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved' 
         new_order.save()
 
-    comments = "payexid: " + unicode(new_order.payex_key)
-    print comments
-   
+    try: 
+        ts = time.time()
+        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+        new_order.payment_log = new_order.payment_log +  '\n' + str(st) 
+        new_order.save()
+    except: 
+        pass
+
+    invoice_type = new_order.paymentmethod
+
+    if(invoice_type == 'P'): 
+        invoice_type_value = 'INVOICE'
+    else:
+        invoice_type_value = 'CASHINVOICE'
+
     # Creat the order part of the json from order_json and log 
     try: 
         invoice_rows = create_invoice_rows(order_json)
-        print invoice_rows
         new_order.payment_log = new_order.payment_log +  '\n' +  'Invoice_rows worked ' 
         new_order.save()
     except: 
@@ -646,7 +656,9 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         new_order.save()
 
     # add addtional information to json
-    orderid_ = new_order.order_number 
+    orderid_ = new_order.order_number
+    comments = "Payexid: " + unicode(new_order.payex_key) +  " Ordernumber: " + unicode(orderid_)
+ 
     customer_order = json.dumps({
                 "Invoice": {
                     "InvoiceRows": invoice_rows,
@@ -654,6 +666,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
                     "PriceList": "B",
                     "Comments": comments,
                     "YourOrderNumber": orderid_,
+                    "InvoiceType": invoice_type_value, 
                 }
             })  
     # send the json order, log and save the order 
@@ -798,7 +811,10 @@ def rea_admin_total(request, limit):
 
         if(email == old_email): 
             rea = 'allready'
-            print "copy" 
+            tempprice = 0
+
+        if(order.status == 'C'): 
+            rea = 'allready'
             tempprice = 0
 
         old_email = email
@@ -809,15 +825,14 @@ def rea_admin_total(request, limit):
                 end = order.message.index( ' SEK', start )
                 if (len(order.message[start:end]) < 120):
                     tempprice = order.message[start:end].rstrip('\n')    
-                    print tempprice       
+      
             except: 
                 tempprice = 0
                 
         total = total + int(tempprice)
-        print total
 
         l = l - 1 
-        print l
+        
         if (l < 2): 
             name = order.first_name    
  
@@ -897,10 +912,10 @@ def consumOrder(request, order_id, force):
 def readOrders(request, key):
 
     if request.user.is_authenticated():  
-           
+   
         headers = get_headers()
         seekorders = getOrders(headers)
-        
+
     else: 
         seekorders = "you are not admin"
 
@@ -908,5 +923,41 @@ def readOrders(request, key):
         'order': seekorders, 
         'seekorder': seekorders
     }, context_instance=RequestContext(request))
+
+
+def getOrderbyOrderNumerAndCheck(request, order_id):
+    if request.user.is_authenticated():  
+        order = "getting order"  
+        try:   
+            order = Checkout.objects.filter(order_number=order_id).order_by('-id')[0] 
+            order_num = order.order_number
+        except: 
+            order = "no order with that id"
+        
+        # check if these is an order   
+        try:
+            headers = get_headers()
+            #fullname = unicode(order.first_name) + " " + unicode(order.last_name)
+            headers = get_headers()
+            #seekorder = seekOrder(headers, fullname)
+            seekorder = seekOrderByOrderNumber(headers, order_id)
+            seekorder = json.loads(seekorder)
+            print seekorder
+
+            if (len(seekorder) == 0):
+                print seekorder
+                
+        except: 
+            seekorder = "None"
+
+    else: 
+        order = "you are not admin"
+
+    return render_to_response('checkout/dubblecheckconsumorder.html', {
+        'order': order, 
+        'seekorder': seekorder
+    }, context_instance=RequestContext(request))
+
+
 
 

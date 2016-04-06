@@ -39,12 +39,9 @@ def json_update(articleNumber, QuantityInStock):
     return data_
 
 def create_invoice_rows(order_json):
-    print order_json
     cartitems = order_json['cartitems'] 
     rea_items = order_json['rea_items'] 
     invoicerows = []
-    print "hello invoice rows"
-    print rea_items
 
     try: 
         for item in cartitems: 
@@ -67,11 +64,8 @@ def create_invoice_rows(order_json):
     except: 
         print "no rea item"
 
-
-
     return invoicerows   
                 
-
 # Interact with API
 
 #https://api.fortnox.se/3/customers?email=palle.torsson@gmail.com
@@ -122,7 +116,6 @@ def CreateCostumer(headers, customer):
     else:      
        customer = formatJson(customer)
 
-
     try:
         r = requests.post(
         url="https://api.fortnox.se/3/customers",
@@ -169,7 +162,6 @@ def updateCostumer(headers, customer, customer_url):
 
     except requests.exceptions.RequestException as e:
         return('HTTP Request failed')
-
     try:    
         result = json.loads(r.content)
     except: 
@@ -241,6 +233,24 @@ def seekOrder(headers, custumer_name):
 
     except requests.exceptions.RequestException as e:
         print('HTTP Request failed')
+    return r.content
+
+def seekOrderByOrderNumber(headers, order_number):
+    # Invoices (GET https://api.fortnox.se/3/invoices/203)         			   
+    #perpage=10&pagenum=1&sortby=id&filterby=all&order=desc&searchValue=&id=&ocr=
+    #&customerNumber=&customerName=&costCenter=&projectFollowUp=&ourReference=
+    #&yourReference=&comment=&orderNumber=1234&dateType=transactionDate&fromDate=&toDate=&payPending=
+
+
+    try:
+        r = requests.get(
+            url="https://api.fortnox.se/3/invoices?yourreference="+str(order_number), 
+            headers = headers,
+        )
+
+    except requests.exceptions.RequestException as e:
+        print('HTTP Request failed')
+    print r.content
     return r.content
 
 def createOrder(headers, customer_order):
