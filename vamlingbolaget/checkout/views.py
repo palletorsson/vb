@@ -14,7 +14,7 @@ from forms import CheckoutForm
 from models import Checkout
 import random
 from payex.service import PayEx
-from fortnox.fortnox import get_headers, get_art_temp, json_update, update_article, CreateCostumer, searchCustomer, customerExistOrCreate, updateCostumer, seekOrder, createOrder, create_invoice_rows, getOrders
+from fortnox.fortnox import get_headers, get_art_temp, json_update, update_article, CreateCostumer, searchCustomer, customerExistOrCreate, updateCostumer, seekOrder, createOrder, create_invoice_rows, getOrders, seekOrderByNumber
 import json
 import time
 import datetime
@@ -133,7 +133,7 @@ def checkout(request):
                     item.id = u'1234'
                     order_json['rea_item']['quantity'] = str(1.00)
                     order_json['rea_item']['article'] = item.reaArticle.article.sku_number
-               
+
                 msg = msg + '\n'
             except: 
                 pass
@@ -931,22 +931,39 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
         try:   
             order = Checkout.objects.filter(order_number=order_id).order_by('-id')[0] 
             order_num = order.order_number
+            email = order.email
         except: 
             order = "no order with that id"
-        
-        # check if these is an order   
-        try:
-            headers = get_headers()
-            #fullname = unicode(order.first_name) + " " + unicode(order.last_name)
-            headers = get_headers()
-            #seekorder = seekOrder(headers, fullname)
-            seekorder = seekOrderByOrderNumber(headers, order_id)
-            seekorder = json.loads(seekorder)
-            print seekorder
+        print order.message
 
-            if (len(seekorder) == 0):
-                print seekorder
-                
+        try:   
+            start = order.message.index('Totalpris: ') + len('Totalpris: ')
+            end = order.message.index( ' SEK', start )
+            totalprice = order.message[start:end].rstrip('\n')    
+        except: 
+            totalprice = 0
+        try:   
+            start = order.message.index('Frakt och hantering: ') + len('Frakt och hantering: ')
+            end = order.message.index( ' SEK', start )
+            shipment = order.message[start:end].rstrip('\n')    
+        except: 
+            shipment = 0
+
+        order.total = totalprice
+        order.shipment = shipment
+
+        new_seekorder = {}
+        # check get orders  
+        try:
+            headers = get_headers() 
+            invoice = seekOrderByNumber(headers, '101')
+            seekorder = json.loads(invoice)
+            new_seekorder['customername'] = seekorder['Invoice']['CustomerName']
+            new_seekorder['total'] = seekorder['Invoice']['TotalToPay']
+            new_seekorder['invoicetype'] = seekorder['Invoice']['InvoiceType']
+            new_seekorder['yourordernumber'] = seekorder['Invoice']['YourOrderNumber']
+            new_seekorder['email'] = seekorder['Invoice']['EmailInformation']['EmailAddressTo']
+
         except: 
             seekorder = "None"
 
@@ -955,7 +972,7 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
 
     return render_to_response('checkout/dubblecheckconsumorder.html', {
         'order': order, 
-        'seekorder': seekorder
+        'seekorder': new_seekorder
     }, context_instance=RequestContext(request))
 
 

@@ -86,6 +86,24 @@ def searchCustomer(headers, name, email):
     except requests.exceptions.RequestException as e:
         return('HTTP Request failed') 
 
+#https://api.fortnox.se/3/customers?email=palle.torsson@gmail.com
+def searchCustomerByEmail(headers, email): 
+    try:
+        r = requests.get(
+            url="https://api.fortnox.se/3/customers?email="+email,
+            headers = headers,
+        )
+        response = r.content
+        response_exist_json = json.loads(response)
+
+        if (response_exist_json['MetaInformation']['@TotalResources'] > 0): 
+            return response_exist_json['Customers'][0]['@url']
+        else:  
+            return False 
+         
+    except requests.exceptions.RequestException as e:
+        return('HTTP Request failed') 
+
 def extractCustmer(customer_meta): 
     customer_meta = json.loads(customer_meta)
     try: 
@@ -235,22 +253,32 @@ def seekOrder(headers, custumer_name):
         print('HTTP Request failed')
     return r.content
 
-def seekOrderByOrderNumber(headers, order_number):
-    # Invoices (GET https://api.fortnox.se/3/invoices/203)         			   
-    #perpage=10&pagenum=1&sortby=id&filterby=all&order=desc&searchValue=&id=&ocr=
-    #&customerNumber=&customerName=&costCenter=&projectFollowUp=&ourReference=
-    #&yourReference=&comment=&orderNumber=1234&dateType=transactionDate&fromDate=&toDate=&payPending=
-
+def seekOrderByNumber(headers, number):
+    # Invoices (GET https://api.fortnox.se/3/invoices/203)
 
     try:
         r = requests.get(
-            url="https://api.fortnox.se/3/invoices?yourreference="+str(order_number), 
+            url="https://api.fortnox.se/3/invoices/"+str(number)+"/", 
             headers = headers,
         )
 
     except requests.exceptions.RequestException as e:
         print('HTTP Request failed')
-    print r.content
+    return r.content
+
+
+def seekOrderByOrderNumber(headers, order_number):
+    url = "https://api.fortnox.se/3/invoices?yourreference="+str(order_number)
+
+    try:
+        r = requests.get(
+            url=url, 
+            headers = headers,
+        )
+    
+    except requests.exceptions.RequestException as e:
+        print('HTTP Request failed')
+
     return r.content
 
 def createOrder(headers, customer_order):
@@ -272,7 +300,7 @@ def get_articles(headers):
     try:
         r = requests.get(
             url="https://api.fortnox.se/3/articles",
-            headers = headers ,
+            headers = headers,
         )
 
         print('Response HTTP Status Code : {status_code}'.format(status_code=r.status_code))
