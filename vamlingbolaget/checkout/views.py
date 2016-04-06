@@ -933,9 +933,9 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
             order_num = order.order_number
             email = order.email
         except: 
-            order = "no order with that id"
-        print order.message
-
+            order = ''
+       
+   
         try:   
             start = order.message.index('Totalpris: ') + len('Totalpris: ')
             end = order.message.index( ' SEK', start )
@@ -949,6 +949,17 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
         except: 
             shipment = 0
 
+        try:   
+            start = order.payment_log.index('Order created in Fortnox: ') + len('Order created in Fortnox: ')
+            end = order.payment_log.index( 'fornox order is ok', start )
+            json_order = order.payment_log[start:end].rstrip('\n')    
+        except: 
+            json_order = {}
+
+
+        json_order = json.loads(json_order)
+        invoice_number = json_order['Invoice']['DocumentNumber']
+        print invoice_number
         order.total = totalprice
         order.shipment = shipment
 
@@ -956,7 +967,7 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
         # check get orders  
         try:
             headers = get_headers() 
-            invoice = seekOrderByNumber(headers, '101')
+            invoice = seekOrderByNumber(headers, invoice_number)
             seekorder = json.loads(invoice)
             new_seekorder['customername'] = seekorder['Invoice']['CustomerName']
             new_seekorder['total'] = seekorder['Invoice']['TotalToPay']
