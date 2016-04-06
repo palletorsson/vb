@@ -932,10 +932,22 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
             order = Checkout.objects.filter(order_number=order_id).order_by('-id')[0] 
             order_num = order.order_number
             email = order.email
+            pk_order = order.pk
         except: 
             order = ''
-       
-   
+	
+	try:
+            next = Checkout.objects.get(pk=pk_order+1)
+	    next_od = next.order_number
+        except: 
+	    next_od = ''
+	    
+	try:	    
+            prev = Checkout.objects.get(pk=pk_order-1)
+            prev_od = prev.order_number
+        except: 
+	    prev_od = ''
+	    
         try:   
             start = order.message.index('Totalpris: ') + len('Totalpris: ')
             end = order.message.index( ' SEK', start )
@@ -956,13 +968,14 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
         except: 
             json_order = {}
 
-
-        json_order = json.loads(json_order)
-        invoice_number = json_order['Invoice']['DocumentNumber']
-        print invoice_number
-        order.total = totalprice
-        order.shipment = shipment
-
+	try:
+            json_order = json.loads(json_order)
+            invoice_number = json_order['Invoice']['DocumentNumber']
+            order.total = totalprice
+            order.shipment = shipment
+        except: 
+            print "no json"
+	    
         new_seekorder = {}
         # check get orders  
         try:
@@ -983,7 +996,9 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
 
     return render_to_response('checkout/dubblecheckconsumorder.html', {
         'order': order, 
-        'seekorder': new_seekorder
+        'seekorder': new_seekorder,
+        'next_od': next_od,
+        'prev_od': prev_od
     }, context_instance=RequestContext(request))
 
 
