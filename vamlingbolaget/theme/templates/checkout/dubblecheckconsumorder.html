@@ -10,7 +10,9 @@
 {% block allcontent %}
 	{% if user.is_superuser %}
 
-<a href="http://127.0.0.1:8000/checkout/consumordercheck/{{ prev_od }}"> <<__ <a/> _ {{ prev_od }}| <a href="http://127.0.0.1:8000/checkout/consumordercheck/{{ next_od }}"> __>> <a/>
+<a href="/checkout/consumordercheck/{{ prev_od }}"> PREV <a/> |  
+<a href="/checkout/consumordercheck/{{ next_od }}"> NEXT <a/>
+
     <ul class="list-group">
  	    <li class="list-group-item"> Costumer:  {{ order.first_name  }}  {{ order.last_name   }}  | {{ seekorder.customername  }} </li>
  	    <li class="list-group-item"> Ordernumber : {{ order.order_number  }} | {{ seekorder.yourordernumber  }}  </li>
