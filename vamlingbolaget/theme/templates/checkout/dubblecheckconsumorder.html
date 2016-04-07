@@ -18,7 +18,7 @@
  	    <li class="list-group-item"> Ordernumber : {{ order.order_number  }} | {{ seekorder.yourordernumber  }}  </li>
  	    <li class="list-group-item"> Email: {{ order.email  }} | {{ seekorder.email  }} </li>
  	    <li class="list-group-item"> Payment method: {{ order.paymentmethod   }}  | {{ seekorder.invoicetype  }}</li>
- 	    <li class="list-group-item"> Total: {{ order.total   }}  | {{ seekorder.total  }} | {{ seekorder.reaprice }} | {{ seekorder.shipment }} </li>
+ 	    <li class="list-group-item"> Total: {{ order.total   }}  | {{ seekorder.total  }} | {{ order.reaprice }} | {{ order.shipment }} </li>
  	    <li class="list-group-item"> Payment log: <br> <br> <pre> {{ seekorder  }} </pre> </li
  	    <li class="list-group-item"> Payment log: <br> <br> <pre> {{ order.payment_log  }} </pre> </li> 
     </ul>
