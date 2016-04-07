@@ -947,6 +947,15 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
             prev_od = prev.order_number
         except: 
 	    prev_od = ''
+        
+        try:
+            start = order.message.index('Produkt 1: ') + len('Produkt 1: ')
+            end = order.message.index( ' :', start )
+
+            if (len(order.message[start:end]) < 120):
+                rea = order.message[start:end]
+        except: 
+            rea = 'notrea'
 	    
         try:   
             start = order.message.index('Totalpris: ') + len('Totalpris: ')
@@ -954,6 +963,7 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
             totalprice = order.message[start:end].rstrip('\n')    
         except: 
             totalprice = 0
+	    
         try:   
             start = order.message.index('Frakt och hantering: ') + len('Frakt och hantering: ')
             end = order.message.index( ' SEK', start )
@@ -968,11 +978,17 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
         except: 
             json_order = {}
 
-	try:
+        try:
             json_order = json.loads(json_order)
             invoice_number = json_order['Invoice']['DocumentNumber']
             order.total = totalprice
             order.shipment = shipment
+	    
+	    if (rea == 'rea'):
+	        order.reaprice = totalprice * 0.70
+	    else: 
+	        order.reaprice = 'no rea'
+		
         except: 
             print "no json"
 	    
