@@ -18,6 +18,7 @@ from fortnox.fortnox import get_headers, get_art_temp, json_update, update_artic
 import json
 import time
 import datetime
+from translator import toEnglish
 
 # --> from /checkout/ pay --> with card | on delivery   
 def checkout(request):
@@ -84,15 +85,17 @@ def checkout(request):
             payex_products = ''
 
             # start creating the costumer message 
-            msg = "Din order till Vamlingbolaget:\n"
-            msg = msg + '--------------------------------- \n'
-            msg = msg + 'Din order:\n'
+            message_header = "Din order till Vamlingbolaget:\n--------------------------------- \nDin order: \n"
+            msg = message_header
+
             cart_numberofitems = len(cartitems)
             # create a json object to store order values log and order in json to be used for fortnox integration 
             order_json = {}
 			# we have three typ of cart items: cartitems, bargins, rea items that we must loop
             # we also create a json object for fortnox
-            order_json['cartitem'] = {}
+            order_json['cartitems'] = {}
+            temp_cartitems = []
+	    
             for item in cartitems:
                 msg = msg + 'Produkt '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
@@ -100,8 +103,12 @@ def checkout(request):
                 articles = articles + item.article.sku_number
                 payex_products = payex_products + item.article.name
                 payex_articles = payex_articles + item.article.sku_number
-                order_json['cartitem']['quantity'] =  str(item.quantity)
-                order_json['cartitem']['article'] = item.article.sku_number
+                temp_cartitems.append(
+        			{'quantity':str(item.quantity), 
+        			 'article': item.article.sku_number,
+        			 'color': item.color.name, 
+        			 'pattern': item.pattern.name })
+		
                 if (i != cart_numberofitems):
                     products = products + ', '
                     articles = articles + ', '
@@ -110,17 +117,24 @@ def checkout(request):
                 if (item.pattern_2 != 0):
                     msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' (utsida)\n'
                     msg = msg + 'och ' + item.pattern_2.name + ', ' + item.color_2.name + ' (insida)\n'
+                    #order_json['cartitem'][i]['color2'] = item.color_2.name
+                    order_json['cartitem'][i]['patter2'] = item.patter_2.name
                 else:
                     msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
+		    
                 if (item.article.type.order < 7 or item.article.type.order == 9):
                     msg = msg + 'Storlek: ' + item.size.name + ' \n'
 
                 msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
-                i = i + 1
-            msg = msg + '\n'
+
             
+            msg = msg + '\n'
+	
+            order_json['cartitems'] = temp_cartitems
             # Secondly loop the rea items
-            order_json['rea_item'] = {}
+            order_json['rea_items'] = {}
+	    
+            temp_reaitems = []
             try:
                 for item in rea_items:
                     payex_products = "Vamlingbolaget"
@@ -131,13 +145,22 @@ def checkout(request):
                     msg = msg + 'Storlek ' + item.reaArticle.size.name + ' \n'            
                     i = i + 1
                     item.id = u'1234'
-                    order_json['rea_item']['quantity'] = str(1.00)
-                    order_json['rea_item']['article'] = item.reaArticle.article.sku_number
-
+                    temp_reaitems.append(
+        			{'quantity':str(1.00), 
+        			 'article': item.reaArticle.article.sku_number,
+        			 'color': item.reaArticle.color.name, 
+        			 'pattern': item.reaArticle.pattern.name, 
+        			 'rea': 'rea' })		   
                 msg = msg + '\n'
+
+
             except: 
                 pass
-
+            
+            order_json['rea_items'] = temp_reaitems
+            # also create a place holder for pax transactionnumber
+            order_json['transnumber'] = 'placeholder'
+	    
             # and lastly bargins (this is actuality an old model we can consider removing)
             order_json['bargains'] = {}
             for item in bargains:
@@ -160,7 +183,7 @@ def checkout(request):
             if len(payex_articles) > 30:
                 payex_articles = "Flera artiklar"
 
-            # continue to build the message from form values
+            # continue to build summery of the message from form values
             msg = msg + 'Frakt och hantering: '+ str(handling) +' SEK \n'
             msg = msg + '--------------------------------- \n'
             msg = msg + 'Totalpris: %s SEK \n' %str(totalprice)
@@ -226,6 +249,8 @@ def checkout(request):
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
                 if (first_name == "Tester"):
                     print "this is for testing we don not need to send a email"
+                    enmsg = toEnglish(msg)
+                    print enmsg
                 else:  
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
@@ -266,7 +291,7 @@ def checkout(request):
 
                 new_order.payex_key = PayExRefKey
                 new_order.message = msg
-                new_order.payment_log = '* Card payment Log - Payment request sent, payEx key: ' + str(PayExRefKey) 
+                new_order.payment_log = '1 Card payment Log - Payment request sent, payEx key: ' + str(PayExRefKey) 
                 new_order.order = order_json 
                 new_order.save()
                 return HttpResponseRedirect(response['redirectUrl'])
@@ -331,15 +356,27 @@ def success(request):
 
             # remove the old cart and cart items if status is Order 
             if (order != 1 and order.status == 'O'):
-                
+
+                try:
+                    transnumber = response['transactionNumber']
+                    order_json = json.loads(order.order)
+                    order_json['transnumber'] = str(transnumber)
+                    order_json = json.dumps(order.order)
+                    order.order = order_json
+                    order.save() 
+                except:
+                    order.payment_log = order.payment_log + '\n' + '3: Log Fail, transnumber'
+                    order.save()
+
                 try:
                     transnumber = response['transactionNumber']
                     order.message = order.message + 'PayEx transaktion: ' + str(transnumber) + '\n'
                     order.payment_log = order.payment_log + '\n' + '3: Log Success: PayEx transaktion: ' + str(transnumber)
-                    order.status = 'P'                  
+                    order.status = 'P'   
+                    order.save()               
                 except:
                     order.payment_log = order.payment_log + '\n' + '3: Log Fail, PayEx transaktion not found: ' + str(transnumber)
-
+                    order.save()
                 try:
                     to = [order.email, 'info@vamlingbolaget.com']
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.message, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
@@ -411,27 +448,27 @@ def cancel(request):
 
 def thanks(request):
     cart_id = _cart_id(request)
-    
+    print cart_id 
     try:
-        order = Checkout.objects.filter(session_key=cart_id)[0]
+        checkout = Checkout.objects.filter(session_key=cart_id)[0]
     except:
-        order = 1
+        checkout = 1
        
-    if (order != 1):
+    if (checkout != 1):
         try: 
-            order.payment_log = order.payment_log + "* Sending thanks message" + '\n'
-            order.save()
+            checkout.payment_log = checkout.payment_log + "* Sending thanks message" + '\n'
+            checkout.save()
         except:
-            order.payment_log = order.payment_log + "* can find order" + '\n'
-            order.save()    
+            checkout.payment_log = checkout.payment_log + "* can find order" + '\n'
+            checkout.save()    
               
         message = "Tack for din order"
-
+        
     else:
         message = u"Lägg till något i din shoppinglåda och gör en beställning."
- 
+    
     return render_to_response('checkout/thanks.html', {
-        'order': order,
+        'order': checkout,
         'message': message
     }, context_instance=RequestContext(request))
 
@@ -516,8 +553,9 @@ def fortnox(request):
 
         # create order in fortnox
         try: 
-            json_order = order.order         
-            fortnoxOrderandCostumer(request, order, the_items)
+            json_order = the_items     
+            print json_order
+            fortnoxOrderandCostumer(request, order, json_order)
             order.payment_log = order.payment_log +  '\n' + 'fornox order is ok'
             order.save()
         except: 
@@ -600,11 +638,7 @@ def getCartItems(request):
 def fortnoxOrderandCostumer(request, new_order, order_json):
 
     fullname = unicode(new_order.first_name) + " " + unicode(new_order.last_name)
-    try: 
-        order_json = json.loads(order_json)
-    except: 
-        pass 
-
+    
     customer_no = '0'
 
     headers = get_headers()
@@ -624,8 +658,8 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     # To make an Fortnox order we need a Custumer
     # first check if customer exist 
     # and update or create customer and get customer number back and log
-    try: 
-        customer_no = customerExistOrCreate(headers, customer, new_order)
+    try:
+        customer_no = customerExistOrCreate(headers, customer, order_json)
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer ok ' 
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved' 
@@ -648,6 +682,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
 
     # Creat the order part of the json from order_json and log 
     try: 
+        
         invoice_rows = create_invoice_rows(order_json)
         new_order.payment_log = new_order.payment_log +  '\n' +  'Invoice_rows worked ' 
         new_order.save()
@@ -657,8 +692,15 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
 
     # add addtional information to json
     orderid_ = new_order.order_number
-    comments = "Payexid: " + unicode(new_order.payex_key) +  " Ordernumber: " + unicode(orderid_)
- 
+    comments = ''
+
+    try: 
+        order_obj = json.loads(new_order.order)
+        tranid = order_obj['transnumber']
+        comments = "Payextransactionnumber: " + unicode(tranid) + " Payexkey: " + unicode(new_order.payex_key) +  " Order number: " + unicode(orderid_)
+    except: 
+        pass 
+
     customer_order = json.dumps({
                 "Invoice": {
                     "InvoiceRows": invoice_rows,
@@ -671,10 +713,11 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
             })  
     # send the json order, log and save the order 
     try: 
-        order = createOrder(headers, customer_order)
-        new_order.payment_log = new_order.payment_log +  '\n' + 'Order created in Fortnox: ' +  str(order)
-        new_order.save()
+        return_order = createOrder(headers, customer_order)
 
+        new_order.payment_log = new_order.payment_log +  '\n' + 'Order created in Fortnox: ' +  str(return_order)
+        new_order.save()
+        retun_order_json = json.loads(return_order)
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order not created' 
         new_order.save()
@@ -953,7 +996,7 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
             end = order.message.index( ' :', start )
 
             if (len(order.message[start:end]) < 120):
-                rea = order.message[start:end]
+                rea = order.message[start:end].rstrip('\n')  
         except: 
             rea = 'notrea'
 	    
@@ -983,15 +1026,18 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
             invoice_number = json_order['Invoice']['DocumentNumber']
             order.total = totalprice
             order.shipment = shipment
-	    
-	    if (rea == 'rea'):
-	        order.reaprice = totalprice * 0.70
-	    else: 
-	        order.reaprice = 'no rea'
-		
         except: 
             print "no json"
-	    
+            
+	try:
+	    if (rea == 'rea'):
+	        order.reaprice = int(totalprice) * 0.70
+		print  order.reaprice 
+	    else: 
+	        order.reaprice = 'no rea'
+	except:
+            print "notrea"
+            
         new_seekorder = {}
         # check get orders  
         try:
@@ -1009,6 +1055,7 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
 
     else: 
         order = "you are not admin"
+       
 
     return render_to_response('checkout/dubblecheckconsumorder.html', {
         'order': order, 
@@ -1018,5 +1065,19 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
     }, context_instance=RequestContext(request))
 
 
-
+def payexCheck2vb(request, payextransactionnumber): 
+    # check 2 PayEx service
+    service = PayEx (
+	    merchant_number=settings.PAYEX_MERCHANT_NUMBER,
+	    encryption_key=settings.PAYEX_ENCRYPTION_KEY,
+	    production=settings.PAYEX_IN_PRODUCTION
+	    )
+    
+    response = service.check2(
+	accountNumber='vamlingbolaget',
+	transactionNumber=payextransactionnumber,  
+	)
+    
+    return response
+    
 

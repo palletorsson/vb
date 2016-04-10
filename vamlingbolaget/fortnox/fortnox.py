@@ -3,6 +3,7 @@ import json
 import requests
 import httplib
 from local_fortnox import get_headers
+from products.models import Color, Pattern, Size
 
 local_tests = True; 
 
@@ -39,30 +40,39 @@ def json_update(articleNumber, QuantityInStock):
     return data_
 
 def create_invoice_rows(order_json):
+    
     cartitems = order_json['cartitems'] 
-    rea_items = order_json['rea_items'] 
+    rea_items = order_json['rea_items']
     invoicerows = []
 
-    try: 
+    try:
         for item in cartitems: 
-            print str(item.quantity)
+            color = Color.objects.get(order=item.color)
+            pattern = Pattern.objects.get(order=item.pattern)
+            size = Size.objects.get(pk=item.size)
             invoicerows.append({
-		        "DeliveredQuantity": int(item.quantity),
-		        "ArticleNumber": int(item.article.sku_number), 
-		     })
-    except: 
-        print "no item"
+    		    "DeliveredQuantity": int(item.quantity),
+    	        "ArticleNumber": int(item.article.sku_number), 
+    		    "Description": str(item.article) + " " + str(color) + " " + str(pattern) + " " + str(size)
+	        })
+    except:
+        print "no cartitem"
 
-    try: 
-        for item in rea_items: 
-
-            print str(item.reaArticle.article.sku_number)
+    try:
+        for item in rea_items:     
             invoicerows.append({
-		        "DeliveredQuantity": 1,
-		        "ArticleNumber": int(item.reaArticle.article.sku_number), 
-		     })
-    except: 
-        print "no rea item"
+    	        "DeliveredQuantity": 1,
+    	        "ArticleNumber": int(item.reaArticle.article.sku_number), 
+    		    "Description": "R: " + str(item.reaArticle) + " " + str(item.reaArticle.color) + " " + str(item.reaArticle.pattern) + " " + str(item.reaArticle.size)
+    	     })
+    except:
+        print "no reaitem"
+
+    invoicerows.append({
+        "DeliveredQuantity": 1,
+        "ArticleNumber": 2, 
+        "Description": "Postavgift"
+     })
 
     return invoicerows   
                 
@@ -402,6 +412,19 @@ def formatJson(the_json):
         the_json = the_json.replace('\'', '"')
     except:
         pass
+    return the_json
+
+def formatJson2(the_json):
+    the_json = json.dumps(the_json)
+    try:
+        the_json = the_json.replace('u', '')
+    except:
+        pass
+    try:
+        the_json = the_json.replace('\'', '"')
+    except:
+        pass
+    the_json = json.loads(the_json)
     return the_json
 
 
