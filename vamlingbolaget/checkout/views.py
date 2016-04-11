@@ -14,7 +14,7 @@ from forms import CheckoutForm
 from models import Checkout
 import random
 from payex.service import PayEx
-from fortnox.fortnox import get_headers, get_art_temp, json_update, update_article, CreateCostumer, searchCustomer, customerExistOrCreate, updateCostumer, seekOrder, createOrder, create_invoice_rows, getOrders, seekOrderByNumber
+from fortnox.fortnox import get_headers, get_art_temp, json_update, update_article, CreateCostumer, searchCustomer, customerExistOrCreate, updateCostumer, seekOrder, createOrder, create_invoice_rows, getOrders, seekOrderByNumber, formatJson
 import json
 import time
 import datetime
@@ -251,6 +251,21 @@ def checkout(request):
                     print "this is for testing we don not need to send a email"
                     enmsg = toEnglish(msg)
                     print enmsg
+                    transnumber = "1234"
+                    order_json = json.loads(new_order.order)
+
+                    print "order_json ", order_json
+                    order_json['transnumber'] = str(transnumber)
+                    #order_json = json.dumps(new_order.order)
+                    new_order.order = order_json
+                    new_order.save() 
+                    order = Checkout.objects.get(order_number=order_numb)
+                    order_obj = formatJson(order.order)
+                    order_obj = json.loads(order_obj)
+                    tranid = order_obj['transnumber']
+                    order_json['transnumber'] = str(transnumber) + str('123')
+                    order.order = order_json
+                    order.save() 
                 else:  
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
@@ -359,11 +374,13 @@ def success(request):
 
                 try:
                     transnumber = response['transactionNumber']
-                    order_json = json.loads(order.order)
+                    order_obj = formatJson(order.order)
+                    order_obj = json.loads(order_obj)
                     order_json['transnumber'] = str(transnumber)
                     order_json = json.dumps(order.order)
                     order.order = order_json
-                    order.save() 
+                    order.save()  
+                    order.payment_log = order.payment_log + '\n' + '3: adding transnumber'
                 except:
                     order.payment_log = order.payment_log + '\n' + '3: Log Fail, transnumber'
                     order.save()
