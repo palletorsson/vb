@@ -108,9 +108,8 @@ def checkout(request):
                 payex_articles = payex_articles + item.article.sku_number
                 temp_cartitems.append(
         			{'quantity':str(item.quantity), 
-        			 'article': item.article.sku_number,
-        			 'color': item.color.name, 
-        			 'pattern': item.pattern.name })
+        			 'article': item.article.sku_number
+        			  })
 		
                 if (i != cart_numberofitems):
                     products = products + ', '
@@ -149,8 +148,6 @@ def checkout(request):
                     temp_reaitems.append(
         			{'quantity':str(1.00), 
         			 'article': item.reaArticle.article.sku_number,
-        			 'color': item.reaArticle.color.name, 
-        			 'pattern': item.reaArticle.pattern.name, 
         			 'rea': 'rea' })		   
                 msg = msg + '\n'
 
