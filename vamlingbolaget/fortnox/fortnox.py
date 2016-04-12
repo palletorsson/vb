@@ -53,8 +53,12 @@ def create_invoice_rows(order_json):
             invoicerows.append({
     		    "DeliveredQuantity": int(item.quantity),
     	        "ArticleNumber": int(item.article.sku_number), 
-    		    "Description": str(item.article) + " " + str(color) + " " + str(pattern) + " " + str(size)
+    		    "Description": str(item.article.name) + " " + str(size) 
 	        })
+            invoicerows.append({
+                "Description": str(pattern) + " " + str(color) 
+            })
+
     except:
         print "no cartitem"
 
@@ -63,8 +67,14 @@ def create_invoice_rows(order_json):
             invoicerows.append({
     	        "DeliveredQuantity": 1,
     	        "ArticleNumber": int(item.reaArticle.article.sku_number), 
-    		    "Description": "R: " + str(item.reaArticle) + " " + str(item.reaArticle.color) + " " + str(item.reaArticle.pattern) + " " + str(item.reaArticle.size)
-    	     })
+    		    "Description": "Rea: " + str(item.reaArticle.article.name) + " "  + str(item.reaArticle.size),
+                "Price": item.reaArticle.article.price,
+                "Discount": 30,
+                "DiscountType": "PERCENT"
+    	    })
+            invoicerows.append({
+                "Description": str(item.reaArticle.pattern) + " " + str(item.reaArticle.color)
+            })
     except:
         print "no reaitem"
 
