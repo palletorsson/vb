@@ -347,7 +347,7 @@ def success(request):
             # get the checkout 
             try:
                 order = Checkout.objects.get(payex_key=orderref)
-                order.payment_log = order.payment_log + u'Log Success: Checkout found with the payex_key: ' +  orderref + '\n' + 'cartid: ' + cart_id
+                order.payment_log = order.payment_log + u'Log Success: Checkout found with the payex_key: ' +  orderref + ' Cartid: ' + cart_id + '\n'
             except:
                 order = 1
                 print 'Log Error: no checkout found with the payex_key: ' + str(orderref)
@@ -363,10 +363,11 @@ def success(request):
             if (order != 1 and order.status == 'O'):
 
                 try:
-                    transnumber = response['transactionNumber']
+                    transnumber_ = response['transactionNumber']
                     order_obj = formatJson(order.order)
                     order_obj = json.loads(order_obj)
-                    order_obj['transnumber'] = str(transnumber)
+                    order_obj['transnumber'] = str(transnumber_)
+                    print "--------------------------------------", order_obj
                     order.order = order_obj
                     order.payment_log = order.payment_log + 'Log Trans: Adding transnumber' + str(order_obj['transnumber']) +'\n' 
                     order.save()
