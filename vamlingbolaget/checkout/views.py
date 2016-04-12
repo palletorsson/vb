@@ -366,11 +366,10 @@ def success(request):
                     transnumber = response['transactionNumber']
                     order_obj = formatJson(order.order)
                     order_obj = json.loads(order_obj)
-                    order_json['transnumber'] = str(transnumber)
-                    order_json = json.dumps(order.order)
-                    order.order = order_json
-                    order.save()  
-                    order.payment_log = order.payment_log + 'Log Trans: Adding transnumber' + '\n' 
+                    order_obj['transnumber'] = str(transnumber)
+                    order.order = order_obj
+                    order.payment_log = order.payment_log + 'Log Trans: Adding transnumber' + str(order_obj['transnumber']) +'\n' 
+                    order.save()
                 except:
                     order.payment_log = order.payment_log + 'Log Trans: Fail, transnumber' + '\n' 
                     order.save()
