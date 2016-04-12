@@ -706,6 +706,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         invoice_type_value = 'CASHINVOICE'
 
         try: 
+            print "-------------------------"
             order_obj = formatJson(new_order.order)
             print "----------------------------", order_obj 
             order_obj = json.loads(order_obj)
