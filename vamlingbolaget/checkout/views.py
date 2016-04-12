@@ -706,9 +706,14 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         invoice_type_value = 'CASHINVOICE'
 
         try: 
-            order_obj = json.loads(new_order.order)
+            order_obj = formatJson(new_order.order)
+            print "----------------------------", order_obj 
+            order_obj = json.loads(order_obj)
+            print "----------------------------", order_obj 
             tranid = order_obj['transnumber']
+            print tranid
             comments = comments + " Payextransactionnumber: " + unicode(tranid) 
+            print comments
         except: 
             pass 
 
