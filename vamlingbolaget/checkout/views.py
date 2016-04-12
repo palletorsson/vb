@@ -95,8 +95,11 @@ def checkout(request):
             # we also create a json object for fortnox
             order_json['cartitems'] = {}
             temp_cartitems = []
-	    
+            cartitemexist = 0; 
+            reaitemexist = 0;
+
             for item in cartitems:
+                cartitemexist = 1; 
                 msg = msg + 'Produkt '+ str(i) + ': \n'
                 msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
                 products = products + item.article.name
@@ -126,9 +129,6 @@ def checkout(request):
                     msg = msg + 'Storlek: ' + item.size.name + ' \n'
 
                 msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
-
-            
-            msg = msg + '\n'
 	
             order_json['cartitems'] = temp_cartitems
             # Secondly loop the rea items
@@ -137,12 +137,13 @@ def checkout(request):
             temp_reaitems = []
             try:
                 for item in rea_items:
+                    reaitemexist = 1; 
                     payex_products = "Vamlingbolaget"
                     payex_articles = "Reavaror"        
-                    msg = msg + 'Produkt '+ str(i) + str(': rea ') + ': \n'
+                    msg = msg + 'Produkt, '+ str(i) + str(' Rea:') + ': \n'
                     msg = msg +  str(1) + u' st ' +  item.reaArticle.article.name + ' (Rea) : ' + str(item.reaArticle.rea_price)  + ' SEK \n'  
                     msg = msg + 'i ' + item.reaArticle.pattern.name + ', ' + item.reaArticle.color.name + ' \n' 
-                    msg = msg + 'Storlek ' + item.reaArticle.size.name + ' \n'            
+                    msg = msg + 'Storlek: ' + item.reaArticle.size.name + ' \n'            
                     i = i + 1
                     item.id = u'1234'
                     temp_reaitems.append(
@@ -188,6 +189,7 @@ def checkout(request):
             msg = msg + '--------------------------------- \n'
             msg = msg + 'Totalpris: %s SEK \n' %str(totalprice)
             msg = msg + '--------------------------------- \n'
+            msg = msg + '\n'
             msg = msg + 'Din adress:  \n'
             msg = msg + u'%s %s \n' % (first_name, last_name)
             msg = msg + u'%s \n' % (street)
@@ -205,8 +207,11 @@ def checkout(request):
                 msg = msg + u' %s \n' % (message)
                 msg = msg + '\n'
             msg = msg + '--------------------------------------------------------------------------------- \n'
-            msg = msg + '* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
-
+            if (cartitemexist == 1): 
+                msg = msg + '* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
+            if (reaitemexist == 1):
+                msg = msg + '* En reaorder till Vamlingbolaget tar ca 1 veckor. \n'  
+                              
             # check it the method is to pay --> with card | on delivery  
             if (paymentmethod == 'P'):
                 msg = msg + u'* Du betalar med postförskott. \n'
@@ -240,7 +245,7 @@ def checkout(request):
                 new_order.message = msg
 
                 # start payment log
-                new_order.payment_log = '* Pay on Delivery - Sending Mail order to ' + request.POST['email']
+                new_order.payment_log = 'Log Email. Pay on Delivery - Sending Mail order to ' + request.POST['email'] + '\n'
 
                 # json order for fortnox
                 new_order.order = json.dumps(order_json)
@@ -250,22 +255,7 @@ def checkout(request):
                 if (first_name == "Tester"):
                     print "this is for testing we don not need to send a email"
                     enmsg = toEnglish(msg)
-                    print enmsg
-                    transnumber = "1234"
-                    order_json = json.loads(new_order.order)
-
-                    print "order_json ", order_json
-                    order_json['transnumber'] = str(transnumber)
-                    #order_json = json.dumps(new_order.order)
-                    new_order.order = order_json
-                    new_order.save() 
-                    order = Checkout.objects.get(order_number=order_numb)
-                    order_obj = formatJson(order.order)
-                    order_obj = json.loads(order_obj)
-                    tranid = order_obj['transnumber']
-                    order_json['transnumber'] = str(transnumber) + str('123')
-                    order.order = order_json
-                    order.save() 
+                    print enmsg 
                 else:  
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
@@ -380,19 +370,19 @@ def success(request):
                     order_json = json.dumps(order.order)
                     order.order = order_json
                     order.save()  
-                    order.payment_log = order.payment_log + '\n' + '3: adding transnumber'
+                    order.payment_log = order.payment_log + 'Log Trans: Adding transnumber' + '\n' 
                 except:
-                    order.payment_log = order.payment_log + '\n' + '3: Log Fail, transnumber'
+                    order.payment_log = order.payment_log + 'Log Trans: Fail, transnumber' + '\n' 
                     order.save()
 
                 try:
                     transnumber = response['transactionNumber']
                     order.message = order.message + 'PayEx transaktion: ' + str(transnumber) + '\n'
-                    order.payment_log = order.payment_log + '\n' + '3: Log Success: PayEx transaktion: ' + str(transnumber)
+                    order.payment_log = order.payment_log + 'Log Success: PayEx transaktion: ' + str(transnumber) + '\n'
                     order.status = 'P'   
                     order.save()               
                 except:
-                    order.payment_log = order.payment_log + '\n' + '3: Log Fail, PayEx transaktion not found: ' + str(transnumber)
+                    order.payment_log = order.payment_log  + 'Log Success Fail, PayEx transaktion not found: ' + str(transnumber) + '\n'
                     order.save()
                 try:
                     to = [order.email, 'info@vamlingbolaget.com']
@@ -465,18 +455,18 @@ def cancel(request):
 
 def thanks(request):
     cart_id = _cart_id(request)
-    print cart_id 
+
     try:
         checkout = Checkout.objects.filter(session_key=cart_id)[0]
     except:
         checkout = 1
        
     if (checkout != 1):
-        try: 
-            checkout.payment_log = checkout.payment_log + "* Sending thanks message" + '\n'
+        try:
+            checkout.payment_log = checkout.payment_log + "Log Thanks: Sending thanks message OK" + '\n'
             checkout.save()
         except:
-            checkout.payment_log = checkout.payment_log + "* can find order" + '\n'
+            checkout.payment_log = checkout.payment_log + "Log Thanks: can not find order" + '\n'
             checkout.save()    
               
         message = "Tack for din order"
@@ -523,8 +513,7 @@ def payexCallback(request):
         order = 1
 
     if (order != 1):
-        order.payment_log = order.payment_log + '\n' + '4; Payex callback Log: PayEx transaktionNumber, transactionRef: ' + str(transactionNumber) + ', ' + str(transactionRef) + ' orderRef: ' + str(orderRef) + ', from ip: '+ ip + '\n'
-
+        order.payment_log = order.payment_log + '4; Payex callback Log: PayEx transaktionNumber, transactionRef: ' + str(transactionNumber) + ', ' + str(transactionRef) + ' orderRef: ' + str(orderRef) + ', from ip: '+ ip + '\n'
         order.save()
 
     return HttpResponse(status=200)
@@ -548,45 +537,44 @@ def fortnox(request):
         except: 
             order = Checkout.objects.filter(order_number=order_id) 
             order = order.reverse()[0]
-            order.payment_log = order.payment_log +  '\n' + 'Duplicate order nummer'
-    
-        # fortnox log 
-   
-        order.payment_log = order.payment_log +  '\n' + 'Fortnox callback Log: order id: ' + str(order_id) + ', from ip: '+ ip 
+            order.payment_log = order.payment_log + 'Duplicate order nummer' +  '\n' 
+            order.save()    
+        
+        order.payment_log = order.payment_log + 'Fortnox callback Log: order id: ' + str(order_id) + ', from ip: '+ ip  + '\n' 
         order.save()
        
         if (ip == order.ip):
-             order.payment_log = order.payment_log +  '\n' + 'Fortnox callback Log: ip from order to order is the same'
+             order.payment_log = order.payment_log + 'Fortnox callback Log: ip from order to order is the same' + '\n'
              order.save()
         else: 
-             order.payment_log = order.payment_log +  '\n' + 'Fortnox callback Log: ip from order to order is not the same'
+             order.payment_log = order.payment_log + 'Fortnox callback Log: ip from order to order is not the same' + '\n' 
              order.save()
 
         # get all item in the cat
         try:
             the_items = getCartItems(request)
         except:
-            print "somethting wrong with th items"
+            order.payment_log = order.payment_log + 'Error, cartitems' + '\n'
+            order.save()    
 
         # create order in fortnox
         try: 
             json_order = the_items     
-            print json_order
             fortnoxOrderandCostumer(request, order, json_order)
-            order.payment_log = order.payment_log +  '\n' + 'fornox order is ok'
+            order.payment_log = order.payment_log + 'fornox order is ok' + '\n'
             order.save()
         except: 
-            order.payment_log = order.payment_log +  '\n' + 'something wrong with fortnox'
+            order.payment_log = order.payment_log + 'something wrong with fortnox' + '\n'
             order.save()
 
         # set the new stock
         try: 
             cleanCartandSetStock(request, the_items)
 
-            order.payment_log = order.payment_log +  '\n' + 'cleaning cart' 
+            order.payment_log = order.payment_log + 'cleaning cart' + '\n'
             order.save()
         except: 
-            order.payment_log = order.payment_log +  '\n' + 'error cleaning cart'
+            order.payment_log = order.payment_log + 'error cleaning cart' + '\n' 
             order.save()
 
         return HttpResponse(status=200)
@@ -678,6 +666,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     try:
         customer_no = customerExistOrCreate(headers, customer, order_json)
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer ok ' 
+        new_order.save()
     except: 
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved' 
         new_order.save()
@@ -690,16 +679,8 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
     except: 
         pass
 
-    invoice_type = new_order.paymentmethod
-
-    if(invoice_type == 'P'): 
-        invoice_type_value = 'INVOICE'
-    else:
-        invoice_type_value = 'CASHINVOICE'
-
     # Creat the order part of the json from order_json and log 
-    try: 
-        
+    try:         
         invoice_rows = create_invoice_rows(order_json)
         new_order.payment_log = new_order.payment_log +  '\n' +  'Invoice_rows worked ' 
         new_order.save()
@@ -707,16 +688,31 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order json not resolved' 
         new_order.save()
 
-    # add addtional information to json
-    orderid_ = new_order.order_number
-    comments = ''
+    # add addtional information to comment  and invoice type feilds
+    try:
+        orderid_ = new_order.order_number 
+        comments = "Order number: " + unicode(orderid_)
+    except:
+        comments = ""
 
-    try: 
-        order_obj = json.loads(new_order.order)
-        tranid = order_obj['transnumber']
-        comments = "Payextransactionnumber: " + unicode(tranid) + " Payexkey: " + unicode(new_order.payex_key) +  " Order number: " + unicode(orderid_)
-    except: 
-        pass 
+    invoice_type = new_order.paymentmethod
+    
+    if(invoice_type == 'P'): 
+        invoice_type_value = 'INVOICE'
+    else:
+        invoice_type_value = 'CASHINVOICE'
+
+        try: 
+            order_obj = json.loads(new_order.order)
+            tranid = order_obj['transnumber']
+            comments = comments + " Payextransactionnumber: " + unicode(tranid) 
+        except: 
+            pass 
+
+        try: 
+            comments = comments + " Payexkey: " + unicode(new_order.payex_key) 
+        except:
+            pass 
 
     customer_order = json.dumps({
                 "Invoice": {
