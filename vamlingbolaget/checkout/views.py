@@ -364,12 +364,14 @@ def success(request):
 
                 try:
                     transnumber_ = response['transactionNumber']
+                    print "--------------------------------------", transnumber_
                     order_obj = formatJson(order.order)
                     order_obj = json.loads(order_obj)
-                    order_obj['transnumber'] = str(transnumber_)
+                    order_obj["transnumber"] = str(transnumber_)
                     print "--------------------------------------", order_obj
                     order.order = order_obj
-                    order.payment_log = order.payment_log + 'Log Trans: Adding transnumber' + str(order_obj['transnumber']) +'\n' 
+                    order.save()
+                    order.payment_log = order.payment_log + 'Log Trans: Adding transnumber' + str(transnumber_) + '\n' 
                     order.save()
                 except:
                     order.payment_log = order.payment_log + 'Log Trans: Fail, transnumber' + '\n' 
