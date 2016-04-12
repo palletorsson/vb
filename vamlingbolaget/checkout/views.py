@@ -365,9 +365,13 @@ def success(request):
                 try:
                     transnumber_ = response['transactionNumber']
                     print "--------------------------------------", transnumber_
+                    print "--------------------------------------", order.order
                     order_obj = formatJson(order.order)
+                    print "--------------------------------------", order_obj
                     order_obj = json.loads(order_obj)
+                    print "--------------------------------------", order_obj
                     order_obj["transnumber"] = str(transnumber_)
+                    print "--------------------------------------", order_obj["transnumber"] 
                     print "--------------------------------------", order_obj
                     order.order = order_obj
                     order.save()
