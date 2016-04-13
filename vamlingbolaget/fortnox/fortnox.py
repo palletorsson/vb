@@ -43,6 +43,7 @@ def create_invoice_rows(order_json):
     
     cartitems = order_json['cartitems'] 
     rea_items = order_json['rea_items']
+
     invoicerows = []
 
     try:
@@ -50,30 +51,32 @@ def create_invoice_rows(order_json):
             color = Color.objects.get(order=item.color)
             pattern = Pattern.objects.get(order=item.pattern)
             size = Size.objects.get(pk=item.size)
+            obj = {
+                "DeliveredQuantity": int(item.quantity),
+                "ArticleNumber": int(item.article.sku_number), 
+                "Description": unicode(item.article.name) + " " + unicode(size) 
+            }
+            invoicerows.append(obj)
             invoicerows.append({
-    		    "DeliveredQuantity": int(item.quantity),
-    	        "ArticleNumber": int(item.article.sku_number), 
-    		    "Description": str(item.article.name) + " " + str(size) 
-	        })
-            invoicerows.append({
-                "Description": str(pattern) + " " + str(color) 
+                "Description": unicode(pattern) + " " + unicode(color) 
             })
+
 
     except:
         print "no cartitem"
 
     try:
-        for item in rea_items:     
+        for item in rea_items:   
             invoicerows.append({
     	        "DeliveredQuantity": 1,
     	        "ArticleNumber": int(item.reaArticle.article.sku_number), 
-    		    "Description": "Rea: " + str(item.reaArticle.article.name) + " "  + str(item.reaArticle.size),
+    		    "Description": "Rea: " + unicode(item.reaArticle.article.name) + " "  + unicode(item.reaArticle.size),
                 "Price": item.reaArticle.article.price,
                 "Discount": 30,
                 "DiscountType": "PERCENT"
     	    })
             invoicerows.append({
-                "Description": str(item.reaArticle.pattern) + " " + str(item.reaArticle.color)
+                "Description": unicode(item.reaArticle.pattern) + " " + unicode(item.reaArticle.color)
             })
     except:
         print "no reaitem"

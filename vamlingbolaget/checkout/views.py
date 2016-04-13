@@ -362,14 +362,9 @@ def success(request):
                 try:
                     transnumber_ = response['transactionNumber']
                     print "--------------------------------------", transnumber_
-                    print "--------------------------------------", order.order
                     order_obj = formatJson(order.order)
-                    print "--------------------------------------", order_obj
                     order_obj = json.loads(order_obj)
-                    print "--------------------------------------", order_obj
                     order_obj["transnumber"] = str(transnumber_)
-                    print "--------------------------------------", order_obj["transnumber"] 
-                    print "--------------------------------------", order_obj
                     order.order = order_obj
                     order.save()
                     order.payment_log = order.payment_log + 'Log Trans: Adding transnumber' + str(transnumber_) + '\n' 
@@ -706,15 +701,10 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         invoice_type_value = 'CASHINVOICE'
 
         try: 
-            print "-------------------------", new_order.order
             order_obj = formatJson(new_order.order)
-            print "----------------------------", order_obj 
             order_obj = json.loads(order_obj)
-            print "----------------------------", order_obj 
             tranid = order_obj['transnumber']
-            print tranid
             comments = comments + " Payextransactionnumber: " + unicode(tranid) 
-            print comments
         except: 
             pass 
 
@@ -722,6 +712,15 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
             comments = comments + " Payexkey: " + unicode(new_order.payex_key) 
         except:
             pass 
+
+        try: 
+            transnumber_extra = "Trans Nr. " + unicode(tranid) 
+            obj_t = { "Description": transnumber_extra }
+            invoice_rows.append(obj_t)
+        except:
+            pass 
+     
+
 
     customer_order = json.dumps({
                 "Invoice": {
