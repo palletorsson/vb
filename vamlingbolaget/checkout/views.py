@@ -714,7 +714,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
             pass 
 
         try: 
-            transnumber_extra = "Trans Nr. " + unicode(tranid) 
+            transnumber_extra = "Trans Nr " + unicode(tranid) 
             obj_t = { "Description": transnumber_extra }
             invoice_rows.append(obj_t)
         except:
