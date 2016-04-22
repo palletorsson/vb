@@ -35,8 +35,8 @@
 					REA : {{ product.article.name }} 
 					| 
 						<span>
-								<span class="discount" id="the_price"> Nu:  {{ product.rea_price }}  :-  | </span>
-								  ({% trans "tidigare pris" %} :  {{ product.article.price }}  :-)   ( +{{ product.stockquantity }} ) 
+								<span>Nu: </span><span class="discount" id="the_price">  {{ product.rea_price }}  </span> <span> :-  | </span>
+								  ({% trans "tidigare pris" %} :  {{ product.article.price }}  :-)  ( +{{ product.stockquantity }} )  
 								<br />	   				 
 						</span>
 					
@@ -45,8 +45,8 @@
                         <span>{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span> <br/>
 						<span>{% trans "Kvalitet" %}: <span id="{{ product.article.quality }}">{{ product.article.quality }}</span>  <br/>
 
-                        <span> {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }}</span>  <br/>
-                        <span>  {% trans "Storlek" %}: {{ product.size }}</span>  
+                        <span id="article_etc"> {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }}</span>  <br/>
+                        <span>  {% trans "Storlek" %}: <span id="article_size"> {{ product.size }} </span> </span>  
 						<hr>						
 						<span> {{ product.description }} </span> 
 					</blockquote>
