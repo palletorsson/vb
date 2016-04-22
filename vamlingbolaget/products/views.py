@@ -36,7 +36,7 @@ def index(request):
                               },
                              context_instance=RequestContext(request))
 
-SIZES = ('XSmall', 'Small', 'Medium', 'Large', 'XLarge','XXLarge', )
+SIZES = ('XS', 'S', 'M', 'L', 'X','XXL', )
 
 
 def reaindex(request):
