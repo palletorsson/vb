@@ -157,7 +157,7 @@ $("#addtocart").click(function() {
 		var widgetExist = $('#widget_exist').text();
 		var widgetTextend = $('#widget_text_end').text();
 		var widgetTextin = $('#widget_text_in').text();
-
+        var widget_size = $('.size_active').text();
 		if(color2 === 0) {
 			var coltext = _.color,
 			pattext = _.pattern;
@@ -167,16 +167,19 @@ $("#addtocart").click(function() {
 
 			}
 
-		 $("#changetext").animate({
-		          height:'150px'
+		 $("#updatecart").animate({
+		          height:'200px'
 		        });
 
-			$("#changetext").html( '<div class=\"alert alert-success\"> <ul><li> <strong> '+ widgetTextstart+ ': '+_.article +' </strong></li>' +
-				 '<li> ' +widgetTextin+' '+ coltext +', '+ pattext +' </li>' +
-				 '<li>'+widgetExist+' '+ _.quantity +' '+widgetTextend+' </li> ' +
-				 '</ul><div>').fadeIn();
+			$("#updatecart").html( '<hr> <li> <strong> '+ widgetTextstart+ ' </strong></li><hr><li>'+_.article +' </li>' +
+				 '<li> - '+ widget_size +' </li>' +
+                 '<li> '+ coltext +', '+ pattext +' </li>' +
+				
+				 ' <div>').fadeIn();
 
-			$("#changetext").delay(6000).fadeOut(1000);
+			$("#updatecart").delay(6000).fadeOut(3000).animate({
+                  height:'0px'
+                });;
 
 			var old_quantity = $("#widget_quantity").text();
 			var new_quantity = parseInt(quantity) + parseInt(old_quantity);
@@ -201,9 +204,23 @@ $("#addreatocart").click(function() {
            item : item
         },
         success: function(data){
+                 $("#updatecart").animate({
+                  height:'200px'
+                });
+
+            var article_etc = $('#article_etc').text();
+            var article_size = $('#article_size').text();
+            console.dir(data); 
             var msg = data.message.msg,
                 _ = data.cartitem;
-			$("#changetext").html('<div class=\"alert alert-success\"> <ul><li> <strong> + ' + msg + '</strong></li></ul></div>').fadeIn();
+
+            if (msg != "Fyndet finns redan ") {                
+			     $("#updatecart").html('<hr><li> <strong> + </strong></li><hr> <li> ' + article_etc + '</li><li> ' + article_size + '</li>').fadeIn();
+            } 
+            else {
+                $("#updatecart").html('<hr><li> <strong> - </strong></li><hr> <li> ' + msg + '</li>').fadeIn();
+            }
+
             if (msg != "Fyndet finns redan ") { 
 			    var old_quantity = $("#widget_quantity").text();
 				var new_quantity = 1 + parseInt(old_quantity);
@@ -214,7 +231,10 @@ $("#addreatocart").click(function() {
 
 				$('#widget_total').text(new_price);
 			}
-			$("#changetext").delay(5000).fadeOut(1000);
+
+            $("#updatecart").delay(6000).fadeOut(3000).animate({
+                  height:'0px'
+                });;
         }
     });
 });

@@ -55,14 +55,18 @@ Vamlingbolaget." %} />
                     </li>
                   </ul>
 
-                      <ul class="nav pull-right">
-                           <li>
-                            <a id="token" href="/cart/show/" >
-								{% trans "Shoppinglåda" %} <img src="{{STATIC_URL}}img/box.png" style="width:30px;" alt="Vamlingbolaget shopping cart" class="">
-                                {% load cart_tags %}
-                                {% cart_total %}
-                            </a>
-                      </li>
+                <ul class="nav pull-right flags">
+
+                  <li>
+                  <button type="button" class="btn btn-default">
+                    <a id="token" href="/cart/show/" >
+							        <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+                        {% load cart_tags %}
+                        {% cart_total %}
+                    </a>
+                    <div id="updatecart"></div>
+                    </button>
+                  </li>
                 </ul>
             </div>
           </div>
