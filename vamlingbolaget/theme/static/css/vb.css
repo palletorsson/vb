@@ -52,7 +52,7 @@ line-height: 1em;
       padding-top: 20px;
   }
 
-  .nav {
+  .nav, a{
   text-transform: uppercase;
   }
 
