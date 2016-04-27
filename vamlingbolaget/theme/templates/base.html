@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
   <head>
     {%block title%}
         <title>Vamlingbolaget | vamlingbolaget.com</title>
@@ -43,17 +43,30 @@ Vamlingbolaget." %} />
           <div class="navbar-inner hidden-phone">
             <div class="container_first">
 
-                  <ul class="nav pull-left flags">
-                    <li>
-                        <form action="/i18n/setlang/" method="post" id="lang" >
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ redirect_to }}" />
-                            <input name="language" type="hidden" value=""  />
-                            <img src="{{STATIC_URL}}img/english_flag.gif" alt="flag english" id="en" class="change_lang" /> 
-                            <img src="{{STATIC_URL}}img/svensk_flagga.gif" alt="flagga svensk"  id="sv"  class="change_lang" />
-                        </form>
-                    </li>
-                  </ul>
+                <div class="nav pull-left flags">
+          
+                  <div class="dropdown">
+                    <button type="button" class="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <span> <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> {% trans "CHANGE LANGUAGE" %}
+                        <b class="caret"> </b>
+                      </span>
+                    </button>
+                    <ul class = "dropdown-menu" aria-labelledby="dropdownMenu1">
+                   
+                     <form action="/i18n/setlang/" method="post" id="lang" >
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}" />
+                        <input name="language" type="hidden" value=""  />
+                        <li> <img src="/theme/static/img/svensk_flagga.gif"> <span class="change_lang" id="sv">Svenska</span> </li>
+                        <li role="separator" class="divider"></li>
+                        <li> <img src="/theme/static/img/english_flag.gif"> <span class="change_lang" id="en">English</span> </li>
+                      </form>
+                    </ul>
+</div>
+              </div>
+               
+
+
 
                 <ul class="nav pull-right flags">
 
@@ -89,6 +102,9 @@ Vamlingbolaget." %} />
                 <div class = "collapse navbar-collapse navHeaderCollapse pull-left">
 
                      <ul class = "nav navbar-nav navbar-right nav-list mainnav">
+                        <li>
+                             <a href="/collection/new/">{% trans "Kollektion" %}</a>
+                        </li>
                         <li>
                             <a href="/products/type/kvinna/">{% trans "Shop" %}</a>
                         </li>
@@ -149,11 +165,11 @@ Vamlingbolaget." %} />
   <footer>
 	{% include "footer.html" %}
   </footer>
-{% endblock %}
+ {% endblock %}
 {% endblock %}
 
 
-    <div class="hidden" id="widget_text_start" >{% trans "Tillagt" %}</div>
+    <div class="hidden" id="widget_text_start" >{% trans "+" %}</div>
     <div class="hidden" id="widget_size" >{% trans "Storlek" %}</div>
     <div class="hidden" id="widget_exist" >{% trans "Det finns" %}</div>
     <div class="hidden" id="widget_text_end" >{% trans "av denna artikel" %}</div>
