@@ -235,13 +235,16 @@
 		border-bottom: 1px solid #ccc;
 	}
 	.price{
-		  font-size: 12px;
+		  font-size: 14px;
 		  font-style: italic;
 		  letter-spacing: 1px;
 	}
 	.artname{
 		  font-size: 12px;
 		  text-overflow: ellipsis
+	      max-width: 162px;
+          display: block;
+         float: left;
 		 }
 
 	.navbar-collapse {
