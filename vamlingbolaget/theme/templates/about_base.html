@@ -3,34 +3,25 @@
 {% block sidebar %}
  <span >
     <ul class="hidden-xs">
-        <h5>{% trans "Vamlingbolaget" %}</h5>
+
+        {% include "about_links.html" %}
+        
+        <hr>
+        {% include "order_terms_links.html" %}
+
+
+        <hr>
         <li>
-            <a href="/about/">{% trans "Om oss" %} </a>
+            <a href="/sthlm/"> {% trans "Vamlingbolaget Stockholm" %} </a>
         </li>
-        <li>
-            <a href="/shops/"> {% trans "Kontakt" %} </a>
-        </li>
-        <li>
-            <a href="/ethics/"> {% trans "Vår värdegrund" %}</a>
-        </li>
-        <li>
-             <a href="/order/">{% trans "Så beställer du" %} </a>
-        </li>
-        <li>
-             <a href="/paymentterms/">{% trans "Betalningsvillkor" %} </a>
-        </li>
-        <li>
-            <a href="/sthlm/"> {% trans "Stockholm" %} </a>
-        </li>
-        <h5>{% trans "Mah-jong" %}</h5>
+
+        <hr>
         <li>
             <a href="/mah-jong/"> {% trans "Om Mah-jong" %} </a>
         </li>
-        <h5>{% trans "Stickeri" %}</h5>
-        <li>
-            <a href="/stickeri/"> {% trans "Om Stickeri" %} </a>
-        </li>
-		 <h5>{% trans "Press" %}</h5>
+
+
+        <hr>
         <li>
             <a href="/press/"> {% trans "Press" %} </a>
         </li>
