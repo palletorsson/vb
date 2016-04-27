@@ -42,33 +42,31 @@ Vamlingbolaget." %} />
     <div class="navbar navbar-default navbar-fixed-top">
           <div class="navbar-inner hidden-phone">
             <div class="container_first">
-
                 <div class="nav pull-left flags">
-          
-                  <div class="dropdown">
-                    <button type="button" class="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      <span> <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> {% trans "CHANGE LANGUAGE" %}
+                <div class="btn-group">
+             
+                    <a type="button" href="#" class="btn dropdown-toggle"  data-toggle="dropdown" >
+                      <span> <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> {% trans "LANGUAGE" %}
                         <b class="caret"> </b>
                       </span>
-                    </button>
-                    <ul class = "dropdown-menu" aria-labelledby="dropdownMenu1">
+                    </a>
+ 
+                    <ul class ="dropdown-menu">
                    
-                     <form action="/i18n/setlang/" method="post" id="lang" >
+                        <li> <a href="#" > <span class="change_lang" id="sv">Svenska</span> <img src="/theme/static/img/svensk_flagga.gif"> </a></li>
+                        <li role="separator" class="divider"></li>
+                        <li> <a href="#"> <span class="change_lang" id="en">English</span> <img src="/theme/static/img/english_flag.gif">  </a></li>
+                    
+                    </ul>
+                </div>
+
+                 <form action="/i18n/setlang/" method="post" id="lang" >
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ redirect_to }}" />
                         <input name="language" type="hidden" value=""  />
-                        <li> <img src="/theme/static/img/svensk_flagga.gif"> <span class="change_lang" id="sv">Svenska</span> </li>
-                        <li role="separator" class="divider"></li>
-                        <li> <img src="/theme/static/img/english_flag.gif"> <span class="change_lang" id="en">English</span> </li>
-                      </form>
-                    </ul>
-</div>
+                    </form>
               </div>
-               
-
-
-
-                <ul class="nav pull-right flags">
+              <ul class="nav pull-right flags">
 
                   <li>
                   <button type="button" class="btn btn-default">
