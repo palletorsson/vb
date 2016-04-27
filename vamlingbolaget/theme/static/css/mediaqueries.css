@@ -241,7 +241,7 @@
 	}
 	.artname{
 		  font-size: 12px;
-		  text-overflow: ellipsis
+		  text-overflow: ellipsis; 
 	      max-width: 162px;
           display: block;
          float: left;
