@@ -447,12 +447,23 @@ position: absolute;
 	padding-left: 20px;
     float:left; 
 }
+
+.navbar-toggle {
+    margin-right: 20px;
+}
+
 .mob_shop_icon {
     padding-left: 36px;
     padding-top: 16px;
     float:left;
 }
 
+
+.mob_nav a {
+  color: black;
+  padding:4px;
+
+}
 .mobile_article_img {
 	height: auto;
 	width: 100px;
