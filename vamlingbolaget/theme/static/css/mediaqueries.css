@@ -197,6 +197,11 @@
 		padding-left: 0px;
 		padding-right: 0px;
 	}
+	.artname {
+    	max-width: 300px; 
+        text-overflow: ellipsis; 
+
+    }
 	.container {
 		  background: #fff; //red;
 	
