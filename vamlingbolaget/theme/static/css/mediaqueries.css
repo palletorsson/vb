@@ -197,11 +197,7 @@
 		padding-left: 0px;
 		padding-right: 0px;
 	}
-	.artname {
-    	max-width: 300px; 
-        text-overflow: ellipsis; 
 
-    }
 	.container {
 		  background: #fff; //red;
 	
@@ -239,12 +235,13 @@
 		border-bottom: 1px solid #ccc;
 	}
 	.price{
-		  font-size: 16px;
+		  font-size: 12px;
 		  font-style: italic;
 		  letter-spacing: 1px;
 	}
 	.artname{
-		  font-size: 17px;
+		  font-size: 12px;
+		  text-overflow: ellipsis
 		 }
 
 	.navbar-collapse {
