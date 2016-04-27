@@ -39,4 +39,12 @@
                 <hr />
 		{% endfor %}
 	{% endif %}
+    <script type="text/javascript">
+        var width = $( window ).width();
+        var metaTag=document.createElement('meta');
+        metaTag.name = "viewport"
+        metaTag.content = "width='+ width +, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        document.getElementsByTagName('head')[0].appendChild(metaTag);
+        $('head').append('<meta name="viewport" content="width=, initial-scale=1.0, maximum-scale=1.0">');
+    </script>
 {% endblock %}
