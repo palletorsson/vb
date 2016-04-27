@@ -1,3 +1,4 @@
+
   body {
       font-family: "Century Gothic", Verdana, Arial, Helvetica, sans-serif;
       font-size: 1.2em;
@@ -14,7 +15,7 @@
   }
 
   /* menu Logo vamlingoblaget  */
-  .leftside{
+  .leftside {
 
     width: 369px;
     left: 300px;
@@ -296,7 +297,9 @@ text-shadow: 0 1px 0 #eeeeee;
 #article_pk {
   text-transform: uppercase;
 }
-
+.article_number {
+ margin: 4px;
+}
 .selectedpatternandcolor {
 	width: 118px;
 }
@@ -469,6 +472,7 @@ position: absolute;
     border: 1px solid red;
     margin:-20px; 
 }
+
 .women_image {
 	height:200px; 
 	background-image:url(http://www.vamlingbolaget.com/media/uploads/mars_15/dsc_7463.jpg);
@@ -503,6 +507,28 @@ position: absolute;
     z-index:10000;
 }
 
+.size_active {
+   color:red; 
+   text-decoration: underline; 
+}
+
+
+.add-to-cart-buttom {
+  background-color: black;
+  width:300px; 
+  filter: alpha(opacity=70);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+  padding: 4px;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
+  transform: skew(-20deg);
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
 img.sample{
     width: 90px;
 }
@@ -519,12 +545,16 @@ img.pattern_color_image {
  float:right;
 }
 
-.footer {
-    background: #fff;
-    border-top: 1px solid #e5e5e5;
-    padding-top:15px;
-    font-size: 12px;
+.floating_l {
+    float:left;
+}
 
+footer {
+    background-color: rgb(249, 249, 249);
+
+}
+.campaign_padding {
+    padding:10px;
 }
 
 .tab-content {
