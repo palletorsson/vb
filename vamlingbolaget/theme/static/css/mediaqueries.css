@@ -258,6 +258,7 @@
 			transform: skew(-20deg);
 			letter-spacing: 2px;
 			font-weight: bold;
+			max-height: 38px;
 		 }
 
 	.navbar-collapse {
