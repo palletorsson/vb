@@ -264,7 +264,7 @@
 				</label>
 				 <div class="col-lg-9">
 		
-					<input type="checkbox" id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> Jag vill ha Sms-avisering <br>
+					<input type="checkbox" id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> {% trans "Jag vill ha sms-avisering" %} <br>
 					<input type="hidden" name="sms" id="id_sms" value="yes">
 				</div>
 			</div>
@@ -306,7 +306,8 @@
 						<div class="tab-pane active" id="post">
 							  <div>
 								  <br />
-								  <i>{% trans "Efter genomförd betalning kommer du att skickas tillbaks till oss och ditt köp kommer att bekräftas" %}. 
+								  <i>{% trans "Efter genomförd betalning kommer du att skickas tillbaks till oss" %} 
+								     {% trans "och ditt köp kommer att bekräftas" %}. 
 										<a href="http://www.payex.se" alt="PayEx link">PayEx </a>{% trans "hanterar betalningen" %}. 
 								   </i>
 								   <br />
