@@ -254,29 +254,7 @@ text-shadow: 0 1px 0 #eeeeee;
     cursor:pointer; 
 }
 
-.artname {
-  font-size: 11px;
-  text-overflow: ellipsis; 
-  max-width: 300px;
-  display: block;
-  float: left;
-  background-color: white;
-  filter: alpha(opacity=70);
-  -moz-opacity: 0.8;
-  -khtml-opacity: 0.8;
-  opacity: 0.8;
-  padding: 4px;
-  -webkit-transform: skew(-20deg);
-  -moz-transform: skew(-20deg);
-  -o-transform: skew(-20deg);
-  transform: skew(-20deg);
-  letter-spacing: 2px;
-  font-weight: bold;
-  max-height: 38px;
-  position: relative;
-  top: -40px;
-  left: 20px;
-}
+
 
 .size_active {
    color:red; 
