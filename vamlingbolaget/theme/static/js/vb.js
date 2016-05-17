@@ -425,7 +425,7 @@ $('.overlay').each(function(){
 var set_first_page = function(){
      var wheight = $(window).height(),
      wwidth = $(window).width(),
-     fullheight = wheight+200;
+     fullheight = wheight-70;
 
 
         $('.spanfullscreen').css({'width':$(window).width(), 'background-color':'#fff','margin':0, 'height': fullheight +'px', 'overflow':'hidden', 'padding':0 });
@@ -442,6 +442,12 @@ var set_first_page = function(){
 
     $('.carousel-control').show()
 }
+
+
+
+$( window ).resize(function() {
+    set_first_page();
+});
 
 $('#sms-checkbox').click(function () {
 	var sms_val = $('input[name=sms]').val()
