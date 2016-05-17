@@ -117,7 +117,11 @@
 		padding-left: 0px;
 		padding-right: 0px 
 	}
+    .artname {
+    	max-width: 300px; 
+        text-overflow: ellipsis; 
 
+    }
 	.container {
 		background: #fff; // green;
 	}
@@ -216,9 +220,9 @@
 
 	.collection_list {
 		float:left;
-		width:50%;
+		width:100%;
 		margin:0:
-			height:350px;
+		height:350px;
 	}
 
 	.leftside {
@@ -234,15 +238,30 @@
 	.nav > li {
 		border-bottom: 1px solid #ccc;
 	}
-	.price{
-		  font-size: 11px;
-		  font-style: italic;
-		  letter-spacing: 1px;
+	.price {
+		font-size: 11px;
+		font-style: italic;
+		letter-spacing: 1px;
+		padding: 4px;
+		display: block;
+		filter: alpha(opacity=70);
+		-moz-opacity: 0.8;
+		-khtml-opacity: 0.8;
+		opacity: 0.8;
+		background-color: white;
+		-webkit-transform: skew(20deg);
+		-moz-transform: skew(20deg);
+		-o-transform: skew(20deg);
+		transform: skew(20deg);
+		letter-spacing: 2px;
+		font-weight: bold;
+		max-height: 38px;
+		max-width: 100px;			
 	}
-	.artname{
+	.artname {
 		    font-size: 11px;
 			text-overflow: ellipsis; 
-			max-width: 162px;
+			max-width: 300px;
 			display: block;
 			float: left;
 			margin-top: -13px;
@@ -272,12 +291,20 @@
 
 	.image_description {
 	  padding: 2px;
-		padding-top:6px;
+	  padding-top:6px;
+	  padding: 0;
+	  margin: 0; 
 	  white-space: normal; 
 	  overflow: hidden;
+      height:90px;
+      top:-80px;
+	  position: relative;   
+	  margin-bottom: -105px;
+      padding-left: 20px;
+      z-index:1000;
 	}
 	.force_image {
-	  height: 260px;
+	  height: 100%;
 	  overflow: hidden;
 	}
     .mob_empty {
