@@ -259,7 +259,6 @@ text-shadow: 0 1px 0 #eeeeee;
   text-overflow: ellipsis; 
   max-width: 300px;
   display: block;
-  background-color: white;
   filter: alpha(opacity=70);
   -moz-opacity: 0.8;
   -khtml-opacity: 0.8;
@@ -273,8 +272,8 @@ text-shadow: 0 1px 0 #eeeeee;
   font-weight: bold;
   max-height: 38px;
   position: relative;
-  top: -40px;
-  left: 20px;
+  top: -26px;
+  left: 91px;
 }
 
 .size_active {
