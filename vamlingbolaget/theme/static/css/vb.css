@@ -120,7 +120,9 @@ line-height: 1em;
   .img-responsive {
     float: left;
     padding-right: 10px;
-    height: 240px;
+    width: 387px;
+    max-width: 135%;
+
   }
 
   .coll_menu_ul {
