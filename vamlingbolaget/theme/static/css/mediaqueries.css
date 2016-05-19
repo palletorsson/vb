@@ -161,7 +161,8 @@
 	}
 
 	a {
-		font-size:18px;
+		font-size:12px;
+		padding:4px;
 	}
 	.navbar .nav > li > a {
 		color: #0C0C0C;
