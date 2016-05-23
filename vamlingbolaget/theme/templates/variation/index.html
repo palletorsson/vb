@@ -1,19 +1,25 @@
 {% extends "collection_base.html" %}
 {% load i18n %}
 {% load fb_versions %}
+{% load endless %}
 {% version model.field_name version_prefix %}
 {% block pagetitle %}
     <legend>{% trans "Shop" %}</legend>
 {% endblock %}
 
-{% block content %}
 
+
+
+
+
+{% block content %}
+{% paginate entries %}
         {% for product in products %}
              <div class="collection_list img_container" >
                 <a href="/products/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
                     {% with product.image_set.all|first as image %}
 
-                            <div class="force_image"><img src="{% version image.image 'medium' %}" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
+                            <div class="force_image"><img data-orginal="{% version image.image 'medium' %}" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
                             <div class='image_description'>
                                <span class="artname"> {{ product.article.name }}</span><br/>
                                 {%if product.article.discount%}
@@ -27,6 +33,7 @@
                 </a>
             </div>
         {% endfor %}
+{% show_pages %}
 {% endblock %}
 
 
