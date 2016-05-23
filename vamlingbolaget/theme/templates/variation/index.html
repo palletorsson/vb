@@ -1,19 +1,13 @@
 {% extends "collection_base.html" %}
 {% load i18n %}
 {% load fb_versions %}
-{% load endless %}
+
 {% version model.field_name version_prefix %}
 {% block pagetitle %}
     <legend>{% trans "Shop" %}</legend>
 {% endblock %}
 
-
-
-
-
-
 {% block content %}
-{% paginate entries %}
         {% for product in products %}
              <div class="collection_list img_container" >
                 <a href="/products/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
@@ -33,7 +27,7 @@
                 </a>
             </div>
         {% endfor %}
-{% show_pages %}
+
 {% endblock %}
 
 
