@@ -4,10 +4,14 @@
 {% version model.field_name version_prefix %}
 {% load endless %}
 {% block pagetitle %}
-    <legend>{% trans "Shop" %}</legend>
+    <legend>{% trans "Shop" %} / REA</legend>
 {% endblock %}
 
 {% block content %}
+    {% if rea == "false" %}
+
+    <h1> ... Ingen rea just nu  ... </h1>
+    {% else %}
 
 {% paginate products %}
         {% for product in products %}
@@ -47,7 +51,7 @@
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
-
+    {% endif %}
  </ul>
 </nav>
 </div>
