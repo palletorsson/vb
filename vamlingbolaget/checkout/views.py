@@ -223,7 +223,7 @@ def checkout(request):
             msg = msg + '- Tack!\n'
 
             # create a random referance number
-            order_numb = random.randrange(0, 111111, 3)
+            order_numb = get_ordernumber()
 
             # create a new order
             new_order.order_number = order_numb
@@ -435,6 +435,23 @@ def success(request):
         return render_to_response('checkout/thanks.html', {
             'message': message
         }, context_instance=RequestContext(request))
+
+
+
+# create a unique order number by recursive funtion 
+def get_ordernumber():
+    rand = random.randrange(0, 111111, 3)
+    try:    
+        order = Checkout.objects.get(order_number=rand)
+        order_exist = 1
+    except:
+        order_exist = 0 
+
+    if (order_exist == 1):
+        get_ordernumber()
+    else: 
+        return rand  
+
 
 # if payment cancelde
 def cancel(request):
