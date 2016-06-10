@@ -167,8 +167,99 @@
 	{% endif %}
 	</tbody>
 </table>
+
 <form action="" method="post" class="form-horizontal" id="order_form">{% csrf_token %}
-<table id="" class="table table-striped table-bordered">
+
+	{{ form.subject.post }}
+		<input type=hidden name="paymentmethod" id="id_paymentmethod" value="C">
+	{{ form.paymentmethod.errors }}
+
+<table class="table table-striped table-bordered">
+	
+	<tr>
+		<th>
+			{% trans "Välj betalningsmetod" %}
+		</th>
+	</tr>
+
+	<tr height="45px">
+	    <td>
+	    </td>
+
+	    <td>
+			<ul class="nav nav-button">
+			    <li class="active" >
+			    <a href="#" class="radiopay" data-toggle="tab" id="C">  
+			    	<input type="radio" checked="checked" name="payment" value="card"> {% trans "Betala med Payex" %}
+			    </a> 
+			</ul>
+		</td>	
+
+		<td width='60%'>
+			<div class="paymenttext active" id="card">
+				<ul>
+					<li>
+						{% trans "Fyll i dina uppgifter och skicka beställningen" %}. 
+						{% trans "Efter genomförd betalning bekräftas ditt köp" %}. 
+					</li>
+				</ul>
+			</div>
+	    </td>
+
+	</tr>
+
+	<tr height="45px">
+		<td>
+	    </td>
+		<td>
+			<ul class="nav nav-pills">
+			    <li>
+			    	<a href="#"  class="radiopay"  data-toggle="tab" id="P">
+			    		<input type="radio" name="payment" value="post"> 
+			    		{% trans "Betala via postförskott" %}
+			    	</a>
+			    </li>
+			</ul>
+		</td>
+		<td>
+			<div class="paymenttext hidden" id="post">
+                <ul> 
+                   <li> 
+                   		{% trans "Fyll i dina uppgifter och skicka beställningen" %}. 
+	                    {% trans "Du betalar vid leverans" %}. 
+	                </li>
+                </ul>
+			</div>
+		</td>
+	</tr>
+    {% if klarna_test == '1' %}
+	<tr height="45px">
+		<td>
+	    </td>
+		<td>
+			<ul class="nav button">
+			    <li>
+			    	<a href="#"  class="radiopay"  data-toggle="tab" id="K">
+			    		<input type="radio" name="payment" value="klarna"> 
+			    		{% trans "Betala med Klarna" %}
+			    	</a>
+			    </li>
+			</ul>
+		</td>
+		<td>
+			<div class="paymenttext hidden" id="klarna">
+               <ul>
+					<li> 
+						{% trans "Fortsätt genom att betala med Klarna Checkout" %}.
+					</li>
+               </ul>
+  			</div>
+		</td>
+	</tr>	
+	{% endif %}
+</table>
+
+<table id="adress_form" class="table table-striped table-bordered">
 	<tr>
 		<th>
 		    {% trans "Adressuppgifter" %}
@@ -284,66 +375,25 @@
 		</td>
 	</tr>
 </table>
-
-<table>
+<table  class="table table-striped table-bordered" >
 	<tr>
-	    <td>
-	    </td>
-	        <td class="paywidth">
-				<div class="span6 right">
-
-				    <ul class="nav nav-tabs" id="myTab">
-				        <li class="active" ><a href="#post" data-toggle="tab" id="C">{% trans "Betala med kort" %}</a></li>		
-				        <li><a href="#card" data-toggle="tab" id="P">{% trans "Betala via postförskott" %}</a></li>
-				    </ul>
-
-				    {{ form.subject.post }}
-				    	<input type=hidden name="paymentmethod" id="id_paymentmethod" value="C">
-				    {{ form.paymentmethod.errors }}
-
-					<div class="tab-content">
-
-						<div class="tab-pane active" id="post">
-							  <div>
-								  <br />
-								  <i>{% trans "Efter genomförd betalning kommer du att skickas tillbaks till oss" %} 
-								     {% trans "och ditt köp kommer att bekräftas" %}. 
-										<a href="http://www.payex.se" alt="PayEx link">PayEx </a>{% trans "hanterar betalningen" %}. 
-								   </i>
-								   <br />
-								   <br />
-							  </div>
-
-							  <div class="span3">
-									<div class="paymentimg"> 
-										<img src="/media/uploads/mastercard_white_140.gif" /> <img src="/media/uploads/verified_visa_white_140.gif" />
-										<img src="/media/uploads/payments_processed_by.jpg" />
-									</div>
-							  </div>
-
-							  <div class="span2">
-									 <blockquote> <input type="submit" class="btn btn-success" value="{% trans "Betala med kort" %}"  /></blockquote>
-							  </div>
-						 </div>
-
-				         <div class="tab-pane" id="card">
-
-				              <div class="span3">
-				                  <img src="{{ STATIC_URL }}img/post.jpg" width="50px"/> {% trans "Betala via postförskott" %}
-				              </div>
-
-				              <div class="span2">
-				                  <blockquote> <input type="submit" class="btn btn-success" value="{% trans "Skicka Din Beställning" %}"  /> </blockquote>
-				              </div>
-						 </div>
-
-				    </div> <!-- end class tab content -->
-		  		</div> <!-- end class span6 right-->
-	      </td>
+		<td   colspan="2" width="80%">	
+		</td>
+		<td>
+			<div class="payblock">
+			   	<ul>
+					<li> 
+						 <input type="submit" id="continue_payment" class="btn btn-success" value="{% trans "Betala med Payex" %}"  />
+					</li>
+               	</ul>
+			</div>
+		</td>
 	</tr>
 </table>
-</form>
 
+</form>
+<div class="hidden hidden_adress_form">
+</div>
 {% endif %}
 
 {% if not cartitems %}
