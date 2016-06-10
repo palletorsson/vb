@@ -11,7 +11,8 @@ ORDER_STATUS = (
 
 PAYMENT_METHOD = (
     ('P', 'On_delivery'),
-    ('C', 'By_card')
+    ('C', 'By_card'),
+    ('K', 'Klarna')
     )
 
 
