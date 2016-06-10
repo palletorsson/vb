@@ -19,9 +19,13 @@ import json
 import time
 import datetime
 from translator import toEnglish
+from klarna import get_order, confirm_order, klarna_cart, get_data_defaults, get_testcart
+from django.contrib.sessions.backends.db import SessionStore
+from django.core.exceptions import ObjectDoesNotExist
 
 # --> from /checkout/ pay --> with card | on delivery   
 def checkout(request):
+    url_klarna = request.path
     # get the all cart data 
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
@@ -187,22 +191,23 @@ def checkout(request):
             msg = msg + 'Totalpris: %s SEK \n' %str(totalprice)
             msg = msg + '--------------------------------- \n'
             msg = msg + '\n'
-            msg = msg + 'Din adress:  \n'
-            msg = msg + u'%s %s \n' % (first_name, last_name)
-            msg = msg + u'%s \n' % (street)
-            msg = msg + u'%s %s \n' % (postcode, city)
-            if (country != 'none'):
-                msg = msg + u'%s \n' % (country)
-            msg = msg + '--------------------------------- \n'
-
-            if (phone != 'none'):
-                msg = msg + u'Ditt telefonnummer: %s \n' % (phone)
+            if (paymentmethod != 'K'):
+                msg = msg + 'Din adress:  \n'
+                msg = msg + u'%s %s \n' % (first_name, last_name)
+                msg = msg + u'%s \n' % (street)
+                msg = msg + u'%s %s \n' % (postcode, city)
+                if (country != 'none'):
+                    msg = msg + u'%s \n' % (country)
                 msg = msg + '--------------------------------- \n'
 
-            if (message != 'none'):
-                msg = msg + 'Din Meddelande:\n'
-                msg = msg + u' %s \n' % (message)
-                msg = msg + '\n'
+                if (phone != 'none'):
+                    msg = msg + u'Ditt telefonnummer: %s \n' % (phone)
+                    msg = msg + '--------------------------------- \n'
+
+                if (message != 'none'):
+                    msg = msg + 'Din Meddelande:\n'
+                    msg = msg + u' %s \n' % (message)
+                    msg = msg + '\n'
             msg = msg + '--------------------------------------------------------------------------------- \n'
             if (cartitemexist == 1): 
                 msg = msg + '* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
@@ -233,6 +238,10 @@ def checkout(request):
             new_order.session_key = _cart_id(request)
 
             new_order.paymentmethod = paymentmethod
+            # save message
+            new_order.message = msg
+
+            # payment logic start
 
             # if costumer pay on delivery 
             # we just send and email with order to vamlingbolaget and a copy to the coustumer and redirect to the thanks url
@@ -250,14 +259,48 @@ def checkout(request):
 
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
                 if (first_name == "Tester"):
-                    print "this is for testing we don not need to send a email"
-                    enmsg = toEnglish(msg)
-                    print enmsg 
-                else:  
+                    transnumber =  1222
+                    order_t = Checkout.objects.get(order_number=order_numb) 
+                    order_obj = formatJson(order_t.order)
+                    order_obj = json.loads(order_obj)
+                    order_obj['transnumber'] = str(transnumber)
+                    order_t.order = order_obj
+                    order_t.payment_log = order_t.payment_log + 'Log Trans: Adding transnumber ' + str(order_obj['transnumber']) +'\n' 
+                    order_t.save()   
+                else:
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
                 return HttpResponseRedirect('thanks/')
 
+            # If costumer use Klarna 
+            if (paymentmethod == 'K'):
+
+                # start klarna payment log
+                new_order.payment_log = 'Log Klarna. Pay with Klarna \n'
+
+                new_order.save()            
+
+                # make cart for klarna
+                new_order.order = json.dumps(order_json)
+                klarna_cart_obj = getCartItems(request)
+                klarna_cart_obj = klarna_cart(klarna_cart_obj)
+
+                # make the return
+                klarna_order  = get_data_defaults(klarna_cart_obj)
+                klarna_obj = get_order(klarna_order)
+                klarna_html = klarna_obj['html']
+                new_order.payex_key = klarna_obj['order_id']
+                new_order.save()  
+                if not request.session.exists(request.session.session_key):
+                    request.session.create() 
+
+                request.session["klarna_id"] = klarna_obj['order_id']
+
+                return render_to_response('checkout/klarna.html', {
+                    'klarna': klarna_html,
+                    'k_session': request.session["klarna_id"]
+                }, context_instance=RequestContext(request))
+     
 
             # if costumer pay with card we need to start a PayEx service
             if (paymentmethod == 'C'):
@@ -298,6 +341,11 @@ def checkout(request):
                 new_order.save()
                 return HttpResponseRedirect(response['redirectUrl'])
 
+    if url_klarna == "/checkout/klarna/":
+        klarna_test = '1' 
+    else: 
+        klarna_test = '0' 
+
     return render_to_response('checkout/checkout.html', {
         'form': form,
         'totalprice': totalprice,
@@ -308,6 +356,7 @@ def checkout(request):
         'rea' : rea_items,
         'sweden': sweden,
         'voucher': voucher,
+        'klarna_test': klarna_test, 
         },
         context_instance=RequestContext(request))
 
@@ -365,6 +414,7 @@ def success(request):
                     order_obj = formatJson(order.order)
                     order_obj = json.loads(order_obj)
                     order_obj["transnumber"] = str(transnumber_)
+                    print "--------------------------------------", order_obj
                     order.order = order_obj
                     order.save()
                     order.payment_log = order.payment_log + 'Log Trans: Adding transnumber' + str(transnumber_) + '\n' 
@@ -470,7 +520,50 @@ def cancel(request):
 
 def thanks(request):
     cart_id = _cart_id(request)
+    klarna_html = 'none'
+    try:
+        checkout = Checkout.objects.filter(session_key=cart_id)[0]
+    except:
+        checkout = 1
+       
+    if (checkout != 1):
+        try:
+            checkout.payment_log = checkout.payment_log + "Log Thanks: Sending thanks message OK" + '\n'
+            checkout.save()
+        except:
+            checkout.payment_log = checkout.payment_log + "Log Thanks: can not find order" + '\n'
+            checkout.save()    
+              
+        message = "Tack for din order"
+        
+    else:
+        message = u"Lägg till något i din shoppinglåda och gör en beställning."
 
+    if checkout.paymentmethod == 'K': 
+        #klarna_html = confirm_order(checkout.payex_key)
+        #klarna_html = confirm_order(request)
+        print "klarna thanks"
+
+    return render_to_response('checkout/thanks.html', {
+        'order': checkout,
+        'message': message, 
+        'klarna_html': klarna_html
+    }, context_instance=RequestContext(request))
+
+def klarna_push(request):
+
+    if request.method == 'POST':
+        print request.POST
+
+
+    if request.method == 'GET':
+        print request.GET
+
+    return HttpResponse(status=200)
+
+def klarna_thanks(request):
+    cart_id = _cart_id(request)
+    klarna_html = 'none'
     try:
         checkout = Checkout.objects.filter(session_key=cart_id)[0]
     except:
@@ -491,7 +584,8 @@ def thanks(request):
     
     return render_to_response('checkout/thanks.html', {
         'order': checkout,
-        'message': message
+        'message': message, 
+        'klarna_html': the_klarna_html, 
     }, context_instance=RequestContext(request))
 
 
@@ -935,10 +1029,15 @@ def pacsoft(request):
 
 
 def testingRemoveStock(request):
-    message = cleanCartandSetStock(request)
-
+    #message = cleanCartandSetStock(request)
+    message = 'session test'
+    request.session['test'] = 'test'
+    request.session['has_commented'] = True
     return render_to_response('checkout/tests.html', {
-        'message': message
+        'message': message,
+        'session_': request.session 
+
+
     }, context_instance=RequestContext(request))
 
 
@@ -1118,4 +1217,20 @@ def payexCheck2vb(request, payextransactionnumber):
     
     return response
     
+
+def testklarnahtml(request): 
+    test_data = get_testcart()
+    klarna_order = get_data_defaults(test_data)
+
+    klarna_html = get_order(klarna_order)
+    print "hej - testklarnahtml",  klarna_html  
+
+    return HttpResponse(klarna_html)
+
+def testconfirmklarnahtml(request): 
+    print "-----------------------------"
+    html = confirm_order('FZE2IG909REESGOSSKHVL3QGUM3')
+    print html
+    return HttpResponse(html)
+
 
