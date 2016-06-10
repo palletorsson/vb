@@ -585,7 +585,7 @@ def klarna_thanks(request):
     return render_to_response('checkout/thanks.html', {
         'order': checkout,
         'message': message, 
-        'klarna_html': the_klarna_html, 
+        'klarna_html': klarna_html, 
     }, context_instance=RequestContext(request))
 
 
