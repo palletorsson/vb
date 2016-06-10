@@ -582,7 +582,7 @@ set_first_page();
                 adress_div.delay(200).hide();
                 $('input[name="paymentmethod"]').val('K');
                 $('input[type="text"]').val('Klarna');
-                $('input[type="email"]').val('temp@klarna.com');  
+                $('input[id="id_email"]').val('temp@klarna.com');  
             } else {
                 var form_hidden = $('.hidden_adress_form')
                 if (form_hidden.html().length > 1) {
