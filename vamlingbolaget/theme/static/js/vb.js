@@ -422,6 +422,13 @@ $('.overlay').each(function(){
  */
 
 
+var path = location.pathname
+console.log(path)
+links = $('a[href="'+window.location.pathname+'"]')
+console.log(links)
+links.addClass('size_active');
+
+
 var set_first_page = function(){
      var wheight = $(window).height(),
      wwidth = $(window).width(),
@@ -460,6 +467,7 @@ $('#sms-checkbox').click(function () {
 });
 
 $('.change_lang').click(function(){
+
     var val = $(this).attr('id');
     $('input[name=language]').val(val)
     $('form#lang').submit();
@@ -491,22 +499,25 @@ set_first_page();
       var pattern = colorandpattern[1];
       var color_name = colorandpattern[2];
       var pattern_name = colorandpattern[3];
+      var img_text = color_name + ' ' +pattern_name+ ' ';
 	  var image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="120"> <br />'+ color_name + ' ' +pattern_name+ ' ';
-      var txt = color_name + ' ' +pattern_name 
-      
+
+      console.log(img_text)
       if ($(this).hasClass("inside")) {
 		$("#selectedpatternandcolor_inside").html(image_url);
         $('input[name="pattern_2"]').val(pattern);
         $('input[name="color_2"]').val(color);
 	  } else {
 	   $(".selectedpatternandcolor").html(image_url);
-	   $(".selectedpatternandcolor_text").html(txt);
+	   $(".selectedpatternandcolor_text").html(img_text);
        $('input[name="pattern"]').val(pattern);
        $('input[name="color"]').val(color);
 	  }
+	  
+  
+
 
     });
-
 
     $(".select_size").click(function(e) {
       e.stopPropagation();
@@ -514,16 +525,23 @@ set_first_page();
       var ok = $('input[name="size"]').val(size_id);;
     
 	  $('.select_size').removeClass('size_active');
-  var $this = $(this);
+      var $this = $(this);
     if (!$this.hasClass('size_active')) {
         $this.addClass('size_active');
     }
     e.preventDefault();
     });
 
+    $(".mainnav li a").click(function(e) {
+          console.log(toString(window.location))
+      var $this = $(this);
 
     
-
+    $(".mainnav li a").removeClass('link_active');
+     var $this = $(this);
+    if (!$this.hasClass('link_active')) {
+        $this.addClass('link_active');
+    }
 
     });
     var $klarna = $('#klarna'),
@@ -625,8 +643,10 @@ set_first_page();
 
     $('#myTab a').click(function (e) {
 
+    // payment method logic
+
         e.preventDefault();
-        $(this).tab('show');
+        $(this).tab('show'); 
         
 
 		$('input[name="paymentmethod"]').val(this.id);
@@ -652,7 +672,7 @@ set_first_page();
 			}
 		}
     });
-
+    
     // for pacsoft autoaddress 
 	$(".address_button").click(function() {
 
@@ -661,6 +681,8 @@ set_first_page();
 		$("#target_address").text(input_address); 
 
 	}); 
+
+
 
 
 }); // --- end document readyfunction
