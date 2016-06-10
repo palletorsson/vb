@@ -1,0 +1,24 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{%block title%}
+<title>Vamlingbolaget | {% trans "Din Beställning" %}  </title>
+<meta name="description" content={% trans "Din Beställning av Vamlingbolagets produkter " %} />
+{%endblock%}
+{% block extra_head %}
+
+{% endblock %}
+
+{% block pagetitle %}
+    <legend> {% trans "Slutför Köpet med Klarna" %} </legend>
+{% endblock %}
+
+{% block allcontent %}
+
+{{ klarna|safe }}
+
+
+{{ k_session }}
+{% endblock %}
+
