@@ -522,7 +522,107 @@ set_first_page();
     });
 
 
-    // payment method logic
+    
+
+
+    });
+    var $klarna = $('#klarna'),
+        $card = $('#card'),
+        $post = $('#post');
+
+
+    var val_check =  $("#id_first_name").val();
+    if (val_check == 'Klarna') {
+        var adress_div = $('#adress_form'); 
+        adress_div.hide();
+        $('input[name="paymentmethod"]').val('K');
+        $('input[type="text"]').val('');
+        $('input[type="email"]').val('');
+        var payment_txt = $("input[value='klarna']").parent().text()
+        $('#continue_payment').val(payment_txt);        
+    }
+
+    
+    $(".radiopay").on({
+        click: function(e) {
+            e.stopPropagation(); 
+            $('input[name="payment"]').prop('checked', false);
+            $(this).find("input[type=radio]").prop("checked", true) 
+            var pay_val = $(this).find("input[type=radio]").val()
+            $('.paymenttext').each(function() {
+                $(this).removeClass('active'); 
+            }); 
+            $('#'+pay_val).addClass('active'); 
+            payment_txt = $.trim($(this).text());
+            $('#continue_payment').val(payment_txt); 
+
+            if (pay_val == 'klarna') {
+                var adress_div = $('#adress_form'); 
+                $('.hidden_adress_form').html(adress_div.html())
+                adress_div.fadeOut(500);
+                adress_div.animate({ height: "0px" }, 700)
+                adress_div.delay(200).hide();
+                $('input[name="paymentmethod"]').val('K');
+                $('input[type="text"]').val('Klarna');
+                $('input[type="email"]').val('temp@klarna.com');  
+            } else {
+                var form_hidden = $('.hidden_adress_form')
+                if (form_hidden.html().length > 1) {
+                    $('#adress_form').html(form_hidden.html()); 
+                    $('#adress_form').fadeIn(300);
+                    $('input[type="text"]').val();
+                    $('input[type="email"]').val();  
+                }
+
+             
+            }
+           $(this).focus();
+           if (pay_val == 'card') { 
+                $('input[name="paymentmethod"]').val('C');
+
+            } else if (pay_val == 'post') {
+
+                $('input[name="paymentmethod"]').val('P');
+
+            } else {
+                $('input[name="paymentmethod"]').val('K');
+
+            }
+        },
+        mouseover: function() {
+            var targetDiv = this.id; 
+            
+            if (targetDiv == 'K') {
+                $klarna.removeClass('hidden');     
+                $card.addClass('hidden');
+                $post.addClass('hidden'); 
+            } else if (targetDiv == 'C') {
+                $card.removeClass('hidden'); 
+                $klarna.addClass('hidden'); 
+                $post.addClass('hidden'); 
+            } else {
+                $post.removeClass('hidden');
+                $klarna.addClass('hidden'); 
+                $card.addClass('hidden'); 
+            }
+           
+        },
+        mouseout:function(){
+            var targetDiv = this.id; 
+            
+            $klarna.addClass('hidden');     
+            $card.addClass('hidden');
+            $post.addClass('hidden'); 
+        
+            $('.paymenttext').each(function() {
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('hidden'); 
+                }
+            });
+ 
+        }
+    }); 
+
     $('#myTab a').click(function (e) {
 
         e.preventDefault();
