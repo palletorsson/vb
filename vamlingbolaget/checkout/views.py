@@ -22,6 +22,7 @@ from translator import toEnglish
 from klarna import get_order, confirm_order, klarna_cart, get_data_defaults, get_testcart
 from django.contrib.sessions.backends.db import SessionStore
 from django.core.exceptions import ObjectDoesNotExist
+from make_messages import head_part_of_message, adress_part_of_message, cart_part_of_message, cartsum_part_of_message, final_part_of_message
 
 # --> from /checkout/ pay --> with card | on delivery   
 def checkout(request):
@@ -49,7 +50,7 @@ def checkout(request):
     # handel the form
     form = CheckoutForm()
     returntotal['form'] = form
-
+    lang = request.LANGUAGE_CODE
 
     if request.method == 'POST':
         form = CheckoutForm(request.POST)
@@ -57,240 +58,79 @@ def checkout(request):
             # start the order process and store form values 
             new_order = form.save(commit=False)
             new_order.ip = request.META['REMOTE_ADDR']
+            sms = request.POST['sms_checkbox']
             new_order.status = 'O'
-            paymentmethod = request.POST['paymentmethod']
-            first_name = request.POST['first_name']
-            last_name = request.POST['last_name']
-            street = request.POST['street']
-            postcode = request.POST['postcode']
-            city = request.POST['city']
-            sms = request.POST['sms']
-
-            # optional values need and if check 
-            if (request.POST['phone']):
-                phone = request.POST['phone']
-            else:
-                phone = 'none'
-  
-            if (request.POST['country']):
-                country = request.POST['country']
-            else:
-                country = 'none'
-            if (request.POST['message']):
-                message = request.POST['message']
-            else:
-                message = 'none'
-
-            # set parameters for the costumer message to be created 
-            i = 1
-            products = 'Vamlingbolaget: '
-            articles = 'Artikel nummer: '
-            payex_articles = ''
-            payex_products = ''
+            new_order.paymentmethod = request.POST['paymentmethod']
+            new_order.order = ''  
 
             # start creating the costumer message 
-            message_header = "Din order till Vamlingbolaget:\n--------------------------------- \nDin order: \n"
-            msg = message_header
+            temp_msg = head_part_of_message(lang) 
+            temp_msg = temp_msg + cart_part_of_message(cartitems, rea_items, lang)
+            temp_msg = temp_msg + cartsum_part_of_message(handling, totalprice, lang)
 
-            cart_numberofitems = len(cartitems)
-            # create a json object to store order values log and order in json to be used for fortnox integration 
-            order_json = {}
-			# we have three typ of cart items: cartitems, bargins, rea items that we must loop
-            # we also create a json object for fortnox
-            order_json['cartitems'] = {}
-            temp_cartitems = []
-            cartitemexist = 0; 
-            reaitemexist = 0;
+            #save the message at this stage to continue on for klarna
+            new_order.message = temp_msg
 
-            for item in cartitems:
-                cartitemexist = 1; 
-                msg = msg + 'Produkt '+ str(i) + ': \n'
-                msg = msg +  str(item.quantity) + ' st ' + item.article.name + ' (' + item.article.sku_number + ') '
-                products = products + item.article.name
-                articles = articles + item.article.sku_number
-                payex_products = payex_products + item.article.name
-                payex_articles = payex_articles + item.article.sku_number
-                temp_cartitems.append(
-        			{'quantity':str(item.quantity), 
-        			 'article': item.article.sku_number
-        			  })
-		
-                if (i != cart_numberofitems):
-                    products = products + ', '
-                    articles = articles + ', '
-                    payex_products = payex_products + ', '
-                    payex_articles = payex_articles + ', '
-                if (item.pattern_2 != 0):
-                    msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' (utsida)\n'
-                    msg = msg + 'och ' + item.pattern_2.name + ', ' + item.color_2.name + ' (insida)\n'
-                    #order_json['cartitem'][i]['color2'] = item.color_2.name
-                    order_json['cartitem'][i]['patter2'] = item.patter_2.name
-                else:
-                    msg = msg + 'i ' + item.pattern.name + ', ' + item.color.name + ' \n'
-		    
-                if (item.article.type.order < 7 or item.article.type.order == 9):
-                    msg = msg + 'Storlek: ' + item.size.name + ' \n'
+            # create a new order number
+            new_order.order_number = get_ordernumber() 
 
-                msg = msg + 'Pris per produkt: ' + str(item.article.price) +  ' SEK \n'
-	
-            order_json['cartitems'] = temp_cartitems
-            # Secondly loop the rea items
-            order_json['rea_items'] = {}
-	    
-            temp_reaitems = []
-            try:
-                for item in rea_items:
-                    reaitemexist = 1; 
-                    payex_products = "Vamlingbolaget"
-                    payex_articles = "Reavaror"        
-                    msg = msg + 'Produkt, '+ str(i) + str(' Rea:') + ': \n'
-                    msg = msg +  str(1) + u' st ' +  item.reaArticle.article.name + ' (Rea) : ' + str(item.reaArticle.rea_price)  + ' SEK \n'  
-                    msg = msg + 'i ' + item.reaArticle.pattern.name + ', ' + item.reaArticle.color.name + ' \n' 
-                    msg = msg + 'Storlek: ' + item.reaArticle.size.name + ' \n'            
-                    i = i + 1
-                    item.id = u'1234'
-                    temp_reaitems.append(
-        			{'quantity':str(1.00), 
-        			 'article': item.reaArticle.article.sku_number,
-        			 'rea': 'rea' })		   
-                msg = msg + '\n'
-
-
-            except: 
-                pass
-            
-            order_json['rea_items'] = temp_reaitems
-            # also create a place holder for pax transactionnumber
-            order_json['transnumber'] = 'placeholder'
-	    
-            # and lastly bargins (this is actuality an old model we can consider removing)
-            order_json['bargains'] = {}
-            for item in bargains:
-                payex_products = "Vamlingbolaget"
-                payex_articles = "Reavaror"        
-                msg = msg + 'Produkt '+ str(i) + str(': fynd ') + ': \n'
-                msg = msg +  str(1) + u' st ' +  item.bargain.title + ' : ' + str(item.bargain.price)  + ' SEK \n' 
-                msg = msg + u' ( ' + item.bargain.description  + ' ) \n'            
-                i = i + 1
-                item.id = u'2345'
-                order_json['bargains']['quantity'] = 1
-                order_json['bargains']['article'] = 1
-               
-            msg = msg + '\n'
-
-            # if the payex_products string get to long we will just call it Vamlingbolaget, the same goes for payex_articles string
-            if len(payex_products) > 30:
-                payex_products = "Vamlingbolaget"
-
-            if len(payex_articles) > 30:
-                payex_articles = "Flera artiklar"
-
-            # continue to build summery of the message from form values
-            msg = msg + 'Frakt och hantering: '+ str(handling) +' SEK \n'
-            msg = msg + '--------------------------------- \n'
-            msg = msg + 'Totalpris: %s SEK \n' %str(totalprice)
-            msg = msg + '--------------------------------- \n'
-            msg = msg + '\n'
-            if (paymentmethod != 'K'):
-                msg = msg + 'Din adress:  \n'
-                msg = msg + u'%s %s \n' % (first_name, last_name)
-                msg = msg + u'%s \n' % (street)
-                msg = msg + u'%s %s \n' % (postcode, city)
-                if (country != 'none'):
-                    msg = msg + u'%s \n' % (country)
-                msg = msg + '--------------------------------- \n'
-
-                if (phone != 'none'):
-                    msg = msg + u'Ditt telefonnummer: %s \n' % (phone)
-                    msg = msg + '--------------------------------- \n'
-
-                if (message != 'none'):
-                    msg = msg + 'Din Meddelande:\n'
-                    msg = msg + u' %s \n' % (message)
-                    msg = msg + '\n'
-            msg = msg + '--------------------------------------------------------------------------------- \n'
-            if (cartitemexist == 1): 
-                msg = msg + '* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \n'
-            if (reaitemexist == 1):
-                msg = msg + '* En reaorder till Vamlingbolaget tar ca 1 veckor. \n'  
-                              
-            # check it the method is to pay --> with card | on delivery  
-            if (paymentmethod == 'P'):
-                msg = msg + u'* Du betalar med postförskott. \n'
-            if (paymentmethod == 'C'):
-                msg = msg + u'* Du har valt kortbetalning. \n'
-
-            # check if the costumer checked the sms box in the from 
-            if (sms == 'yes'):
-                msg = msg + '--------------------------------------------------------------------------------- \n'
-                msg = msg + u'* Du får en sms-avisering. \n'
-
-            msg = msg + '- Tack!\n'
-
-            # create a random referance number
-            order_numb = get_ordernumber()
-
-            # create a new order
-            new_order.order_number = order_numb
-            msg = msg + '--------------------------------------------------------------------------------- \n'
-            msg = msg + 'Ditt ordernummer: '+ str(order_numb) +'\n'
-
+            # get the session_key for look up 
             new_order.session_key = _cart_id(request)
+            
+            new_order.save()
 
-            new_order.paymentmethod = paymentmethod
+            # add adress part of message 
+            temp_msg = temp_msg + adress_part_of_message(new_order, lang)
+
+            #finalize the message including ordernumber and session key
+            the_message = temp_msg + final_part_of_message(new_order, lang)
+
             # save message
-            new_order.message = msg
 
             # payment logic start
 
             # if costumer pay on delivery 
             # we just send and email with order to vamlingbolaget and a copy to the coustumer and redirect to the thanks url
             # we also save the order in json that we can use with fortnox, as well as staring the payment log 
-            if (paymentmethod == 'P'):
-                # save message
-                new_order.message = msg
+            if (new_order.paymentmethod == 'P'):
 
+                new_order.message = the_message
+                
                 # start payment log
                 new_order.payment_log = 'Log Email. Pay on Delivery - Sending Mail order to ' + request.POST['email'] + '\n'
-
-                # json order for fortnox
-                new_order.order = json.dumps(order_json)
                 new_order.save()
 
+                # send email verifaction to customer if name not Tester
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
-                if (first_name == "Tester"):
-                    transnumber =  1222
-                    order_t = Checkout.objects.get(order_number=order_numb) 
-                    order_obj = formatJson(order_t.order)
-                    order_obj = json.loads(order_obj)
-                    order_obj['transnumber'] = str(transnumber)
-                    order_t.order = order_obj
-                    order_t.payment_log = order_t.payment_log + 'Log Trans: Adding transnumber ' + str(order_obj['transnumber']) +'\n' 
-                    order_t.save()   
+                if (new_order.first_name == "Tester"):
+                    print "test no email"   
                 else:
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
                 return HttpResponseRedirect('thanks/')
 
             # If costumer use Klarna 
-            if (paymentmethod == 'K'):
+            if (new_order.paymentmethod == 'K'):
 
                 # start klarna payment log
                 new_order.payment_log = 'Log Klarna. Pay with Klarna \n'
-
                 new_order.save()            
 
                 # make cart for klarna
-                new_order.order = json.dumps(order_json)
+                # new_order.order = json.dumps(order_json)
                 klarna_cart_obj = getCartItems(request)
                 klarna_cart_obj = klarna_cart(klarna_cart_obj)
 
-                # make the return
+                # create html the return
                 klarna_order  = get_data_defaults(klarna_cart_obj)
                 klarna_obj = get_order(klarna_order)
                 klarna_html = klarna_obj['html']
+
+                # create and save klarna key
                 new_order.payex_key = klarna_obj['order_id']
                 new_order.save()  
+
+                # TODO concider this block the order is not saved...
                 if not request.session.exists(request.session.session_key):
                     request.session.create() 
 
@@ -303,7 +143,8 @@ def checkout(request):
      
 
             # if costumer pay with card we need to start a PayEx service
-            if (paymentmethod == 'C'):
+            if (new_order.paymentmethod == 'C'):
+
                 # Initialize PayEx service
                 service = PayEx(
                     merchant_number=settings.PAYEX_MERCHANT_NUMBER,
@@ -312,7 +153,8 @@ def checkout(request):
                     )
 
                 price = totalprice * 100
-
+                payex_products = 'Vamlingbolaget'
+                payex_articles = 'Vamlingbolaget'
                 response = service.initialize(
                     purchaseOperation='SALE',
                     price=price,
@@ -335,9 +177,9 @@ def checkout(request):
                     PayExRefKey = 1
 
                 new_order.payex_key = PayExRefKey
-                new_order.message = msg
+                new_order.message = the_message
                 new_order.payment_log = '1 Card payment Log - Payment request sent, payEx key: ' + str(PayExRefKey) 
-                new_order.order = order_json 
+                new_order.order = ''
                 new_order.save()
                 return HttpResponseRedirect(response['redirectUrl'])
 
@@ -520,7 +362,7 @@ def cancel(request):
 
 def thanks(request):
     cart_id = _cart_id(request)
-    klarna_html = 'none'
+
     try:
         checkout = Checkout.objects.filter(session_key=cart_id)[0]
     except:
@@ -539,15 +381,10 @@ def thanks(request):
     else:
         message = u"Lägg till något i din shoppinglåda och gör en beställning."
 
-    if checkout.paymentmethod == 'K': 
-        #klarna_html = confirm_order(checkout.payex_key)
-        #klarna_html = confirm_order(request)
-        print "klarna thanks"
 
     return render_to_response('checkout/thanks.html', {
         'order': checkout,
         'message': message, 
-        'klarna_html': klarna_html
     }, context_instance=RequestContext(request))
 
 def klarna_push(request):
@@ -562,13 +399,17 @@ def klarna_push(request):
     return HttpResponse(status=200)
 
 def klarna_thanks(request):
+    print "tx start"
     cart_id = _cart_id(request)
-    klarna_html = 'none'
+    #klarna_html = 'none'
+
     try:
         checkout = Checkout.objects.filter(session_key=cart_id)[0]
     except:
         checkout = 1
-       
+
+    message = "Ha en bra dag!"
+
     if (checkout != 1):
         try:
             checkout.payment_log = checkout.payment_log + "Log Thanks: Sending thanks message OK" + '\n'
@@ -578,10 +419,31 @@ def klarna_thanks(request):
             checkout.save()    
               
         message = "Tack for din order"
-        
-    else:
-        message = u"Lägg till något i din shoppinglåda och gör en beställning."
+
+    klarna_html = confirm_order(checkout.payex_key)
+    adress = klarna_html['billingadress']
+
+    checkout.first_name = adress['family_name']
+    checkout.last_name = adress['given_name']
+    checkout.email = adress[ 'email']
+    checkout.phone = adress['phone']
+    checkout.postcodee = adress['postal_code']
+    checkout.street = adress['street_address']
+    checkout.country = adress['country']
+    checkout.save()
+    # add adress part of message
+    lang = request.LANGUAGE_CODE 
+    temp_msg = checkout.message
+    temp_msg = temp_msg + adress_part_of_message(checkout, lang)
+
     
+    #finalize the message including ordernumber and session key
+    the_message = temp_msg + final_part_of_message(checkout, lang)
+
+    # save message
+    checkout.message = the_message
+    checkout.save()
+
     return render_to_response('checkout/thanks.html', {
         'order': checkout,
         'message': message, 
@@ -670,7 +532,7 @@ def fortnox(request):
         try: 
             json_order = the_items     
             fortnoxOrderandCostumer(request, order, json_order)
-            order.payment_log = order.payment_log + 'fornox order is ok' + '\n'
+            order.payment_log = order.payment_log + 'fortnox order is ok' + '\n'
             order.save()
         except: 
             order.payment_log = order.payment_log + 'something wrong with fortnox' + '\n'
@@ -693,7 +555,9 @@ def fortnox(request):
 
 # clean cart and chang stockquanity 
 def cleanCartandSetStock(request, the_items): 
- 
+     # create a clean new cart
+    _new_cart_id(request)
+
     # get cart, key and items 
 
     # update rea stock internalty 
@@ -715,18 +579,28 @@ def cleanCartandSetStock(request, the_items):
         print "clean wrong"
  
     # remove all caritem from that cart and the cart 
-    cartitems.delete() 
-    bargains.delete()
+
     try: 
         rea_items.delete()
     except:
+        pass
+
+    try:    
+        cartitems.delete() 
+    except:
         pass 
-
-    voucher.delete()
-    cart.delete()
-
-    # create a clean new cart
-    _new_cart_id(request)
+    
+    try:    
+        bargains.delete()
+        voucher.delete()
+    except:
+        pass 
+    
+    try:    
+        cart.delete()
+    except:
+        pass 
+   
 
     return 1
 
@@ -1188,7 +1062,7 @@ def getOrderbyOrderNumerAndCheck(request, order_id):
             new_seekorder['email'] = seekorder['Invoice']['EmailInformation']['EmailAddressTo']
 
         except: 
-            seekorder = "None"
+            seekorder = "None"	
 
     else: 
         order = "you are not admin"

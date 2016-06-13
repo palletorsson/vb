@@ -1,8 +1,17 @@
 from django import forms
 from models import Checkout
 
-class CheckoutForm(forms.ModelForm):
+LANG = (
+    ('Sverige', 'Sverige'),
+    ('Finland', 'Suomi'),
+    ('Tyskland', 'Deutschland'),
+    ('Danmark', 'Danmark'),
+    ('Norge', 'Norge'),
+    ('Other', 'Other'),
+)
 
+class CheckoutForm(forms.ModelForm):
+    country = forms.ChoiceField(choices=LANG)
 
 
     def __init__(self, *args, **kwargs):
