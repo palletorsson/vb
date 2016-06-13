@@ -5,8 +5,10 @@
 <meta name="description" content={% trans "Tack för din Beställning av Vamlingbolagets produkter " %} />
 {%endblock%}
 {% block pagetitle %}
-    {% if order %}
-        <legend> {{ message }} </legend>
+    {% if order != 1 %}
+        {% if klarna_html %}
+            <pre>{{ klarna_html | safe}}</pre>
+        {% endif %}
     {% endif %}
 {% endblock %}
 

@@ -58,10 +58,15 @@ def checkout(request):
             # start the order process and store form values 
             new_order = form.save(commit=False)
             new_order.ip = request.META['REMOTE_ADDR']
-            sms = request.POST['sms_checkbox']
+            sms = request.POST['sms']
+            
             new_order.status = 'O'
             new_order.paymentmethod = request.POST['paymentmethod']
-            new_order.order = ''  
+            new_order.order = ''
+            if (sms == 'yes'): 
+                new_order.post = True
+            else: 
+                new_order.post = False
 
             # start creating the costumer message 
             temp_msg = head_part_of_message(lang) 
@@ -85,8 +90,6 @@ def checkout(request):
             #finalize the message including ordernumber and session key
             the_message = temp_msg + final_part_of_message(new_order, lang)
 
-            # save message
-
             # payment logic start
 
             # if costumer pay on delivery 
@@ -95,9 +98,11 @@ def checkout(request):
             if (new_order.paymentmethod == 'P'):
 
                 new_order.message = the_message
-                
+
                 # start payment log
                 new_order.payment_log = 'Log Email. Pay on Delivery - Sending Mail order to ' + request.POST['email'] + '\n'
+
+                # save the order 
                 new_order.save()
 
                 # send email verifaction to customer if name not Tester
@@ -112,8 +117,17 @@ def checkout(request):
             # If costumer use Klarna 
             if (new_order.paymentmethod == 'K'):
 
+                #prevent database duplication     
+                try: 
+                    new_order = Checkout.objects.get(session_key=new_order.session_key)
+                    print find_order
+                except: 
+                    new_order.save()  
+
                 # start klarna payment log
                 new_order.payment_log = 'Log Klarna. Pay with Klarna \n'
+                # save the order 
+
                 new_order.save()            
 
                 # make cart for klarna
@@ -180,6 +194,7 @@ def checkout(request):
                 new_order.message = the_message
                 new_order.payment_log = '1 Card payment Log - Payment request sent, payEx key: ' + str(PayExRefKey) 
                 new_order.order = ''
+                # save the order 
                 new_order.save()
                 return HttpResponseRedirect(response['redirectUrl'])
 
@@ -381,10 +396,13 @@ def thanks(request):
     else:
         message = u"Lägg till något i din shoppinglåda och gör en beställning."
 
+    # TODO internationalize these messages 
+    klarna_html_res = '<div class="text-center"><hr><button type="button" class="btn btn-large btn-success text-center"> Tack för ditt köp! </button><hr></div>'
 
     return render_to_response('checkout/thanks.html', {
         'order': checkout,
         'message': message, 
+        'klarna_html': klarna_html_res, 
     }, context_instance=RequestContext(request))
 
 def klarna_push(request):
@@ -399,7 +417,7 @@ def klarna_push(request):
     return HttpResponse(status=200)
 
 def klarna_thanks(request):
-    print "tx start"
+
     cart_id = _cart_id(request)
     #klarna_html = 'none'
 
@@ -421,8 +439,9 @@ def klarna_thanks(request):
         message = "Tack for din order"
 
     klarna_html = confirm_order(checkout.payex_key)
+    klarna_html_res = klarna_html["html"] 
     adress = klarna_html['billingadress']
-
+    checkout.order = klarna_html['shipping_address']
     checkout.first_name = adress['family_name']
     checkout.last_name = adress['given_name']
     checkout.email = adress[ 'email']
@@ -447,7 +466,7 @@ def klarna_thanks(request):
     return render_to_response('checkout/thanks.html', {
         'order': checkout,
         'message': message, 
-        'klarna_html': klarna_html, 
+        'klarna_html': klarna_html_res, 
     }, context_instance=RequestContext(request))
 
 
