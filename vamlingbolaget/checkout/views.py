@@ -19,7 +19,7 @@ import json
 import time
 import datetime
 from translator import toEnglish
-from klarna import get_order, confirm_order, klarna_cart, get_data_defaults, get_testcart
+from klarna import get_order, confirm_order, klarna_cart, get_data_defaults, get_testcart, confirm_order_with_klarna
 from django.contrib.sessions.backends.db import SessionStore
 from django.core.exceptions import ObjectDoesNotExist
 from make_messages import head_part_of_message, adress_part_of_message, cart_part_of_message, cartsum_part_of_message, final_part_of_message
@@ -405,15 +405,21 @@ def thanks(request):
         'klarna_html': klarna_html_res, 
     }, context_instance=RequestContext(request))
 
-def klarna_push(request):
+def klarna_push(request, klarna_id):
 
-    if request.method == 'POST':
-        print request.POST
+    confirm_ok = confirm_order_with_klarna(klarna_id)
 
+    try:
+        checkout = Checkout.objects.filter(payex_key=klarna_id)[0]
+    except:
+        checkout = 0
 
-    if request.method == 'GET':
-        print request.GET
-
+    try:
+        checkout.status = 'F'
+        checkout.save()
+    except:
+        checkout = 0
+    
     return HttpResponse(status=200)
 
 def klarna_thanks(request):

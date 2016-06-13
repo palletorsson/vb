@@ -6,7 +6,8 @@ ORDER_STATUS = (
     ('O', 'Ordered'),
     ('C', 'Cancelled'),
     ('S', 'Sent'),
-    ('P', 'Payed')
+    ('P', 'Payed'),
+    ('F', 'Finalized')
     )
 
 PAYMENT_METHOD = (
@@ -31,7 +32,7 @@ class Checkout(models.Model):
     order = models.TextField(blank=True)
     payment_log = models.TextField(blank=True)
     payex_key = models.CharField(_("Payex key"), max_length=34, blank=True)
-    post = models.BooleanField()
+    post = models.BooleanField(default="True")
     paymentmethod = models.CharField(_("Betalning"), max_length=1, choices=PAYMENT_METHOD)
     order_number = models.IntegerField(blank=True)
     status = models.CharField(max_length=1, choices=ORDER_STATUS, blank=True)
