@@ -4,9 +4,13 @@
 <title>Vamlingbolaget | {% trans "Tack för din Beställning " %}  </title>
 <meta name="description" content={% trans "Tack för din Beställning av Vamlingbolagets produkter " %} />
 {%endblock%}
+
+
 {% block pagetitle %}
     {% if order != 1 %}
+        {% if klarna_html %}
             <pre>{{ klarna_html | safe }}</pre>
+        {% endif %}
     {% endif %}
 {% endblock %}
 
@@ -16,6 +20,7 @@
         <pre>{{order.message}}</pre>
         <pre>{% trans "Vi hör av oss om vi har några frågor" %}. </pre>
         <span class="hidden" id="order_num">{{order.order_number}}</span>  
+
 
 <script> $( document ).ready(function() {
 
@@ -80,11 +85,12 @@ $.ajaxSetup({
 		    },
 			success: function(data){
                 $("#widget_quantity").text('0');
-                $("#widget_total").text('0')
+                $("#widget_total").text('0'); 
 		    	}
   		});
 	}
 });
+
 </script>
     {% endif %}
 
