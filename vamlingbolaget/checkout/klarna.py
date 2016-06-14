@@ -175,6 +175,22 @@ def klarna_cart(order_json):
     })
     return invoicerows
 
+def confirm_order_with_klarna(order_id): 
+    connector = get_connector()
+    order = klarnacheckout.Order(connector, order_id)
+        
+    order_k = order.fetch()
+    if order_k['status'] == "checkout_complete": 
+
+        # At this point make sure the order is created in your system and send a
+        # confirmation email to the customer
+
+        update = {};
+        update['status'] = 'created'
+        order.update(update)
+
+    return True
+
 def confirm_order(klarna_id): 
     # Instance of the HTTP library that is being used in the server
 
