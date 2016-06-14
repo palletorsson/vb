@@ -36,7 +36,7 @@ def get_merchant_urls():
     merchant_url = "http://127.0.0.1:8000" # http://www.vamlingbolaget.com
     merchant = {
         'id': eid,
-        'terms_uri': merchant_url + '/terms',
+        'terms_uri': merchant_url + '/paymentterms',
         'checkout_uri': merchant_url + '/checkout/klarna',
         # add {checkout.order.id})
         'confirmation_uri': merchant_url + '/checkout/klhanks/',
@@ -44,7 +44,7 @@ def get_merchant_urls():
         # You can not receive push notification on
         # a non publicly available uri
         # add  + {checkout.order.id})
-        'push_uri': merchant_url +'/checkout/push_klar/'
+        'push_uri': merchant_url +'/checkout/push_klar/{checkout.order.id}'
     }
 
     return merchant
@@ -186,8 +186,9 @@ def confirm_order(klarna_id):
     connector = get_connector()
 
     order = klarnacheckout.Order(connector, order_id)
-    order.fetch()
+    json_order_k = order.fetch()
     return_obj = {}
+    return_obj["shipping_address"] = order["shipping_address"]
     return_obj["html"] = "<div>%s</div>" % (order["gui"]["snippet"])
 
     return_obj["billingadress"] = order["billing_address"]
