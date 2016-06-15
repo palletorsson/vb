@@ -419,7 +419,10 @@ def klarna_push(request, klarna_id):
         checkout.save()
     except:
         checkout = 0
-    
+
+    if confirm_ok == False: 
+        return HttpResponse('no such order_id')    
+
     return HttpResponse(status=200)
 
 def klarna_thanks(request):
