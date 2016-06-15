@@ -17,7 +17,7 @@ urlpatterns = patterns('checkout.views',
     url(r'consumordercheck/(?P<order_id>[a-zA-Z0-9_.-]+)/$', 'getOrderbyOrderNumerAndCheck'),
     url(r'klhanks/$', 'klarna_thanks'),
     url(r'klarnatestid/$', 'testconfirmklarnahtml'),
-    url(r'klar_push/(?P<klarna_id>[a-zA-Z0-9_.-]+)/$', 'klarna_push'),
+    url(r'push_klar/(?P<klarna_id>[a-zA-Z0-9_.-]+)/$', 'klarna_push'),
     url(r'klarna/$', 'checkout'),
 
 )
