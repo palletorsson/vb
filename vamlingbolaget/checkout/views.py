@@ -417,7 +417,7 @@ def klarna_push(request, klarna_id):
         checkout = 0
 
     if confirm_ok == None: 
-        return HttpResponse('no such order_id')    
+        return HttpResponse(status=200) 
 
     return HttpResponse(status=200)
 
