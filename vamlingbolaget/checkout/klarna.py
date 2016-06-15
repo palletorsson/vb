@@ -177,11 +177,18 @@ def klarna_cart(order_json):
 
 def confirm_order_with_klarna(order_id): 
     connector = get_connector()
-    order = klarnacheckout.Order(connector, order_id)  
-    
+    order = klarnacheckout.Order(connector, order_id) 
 
-    order = order.fetch()
     try: 
+        order = order.fetch()
+    except: 
+        pass
+
+    if order == None: 
+        return order
+    
+    try: 
+
         if order['status'] == "checkout_complete": 
 
             # At this point make sure the order is created in your system and send a
@@ -192,9 +199,9 @@ def confirm_order_with_klarna(order_id):
             order.update(update)
             return True
     except: 
-        return False
+        pass
 
-    return False
+    return order
 
 def confirm_order(klarna_id): 
     # Instance of the HTTP library that is being used in the server

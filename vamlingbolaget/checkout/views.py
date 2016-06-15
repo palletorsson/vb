@@ -411,16 +411,12 @@ def klarna_push(request, klarna_id):
 
     try:
         checkout = Checkout.objects.filter(payex_key=klarna_id)[0]
-    except:
-        checkout = 0
-
-    try:
         checkout.status = 'F'
         checkout.save()
     except:
         checkout = 0
 
-    if confirm_ok == False: 
+    if confirm_ok == None: 
         return HttpResponse('no such order_id')    
 
     return HttpResponse(status=200)
