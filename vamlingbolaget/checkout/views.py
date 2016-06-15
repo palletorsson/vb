@@ -416,7 +416,7 @@ def klarna_push(request, klarna_id):
     except:
         checkout = 0
 
-    if confirm_ok == None: 
+    if confirm_ok == False: 
         return HttpResponse(status=200) 
 
     return HttpResponse(status=200)

@@ -179,8 +179,13 @@ def confirm_order_with_klarna(order_id):
     connector = get_connector()
     order = klarnacheckout.Order(connector, order_id) 
 
-    order.fetch()
-
+    try:
+        order.fetch()
+    except klarnacheckout.HTTPResponseException as e:
+        print(e.json.get('http_status_message'))
+        print(e.json.get('internal_message'))
+        return False
+    
     if order['status'] == "checkout_complete": 
 
         # At this point make sure the order is created in your system and send a
