@@ -134,7 +134,7 @@ def final_part_of_message(new_order, lang):
         last_part_message = last_part_message + s.substitute(youpaypostal_=unicode(youpaypostal), )
     if (new_order.paymentmethod == 'C'):
         s = Template('* $youpaypayex_ \n')
-        last_part_message = last_part_message + s.substitute(youpaypayex_=youpaypostal, )
+        last_part_message = last_part_message + s.substitute(youpaypayex_=youpaypayex, )
     if (new_order.paymentmethod == 'K'):
         s = Template('* $youpayklarna_ \n')
         last_part_message = last_part_message + s.substitute(youpayklarna_=youpayklarna, )
