@@ -554,10 +554,13 @@ def fortnox(request):
 
         # create order in fortnox
         try: 
-            json_order = the_items     
-            fortnoxOrderandCostumer(request, order, json_order)
-            order.payment_log = order.payment_log + 'fortnox order is ok' + '\n'
-            order.save()
+            if order.paymentmethod == 'C' or order.paymentmethod == 'P': 
+                json_order = the_items
+                fortnoxOrderandCostumer(request, order, json_order)
+                order.payment_log = order.payment_log + 'fortnox order is ok' + '\n'
+                order.save()
+            else: 
+                print "klarna checkout"
         except: 
             order.payment_log = order.payment_log + 'something wrong with fortnox' + '\n'
             order.save()
