@@ -406,20 +406,18 @@ def thanks(request):
     }, context_instance=RequestContext(request))
 
 def klarna_push(request, klarna_id):
-
-    confirm_ok = confirm_order_with_klarna(klarna_id)
-
     try:
         checkout = Checkout.objects.filter(payex_key=klarna_id)[0]
+        print checkout
         checkout.status = 'F'
         checkout.save()
     except:
-        checkout = 0
+        confirm_ok = 'no such checkout'
+        return HttpResponse(confirm_ok)
+ 
+    confirm_ok = confirm_order_with_klarna(klarna_id)
 
-    if confirm_ok == False: 
-        return HttpResponse(status=200) 
-
-    return HttpResponse(status=200)
+    return HttpResponse(confirm_ok)
 
 def klarna_thanks(request):
 

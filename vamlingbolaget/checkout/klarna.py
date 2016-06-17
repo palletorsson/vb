@@ -184,8 +184,10 @@ def confirm_order_with_klarna(order_id):
     except klarnacheckout.HTTPResponseException as e:
         print(e.json.get('http_status_message'))
         print(e.json.get('internal_message'))
-        return False
-    
+        order['status'] = ''
+        order['http_status'] = e.json.get('http_status_message')
+        order['internal_message'] = e.json.get('internal_message')
+
     if order['status'] == "checkout_complete": 
 
         # At this point make sure the order is created in your system and send a
@@ -194,9 +196,9 @@ def confirm_order_with_klarna(order_id):
         update = {};
         update['status'] = 'created'
         order.update(update)
-        return True
+        return update['status']
  
-    return order
+    return order['status']
 
 def confirm_order(klarna_id): 
     # Instance of the HTTP library that is being used in the server
