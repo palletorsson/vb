@@ -110,7 +110,7 @@ def checkout(request):
                 if (new_order.first_name == "Tester"):
                     print "test no email"   
                 else:
-                    mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %msg, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                    mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %the_message, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
                 return HttpResponseRedirect('thanks/')
 
