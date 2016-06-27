@@ -17,7 +17,7 @@ from requests.auth import HTTPDigestAuth
 import json
 #from checkout.views import fortnoxOrderandCostumer
 import base64
-
+from vamlingbolaget.settings import ROOT_DIR
 
 def CheckoutTransfer(checkout, cartitem, reaitems):
 
@@ -78,7 +78,6 @@ def ShowOrder(request, order_id):
         
         # check if customer exist in fortnox 
         fortnox_custumer = searchCustomer(headers, name, email=email)
-        print fortnox_custumer
         if fortnox_custumer == False:
             customer_number = 'New Customer'
         else:
@@ -121,6 +120,7 @@ def ShowOrder(request, order_id):
 
 
 def OrderAction(request, todo, stage, order_number): 
+
     if request.user.is_authenticated:
         current_user = request.user
         order = Checkout.objects.filter(order_number=order_number)[0]
@@ -138,12 +138,11 @@ def OrderAction(request, todo, stage, order_number):
 
 
         if (stage == 'packaging'): 
+
             if todo == 'activate': 
                 order.status = 'H'	
                 # make Fortnox invoice
                 new_order = order.order
-                print new_order
-                print len(order.payment_log)
                 if len(order.fortnox_obj) < 100:
                     headers = get_headers()
                     resp = createOrder(headers, new_order)
@@ -203,7 +202,6 @@ def OrderAction(request, todo, stage, order_number):
 
 
                 shipment = unifaunShipmentCall(shipmentparams) 
-                print shipment
                 if len(shipment) < 100:
                     log = 'Order: ' + str(shipment) + ', Unifaun order creation error'
                     keepLog(request, log, 'ERROR', current_user, shipment) 
@@ -260,7 +258,6 @@ def unifaunShipmentCall(shipmentparams):
     			headers=headers, 
     			data=shipmentparams, 
     			)
-    print r.content
     return r.content
 
 # https://www.unifaunonline.se/ufoweb-prod-201606211020/rs-extapi/v1/stored-shipments
@@ -273,7 +270,6 @@ def removeShipment(id):
             url, 
             headers=headers
             )
-    print r.content
     return r.content
 
 def getShipmentsByDate(date):
@@ -283,8 +279,6 @@ def getShipmentsByDate(date):
                 url, 
                 headers=headers
                 )
-    print r
-    print r.content
     return r.content
 
 def checkZip(zip):
@@ -294,31 +288,23 @@ def checkZip(zip):
                 url, 
                 headers=headers
                 )
-    print r
-    print r.content
     return r.content
 
 
 def requestKlarna(klarna_id): 
     url =  'http://127.0.0.1:8000/checkout/push_klar/'+str(klarna_id)
     resp = requests.get(url)
-    print  resp.content
     return resp.content
     
 def unifaunShipmentGetPDF(href, id):
     url = href
-    print url
     headers = GetHeaders()
     resp = requests.get(url, headers=headers)
-    pdf_str = '/home/palle/Project/django/vb/vb/vamlingbolaget/media/'+id+'.pdf'
+    pdf_str = ROOT_DIR+'/media/'+id+'.pdf'
     with open(pdf_str, 'wb') as f:
         f.write(resp.content)
     return 'media/'+id+'.pdf'
 
-
-def googleCall():
-    resp = requests.get('http://www.vamlingbolaget.com/checkout/push_klar/FZP8ROONGYCODNOKWXU3CW0PN5O/')
-    print resp
 
 def getShipmentPara():
     null = 'null'
@@ -328,15 +314,11 @@ def getShipmentPara():
 
 
 def getParcels(parcel_json, parcel_json_len):
-    print parcel_json, parcel_json_len
     weight = 0
     if parcel_json_len == 'long':
         return_parcels = []
-        print parcel_json
         parcel_json = json.loads(parcel_json)
-        print parcel_json
         parcel_json = parcel_json["Invoice"]["InvoiceRows"]
-        print parcel_json
         
         for item in parcel_json: 
             if len(parcel_json) == 2:
