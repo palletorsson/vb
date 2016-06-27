@@ -239,7 +239,7 @@ def OrderAction(request, todo, stage, order_number):
         return HttpResponseRedirect('/orders/order/'+order_number)
 
 def GetSecrets(): 
-	return {'id': 'WB7FDJPDLBON5HTW', 'pass': '6JKMQRWQAPF4NABGLRXFMRE5'}
+	return {'id': 'id', 'pass': 'pass'}
 
 def GetHeaders():
     secrets = GetSecrets()
