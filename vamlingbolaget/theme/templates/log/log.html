@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% block allcontent %}
+
+  {% if user.is_authenticated %}
+	<legend> <a href="/orders/"> orders</a> | Order </legend>
+	<legend> Costumer </legend>
+
+<table class="table table-bordered table-striped" >
+	    <thead><tr>
+		    <td>
+		        <div>
+		            <span> Log </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Log Level </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> date  </span>
+		        </div>
+		    </td>
+		    <td>
+		        <div>
+		            <span> session / pid </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Ip / Id </span>
+		        </div>
+		    </td>
+		      
+		    </tr>
+		    </thead>
+
+	<tbody>	
+
+	   <tr>
+		    <td style="word-wrap:break-word;">    
+		        <div>
+		            <span> <a href="/logger/{{ log.pk }}/">{{ log.date_added }}</a> </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> 
+					{{ log.title  }}
+						
+		           
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span>{% if log.log_level == 'INFO' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-primary text-center"> INFO </button>
+						{% endif %}
+						{% if log.log_level == 'WARN' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-danger text-center"> WARNING </button>
+						{% endif %}
+						{% if log.log_level == 'ERROR' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-error text-center"> ERROR </button>
+						{% endif %}
+						</span>
+		        </div>
+		    </td>
+		        <td>
+		        <div>
+		            <span> {{ log.session_key  }} </span>
+		        </div>
+		    </td>
+		         <td>
+		        <div>
+		            <span> {{ log.ip }} </span>
+		        </div>
+		    </td>
+		    </tr>
+		    <tr >
+		    <td colspan="5">
+		        <div>
+		          {{ log.json_dump  }} 
+		        </div>
+		    </td>
+</tr>
+		</tbody>
+</table>
+
+
+<tbody>
+
+    {% else %}
+        <p> please ... </p>
+    {% endif %}
+{% endblock %}
