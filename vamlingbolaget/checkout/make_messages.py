@@ -7,9 +7,9 @@ from django.utils import translation
 def head_part_of_message(lang): 
     # start creating the costumer message header 
 
-    if lang == 'sv': 
-        yourorderto = 'Din order till Vamlingbolaget'
-        yourorder = 'Din order'
+
+    yourorderto = 'Din order till Vamlingbolaget'
+    yourorder = 'Din order'
 
     if lang == 'en': 
         yourorderto = 'Your order to Vamlingbolaget'
@@ -21,17 +21,17 @@ def head_part_of_message(lang):
 
 def cart_part_of_message(cartitems, rea_items, lang, i=1): 
     #build the cart summery
-    translation.override('en')
+
     cartitems_str = ''
-    if lang == 'sv': 
-        product = 'Produkt'
-        amount = 'st'
-        itsin = 'i'
-        outsida = 'utsida'
-        insida = 'insida'
-        itsand = 'och'
-        size = 'Storlek'
-        priceperproduct = "Pris per produkt"
+
+    product = 'Produkt'
+    amount = 'st'
+    itsin = 'i'
+    outsida = 'utsida'
+    insida = 'insida'
+    itsand = 'och'
+    size = 'Storlek'
+    priceperproduct = "Pris per produkt"
 
     if lang == 'en': 
         product = 'Product'
@@ -41,7 +41,7 @@ def cart_part_of_message(cartitems, rea_items, lang, i=1):
         insida = 'inside'
         itsand = 'and'
         size = 'Size'
-        priceperproduct = "Pris per product"
+        priceperproduct = "Price per product"
 
     for item in cartitems:
         s = Template('----------- \n$product_ $num_ : \n$item_quantity $amount_ $art_name ( $art_sku ) \n')
@@ -80,8 +80,7 @@ def cart_part_of_message(cartitems, rea_items, lang, i=1):
 
 def cartsum_part_of_message(handling, totalprice, lang):
 
-    if lang == 'sv': 
-        transporthandling = 'Frakt och hantering'
+    transporthandling = 'Frakt och hantering'
 
     if lang == 'en': 
         transporthandling = 'Shipping and handling'
@@ -92,11 +91,24 @@ def cartsum_part_of_message(handling, totalprice, lang):
     sum = u.substitute(transporthandling_=transporthandling, handling=handling, totalprice_=totalprice)
     return sum
 
+
+def personal_part_of_message(message, lang):
+    yourmess = 'Ditt Meddelande till oss'
+
+    if lang == 'en': 
+        yourmess = 'Your Message to us'
+
+
+    # continue to build summery of the message from form values
+    u = Template('\n$yourmess_ : \n--------------------------------- \n$message \n--------------------------------- \n')
+    mess = u.substitute(yourmess_=yourmess, message=message)
+    return mess
+
+
 def adress_part_of_message(new_order, lang): 
 
-    if lang == 'sv': 
-        youradress = 'Din adress'
-        yourphone = 'Ditt telefonnummer'
+    youradress = 'Din adress'
+    yourphone = 'Ditt telefonnummer'
 
     if lang == 'en': 
         youradress = 'Your address'
@@ -109,13 +121,12 @@ def adress_part_of_message(new_order, lang):
     
 def final_part_of_message(new_order, lang): 
     last_part_message = ''
-    if lang == 'sv': 
-        handling = 'En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. Reaplagg tar ca 1 vecka.'
-        youpaypostal = 'Du betalar med postforskott'
-        youpaypayex = 'Du valde Payex kortbetalning'
-        youpayklarna = 'Du valde Klarna checkout'
-        sms_notice='sms-avisering kommer'
-        yourordernumber='Ditt ordernummer'
+    handling = 'En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. Reaplagg tar ca 1 vecka.'
+    youpaypostal = 'Du betalar med postforskott'
+    youpaypayex = 'Du valde Payex kortbetalning'
+    youpayklarna = 'Du valde Klarna checkout'
+    sms_notice='sms-avisering kommer'
+    yourordernumber='Ditt ordernummer'
 
     if lang == 'en': 
         handling = 'An order to Vamlingbolaget takes about 3 weeks since we sew your garments. Rea items takes about 1 week. '

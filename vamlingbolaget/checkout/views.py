@@ -22,7 +22,7 @@ from translator import toEnglish
 from klarna import get_order, confirm_order, klarna_cart, get_data_defaults, get_testcart, confirm_order_with_klarna
 from django.contrib.sessions.backends.db import SessionStore
 from django.core.exceptions import ObjectDoesNotExist
-from make_messages import head_part_of_message, adress_part_of_message, cart_part_of_message, cartsum_part_of_message, final_part_of_message
+from make_messages import head_part_of_message, adress_part_of_message, cart_part_of_message, cartsum_part_of_message, final_part_of_message, personal_part_of_message
 from orders.views import CheckoutTransfer
 from logger.views import keepLog
 
@@ -54,8 +54,12 @@ def checkout(request, test=''):
     # handel the form
     form = CheckoutForm()
     returntotal['form'] = form
-    lang = request.LANGUAGE_CODE
 
+    try: 
+        lang = request.LANGUAGE_CODE
+    except: 
+        lang = 'sv'            
+    
     if request.method == 'POST':
         form = CheckoutForm(request.POST)
         if form.is_valid():
@@ -80,6 +84,11 @@ def checkout(request, test=''):
             temp_msg = head_part_of_message(lang) 
             temp_msg = temp_msg + cart_part_of_message(cartitems, rea_items, lang)
             temp_msg = temp_msg + cartsum_part_of_message(handling, totalprice, lang)
+
+
+            mess = request.POST['message']
+            if len(mess) > 2: 
+                temp_msg = temp_msg + personal_part_of_message(mess, lang)
 
             #save the message at this stage to continue on for klarna
             new_order.message = temp_msg
