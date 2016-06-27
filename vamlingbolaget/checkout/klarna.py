@@ -194,24 +194,29 @@ def confirm_order_with_klarna(order_id):
         # confirmation email to the customer
 
         update = {};
+       
         update['status'] = 'created'
+        
         order.update(update)
+         
+        log = 'Klarna order push made successfully, order status: ' + order['status']
+        keepLog('', log, 'INFO', '', order_id) 
         return update['status']
+
+    log = 'Klarna order push was made to checkout already complete, status: ' + order['status'] 
+    keepLog('', log, 'WARN', '', order_id) 
  
     return order['status']
 
 def confirm_order(klarna_id): 
     # Instance of the HTTP library that is being used in the server
 
-    try:
-        order_id = klarna_id
-    except:
-        order_id = 'FZ816WTK3CGMX3X673SHQEA047J'
-
     connector = get_connector()
-
-    order = klarnacheckout.Order(connector, order_id)
-    json_order_k = order.fetch()
+    print connector
+    
+    order = klarnacheckout.Order(connector, klarna_id)
+    print order 
+    order.fetch()
     return_obj = {}
     return_obj["shipping_address"] = order["shipping_address"]
     return_obj["html"] = "<div>%s</div>" % (order["gui"]["snippet"])

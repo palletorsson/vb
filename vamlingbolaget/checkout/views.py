@@ -23,9 +23,13 @@ from klarna import get_order, confirm_order, klarna_cart, get_data_defaults, get
 from django.contrib.sessions.backends.db import SessionStore
 from django.core.exceptions import ObjectDoesNotExist
 from make_messages import head_part_of_message, adress_part_of_message, cart_part_of_message, cartsum_part_of_message, final_part_of_message
+from orders.views import CheckoutTransfer
+from logger.views import keepLog
 
 # --> from /checkout/ pay --> with card | on delivery   
-def checkout(request):
+def checkout(request, test=''):
+    if test  == 'test': 
+        print 'katten'
     url_klarna = request.path
     # get the all cart data 
     key = _cart_id(request)
@@ -59,7 +63,11 @@ def checkout(request):
             new_order = form.save(commit=False)
             new_order.ip = request.META['REMOTE_ADDR']
             sms = request.POST['sms']
-            
+            try: 
+                zip = int(request.POST['postcode'])
+            except: 
+                zip = 11122            
+            new_order.postcode = zip 
             new_order.status = 'O'
             new_order.paymentmethod = request.POST['paymentmethod']
             new_order.order = ''
@@ -100,18 +108,27 @@ def checkout(request):
                 new_order.message = the_message
 
                 # start payment log
-                new_order.payment_log = 'Log Email. Pay on Delivery - Sending Mail order to ' + request.POST['email'] + '\n'
+                log = 'New Order - Pay on Delivery, ' + request.POST['email'] 
+                keepLog(request, log, 'INFO', new_order.ip, key) 
+                log = 'Sending Mail order to ' + request.POST['email'] 
+                keepLog(request, log, 'INFO', new_order.ip, key)
 
                 # save the order 
                 new_order.save()
 
+                
                 # send email verifaction to customer if name not Tester
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
                 if (new_order.first_name == "Tester"):
-                    print "test no email"   
+                    pass
                 else:
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %the_message, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
+                the_items = getCartItems(request)
+                cartitems = the_items['cartitems'] 
+                reaitems = the_items['rea_items'] 
+
+                CheckoutTransfer(new_order, cartitems, reaitems)
                 return HttpResponseRedirect('thanks/')
 
             # If costumer use Klarna 
@@ -120,12 +137,13 @@ def checkout(request):
                 #prevent database duplication     
                 try: 
                     new_order = Checkout.objects.get(session_key=new_order.session_key)
-                    print find_order
+                    
                 except: 
                     new_order.save()  
 
                 # start klarna payment log
-                new_order.payment_log = 'Log Klarna. Pay with Klarna \n'
+                log = 'Initialize Klarna Checkout, ' + request.POST['email'] 
+                keepLog(request, log, 'INFO', new_order.ip, key)
                 # save the order 
 
                 new_order.save()            
@@ -192,7 +210,9 @@ def checkout(request):
 
                 new_order.payex_key = PayExRefKey
                 new_order.message = the_message
-                new_order.payment_log = '1 Card payment Log - Payment request sent, payEx key: ' + str(PayExRefKey) 
+                # log 
+                log = 'Initialize PayEx Process, ' + request.POST['email'] 
+                keepLog(request, log, 'INFO', new_order.ip, key) 
                 new_order.order = ''
                 # save the order 
                 new_order.save()
@@ -236,7 +256,8 @@ def success(request):
     try:
         orderref = request.GET.get('orderRef', None)
     except:
-        print "no payex_key found"
+        log = 'No orderRef found' 
+        keepLog(request, log, 'ERROR', ip)
 
     if orderref:
         response = service.complete(orderRef=orderref)
@@ -250,10 +271,12 @@ def success(request):
             # get the checkout 
             try:
                 order = Checkout.objects.get(payex_key=orderref)
-                order.payment_log = order.payment_log + u'Log Success: Checkout found with the payex_key: ' +  orderref + ' Cartid: ' + cart_id + '\n'
+                log = u'Log Success: Checkout found with the payex_key: ' +  orderref + ' Cartid: ' + cart_id 
+                keepLog(request, log, 'INFO', ip, cart_id)
             except:
                 order = 1
-                print 'Log Error: no checkout found with the payex_key: ' + str(orderref)
+                log = 'Log Error: no checkout found with the payex_key: ' + str(orderref)
+                keepLog(request, log, 'ERROR', ip, cart_id)
 
             # in the unlily event that the checkout can't be found send a coustmer to thanks url with a message to contact vamlingbolaget.  
             if (order == 1):
@@ -267,36 +290,40 @@ def success(request):
 
                 try:
                     transnumber_ = response['transactionNumber']
-                    print "--------------------------------------", transnumber_
+
                     order_obj = formatJson(order.order)
                     order_obj = json.loads(order_obj)
                     order_obj["transnumber"] = str(transnumber_)
-                    print "--------------------------------------", order_obj
                     order.order = order_obj
                     order.save()
-                    order.payment_log = order.payment_log + 'Log Trans: Adding transnumber' + str(transnumber_) + '\n' 
-                    order.save()
+                    # logging 
+                    log = 'Log Trans: Adding transnumber' + str(transnumber_) 
+                    keepLog(request, log, 'INFO', ip, cart_id)
                 except:
-                    order.payment_log = order.payment_log + 'Log Trans: Fail, transnumber' + '\n' 
-                    order.save()
+                    log = 'Log Trans: Fail, transnumber'
+                    keepLog(request, log, 'ERROR', ip, cart_id)
 
                 try:
                     transnumber = response['transactionNumber']
-                    order.message = order.message + 'PayEx transaktion: ' + str(transnumber) + '\n'
-                    order.payment_log = order.payment_log + 'Log Success: PayEx transaktion: ' + str(transnumber) + '\n'
+                    order.message = order.message + 'PayEx transaktion: ' + str(transnumber) 
                     order.status = 'P'   
-                    order.save()               
-                except:
-                    order.payment_log = order.payment_log  + 'Log Success Fail, PayEx transaktion not found: ' + str(transnumber) + '\n'
                     order.save()
+                    # logging     
+                    log = 'Log Success: PayEx transaktion: ' + str(transnumber) + '\n' 
+                    keepLog(request, log, 'INFO', ip, cart_id)          
+                except:
+                    log = 'Log Success Fail, PayEx transaktion not found: ' + str(transnumber) 
+                    keepLog(request, log, 'ERROR', ip, cart_id) 
                 try:
                     to = [order.email, 'info@vamlingbolaget.com']
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.message, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
                     order.message = order.message + u'Om du har frågor kontakta oss på telefonnummer 0498-498080 eller skicka ett mail till info@vamlingbolaget.com.'
-                    order.payment_log = order.payment_log + '\n' + u'4: Log Success: Mail sent to mail adress : ' + order.email
-                    order.save()
+                    # logging 
+                    log = u'4: Log Success: Mail sent to mail adress : ' + order.email
+                    keepLog(request, log, 'INFO', ip, cart_id)  
                 except: 
-                    order.payment_log = order.payment_log + '\n' + u'4: Log Fail: Mail not sent to mail adress : ' + str(order.email)
+                    log = u'4: Log Fail: Mail not sent to mail adress : ' + str(order.email)
+                    keepLog(request, log, 'ERROR', ip, cart_id) 
 
 
                 message = "Tack for din order"
@@ -320,18 +347,24 @@ def success(request):
                 order = 1
 
             if(order == 1):
-                order.payment_log = order.payment_log + '\n' + u'2: Cancel log: - det fanns ingen beställning att avbryta'
-
                 message = u"- Det finns inte någon sådan beställning"
+
+                # logging 
+                log = u'2: Cancel log: - det fanns ingen beställning att avbryta'
+                keepLog(request, log, 'ERROR', ip) 
+
                 return render_to_response('checkout/thanks.html', {
                 'message': message,
                 }, context_instance=RequestContext(request))
 
             else:
-                order.payment_log = order.payment_log + '\n' + u'2: Cancel log: - Betalningen avslogs eller avbröts.'
                 order.status = 'C'
                 order.save()
                 message = u"- Betalningen avslogs eller avbröts."
+
+                # logging 
+                log = u'2: Cancel log: - Betalningen avslogs eller avbröts.'
+                keepLog(request, log, 'ERROR', ip) 
 
             return render_to_response('checkout/thanks.html', {
                 'message': message,
@@ -360,8 +393,12 @@ def get_ordernumber():
         return rand  
 
 
-# if payment cancelde
+# if payment canceled
 def cancel(request):
+    try:
+        ip = request.META['REMOTE_ADDR']
+    except:
+        ip = None
     cart_id = _cart_id(request)
     try:
         order = Checkout.objects.get(session_key=cart_id)
@@ -371,34 +408,42 @@ def cancel(request):
     if(order == 0):
         pass
     else:
-        order.payment_log = order.payment_log + '\n' + 'Payment canceled' 
+        log = 'Payment canceled' 
+        keepLog(request, log, 'ERROR', ip, cart_id) 
 
     return HttpResponseRedirect('/checkout/')
 
 def thanks(request):
+    try:
+        ip = request.META['REMOTE_ADDR']
+    except:
+        ip = None
+
     cart_id = _cart_id(request)
 
     try:
         checkout = Checkout.objects.filter(session_key=cart_id)[0]
     except:
         checkout = 1
+        log =  "Thanks url hit but no checkout found"
+        keepLog(request, log, 'WARN', ip, cart_id)
+        return HttpResponseRedirect('/')
        
     if (checkout != 1):
         try:
-            checkout.payment_log = checkout.payment_log + "Log Thanks: Sending thanks message OK" + '\n'
-            checkout.save()
+            log = "Displaying thanks you message"
+            keepLog(request, log, 'INFO', ip, cart_id) 
         except:
-            checkout.payment_log = checkout.payment_log + "Log Thanks: can not find order" + '\n'
-            checkout.save()    
+            log =  "Log Thanks: can not find order"
+            keepLog(request, log, 'INFO', ip, cart_id)    
               
         message = "Tack for din order"
         
     else:
         message = u"Lägg till något i din shoppinglåda och gör en beställning."
-
+    
     # TODO internationalize these messages 
     klarna_html_res = '<div class="text-center"><hr><button type="button" class="btn btn-large btn-success text-center"> Tack för ditt köp! </button><hr></div>'
-
     return render_to_response('checkout/thanks.html', {
         'order': checkout,
         'message': message, 
@@ -406,6 +451,7 @@ def thanks(request):
     }, context_instance=RequestContext(request))
 
 def klarna_push(request, klarna_id):
+
     try:
         checkout = Checkout.objects.filter(payex_key=klarna_id)[0]
         print checkout
@@ -419,32 +465,31 @@ def klarna_push(request, klarna_id):
 
     return HttpResponse(confirm_ok)
 
+
 def klarna_thanks(request):
+    try:
+        log_ip = request.META['REMOTE_ADDR']
+    except:
+        log_ip = 'none'
 
     cart_id = _cart_id(request)
     #klarna_html = 'none'
-
+    
     try:
         checkout = Checkout.objects.filter(session_key=cart_id)[0]
     except:
-        checkout = 1
+        checkout = 0
+        log =  "Klarna thanks url hit but no checkout found"
+        keepLog(request, log, 'WARN', ip, cart_id)
+        return HttpResponseRedirect('/')
 
-    message = "Ha en bra dag!"
-
-    if (checkout != 1):
-        try:
-            checkout.payment_log = checkout.payment_log + "Log Thanks: Sending thanks message OK" + '\n'
-            checkout.save()
-        except:
-            checkout.payment_log = checkout.payment_log + "Log Thanks: can not find order" + '\n'
-            checkout.save()    
-              
-        message = "Tack for din order"
+    message = "Tack for din order"
 
     klarna_html = confirm_order(checkout.payex_key)
     klarna_html_res = klarna_html["html"] 
+
     adress = klarna_html['billingadress']
-    checkout.order = klarna_html['shipping_address']
+    #checkout.order = klarna_html['shipping_address']
     checkout.first_name = adress['family_name']
     checkout.last_name = adress['given_name']
     checkout.email = adress[ 'email']
@@ -453,6 +498,7 @@ def klarna_thanks(request):
     checkout.street = adress['street_address']
     checkout.country = adress['country']
     checkout.save()
+
     # add adress part of message
     lang = request.LANGUAGE_CODE 
     temp_msg = checkout.message
@@ -466,6 +512,19 @@ def klarna_thanks(request):
     checkout.message = the_message
     checkout.save()
 
+    if (checkout != 0):
+        try:
+            log = 'Sending mail order conformation to: ' + checkout.email
+            keepLog(request, log, 'INFO', checkout.ip, cart_id) 
+        except:
+            pass
+
+    the_items = getCartItems(request)
+    cartitems = the_items['cartitems'] 
+    reaitems = the_items['rea_items'] 
+
+    CheckoutTransfer(checkout, cartitems, reaitems)
+    
     return render_to_response('checkout/thanks.html', {
         'order': checkout,
         'message': message, 
@@ -506,14 +565,15 @@ def payexCallback(request):
         order = 1
 
     if (order != 1):
-        order.payment_log = order.payment_log + '4; Payex callback Log: PayEx transaktionNumber, transactionRef: ' + str(transactionNumber) + ', ' + str(transactionRef) + ' orderRef: ' + str(orderRef) + ', from ip: '+ ip + '\n'
-        order.save()
+        log =   '4; Payex callback Log: PayEx transaktionNumber, transactionRef: ' + str(transactionNumber) + ', ' + str(transactionRef) + ' orderRef: ' + str(orderRef) + ', from ip: '+ ip + '\n'
+        keepLog(request, log, 'INFO', ip, str(transactionNumber)) 
 
     return HttpResponse(status=200)
 
 
-def fortnox(request): 
 
+def fortnox(request): 
+    cart_id = _cart_id(request)
     try:
         ip = request.META['REMOTE_ADDR']
     except:
@@ -530,48 +590,61 @@ def fortnox(request):
         except: 
             order = Checkout.objects.filter(order_number=order_id) 
             order = order.reverse()[0]
-            order.payment_log = order.payment_log + 'Duplicate order nummer' +  '\n' 
-            order.save()    
-        
-        order.payment_log = order.payment_log + 'Fortnox callback Log: order id: ' + str(order_id) + ', from ip: '+ ip  + '\n' 
-        order.save()
-       
-        if (ip == order.ip):
-             order.payment_log = order.payment_log + 'Fortnox callback Log: ip from order to order is the same' + '\n'
-             order.save()
-        else: 
-             order.payment_log = order.payment_log + 'Fortnox callback Log: ip from order to order is not the same' + '\n' 
-             order.save()
+            log = 'Duplicate order nummer' 
+            keepLog(request, log, 'WARN', ip)
 
         # get all item in the cat
         try:
             the_items = getCartItems(request)
         except:
-            order.payment_log = order.payment_log + 'Error, cartitems' + '\n'
-            order.save()    
+            log = 'Error, cartitems'  
+            keepLog(request, log, 'ERROR', ip)
+   
 
-        # create order in fortnox
+        # create the json base for the fortnox order
         try: 
-            if order.paymentmethod == 'C' or order.paymentmethod == 'P': 
-                json_order = the_items
-                fortnoxOrderandCostumer(request, order, json_order)
-                order.payment_log = order.payment_log + 'fortnox order is ok' + '\n'
-                order.save()
-            else: 
-                print "klarna checkout"
-        except: 
-            order.payment_log = order.payment_log + 'something wrong with fortnox' + '\n'
+            json_order = the_items
+            final_orderjson = fortnoxOrderandCostumer(request, order, json_order)
+            order.order = final_orderjson
             order.save()
+            log = 'Creating order_json bacis for order: ' + str(order_id) 
+            keepLog(request, log, 'INFO', ip, cart_id, final_orderjson)
+            order_ok_json = True
+        except: 
+            log = 'Fortnox Error when adding Fortnox order'
+            keepLog(request, log, 'ERROR', ip, cart_id)
+            order_ok_json = False
+
+        # send the json order, log and save the order 
+        if order_ok_json == True: 
+           
+            if order.paymentmethod != 'K': 
+                headers = get_headers() 
+                return_order = createOrder(headers, final_orderjson)
+                order.fortnox_obj = return_order 
+                order.save()
+                
+                log = 'Creating final_order_json with Order id: ' + str(order_id) 
+                keepLog(request, log, 'INFO', ip, cart_id, return_order)
+            else: 
+                order.fortnox_obj = 'not jet' 
+                order.save()
+                print "klarna not on"
+       
+        else:         
+            log = 'Fortnox order not created'
+            keepLog(request, log, 'ERROR', ip)
+
 
         # set the new stock
         try: 
             cleanCartandSetStock(request, the_items)
 
-            order.payment_log = order.payment_log + 'cleaning cart' + '\n'
-            order.save()
+            log = 'Cleaning cart'
+            keepLog(request, log, 'INFO', ip)
         except: 
-            order.payment_log = order.payment_log + 'error cleaning cart' + '\n' 
-            order.save()
+            log = 'error cleaning cart' 
+            keepLog(request, log, 'ERROR', ip)
 
         return HttpResponse(status=200)
     else: 
@@ -645,18 +718,14 @@ def getCartItems(request):
         print "clean wrong"
 
     allitems = {'cartitems': cartitems, 'bargains': bargains, 'voucher': voucher, 'rea_items': rea_items}
+
     return allitems
 
-# Run after order when customer is send to conferm url /thanks/
-def fortnoxOrderandCostumer(request, new_order, order_json):
+def getCustumer(new_order): 
 
     fullname = unicode(new_order.first_name) + " " + unicode(new_order.last_name)
-    
-    customer_no = '0'
 
-    headers = get_headers()
-
-    customer = json.dumps({
+    return json.dumps({
             "Customer": {
                 "Name": unicode(fullname),
                 "Address1": unicode(new_order.street),
@@ -668,35 +737,31 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
             }
         })
 
+# Run after order when customer is send to conferm url /thanks/
+def fortnoxOrderandCostumer(request, new_order, order_json):
+    customer_no = '0'
+    customer = getCustumer(new_order)
+    headers = get_headers()
+
     # To make an Fortnox order we need a Custumer
     # first check if customer exist 
     # and update or create customer and get customer number back and log
     try:
         customer_no = customerExistOrCreate(headers, customer, order_json)
-        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer ok ' 
-        new_order.save()
     except: 
-        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox customer not resolved' 
-        new_order.save()
+        log = 'Fortnox customer not resolved' 
+        keepLog(request, log, 'ERROR', '', customer)
 
-    try: 
-        ts = time.time()
-        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-        new_order.payment_log = new_order.payment_log +  '\n' + str(st) 
-        new_order.save()
-    except: 
-        pass
 
     # Creat the order part of the json from order_json and log 
     try:         
         invoice_rows = create_invoice_rows(order_json)
-        new_order.payment_log = new_order.payment_log +  '\n' +  'Invoice_rows worked ' 
-        new_order.save()
     except: 
-        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order json not resolved' 
-        new_order.save()
+        log = 'Fortnox order json not resolved' 
+        keepLog(request, log, 'ERROR', '', customer)
 
-    # add addtional information to comment  and invoice type feilds
+
+    # add addtional information to comment and invoice type feilds
     try:
         orderid_ = new_order.order_number 
         comments = "Order number: " + unicode(orderid_)
@@ -730,8 +795,6 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         except:
             pass 
      
-
-
     customer_order = json.dumps({
                 "Invoice": {
                     "InvoiceRows": invoice_rows,
@@ -742,21 +805,8 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
                     "InvoiceType": invoice_type_value, 
                 }
             })  
-    # send the json order, log and save the order 
-    try: 
-        return_order = createOrder(headers, customer_order)
 
-        new_order.payment_log = new_order.payment_log +  '\n' + 'Order created in Fortnox: ' +  str(return_order)
-        new_order.save()
-        retun_order_json = json.loads(return_order)
-    except: 
-        new_order.payment_log = new_order.payment_log +  '\n' + 'Fortnox order not created' 
-        new_order.save()
-
-    # save create new blank order  
-    new_order.save()
-
-    return 1  
+    return customer_order 
 
 # to show all checkouts
 def admin_view(request, limit):
@@ -1133,3 +1183,28 @@ def testconfirmklarnahtml(request):
     return HttpResponse(html)
 
 
+def MakeCheckoutTransfer(request, checkout_id): 
+    # get checkout
+    checkout = Checkout.objects.filter(session_key=checkout_id)[0]
+    # get corsponding cart
+    cart = Cart.objects.get(key = checkout.session_key)
+    # and items of that cart
+    cartitems = cart.cartitem_set.all()
+    reaitems = cart.reacartitem_set.all()
+    # Transfer cartitem to checkout
+    CheckoutTransfer(checkout, cartitems, reaitems)
+    return HttpResponse(status=200)
+
+
+def ShowCheckouts(request):
+    checkouts = Checkout.objects.filter(status='S')
+
+    print checkouts
+
+    return HttpResponse(status=200)
+
+def whatEver(request, ):
+    print "-----------------------"
+    resp = checkout(request, 'test')
+
+    return HttpResponse(status=200)
