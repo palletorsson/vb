@@ -17,7 +17,7 @@ from vamlingbolaget.settings import ROOT_DIR
 import operator
 from fortnox.fortnox import get_headers, searchCustomer
 from django.contrib.auth.decorators import login_required
-
+from logger.views import keepLog
 
 CART_ID_SESSION_KEY = 'cart_id'
 
@@ -161,6 +161,8 @@ def addtocart(request):
                 }
 
         return_data = json.dumps(returnjson)
+        log = 'Cart add: ' + article_db.name + ' ' + sku  + ' ' + color_db.name + ' ' + pattern_db.name + ' ' + size_db.name
+        keepLog(request, log, 'INFO', '', cart_id) 
 
     if request.method == 'GET':
         return_data = json.dumps({'msg' : 'nothing here'})
@@ -237,6 +239,10 @@ def add_rea(request):
                 },
             'message': { 'msg' : msg }
         }
+
+    log = 'Rea add: ' + rea.article.name
+    keepLog(request, log, 'INFO', '', cart_id) 
+
     return_data = json.dumps(returnjson)
     response = HttpResponse(return_data, mimetype="application/json")
     return response
