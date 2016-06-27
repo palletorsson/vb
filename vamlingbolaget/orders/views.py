@@ -193,7 +193,10 @@ def OrderAction(request, todo, stage, order_number):
 				        "custNo": "0111111118"
 				    
 				    }],
-                    "options": opt 
+                    "options": opt,
+                    "test": "true"
+ 
+
                     }
                 }
                 shipmentparams = json.dumps(unifaunObj)
