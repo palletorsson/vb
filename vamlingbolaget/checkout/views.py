@@ -65,6 +65,10 @@ def checkout(request, test=''):
         if form.is_valid():
             # start the order process and store form values 
             new_order = form.save(commit=False)
+            
+            # create a new order number
+            new_order.order_number = get_ordernumber() 
+
             new_order.ip = request.META['REMOTE_ADDR']
             sms = request.POST['sms']
             try: 
@@ -92,9 +96,6 @@ def checkout(request, test=''):
 
             #save the message at this stage to continue on for klarna
             new_order.message = temp_msg
-
-            # create a new order number
-            new_order.order_number = get_ordernumber() 
 
             # get the session_key for look up 
             new_order.session_key = _cart_id(request)
