@@ -1,0 +1,399 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% block allcontent %}
+
+  {% if user.is_authenticated %}
+	<legend> <a href="/orders/"> orders</a> | Order </legend>
+	<legend> Costumer </legend>
+
+<table class="table table-bordered table-striped" >
+	    <thead><tr>
+		    <td>
+		        <div>
+		            <span> Costumer </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Street </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> City </span>
+		        </div>
+		    </td>
+		    		     <td>
+		        <div>
+		            <span> Email </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Telephone </span>
+		        </div>
+		    </td>
+		        <td>
+		        <div>
+		            <span>Fortnox Nr.</span>
+		        </div>
+		    </td>
+		    </tr>
+		    </thead>
+
+	<tbody>	
+
+	    <tr>
+		    <td>
+		        <div>
+		            <span>  {{ order.first_name }}  {{ order.last_name }} </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span>  {{ order.street }}   </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> {{ order.city }}</span>
+		        </div>
+		    </td>
+		        <td>
+		        <div>
+		            <span> {{ order.email }} </span>
+		        </div>
+		    </td>
+		         <td>
+		        <div>
+		            <span> {{ order.phone }} </span>
+		        </div>
+		    </td>
+		     </td>
+	         <td>
+		        <div>
+		            <span>  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> {{ customer_number }} </span> </span>
+		        </div>
+		    </td>
+
+		</tr> 
+		</tbody>
+</table>
+
+<legend> Order details </legend>
+<table class="table table-bordered table-striped" >
+	    <thead><tr>
+		    <td>
+		        <div>
+		            <span> Order Number </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Order Status </span>
+		        </div>
+		    </td>
+		    
+		    		     <td>
+		        <div>
+		            <span> Payment Key </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Payment Method </span>
+		        </div>
+		    </td>
+		       
+		    </tr>
+		    </thead>
+
+	<tbody>	
+
+	    <tr>
+		    <td>
+		        <div>
+		            <span> {{ order.order_number }} </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> 
+		            	{% if order.status == 'O' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-danger text-center"> Ordered </button>
+						{% endif %}
+						{% if order.status == 'M' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-primary text-center"> In Production </button>
+						{% endif %}
+						{% if order.status == 'H' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-success text-center"> Packaging </button>
+						{% endif %}
+						{% if order.status == 'S' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-default text-center"> Shipping </button>
+						{% endif %}
+						{% if order.status == 'F' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-warning text-center">  Achived </button>
+						{% endif %}
+						</span>
+		        </div>
+		    </td>
+		  
+		        <td>
+		        <div>
+		            <span> 	
+		            	{% if order.paymentmethod == 'P' %}
+						-
+						{% endif %}
+						{{ order.payex_key }} </span>
+		        </div>
+		    </td>
+		         <td>
+		        <div>
+		            <span> 
+		            	{% if order.paymentmethod == 'C' %}
+						Card Payment with Payex
+						{% endif %}
+						{% if order.paymentmethod == 'P' %}
+						Pay on Delivery
+						{% endif %}
+						{% if order.paymentmethod == 'K' %}
+						Klarna Checkout
+						{% endif %}
+		        </div>
+		    </td>
+		</tr> 
+		</tbody>
+</table>
+
+<table class="table table-bordered table-striped" >
+<tr>
+    <th>
+            <span> {% trans "Antal" %}  </span>
+    </th>
+    <th>
+            <span> {% trans "Artikel" %}   </span>
+    </th>
+    <th>
+            <span> {% trans "Färg" %} </span>
+    </th>
+    <th>
+            <span> {% trans "Mönster" %} </span>
+    </th>
+    <th>
+        <span> {% trans "Storlek" %} </span>
+    </th>
+    <th width="100px">
+            <span> {% trans "Pris" %} </span>
+    </th>
+</tr>
+<tbody>
+
+	    {% for item in cartitems %}
+	    <tr>
+	    <td>
+	        <div>
+	            <span> {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span>
+	        </div>
+	    </td>
+	    <td>
+	        <div>
+	            <span> {{ item.article }} i {{item.article.quality|lower}}</span>
+	        </div>
+	    </td>
+	    <td>
+	        <div>
+	            <span>{{ item.color }}
+	            {%if item.color_2%}
+	                / {{item.color_2}}
+	            {%endif%}
+	            </span>
+	        </div>
+	    </td>
+	    <td>
+	        <div>
+	            <span>{{ item.pattern }}
+	            {%if item.pattern_2%}
+	                / {{item.pattern_2}}
+	            {%endif%}
+	            
+	            </span>
+	        </div>
+	    </td>
+        <td>
+            <div>
+                <span>{% if item.article.type.order == 8 or  item.article.type.order == 7  %} - {%else%} {{ item.size }} {%endif%}</span>
+            </div>
+        </td>
+                <td>
+            <div>
+                <span> {{ item.article.price }} SEK </span>
+            </div>
+        </td>
+                {% endfor %}
+
+{% for item in reaitems %}
+        <tr>
+        <td>
+            <div>
+                <span> 1 </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span> {{ item.reaArticle.article.name }} i {{item.reaArticle.article.quality|lower}} <span class="discount"> (REA) </span>  </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span>{{ item.reaArticle.color }}
+                {% if item.reaArticle.color_2 > 0 %}
+                    / {{ item.reaArticle.color_2 }}
+                {%endif%}
+                </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span>
+                    {{ item.reaArticle.pattern }}
+                    {% if item.reaArticle.pattern_2 > 0 %}
+                        / {{ item.reaArticle.pattern_2 }}
+                    {%endif%}
+                </span>
+            </div>
+        </td>
+            <td>
+                <div>
+                    <span>{{ item.reaArticle.size }} </span>
+                </div>
+            </td>
+
+            <td>
+            <div>
+           	<span class="discount"> {{ item.reaArticle.rea_price }} </span>(<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} </span>)</span>
+            </div>
+        </td>
+        {% endfor %}
+<tr>
+			<td class="totalprice" colspan="5" style="text-align: right">
+			    {% trans "Leverans" %} :
+			</td>
+			<td id="handling">
+			    {{ handling }} {%trans "SEK"%}
+			</td>
+		</tr>
+			
+		<tr>
+			<th class="totalprice" colspan="5" style="text-align: right">
+			    {% trans "Total pris" %} :
+			</th>
+			<th id="totalprice">
+			    {{ totalprice }} {%trans "SEK"%}
+			</th>
+		</tr>
+{{returntotal}}
+		<tbody>
+	</tbody>
+</table>
+
+
+<legend> Activate Order </legend>
+<tr>
+
+    <th>
+{% if order.status == 'O' %}
+	<div class="text-center"><hr><a href="/orders/order/action/activate/production/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Activate Order For Production </button></a><br><small>(an email notifcation about the order will be sent to the custumer)</small>
+	<br><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a><hr></div>
+{% endif %}
+{% if order.status == 'M' %}
+
+	<div class="text-center"><hr><a href="/orders/order/action/activate/packaging/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-success text-center"> Activate Order For Packaging </button></a><br><small>(The order will be added to Fortnox)</small>
+	<br><small><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a></small><hr></div>
+
+{% endif %}
+{% if order.status == 'H' %}
+	<div class="text-center"><hr> <a href="/orders/order/action/activate/shipping/{{ order.order_number }}/">
+	    <br><button type="button" id="activate_order" class="btn btn-large btn-warning text-center"> Activate Order For Shipping </button></a><br><small>(A Unifaun, Postnord order will be activated)</small>
+	<br><small><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a></small><hr></div>
+{% endif %}
+{% if order.status == 'S' %}
+
+    <div class="text-center"><a href="/{{ pdf }}">Pdf Shipment </a> | <a href="#">Content Pdf</a></div> 
+	<div class="text-center"><hr><a href="/orders/order/action/finalize/finalize/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-danger text-center"> Finalize Order </button></a><br><small>(An email notifcation with package tracking information will be sent to the custumer.)</small>
+	<br><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a><hr></div>
+{% endif %}
+{% if order.status == 'F' %}
+	<div class="text-center"><button type="button" id="activate_order" class="btn btn-large btn-default text-center"> Order Achived </button></div>
+		<div class="text-center"><hr><a href="/orders/order/action/activate/production/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Reactivate Order For Production </button></a><hr></div>
+{% endif %}
+{% if order.status == 'C' %}
+	<div class="text-center"><button type="button" id="activate_order" class="btn btn-large btn-default text-center"> This order has been cancelled</button></div>
+	<div class="text-center"><hr><a href="/orders/order/action/activate/production/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Reactivate Order For Production </button></a><hr></div>
+{% endif %}
+
+</th>
+</tr>
+</table>  
+	{% if fortnox %}
+
+<table class="table table-bordered table-striped" >
+	<tr>
+		<td>
+
+			<div class="text-center">{{ fortnox }}</div>
+		 </td>
+		</tr> 
+		</tbody>
+</table>	
+
+	{% endif %}
+
+
+		{% if lastmessage %}
+<legend> Package message </legend>
+<table class="table table-bordered table-striped" >
+	<tr>
+		<td>
+
+			<pre>{{ lastmessage }}</pre>
+		 </td>
+		</tr> 
+		</tbody>
+</table>	
+
+	{% endif %}
+
+
+	{% if secondmessage %}
+	<legend> Consumer message 2:  </legend>
+<table class="table table-bordered table-striped" >
+	<tr>
+		<td>
+
+			<pre>{{ secondmessage }}</pre>
+		 </td>
+		</tr> 
+		</tbody>
+</table>	
+
+	{% endif %}
+	{% if order.status == 'O' %}
+	kolla klarna
+<legend> This Message has been sent to the customer: </legend>
+<table class="table table-bordered table-striped" >
+<tr>
+    <td>
+      <pre>{{ order.message }}</pre>
+    </td>
+</tr>
+</table>
+
+	{% endif %}
+<tbody>
+
+    {% else %}
+        <p> please ... </p>
+    {% endif %}
+{% endblock %}

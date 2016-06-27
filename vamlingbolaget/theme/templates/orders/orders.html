@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% block allcontent %}
+
+  {% if user.is_authenticated %}
+
+	<legend> 
+	<a href="/orders/orders/all/"><button type="button" id="activate_order" class="btn btn-large btn-info text-center">
+		All Orders </button></a> | 
+		<a href="/orders/orders/ordered/"><button type="button" id="activate_order" class="btn btn-large btn-danger text-center">
+		Ordered </button>
+		</a> | 
+		<a href="/orders/orders/making/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> 
+		In production</button>
+		</a> |  
+		<a href="/orders/orders/handling/"><button type="button" id="activate_order" class="btn btn-large btn-success text-center">
+		Packing </button> </a> | 
+		<a href="/orders/orders/shipped/"><button type="button" id="activate_order" class="btn btn-large btn-default text-center">
+		Shipping </button> </a>  |  
+		<a href="/orders/orders/finlized/"><button type="button" id="activate_order" class="btn btn-large btn-warning text-center">Arcived</button>
+		</a> |  
+	</legend>
+
+<table class="table table-bordered table-striped" >
+	    <thead><tr>
+		    <td>
+		        <div>
+		            <span> Order Number </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Order Status </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Costumer </span>
+		        </div>
+		    </td>
+		    		     <td>
+		        <div>
+		            <span> Payment Key </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Payment Method </span>
+		        </div>
+		    </td>
+		       <td>
+		        <div>
+		            <span> Manage Order </span>
+		        </div>
+		    </td>
+		    </tr>
+		    </thead>
+	<tbody>
+	    {% for order in checkouts %}
+	    <tr>
+		    <td>
+		        <div>
+		            <span> <a href="/orders/order/{{ order.order_number }}/">{{ order.order_number }}</a> </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> <a href="/orders/order/{{ order.order_number }}/">
+						{% if order.status == 'O' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-danger text-center"> Ordered </button>
+						{% endif %}
+						{% if order.status == 'M' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-primary text-center"> In Production </button>
+						{% endif %}
+						{% if order.status == 'H' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-success text-center"> Packaging </button>
+						{% endif %}
+						{% if order.status == 'S' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-default text-center"> Shipping </button>
+						{% endif %}
+						{% if order.status == 'F' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-warning text-center"> Achived </button>
+						{% endif %}
+		            </a>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> {{ order.first_name }}  {{ order.last_name }}</span>
+		        </div>
+		    </td>
+		        <td>
+		        <div>
+		            <span> {{ order.payex_key }} </span>
+		        </div>
+		    </td>
+		         <td>
+		        <div>
+		            <span> {{ order.paymentmethod }} </span>
+		        </div>
+		    </td>
+		    <td>
+		        <div>
+		            <span> <a href="/orders/order/{{ order.order_number }}/"> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></span></a> </span>
+		        </div>
+		    </td>
+
+	    {% endfor %}
+		</tr> 
+	</tbody>
+</table>
+    {% else %}
+        <p> please ... </p>
+    {% endif %}
+{% endblock %}
