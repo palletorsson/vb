@@ -373,6 +373,13 @@ margin-right: -49px;
 
   }
 
+.truncate {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
   .pattern_row {
       color:#000;
       font-weight: bold;
