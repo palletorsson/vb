@@ -45,7 +45,7 @@ def get_merchant_urls():
         # You can not receive push notification on
         # a non publicly available uri
         # add  + {checkout.order.id})
-        'push_uri': merchant_url +'/checkout/push_klar/{checkout.order.id}'
+        'push_uri': merchant_url +'/checkout/push_klar/{checkout.order.id}/'
     }
 
     return merchant
