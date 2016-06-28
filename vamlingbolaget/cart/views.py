@@ -352,7 +352,9 @@ def removefromcart(request, pk, type):
         cart = Cart.objects.get(key=key)
         cartitems = cart.cartitem_set.all()
         bargains = cart.bargaincartitem_set.all()
-        total = totalsum(cartitems, bargains)
+        rea = []
+        voucher = []
+        total = totalsum(cartitems, bargains, request, voucher, rea)
         return_data = json.dumps(total)
         response = HttpResponse(return_data, mimetype="application/json")
         return response
