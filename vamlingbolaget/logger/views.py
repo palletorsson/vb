@@ -11,6 +11,8 @@ def keepLog(request, title, log_level, ip, session_key='', json_dump=''):
 
 def ShowAllLogging(request): 
     logs = LogItem.objects.all().order_by('-date_added')[:100]
+    for l in logs: 
+        l.session_key = l.session_key[:12] + " ..."
 
     return render_to_response('log/logs.html', {
         'logs': logs,
