@@ -20,6 +20,7 @@ This file demonstrates the use of the Klarna library to create an order.
 import json
 import klarnacheckout
 from products.models import Color, Pattern, Size
+from logger.views import keepLog
 
 
 def get_connector(): 
