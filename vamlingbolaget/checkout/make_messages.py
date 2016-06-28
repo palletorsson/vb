@@ -48,7 +48,7 @@ def cart_part_of_message(cartitems, rea_items, lang, i=1):
         cart_temp = s.substitute(product_=product, num_=str(i), item_quantity=str(item.quantity), amount_=amount, art_name=item.article.name, art_sku=item.article.sku_number, )
 
         if (item.pattern_2 != 0):
-            u = Template('$in_ $patternname, $patterncolor ( $outside_ )\n$and_ $patternname2 , $patterncolor2 ( $inside_ )')
+            u = Template('$in_ $patternname, $patterncolor ( $outside_ )\n$and_ $patternname2 , $patterncolor2 ( $inside_ )\n')
             cart_temp = cart_temp + u.substitute(in_=itsin, patternname=item.pattern.name, patterncolor=item.color.name, outside_=outsida, and_=itsand, patternname2=item.pattern_2.name, patterncolor2=item.color_2.name, inside_=insida, ) 
         else:
             u = Template('$in_ $patternname, $patterncolor \n')
