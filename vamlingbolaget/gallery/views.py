@@ -16,12 +16,9 @@ def show_galleries(request):
     )
 
 def show_gallery(request, key):
-    if key == 'new':
-        gallery = Gallery.objects.get(status__display_on_collection_page=True)
-        template='gallery/collection.html'
-    else:
-        gallery = Gallery.objects.get(pk=key)
-        template='gallery/gallery.html'
+ 
+    gallery = Gallery.objects.get(pk=key)
+    template='gallery/gallery.html'
 
     images = gallery.image_set.all().order_by('order')
     num = len(images) + 1 #all images plus the feature image
