@@ -35,11 +35,17 @@
 		            <span> Telephone </span>
 		        </div>
 		    </td>
-		        <td>
+		     <td>
 		        <div>
 		            <span>Fortnox Nr.</span>
 		        </div>
 		    </td>
+		     <td>
+		        <div>
+		            <span>Process status</span>
+		        </div>
+		    </td>
+
 		    </tr>
 		    </thead>
 
@@ -77,6 +83,12 @@
 		            <span>  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> {{ customer_number }} </span> </span>
 		        </div>
 		    </td>
+
+	         <td>
+		        <div>
+		            <span>  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> {{ process_status }}</span> </span>
+		        </div>
+		    </td>		    
 
 		</tr> 
 		</tbody>
@@ -124,6 +136,9 @@
 		            	{% if order.status == 'O' %}
 						<button type="button" id="activate_order" class="btn btn-xs btn-danger text-center"> Ordered </button>
 						{% endif %}
+						{% if order.status == 'I' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-danger text-center"> Ordered </button>
+						{% endif %}
 						{% if order.status == 'M' %}
 						<button type="button" id="activate_order" class="btn btn-xs btn-primary text-center"> In Production </button>
 						{% endif %}
@@ -165,6 +180,7 @@
 		    </td>
 		</tr> 
 		</tbody>
+
 </table>
 
 <table class="table table-bordered table-striped" >

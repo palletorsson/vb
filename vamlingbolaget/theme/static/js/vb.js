@@ -676,6 +676,15 @@ set_first_page();
 		}
     });
     
+    // serach order by order id
+
+    $("#search_order").click(function(e) {
+
+        var order_id = $('#order_id').val();
+        window.location = '/orders/order/'+order_id
+
+
+    }); 
     // for pacsoft autoaddress 
 	$(".address_button").click(function() {
 

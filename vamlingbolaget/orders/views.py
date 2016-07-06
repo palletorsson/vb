@@ -63,7 +63,11 @@ def ShowOrder(request, order_id):
     if request.user.is_authenticated:
         headers = get_headers()
         name = ''
-        checkout = Checkout.objects.filter(order_number=order_id)[0]
+        try: 
+            checkout = Checkout.objects.filter(order_number=order_id)[0]
+        except: 
+            return HttpResponseRedirect('/orders/')
+        process_status = LookAtDict(checkout)
         email = checkout.email
         cartis = checkout.orderitem_set.all()
         cartitems = checkout.orderitem_set.all()
@@ -105,6 +109,7 @@ def ShowOrder(request, order_id):
         
         return render_to_response('orders/order.html', {
             'order': checkout,
+            'process_status': process_status,
             'cartitems':cartitems,
             'reaitems':reaitems,        
             'fortnox':fortnox,
@@ -398,3 +403,41 @@ def getOptions(email):
       "sendEmail": true,
       "key": "testapi1"
     }
+
+def LookAtDict(checkout):
+    check_string = ''
+    first_order_exist = False
+    order_exist = False
+    shipping_exist = False
+
+    try: 
+        firsTorder = json.loads(checkout.order) 
+        
+        firstorder = firsTorder['Invoice']['YourOrderNumber']
+        first_order_exist = True
+        check_string = '["1":"OK"]'
+    except:
+        first_order_exist = False
+        check_string = '["1":"NA"]'
+
+
+    try: 
+        fortnoXobj = json.loads(checkout.fortnox_obj) 
+        orderNum = fortnoXobj['Invoice']['YourOrderNumber']
+        order_exist = True 
+        check_string = check_string + '["1":"OK"]'
+
+    except:
+        order_exist = False
+        check_string = check_string + '["2":"NA"]'
+       
+    try: 
+        unifaunObj = json.loads(checkout.unifaun_obj) 
+        unifaunNum = unifaunObj
+        shipping_exist = True 
+        check_string = check_string + '["3":"OK"]'
+    except:
+        shipping_exist = False
+        check_string = check_string + '["3":"NA"]'
+
+    return check_string

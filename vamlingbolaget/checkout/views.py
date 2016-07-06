@@ -97,9 +97,11 @@ def checkout(request, test=''):
             #save the message at this stage to continue on for klarna
             new_order.message = temp_msg
 
+
             # get the session_key for look up 
             new_order.session_key = _cart_id(request)
-            
+
+
             new_order.save()
 
             # add adress part of message 
@@ -1213,8 +1215,48 @@ def ShowCheckouts(request):
 
     return HttpResponse(status=200)
 
-def whatEver(request, ):
-    print "-----------------------"
-    resp = checkout(request, 'test')
 
-    return HttpResponse(status=200)
+
+def LookAtDict(request, checkout_order_id):
+    checkout = None
+
+    first_order_exist = None
+    order_exist = None
+    shipping_exist = None
+
+    checkout = Checkout.objects.get(order_number=checkout_order_id)
+
+
+    try: 
+        firsTorder = json.loads(checkout.order) 
+        firstorder = fortnoXobj['Invoice']['YourOrderNumber']
+        first_order_exist = True 
+    except:
+        first_order_exist = False
+
+
+
+    try: 
+        fortnoXobj = json.loads(checkout.fortnox_obj) 
+        orderNum = fortnoXobj['Invoice']['YourOrderNumber']
+        order_exist = True 
+    except:
+        order_exist = False
+
+       
+
+    try: 
+        unifaunObj = json.loads(checkout.unifaun_obj) 
+        print unifaunObj
+        unifaunNum = unifaunObj
+        shipping_exist = True 
+    except:
+        shipping_exist = False
+
+    return render_to_response('checkout/checkout_look.html', {
+        'checkout': checkout,
+        'orderExist': order_exist,
+        'firstOrderExist': first_order_exist, 
+        'shipping_exist': shipping_exist
+    }, context_instance=RequestContext(request))
+

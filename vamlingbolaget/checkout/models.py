@@ -46,7 +46,8 @@ class Checkout(models.Model):
     shipping_postcode = models.CharField(_("Postnummer2"), max_length=10, blank=True)
     shipping_country = models.CharField(_("Land2"), max_length=80, blank=True)
     fortnox_obj = models.TextField(blank=True)
-    unifaun_obj = models.TextField(blank=True) 
+    unifaun_obj = models.TextField(blank=True)
+    language = models.CharField(max_length=10, blank=True)
 
     def __unicode__(self):
         return "%s %s %s %s" % (self.first_name, self.last_name, self.order_number, self.date_added)

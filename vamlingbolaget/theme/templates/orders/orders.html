@@ -6,22 +6,30 @@
 
   {% if user.is_authenticated %}
 
-	<legend> 
-	<a href="/orders/orders/all/"><button type="button" id="activate_order" class="btn btn-large btn-info text-center">
-		All Orders </button></a> | 
-		<a href="/orders/orders/ordered/"><button type="button" id="activate_order" class="btn btn-large btn-danger text-center">
-		Ordered </button>
-		</a> | 
-		<a href="/orders/orders/making/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> 
-		In production</button>
-		</a> |  
-		<a href="/orders/orders/handling/"><button type="button" id="activate_order" class="btn btn-large btn-success text-center">
-		Packing </button> </a> | 
-		<a href="/orders/orders/shipped/"><button type="button" id="activate_order" class="btn btn-large btn-default text-center">
-		Shipping </button> </a>  |  
-		<a href="/orders/orders/finlized/"><button type="button" id="activate_order" class="btn btn-large btn-warning text-center">Arcived</button>
-		</a> |  
-	</legend>
+
+
+		    <a href="/orders/orders/all/"><button type="button" id="activate_order" class="btn btn-large btn-info text-center">
+			All Orders </button></a> |     
+			<a href="/orders/orders/ordered/"><button type="button" id="activate_order" class="btn btn-large btn-danger text-center">
+			Ordered </button>
+			</a> |    
+			<a href="/orders/orders/making/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> 
+			In production</button>
+			</a> |      
+			<a href="/orders/orders/handling/"><button type="button" id="activate_order" class="btn btn-large btn-success text-center">
+			Packing </button> </a> |     
+			<a href="/orders/orders/shipped/"><button type="button" id="activate_order" class="btn btn-large btn-default text-center">
+			Shipping </button> </a> |      
+			<a href="/orders/orders/finlized/"><button type="button" id="activate_order" class="btn btn-large btn-warning text-center">Arcived</button>
+			</a> 
+
+			<div class="pull-right"> 
+	        <input type="text" id="order_id" class="order_id_search form-control" placeholder="Search by order id...">
+	        <button class="btn btn-default"id="search_order" type="button">Go!</button>
+	   		</div>
+
+	   		<hr>
+
 
 <table class="table table-bordered table-striped" >
 	    <thead><tr>
