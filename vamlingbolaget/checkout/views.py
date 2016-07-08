@@ -110,6 +110,18 @@ def checkout(request, test=''):
             #finalize the message including ordernumber and session key
             the_message = temp_msg + final_part_of_message(new_order, lang)
 
+            try:
+                the_items = getCartItems(request)
+                cartitems = the_items['cartitems'] 
+                reaitems = the_items['rea_items'] 
+                CheckoutTransfer(new_order, cartitems, reaitems)
+                log = 'Checkout Transfer Succcess' 
+                keepLog(request, log, 'INFO', new_order.ip, key) 
+            except:
+                log = 'Checkout Transfer failed' 
+                keepLog(request, log, 'ERROR', new_order.ip, key) 
+
+
             # payment logic start
 
             # if costumer pay on delivery 
@@ -136,11 +148,6 @@ def checkout(request, test=''):
                 else:
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %the_message, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
-                the_items = getCartItems(request)
-                cartitems = the_items['cartitems'] 
-                reaitems = the_items['rea_items'] 
-
-                CheckoutTransfer(new_order, cartitems, reaitems)
                 return HttpResponseRedirect('thanks/')
 
             # If costumer use Klarna 
