@@ -694,7 +694,13 @@ set_first_page();
 
 	}); 
 
-
+    $('#Service').on('change', function () {
+          var extra = $(this).val(); 
+          var base_url = $('#urlbase').html();
+          var final_url = base_url + extra;
+          $('#target_url').attr('href', final_url); 
+          return true;
+      });
 
 
 }); // --- end document readyfunction
