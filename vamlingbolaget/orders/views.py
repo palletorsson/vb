@@ -18,6 +18,7 @@ import json
 #from checkout.views import fortnoxOrderandCostumer
 import base64
 from vamlingbolaget.settings import ROOT_DIR
+import datetime
 
 def CheckoutTransfer(checkout, cartitem, reaitems):
 
@@ -90,12 +91,14 @@ def ShowOrder(request, order_id):
         secondmessage = None
         if checkout.status == 'O': 
             secondmessage = u'Hej! \n\nVi på Vamlingbolaget vill återigen tack för din order. Din ordernummer är: 37827359723\nNu har vi in lagt din order för production. En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \nSå fort det är klar kommer vi att skicka dina produkter. Då får du också ett nummer så du kan följa din order när den skickas. \n\nVänliga Hälsningar \nVamlingbolaget.'
-
+        
+        incolor_path = None
         fortnox = None
         if checkout.status == 'M': 
             allitems = {'cartitems': cartis, 'bargains': {}, 'voucher': {}, 'rea_items': reaitems}
             invoice_rows = create_invoice_rows(allitems)
-            
+            file_name = checkout.order_number
+            incolor_path = '../../media/'+str(file_name)+'.txt'
             fortnox = 'Preview the order and customer information for the Fortnox invoice'
         
         unifaun = None
@@ -113,6 +116,7 @@ def ShowOrder(request, order_id):
             'cartitems':cartitems,
             'reaitems':reaitems,        
             'fortnox':fortnox,
+            'incolor_path': incolor_path,  
             'secondmessage':  secondmessage, 
             'totalprice':totalprice,
             'handling':handling,
@@ -124,7 +128,7 @@ def ShowOrder(request, order_id):
             context_instance=RequestContext(request))
 
 
-def OrderAction(request, todo, stage, order_number): 
+def OrderAction(request, todo, stage, order_number, send_type=''): 
 
     if request.user.is_authenticated:
         current_user = request.user
@@ -136,6 +140,10 @@ def OrderAction(request, todo, stage, order_number):
                 if order.paymentmethod == 'K': 
                     klarna_id = order.payex_key
                     requestKlarna(klarna_id)
+                try:
+                    makeLeaf(order)
+                except: 
+                    pass
                 # send second email 
                 #log process
                 log = 'Order: ' + str(order.order_number) + ', Second email sent to: ' + order.email 
@@ -153,6 +161,7 @@ def OrderAction(request, todo, stage, order_number):
                     resp = createOrder(headers, new_order)
                     order.fortnox_obj = resp
                     order.save()
+
                     #log process
                     if len(resp) < 100: 
                         log = 'Order: ' + str(order.order_number) + ', Fortnox order could not be created, view details'  
@@ -179,7 +188,7 @@ def OrderAction(request, todo, stage, order_number):
                     parcel_json_len = 'short' 
                 parcels = getParcels(order_json, parcel_json_len)
                 pdfConf = getPdfConfig()
-                service = getService('P15')
+                service = getService(send_type)
                 vamlingbolaget = getSender()
                 opt =  getOptions(order.email)
                 #checkZip(order.postcode)
@@ -425,19 +434,66 @@ def LookAtDict(checkout):
         fortnoXobj = json.loads(checkout.fortnox_obj) 
         orderNum = fortnoXobj['Invoice']['YourOrderNumber']
         order_exist = True 
-        check_string = check_string + '["1":"OK"]'
+        check_string = check_string + '["2":"OK"]'
 
     except:
         order_exist = False
         check_string = check_string + '["2":"NA"]'
        
     try: 
-        unifaunObj = json.loads(checkout.unifaun_obj) 
-        unifaunNum = unifaunObj
-        shipping_exist = True 
-        check_string = check_string + '["3":"OK"]'
+        unifaunMedia = checkout.unifaun_obj[:5] 
+
+        if unifaunMedia == 'media': 
+            shipping_exist = True 
+            check_string = check_string + '["3":"OK"]'
     except:
         shipping_exist = False
         check_string = check_string + '["3":"NA"]'
 
     return check_string
+
+
+def makeLeaf(checkout):
+    cartitems = checkout.orderitem_set.all()
+    headers = get_headers()
+    searchCustomer(headers, '', checkout.email)
+    getnames(cartitems)
+    reaitems = checkout.reaorderitem_set.all()
+    
+    fortnox_custumer = searchCustomer(headers, '', email=checkout.email)
+
+    file_name = checkout.order_number
+    txt_path = ROOT_DIR+'/media/'+str(file_name)+'.txt'
+
+    f = open(txt_path, 'w')
+
+    for item in cartitems: 
+        f.write('\n') 
+        f.write("INFARGNINGSSEDEL -------- DATUM: ".encode('utf8') + str(datetime.date.today()) + '\n')
+        f.write('-------------------------------------------\n')
+        f.write('\n')
+        f.write('KUND: ' + fortnox_custumer.rsplit('/', 1)[-1] + '  ---------------  ')
+        f.write('ORDER NR: ' + str(checkout.order_number)  + '\n' )
+        f.write('-------------------------------------------\n')
+        f.write('\n')
+        f.write('ARTIKEL: \n')        
+        f.write('-------------------------------------------\n')
+        f.write('ART NR: '+ str(item.article.sku_number) + '\n' )
+        f.write('-------------------------------------------\n')
+        f.write('PLAGG: '+  item.article.name.encode('utf8') + '\n' )
+        f.write('-------------------------------------------\n')
+        f.write('FARG: '+  str(item.color) + ' -- ')
+        f.write('MONSTER: '+  str(item.pattern) + ' \n')
+        if (item.pattern_2 != 0):
+            f.write('FARG2: '+  str(item.color2) + ' -- ')
+            f.write('MONSTER2: '+  str(item.pattern2) + ' \n')     
+        f.write('-------------------------------------------\n')      
+
+        f.write('ANTAL: '+ str(item.quantity) + '\n' )
+        f.write('\n')
+        f.write('KOMMENTAR:\n')  
+        f.write('-------------------------------------------\n\n\n\n\n')  
+        f.write('-------------------------------------------\n') 
+        f.write('\n\n\n\n') 
+    f.closed
+    return 1
