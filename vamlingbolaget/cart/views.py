@@ -299,6 +299,27 @@ def showcart(request):
         returntotal,
         context_instance=RequestContext(request))
 
+def showcartBySessionId(request, session_id):
+    if request.user.is_authenticated:
+        key = session_id
+        try:
+            cart = Cart.objects.get(key=key)
+            cartitems = cart.cartitem_set.all()
+            bargains = cart.bargaincartitem_set.all()
+            rea = cart.reacartitem_set.all()
+            voucher = cart.vouchercart_set.all()
+            returntotal = totalsum(cartitems, bargains, request, voucher, rea)
+            getnames(cartitems)
+            returntotal['cartitems'] =  cartitems
+            returntotal['bargains'] =  bargains
+            returntotal['voucher'] = voucher
+            returntotal['rea'] = rea
+        except:
+            returntotal = ''
+
+        return render_to_response('cart/show_cart.html',
+            returntotal,
+            context_instance=RequestContext(request))
 
 def editcartitem(request, key):
 
@@ -343,6 +364,13 @@ def removefromcart(request, pk, type):
             cartitem = CartItem.objects.get(pk=pk)
     except CartItem.DoesNotExist:
         cartitem = None
+
+    try:
+        log = 'Cartitem remove: ' + cartitem.article.name 
+        keepLog(request, log, 'INFO', '', pk) 
+    except:
+        log = 'Cartitem remove failed' 
+        keepLog(request, log, 'ERROR', '', pk) 
 
     cartitem.delete()
     listed = isincart(request, pk, cartitem)
