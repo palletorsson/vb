@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% block allcontent %}
+
+  {% if user.is_authenticated %}
+	<legend> <a href="/orders/"> All orders</a> | Order </legend>
+	<legend> Shipment </legend>
+	<pre> {{shipment}} </pre>
+
+
+    {% else %}
+        <p> please ... </p>
+    {% endif %}
+{% endblock %}

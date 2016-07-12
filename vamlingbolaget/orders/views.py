@@ -127,6 +127,15 @@ def ShowOrder(request, order_id):
             },
             context_instance=RequestContext(request))
 
+def loadShipment(request, id): 
+
+    shipment = getShipment(id)
+    
+    return render_to_response('orders/shipment.html', {
+        'shipment': shipment,
+      
+        },
+        context_instance=RequestContext(request))
 
 def OrderAction(request, todo, stage, order_number, send_type=''): 
 
@@ -191,6 +200,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                 service = getService(send_type)
                 vamlingbolaget = getSender()
                 opt =  getOptions(order.email)
+                senderpartner = senderPartner(send_type)
                 #checkZip(order.postcode)
                 unifaunObj = {
                 "pdfConfig": pdfConf,
@@ -201,11 +211,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                     "receiver": receiver,
                     "service": service,
                     "senderReference": "Vamlingbolaget", 
-				    "senderPartners": [{
-				        "id": "PLAB",
-				        "custNo": "0111111118"
-				    
-				    }],
+				    "senderPartners": senderpartner,
                     "options": opt,
                     "test": "true"
  
@@ -277,6 +283,27 @@ def unifaunShipmentCall(shipmentparams):
 # https://www.unifaunonline.se/ufoweb-prod-201606211020/rs-extapi/v1/stored-shipments
 # ?dateType=created&searchField=orderNo&searchOp=equals&status=ready
 
+def getAllShipment(): 
+    url = 'https://www.unifaunonline.se/rs-extapi/v1/stored-shipments/'
+    headers = GetHeaders() 
+    r = requests.get(
+            url, 
+            headers=headers
+            )
+    print r
+    return r.content
+
+def getShipment(id): 
+    url = 'https://www.unifaunonline.se/rs-extapi/v1/shipments/'
+    headers = GetHeaders() 
+    r = requests.get(
+            url, 
+            headers=headers
+            )
+    print r
+    print r.contentsq
+    return r.content
+
 def removeShipment(id): 
     url = 'https://www.unifaunonline.se/rs-extapi/v1/stored-shipments/'+id
     headers = GetHeaders() 
@@ -326,6 +353,22 @@ def getShipmentPara():
     json2 = '{"pdfConfig": {"target4YOffset": 0, "target2XOffset": 0, "target2YOffset": 0, "target4XOffset": 0, "target2Media": "laser-a4", "target1XOffset": 0, "target1Media": "laser-ste", "target3XOffset": 0, "target3YOffset": 0, "target3Media": "null", "target1YOffset": 0, "target4Media": "null"}, "shipment": {"options": [{"to": "sales@unifaun.com", "message": "This is order number 123", "from": "info@unifaun.com", "id": "ENOT", "languageCode": "SE"}], "Party_CustNo": {"location":"Stockholm"},"senderPartners": [{ "id": "001", "custNo": "001" }], "sender": {"phone": "+46 31 725 35 00", "city": "G\u00d6TEBORG", "name": "Unifaun AB", "address1": "Skeppsbron 5-6", "quickId": "1", "country": "SE", "email": "info@unifaun.com", "zipcode": "41121"}, "service": {"id": "P15"}, "receiver": {"city": "STOCKHOLM", "name": "Unifaun AB", "address1": "Tegn\u00e9rgatan 34", "zipcode": "11359", "phone": "+46 8 34 35 15", "country": "SE", "email": "sales@unifaun.com"}, "orderNo": "order number 123", "receiverReference": "receiver ref 345", "parcels": [{"contents": "important things", "copies": "1", "weight": "2.75", "location": "gotland"}], "senderReference": "sender ref 234"}}' 
     return json2
 
+def senderPartner(sender_type):
+    print sender_type 
+    if sender_type == "PAF": 
+        senderpartner = "PBREV" 
+        custno = "011111118"
+    if sender_type == "P15": 
+        senderpartner = "PLAB" 
+        custno = "0111111118"
+    if sender_type == "PUA":
+        senderpartner = "PBREV" 
+        custno = "01111118" 
+
+    return [{ "id": senderpartner,
+        "custNo": custno }]
+
+
 
 def getParcels(parcel_json, parcel_json_len):
     weight = 0
@@ -368,11 +411,25 @@ def getPdfConfig():
     "target1XOffset": 0,
     "target2XOffset": 0
     }
+
 # "id": "P15"
 def getService(service):
-	return {
-      "id": service
-    }
+    if service == "PAF": 
+        return {
+          "id": service,
+          "paymentMethodType": "invodn",  
+           "addons": [{
+                 "id": "PAF"
+                },
+                {
+                "id": "COD",
+                "amount": 100
+                }],
+        }
+    else: 
+        return {
+          "id": service
+        }
 
 def getSender(): 
     return {
@@ -469,7 +526,7 @@ def makeLeaf(checkout):
 
     for item in cartitems: 
         f.write('\n') 
-        f.write("INFARGNINGSSEDEL -------- DATUM: ".encode('utf8') + str(datetime.date.today()) + '\n')
+        f.write("INFARGNINGSSEDEL -------- DATUM: " + str(datetime.date.today()) + '\n')
         f.write('-------------------------------------------\n')
         f.write('\n')
         f.write('KUND: ' + fortnox_custumer.rsplit('/', 1)[-1] + '  ---------------  ')
@@ -478,15 +535,15 @@ def makeLeaf(checkout):
         f.write('\n')
         f.write('ARTIKEL: \n')        
         f.write('-------------------------------------------\n')
-        f.write('ART NR: '+ str(item.article.sku_number) + '\n' )
+        f.write('ART NR: '+ str(item.article.sku_number).encode('iso-8859-1') + '\n' )
         f.write('-------------------------------------------\n')
-        f.write('PLAGG: '+  item.article.name.encode('utf8') + '\n' )
+        f.write('PLAGG: '+  item.article.name.encode('iso-8859-1') + '\n' )
         f.write('-------------------------------------------\n')
-        f.write('FARG: '+  str(item.color) + ' -- ')
-        f.write('MONSTER: '+  str(item.pattern) + ' \n')
+        f.write('FARG: '+  str(item.color).encode('iso-8859-1') + ' -- ')
+        f.write('MONSTER: '+  str(item.pattern).encode('iso-8859-1') + ' \n')
         if (item.pattern_2 != 0):
-            f.write('FARG2: '+  str(item.color2) + ' -- ')
-            f.write('MONSTER2: '+  str(item.pattern2) + ' \n')     
+            f.write('FARG2: '+  str(item.color2).encode('iso-8859-1') + ' -- ')
+            f.write('MONSTER2: '+  str(item.pattern2).encode('iso-8859-1') + ' \n')     
         f.write('-------------------------------------------\n')      
 
         f.write('ANTAL: '+ str(item.quantity) + '\n' )
