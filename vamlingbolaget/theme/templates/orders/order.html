@@ -337,74 +337,21 @@
 
 	
 	Välj fraktsätt: <option value="*SELECT*">- Välj -</option>
-
 	<option value="PAF">PostNord - Brevpostförskott</option>
-
-	<option value="BEXPD">PostNord - Expressbrev</option>
-
-	<option value="BREV">PostNord - Normal</option>
-
-	<option value="BREKDBREKI">PostNord - Rekommenderat</option>
 
 	<option value="PUA">PostNord - Varubrev 1:a klass</option>
 
-	<option value="PUE">PostNord - Varubrev Ekonomi</option>
-
-	<option value="PBM">PostNord - Varubrev Retur</option>
-
-	<option value="BVAL">PostNord - Värde</option>
-
-	<option value="P15">PostNord DPD Företagspaket</option>
-
-	<option value="P31">PostNord DPD Företagspaket 09.00</option>
-
-	<option value="P14">PostNord DPD Företagspaket 12.00</option>
-
-	<option value="DPD">PostNord DPD Utrikes</option>
-
-	<option value="EMSD2">PostNord EMS (brev/dokument)</option>
-
-	<option value="EMSP2">PostNord EMS (paket/varor)</option>
-
-	<option value="P42" selected="selected">PostNord Express - Expresspaket</option>
-
-	<option value="P32">PostNord Hempaket</option>
-
-	<option value="H48">PostNord InNight</option>
-
-	<option value="P91">PostNord International Parcel</option>
-
-	<option value="P42NO">PostNord Logistics Express Next Day (Norge)</option>
-
-	<option value="DTPGSG">PostNord Logistics Groupage (Norge)</option>
-
-	<option value="DTPGHD">PostNord Logistics Hjemlevering (Norge)</option>
-
-	<option value="P19NO">PostNord Logistics MyPack (Norge)</option>
-
-	<option value="P24NO">PostNord Logistics MyPack Return (Norge)</option>
-
-	<option value="DTPG52">PostNord Logistics Pallet (Norge)</option>
-
-	<option value="DTPGPF">PostNord Logistics Partifrakt (Norge)</option>
-
-	<option value="P19P19DPD">PostNord MyPack</option>
-
-	<option value="P24P24DPD">PostNord MyPack return</option>
-
-	<option value="P52">PostNord PALL.ETT</option>
-
-	<option value="P85">PostNord Partigods</option>
-
-	<option value="P83">PostNord Styckegods</option>
+	<option value="P15" selected="selected">PostNord DPD Företagspaket</option>
 
 </select>
+
 <div id="urlbase" class="hidden">/orders/order/action/activate/shipping/{{ order.order_number }}/</div>
-	 <a id="target_url" href="/orders/order/action/activate/shipping/{{ order.order_number }}/P15">
+	 <a id="target_url" href="/orders/order/action/activate/shipping/{{ order.order_number }}/P15/1.4">
 	    <br><button type="button" id="activate_order" class="btn btn-large btn-warning text-center"> Activate Order For Shipping </button>
 	    </a><br><small>(A Unifaun, Postnord order will be activated)</small>
 
-	<br><small><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a></small><hr></div>
+	<br><small><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a></small><hr>
+	</div>
 {% endif %}
 {% if order.status == 'S' %}
 
