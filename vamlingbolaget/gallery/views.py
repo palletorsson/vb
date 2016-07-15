@@ -1,7 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response 
+from django.shortcuts import redirect
 from django.template import RequestContext
 from models import *
+from products.models import Article
+import csv
 
 def show_galleries(request):
     galleries = Gallery.objects.filter(status__display_on_gallery_page = True)
@@ -16,8 +19,12 @@ def show_galleries(request):
     )
 
 def show_gallery(request, key):
- 
-    gallery = Gallery.objects.get(pk=key)
+
+    try: 
+        gallery = Gallery.objects.get(pk=key)
+    except: 
+        return redirect('/galleries/')
+
     template='gallery/gallery.html'
 
     images = gallery.image_set.all().order_by('order')
@@ -52,3 +59,36 @@ def show_gallery(request, key):
          'break3':break3,
          },context_instance=RequestContext(request)
     )
+
+
+
+def CsvGallery(request): 
+    # get the data if post
+    if request.method == 'POST':   
+
+        reader = csv.reader(request.FILES["fileToUpload"])
+        for row in reader:
+            print row
+            gallery = Gallery.objects.get(pk=row[0])
+            image = Image.objects.get(pk=row[1])
+            article= Article.objects.get(pk=row[2])
+            _, created = GalleryImage.objects.get_or_create(
+                gallery=gallery,
+                image=image,
+                article=article,
+                is_featured=row[3],
+                order=row[4]   
+                )
+        return render_to_response(
+            'gallery/import_json.html',
+            context_instance=RequestContext(request))
+    else:
+        return render_to_response(
+            'gallery/import_json.html',
+            context_instance=RequestContext(request))
+
+def CsvExport(request, key): 
+
+    galleryimages = GalleryImage.objects.filter(gallery=key)
+
+    
