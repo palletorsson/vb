@@ -189,9 +189,9 @@ $("#addtocart").off('click').on({
 
     			$("#updatecart").delay(6000).fadeOut(3000).animate({
                       height:'0px'
-                    });;
+                    });
 
-                        });;
+                    
 
         			var old_quantity = $("#widget_quantity").text();
         			var new_quantity = parseInt(quantity) + parseInt(old_quantity);
