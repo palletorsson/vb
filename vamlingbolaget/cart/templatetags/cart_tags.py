@@ -7,6 +7,7 @@ register = template.Library()
 
 #@register.tag(name='cart_total')
 def cart_total(context):
+    has_items = False
     request = context['request']
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
@@ -17,6 +18,8 @@ def cart_total(context):
     returntotal = totalsum(cartitems, bargains, request, voucher, rea)
     total = returntotal['totalprice']
     numbers = returntotal['totalitems']
-    return { 'total': total, 'numbers': numbers }
+    if numbers > 0: 
+        has_items = True
+    return { 'total': total, 'numbers': numbers, 'has_items': has_items }
 
 register.inclusion_tag('cart/cart_template.html', takes_context = True)(cart_total)

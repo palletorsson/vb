@@ -10,7 +10,8 @@
 {% block pagetitle %}
 	<div class="row-fluid">
 		<div class="span12" >
-			<legend><a href="javascript:history.go(-1)">{% trans "Shop" %}</a> / {{ product.article.name }} </legend>
+<div class="bread" ><a href="javascript:history.go(-1)"> << {% trans "Shop" %}</a> / </div> 
+			<hr>
 		</div>
 {% endblock %}
 
@@ -261,5 +262,5 @@
 
 </div>
 </div>
-{{ product.article.quality.order }}
+
 {% endblock %}
