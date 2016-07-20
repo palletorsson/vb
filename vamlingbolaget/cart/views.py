@@ -67,8 +67,9 @@ def addtocart(request):
             size = d['size']
         except: 
             size = 1
-
-        if sku == 1000: 
+            
+        # when article in metervara 
+        if sku == '3' or sku == '1000': 
             quantity = int(d['quantity']) 
         else: 
             quantity = 1
@@ -100,7 +101,7 @@ def addtocart(request):
             for item in existing_cartitems:
                 if (str(item.article.sku_number) == str(sku) and str(item.pattern) == str(pattern) and
                     str(item.color) == str(color) and str(item.size) == str(size)):
-                    item.quantity = item.quantity + quantity
+                    item.quantity = quantity
                     item.save()
                     msg = u'Antal 1,  %s <br/>' %(article_db.name)
                     quantity = item.quantity
