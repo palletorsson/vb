@@ -56,15 +56,23 @@ def addtocart(request):
         color = d['color']
         pattern = d['pattern']
         color2 = int(d['color2'])
-        #print color2
+
         if(color2 == 0):
             pass
         else:
             color2 = d['color2']
             pattern2 = d['pattern2']
 
-        size = d['size']
-        quantity = int(d['quantity'])
+        try: 
+            size = d['size']
+        except: 
+            size = 1
+
+        if sku == 1000: 
+            quantity = int(d['quantity']) 
+        else: 
+            quantity = 1
+
         cartitem_id = int(d['cartitem_id'])
         add_or_edit = d['add_or_edit']
 
@@ -94,7 +102,7 @@ def addtocart(request):
                     str(item.color) == str(color) and str(item.size) == str(size)):
                     item.quantity = item.quantity + quantity
                     item.save()
-                    msg = u'Du la till ytterligare %s %s och har nu: <br/>' %(quantity, article_db.name)
+                    msg = u'Antal 1,  %s <br/>' %(article_db.name)
                     quantity = item.quantity
                     update = True
             if update != True:
@@ -107,8 +115,8 @@ def addtocart(request):
                 cartitem.size = size
                 cartitem.color = color
                 cartitem.quantity = quantity
+                msg = u'Du har lagt till: <br/>'                   
                 cartitem.save()
-                msg = u'Du har lagt till: <br/>'
 
         else:
             cartitem = CartItem.objects.create(cart = cart)
@@ -116,10 +124,10 @@ def addtocart(request):
             cartitem.pattern = pattern
             cartitem.size = size
             cartitem.color = color
+            cartitem.quantity = quantity
             if(color2 > 0):
                 cartitem.color_2 = color2
                 cartitem.pattern_2 = pattern2
-            cartitem.quantity = quantity
             cartitem.save()
             msg = u'Du har lagt till: <br/>'
 
@@ -202,6 +210,7 @@ def add_bargain(request):
                 },
             'message': { 'msg' : msg }
         }
+
     return_data = json.dumps(returnjson)
     response = HttpResponse(return_data, mimetype="application/json")
     return response
@@ -359,7 +368,6 @@ def removefromcart(request, pk, type):
             cartitem = BargainCartItem.objects.get(pk=pk)
         elif type == 'rea': 
             cartitem = ReaCartItem.objects.get(pk=pk)
-            print cartitem
         else:
             cartitem = CartItem.objects.get(pk=pk)
     except CartItem.DoesNotExist:
@@ -409,8 +417,7 @@ def totalsum(cartitems, bargains, request, voucher, rea):
     
     if (voucher and cartitems):
 		try:
-			ordered = sorted(cartitems, key=operator.attrgetter('article.price'), reverse=True) 
-			print ordered
+			ordered = sorted(cartitems, key=operator.attrgetter('article.price'), reverse=True)
 			ordered[0].article.oldprice = int(ordered[0].article.price)
 			ordered[0].article.price = int(ordered[0].article.price * 0.85)
 		except:
@@ -442,6 +449,7 @@ def totalsum(cartitems, bargains, request, voucher, rea):
         gi = pygeoip.GeoIP(ROOT_DIR+'/GeoIP.dat')
         ip_ = request.META['REMOTE_ADDR']
         country = gi.country_code_by_addr(ip_)
+
     except:
         country = 'SE'
 
@@ -496,7 +504,6 @@ def customer_email(request, email):
 
     if request.user.is_superuser:    
         name = ''
-        print email
         headers = get_headers()
         customer = searchCustomer(headers, name, email) 
     else:

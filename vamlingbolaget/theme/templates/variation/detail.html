@@ -31,7 +31,7 @@
 		</div>
 		<div class="span7">
 			<span class="articlehead">
-				<span id="articlename" >
+				<span id="articlename">
 					<input id="article_pk" type="hidden" value="{{ product.article.pk }}">
 					{{ product.article.name }} 
 					<small>	| 
@@ -180,13 +180,13 @@
 		<!-- if type is  Piece-goods (metervara) -->
 		{% if product.article.type.order == 8 %}
 			 {% trans "Välj" %} ..
-				<span class="select_size" id="1"> 1 meter </span> | 
-				<span class="select_size" id="2"> 2 meter </span> | 
-				<span class="select_size" id="3"> 3 meter </span> | 
-				<span class="select_size" id="4"> 4 meter </span> | 
-				<span class="select_size" id="5"> 5 meter </span> | 
-				<span class="select_size" id="6"> 6 meter </span> | 
-			
+				<span class="select_quantity" id="1"> 1 meter </span> | 
+				<span class="select_quantity" id="2"> 2 meter </span> | 
+				<span class="select_quantity" id="3"> 3 meter </span> | 
+				<span class="select_quantity" id="4"> 4 meter </span> | 
+				<span class="select_quantity" id="5"> 5 meter </span> | 
+				<span class="select_quantity" id="6"> 6 meter </span> | 
+
 				<input type="hidden" id="quantity" name="quantity" value="1">	
 		{% else %}
 			

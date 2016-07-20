@@ -74,9 +74,9 @@ var str = "Beställ "+article_name+ " i ",
     img = "";
 
 var once = 1,
-		img2,
-		img,
-		pattern2_id = $("#pattern2").val() || null;
+	img2,
+	img,
+	pattern2_id = $("#pattern2").val() || null;
 
 $(".changonselect option:selected").each(function () {
 	str += $(this).text() + " ";
@@ -87,9 +87,9 @@ $(".changonselect option:selected").each(function () {
     once = 2;
 
     var pattern_id = $("#pattern").val(),
-			color_id = $("#color").val(),
-			size_id = $("#size").val(),
-			color2_id = $("#color2").val() || null;
+		color_id = $("#color").val(),
+		size_id = $("#size").val(),
+		color2_id = $("#color2").val() || null;
 			
 		img = folder+color_id+"f_"+pattern_id+"m.jpg";
 		
@@ -110,11 +110,8 @@ $("#pattern_color_image").attr("src", img);
 
 
 if ($(".hasitems")[0]){
-    console.log("hast")
     $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff0000"}) 
-} else {
-     console.log("no hast")   
-}
+} 
 
 var counter = 0;
 $("#addtocart").off('click').on({
@@ -189,9 +186,7 @@ $("#addtocart").off('click').on({
 
     			$("#updatecart").delay(6000).fadeOut(3000).animate({
                       height:'0px'
-                    });
-
-                    
+                    });                    
 
         			var old_quantity = $("#widget_quantity").text();
         			var new_quantity = parseInt(quantity) + parseInt(old_quantity);
@@ -437,9 +432,7 @@ $('.overlay').each(function(){
 
 
 var path = location.pathname
-console.log(path)
 links = $('a[href="'+window.location.pathname+'"]')
-console.log(links)
 links.addClass('size_active');
 
 
@@ -539,6 +532,20 @@ set_first_page();
       var ok = $('input[name="size"]').val(size_id);;
     
 	  $('.select_size').removeClass('size_active');
+      var $this = $(this);
+    if (!$this.hasClass('size_active')) {
+        $this.addClass('size_active');
+    }
+    e.preventDefault();
+    });
+
+    $(".select_quantity").click(function(e) {
+      console.log("hast")
+      e.stopPropagation();
+      var quantity_id = this.id; 
+      var ok = $('input[name="quantity"]').val(quantity_id);;
+    
+      $('.select_quantity').removeClass('size_active');
       var $this = $(this);
     if (!$this.hasClass('size_active')) {
         $this.addClass('size_active');
