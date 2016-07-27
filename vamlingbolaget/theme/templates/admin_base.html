@@ -1,0 +1,132 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+  <head>
+    {%block title%}
+        <title>Vamlingbolaget | vamlingbolaget.com</title>
+        <meta name="description" content={% trans "Vamlingbolaget in Stockholm and Gotland, Sweden. Vackra kläder med rötter i Mah-jong och produktion på gotland. Vamlingbolaget startades 1983 när Kristina Torsson med familj flyttade in i ett f d mejeri i Vamlingbo på södra Gotland. Huvudbyggnaden innehåller idag en verkstad där 6-8 personer arbetar året runt med färgning av tyger, tillskärning och sömnad samt postorderexpedition.
+Vamlingbolaget." %} />
+    {%endblock%}
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Vamlingbolaget" />
+    <meta name="keywords" content="Vamlingbolaget,vamlingbolaget.com,vamlingbolaget stockholm,vamlingbolaget gotland" />
+	<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/vamlingbolaget.ico"/>
+    <!-- The styles -->
+
+     
+    <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap_new.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/vb.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/mediaqueries.css" rel="stylesheet">
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.12.3.min.js"></script>
+	<!--[if (lt IE 9)]><!-->
+
+	<script src="{{ STATIC_URL }}js/css3media.js" type="text/javascript"> </script>
+	<script src="{{ STATIC_URL }}js/respond.min.js" type="text/javascript"> </script>
+	<script src="{{ STATIC_URL }}js/masonry.pkgd.min.js" type="text/javascript"> </script>
+    <!--<![endif]-->
+
+
+    <!-- The scripts -->
+   
+      {% block extra_head %}{% endblock %}
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="{{ STATIC_URL }}js/controller.js" type="text/javascript"> </script>
+	<script src="{{ STATIC_URL }}js/underscore.js" type="text/javascript"> </script>
+	<script src="{{ STATIC_URL }}js/backbone.js" type="text/javascript"> </script>
+	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>
+</head>
+
+ <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+    <!-- Navbar ================================================== -->
+    <div class="navbar navbar-default navbar-fixed-top">
+         
+
+          <div class="navbar-inner">
+            <div class="container">
+
+				<span class = "visible-xs">
+					  <a id="token" href="/cart/show/">
+					   <span class="mob_shop_icon">
+             <span class="glyphicon glyphicon-gift" aria-hidden="true"  alt="Vamlingbolaget shopping cart" ></span> 
+             </span>
+					  </a>
+				</span> 
+
+                <a href="/" class="navbar-brand"><img src="{{ STATIC_URL }}img/vb_logo_r.png" alt="Vamlingbolaget logo" class="leftside" /> <span class="glyphicon glyphicon-certificate"  ></span> </a>
+                <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+                        <span class = "icon-bar"></span>
+                        <span class = "icon-bar"></span>
+                        <span class = "icon-bar"></span>
+                </button>
+
+                <div class = "collapse navbar-collapse navHeaderCollapse pull-left">
+
+                     <ul class = "nav navbar-nav navbar-right nav-list mainnav mob_nav">
+                    
+                        <li>
+                            <a href="/orders/">{% trans "All Orders" %}</a>
+                        </li>
+                        <li>
+                            <a href="/logger/">{% trans "See action log" %}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+    </div>
+
+{% block stretchpage %}
+    <div class="container content"> <!--this is for the left margin -->
+      <div id="changetext"></div>
+        <div class="pagetitle">
+        {% block pagetitle %} {% endblock %}
+        {% block pagedesc %} {% endblock %}
+      </div>
+
+    {% block allcontent %}
+      <div class="span2">
+           {% block sidebar %}
+
+           {% endblock %}
+      </div>
+      <div class="span9">
+           {% block content %}
+                 FEATURED COLLECTION
+          {% endblock %}
+      </div>
+    {% endblock %}
+  </div>
+
+
+{% block footer %}
+
+  <footer>
+	{% include "footer.html" %}
+  </footer>
+ {% endblock %}
+{% endblock %}
+
+
+    <div class="hidden" id="widget_text_start" >{% trans "+" %}</div>
+    <div class="hidden" id="widget_size" >{% trans "Storlek" %}</div>
+    <div class="hidden" id="widget_exist" >{% trans "Det finns" %}</div>
+    <div class="hidden" id="widget_text_end" >{% trans "av denna artikel" %}</div>
+    <div class="hidden" id="widget_text_in" >{% trans "i" %}</div>
+    <div class="hidden" id="widget_text_remove" >{% trans "Vill du ta bort denna post?" %}</div>
+
+
+
+	<script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
+	<script src="{{ STATIC_URL }}js/lightbox.js" type="text/javascript"> </script>
+        
+</div>
+</div>
+ 
+ </body>
+</html>

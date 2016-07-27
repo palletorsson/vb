@@ -1,13 +1,11 @@
-{% extends "base.html" %}
+{% extends "admin_base.html" %}
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {% block allcontent %}
 
   {% if user.is_authenticated %}
-
-
-
+	<legend> Vamlingbolaget Web Orders </legend>
 		    <a href="/orders/orders/all/"><button type="button" id="activate_order" class="btn btn-large btn-info text-center">
 			All Orders </button></a> |     
 			<a href="/orders/orders/ordered/"><button type="button" id="activate_order" class="btn btn-large btn-danger text-center">

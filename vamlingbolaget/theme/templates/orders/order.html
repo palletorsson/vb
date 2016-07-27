@@ -1,11 +1,10 @@
-{% extends "base.html" %}
+{% extends "admin_base.html" %}
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {% block allcontent %}
 
   {% if user.is_authenticated %}
-	<legend> <a href="/orders/"> All orders</a> | Order </legend>
 	<legend> <span class="glyphicon glyphicon-user" aria-hidden="true"> </span> Costumer </legend>
 
 <table class="table table-bordered table-striped" >
