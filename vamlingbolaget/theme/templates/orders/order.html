@@ -6,7 +6,7 @@
 
   {% if user.is_authenticated %}
 	<legend> <a href="/orders/"> All orders</a> | Order </legend>
-	<legend> Costumer </legend>
+	<legend> <span class="glyphicon glyphicon-user" aria-hidden="true"> </span> Costumer </legend>
 
 <table class="table table-bordered table-striped" >
 	    <thead><tr>
@@ -40,11 +40,7 @@
 		            <span>Fortnox Nr.</span>
 		        </div>
 		    </td>
-		     <td>
-		        <div>
-		            <span>Process status</span>
-		        </div>
-		    </td>
+
 
 		    </tr>
 		    </thead>
@@ -82,19 +78,13 @@
 		        <div>
 		            <span>  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> {{ customer_number }} </span> </span>
 		        </div>
-		    </td>
-
-	         <td>
-		        <div>
-		            <span>  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> {{ process_status }} </span> </span>
-		        </div>
 		    </td>		    
 
 		</tr> 
 		</tbody>
 </table>
 
-<legend> Order details </legend>
+<legend> <span class="glyphicon glyphicon-tags" aria-hidden="true"> </span>  Order details </legend>
 <table class="table table-bordered table-striped" >
 	    <thead><tr>
 		    <td>
@@ -118,7 +108,11 @@
 		            <span> Payment Method </span>
 		        </div>
 		    </td>
-		       
+		    <td>
+		        <div>
+		            <span>Process status</span>
+		        </div>
+		    </td>
 		    </tr>
 		    </thead>
 
@@ -133,11 +127,12 @@
 		     <td>
 		        <div>
 		            <span> 
+
 		            	{% if order.status == 'O' %}
 						<button type="button" id="activate_order" class="btn btn-xs btn-danger text-center"> Ordered </button>
 						{% endif %}
-						{% if order.status == 'I' %}
-						<button type="button" id="activate_order" class="btn btn-xs btn-danger text-center"> Ordered </button>
+						{% if order.status == 'P' %}
+						<button type="button" id="activate_order" class="btn btn-xs btn-danger text-center"> Ordered and Payed </button>
 						{% endif %}
 						{% if order.status == 'M' %}
 						<button type="button" id="activate_order" class="btn btn-xs btn-primary text-center"> In Production </button>
@@ -176,6 +171,11 @@
 						{% if order.paymentmethod == 'K' %}
 						Klarna Checkout
 						{% endif %}
+		        </div>
+		    </td>
+		    <td>
+		        <div>
+		            <span>  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> {{ process_status }} </span> </span>
 		        </div>
 		    </td>
 		</tr> 
@@ -315,50 +315,63 @@
 </table>
 
 
-<legend> Activate Order </legend>
+<legend> <span class="glyphicon glyphicon-bell" aria-hidden="true"> </span>  Order Action </legend>
 <tr>
 
     <th>
-{% if order.status == 'O' %}
-	<div class="text-center"><hr><a href="/orders/order/action/activate/production/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Activate Order For Production </button></a><br><small>(an email notifcation about the order will be sent to the custumer)</small>
-	<br><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a><hr></div>
+{% if order.status == 'O' or order.status == 'P'%}
+	<div class="text-center"><hr><a href="/orders/order/action/activate/production/{{ order.order_number }}/">
+		<button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Activate Order For Production </button></a>
+		<hr>
+		<a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a>
+		<hr>
+	</div>
 {% endif %}
 {% if order.status == 'M' %}
-    <div class="text-center">Skriv ut : <a href="/{{ incolor_path }}">Produktionssedel </a> </div>
-	
-	<div class="text-center"><hr><a href="/orders/order/action/activate/packaging/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-success text-center"> Activate Order For Packaging </button></a><br><small>(The order will be added to Fortnox)</small>
-	<br><small><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a></small><hr></div>
+    <div class="text-center"> 
+    	<span class="glyphicon glyphicon-print" aria-hidden="true"> </span> 
+    	<a href="/{{ incolor_path }}">Produktionssedel </a>
+    </div>
+	<div class="text-center"><hr><a href="/orders/order/action/activate/packaging/{{ order.order_number }}/">
+		<button type="button" id="activate_order" class="btn btn-large btn-success text-center"> Activate Order For Packaging </button></a>
+		<hr>
+		<br><small><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a></small><hr>
+	</div>
 
 {% endif %}
 {% if order.status == 'H' %}
 	<div class="text-center">
-	<hr>
+	<hr> Välj Fraktsätt: <br><br>
 	<select name="Service" id="Service" size="0" tabindex="1">
-
-	
-	Välj fraktsätt: <option value="*SELECT*">- Välj -</option>
-	<option value="PAF">PostNord - Brevpostförskott</option>
-
-	<option value="PUA">PostNord - Varubrev 1:a klass</option>
-
-	<option value="P15" selected="selected">PostNord DPD Företagspaket</option>
-
-</select>
+		Välj fraktsätt: <option value="*SELECT*">- Välj -</option>
+		<option value="PAF">PostNord - Brevpostförskott</option>
+		<option value="PUA">PostNord - Varubrev 1:a klass</option>
+		<option value="P15" selected="selected">PostNord DPD Företagspaket</option>
+	<</select>
 
 <div id="urlbase" class="hidden">/orders/order/action/activate/shipping/{{ order.order_number }}/</div>
-	 <a id="target_url" href="/orders/order/action/activate/shipping/{{ order.order_number }}/P15/1.4">
+	 <a id="target_url" href="/orders/order/action/activate/shipping/{{ order.order_number }}/PAF/">
 	    <br><button type="button" id="activate_order" class="btn btn-large btn-warning text-center"> Activate Order For Shipping </button>
-	    </a><br><small>(A Unifaun, Postnord order will be activated)</small>
-
+	    </a>
+        <hr>  
 	<br><small><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a></small><hr>
 	</div>
 {% endif %}
 {% if order.status == 'S' %}
 
-    <div class="text-center"><a href="/{{ pdf }}">Pdf Shipment </a> | </div> 
-	<div class="text-center"><hr><a href="/orders/order/action/finalize/finalize/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-danger text-center"> Finalize Order </button></a><br><small>(An email notifcation with package tracking information will be sent to the custumer.)</small>
-	<br><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a><hr></div>
+    <div class="text-center"><a href="/media/{{ pdf }}.pdf">    	
+    <span class="glyphicon glyphicon-print" aria-hidden="true"> </span> Shipment Pdf</a>  
+    </div> 
+	<div class="text-center">
+	<hr>
+	<a href="/orders/order/action/finalize/finalize/{{ order.order_number }}/">
+	<button type="button" id="activate_order" class="btn btn-large btn-danger text-center"> Achvie Order </button></a>
+	<br><hr>
+	<br><a href="/orders/order/action/cancel/shipment/{{ order.order_number }}/">(remove shipment)</a> <a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a>
+	<hr>
+	</div>
 {% endif %}
+
 {% if order.status == 'F' %}
 	<div class="text-center"><button type="button" id="activate_order" class="btn btn-large btn-default text-center"> Order Achived </button></div>
 		<div class="text-center"><hr><a href="/orders/order/action/activate/production/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Reactivate Order For Production </button></a><hr></div>
@@ -370,63 +383,48 @@
 
 </th>
 </tr>
-</table>  
-	{% if fortnox %}
+</table> 
+<legend> <span class="glyphicon glyphicon-comment" aria-hidden="true"> </span>  Communication </legend> 
+{% if fortnox %}
+	<table class="table table-bordered table-striped" >
+		<tr>
+			<td>
+				<div class="text-center">{{ fortnox }}</div>
+			 </td>
+			</tr> 
+	</table>	
+{% endif %}
 
-<table class="table table-bordered table-striped" >
-	<tr>
-		<td>
+{% if lastmessage %}
+<pre>{{ lastmessage }}</pre>
+{% endif %}
 
-			<div class="text-center">{{ fortnox }}</div>
-		 </td>
-		</tr> 
-		</tbody>
-</table>	
+{% if secondmessage %}
+	<legend> This email notifcation about the order will be sent to the custumer. </legend> 
+	<table class="table table-bordered table-striped" >
+		<tr>
+			<td>
+				<pre>{{ secondmessage }}</pre>
+			 </td>
+		</tr> 	
+	</table>	
+{% endif %}
 
-	{% endif %}
+{% if order.status == 'H' %}
+	<pre>A Unifaun, Postnord order will be created and stored in Unifaun and for printing.</pre>
+{% endif %}
 
-
-		{% if lastmessage %}
-<legend> Package message </legend>
-<table class="table table-bordered table-striped" >
-	<tr>
-		<td>
-
-			<pre>{{ lastmessage }}</pre>
-		 </td>
-		</tr> 
-		</tbody>
-</table>	
-
-	{% endif %}
-
-
-	{% if secondmessage %}
-	<legend> Consumer message 2:  </legend>
-<table class="table table-bordered table-striped" >
-	<tr>
-		<td>
-
-			<pre>{{ secondmessage }}</pre>
-		 </td>
-		</tr> 
-		</tbody>
-</table>	
-
-	{% endif %}
-	{% if order.status == 'O' %}
+{% if order.status == 'O' %}
 	kolla klarna
 <legend> This Message has been sent to the customer: </legend>
 <table class="table table-bordered table-striped" >
 <tr>
     <td>
-      <pre>{{ order.message }}</pre>
+      <pre> {{ order.message }}</pre>
     </td>
 </tr>
 </table>
-
-
-	{% endif %}
+{% endif %}
 
 
 

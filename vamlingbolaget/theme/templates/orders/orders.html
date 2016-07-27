@@ -76,7 +76,7 @@
 		     <td>
 		        <div>
 		            <span> <a href="/orders/order/{{ order.order_number }}/">
-						{% if order.status == 'O' %}
+						{% if order.status == 'O' or order.status = 'P' %}
 						<button type="button" id="activate_order" class="btn btn-xs btn-danger text-center"> Ordered </button>
 						{% endif %}
 						{% if order.status == 'M' %}

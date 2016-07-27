@@ -42,7 +42,7 @@ def ShowOrders(request, stage='all'):
 	if request.user.is_authenticated:
 	    if stage == 'all': 
 	        checkouts = Checkout.objects.filter(~Q(status='C')).exclude(status='F').order_by('-id')[:100]
-	    elif stage == 'ordered':
+	    elif stage == 'ordered' or stage == 'card':
 	         checkouts = Checkout.objects.filter(status='O').order_by('-id')[:50]
 	    elif stage == 'making':
 	         checkouts = Checkout.objects.filter(status='M').order_by('-id')[:50]
@@ -90,7 +90,7 @@ def ShowOrder(request, order_id):
 
         secondmessage = None
         if checkout.status == 'O': 
-            secondmessage = u'Hej! \n\nVi på Vamlingbolaget vill återigen tack för din order. Din ordernummer är: 37827359723\nNu har vi in lagt din order för production. En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. \nSå fort det är klar kommer vi att skicka dina produkter. Då får du också ett nummer så du kan följa din order när den skickas. \n\nVänliga Hälsningar \nVamlingbolaget.'
+            secondmessage = u'Hej! \n\nVi på Vamlingbolaget har nu tagit emot och registerat din order. \nSå fort ordern är klar kommer vi att skicka dina produkter.  \nDå får du också ett mail eller sms från Posten så du kan följa din beställning tills den kommer fram till dig. \n\nVänliga Hälsningar \nVamlingbolaget. \n\nDitt ordernummer är: '+ str(checkout.order_number)
         
         incolor_path = None
         fortnox = None
@@ -99,7 +99,7 @@ def ShowOrder(request, order_id):
             invoice_rows = create_invoice_rows(allitems)
             file_name = checkout.order_number
             incolor_path = '../../media/'+str(file_name)+'.txt'
-            fortnox = 'Preview the order and customer information for the Fortnox invoice'
+            fortnox = 'Preview the order and customer information for the Fortnox invoice. The order will be added to Fortnox.'
         
         unifaun = None
         pdf = checkout.unifaun_obj
@@ -108,7 +108,7 @@ def ShowOrder(request, order_id):
 
         lastmessage = None 
         if checkout.status == 'S': 
-            lastmessage = u'Hej! \n\nFölj ditt paket här: 010102492148709. Innehållet: \nVänligen \nVamlingbolaget'
+            lastmessage = u'You can print the Shipping docs now or login to Unifaun later.  \nWhen you activate the postal docs in Unifaun an email will be send to the customer with shipment detail and tracking information.'
         
         return render_to_response('orders/order.html', {
             'order': checkout,
@@ -127,9 +127,20 @@ def ShowOrder(request, order_id):
             },
             context_instance=RequestContext(request))
 
-def loadShipment(request, id): 
+def loadShipment(request, id=''): 
 
-    shipment = getShipment(id)
+    shipment =  getShipments()
+    
+    return render_to_response('orders/shipment.html', {
+        'shipment': shipment,
+      
+        },
+        context_instance=RequestContext(request))
+
+
+def loadShipments(request, id=''): 
+
+    shipment =  getShipments()
     
     return render_to_response('orders/shipment.html', {
         'shipment': shipment,
@@ -218,7 +229,9 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
 
                     }
                 }
+                print unifaunObj
                 shipmentparams = json.dumps(unifaunObj)
+                print shipmentparams
 
 
                 shipment = unifaunShipmentCall(shipmentparams) 
@@ -231,7 +244,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                     pdf_href = shipment_obj[0]['pdfs'][0]['href']
                     shipment_id = shipment_obj[0]['id']
                     pdf = unifaunShipmentGetPDF(pdf_href, shipment_id)
-                    order.unifaun_obj = pdf
+                    order.unifaun_obj = shipment_id
                     order.save()
                     #log process
                     log = 'Order: ' + str(order.order_number) + ', Unifaun print created'
@@ -247,12 +260,24 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
             log = 'Order: ' + str(order.order_number) + ', Order Finlized '  
             keepLog(request, log, 'INFO', current_user, order.order_number, '')
 
-        if stage == 'cancel':
-            if todo == 'cancel':
+        if todo == 'cancel':
+
+            if stage == 'cancel':
+               
                 order.status = 'C'    	
                 #log process
                 log = 'Order: ' + str(order.order_number) + ', Order was cancelled'
                 keepLog(request, log, 'INFO', current_user, order.order_number) 
+
+            if stage == 'shipment': 
+
+
+                shipment_id = order.unifaun_obj
+                print shipment_id
+
+ 
+                remove = removeShipment(shipment_id)
+                print remove
         order.save()
 
 
@@ -293,6 +318,16 @@ def getAllShipment():
     print r
     return r.content
 
+def getShipments(): 
+    url = 'https://www.unifaunonline.se/rs-extapi/v1/shipments/'
+    headers = GetHeaders() 
+    r = requests.get(
+            url, 
+            headers=headers
+            )
+    print r
+    return True
+
 def getShipment(id): 
     url = 'https://www.unifaunonline.se/rs-extapi/v1/shipments/'
     headers = GetHeaders() 
@@ -301,16 +336,18 @@ def getShipment(id):
             headers=headers
             )
     print r
-    print r.contentsq
+
     return r.content
 
+
 def removeShipment(id): 
-    url = 'https://www.unifaunonline.se/rs-extapi/v1/stored-shipments/'+id
+    url = 'https://www.unifaunonline.se/rs-extapi/v1/shipments/'+id
     headers = GetHeaders() 
     r = requests.delete(
             url, 
             headers=headers
             )
+    print r
     return r.content
 
 def getShipmentsByDate(date):
@@ -321,6 +358,7 @@ def getShipmentsByDate(date):
                 headers=headers
                 )
     return r.content
+
 
 def checkZip(zip):
     url = 'https://www.unifaunonline.se/rs-extapi/v1/addresses/zipcodes?countryCode=SE&zip='+zip
@@ -424,12 +462,20 @@ def getService(service):
                 {
                 "id": "COD",
                 "amount": 100
-                }],
+                },
+                { 
+                "id": "NOT"
+                }
+                ],
         }
     else: 
         return {
-          "id": service
+          "id": service, 
+          "addons": [{
+            "id": "NOT"
+            }]
         }
+        
 
 def getSender(): 
     return {
@@ -452,7 +498,8 @@ def getReceiver(name, email, adress1, zipcode, city, country, phone):
       "name": name,
       "address1": adress1,
       "country": "SE",
-      "city": city
+      "city": city,
+     
     }
 
 
@@ -498,9 +545,8 @@ def LookAtDict(checkout):
         check_string = check_string + '["2":"NA"]'
        
     try: 
-        unifaunMedia = checkout.unifaun_obj[:5] 
-
-        if unifaunMedia == 'media': 
+        shipment_id = checkout.unifaun_obj
+        if len(shipment_id) > 3: 
             shipping_exist = True 
             check_string = check_string + '["3":"OK"]'
     except:
@@ -512,12 +558,14 @@ def LookAtDict(checkout):
 
 def makeLeaf(checkout):
     cartitems = checkout.orderitem_set.all()
+    print cartitems
     headers = get_headers()
     searchCustomer(headers, '', checkout.email)
     getnames(cartitems)
     reaitems = checkout.reaorderitem_set.all()
     
     fortnox_custumer = searchCustomer(headers, '', email=checkout.email)
+    
 
     file_name = checkout.order_number
     txt_path = ROOT_DIR+'/media/'+str(file_name)+'.txt'
@@ -525,13 +573,16 @@ def makeLeaf(checkout):
     f = open(txt_path, 'w')
 
     for item in cartitems: 
+        
         f.write('\n') 
         f.write("INFARGNINGSSEDEL -------- DATUM: " + str(datetime.date.today()) + '\n')
         f.write('-------------------------------------------\n')
         f.write('\n')
         f.write('KUND: ' + fortnox_custumer.rsplit('/', 1)[-1] + '  ---------------  ')
-        f.write('ORDER NR: ' + str(checkout.order_number)  + '\n' )
+        f.write('ORDER NR: ' + str(checkout.order_number) + '\n' )
         f.write('-------------------------------------------\n')
+        print item.article.name.encode('iso-8859-1')
+
         f.write('\n')
         f.write('ARTIKEL: \n')        
         f.write('-------------------------------------------\n')
@@ -547,10 +598,13 @@ def makeLeaf(checkout):
         f.write('-------------------------------------------\n')      
 
         f.write('ANTAL: '+ str(item.quantity) + '\n' )
+        print ('ANTAL: '+ str(item.quantity) + '\n' )
         f.write('\n')
         f.write('KOMMENTAR:\n')  
         f.write('-------------------------------------------\n\n\n\n\n')  
         f.write('-------------------------------------------\n') 
         f.write('\n\n\n\n') 
+
     f.closed
+
     return 1
