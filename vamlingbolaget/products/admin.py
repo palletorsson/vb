@@ -18,7 +18,15 @@ class VariationAdmin(admin.ModelAdmin):
     search_fields = ['article']
     list_per_page = 20
     ordering = ['active','article']
-
+ 
+class FullVariationAdmin(admin.ModelAdmin):
+    model = FullVariation
+    list_display = ('active', 'variation', 'size', 'order',)
+    list_display_links = ('variation',)
+    list_filter = ('variation', 'size',)
+    search_fields = ['variation']
+    list_per_page = 20
+    ordering = ['variation']
 
 
 class ArticleAdmin(TranslationAdmin):
