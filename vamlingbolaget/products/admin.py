@@ -110,7 +110,9 @@ class CategoryAdmin(TranslationAdmin):
     list_filter = ('active', )
     ordering = ['order']
 
-admin.site.register(Variation, VariationAdmin)    
+
+admin.site.register(Variation, VariationAdmin)  
+admin.site.register(FullVariation, FullVariationAdmin)     
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ReaArticle, ReaArticleAdmin)
 admin.site.register(Size, SizeAdmin)
