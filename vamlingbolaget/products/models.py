@@ -10,6 +10,15 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Adjust
 #from products.fortnox import get_headers, get_art_temp, get_articles, get_article, create_article, update_article
 
+SIZES = (
+        ('XS', 'XS'), 
+        ('S', 'S'),
+        ('M', 'M'),
+        ('L', 'L'),
+        ('XL', 'XL'),
+        ('XLL', 'XLL'),
+        )
+
 class TimeStampedActivate(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -42,6 +51,21 @@ class Variation(TimeStampedActivate):
     def __unicode__(self):
         return unicode(self.article)
 
+
+class FullVariation(TimeStampedActivate):
+    variation = models.ForeignKey('Variation')
+    size  = models.CharField(max_length=10, choices = SIZES)
+    stock = models.IntegerField(default=1)
+    order = models.IntegerField("order items", default=100)
+    
+    def get_art_num(self):
+        return "%s_%s_%s_%s" % (self.variation.article.sku_number, self.variation.color.pk, self.variation.pattern.pk, self.size)
+
+    def get_sizes(self): 
+        return SIZES
+
+    def __unicode__(self):
+        return "%s %s %s %s" % (self.variation.article.sku_number, self.variation.color, self.variation.pattern, self.size)
 
 class Size(models.Model):
     """
