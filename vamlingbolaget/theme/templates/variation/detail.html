@@ -76,7 +76,7 @@
 			<!-- if article is the "Reversible zip jacket" | pattern -->
 			{%elif product.article.sku_number == '9805' %}	
 
-				<h5> {% trans "Välj Utsidans mönster %}</h5>
+				<h5> {% trans "Välj Utsidans mönster" %}</h5>
 				<div class="outside">
 					<div class="selectedpatternandcolor span2">
 						<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
@@ -92,7 +92,23 @@
 					<input type="hidden" id="color2" name="color_2" value="{{ product.color.order }}">
 					<div style="clear: both;"></div>
 				</div> 
-			<!-- else if quality is Silky jersey or silkjersey-children etc -->
+				<h5> {% trans "Välj Insidans mönster" %}</h5>
+					<div class="inside">
+						<div id="selectedpatternandcolor_inside" class="selectedpatternandcolor_inside span2">
+						<img id="pattern_color_image inside" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
+						<br/>
+						{{ product.color.name }} {{ product.pattern.name }}
+						</div>
+						<div class="color_and_pattern_choose span5">
+							{% for item in colorsandpattern %}
+								<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image inside" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+							{% endfor  %}
+						</div>
+						<input type="hidden" id="pattern2" name="pattern_2" value="{{ product.pattern.order }}" >
+						<input type="hidden" id="color2" name="color_2" value="{{ product.color.order }}">
+						<div style="clear: both;"></div>
+					</div> 
+			<!-- else if quality is Silky jersey or silkjersey-children etc | pattern -->
 			<!-- hard coded change on server hot fix-->
 			{% elif product.article.quality.order == 1 or product.article.quality.order == 2 or product.article.quality.order == 5 or product.article.quality.order == 9 or product.article.quality.order == 10 or product.article.quality.order == 14 or product.article.quality.order == 16 or product.article.quality.order == 17 or product.article.quality.order == 18 or product.article.quality.order == 19 %}
 			<!-- hard coded change on server -->
@@ -220,7 +236,7 @@
 
 <div class="span12" > 
 	<hr/>
-	<strong>{% trans "Fler produkter av%} {{ product.article.name }} </strong>  
+	<strong>{% trans "Fler produkter av" %} {{ product.article.name }} </strong>  
 	<hr/>
 	{% for product in products %}
 	<div class='image_wrapper'>
