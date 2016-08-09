@@ -73,30 +73,15 @@
 			
 			<input id="hidden_colorpattern" type="hidden" value="">
 
-			{%elif product.article.sku_number == '9805' %}	<!-- if article is the "Reversible zip jacket" -->
-			<h5> Välj Utsidans mönster</h5>
-			<div class="outside">
-				<div class="selectedpatternandcolor span2">
-					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:130px;" />
-				
-					
-				</div>
-				<div class="color_and_pattern_choose span5">
-					{% for item in colorsandpattern %}
-					<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
-					{% endfor  %}
-				</div>
-				<input type="hidden" id="pattern" name="pattern" value="{{ product.pattern.order }}" >
-				<input type="hidden" id="color" name="color" value="{{ product.color.order }}">
-				<div style="clear: both;"></div>
-				<hr/>
-			</div> 
-			<h5> Välj Insidans mönster</h5>
-				<div class="inside">
-					<div id="selectedpatternandcolor_inside" class="selectedpatternandcolor_inside span2">
-					<img id="pattern_color_image inside" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:130px;" />
-					<br/>
-					{{ product.color.name }} {{ product.pattern.name }}
+			<!-- if article is the "Reversible zip jacket" | pattern -->
+			{%elif product.article.sku_number == '9805' %}	
+
+				<h5> {% trans "Välj Utsidans mönster %}</h5>
+				<div class="outside">
+					<div class="selectedpatternandcolor span2">
+						<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:120px;" />
+						<br/>
+						{{ product.color.name }} {{ product.pattern.name }}
 					</div>
 					<div class="color_and_pattern_choose span5">
 						{% for item in colorsandpattern %}
@@ -235,7 +220,7 @@
 
 <div class="span12" > 
 	<hr/>
-	<strong>Fler produkter av {{ product.article.name }} </strong>  
+	<strong>{% trans "Fler produkter av%} {{ product.article.name }} </strong>  
 	<hr/>
 	{% for product in products %}
 	<div class='image_wrapper'>

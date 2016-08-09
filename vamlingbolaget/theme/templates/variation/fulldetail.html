@@ -1,0 +1,172 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{%block title%}
+    <title>Vamlingbolaget | {% trans "Kollektion" %} | {{ product.article.name }} 
+    ,  {{ product.variation }} </title>
+    <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }} 
+    ,  {{ product.variation }}" %}/>
+{%endblock%}
+
+{% block pagetitle %}
+	<div class="row-fluid">
+		<div class="span12" >
+<div class="bread" ><a href="javascript:history.go(-1)"> << {% trans "Shop" %}</a> / <a href="/products/full"> full </a></div> 
+			<hr>
+		</div>
+{% endblock %}
+
+{% block allcontent %}
+	<div class="span12">
+		<div class="span4 article_background" id="fadeifchangeorder">
+	        <div id="images_container" class="img_container">
+	        {% with images|first as image %}
+	        	<img src="{{ image }}" alt="article image" class="variation_img" />
+			{% endwith %}
+		  	</div>
+		  	<div class="text-center">
+            {% for image in images %}
+            	<button>
+	                <img src="{{ image }}" alt="article image" width="100px" class="variation_img" />
+	        	</button>
+	  		{% endfor %}
+	  		</div>
+		</div>
+			   	
+		<div class="span7">
+			<span class="articlehead">
+				<span id="articlename">
+					<input id="article_pk" type="hidden" value="{{ product.variation.article.pk }}">
+					<input type="hidden" id="pattern" name="pattern" value="{{ product.variation.pattern.order}}" >							
+					<input type="hidden" id="color" name="color" value="{{ product.variation.color.order }}" >
+
+
+					<h3>{{ product.variation.article.name }} | 
+						<span> 
+							{%if product.variation.article.discount %}
+								<span class="discount"> {{ product.variation.article.f_discount }} </span> :- * <br />
+								<span class="smaller">({% trans "tidigare pris" %} </span>  
+								<span id="the_price"> {{ product.variation.article.price }} </span>    
+								<span class="smaller"> :-) <br />
+		   						* {{ product.variation.article.discount.reason }} </span>
+							{%else%}
+							<span id="the_price"> {{ product.variation.article.price }}</span> :-
+							{%endif%}  
+							
+
+						</span> 
+					</h3>
+					<hr> 
+					<div class="span2">
+					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.variation.color.order }}f_{{ product.variation.pattern.order }}m.jpg" style="width:160px;" />
+										<hr>
+				{% trans "Storlek" %}: {{ product.size }}
+					</div>
+
+					<div class="span1"> </div>
+					<div class="span5">
+			{% trans "Färger och Mönster" %}:
+			<hr>			
+			  {% for colorsandpattern in colorsandpatterns %}
+				<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ colorsandpattern }}.jpg" style="width:60px;" />
+
+			  {% endfor %}
+			
+			<hr>
+			<span> 
+
+				
+			<nav>
+				<ul class="pagination">
+			  
+				{% for size in init_sizes  %} 
+					{% if size == product.size %} 
+						<li class="active" id="{{ size }}"><a href="#"> {{ size }}</a></li> 
+					{% else %}
+						<li class="disabled" id="{{ size }}"><a href="#" > {{ size }} </a></li>
+					{% endif %} 
+					
+				{% endfor %}
+				</ul>
+            </nav>
+                <ul class="hidden">
+				{% for size in sizes  %} 
+		
+						<li class="has_size" ><a href="#"> {{ size }}  </a> </li>
+					
+				{% endfor %}
+
+
+	            </ul>
+
+	            {% for varis in full_variations %} 
+	            	{{ varis.size }} {{ varis.pk }}
+	            {% endfor %}
+			<input type="hidden" id="size" name="size" value="3" >
+		
+
+			<hr>
+			<span> {% trans "Kvalitet" %}: 
+			
+			<span class="quality" id="{{ product.article.quality }}">{{ product.variation.article.quality }}</span> | 
+
+			<span> {% trans "Kategori" %}: 
+			
+			<span class="typ" id="{{ product.article.type }}">{{ product.variation.article.type }}</span> *  
+			<hr>
+	     <div id="addtocart" style="display:block;">
+			<span style="padding-left: 30px;">
+				<button class="btn btn-success btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
+				<input type="hidden" id="add_or_edit" name="full" value="full" > 
+			</span>
+		</div>
+		<hr>
+		{% trans "I lager" %}: {{ product.stock }} {% trans "st"  %}
+		<input type="hidden" id="quantity" name="quantity" value="1" >
+
+		<hr> 
+			{% trans "Detaljer" %} :
+			<span> {{ product.variation.article.quality.description }} </span> 
+		<hr>
+		    | Art.Num: {{ product.get_art_num }}	
+		</div> 
+				 
+	
+		
+			
+
+		</div> <!-- end span7 -->
+	</div> <!-- end span12 -->
+
+<div class="span12" > 
+	<hr/>
+	<strong>{% trans "Fler produkter av" %}  {{ product.variation.article.name }} </strong>  
+	<hr/>
+	{% for product in products %}
+	<div class='image_wrapper'>
+		<a href="/products/{{product.pk}}">
+		    {% with product.image_set.all|first as image %}
+		        <div class="collection_list img_container">
+		        <img src="{% version image.image 'medium' %}" alt="{{ product.article.name }}"  />
+		        <br/>
+		        <div>
+		            {{ product.variation.article.name }}<br/>
+		            {% trans "Pris" %} :
+		            {%if product.variation.article.discount%}
+		                <span class="discount"> {{ product.variation.article.f_discount }} </span> ({{ product.variation.article.price }}) SEK
+		            {%else%}
+		                {{ product.variation.article.price }} SEK
+		            {%endif%}
+		        </div>
+		    </div>
+		    {% endwith %}
+		</a>
+	
+	</div>
+	{% endfor %}
+
+</div>
+</div>
+
+{% endblock %}
