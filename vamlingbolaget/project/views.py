@@ -1,8 +1,12 @@
+#-*-coding:iso-8859-1-*-
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
 from models import Project, Media, File, Kanban
+from products.models import Article
 import json
 import contextlib
 import os
@@ -10,7 +14,10 @@ import time
 import re
 import requests
 import io
+import urllib
 
+
+@login_required
 def index(request):
     projects = Project.objects.filter(status="A")
     projects_expired = Project.objects.filter(status="E")
@@ -23,6 +30,7 @@ def index(request):
 							},
 							context_instance=RequestContext(request))
 
+@login_required
 def detail(request, pk):
     temp_int = 1
     project = Project.objects.get(pk=pk)
@@ -39,56 +47,108 @@ def detail(request, pk):
 							context_instance=RequestContext(request))
 
 
+@login_required
 def transtest(request):
-    hej = "hej"
+    hej = "testing translation"
     trans_root  = os.path.join(settings.ROOT_DIR, 'vamlingbolaget')
     input_root  = os.path.join(settings.ROOT_DIR, 'media')
-    file_path = str(trans_root) + '/locale/django.po'
-    input_file = str(input_root) + '/test3.csv'
+    file_path = str(trans_root) + '/locale/django.po'    
     write_file = str(input_root) + '/w.text'
-
     word_list = []
-
-    with open(input_file, 'r') as i:  
-        for line in i:
-            word_list.append(line)
-
-    print word_list
-    a = -1
-
     p = open(write_file, 'w+')
-
+    limit = 0
     with open(file_path, 'r') as f:
- 
         for line in f:
-
-           
-            what = re.findall('^([\w\-]+)', line)
-
-            if len(what) > 0:
-
-                if what[0] == 'msgstr': 
-                    word = word_list[a].strip()  
-                    line = re.sub(r'\"(.+?)\"','"'+word+'"', line)
-                    print line 
-                    a = a + 1
-            p.write(line)
-
-
+            if limit < 30:
+                what = re.findall('^([\w\-]+)', line)
+                if len(what) > 0:
+                    if what[0] == 'msgstr': 
+                        word = re.findall('\"(.*?)\"', line)
+                        if word != None:     
+                            word = word[0]
+                            word = googleTranslate(word, 'fi')
+                            line = re.sub(r'\"(.+?)\"','"'+word+'"', line)
+                p.write(line)
+            limit = limit + 1 
 
     return render_to_response('projects/tran.html',
                         {'hej': hej},
                           context_instance=RequestContext(request))
 
 
+@login_required
 def testtrans2(request, string, lang): 
-    hej = translatestring(request, string, lang)
-
+    #hej = translatestring(request, string, lang)
+    hej = full_tranlation(request, string, lang)
+    print "maju"
     return render_to_response('projects/tran.html',
                     {'hej': hej},
                       context_instance=RequestContext(request))
 
+
+@login_required
+def transString(request, string, lang): 
+    hej = translatestring(request, string, lang)
+    return render_to_response('projects/tran.html',
+                    {'hej': hej},
+                      context_instance=RequestContext(request))
+
+@login_required
 def translatestring(request, string, lang): 
     url = 'https://www.googleapis.com/language/translate/v2?key=key&q='+string+'&source=sv&target='+lang
     resp = requests.get(url)
     return resp.content
+
+
+@login_required
+def full_tranlation(request, string, lang):
+    articles = Article.objects.all()
+    count = 0
+
+    tranlate_on = get_tranlatestatus()
+    if tranlate_on == True: 
+        for art in articles: 
+            name = art.name.encode('utf-8') 
+            string = urllib.urlencode({'q': name})
+            count = count + 1
+            # break out tis function 
+            if count < 3:
+                try: 
+                    art.name_fi = googleTranslate(string, lang)
+                    art.save()
+                except: 
+                    pass
+                time.sleep(2)
+                
+        return "translate is on"
+
+    return "translate is of"    
+
+
+def googleTranslate(string, lang): 
+
+    api_key = ""
+    url = 'https://www.googleapis.com/language/translate/v2?key='+api_key+'&'+string+'&source=sv&target='+lang
+    resp = requests.get(url)
+    #print url
+    the_content = json.loads(resp.content)
+    print the_content
+    try: 
+        the_return = the_content['data']['translations'][0]['translatedText'].title()
+    except: 
+        the_return = "error"
+    return the_return
+
+
+def get_tranlatestatus():
+    translate_on = False 
+    return translate_on
+
+def printwords():
+    input_file = str(input_root) + '/test3.csv'
+
+    with open(input_file, 'r') as i:  
+        for line in i:
+            word_list.append(line)
+
+    print word_list
