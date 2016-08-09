@@ -499,7 +499,7 @@ def klarna_thanks(request):
     except:
         checkout = 0
         log =  "Klarna thanks url hit but no checkout found"
-        keepLog(request, log, 'WARN', ip, cart_id)
+        keepLog(request, log, 'WARN', log_ip, cart_id)
         return HttpResponseRedirect('/')
 
     message = "Tack for din order"
