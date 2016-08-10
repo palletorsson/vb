@@ -6,7 +6,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from models import Project, Media, File, Kanban
-from products.models import Article
+from products.models import *
+from gallery.models import Gallery
 import json
 import contextlib
 import os
@@ -101,33 +102,92 @@ def translatestring(request, string, lang):
 
 
 @login_required
-def full_tranlation(request, string, lang):
-    articles = Article.objects.all()
-    count = 0
-
+def full_tranlation(request, lang, model):
     tranlate_on = get_tranlatestatus()
+    hej = 'no trans'
+    count = 0
+    
+    if model == 'art':
+        the_model = Article.objects.all()
+
+    elif model == 'color':
+        the_model = Color.objects.all()
+
+    elif model == 'pattern':
+        the_model = Pattern.objects.all()
+
+    elif model == 'quality':
+        the_model = Quality.objects.all()
+
+    elif model == 'type':
+        the_model = Type.objects.all()
+
+    elif model == 'category':
+        the_model = Category.objects.all()
+
+    elif model == 'gallery':
+        the_model = Gallery.objects.all()
+  
+    else: 
+        hej = "now such model"
+        return render_to_response('projects/tran.html',
+                {'hej': hej},
+                  context_instance=RequestContext(request))
+
     if tranlate_on == True: 
-        for art in articles: 
-            name = art.name.encode('utf-8') 
-            string = urllib.urlencode({'q': name})
+        for art in the_model:
             count = count + 1
-            # break out tis function 
-            if count < 3:
-                try: 
-                    art.name_fi = googleTranslate(string, lang)
-                    art.save()
-                except: 
-                    pass
-                time.sleep(2)
-                
-        return "translate is on"
 
-    return "translate is of"    
+            if count < 5:
+                print "--" 
+                name = art.name.encode('utf-8') 
+                string = urllib.urlencode({'q': name})
 
+                if lang == 'fi':
+                    try: 
+                        art.name_fi = googleTranslate(string, lang)
+                        art.save()
+                    except: 
+                        pass
+                elif lang == 'dk':
+                    try: 
+                        art.name_dk = googleTranslate(string, lang)
+                        art.save()
+                    except: 
+                        pass
+                elif lang == 'de':
+                    try: 
+                        art.name_de= googleTranslate(string, lang)
+                        art.save()
+                    except: 
+                        pass
+                elif  lang == 'all': 
+                    try: 
+                        art.name_fi = googleTranslate(string, lang)
+                        art.name_dk = googleTranslate(string, lang)
+                        art.name_de = googleTranslate(string, lang)
+                        art.save()
+                    except: 
+                        pass                    
+                else: 
+                    hej = "now such language"
+                    return render_to_response('projects/tran.html',
+                            {'hej': hej},
+                              context_instance=RequestContext(request))
+
+                time.sleep(1)
+
+        hej = "translate is on, art, color, pattern, quality, type, category, gallery"
+
+    return render_to_response('projects/tran.html',
+                    {'hej': hej},
+                      context_instance=RequestContext(request))
+
+          
 
 def googleTranslate(string, lang): 
 
-    api_key = ""
+    api_key = "key"
     url = 'https://www.googleapis.com/language/translate/v2?key='+api_key+'&'+string+'&source=sv&target='+lang
     resp = requests.get(url)
     #print url
@@ -141,7 +201,7 @@ def googleTranslate(string, lang):
 
 
 def get_tranlatestatus():
-    translate_on = False 
+    translate_on = True
     return translate_on
 
 def printwords():
