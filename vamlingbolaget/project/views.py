@@ -144,7 +144,7 @@ def full_tranlation(request, lang, model):
                     art.save()
                 except: 
                     pass
-            elif lang == 'dk':
+            elif lang == 'da':
                 try: 
                     art.name_dk = googleTranslate(string, lang)
                     art.save()
