@@ -81,7 +81,6 @@ def transtest(request):
 def testtrans2(request, string, lang): 
     #hej = translatestring(request, string, lang)
     hej = full_tranlation(request, string, lang)
-    print "maju"
     return render_to_response('projects/tran.html',
                     {'hej': hej},
                       context_instance=RequestContext(request))
@@ -170,7 +169,7 @@ def full_tranlation(request, lang, model):
                         {'hej': hej},
                           context_instance=RequestContext(request))
 
-            time.sleep(1)
+            time.sleep(0.5)
 
         hej = "translate is on, art, color, pattern, quality, type, category, gallery"
 
@@ -185,9 +184,7 @@ def googleTranslate(string, lang):
     api_key = "key"
     url = 'https://www.googleapis.com/language/translate/v2?key='+api_key+'&'+string+'&source=sv&target='+lang
     resp = requests.get(url)
-    #print url
     the_content = json.loads(resp.content)
-    print the_content
     try: 
         the_return = the_content['data']['translations'][0]['translatedText'].title()
     except: 
