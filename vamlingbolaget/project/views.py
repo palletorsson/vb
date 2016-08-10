@@ -105,7 +105,6 @@ def translatestring(request, string, lang):
 def full_tranlation(request, lang, model):
     tranlate_on = get_tranlatestatus()
     hej = 'no trans'
-    count = 0
     
     if model == 'art':
         the_model = Article.objects.all()
@@ -136,46 +135,42 @@ def full_tranlation(request, lang, model):
 
     if tranlate_on == True: 
         for art in the_model:
-            count = count + 1
+            name = art.name.encode('utf-8') 
+            string = urllib.urlencode({'q': name})
 
-            if count < 5:
-                print "--" 
-                name = art.name.encode('utf-8') 
-                string = urllib.urlencode({'q': name})
+            if lang == 'fi':
+                try: 
+                    art.name_fi = googleTranslate(string, lang)
+                    art.save()
+                except: 
+                    pass
+            elif lang == 'dk':
+                try: 
+                    art.name_dk = googleTranslate(string, lang)
+                    art.save()
+                except: 
+                    pass
+            elif lang == 'de':
+                try: 
+                    art.name_de= googleTranslate(string, lang)
+                    art.save()
+                except: 
+                    pass
+            elif  lang == 'all': 
+                try: 
+                    art.name_fi = googleTranslate(string, lang)
+                    art.name_dk = googleTranslate(string, lang)
+                    art.name_de = googleTranslate(string, lang)
+                    art.save()
+                except: 
+                    pass                    
+            else: 
+                hej = "now such language"
+                return render_to_response('projects/tran.html',
+                        {'hej': hej},
+                          context_instance=RequestContext(request))
 
-                if lang == 'fi':
-                    try: 
-                        art.name_fi = googleTranslate(string, lang)
-                        art.save()
-                    except: 
-                        pass
-                elif lang == 'dk':
-                    try: 
-                        art.name_dk = googleTranslate(string, lang)
-                        art.save()
-                    except: 
-                        pass
-                elif lang == 'de':
-                    try: 
-                        art.name_de= googleTranslate(string, lang)
-                        art.save()
-                    except: 
-                        pass
-                elif  lang == 'all': 
-                    try: 
-                        art.name_fi = googleTranslate(string, lang)
-                        art.name_dk = googleTranslate(string, lang)
-                        art.name_de = googleTranslate(string, lang)
-                        art.save()
-                    except: 
-                        pass                    
-                else: 
-                    hej = "now such language"
-                    return render_to_response('projects/tran.html',
-                            {'hej': hej},
-                              context_instance=RequestContext(request))
-
-                time.sleep(1)
+            time.sleep(1)
 
         hej = "translate is on, art, color, pattern, quality, type, category, gallery"
 
