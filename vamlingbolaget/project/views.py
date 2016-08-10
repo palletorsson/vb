@@ -169,8 +169,6 @@ def full_tranlation(request, lang, model):
                         {'hej': hej},
                           context_instance=RequestContext(request))
 
-            time.sleep(0.5)
-
         hej = "translate is on, art, color, pattern, quality, type, category, gallery"
 
     return render_to_response('projects/tran.html',
