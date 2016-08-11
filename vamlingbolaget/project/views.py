@@ -211,7 +211,6 @@ def full_tranlation(request, lang, model):
                       context_instance=RequestContext(request))
 
 def translateflatpages(request, lang, pk):
-    # glöm inte bilder till italien
     tranlate_on = get_tranlatestatus()
     hej = 'no trans'
     if tranlate_on == True: 
@@ -238,9 +237,8 @@ def translateflatpages(request, lang, pk):
         for item in soup.findAll( "span", { "class" : "trans_text" }):
             original_string = item.contents[0]      
             trans_string = item.contents[0].encode('utf-8')
-            string_ = urllib.urlencode({'q': original_string})                            
-            new_string = googleTranslate(string_, lang) 
-            print new_string       
+            string_ = urllib.urlencode({'q': trans_string})                            
+            new_string = googleTranslate(string_, lang)       
             original_string.replace_with(new_string)
         
 
