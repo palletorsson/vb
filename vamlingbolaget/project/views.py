@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from models import Project, Media, File, Kanban
 from products.models import *
 from gallery.models import Gallery
+from django.contrib.flatpages.models import FlatPage
 import json
 import contextlib
 import os
@@ -16,7 +17,7 @@ import re
 import requests
 import io
 import urllib
-
+from bs4 import BeautifulSoup
 
 @login_required
 def index(request):
@@ -50,7 +51,6 @@ def detail(request, pk):
 
 @login_required
 def transtest(request):
-    hej = "testing translation"
     trans_root  = os.path.join(settings.ROOT_DIR, 'vamlingbolaget')
     input_root  = os.path.join(settings.ROOT_DIR, 'media')
     file_path = str(trans_root) + '/locale/django.po'    
@@ -60,15 +60,18 @@ def transtest(request):
     limit = 0
     with open(file_path, 'r') as f:
         for line in f:
-            if limit < 30:
+            if limit < 1000:
                 what = re.findall('^([\w\-]+)', line)
                 if len(what) > 0:
                     if what[0] == 'msgstr': 
                         word = re.findall('\"(.*?)\"', line)
                         if word != None:     
                             word = word[0]
-                            word = googleTranslate(word, 'fi')
+                            name = word.encode('utf-8') 
+                            string = urllib.urlencode({'q': name})                            
+                            word = googleTranslate(string, 'de')
                             line = re.sub(r'\"(.+?)\"','"'+word+'"', line)
+                            line = line.encode('iso-8859-1')  
                 p.write(line)
             limit = limit + 1 
 
@@ -76,6 +79,38 @@ def transtest(request):
                         {'hej': hej},
                           context_instance=RequestContext(request))
 
+
+@login_required
+def transEmailMess(request):
+    trans_root  = os.path.join(settings.ROOT_DIR, 'checkout')
+    input_root  = os.path.join(settings.ROOT_DIR, 'media')
+    file_path = str(trans_root) + '/messages.txt'    
+    write_file = str(input_root) + '/h.text'
+    word_list = []
+    p = open(write_file, 'w+')
+    limit = 0
+    hej = "tranlating email messages"
+    with open(file_path, 'r') as f:
+        for line in f:
+            if limit < 200:
+                what = re.findall("\'(.*?)\'", line)
+                print "-", what, len(what)
+                if len(what) != 0:
+                    if what != None or what != "#":  
+                        word = what   
+                        word = word[0]
+                        name = word.encode('utf-8') 
+                        string = urllib.urlencode({'q': name})                            
+                        word = googleTranslate(string, 'fi')
+                        print word
+                        line = re.sub(r"\'(.*?)\'",'"'+word+'"', line)
+                        line = line.encode('iso-8859-1')  
+            p.write(line)
+        limit = limit + 1 
+
+    return render_to_response('projects/tran.html',
+                        {'hej': hej},
+                          context_instance=RequestContext(request))
 
 @login_required
 def testtrans2(request, string, lang): 
@@ -175,7 +210,54 @@ def full_tranlation(request, lang, model):
                     {'hej': hej},
                       context_instance=RequestContext(request))
 
-          
+def translateflatpages(request, lang, pk):
+    # glöm inte bilder till italien
+    tranlate_on = get_tranlatestatus()
+    hej = 'no trans'
+    if tranlate_on == True: 
+        #html = open("a.html",'r').read()
+        hej = 'trans: ', lang
+        the_page = FlatPage.objects.get(pk=pk)
+        # translate title
+        title = the_page.title_en
+        string_ = urllib.urlencode({'q': title})                            
+        new_title = googleTranslate(string_, lang) 
+        
+        if lang == 'fi':
+            the_page.title_fi = new_title
+        elif lang == 'da':
+            the_page.title_da = new_title
+        elif lang == 'de':
+            the_page.title_de = new_title
+        else: 
+            hej = "now such language"
+        # translate content
+        html = the_page.content_en
+        soup = BeautifulSoup(html, 'html.parser')
+
+        for item in soup.findAll( "span", { "class" : "trans_text" }):
+            original_string = item.contents[0]      
+            trans_string = item.contents[0].encode('utf-8')
+            string_ = urllib.urlencode({'q': original_string})                            
+            new_string = googleTranslate(string_, lang) 
+            print new_string       
+            original_string.replace_with(new_string)
+        
+
+        if lang == 'fi':
+            the_page.content_fi = soup.prettify('utf-8')
+        elif lang == 'da':
+            the_page.content_dk = soup.prettify('utf-8')
+        elif lang == 'de':
+            the_page.content_de = soup.prettify('utf-8')
+        else: 
+            hej = "now such language"
+
+        the_page.save()
+
+    return render_to_response('projects/tran.html',
+                    {'hej': hej},
+                      context_instance=RequestContext(request))
 
 def googleTranslate(string, lang): 
 
