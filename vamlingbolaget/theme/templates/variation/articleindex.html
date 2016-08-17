@@ -4,13 +4,13 @@
 {% version model.field_name version_prefix %}
 
 {% block pagetitle %}
-    <legend>{% trans "Articles" %} / REA</legend>
+    <legend>{% trans "Artiklar" %} </legend>
 {% endblock %}
 
 {% block content %}
   {% for article in articles %}
      <div class="collection_list img_container" >
-        <a href="/articles/{{article.pk}}/#{{ article.article.name }}">
+        <a href="/products/articles/article/{{article.pk}}/#{{ article.name }}">
             <div class="force_image">
               <img src="{% version article.file 'medium' %}" alt="Vamlingbolaget {{ article.name }}"  /></div>
               <div class='image_description'>
