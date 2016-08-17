@@ -59,7 +59,7 @@ class FullVariation(TimeStampedActivate):
     order = models.IntegerField("order items", default=100)
     
     def get_art_num(self):
-        return "%s_%s_%s_%s" % (self.variation.article.sku_number, self.variation.color.pk, self.variation.pattern.pk, self.size)
+        return "%s_%s_%s_%s" % (self.variation.article.sku_number, self.variation.color.order, self.variation.pattern.order, self.size)
 
     def get_sizes(self): 
         return SIZES
