@@ -1,0 +1,73 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{%block title%}
+    <title>Vamlingbolaget | {% trans "Artikel" %} | {{ article.name }}  </title>
+{%endblock%}
+
+{% block pagetitle %}
+	<div class="row-fluid">
+		<div class="span12" >
+			<legend><a href="javascript:history.go(-1)">{% trans "Shop" %}</a> / {{ article.name }} </legend>
+		</div>
+{% endblock %}
+
+{% block allcontent %}
+	<div class="span12">
+		<div class="span3 img_container article_background" >
+			 <a href="{{ article.image.url }}" alt="{{ article.name }}" >
+				 <img src="{{ article.file.url }}" alt="{{ article.name }}" />
+			 </a>
+			<div id="art_description" class="image_description_detail"></div>
+	</div>
+
+		<div class="span7">
+			<span class="articlehead">
+				<span id="articlename" >
+					<h3>{{ article.name }} |  <span>{% trans "Art.Nr." %}: <span id="sku_number">{{ article.sku_number }}</span> <br/>	</h3>		
+					<hr/> 
+                    <blockquote>
+					<br/>
+						<span>{% trans "Kategori" %}: <span id="{{ article.article.quality }}">{{ article.category.name }} </span>  <br/>		
+						<span>{% trans "Kvalitet" %}: <span id="{{ article.article.quality }}">{{ article.type.name }} </span>  <br/>
+						<span>{% trans "Pris" %}: <span id="{{ article.article.quality }}">{{ article.price }} </span> SEK <br/>				
+						<hr>
+
+						<span> {{ article.description }} </span> 
+					</blockquote>
+					<hr/>
+				</span>
+			</span>	
+		</div>
+		<hr>
+		<div class="span12">
+		<hr>
+        {% for product in products %}
+             <div class="collection_list img_container" >
+                <a href="/products/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
+                    {% with product.image_set.all|first as image %}
+
+                            <div class="force_image"> <img src="{% version image.image 'large' %}" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
+                            <div class='image_description'>
+                               <span class="artname"> {{ product.article.name }}</span><br/>
+                                {%if product.article.discount%}
+                                    <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) :-
+                                {%else%}
+                                    <span class="price">{{ product.article.price }} SEK</span>
+                                {%endif%}
+                            </div>
+<hr>
+                    {% endwith %}
+                </a>
+            </div>
+        {% endfor %}
+ </div>
+		<hr>
+		</div> <!-- end span7 -->
+	</div> <!-- end span12 -->
+
+</script>
+</div>
+
+{% endblock %}
