@@ -49,7 +49,7 @@ class Variation(TimeStampedActivate):
     get_image.allow_tags = True
     
     def __unicode__(self):
-        return unicode(self.article)
+        return "%s %s %s %s" % (self.article.sku_number, self.article.name, self.color, self.pattern)
 
 
 class FullVariation(TimeStampedActivate):
@@ -94,7 +94,9 @@ class Type(ChoiceBase):
     """
     Type used in Article Model
     """
-    pass
+    
+    def __unicode__(self):
+        return unicode(self.name)
 
 class Category(ChoiceBase):
     """
@@ -124,7 +126,8 @@ class Quality(ChoiceBase):
     class Meta:
         verbose_name_plural = 'Qualies'
 
-
+    def __unicode__(self):
+        return unicode(self.name)
 
 class Article(TimeStampedActivate):
     """
