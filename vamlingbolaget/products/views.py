@@ -6,7 +6,7 @@ from blog.models import Post
 from gallery.models import *
 from django.http import Http404
 from fortnox.fortnox import get_headers, get_articles, get_article, create_article, update_article
-from fortnox.local_fortnox import get_vb_headers
+#from fortnox.local_fortnox import get_vb_headers
 import json
 from django.core import serializers
 from collections import Counter
