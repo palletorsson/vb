@@ -85,7 +85,7 @@
 					</div>
 					<div class="color_and_pattern_choose span5">
 						{% for item in colorsandpattern %}
-							<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image inside" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image outside" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
 						{% endfor  %}
 					</div>
 					<input type="hidden" id="pattern2" name="pattern_2" value="{{ product.pattern.order }}" >
