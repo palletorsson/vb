@@ -71,10 +71,16 @@ def checkout(request, test=''):
 
             new_order.ip = request.META['REMOTE_ADDR']
             sms = request.POST['sms']
+
+            zip = request.POST['postcode'] 
             try: 
-                zip = int(request.POST['postcode'])
+                zip = zip.replace(" ", "") 
+                zip = int(zip) 
             except: 
-                zip = 11122            
+                log = 'Error zip code' 
+                keepLog(request, log, 'ERROR', new_order.ip, zip) 
+                zip = 11122 
+
             new_order.postcode = zip 
             new_order.status = 'O'
             new_order.paymentmethod = request.POST['paymentmethod']
