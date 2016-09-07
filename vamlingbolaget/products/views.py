@@ -291,7 +291,7 @@ def artdetail(request, pk):
     except:
         raise Http404
 
-    products = Variation.objects.filter(article=article)
+    products = Variation.objects.filter(article=article_)
     return render_to_response('variation/artdetail.html',
                    {'article': article_,
                    'products': products,
