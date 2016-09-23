@@ -42,7 +42,7 @@ def index(request):
 SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
 
 def fullindex(request):
-    full_variation = FullVariation.objects.filter(active=True).order_by('-order')
+    full_variation = FullVariation.objects.filter(active=True, size=3840).order_by('-order')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
   
@@ -263,19 +263,19 @@ def fulldetail(request, pk):
     variation_sizes = list(variation_sizes)
     colorpattern_list = list(colorpattern_list)
     path_dir = settings.ROOT_DIR
-    filename = str(full_variation.variation.article.sku_number) + "_" + str(full_variation.variation.color.order) + "_" + str(full_variation.variation.pattern.order) 
+    filename = str(full_variation.variation.article.sku_number) + "_" + str(full_variation.variation.pattern.order) + "_" + str(full_variation.variation.color.order) 
 
     images = [] 
 
     for x in range(0, 3):
-        image = path_dir + "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"        
-        file_exist = os.path.isfile(image) 
-        file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"        
-        if file_exist: 
-          images.append(file)
-    
-    stock_value = get_stockvalue(full_variation.variation.article.sku_number)
-      
+        file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg" 
+        print file       
+        images.append(file)
+
+    try:
+        stock_value = get_stockvalue(full_variation.variation.article.sku_number)
+    except:  
+        stock_value = full_variation.variation.article.stock
 
     return render_to_response('variation/fulldetail.html',
                    {'product': full_variation,
