@@ -533,7 +533,7 @@ def fromCsvToDjango(article, pattern, color, size, stock):
 @login_required         
 def readCsvOnlyCheck(request):
     path_dir = settings.ROOT_DIR
-    input_file = './x.csv'
+    input_file = './modeller.csv'
     count = 0 
     # open file and sepate values 
     articles = []
@@ -553,7 +553,11 @@ def readCsvOnlyCheck(request):
                 full_article_sku = sepatated_values[1]
                 #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
                 splitart = full_article_sku.split("_")
-                article = Article.objects.get(sku_number=splitart[0])
+                try: 
+                    article = Article.objects.get(sku_number=splitart[0])
+                except:
+                    article = "no article"
+                    
                 try: 
                     color = Color.objects.get(order=splitart[1])
                 except: 
@@ -596,7 +600,7 @@ def readCsvOnlyCheck(request):
 
 @login_required
 def readCsv(request):
-    input_file = './x.csv'
+    input_file = './modeller.csv'
     count = 0 
     # open file and sepate values 
     with open(input_file, 'r') as i:
