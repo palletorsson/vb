@@ -551,7 +551,8 @@ def readCsvOnlyCheck(request):
                     stock = 0
  
                 full_article_sku = sepatated_values[1]
-                #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
+                #pattern first
+                #split and get values from 1223_10_12_36 - article_sku, pattern, color, size 
                 splitart = full_article_sku.split("_")
                 try: 
                     article = Article.objects.get(sku_number=splitart[0])
@@ -559,17 +560,17 @@ def readCsvOnlyCheck(request):
                     article = "no article"
                     
                 try: 
-                    color = Color.objects.get(order=splitart[1])
+                    color = Color.objects.get(order=splitart[2])
                 except: 
                     color = "no color"
                 try:       
-                    pattern = Pattern.objects.get(order=splitart[2])
+                    pattern = Pattern.objects.get(order=splitart[1])
                 except: 
                     color = "no pattern"      
 
                 size = splitart[3]
 
-                img_name = splitart[0] + "_" + splitart[1] + "_" + splitart[2] + "_" + str(img_count) 
+                img_name = splitart[0] + "_" + splitart[2] + "_" + splitart[1] + "_" + str(img_count) 
                 image = path_dir + "/media/variations/"+ str(img_name) + ".jpg"   
                 print image     
                 file_exist = os.path.isfile(image) 
@@ -579,7 +580,7 @@ def readCsvOnlyCheck(request):
                 else: 
                     image = "fail: " + img_name
 
-                check = unicode(article) + "_" + unicode(color) + "_" + unicode(pattern) + "_" + unicode(size)
+                check = unicode(article) + "_" + unicode(pattern) + "_" + unicode(color) + "_" + unicode(size) +" - " + unicode(full_article_sku)
                 articles.append(check)
                 images.append(image)
 
@@ -618,11 +619,11 @@ def readCsv(request):
                     #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
                     splitart = full_article_sku.split("_")
                     article = Article.objects.get(sku_number=splitart[0])
-                    color = Color.objects.get(order=splitart[1])
-                    pattern = Pattern.objects.get(order=splitart[2])
+                    color = Color.objects.get(order=splitart[2])
+                    pattern = Pattern.objects.get(order=splitart[1])
                     size = splitart[3]
 
-                    article_name = unicode(article.name) + " " + unicode(color) + " " + unicode(pattern)
+                    article_name = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color)
 
                     # insert or update product in fortnox
                     error_or_create = fromCsvToFortnox(article_name, full_article_sku, size)
