@@ -275,7 +275,7 @@ def fulldetail(request, pk):
     try:
         stock_value = get_stockvalue(full_variation.variation.article.sku_number)
     except:  
-        stock_value = full_variation.variation.article.stock
+        stock_value = full_variation.stock
 
     return render_to_response('variation/fulldetail.html',
                    {'product': full_variation,
