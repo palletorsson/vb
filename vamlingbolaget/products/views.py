@@ -580,7 +580,7 @@ def readCsvOnlyCheck(request):
                 else: 
                     image = "fail: " + img_name
 
-                check = unicode(article) + "_" + unicode(pattern) + "_" + unicode(color) + "_" + unicode(size) +" - " + unicode(full_article_sku)
+                check = unicode(article) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size) + "  " + unicode(full_article_sku)
                 articles.append(check)
                 images.append(image)
 
@@ -623,7 +623,7 @@ def readCsv(request):
                     pattern = Pattern.objects.get(order=splitart[1])
                     size = splitart[3]
 
-                    article_name = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color)
+                    article_name = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
 
                     # insert or update product in fortnox
                     error_or_create = fromCsvToFortnox(article_name, full_article_sku, size)
