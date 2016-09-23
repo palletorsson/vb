@@ -570,7 +570,7 @@ def readCsvOnlyCheck(request):
 
                 size = splitart[3]
 
-                img_name = splitart[0] + "_" + splitart[2] + "_" + splitart[1] + "_" + str(img_count) 
+                img_name = splitart[0] + "_" + splitart[1] + "_" + splitart[2] + "_" + str(img_count) 
                 image = path_dir + "/media/variations/"+ str(img_name) + ".jpg"   
                 print image     
                 file_exist = os.path.isfile(image) 
