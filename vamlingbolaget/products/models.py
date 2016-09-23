@@ -54,7 +54,7 @@ class Variation(TimeStampedActivate):
 
 class FullVariation(TimeStampedActivate):
     variation = models.ForeignKey('Variation')
-    size  = models.CharField(max_length=10, choices = SIZES)
+    size  = models.CharField(max_length=10)
     stock = models.IntegerField(default=1)
     order = models.IntegerField("order items", default=100)
     
@@ -105,11 +105,18 @@ class Category(ChoiceBase):
     class Meta:
         verbose_name_plural = 'Categories'
 
+    def __unicode__(self):
+        return unicode(self.name)
+
+
 class Color(ChoiceBase):
     """
     Color used in Product Model         
     """
     quality = models.ForeignKey('Quality', default=1)
+
+    def __unicode__(self):
+        return unicode(self.name)
 
 
 class Pattern(ChoiceBase):
@@ -117,6 +124,10 @@ class Pattern(ChoiceBase):
     Pattern used in Product Model         
     """
     quality = models.ForeignKey('Quality', default=1)
+
+    def __unicode__(self):
+        return unicode(self.name)
+
 
 class Quality(ChoiceBase):
     """
