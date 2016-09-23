@@ -626,7 +626,7 @@ def readCsv(request):
                     article_name = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
 
                     # insert or update product in fortnox
-                    error_or_create = fromCsvToFortnox(article_name, full_article_sku, size)
+                    error_or_create = fromCsvToFortnox(article_name, full_article_sku, stock)
                    
 
                     # insert or update full_variation
