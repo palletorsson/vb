@@ -22,7 +22,7 @@
 		<div class="span4 article_background" id="fadeifchangeorder">
 	        <div id="images_container" class="img_container">
 	        {% with images|first as image %}
-	        	<img src="{{ image }}" alt="article image" class="variation_img" />
+	        	<a href="{{ image }}"><img src="{{ image }}" alt="article image" class="variation_img" /></a>
 			{% endwith %}
 		  	</div>
 		  	<div class="text-center">
