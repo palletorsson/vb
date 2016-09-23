@@ -440,6 +440,88 @@ def formatJson2(the_json):
     the_json = json.loads(the_json)
     return the_json
 
+def article_for_csv(csv_path): 
+    with open(csv_path) as f:
+        reader = csv.reader(f)
+    
+        # loop all the articles
+        headers = get_headers()
+        process_json = []
+
+        for article in reader:
+            # crate a json article from csv row
+            print article[1]
+
+            articleNumber = article[0]
+            data = json.dumps({
+                "Article": {
+                    "Description": article[1],
+                    "ArticleNumber": article[0],
+                    "Unit": 'st',
+                    "QuantityInStock": article[2]
+                }
+            })
+            #process_json.append({"art_json_fail": article[1]})
+                
+            # try to insert the article 
+            # surrund this in a try except soon  
+            returns = create_article(articleNumber, data, headers)
+            r = json.loads(returns)
+
+            if 'ErrorInformation' in r:  
+                process_json.append({"insert_fail": article[0]})
+                update = 1
+            else: 
+                process_json.append({"insert_success": article[0]}) 
+                update = 0
+
+
+            # if the article failed i can alreay be in fortnox, then try to update
+            if (update == 1): 
+
+                returns = update_article(articleNumber, data, headers) 
+                r = json.loads(returns)
+
+                if 'ErrorInformation' in r:  
+                    process_json.append({"update_fail": article[0]})
+                else: 
+                    process_json.append({"update_success": article[0]}) 
+
+            print process_json
+
+# stock logic 
+def stockvalue_down(article_num): 
+    update = 1
+    headers = get_headers()
+    process_json = []
+    retured_art = get_article(headers, article_num)
+
+    art_json = json.loads(retured_art)
+  
+    if 'ErrorInformation' in art_json:  
+        process_json.append({"insert_fail": article[0]})
+        update = 0
+    else: 
+        amount = int(art_json['Article']['QuantityInStock'])
+        amount = amount - 1  
+        data = json.dumps({
+                "Article": {
+                    "ArticleNumber": article_num, 
+                    "QuantityInStock": amount
+                }
+            })
+        art_returns = update_article(article_num, data, headers)
+    if update == 1: 
+        return art_returns
+    else:
+        return "at this point something failed"    
+
+def get_stockvalue(article_num):
+    headers = get_headers()
+    article = get_article(headers, article_num)
+    json_article = json.loads(article)
+    art_stock_int = json_article["Article"]["QuantityInStock"]
+    return art_stock_int
 
 # running som tests 
 

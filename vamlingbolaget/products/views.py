@@ -1,5 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render_to_response 
+from django.shortcuts import render_to_response
+from django.template import loader, Context
 from django.template import RequestContext
 from products.models import *
 from blog.models import Post
@@ -13,7 +14,7 @@ from collections import Counter
 import csv
 import os
 from django.conf import settings
-
+from django.contrib.auth.decorators import login_required
 
 def first_page(request):
     variations = Variation.objects.filter(active=True).order_by('article__quality')
@@ -272,14 +273,18 @@ def fulldetail(request, pk):
         file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"        
         if file_exist: 
           images.append(file)
-  
+    
+    stock_value = get_stockvalue(full_variation.variation.article.sku_number)
+      
+
     return render_to_response('variation/fulldetail.html',
                    {'product': full_variation,
                    'images': images,
                    'sizes': variation_sizes,
                    'colorsandpatterns': colorpattern_list,
                    'init_sizes': init_sizes, 
-                   'full_variations': full_variations
+                   'full_variations': full_variations, 
+                   'stock_value': stock_value
                    },
                    context_instance=RequestContext(request)
                     )
@@ -366,9 +371,10 @@ def checkArticles(request):
 # to show all articels
 def allArt(request):
     articles = Article.objects.filter(active = True).order_by('name')
-
+    
     headers = get_headers()
     check_art = []
+
     for art in articles: 
         try: 
             sku_num = int(art.sku_number)
@@ -467,7 +473,29 @@ def articlesTranferToFortnox(request):
             print created   
 
     return HttpResponse(status=200)    
-         
+
+def fromCsvToFortnox(name, sku_number, stock_value): 
+
+    headers = get_headers()
+    data = json.dumps({
+        "Article": {
+            "Description": name,
+            "ArticleNumber": sku_number, 
+            "QuantityInStock": stock_value, 
+        }
+    })
+    error_or_create = create_article(sku_number, data, headers)
+    # If product exist the error message look like : {"ErrorInformation":{"error":1,"message":"Artikelnumret \"1510_7_6_46\" \u00e4r redan taget.","code":2000013}}
+    # then only update the product
+    try:
+        error_or_create = json.loads(error_or_create)
+        if error_or_create["ErrorInformation"]["code"] == 2000013: 
+            update_art = update_article(articleNumber, data, headers)
+    except:
+        pass
+
+    return True    
+               
 def articleUpdateStock(request, sku_num, stock): 
     sku_number = sku_num
     headers = get_headers()
@@ -490,6 +518,119 @@ def articleUpdateStock(request, sku_num, stock):
 
     return HttpResponse(status=200)    
 
+# import or update fullvaration from csv                     
+def fromCsvToDjango(article, pattern, color, size, stock):
+    variation, created_variation = Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
+    fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
+    # if fullvariation exist only update the fullvaration with stockvalue
+    if created_fullvariation == False: 
+        fullvariation.stock = stock
+        fullvariation.save()
+    return True
 
-# article_sku, color, pattern, 1223_L02_MAH_01 1325_001_001_XL
+#read csv and insert full varations or products ini django database and fortnox 
+
+@login_required         
+def readCsvOnlyCheck(request):
+    path_dir = settings.ROOT_DIR
+    input_file = './x.csv'
+    count = 0 
+    # open file and sepate values 
+    articles = []
+    images = []
+    check_art = "mjau"
+    with open(input_file, 'r') as i:
+        for line in i:
+            sepatated_values = line.split(",")
+            count = count + 1 
+            img_count = 1
+            # see if values exist 
+            if sepatated_values[1] != '' and count > 1: 
+                stock = sepatated_values[2]
+                if stock == '':
+                    stock = 0
+ 
+                full_article_sku = sepatated_values[1]
+                #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
+                splitart = full_article_sku.split("_")
+                article = Article.objects.get(sku_number=splitart[0])
+                try: 
+                    color = Color.objects.get(order=splitart[1])
+                except: 
+                    color = "no color"
+                try:       
+                    pattern = Pattern.objects.get(order=splitart[2])
+                except: 
+                    color = "no pattern"      
+
+                size = splitart[3]
+
+                img_name = splitart[0] + "_" + splitart[1] + "_" + splitart[2] + "_" + str(img_count) 
+                image = path_dir + "/media/variations/"+ str(img_name) + ".jpg"   
+                print image     
+                file_exist = os.path.isfile(image) 
+
+                if file_exist: 
+                    image = "ok: " + img_name
+                else: 
+                    image = "fail: " + img_name
+
+                check = unicode(article) + "_" + unicode(color) + "_" + unicode(pattern) + "_" + unicode(size)
+                articles.append(check)
+                images.append(image)
+
+                img_count = img_count + 1
+                print img_count 
+                if img_count == 4:
+                    img_count = 1
+
+            else: 
+                pass 
+
+    return render_to_response('variation/csv_view.html', {
+        'articles': articles, 
+        'images': images
+    }, context_instance=RequestContext(request))
+
+#read csv and insert full varations or products ini django database and fortnox          
+
+@login_required
+def readCsv(request):
+    input_file = './x.csv'
+    count = 0 
+    # open file and sepate values 
+    with open(input_file, 'r') as i:
+        for line in i:
+            sepatated_values = line.split(",")
+            count = count + 1 
+            # see if values exist 
+            if sepatated_values[1] != '' and count > 1: 
+                stock = sepatated_values[2]
+                if stock == '':
+                    stock = 0
+
+                try: 
+                    full_article_sku = sepatated_values[1]
+                    #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
+                    splitart = full_article_sku.split("_")
+                    article = Article.objects.get(sku_number=splitart[0])
+                    color = Color.objects.get(order=splitart[1])
+                    pattern = Pattern.objects.get(order=splitart[2])
+                    size = splitart[3]
+
+                    article_name = unicode(article.name) + " " + unicode(color) + " " + unicode(pattern)
+
+                    # insert or update product in fortnox
+                    error_or_create = fromCsvToFortnox(article_name, full_article_sku, size)
+                   
+
+                    # insert or update full_variation
+                    fromCsvToDjango(article, pattern, color, size, stock)
+                except:
+                    pass
+            else: 
+                pass 
+
+    return HttpResponse(status=200)
+
 

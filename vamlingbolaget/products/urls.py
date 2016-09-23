@@ -24,6 +24,9 @@ urlpatterns = patterns('products.views',
     url(r'^allart_rea/$', 'allreaArt'),
     #url(r'^articles/$', 'articleList'),
     url(r'^articlescsv/$', 'articlesCsv'),
+    url(r'^readcsv/$', 'readCsv'),
+    url(r'^checkcsv/$', 'readCsvOnlyCheck'),
+    
     url(r'^articlestrans/$', 'articlesTranferToFortnox'),
     url(r'^article_stock/(?P<sku_num>[a-zA-Z0-9_.-]+)/(?P<stock>[a-zA-Z0-9_.-]+)/$', 'articleUpdateStock'),    
 )

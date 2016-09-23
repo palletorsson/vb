@@ -1,0 +1,27 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{%block title%}
+<title>Vamlingbolaget | {% trans "pacsoft " %}  </title>
+<meta name="description" content={% trans "Tack för din Beställning av Vamlingbolagets produkter " %} />
+
+{%endblock%}
+
+
+{% block allcontent %}
+{% if user.is_authenticated %}
+
+<ul>
+{% for art in articles %}
+   <li> {{ art }} </li>
+
+{% endfor %}
+</ul>
+
+<ul>
+{% for art in images %}
+   <li> {{ art }} </li>
+
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
