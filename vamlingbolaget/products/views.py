@@ -609,6 +609,7 @@ def readCsv(request):
             sepatated_values = line.split(",")
             count = count + 1 
             # see if values exist 
+            stock = sepatated_values[2]
             if sepatated_values[1] != '' and count > 1: 
                 stock = sepatated_values[2]
                 if stock == '':
@@ -624,18 +625,64 @@ def readCsv(request):
                     size = splitart[3]
 
                     article_name = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
-
-                    # insert or update product in fortnox
-                    error_or_create = fromCsvToFortnox(article_name, full_article_sku, stock)
-                   
-
-                    # insert or update full_variation
-                    fromCsvToDjango(article, pattern, color, size, stock)
                 except:
-                    pass
+                    print "art wrong ", count
+
+                # insert or update product in fortnox       
+                try:
+                    error_or_create = fromCsvToFortnox(article_name, full_article_sku, stock)
+                except:
+                    print "fortnox wrong ", count
+
+                # insert or update full_variation
+                try:
+                    fromCsvToDjango(article, pattern, color, size, stock)
+                except: 
+                    print "django wrong ", count
+                
             else: 
                 pass 
 
     return HttpResponse(status=200)
 
+
+@login_required
+def orderCsv(request):
+    input_file = './order.csv'
+    count = 0 
+    sizes = [34, 36, 3840, 42, 44, 46]
+    # open file and sepate values 
+    with open(input_file, 'r') as i:
+
+        for line in i:
+            print line 
+            sepatated_values = line.split(",")
+            count = count + 1 
+            # see if values exist 
+            if sepatated_values[0] != '': 
+                art_and_partner = sepatated_values[0] 
+                splitart = art_and_partner.split("_")
+
+                try: 
+                    article = Article.objects.get(sku_number=splitart[0])
+                    pattern = Pattern.objects.get(order=splitart[1])
+                    color = Color.objects.get(order=splitart[2])
+                    variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+                    print variation 
+                    order = 100 + count
+                    print art_and_partner, splitart, order
+                    for size in sizes: 
+                         
+                        try:
+                            fullvar = FullVariation.objects.get(variation=variation, size=size)
+                            fullvar.order = order
+                            fullvar.save()
+                        except:
+                            print "no such size"
+                        print fullvar
+                except:
+                    print "knas"
+
+
+    return HttpResponse(status=200)
 

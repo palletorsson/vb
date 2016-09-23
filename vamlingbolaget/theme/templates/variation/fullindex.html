@@ -13,9 +13,10 @@
         {% for product in products %}
              <div class="collection_list img_container" >
                 <a href="/products/fullvariation/{{product.pk}}/#{{ product.variation.article.name }} {% trans "i" %} {{ product.variation.color|lower }} {{ product.pattern|lower }}">
-                    {% with product.variation.image_set.all|first as image %}
+                   
+                            <div class="force_image"> <img src="/media/variations/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_1.jpg" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
 
-                            <div class="force_image"> <img src="{% version image.image 'large' %}" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
+                            </div>
                             <div class='image_description'>
                                <span class="artname"> {{ product.variation.article.name }}</span><br/>
                                 {%if product.variation.article.discount%}
@@ -25,7 +26,7 @@
                                 {%endif%}
                             </div>
 <hr>
-                    {% endwith %}
+                   
                 </a>
             </div>
         {% endfor %}
