@@ -203,6 +203,120 @@ $("#addtocart").off('click').on({
     }
 });//end of click
 
+
+$("#addtofullcart").off('click').on({
+
+    click:function(e) {
+        e.stopPropagation();
+        if(counter == 0){
+                console.log("addtofullcart")
+            counter++;
+            setTimeout(function(){counter = 0},2000)
+            
+            full = $('#add_or_edit').val();
+
+            if (full == 'full') { 
+                var add_or_edit = 'full'
+            }
+            else {
+                var add_or_edit = 'add'; 
+            }
+
+            var sku_number = $('#sku_number').text(),
+                product_type = $('#product_type').text(),
+                quality = $(".quality").text(),
+                size_id = $('#size').val() || size_id_default,
+                article_id = $('#article_pk').val(),
+
+                quantity = $('#quantity').val(),
+                color = $('#color').val() || $('#color option:selected').val() || $('#hidden_colorpattern').val(),
+                the_price = $("#the_price").text(),
+                pattern = $('#pattern').val() || $('#pattern option:selected').val() || $('#hidden_colorpattern').val(),
+                color2 = 0,
+                pattern2 = 0;
+
+            if (sku_number == 9805) { //fill in proper article no for 2 patterned items
+                color2 = $('#color2').val();
+                pattern2 = $('#pattern2').val();
+            }
+
+            $.ajax({
+                type:"POST",
+                url:"/cart/addtofullcart/",
+                data: {
+                article_sku: sku_number,
+                color: color,
+                color2: color2,
+                pattern: pattern,
+                pattern2: pattern2,
+                size: size_id,
+                csrfmiddlewaretoken: csrftoken,
+                cartitem_id: '1',
+                quantity: quantity,
+                add_or_edit : add_or_edit
+                },
+                
+                success: function(data){
+                var msg = data.message.msg,
+                    _ = data.cartitem;
+                var widgetTextstart = $('#widget_text_start').text();
+                var widgetSize = $('#widget_size').text();
+                var widgetExist = $('#widget_exist').text();
+                var widgetTextend = $('#widget_text_end').text();
+                var widgetTextin = $('#widget_text_in').text();
+                var widget_size = $('.size_active').text();
+                if(color2 === 0) {
+                    var coltext = _.color,
+                    pattext = _.pattern;
+                } else {
+                    var coltext = _.color +' / '+_.color2,
+                    pattext = _.pattern +' / '+_.pattern2;
+
+                    }
+
+             $("#updatecart").animate({
+                      height:'200px'
+                    });
+
+                $("#updatecart").html( '<hr> <li> <strong> '+ widgetTextstart+ ' </strong></li><hr><li>'+_.article +' </li>' +
+                     '<li> - '+ widget_size +' </li>' +
+                     '<li> '+ coltext +', '+ pattext +' </li>' +
+                    
+                     ' <div>').fadeIn();
+
+                $("#updatecart").delay(6000).fadeOut(3000).animate({
+                      height:'0px'
+                    });
+
+                    var old_quantity = $("#widget_quantity").text();
+                    var new_quantity = parseInt(quantity) + parseInt(old_quantity);
+                    $('#widget_quantity').text(new_quantity);
+
+                    var old_price = $("#widget_total").text();
+                    var new_price = parseInt(the_price) + parseInt(old_price);
+                    $('#widget_total').text(new_price);
+                    $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff0000"}) 
+
+              }
+           });
+        }
+    }
+});//end of click
+
+$(".variation_img").click(function() {
+   img = $(this).attr('src');
+   $("#images_container").html('')
+   $("#images_container").prepend($('<img>',{id:'theImg',src:img}))
+}); 
+
+$(".has_size").each(function() {
+    var current_size = $(this).text().trim();
+    var id_= "#"+current_size
+    console.log(id_)
+    $(id_).removeClass('disabled'); 
+       
+});
+
 $("#addreatocart").click(function() {
 	var item = $('#rea_pk').val();
 	the_price = $("#the_price").text(),
