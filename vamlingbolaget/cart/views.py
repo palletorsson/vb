@@ -109,9 +109,7 @@ def addtocart(request):
 
         # if costumer adds a full varation 
         elif (cartitem_id and add_or_edit == 'full'):
-            print cartitem_id
             cartitem = CartItem.objects.create(cart = cart)
-            print cartitem
             cartitem.article = article_db
             cartitem.pattern = pattern
             cartitem.size = size
@@ -165,22 +163,9 @@ def addtocart(request):
                 msg = u'Du har lagt till: <br/>'                   
                 cartitem.save()
 
-        else:
-            cartitem = CartItem.objects.create(cart = cart)
-            cartitem.article = article_db
-            cartitem.pattern = pattern
-            cartitem.size = size
-            cartitem.color = color
-            cartitem.quantity = quantity
-            if(color2 > 0):
-                cartitem.color_2 = color2
-                cartitem.pattern_2 = pattern2
-            cartitem.save()
-            msg = u'Du har lagt till: <br/>'
-
         color_db = Color.objects.get(order=color)
         pattern_db = Pattern.objects.get(order=pattern)
-        size_db = Size.objects.get(pk=size)
+        size_db = getsize(size)
 
         if(color2 == '0'):
             pass
@@ -336,10 +321,10 @@ def voucher(request, pk):
 		print 'fel kod'
 		
 	return redirect('/cart/show/')
-	
+
 def showcart(request):
-    key = _cart_id(request)
-    cart, created = Cart.objects.get_or_create(key=key)
+    cart_id = _cart_id(request)
+    cart, created = Cart.objects.get_or_create(key=cart_id)
     cartitems = cart.cartitem_set.all()
     bargains = cart.bargaincartitem_set.all()
     rea = cart.reacartitem_set.all()
@@ -525,7 +510,8 @@ def totalsum(cartitems, bargains, request, voucher, rea):
     return total
 
 def getsize(size):
-    print size 
+    temp_size = size
+
     if size == 34 or size == 1: 
         return_size = 'XS' 
     elif size == 36 or size == 2: 
@@ -540,6 +526,10 @@ def getsize(size):
         return_size = 'XLL'
     else: 
         return_size = 'NO'
+
+    if return_size == 'NO': 
+        return_size = Size.objects.get(id=temp_size)
+
     return return_size
 
 def getnames(cartitems):
@@ -548,9 +538,6 @@ def getnames(cartitems):
         item.pattern = Pattern.objects.get(order=item.pattern)
         size = item.size 
         item.size = getsize(item.size)
-        if item.size == 'NO': 
-            item.size = Size.objects.get(id=size)
-
         if item.color_2:
             item.color_2 = Color.objects.get(order=item.color_2)
             item.pattern_2 = Pattern.objects.get(order=item.pattern_2)
