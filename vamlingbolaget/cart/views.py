@@ -15,7 +15,7 @@ import json
 import pygeoip
 from vamlingbolaget.settings import ROOT_DIR
 import operator
-from fortnox.fortnox import get_headers, searchCustomer
+from fortnox.fortnox import get_headers, searchCustomer, stockvalue_down
 from django.contrib.auth.decorators import login_required
 from logger.views import keepLog
 
@@ -49,14 +49,23 @@ def augment_quantity(self, quantity):
 
 def addtocart(request):
     if (request.method == 'POST'):
+
         d = request.POST
+        msg = ''
         sku = d['article_sku']
         article_db = Article.objects.get(sku_number = sku)
+ 
+ 
+        try: 
+            color = d['color']
+            pattern = d['pattern']
+            color2 = d['color2']
+        except: 
+            color = 0
+            pattern = 0
+            color2 = 0
 
-        color = d['color']
-        pattern = d['pattern']
-        color2 = int(d['color2'])
-
+        # if color2 exist then it is reversable zip jacket 
         if(color2 == 0):
             pass
         else:
@@ -67,10 +76,10 @@ def addtocart(request):
             size = d['size']
         except: 
             size = 1
-            
-        # when article in metervara 
+        
+        #  if article is metervara else te quatity is 1
         if sku == '3' or sku == '1000': 
-            quantity = int(d['quantity']) 
+            quantity = d['quantity'] 
         else: 
             quantity = 1
 
@@ -78,13 +87,14 @@ def addtocart(request):
         add_or_edit = d['add_or_edit']
 
         cart_id = _cart_id(request)
-
         cart, created = Cart.objects.get_or_create(key = cart_id)
         cart.save()
 
         existing_cartitems = CartItem.objects.filter(cart=cart)
 
         update = False
+
+        # if costumer edits cart
         if (cartitem_id and add_or_edit == 'edit'):
             cartitem = CartItem.objects.get(pk=cartitem_id)
             cartitem.size = size
@@ -97,7 +107,43 @@ def addtocart(request):
             cartitem.save()
             msg = u'Du har andrat till: </br>'
 
-        elif (existing_cartitems):
+        # if costumer adds a full varation 
+        elif (cartitem_id and add_or_edit == 'full'):
+            print cartitem_id
+            cartitem = CartItem.objects.create(cart = cart)
+            print cartitem
+            cartitem.article = article_db
+            cartitem.pattern = pattern
+            cartitem.size = size
+            cartitem.color = color
+            cartitem.quantity = quantity
+            if(color2 > 0):
+                cartitem.color_2 = color2
+                cartitem.pattern_2 = pattern2
+            cartitem.save()
+            msg = u'Du har lagt till: <br/>'
+
+        # if costumer adds a varation 
+
+        elif (cartitem_id and add_or_edit == 'add'):
+            print "ist add"
+            cartitem = CartItem.objects.create(cart = cart)
+            cartitem.article = article_db
+            cartitem.pattern = pattern
+            cartitem.size = size
+            cartitem.color = color
+            cartitem.quantity = quantity
+            if(color2 > 0):
+                cartitem.color_2 = color2
+                cartitem.pattern_2 = pattern2
+            cartitem.save()
+            msg = u'Du har lagt till: <br/>'
+        else: 
+            print "o no"
+            pass
+
+        # if there is cart item in the shopping cart check if it is the same.     
+        if (existing_cartitems):
             for item in existing_cartitems:
                 if (str(item.article.sku_number) == str(sku) and str(item.pattern) == str(pattern) and
                     str(item.color) == str(color) and str(item.size) == str(size)):
@@ -136,13 +182,13 @@ def addtocart(request):
         pattern_db = Pattern.objects.get(order=pattern)
         size_db = Size.objects.get(pk=size)
 
-        if(color2 == 0):
+        if(color2 == '0'):
             pass
         else:
             color_db2 = Color.objects.get(order = color2)
             pattern_db2 = Pattern.objects.get(order = pattern2)
 
-        if(color2 > 0):
+        if(color2 != '0'):
             returnjson = {
                     'cartitem': {
                         'article': article_db.name,
