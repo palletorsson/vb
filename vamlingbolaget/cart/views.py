@@ -524,11 +524,33 @@ def totalsum(cartitems, bargains, request, voucher, rea):
     total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling, 'se': se}
     return total
 
+def getsize(size):
+    print size 
+    if size == 34 or size == 1: 
+        return_size = 'XS' 
+    elif size == 36 or size == 2: 
+        return_size = 'S'
+    elif size == 3840 or size == 3: 
+        return_size = 'M'
+    elif size == 42 or size == 5: 
+        return_size = 'L'
+    elif size == 44 or size == 6: 
+        return_size = 'XL'  
+    elif size == 46 or size == 7:
+        return_size = 'XLL'
+    else: 
+        return_size = 'NO'
+    return return_size
+
 def getnames(cartitems):
     for item in cartitems:
         item.color = Color.objects.get(order=item.color)
         item.pattern = Pattern.objects.get(order=item.pattern)
-        item.size = Size.objects.get(id=item.size)
+        size = item.size 
+        item.size = getsize(item.size)
+        if item.size == 'NO': 
+            item.size = Size.objects.get(id=size)
+
         if item.color_2:
             item.color_2 = Color.objects.get(order=item.color_2)
             item.pattern_2 = Pattern.objects.get(order=item.pattern_2)
