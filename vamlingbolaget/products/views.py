@@ -278,13 +278,12 @@ def fulldetail(request, pk):
 
     variation_sizes = Counter(size_list)
     variation_sizes = list(variation_sizes)
-    
 
     full_variations_article = Counter(full_variations_article) 
     full_variations_article = list(full_variations_article)
 
     path_dir = settings.ROOT_DIR
-    filename = str(full_variation.variation.article.sku_number) + "_" + str(full_variation.variation.pattern.order) + "_/" + str(full_variation.variation.color.order) 
+    filename = str(full_variation.variation.article.sku_number) + "_" + str(full_variation.variation.pattern.order) + "_" + str(full_variation.variation.color.order) 
 
     images = [] 
 
