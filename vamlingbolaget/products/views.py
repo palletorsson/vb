@@ -564,6 +564,7 @@ def readCsvOnlyCheck(request):
             count = count + 1 
             img_count = 1
             # see if values exist 
+
             if sepatated_values[1] != '' and count > 1: 
                 stock = sepatated_values[2]
                 if stock == '':
@@ -577,7 +578,7 @@ def readCsvOnlyCheck(request):
                     article = Article.objects.get(sku_number=splitart[0])
                 except:
                     article = "no article"
-                    
+
                 try: 
                     color = Color.objects.get(order=splitart[2])
                 except: 
@@ -591,7 +592,7 @@ def readCsvOnlyCheck(request):
 
                 img_name = splitart[0] + "_" + splitart[1] + "_" + splitart[2] + "_" + str(img_count) 
                 image = path_dir + "/media/variations/"+ str(img_name) + ".jpg"   
-                print image     
+                #print image     
                 file_exist = os.path.isfile(image) 
 
                 if file_exist: 
@@ -604,7 +605,7 @@ def readCsvOnlyCheck(request):
                 images.append(image)
 
                 img_count = img_count + 1
-                print img_count 
+                #print img_count 
                 if img_count == 4:
                     img_count = 1
 
@@ -617,9 +618,9 @@ def readCsvOnlyCheck(request):
     }, context_instance=RequestContext(request))
 
 #read csv and insert full varations or products ini django database and fortnox          
-
+#url(r'^readcsv/(?P<what>[a-zA-Z0-9_.-]+)/$', 'readCsv'),
 @login_required
-def readCsv(request):
+def readCsv(request, what):
     input_file = './modeller.csv'
     count = 0 
     # open file and sepate values 
@@ -634,31 +635,38 @@ def readCsv(request):
                 if stock == '':
                     stock = 0
 
+                full_article_sku = sepatated_values[1]
+                #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
+                splitart = full_article_sku.split("_")
                 try: 
-                    full_article_sku = sepatated_values[1]
-                    #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
-                    splitart = full_article_sku.split("_")
                     article = Article.objects.get(sku_number=splitart[0])
                     color = Color.objects.get(order=splitart[2])
                     pattern = Pattern.objects.get(order=splitart[1])
                     size = splitart[3]
-
                     article_name = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
+                    print "art ok ", count, sepatated_values[1]
                 except:
-                    print "art wrong ", count
+                    print "art wrong ", count, sepatated_values[1]
+                    
+                    
 
-                # insert or update product in fortnox       
-                try:
-                    error_or_create = fromCsvToFortnox(article_name, full_article_sku, stock)
-                except:
-                    print "fortnox wrong ", count
+                if what == "fortnox": 
+                    # insert or update product in fortnox       
+                    try:
+                        error_or_create = fromCsvToFortnox(article_name, full_article_sku, stock)
+                        #print error_or_create
+                    except:
+                        pass
+                        #print "fortnox wrong ", count, sepatated_values[1]
 
-                # insert or update full_variation
-                try:
-                    fromCsvToDjango(article, pattern, color, size, stock)
-                except: 
-                    print "django wrong ", count
-                
+                elif what == "django": 
+                    # insert or update full_variation
+                    try:
+                        fromCsvToDjango(article, pattern, color, size, stock)
+                    except: 
+                        print "django wrong ", count, sepatated_values[1]
+                else: 
+                    print "hej"            
             else: 
                 pass 
 
