@@ -620,7 +620,7 @@ def readCsvOnlyCheck(request):
 #read csv and insert full varations or products ini django database and fortnox          
 #url(r'^readcsv/(?P<what>[a-zA-Z0-9_.-]+)/$', 'readCsv'),
 @login_required
-def readCsv(request, what):
+def readCsv(request, what, start_at, end_at):
     input_file = './modeller.csv'
     count = 0 
     # open file and sepate values 
@@ -629,8 +629,12 @@ def readCsv(request, what):
             sepatated_values = line.split(",")
             count = count + 1 
             # see if values exist 
+            start_at = int(start_at)
+            end_at = int(end_at)
             stock = sepatated_values[2]
-            if sepatated_values[1] != '' and count > 1: 
+
+            if sepatated_values[1] != '' and count > 1 and count > start_at and count < end_at: 
+
                 stock = sepatated_values[2]
                 if stock == '':
                     stock = 0
