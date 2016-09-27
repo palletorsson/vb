@@ -19,6 +19,10 @@ STATUS = (
     )
 
 MEDIATYPE = (
+    ('F', 'Fullpost'),
+    ('HF', 'halfpostfull'), 
+    ('HT', 'halfposttop'), 
+    ('HB', 'halfpostbottom'), 
     ('I', 'Imagepost'),
     ('V', 'Videopost')
     )
@@ -34,14 +38,15 @@ class FrontpageTheme(models.Model):
 
 class FrontpageExtended(models.Model):
     heading  = models.CharField(max_length=255, help_text="The title")
-    theme = models.ForeignKey('FrontpageTheme')
     heading_extra = models.CharField(max_length=255, blank=True, help_text="as tagline")
+    mediatype = models.CharField(max_length=1, choices=MEDIATYPE, help_text="Style your content", verbose_name="Layout Type")
+    theme = models.ForeignKey('FrontpageTheme')
     link_to = models.CharField(max_length=255, help_text="use relative link")
     feature_image = FileBrowseField("Image", max_length=200, directory="frontpage/", extensions=[".jpg"], blank=True, null=True)
     body = models.TextField(blank=True, help_text="This could be used for sweden")
     order = models.IntegerField(help_text="Set the order")
     status = models.CharField(max_length=1, choices=STATUS)
-    mediatype = models.CharField(max_length=1, choices=MEDIATYPE)
+
     extramedia = models.TextField(blank=True, help_text="This could be the iframe of a video, gif or other html")
 
     def __unicode__(self):
