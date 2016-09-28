@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+
+{% block stretchpage %}
+    
+<div class="hidden-xs">
+    <!-- Carousel for larger screens -->
+
+    <div class="spanfullscreen">
+		<div class="bs-docs-example">
+			<div id="myCarousel" class="carousel slide">
+				<div class="carousel-inner" >
+				  	{%for image in images%}
+				    <div class="item {% if forloop.first%} active {%endif%} spanfullscreen">
+				 
+				      	<a href="/products/type/kvinna/"><img src="{{MEDIA_URL}}{{image.image}}" alt="{{image.name}}" name="{{image.name}}"/></a>
+				    </div>
+					{%endfor%}
+				</div>
+				<div class="left"  ><a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a></div>
+				<div class="right" ><a class="right carousel-control"  href="#myCarousel" data-slide="next">&rsaquo;</a></div>
+		  	</div>
+		</div>
+    </div>  <!-- end fulscreen --> 
+
+
+  <div class="container">
+  	<div class="nav" style="clear:both;"></div>
+      <hr>
+
+      <h1 class="text-center"> {{ theme1.0.title }}  </h1>
+      <hr>
+    <div>
+
+{% for feature in features %}
+    {% if feature.mediatype == 'F' %}
+        <div class="col-md-12">
+       		<div class="grid-item">
+	          <div>
+		          <a href="{{ feature.link_to }}">  
+		            <img src="{% version feature.feature_image 'large' %}" style='width: 100%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+		          </a>
+	          </div>
+        	</div>
+  		</div>
+        {% elif feature.mediatype == 'H' %}
+		<div class="col-md-6">
+   			<div class="grid-item">
+   			<br>
+      		<a href="{{ feature.link_to }}">  
+        		<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+      		</a>
+    		</div> 
+ 		</div> 
+        {% elif feature.mediatype == 'T' %}
+		<div class="col-md-6">
+   			<div class="grid-item" >
+      		    <h2> {{ feature.heading }} </h2>
+         	    <h2> {{ feature.heading_extra}} </h2>
+	            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"> </span>
+	          	<a href="{{ feature.link_to }}">  
+	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; max-height:704px; object-fit: fill' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+      			</a>
+    		</div> 
+    	
+ 		</div> 
+        {% elif feature.mediatype == 'B' %}
+		<div class="col-md-6">
+   			<div class="grid-item">
+	            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"> </span>
+	          	<a href="{{ feature.link_to }}">  
+	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+      			</a>
+    		</div> 
+    		<h2> {{ feature.heading }} </h2>
+         	<h2> {{ feature.heading_extra}} </h2>
+ 		</div> 
+        {% else %}
+
+    <br>
+    {% endif %}
+{% endfor %}
+  
+  </div>  <!-- end container --> 
+</div>  <!-- end hidden xs -->
+
+<div class = "visible-xs">
+	<div class="list-group">
+    <a href="/products/type/kvinna/" class="list-group-item"> 
+
+
+
+      <div style="background-image: url({% for feature in features %} {% if forloop.first %} {% version feature.feature_image 'medium' %} {% endif %} {% endfor %})"></div>
+				<div class="textonimage"> DAM </div> 
+		    </div>
+			</a>
+	 <hr>
+
+     {% for feature in features %}
+
+		<a href="{{ feature.link_to }}" class="list-group-item"> 
+			<div class="mobile_image">
+      <img src="{% version feature.feature_image 'large' %}" class="mobile_image" alt="{{ feature.heading }} image">
+				<div class="textonimage"> {{ feature.heading }}</div> 
+		  </div>
+			</a>
+	 <hr>
+     {% endfor  %}
+
+	<div class="list-group">
+	  <a href="/cart/show/" class="list-group-item"> {% trans "Shoppinglåda" %}</a>
+	</div>
+	<hr>
+	<div class="list-group">
+		<a href="/products/type/kvinna/" class="list-group-item">{% trans "Shop" %}</a>
+		<hr>
+		<a href="/news/" class="list-group-item">{% trans "Nyheter" %}</a>
+		<a href="/galleries/" class="list-group-item">{% trans "Bildgallerier" %}</a>
+		<hr>
+		<a href="/about/" class="list-group-item">{% trans "Om oss" %}</a>
+		<a href="/shops/" class="list-group-item">{% trans "Butiker" %}</a>
+		<a href="/order/" class="list-group-item">{% trans "Beställ" %}</a>
+		<a href="/newsletter/" class="list-group-item">{% trans "Nyhetsbrev" %}</a>                           
+	</div>
+</div> <!--- list group ends --> 
+</div> <!--- vis mobile ends --> 
+
+
+<footer>
+  {% include "footer.html" %}
+</footer>
+
+    <script>
+      $(document).ready(function(){
+        $('.carousel').carousel(
+          {interval:6000}
+        )
+      });
+    </script>
+{% endblock %}
