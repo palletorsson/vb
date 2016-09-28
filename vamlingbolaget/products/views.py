@@ -251,6 +251,9 @@ def fulldetail(request, pk):
         num = int(full_var.pk)
         link = "/products/fullvariation/"+ str(num) + "/#" + str(full_var.variation) + " " + str(full_var)
         full_var.link = link
+        filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order) 
+        file = "/media/variations/"+ filename +"_1.jpg"  
+        full_var.image = file   
 
     #mapping name size to number
     for full_var in full_variations:
@@ -276,8 +279,7 @@ def fulldetail(request, pk):
         else: 
             print "no such size"
 
-    variation_sizes = Counter(size_list)
-    variation_sizes = list(variation_sizes)
+    variation_sizes  = f7(full_variations)
 
     full_variations_article = Counter(full_variations_article) 
     full_variations_article = list(full_variations_article)
@@ -308,6 +310,10 @@ def fulldetail(request, pk):
                    context_instance=RequestContext(request)
                     )
 
+def f7(seq):
+    seen = set()
+    seen_add = seen.add
+    return [x for x in seq if not (x.size in seen or seen_add(x.size))]
 
 def artdetail(request, pk):
     try:

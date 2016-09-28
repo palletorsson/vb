@@ -12,7 +12,7 @@
 {% block pagetitle %}
 	<div class="row-fluid">
 		<div class="span12" >
-<div class="bread" ><a href="javascript:history.go(-1)"> << {% trans "Shop" %}</a> / <a href="/products/full"> full </a></div> 
+<div class="bread" ><a href="/products/full"> << {% trans "Shop" %}</a> / <a href="/products/full"> {{ product.variation.article.name }}  </a></div> 
 			<hr>
 		</div>
 {% endblock %}
@@ -61,7 +61,7 @@
 					<div class="span2">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.variation.color.order }}f_{{ product.variation.pattern.order }}m.jpg" style="width:160px;" />
 										<hr>
-				{% trans "Storlek" %}: {{ product.size }}
+			
 					</div>
 
 					<div class="span1"> </div>
@@ -81,12 +81,14 @@
 				
 			<nav>
 				<ul class="pagination">
-			  
-				{% for size in full_variations  %} 
-					{% if size == product.size %} 
-						<li class="active select_size" id="{{ size.size  }}"><a href=""> {{ size.lettersize }}</a></li> 
+			  			
+				{% for size in sizes %} 
+			
+					{% if product.size == size.size %}  
+						<li class="active select_size" id="{{ size.size }}"><a href=""> {{ size.lettersize }}</a></li> 
+				
 					{% else %}
-						<li class="disabled select_size" id="{{ size.size  }}"><a href=""> {{ size.lettersize }} </a></li>
+						<li class="select_size" id="{{ size.size  }}"><a href=""> {{ size.lettersize }} </a></li>
 					{% endif %} 
 					
 				{% endfor %}
@@ -100,7 +102,7 @@
 			{% endfor %}
             </ul>
 
-			<input type="hidden" id="size" name="size" value="3" >
+			<input type="hidden" id="size" name="size" value="{{product.size }}" >
 	    	<input type="hidden" id="quantity" name="quantity" value="1" >		
 
 			<hr>
@@ -113,8 +115,10 @@
 		    </div>
 			<hr>
 				{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.get_art_num }}
-				<br>
-				<span> {{ product.variation.article.description }} </span> <br>
+				<hr>
+				
+				<span> {{ product.variation.article.description }} </span> 
+				<hr>
 				<span class="quality" id="{{ product.article.quality }}">{{ product.variation.article.quality }}</span> : 
 				<span> {{ product.variation.article.quality.description }} </span> 
 				 
@@ -127,12 +131,12 @@
 	<hr/>
 	<strong>{% trans "Fler produkter av" %}  {{ product.variation.article.name }} </strong>  
 	<hr/>
-	{% for product in products %}
+	{% for product in full_variations_article %}
 	<div class='image_wrapper'>
-		<a href="/products/{{product.pk}}">
-		    {% with product.image_set.all|first as image %}
+		<a href="{{product.link}}">
+
 		        <div class="collection_list img_container">
-		        <img src="{% version image.image 'medium' %}" alt="{{ product.article.name }}"  />
+		        <img src="{{ product.image }}" alt="{{ product.article.name }}"  />
 		        <br/>
 		        <div>
 		            {{ product.variation.article.name }}<br/>
@@ -144,7 +148,7 @@
 		            {%endif%}
 		        </div>
 		    </div>
-		    {% endwith %}
+		   
 		</a>
 	
 	</div>
