@@ -18,7 +18,7 @@
     {% if forloop.first%} <!-- don nothing here-->
     {%else%}  
     {% if feature.mediatype == 'F' %}
-        <div class="col-md-1"></div>
+        <div class="col-md-1">.</div>
         <div class="col-md-10">
        		<div class="grid-item">
 	          <div>
@@ -28,10 +28,10 @@
 	          </div>
         	</div>
         </div>
-        <div class="col-md-1"></div>
+        <div class="col-md-1">.</div>
 
         {% elif feature.mediatype == 'H' %}
-        <div class="col-md-1"></div>
+        <div class="col-md-1">.</div>
 		<div class="col-md-5">
    			<div class="grid-item">
    			<br>
@@ -42,7 +42,7 @@
  		</div> 
  		        
         {% elif feature.mediatype == 'T' %}
-   		<div class="col-md-1"></div>
+   		<div class="col-md-1">.</div>
 		<div class="col-md-4">
    			<div class="grid-item" >
       		    <h2> {{ feature.heading }} </h2>
@@ -52,11 +52,10 @@
 	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; max-height:704px; object-fit: fill' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       			</a>
     		</div> 
-    	
  		</div> 
-        <div class="col-md-1"></div>
+        <div class="col-md-1">.</div>
         {% elif feature.mediatype == 'B' %}
-        <div class="col-md-1"></div>
+        <div class="col-md-1">.</div>
 		<div class="col-md-4">
    			<div class="grid-item">
 	            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"> </span>
@@ -67,7 +66,7 @@
     		<h2> {{ feature.heading }} </h2>
          	<h2> {{ feature.heading_extra}} </h2>
  		</div> 
- 		<div class="col-md-1"></div>
+ 		<div class="col-md-1">.</div>
         {% else %}
 {%endif%} 
     <br>
