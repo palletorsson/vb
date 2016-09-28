@@ -25,7 +25,7 @@ v1_api.register(SizeResource())
 urlpatterns = patterns('',
 
     url(r'^google[a-zA-Z0-9_.-]+/$', TemplateView.as_view(template_name="google612609a6d26fc452.html")),
-    url(r'^$', 'frontpage.views.first_page', name='index'),
+    url(r'^', include('frontpage.urls')),  
     url(r'^products/', include('products.urls')),
     url(r'^patternandcolor/$', 'products.views.pattern_and_color'),
     url(r'^collection/(?P<key>[a-zA-Z0-9_.-]+)/$', 'gallery.views.show_gallery'),
