@@ -19,20 +19,20 @@
     {%else%}  
     {% if feature.mediatype == 'F' %}
 
-        <div class="seventeen" style='margin-bottom: 17px; color:white;'>.</div> 
+
 
         <div class="col-md-12">
        		<div class="grid-item">
 	          <div>
 		          <a href="{{ feature.link_to }}">  
-		            <img src="{% version feature.feature_image 'large' %}" style='width: 100%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+		            <img src="{% version feature.feature_image 'large' %}" style='width: 100%; object-fit: contain; margin-top: 10px; margin-bottom: 10px;' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
 		          </a>
 	          </div>
         	</div>
   		</div>
         {% elif feature.mediatype == 'H' %}
 
-		<div class="col-md-6">
+		<div class="col-md-5">
    			<div class="grid-item">
    			<br>
       		<a href="{{ feature.link_to }}">  
@@ -43,7 +43,7 @@
  		        
         {% elif feature.mediatype == 'T' %}
    		
-		<div class="col-md-5">
+		<div class="col-md-4">
    			<div class="grid-item" >
       		    <h2> {{ feature.heading }} </h2>
          	    <h2> {{ feature.heading_extra}} </h2>
