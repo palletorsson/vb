@@ -20,9 +20,12 @@ STATUS = (
 
 MEDIATYPE = (
     ('F', 'Fullpost'),
-    ('H', 'halfpostfull'), 
-    ('T', 'halfposttop'), 
-    ('B', 'halfpostbottom'), 
+    ('L', 'halfpostfullLeft'), 
+    ('H', 'halfpostfullRight'), 
+    ('T', 'halfposttopLeft'), 
+    ('P', 'halfposttopRight'), 
+    ('B', 'halfpostbottomLeft'), 
+    ('J', 'halfpostbottomRight'), 
     ('I', 'Imagepost'),
     ('V', 'Videopost')
     )
