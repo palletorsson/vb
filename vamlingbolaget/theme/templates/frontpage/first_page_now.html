@@ -18,6 +18,9 @@
     {% if forloop.first%} <!-- don nothing here-->
     {%else%}  
     {% if feature.mediatype == 'F' %}
+
+        <div class="seventeen" style='margin-bottom: 17px; color:white;'>.</div> 
+
         <div class="col-md-12">
        		<div class="grid-item">
 	          <div>
@@ -39,8 +42,8 @@
  		</div> 
  		        
         {% elif feature.mediatype == 'T' %}
-   		<div class="col-md-1"></div>
-		<div class="col-md-4">
+   		
+		<div class="col-md-5">
    			<div class="grid-item" >
       		    <h2> {{ feature.heading }} </h2>
          	    <h2> {{ feature.heading_extra}} </h2>
@@ -51,10 +54,10 @@
     		</div> 
     	
  		</div> 
- 		<div class="col-md-1"></div>
+
         {% elif feature.mediatype == 'B' %}
-        <div class="col-md-1"></div>
-		<div class="col-md-6">
+
+		<div class="col-md-5">
    			<div class="grid-item">
 	            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"> </span>
 	          	<a href="{{ feature.link_to }}">  
