@@ -15,7 +15,7 @@
 
 
 {% for feature in features %}
-    {% if forloop.first%} <!-- don nothing here-->
+    {% if forloop.first%} 
     {%else%} 
     <!-- full size img 'Fullpost'-->
     {% if feature.mediatype == 'F' %}
@@ -32,10 +32,8 @@
         </div>
         <div class="col-md-1">.</div>
  	</div>
-
-
-	<!-- 'halfpostfullLeft' -->     
  	{% elif feature.mediatype == 'L' %}
+	<!-- 'halfpostfullLeft' starts -->     
     <row>
     <div class="col-md-1">.</div>
 	<div class="col-md-5">
@@ -45,12 +43,9 @@
     		<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
   		</a>
 		</div>         		          
-
 		</div> 
-    
-    <!-- 'halfpostfullRight' -->   
     {% elif feature.mediatype == 'H' %}
-
+    <!-- 'halfpostfullRight' ends -->   
     <div class="col-md-1">.</div>
 	<div class="col-md-5">
 			<div class="grid-item">
@@ -61,11 +56,9 @@
 		</div> 
 		</div> 
     <row>
-    
-
-
-    <!-- 'halfposttopLeft' -->    
+    <div class="clearfix">...</div>
     {% elif feature.mediatype == 'T' %}
+    <!-- 'halfposttopLeft' start -->  
     <row>
    		<div class="col-md-1">.</div>
 		<div class="col-md-4">
@@ -79,8 +72,8 @@
     		</div> 
  		</div> 
         <div class="col-md-1">.</div>
-    <!-- 'halfposttopRight' -->    
     {% elif feature.mediatype == 'P' %}
+    <!-- 'halfposttopRight' ends -->
    		<div class="col-md-1">.</div>
 		<div class="col-md-4">
    			<div class="grid-item" >
@@ -94,10 +87,10 @@
  		</div> 
         <div class="col-md-1">.</div>
     <row>    
-
+    <div class="clearfix">...</div>
  
-    <!-- 'halfpostbottomLeft' --> 
     {% elif feature.mediatype == 'B' %}
+    <!-- 'halfpostbottomLeft' starts--> 
     <row>
         <div class="col-md-1">.</div>
 		<div class="col-md-4">
@@ -111,8 +104,8 @@
          	<h2> {{ feature.heading_extra}} </h2>
  		</div> 
  		<div class="col-md-1">.</div>
-    <!-- 'halfpostbottomRight' --> 
  	{% elif feature.mediatype == 'J' %}
+    <!-- 'halfpostbottomRight' end --> 
     
         <div class="col-md-1">.</div>
 		<div class="col-md-4">
@@ -127,6 +120,7 @@
  		</div> 
  		<div class="col-md-1">.</div>
     <row>	
+    <div class="clearfix">...</div>
         {% else %}
 {%endif%} 
     <br>
