@@ -3,10 +3,8 @@
 from string import Template
 from django.utils import translation
 
-
+# start by creating the costumer message header 
 def head_part_of_message(lang): 
-    # start creating the costumer message header 
-
 
     yourorderto = 'Din order till Vamlingbolaget'
     yourorder = 'Din order'
@@ -19,8 +17,8 @@ def head_part_of_message(lang):
     message_header = s.substitute(yourorderto_=yourorderto, yourorder_=yourorder)
     return message_header
 
+# continue to build the message cart summery
 def cart_part_of_message(cartitems, rea_items, lang, i=1): 
-    #build the cart summery
 
     cartitems_str = ''
 
@@ -56,7 +54,10 @@ def cart_part_of_message(cartitems, rea_items, lang, i=1):
 
         if (item.article.type.order < 7 or item.article.type.order == 9):
             v = Template('$size_ : $size_name \n')
-            cart_temp = cart_temp + v.substitute(size_=size, size_name=item.size.name,) 
+            try:
+                cart_temp = cart_temp + v.substitute(size_=size, size_name=item.size.name,) 
+            except:
+                cart_temp = cart_temp + v.substitute(size_=size, size_name=item.size) 
 
         t = Template('$productprice_ : $price $sek_ \n')
         cart_temp = cart_temp + t.substitute(productprice_=priceperproduct, price=str(item.article.price), sek_='SEK') 
