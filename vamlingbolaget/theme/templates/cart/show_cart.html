@@ -11,7 +11,6 @@
 {% endblock %}
 
 {% block allcontent %}
-
 <div class="hidden-xs">
 {%if cartitems or bargains or rea%}
     <table class="table table-bordered small">
@@ -30,11 +29,6 @@
             <div>
                 <a href="{%url removefromcart item.pk 'cartitem'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>
 
-            </div>
-        </td>
-        <td>
-            <div>
-                <a href="/cart/edititem/{{ item.id }}/"><i class="icon-edit glyphicon glyphicon-edit"> </i></a>
             </div>
         </td>
         <td>
@@ -183,7 +177,7 @@
             </td>
             {% endfor %}
         </tbody>
-        <td class="totalprice" colspan="8" style="text-align: right">
+        <td class="totalprice" colspan="7" style="text-align: right">
             {% trans "Leverans" %}:
         </td>
         <td id="handling">
@@ -192,7 +186,7 @@
         </tr>
 
         <tr>
-        <th class="totalprice" colspan="8" style="text-align: right">
+        <th class="totalprice" colspan="7" style="text-align: right">
             {% trans "Totalpris" %}:
         </th>
         <th id="totalprice">
