@@ -84,7 +84,9 @@ def addtocart(request):
             quantity = 1
 
         cartitem_id = int(d['cartitem_id'])
+        print "cart id", cartitem_id
         add_or_edit = d['add_or_edit']
+        print "add or edit", add_or_edit
 
         cart_id = _cart_id(request)
         cart, created = Cart.objects.get_or_create(key = cart_id)
@@ -194,14 +196,14 @@ def addtocart(request):
                         'sku' : sku,
                         'color': color_db.name,
                         'pattern': pattern_db.name,
-                        'size': size_db.name,
+                        'size': size_db,
                         'quantity': quantity,
                         },
                     'message': { 'msg' : msg  }
                 }
 
         return_data = json.dumps(returnjson)
-        log = 'Cart add: ' + article_db.name + ' ' + sku  + ' ' + color_db.name + ' ' + pattern_db.name + ' ' + size_db.name
+        log = 'Cart add: ' + article_db.name + ' ' + sku  + ' ' + color_db.name + ' ' + pattern_db.name + ' ' + size_db
         keepLog(request, log, 'INFO', '', cart_id) 
 
     if request.method == 'GET':
