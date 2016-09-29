@@ -83,7 +83,7 @@ def addtocart(request):
         else: 
             quantity = 1
 
-        cartitem_id = int(d['cartitem_id'])
+        cartitem_id = 1
         print "cart id", cartitem_id
         add_or_edit = d['add_or_edit']
         print "add or edit", add_or_edit
