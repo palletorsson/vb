@@ -167,7 +167,10 @@ def addtocart(request):
 
         color_db = Color.objects.get(order=color)
         pattern_db = Pattern.objects.get(order=pattern)
-        size_db = getsize(size)
+        try: 
+            size_db = Size.objects.get(order=size)
+        except:
+            size_db = getsize(int(size))
 
         if(color2 == '0'):
             pass
@@ -528,9 +531,6 @@ def getsize(size):
         return_size = 'XLL'
     else: 
         return_size = 'NO'
-
-    if return_size == 'NO': 
-        return_size = Size.objects.get(id=temp_size)
 
     return return_size
 
