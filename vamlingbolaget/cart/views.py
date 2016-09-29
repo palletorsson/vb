@@ -168,7 +168,8 @@ def addtocart(request):
         color_db = Color.objects.get(order=color)
         pattern_db = Pattern.objects.get(order=pattern)
         try: 
-            size_db = Size.objects.get(order=size)
+            size_db = Size.objects.get(pk=size)
+            size_db = size_db.name
         except:
             size_db = getsize(int(size))
 
@@ -187,7 +188,7 @@ def addtocart(request):
                         'pattern': pattern_db.name,
                         'color2': color_db2.name,
                         'pattern2': pattern_db2.name,
-                        'size': size_db.name,
+                        'size': size_db,
                         'quantity': quantity,
                         },
                     'message': { 'msg' : msg  }
@@ -532,14 +533,24 @@ def getsize(size):
     else: 
         return_size = 'NO'
 
+    if return_size == 'NO':
+        print "noooooooooo"
+        try: 
+            size_db = Size.objects.get(pk=size)
+            size_db = size_db.name
+        except: 
+            pass 
+
     return return_size
 
 def getnames(cartitems):
     for item in cartitems:
         item.color = Color.objects.get(order=item.color)
         item.pattern = Pattern.objects.get(order=item.pattern)
-        size = item.size 
-        item.size = getsize(item.size)
+        try: 
+            item.size = Size.objects.get(pk=item.size)
+        except:
+            item.size = getsize(item.size)
         if item.color_2:
             item.color_2 = Color.objects.get(order=item.color_2)
             item.pattern_2 = Pattern.objects.get(order=item.pattern_2)
