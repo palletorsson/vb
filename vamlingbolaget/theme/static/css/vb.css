@@ -15,9 +15,14 @@ body html {
 }
 
 
-.17ms {
+.seventeen {
     margin-bottom: 17px;
     color:white;
+}
+
+.top0 {
+  vertical-align: top;
+  display: inline;
 }
 
 .pull-right{
