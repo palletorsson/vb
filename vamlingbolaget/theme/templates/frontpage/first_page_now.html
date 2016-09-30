@@ -11,7 +11,7 @@
 	<a href=""><img src="/media/{{features.0.feature_image}}" /></a>	
 </div>
 
-<div class="seventeen" style='margin-bottom: 17px; color:white;'>.</div> 
+<div class="seventeen" style='margin-bottom: 45px; color:white;'>.</div> 
 
 
 {% for feature in features %}
@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-1">.</div>
  	</div>
- 	    <div class="clearfix" style='margin-bottom: 17px; color:white;'>.</div>
+ 	    <div class="clearfix" style='margin-bottom: 45px; color:white;'>.</div>
  	{% elif feature.mediatype == 'L' %}
 	<!-- 'halfpostfullLeft' starts -->     
     <row>
@@ -41,7 +41,7 @@
 			<div class="grid-item top0">
 		
   		<a href="{{ feature.link_to }}">  
-    		<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+    		<img src="{% version feature.feature_image 'large' %}"  style=' width: 80%; object-fit: contain; float: right; ' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
   		</a>
 		</div>         		          
 		</div> 
@@ -51,54 +51,56 @@
 			<div class="grid-item top0">
 		
   		<a href="{{ feature.link_to }}">  
-    		<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+    		<img src="{% version feature.feature_image 'large' %}"  style=' width: 80%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
   		</a>
 		</div> 
 		</div> 
 		<div class="col-md-1">.</div>
-    </row>
-    <div class="clearfix" style='margin-bottom: 17px; color:white;'>.</div>
+    </row>  
+    <div class="clearfix" style='margin-bottom: 45px; color:white;'>.</div>
     {% elif feature.mediatype == 'T' %}
     <!-- 'halfposttopLeft' start -->  
     <row>
-   		<div class="col-md-1">.</div>
-		<div class="col-md-4">
+
+		<div class="col-md-5">
    			<div class="grid-item top0" style="text-align:right;" >
-      		    <h2> {{ feature.heading }} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span></h2>
-         	    <h2> {{ feature.heading_extra}} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"> </span></h2>
+      		    <h3> {{ feature.heading }} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span></h3>
+         	    <h3> {{ feature.heading_extra}} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"> </span></h3>
 	          	<a href="{{ feature.link_to }}">  
-	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; max-height:704px; object-fit: fill' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 70%; max-height:704px; object-fit: fill; margin-left:30px' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       			</a>
     		</div> 
  		</div> 
         <div class="col-md-1">.</div>
     {% elif feature.mediatype == 'P' %}
     <!-- 'halfposttopRight' ends -->
-   		<div class="col-md-1">.</div>
-		<div class="col-md-4">
+
+		<div class="col-md-5">
    			<div class="grid-item top0">
-      		    <h2> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span> {{ feature.heading }} </h2>
-         	    <h2> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"> </span> {{ feature.heading_extra}} </h2>
+      		    <h3> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span> {{ feature.heading }} </h3>
+         	    <h3> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"> </span> {{ feature.heading_extra}} </h3>
 	          	<a href="{{ feature.link_to }}">  
-	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; object-fit: fill' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 70%; object-fit: fill; margin-left:30px' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       			</a>
     		</div> 
  		</div> 
         <div class="col-md-1">.</div>
     <row>    
-    <div class="clearfix" style='margin-bottom: 17px; color:white;'>.</div>
+    <div class="clearfix" style='margin-bottom: 45px; color:white;'>.</div>
  
     {% elif feature.mediatype == 'B' %}
     <!-- 'halfpostbottomLeft' starts--> 
     <row>
-        <div class="col-md-1">.</div>
-		<div class="col-md-4">
+
+		<div class="col-md-5">
 	          	<a href="{{ feature.link_to }}">  
-	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 70%; object-fit: contain; margin-left:30px' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       			</a>
+            <div style="clear:both;"></div>
       			<div class="grid-item top0"  style="text-align:right;" >
-      		    <h2> {{ feature.heading }} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-top" aria-hidden="true"> </span></h2>
-         	    <h2> {{ feature.heading_extra}} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-right" aria-hidden="true"> </span></h2>
+            <div style="clear:both;"></div>
+      		    <h3> {{ feature.heading }} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-top" aria-hidden="true"> </span></h3>
+         	    <h3> {{ feature.heading_extra}} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-right" aria-hidden="true"> </span></h3>
  		</div> 
     		</div> 
          	
@@ -106,20 +108,21 @@
  	{% elif feature.mediatype == 'J' %}
     <!-- 'halfpostbottomRight' end --> 
     
-        <div class="col-md-1">.</div>
-		<div class="col-md-4">
+
+		<div class="col-md-5">
    			<div class="grid-item top0">
 
 	          	<a href="{{ feature.link_to }}">  
-	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 100%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 70%; object-fit: contain; margin-left:30px' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       			</a>
-      			 <h2>  <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-top" aria-hidden="true"> </span> {{ feature.heading }}</h2>
-         	    <h2> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span>{{ feature.heading_extra}} </h2>
+            <div style="clear:both;"></div>
+      			 <div style='margin-left:30px' ><h3>  <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-top" aria-hidden="true"> </span> {{ feature.heading }}</h3>
+         	    <h3> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span>{{ feature.heading_extra}} </h3></div>
     		</div> 
  		</div> 
  		<div class="col-md-1">.</div>
     </row>	
-    <div class="clearfix" style='margin-bottom: 17px; color:white;'>.</div>
+    <div class="clearfix" style='margin-bottom: 45px; color:white;'>.</div>
         {% else %}
     {%endif%} 
 
