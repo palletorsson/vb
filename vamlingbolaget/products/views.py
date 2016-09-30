@@ -6,7 +6,7 @@ from products.models import *
 from blog.models import Post
 from gallery.models import *
 from django.http import Http404
-from fortnox.fortnox import get_headers, get_articles, get_article, create_article, update_article
+from fortnox.fortnox import get_headers, get_articles, get_article, create_article, update_article, get_stockvalue, delete_article
 #from fortnox.local_fortnox import get_vb_headers
 import json
 from django.core import serializers
@@ -678,7 +678,30 @@ def readCsv(request, what, start_at, end_at):
                 else: 
                     print "hej"            
             else: 
-                pass 
+                pass
+    return HttpResponse(status=200)
+
+@login_required
+def removeCsv(request, start_at, end_at):
+    input_file = './modeller.csv'
+    count = 0 
+    header = get_headers()
+    # open file and sepate values 
+    with open(input_file, 'r') as i:
+        for line in i:
+            sepatated_values = line.split(",")
+            count = count + 1 
+            # see if values exist 
+
+            if sepatated_values[1] != '' and count > 1 and count > start_at and count < end_at: 
+                print "read this line"
+                stock = sepatated_values[2]
+                if stock == '':
+                    stock = 0
+
+                full_article_sku = sepatated_values[1]
+                del_art = delete_article(header, full_article_sku)
+                print del_art
 
     return HttpResponse(status=200)
 

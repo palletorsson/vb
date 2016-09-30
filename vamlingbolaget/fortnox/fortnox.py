@@ -311,46 +311,60 @@ def createOrder(headers, customer_order):
             headers = headers,
             data = customer_order,
         )
-        if local_tests == True: 
-            print r.content
+
         return r.content
     except requests.exceptions.RequestException as e:
         return ('HTTP Request failed')
 
-# Get all articles
-def get_articles(headers):
-    # Articles (GET https://api.fortnox.se/3/articles)
+# this is the order
+def createNewOrder(headers, customer_new_order, order_number=''):
+
     try:
-        r = requests.get(
-            url="https://api.fortnox.se/3/articles",
+        r = requests.post(
+            url="https://api.fortnox.se/3/orders",
             headers = headers,
+            data = customer_new_order,
         )
-
-        print('Response HTTP Status Code : {status_code}'.format(status_code=r.status_code))
-        print('Response HTTP Response Body : {content}'.format(content=r.content))
+        print r.content
+        return r.content
     except requests.exceptions.RequestException as e:
-        print('HTTP Request failed')
+        return ('HTTP Request failed')
 
-    response_data = json.dumps({ 
-		"response": {
-			"status_code" : r.status_code,
-	        "content" : r.content 
-		}
-	})
-    return response_data
- 
-
-def get_articles(headers):
-    # Articles (GET https://api.fortnox.se/3/articles)
-
+# make invoice from order
+def InvoicefromOrder(headers, order_number=''):
     try:
-        r = requests.get(
-            url="https://api.fortnox.se/3/articles",
+        r = requests.put(
+            url="https://api.fortnox.se/3/orders/"+ str(order_number) +"/createinvoice",
             headers = headers,
         )
         return r.content
     except requests.exceptions.RequestException as e:
+        return ('HTTP Request failed')
+
+def EmailOrder(headers, order_number=''):
+    try:
+        r = requests.get(
+            url="https://api.fortnox.se/3/orders/"+ str(order_number) +"/email",
+            headers = headers,
+        )
+        return r.content
+    except requests.exceptions.RequestException as e:
+        return ('HTTP Request failed')    
+
+# Get all articles
+def get_articles(headers, page):
+    # Articles (GET https://api.fortnox.se/3/articles)
+    try:
+        r = requests.get(
+            url="https://api.fortnox.se/3/articles/?page="+page,
+            headers = headers
+        )
+
+    except requests.exceptions.RequestException as e:
         print('HTTP Request failed')
+
+    return r.content
+ 
 
 def get_article(headers, article_num):
     # Article (GET https://api.fortnox.se/3/articles/TR01)
@@ -384,6 +398,20 @@ def create_article(articleNumber, data, headers):
     except requests.exceptions.RequestException as e:
         return ('HTTP Request failed')
 
+
+def delete_article(headers, articleNumber):
+    # Article (DELETE https://api.fortnox.se/3/articles/FRPPLUS)
+
+    try:
+        r = requests.delete(
+            url="https://api.fortnox.se/3/articles/"+articleNumber,
+            headers = headers ,
+        )
+        return r.content
+    except requests.exceptions.RequestException as e:
+        return ('HTTP Request failed')
+
+    
 # Update article
 def update_article(articleNumber, data, headers):
     # Article (PUT https://api.fortnox.se/3/articles/DE_782)

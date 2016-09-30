@@ -1,0 +1,75 @@
+{% extends "admin_base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% block allcontent %}
+
+  {% if user.is_authenticated %}
+	<legend> Vamlingbolaget Articles | Pages:  [ <a href="/orders/articles/1/">1</a> | <a href="/orders/articles/2/">2</a> | <a href="/orders/articles/3/">3</a> | <a href="/orders/articles/4/">4</a> | <a href="/orders/articles/5/">5</a> | <a href="/orders/articles/6/">6</a> ]</legend>
+
+<table class="table table-bordered table-striped" >
+	    <thead><tr>
+		    <td>
+		        <div>
+		            <span> Number </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Name </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Stock Quantity </span>
+		        </div>
+		    </td>
+		    		     <td>
+		        <div>
+		            <span> Edit </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> Remove </span>
+		        </div>
+		    </td>
+		    </tr>
+		    </thead>
+	<tbody>
+	    {% for art in articles %}
+	    <tr>
+		    <td>
+		        <div> 
+		            <span> <a href="#">{{ art.ArticleNumber }}</a> </span>
+		        </div>
+		    </td>
+		     <td>
+		        <div>
+		            <span> {{ art.Description }}</span>
+		        </div>
+		    </td>
+		        <td>
+		        <div>
+		            <span> {{ art.QuantityInStock }} </span>
+		        </div>
+		    </td>
+		         <td>
+		        <div>
+		            <span> {{ art.url }} </span>
+		        </div>
+		    </td>
+		    <td>
+		        <div>
+		            ok
+		        </div>
+		    </td>
+
+	    {% endfor %}
+		</tr> 
+	</tbody>
+</table>
+    {% else %}
+        <p> please ... </p>
+    {% endif %}
+{% endblock %}

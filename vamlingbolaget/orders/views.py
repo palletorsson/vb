@@ -8,7 +8,8 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.db.models import Q
-from fortnox.fortnox import create_invoice_rows, searchCustomer, get_headers, createOrder
+from fortnox.fortnox import create_invoice_rows, searchCustomer, get_headers, createOrder, get_stockvalue, get_articles
+from cart.views import getsize
 from django.http import HttpResponseRedirect
 import json
 from logger.views import keepLog
@@ -74,6 +75,7 @@ def ShowOrder(request, order_id):
         cartitems = checkout.orderitem_set.all()
         searchCustomer(headers, name, email)
         getnames(cartitems)
+        stock = getOrderStock(cartitems)
         reaitems = checkout.reaorderitem_set.all()
         bargains = {}
         voucher = {}
@@ -123,7 +125,8 @@ def ShowOrder(request, order_id):
             'customer_number': customer_number,
             'unifaun': unifaun,
             'pdf':pdf, 
-            'lastmessage': lastmessage
+            'lastmessage': lastmessage,
+            'stock': stock
             },
             context_instance=RequestContext(request))
 
@@ -174,10 +177,11 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
 
             if todo == 'activate': 
                 order.status = 'H'	
-                # make Fortnox invoice
+                # make Fortnox invoice 
                 new_order = order.order
                 if len(order.fortnox_obj) < 100:
                     headers = get_headers()
+                    # we can do this in fortnox to with url put
                     resp = createOrder(headers, new_order)
                     order.fortnox_obj = resp
                     order.save()
@@ -225,14 +229,11 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
 				    "senderPartners": senderpartner,
                     "options": opt,
                     "test": "true"
- 
 
                     }
                 }
-                print unifaunObj
-                shipmentparams = json.dumps(unifaunObj)
-                print shipmentparams
 
+                shipmentparams = json.dumps(unifaunObj)
 
                 shipment = unifaunShipmentCall(shipmentparams) 
                 if len(shipment) < 100:
@@ -270,14 +271,9 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                 keepLog(request, log, 'INFO', current_user, order.order_number) 
 
             if stage == 'shipment': 
-
-
-                shipment_id = order.unifaun_obj
-                print shipment_id
-
- 
+                shipment_id = order.unifaun_obj 
                 remove = removeShipment(shipment_id)
-                print remove
+
         order.save()
 
 
@@ -293,6 +289,37 @@ def GetHeaders():
     basic_encoded = 'Basic '+encoded
     headers = {'Authorization': basic_encoded, 'Content-Type': 'application/json; charset=UTF-8'}
     return headers
+
+def getOrderStock(cartitems):
+    for item in cartitems: 
+        try: 
+            size = item.size.pk
+        except:  
+            size = getsizenumber(item.size)
+            
+        fortnox_id = str(item.article.sku_number) + "_" + str(item.pattern.order) + "_" + str(item.color.order) + "_" + str(size)
+        print fortnox_id
+        in_stock = get_stockvalue(fortnox_id)
+        return in_stock
+        
+
+def getsizenumber(size):
+    if size == 'XS': 
+        return_size = 34 
+    elif size == 'S': 
+        return_size = 36
+    elif size == 'M': 
+        return_size = 3840
+    elif size == 'L': 
+        return_size = 42
+    elif size == 'XL': 
+        return_size =   44
+    elif size == 'XLL':
+        return_size = 46
+    else: 
+        return_size = 'NO' 
+    print return_size
+    return return_size
 
 def unifaunShipmentCall(shipmentparams):
     url = 'https://api.unifaun.com/rs-extapi/v1/shipments' 
@@ -608,3 +635,24 @@ def makeLeaf(checkout):
     f.closed
 
     return 1
+
+def getFornoxArticles(request, page): 
+    headers = get_headers()
+    articles = get_articles(headers, page)
+    articles = json.loads(articles)
+    articles = articles['Articles']
+    r_articles = []
+
+    for art in articles:
+        temp = {}
+        temp['Description'] = art['Description']
+        temp['ArticleNumber'] = art['ArticleNumber']
+        temp['QuantityInStock'] = art['QuantityInStock']
+        temp['url'] = art['@url']
+        
+        r_articles.append(temp)
+
+    return render_to_response('orders/articles.html', {
+        'articles': r_articles,
+        },
+        context_instance=RequestContext(request))

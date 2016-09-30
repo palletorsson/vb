@@ -7,6 +7,8 @@ urlpatterns = patterns('orders.views',
     url(r'order/action/(?P<todo>[a-zA-Z0-9_.-]+)/(?P<stage>[a-zA-Z0-9_.-]+)/(?P<order_number>[a-zA-Z0-9_.-]+)/$', 'OrderAction'),
     url(r'order/action/(?P<todo>[a-zA-Z0-9_.-]+)/(?P<stage>[a-zA-Z0-9_.-]+)/(?P<order_number>[a-zA-Z0-9_.-]+)/(?P<send_type>[a-zA-Z0-9_.-]+)/$', 'OrderAction'),
     url(r'loadship/(?P<id>[a-zA-Z0-9_.-]+)/$', 'loadShipment'),
+    url(r'loadshipments/$', 'loadShipments'),
+    url(r'articles/(?P<page>[a-zA-Z0-9_.-]+)/$', 'getFornoxArticles'),
 )
 
 
