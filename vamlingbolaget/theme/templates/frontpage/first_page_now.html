@@ -64,8 +64,8 @@
 
 		<div class="col-md-5">
    			<div class="grid-item top0" style="text-align:right;" >
-      		    <h3> {{ feature.heading }} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span></h3>
-         	    <h3> {{ feature.heading_extra}} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"> </span></h3>
+      		    <h4> {{ feature.heading }} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span></h4>
+         	    <h4> {{ feature.heading_extra}} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"> </span></h4>
 	          	<a href="{{ feature.link_to }}">  
 	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 70%; max-height:704px; object-fit: fill; margin-left:30px' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       			</a>
@@ -77,8 +77,8 @@
 
 		<div class="col-md-5">
    			<div class="grid-item top0">
-      		    <h3> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span> {{ feature.heading }} </h3>
-         	    <h3> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"> </span> {{ feature.heading_extra}} </h3>
+      		    <h4> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span> {{ feature.heading }} </h4>
+         	    <h4> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"> </span> {{ feature.heading_extra}} </h4>
 	          	<a href="{{ feature.link_to }}">  
 	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 70%; object-fit: fill; margin-left:30px' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       			</a>
@@ -93,14 +93,15 @@
     <row>
 
 		<div class="col-md-5">
-	          	<a href="{{ feature.link_to }}">  
+	          <div style="float: right">	
+            <a href="{{ feature.link_to }}">  
 	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 70%; object-fit: contain; margin-left:30px' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
-      			</a>
+      			</a></div>
             <div style="clear:both;"></div>
       			<div class="grid-item top0"  style="text-align:right;" >
-            <div style="clear:both;"></div>
-      		    <h3> {{ feature.heading }} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-top" aria-hidden="true"> </span></h3>
-         	    <h3> {{ feature.heading_extra}} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-right" aria-hidden="true"> </span></h3>
+
+      		    <h4> {{ feature.heading }} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-top" aria-hidden="true"> </span></h4>
+         	    <h4> {{ feature.heading_extra}} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-right" aria-hidden="true"> </span></h4>
  		</div> 
     		</div> 
          	
@@ -111,13 +112,14 @@
 
 		<div class="col-md-5">
    			<div class="grid-item top0">
-
+        <div style="float: left"> 
 	          	<a href="{{ feature.link_to }}">  
 	            	<img src="{% version feature.feature_image 'large' %}"  style=' width: 70%; object-fit: contain; margin-left:30px' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       			</a>
+            </div>
             <div style="clear:both;"></div>
-      			 <div style='margin-left:30px' ><h3>  <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-top" aria-hidden="true"> </span> {{ feature.heading }}</h3>
-         	    <h3> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span>{{ feature.heading_extra}} </h3></div>
+      			 <div style='margin-left:30px' ><h4>  <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-top" aria-hidden="true"> </span> {{ feature.heading }}</h4>
+         	    <h4> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span>{{ feature.heading_extra}} </h4></div>
     		</div> 
  		</div> 
  		<div class="col-md-1">.</div>
