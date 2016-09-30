@@ -26,6 +26,8 @@ urlpatterns = patterns('products.views',
     url(r'^articlescsv/$', 'articlesCsv'),
     url(r'^readcsv/(?P<what>[a-zA-Z0-9_.-]+)/(?P<start_at>[a-zA-Z0-9_.-]+)/(?P<end_at>[a-zA-Z0-9_.-]+)/$', 'readCsv'),
     url(r'^checkcsv/$', 'readCsvOnlyCheck'),
+    url(r'^ordercsv/$', 'orderCsv'),
+    url(r'^delfromcsv/(?P<start_at>[a-zA-Z0-9_.-]+)/(?P<end_at>[a-zA-Z0-9_.-]+)$', 'removeCsv'),
     
     url(r'^articlestrans/$', 'articlesTranferToFortnox'),
     url(r'^article_stock/(?P<sku_num>[a-zA-Z0-9_.-]+)/(?P<stock>[a-zA-Z0-9_.-]+)/$', 'articleUpdateStock'),    
