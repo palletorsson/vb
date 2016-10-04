@@ -116,9 +116,9 @@
 			<hr>			<span> {% trans "Leverans:" %} 
 							 	
 				
-							<span class="stock_text {% if stock_value = 0 %} hidden {% endif %}">{% trans "Tre veckor" %} </span>
+							<span class="stock_text_no {% if stock_value = 0 %} hidden {% endif %}">{% trans "Tre veckor" %} </span>
 					  
-							<span class="stock_text {% if stock_value > 0 %} hidden {% endif %}"> {% trans "En vecka" %} </span>
+							<span class="stock_text_yes {% if stock_value > 0 %} hidden {% endif %}"> {% trans "En vecka" %} </span>
 					    </span>
 
 				<hr>
