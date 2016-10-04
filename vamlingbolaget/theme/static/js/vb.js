@@ -303,10 +303,11 @@ $("#addtofullcart").off('click').on({
     }
 });//end of click
 
-$(".variation_img").click(function() {
+$(".variation_imgs").click(function() {
    img = $(this).attr('src');
-   
-   $("#images_container").prepend($('<img>',{id:'theImg',src:img}))
+   $(".variation_img").attr("src", img)
+   $(".variation_link").attr("href", img)
+
 }); 
 
 $(".has_size").each(function() {
