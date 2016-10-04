@@ -31,7 +31,7 @@
 	                <img src="{{ image }}" alt="article image" width="100px" class="variation_imgs" />
 	        	</button>
 	  		{% endfor %}
-	  		</div><
+	  		</div>
 		</div>
 			   	
 		<div class="span7">
@@ -116,7 +116,7 @@
 			<hr>			<span> {% trans "Leverans:" %} 
 							 	
 				
-							<span class="stock_text_no {% if stock_value > 0 %} hidden {% endif %}">{% trans "Tre veckor" %} </span>
+							<span class="stock_text_no {% if stock_value < 1 %} hidden {% endif %}">{% trans "Tre veckor" %} </span>
 					  
 							<span class="stock_text_yes {% if stock_value > 0 %} hidden {% endif %}"> {% trans "En vecka" %} </span>
 					    </span>

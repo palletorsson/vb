@@ -232,8 +232,6 @@ def readetail(request, pk):
 def fulldetail(request, pk):
     try:
         full_variation = FullVariation.objects.get(pk=pk)
-        images = Image.objects.filter(variation__pk=full_variation.variation.pk)
-        sizes = SIZES
     except:
         raise Http404
 
@@ -257,7 +255,6 @@ def fulldetail(request, pk):
 
     #mapping name size to number
     for full_var in full_variations:
-        print full_var.size, full_var
         if full_var.size == '34': 
             size_list.append('XS')
             full_var.lettersize =  'XS'
@@ -293,10 +290,7 @@ def fulldetail(request, pk):
         file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"        
         images.append(file)
 
-    try:
-        stock_value = get_stockvalue(full_variation.variation.article.sku_number)
-    except:  
-        stock_value = full_variation.stock
+    stock_value = full_variation.stock
 
     return render_to_response('variation/fulldetail.html',
                    {'product': full_variation,
