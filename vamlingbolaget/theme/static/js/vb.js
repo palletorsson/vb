@@ -305,7 +305,7 @@ $("#addtofullcart").off('click').on({
 
 $(".variation_img").click(function() {
    img = $(this).attr('src');
-   $("#images_container").html('')
+   
    $("#images_container").prepend($('<img>',{id:'theImg',src:img}))
 }); 
 
