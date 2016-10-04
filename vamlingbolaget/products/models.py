@@ -64,8 +64,14 @@ class FullVariation(TimeStampedActivate):
     def get_sizes(self): 
         return SIZES
 
+    def get_sku(self): 
+        return str(self.variation.article.sku_number) + "_" +  str(self.variation.color) + "_" + str(self.variation.pattern) + "_" + str(self.size)
+
     def __unicode__(self):
         return "%s %s %s %s" % (self.variation.article.sku_number, self.variation.color, self.variation.pattern, self.size)
+
+    class Meta:
+        unique_together = ('variation', 'size',)
 
 class Size(models.Model):
     """

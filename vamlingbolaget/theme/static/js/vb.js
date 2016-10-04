@@ -151,7 +151,7 @@ $("#addtocart").off('click').on({
         		pattern2: pattern2,
         		size: size_id,
         		csrfmiddlewaretoken: csrftoken,
-        		cartitem_id: '0',
+        		cartitem_id: '1',
         		quantity: quantity,
         		add_or_edit : add_or_edit
         		},
@@ -646,10 +646,25 @@ set_first_page();
       var ok = $('input[name="size"]').val(size_id);;
     
 	  $('.select_size').removeClass('size_active');
+      $('.select_size').removeClass('active');
       var $this = $(this);
     if (!$this.hasClass('size_active')) {
         $this.addClass('size_active');
+        $this.addClass('active');
     }
+
+    var a = $this.data('size'); 
+    if (a < 1) {
+
+            $('.stock_text_no').removeClass('hidden');
+            $('.stock_text_yes').addClass('hidden');
+  
+    } else {
+        $('.stock_text_yes').removeClass('hidden');
+        $('.stock_text_no').addClass('hidden');
+    }
+
+
     e.preventDefault();
     });
 
@@ -834,5 +849,14 @@ set_first_page();
           return true;
       });
 
+    $('#weight').on('change', function () {
+          var weight = $(this).val(); 
+          var base_url = $('#urlbase').html();
+          var extra = $("#Service :selected").val();
+          var final_url = base_url + extra + "/" + weight + "/";
+
+          $('#target_url').attr('href', final_url); 
+          return true;
+      });
 
 }); // --- end document readyfunction

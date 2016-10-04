@@ -82,13 +82,13 @@
 			<nav>
 				<ul class="pagination">
 			  			
-				{% for size in sizes %} 
+				{% for size in full_variations %} 
 			
 					{% if product.size == size.size %}  
-						<li class="active select_size" id="{{ size.size }}"><a href=""> {{ size.lettersize }}</a></li> 
+						<li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}"><a href=""> {{ size.lettersize }}  </a></li> 
 				
 					{% else %}
-						<li class="select_size" id="{{ size.size  }}"><a href=""> {{ size.lettersize }} </a></li>
+						<li class="select_size" id="{{ size.size  }}"  data-size="{{ size.stock }}"><a href=""> {{ size.lettersize }} </a></li>
 					{% endif %} 
 					
 				{% endfor %}
@@ -113,12 +113,20 @@
 					<span class="hidden" id="sku_number">{{ product.variation.article.sku_number }}</span>
 				</span>
 		    </div>
-			<hr>
+			<hr>			<span> {% trans "Leverans:" %} 
+							 	
+				
+							<span class="stock_text {% if stock_value = 0 %} hidden {% endif %}">{% trans "Tre veckor" %} </span>
+					  
+							<span class="stock_text {% if stock_value > 0 %} hidden {% endif %}"> {% trans "En vecka" %} </span>
+					    </span>
+
+				<hr>
 				{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.get_art_num }}
 				<hr>
 				
 				<span> {{ product.variation.article.description }} </span> 
-				<hr>
+		<hr>
 				<span class="quality" id="{{ product.article.quality }}">{{ product.variation.article.quality }}</span> : 
 				<span> {{ product.variation.article.quality.description }} </span> 
 				 
