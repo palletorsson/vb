@@ -3,7 +3,9 @@ import json
 import requests
 import httplib
 from local_fortnox import get_headers
-from products.models import Color, Pattern, Size
+import csv
+from products.models import *
+
 
 local_tests = True; 
 
@@ -46,24 +48,25 @@ def create_invoice_rows(order_json):
 
     invoicerows = []
 
-    try:
-        for item in cartitems: 
-            color = Color.objects.get(order=item.color)
-            pattern = Pattern.objects.get(order=item.pattern)
-            size = Size.objects.get(pk=item.size)
-            obj = {
-                "DeliveredQuantity": int(item.quantity),
-                "ArticleNumber": int(item.article.sku_number), 
-                "Description": unicode(item.article.name) + " " + unicode(size) 
-            }
-            invoicerows.append(obj)
-            invoicerows.append({
-                "Description": unicode(pattern) + " " + unicode(color) 
-            })
+    for item in cartitems: 
+        color = Color.objects.get(order=item.color)
+
+        pattern = Pattern.objects.get(order=item.pattern)
 
 
-    except:
-        print "no cartitem"
+        size = Size.objects.get(pk=item.size)
+
+        obj = {
+            "DeliveredQuantity": int(item.quantity),
+            "ArticleNumber": int(item.article.sku_number), 
+            "Description": unicode(item.article.name) + " " + unicode(size) 
+        }
+
+        invoicerows.append(obj)
+        invoicerows.append({
+            "Description": unicode(pattern) + " " + unicode(color) 
+        })
+
 
     try:
         for item in rea_items:   
@@ -87,8 +90,75 @@ def create_invoice_rows(order_json):
         "Description": "Postavgift"
      })
 
+    return invoicerows  
+
+def create_order_rows(order_json):
+    print "order rows"
+    cartitems = order_json['cartitems'] 
+    rea_items = order_json['rea_items']
+
+    invoicerows = []
+
+    for item in cartitems: 
+        full = False
+        color = Color.objects.get(order=item.color)
+        pattern = Pattern.objects.get(order=item.pattern)
+        variation = Variation.objects.get(article=item.article, color=color, pattern=pattern)
+
+        # use the try statment to check if it is a full varition  
+        try: 
+            full_var = FullVariation.objects.get(variation=variation, size=item.size)
+            # create the full article number here
+            full_var_num = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order)  + "_" + str(full_var.size)
+            full = True
+        except:
+            pass 
+
+        if full == True: 
+            # here we it could be good to do get the size        
+            obj = {
+                "OrderedQuantity": int(item.quantity),
+                "ArticleNumber": full_var_num, 
+                "Description": unicode(full_var) 
+            }
+            invoicerows.append(obj)
+    
+        if full == False: 
+            size = Size.objects.get(pk=item.size)
+            obj = {
+                "OrderedQuantity": int(item.quantity),
+                "ArticleNumber": int(item.article.sku_number), 
+                "Description": unicode(item.article.name) + " " + unicode(size) 
+            }
+            invoicerows.append(obj)
+            invoicerows.append({
+                "Description": unicode(pattern) + " " + unicode(color) 
+            })
+    
+    try:
+        for item in rea_items:   
+            invoicerows.append({
+                "OrderedQuantity": 1,
+                "ArticleNumber": int(item.reaArticle.article.sku_number), 
+                "Description": "Rea: " + unicode(item.reaArticle.article.name) + " "  + unicode(item.reaArticle.size),
+                "Price": item.reaArticle.article.price,
+                "Discount": 30,
+                "DiscountType": "PERCENT"
+            })
+            invoicerows.append({
+                "Description": unicode(item.reaArticle.pattern) + " " + unicode(item.reaArticle.color)
+            })
+    except:
+        print "no reaitem"
+
+    invoicerows.append({
+        "OrderedQuantity": 1,
+        "ArticleNumber": 2, 
+        "Description": "Postavgift"
+    })
+
     return invoicerows   
-                
+
 # Interact with API
 
 #https://api.fortnox.se/3/customers?email=palle.torsson@gmail.com
@@ -377,7 +447,7 @@ def get_article(headers, article_num):
 
     try:
         r = requests.get(
-            url="https://api.fortnox.se/3/articles/"+ art_int_str ,
+            url="https://api.fortnox.se/3/articles/"+ str(art_int_str) ,
             headers = headers,
         )
         return r.content
