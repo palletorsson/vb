@@ -10,7 +10,7 @@
 <div class="spanfullscreen">
 	<a href="/products/full"><img src="/media/{{features.0.feature_image}}" /></a>	
 </div>
-
+<div class="clearfix" style='margin-top: 25px; color:white;'>.</div>
 {% for feature in features %}
     {% if forloop.first%} 
     {%else%} 
@@ -23,7 +23,7 @@
  	</div>
  	{% elif feature.mediatype == 'L' %}
 	<!-- 'halfpostfullLeft' starts -->  
-  <div style='margin-top: 45px; color:white;'>.</div>   
+<div class="clearfix" style='margin-top: 25px; color:white;'>.</div> 
     <row>
     <div class="col-md-1">.</div>
 	<div class="col-md-5">
@@ -49,7 +49,7 @@
 
     {% elif feature.mediatype == 'T' %}
     <!-- 'halfposttopLeft' start -->
-    <div style='margin-top: 45px; color:white;'>.</div>
+<div class="clearfix" style='margin-top: 25px; color:white;'>.</div>
     <row>
 
 		<div class="col-md-5">
@@ -78,7 +78,9 @@
     <row>    
  
     {% elif feature.mediatype == 'B' %}
+
     <!-- 'halfpostbottomLeft' starts--> 
+    <div class="clearfix" style='margin-top: 25px; color:white;'>.</div>
     <row>
 		<div class="col-md-5" style="text-align:right;">
 	          <div>	
