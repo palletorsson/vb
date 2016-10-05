@@ -42,7 +42,7 @@ def index(request):
 SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
 
 def fullindex(request):
-    full_variation = FullVariation.objects.filter(active=True, size=3840).order_by('-order')
+    full_variation = FullVariation.objects.filter(active=True, size=3840).order_by('order')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
   
