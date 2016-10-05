@@ -164,9 +164,13 @@ def addtocart(request):
                 cartitem.quantity = quantity
                 msg = u'Du har lagt till: <br/>'                   
                 cartitem.save()
+        try: 
+            color_db = Color.objects.get(order=color)
+            pattern_db = Pattern.objects.get(order=pattern)
+        except:
+            color_db = Color.objects.get(order=1)
+            pattern_db = Pattern.objects.get(order=1)
 
-        color_db = Color.objects.get(order=color)
-        pattern_db = Pattern.objects.get(order=pattern)
         try: 
             size_db = Size.objects.get(pk=size)
             size_db = size_db.name
