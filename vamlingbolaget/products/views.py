@@ -54,7 +54,7 @@ def fullindex(request):
                              context_instance=RequestContext(request))
 
 def fullexport(request, what):
-    full_variation = FullVariation.objects.filter(active=True).order_by('-order')
+    full_variation = FullVariation.objects.filter(active=True).order_by('order')
 
     for var in full_variation:
         print var.variation.article.sku_number, "|", var.variation.color, "|", var.variation.pattern, "|", var.size, "|", var.stock, "|"
