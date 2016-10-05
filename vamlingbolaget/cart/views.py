@@ -549,8 +549,13 @@ def getsize(size):
 
 def getnames(cartitems):
     for item in cartitems:
-        item.color = Color.objects.get(order=item.color)
-        item.pattern = Pattern.objects.get(order=item.pattern)
+        try: 
+            item.color = Color.objects.get(order=item.color)
+            item.pattern = Pattern.objects.get(order=item.pattern)
+        except:
+            item.color= Color.objects.get(order=1)
+            item.pattern = Pattern.objects.get(order=1)
+
         try: 
             item.size = Size.objects.get(pk=item.size)
         except:
