@@ -153,7 +153,7 @@ def by_type(request, key):
 
 
 def by_quality(request, key):
-    if key == 'kvinna':
+    if key == 'silkestrika':
         products = FullVariation.objects.filter(variation__article__category__slug = key, order__lte=100, active=True).order_by('order')
         template = 'variation/fullindex.html'
     else: 
