@@ -29,12 +29,13 @@
     <div class="col-md-1">.</div>
 	<div class="col-md-5">
 			<div class="grid-item top0">
-		
-  		<a href="{{ feature.link_to }}">  
-    		<img src="{% version feature.feature_image 'large' %}"  style=' width: 80%; object-fit: contain; float: right; ' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+		  <div>
+    		<a href="{{ feature.link_to }}">  
+      		<img src="{% version feature.feature_image 'large' %}"  style=' width: 80%; object-fit: contain; float: right; ' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
 
-  		</a>
-       <div style="text-transform: uppercase; font-size: 14px; clear: both; width: 80%; text-align: center;"> {{ feature.heading }} </div>
+    		</a>
+         <span style="text-transform: uppercase; font-size: 16px; text-align: center;"> {{ feature.heading }} </span>
+      </div>
 		</div> 
           	          
 		</div> 
@@ -42,12 +43,13 @@
     <!-- 'halfpostfullRight' ends -->   
 	<div class="col-md-5">
 			<div class="grid-item top0">
-		
+		  <div>
   		<a href="{{ feature.link_to }}">  
     		<img src="{% version feature.feature_image 'large' %}"  style=' width: 80%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
   		</a>
  
-       <div style="text-transform: uppercase; font-size: 14px; clear: both; width: 80%; text-align: "> {{ feature.heading }} </div>
+       <span style="text-transform: uppercase; font-size: 16px; text-align: center;"> {{ feature.heading }} </span>
+       </div>
 		</div> 
 		</div> 
 		<div class="col-md-1">.</div>
