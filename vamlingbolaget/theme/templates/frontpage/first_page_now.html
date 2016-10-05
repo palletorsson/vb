@@ -32,8 +32,11 @@
 		
   		<a href="{{ feature.link_to }}">  
     		<img src="{% version feature.feature_image 'large' %}"  style=' width: 80%; object-fit: contain; float: right; ' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+
   		</a>
-		</div>         		          
+       <div style="text-transform: uppercase; font-size: 12px;"> {{ feature.heading }} </div>
+		</div> 
+          	          
 		</div> 
     {% elif feature.mediatype == 'H' %}
     <!-- 'halfpostfullRight' ends -->   
@@ -43,9 +46,12 @@
   		<a href="{{ feature.link_to }}">  
     		<img src="{% version feature.feature_image 'large' %}"  style=' width: 80%; object-fit: contain' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
   		</a>
+ 
+       <div style="text-transform: uppercase; font-size: 12px;"> {{ feature.heading }} </div>
 		</div> 
 		</div> 
 		<div class="col-md-1">.</div>
+
     </row>  
   <div class="seventeen_bottom clearfix" style='color:white;'>.</div>
     {% elif feature.mediatype == 'T' %}
