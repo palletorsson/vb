@@ -8,7 +8,7 @@
 <div class="hidden-xs">
 
 <div class="spanfullscreen">
-	<a href=""><img src="/media/{{features.0.feature_image}}" /></a>	
+	<a href="/products/full"><img src="/media/{{features.0.feature_image}}" /></a>	
 </div>
 
 <div class="seventeen" style='margin-bottom: 45px; color:white;'>.</div> 
@@ -21,12 +21,12 @@
     {% if feature.mediatype == 'F' %}
     <div class="spanfullscreen">
       <a href="{{ feature.link_to }}">  
-        <img src="{% version feature.feature_image 'large' %}" style='width: 100%; object-fit: contain; margin-top: 10px; margin-bottom: 10px;' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+        <img src="/media/{{feature.feature_image}}" style='width: 100%; object-fit: contain; margin-top: 10px; margin-bottom: 10px;' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       </a> 
  	</div>
- 	    <div class="clearfix" style='margin-bottom: 45px; color:white;'>.</div>
  	{% elif feature.mediatype == 'L' %}
-	<!-- 'halfpostfullLeft' starts -->     
+	<!-- 'halfpostfullLeft' starts -->  
+  <div class="clearfix" style='margin-bottom: 45px; color:white;'>.</div>   
     <row>
     <div class="col-md-1">.</div>
 	<div class="col-md-5">
@@ -52,6 +52,7 @@
     <div class="clearfix" style='margin-bottom: 45px; color:white;'>.</div>
     {% elif feature.mediatype == 'T' %}
     <!-- 'halfposttopLeft' start -->  
+    <div class="clearfix" style='margin-bottom: 45px; color:white;'>.</div>
     <row>
 
 		<div class="col-md-5">
@@ -82,6 +83,7 @@
  
     {% elif feature.mediatype == 'B' %}
     <!-- 'halfpostbottomLeft' starts--> 
+    <div class="clearfix" style='margin-bottom: 45px; color:white;'>.</div>
     <row>
 
 		<div class="col-md-5" style="text-align:right;">
