@@ -153,10 +153,16 @@ def by_type(request, key):
 
 
 def by_quality(request, key):
-    products = Variation.objects.filter(article__quality__slug__contains = key, order__lte=100, active=True).order_by('-order', 'article__quality')
+    if key == 'kvinna':
+        products = FullVariation.objects.filter(variation__article__category__slug = key, order__lte=100, active=True).order_by('order')
+        template = 'variation/fullindex.html'
+    else: 
+        products = Variation.objects.filter(article__quality__slug__contains = key, order__lte=100, active=True).order_by('-order', 'article__quality')
+        template = 'variation/index.html'
+     
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
-    return render_to_response('variation/index.html',
+    return render_to_response(template,
         {'products': products,
          'qualities': qualities,
          'types': types,},
