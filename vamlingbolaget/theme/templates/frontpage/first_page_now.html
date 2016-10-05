@@ -10,7 +10,7 @@
 <div class="spanfullscreen">
 	<a href="/products/full"><img src="/media/{{features.0.feature_image}}" /></a>	
 </div>
-<div class="seventeen" style='color:white;'>.</div>
+<div class="seventeen_bottom clearfix" style='color:white;'>.</div>
 {% for feature in features %}
     {% if forloop.first%} 
     {%else%} 
@@ -24,7 +24,7 @@
 
  	{% elif feature.mediatype == 'L' %}
 	<!-- 'halfpostfullLeft' starts -->  
-
+<div class="seventeen_top clearfix" style='color:white;'>.</div>
     <row>
     <div class="col-md-1">.</div>
 	<div class="col-md-5">
@@ -47,10 +47,10 @@
 		</div> 
 		<div class="col-md-1">.</div>
     </row>  
-  <div class="seventeen" style='color:white;'>.</div>
+  <div class="seventeen_bottom clearfix" style='color:white;'>.</div>
     {% elif feature.mediatype == 'T' %}
     <!-- 'halfposttopLeft' start -->
-
+<div class="seventeen_top clearfix" style='color:white;'>.</div>
     <row>
 
 		<div class="col-md-5">
@@ -77,11 +77,11 @@
  		</div> 
         <div class="col-md-1">.</div>
     <row>    
-   <div class="seventeen" style='color:white;'>.</div>
+   <div class="seventeen_bottom clearfix" style='color:white;'>.</div>
     {% elif feature.mediatype == 'B' %}
 
     <!-- 'halfpostbottomLeft' starts--> 
-
+<div class="seventeen_top clearfix" style='color:white;'>.</div>
     <row>
 		<div class="col-md-5" style="text-align:right;">
 	          <div>	
@@ -113,7 +113,7 @@
  		</div> 
  		<div class="col-md-1">.</div>
     </row>	
-      <div class="seventeen" style='color:white;'>.</div>
+      <div class="seventeen_bottom clearfix" style='color:white;'>.</div>
     
         {% else %}
     {%endif%} 
@@ -121,7 +121,7 @@
     {% endif %}
 {% endfor %}
   
-  </div>  <!-- end container --> 
+
 </div>  <!-- end hidden xs -->
 
 <div class = "visible-xs">

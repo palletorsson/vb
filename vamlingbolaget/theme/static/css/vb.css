@@ -15,10 +15,18 @@ body html {
 }
 
 
-.seventeen {
-    margin-bottom: 17px;
+.seventeen_bottom {
+    margin-bottom: 30px;
     color:white;
 }
+
+
+
+.seventeen_top {
+    margin-top: 30px;
+    color:white;
+}
+
 
 .top0 {
   vertical-align: top;
