@@ -128,6 +128,8 @@ $("#addtocart").off('click').on({
         		quality = $(".quality").text(),
         		size_id = $('#size').val() || size_id_default,
         		article_id = $('#article_pk').val(),
+                full_var = $('#full_var').val() || 0
+
         		quantity = $('#quantity').val(),
         		color = $('#color').val() || $('#color option:selected').val() || $('#hidden_colorpattern').val(),
         		the_price = $("#the_price").text(),
@@ -136,8 +138,10 @@ $("#addtocart").off('click').on({
         		pattern2 = 0;
 
         	if (sku_number == 9805) { //fill in proper article no for 2 patterned items
-        		color2 = $('#color2').val();
-        		pattern2 = $('#pattern2').val();
+                if (full_var != 1) {
+        		   color2 = $('#color2').val();
+        		   pattern2 = $('#pattern2').val();
+                }
         	}
 
         	$.ajax({
