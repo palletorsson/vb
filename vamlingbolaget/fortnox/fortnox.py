@@ -42,33 +42,78 @@ def json_update(articleNumber, QuantityInStock):
     return data_
 
 def create_invoice_rows(order_json):
-    
+    custom = 0
+    rea = 0
+    invoicerows = []
     cartitems = order_json['cartitems'] 
     rea_items = order_json['rea_items']
 
-    invoicerows = []
-
     for item in cartitems: 
+        full = False
         color = Color.objects.get(order=item.color)
-
         pattern = Pattern.objects.get(order=item.pattern)
+        variation = Variation.objects.get(article=item.article, color=color, pattern=pattern)
+        # use the try statment to check if it is a full varition  
+        try: 
+            full_var = FullVariation.objects.get(variation=variation, size=item.size)
+            text = str(full_var)
+            print text
+            # create the full article number here
+            print "---", item.size
+            size = getFortnoxSize(item.size)
+            print size 
+            full_var_text = str(full_var.variation) + str(" - ") + str(size)
+            print full_var_text
+            full_var_num = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order)  + "_" + str(full_var.size)
+            full = True
+        except:
+            pass 
+
+        if full == True: 
+            print "tu"
+            # here we it could be good to do get the size        
+            obj = {
+                "DeliveredQuantity": int(item.quantity),
+                "ArticleNumber": full_var_num, 
+                "Description": full_var_text
+            }
+            invoicerows.append(obj)
+            print "ll", invoicerows
+    
+        if full == False: 
+            size = Size.objects.get(pk=item.size)
+            obj = {
+                "DeliveredQuantity": int(item.quantity),
+                "ArticleNumber": int(item.article.sku_number), 
+                "Description": unicode(item.article.name) + " " + unicode(size) 
+            }
+
+            invoicerows.append(obj)
+            invoicerows.append({
+                "Description": unicode(pattern) + " " + unicode(color) 
+            })
+    
+    print "-", invoicerows
+
+    if (custom == 1): 
+        for item in cartitems: 
+            color = Color.objects.get(order=item.color)
+            pattern = Pattern.objects.get(order=item.pattern)
+            size = Size.objects.get(pk=item.size)
+
+            obj = {
+                "DeliveredQuantity": int(item.quantity),
+                "ArticleNumber": int(item.article.sku_number), 
+                "Description": unicode(item.article.name) + " " + unicode(size) 
+            }
+
+            invoicerows.append(obj)
+            invoicerows.append({
+                "Description": unicode(pattern) + " " + unicode(color) 
+            })
 
 
-        size = Size.objects.get(pk=item.size)
-
-        obj = {
-            "DeliveredQuantity": int(item.quantity),
-            "ArticleNumber": int(item.article.sku_number), 
-            "Description": unicode(item.article.name) + " " + unicode(size) 
-        }
-
-        invoicerows.append(obj)
-        invoicerows.append({
-            "Description": unicode(pattern) + " " + unicode(color) 
-        })
-
-
-    try:
+    if (rea == 1):
         for item in rea_items:   
             invoicerows.append({
     	        "DeliveredQuantity": 1,
@@ -81,9 +126,7 @@ def create_invoice_rows(order_json):
             invoicerows.append({
                 "Description": unicode(item.reaArticle.pattern) + " " + unicode(item.reaArticle.color)
             })
-    except:
-        print "no reaitem"
-
+    
     invoicerows.append({
         "DeliveredQuantity": 1,
         "ArticleNumber": 2, 
@@ -91,6 +134,31 @@ def create_invoice_rows(order_json):
      })
 
     return invoicerows  
+
+def getFortnoxSize(size): 
+    size = str(size)
+    if size == '34':         
+        the_size = 'XS'
+
+    elif size == '36': 
+        the_size = 'S'   
+
+    elif size == '3840': 
+        the_size = 'M'
+
+    elif size == '42': 
+        the_size = 'L'
+       
+    elif size == '44': 
+        the_size = 'XL'
+ 
+    elif size == '46':
+        the_size = 'XXL'
+
+    else: 
+        the_size = 'No SUCH SIZE'
+
+    return the_size
 
 def create_order_rows(order_json):
     print "order rows"
@@ -130,6 +198,7 @@ def create_order_rows(order_json):
                 "ArticleNumber": int(item.article.sku_number), 
                 "Description": unicode(item.article.name) + " " + unicode(size) 
             }
+
             invoicerows.append(obj)
             invoicerows.append({
                 "Description": unicode(pattern) + " " + unicode(color) 

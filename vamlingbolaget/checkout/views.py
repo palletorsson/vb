@@ -627,7 +627,7 @@ def fortnox(request):
             keepLog(request, log, 'ERROR', ip)
 
         # set the fortnox input to order and not invoice
-        what = "order"
+        what = "invoice"
         
         # create the json base for the fortnox order and save to database
         try: 
@@ -719,7 +719,8 @@ def cleanCartandSetStock(request, the_items):
                 full_var.stock = new_stock
                 full_var.save()
         except: 
-            pass    
+            pass  
+
     # remove all caritem from that cart and the cart 
     try: 
         rea_items.delete()
@@ -863,7 +864,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
                 "CustomerNumber": customer_no,
                 "OrderRows": order_rows 
                 }
-            })
+            }) 
 
     return customer_order 
 
@@ -1057,7 +1058,7 @@ def consumOrder(request, order_id, force):
         except: 
             order = "no order with that id"
 
-        what = 'order'
+        what = 'invoice'
         # get all item in the cat
         try:
             the_items = getCartItems(request)
