@@ -57,20 +57,15 @@ def create_invoice_rows(order_json):
         try: 
             full_var = FullVariation.objects.get(variation=variation, size=item.size)
             text = str(full_var)
-            print text
             # create the full article number here
-            print "---", item.size
             size = getFortnoxSize(item.size)
-            print size 
             full_var_text = str(full_var.variation) + str(" - ") + str(size)
-            print full_var_text
             full_var_num = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order)  + "_" + str(full_var.size)
             full = True
         except:
             pass 
 
         if full == True: 
-            print "tu"
             # here we it could be good to do get the size        
             obj = {
                 "DeliveredQuantity": int(item.quantity),
@@ -78,7 +73,7 @@ def create_invoice_rows(order_json):
                 "Description": full_var_text
             }
             invoicerows.append(obj)
-            print "ll", invoicerows
+
     
         if full == False: 
             size = Size.objects.get(pk=item.size)
@@ -93,7 +88,7 @@ def create_invoice_rows(order_json):
                 "Description": unicode(pattern) + " " + unicode(color) 
             })
     
-    print "-", invoicerows
+    print "-----", invoicerows
 
     if (custom == 1): 
         for item in cartitems: 
