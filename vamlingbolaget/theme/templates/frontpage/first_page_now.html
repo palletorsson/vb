@@ -133,18 +133,14 @@
 
 <div class = "visible-xs">
 	<div class="list-group">
-    <a href="/products/type/kvinna/" class="list-group-item"> 
-
-
-
-      <div style="background-image: url({% for feature in features %} {% if forloop.first %} {% version feature.feature_image 'medium' %} {% endif %} {% endfor %})"></div>
-				<div class="textonimage"> DAM </div> 
-		    </div>
-			</a>
-	 <hr>
-
-     {% for feature in features %}
-
+    <a href="/products/full" class="list-group-item"> 
+      <div style="background-image: url(/media/{{features.0.feature_image}})"></div>
+    </a>
+	 
+    {% for feature in features %}
+  {% if forloop.first%} 
+    {%else%} 
+ 
 		<a href="{{ feature.link_to }}" class="list-group-item"> 
 			<div class="mobile_image">
       <img src="{% version feature.feature_image 'large' %}" class="mobile_image" alt="{{ feature.heading }} image">
@@ -152,6 +148,7 @@
 		  </div>
 			</a>
 	 <hr>
+      {% endif %}
      {% endfor  %}
 
 	<div class="list-group">
