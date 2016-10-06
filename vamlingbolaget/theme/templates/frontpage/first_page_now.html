@@ -18,7 +18,7 @@
     {% if feature.mediatype == 'F' %}
     <div class="spanfullscreen">
       <a href="{{ feature.link_to }}">  
-        <img src="/media/{{feature.feature_image}}" style='width: 100%; object-fit: contain; margin-top: 10px; margin-bottom: 10px;' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+        <img src="/media/{{feature.feature_image}}" style='width: 100%; object-fit: contain;' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       </a> 
  	</div>
       <div class="seventeen_bottom clearfix" style='color:white;'>.</div>
@@ -31,7 +31,7 @@
 			<div class="grid-item top0">
 		  <div>
     		<a href="{{ feature.link_to }}">  
-      		<img src="{% version feature.feature_image 'large' %}"  style='object-fit: contain; width: 80%; float: right; ' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+      		<img src="{% version feature.feature_image 'large' %}"  style='object-fit: contain; width: 80%; float: right; margin-bottom: 12px;' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
     		</a>
          <span style="text-transform: uppercase; font-size: 14px; margin-left:21%; text-align: center; display: inherit;"> {{ feature.heading }} </span>
       </div>
@@ -44,7 +44,7 @@
 			<div class="grid-item top0">
 		  <div>
   		<a href="{{ feature.link_to }}">  
-    		<img src="{% version feature.feature_image 'large' %}"  style='object-fit: contain; width: 80%;' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+    		<img src="{% version feature.feature_image 'large' %}"  style='object-fit: contain; width: 80%; margin-bottom: 12px;' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
   		</a>
  
        <span style="text-transform: uppercase; font-size: 14px; margin-right:21%; text-align: center; display: inherit;"> {{ feature.heading }} </div>
