@@ -76,6 +76,12 @@
 
 
 			  {% endfor %}
+			  	<!-- <div class="color_and_pattern_choose span5">
+					{% for item in colorsandpatterns %}
+						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+					{% endfor  %}
+				</div> -->
+
 			</div>
 			<span> 
 
@@ -86,15 +92,19 @@
 				{% for size in full_variations %} 
 			
 					{% if product.size == size.size %}  
-						<li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}"><a href=""> {{ size.lettersize }}  </a></li> 
+						<li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+							<a> {{ size.lettersize }}  </a>
+						</li> 
 				
 					{% else %}
-						<li class="select_size" id="{{ size.size  }}"  data-size="{{ size.stock }}"><a href=""> {{ size.lettersize }} </a></li>
+						<li class="select_size" id="{{ size.size  }}" data-size="{{ size.stock }}">
+							<a> {{ size.lettersize }} </a>
+						</li>
 					{% endif %} 
 					
 				{% endfor %}
 
-				</ul>
+			
 				</ul>
             </nav>
             <ul class="hidden">
@@ -103,7 +113,7 @@
 			{% endfor %}
             </ul>
 
-			<input type="hidden" id="size" name="size" value="{{product.size }}" >
+			<input type="hidden" id="size" name="size" value="{{ product.size }}" >
 	    	<input type="hidden" id="quantity" name="quantity" value="1" >		
 
 			<hr>
