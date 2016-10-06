@@ -11,10 +11,10 @@ def first_page(request):
     gallery = Gallery.objects.filter(status__display_on_index_page = True) 
     images = Image.objects.filter(gallery=gallery)
     news = New.objects.filter(active=True).order_by('-publish_at')[:2]
-    features = FrontpageExtended.objects.filter(status='A', theme__title='*').order_by('order')
+    features = FrontpageExtended.objects.filter(status='A', theme__title='rightNow').order_by('order')
     theme1 = FrontpageTheme.objects.filter(status='A').order_by('order')[:1]
 
-    return render_to_response('frontpage/first_page.html',
+    return render_to_response('frontpage/first_page_now.html',
         {'frontpage': frontpage,
          'gallery' : gallery,
          'images': images,
