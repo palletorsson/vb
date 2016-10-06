@@ -8,7 +8,7 @@
 <div class="hidden-xs">
 
 <div class="spanfullscreen">
-	<a href="/products/full"><img src="/media/{{features.0.feature_image}}" /></a>	
+	<a href="/products/full"><img src="/media/{{features.0.feature_image}}" style='padding-top: 80px'/></a>	
 </div>
   <div class="seventeen_bottom clearfix" style='color:white;'>.</div>
 {% for feature in features %}
@@ -33,7 +33,7 @@
     		<a href="{{ feature.link_to }}">  
       		<img src="{% version feature.feature_image 'large' %}"  style='object-fit: contain; width: 80%; float: right; ' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
     		</a>
-         <span style="text-transform: uppercase; font-size: 14px; float:left; margin-left:21%;  text-align: center;"> {{ feature.heading }} </span>
+         <span style="text-transform: uppercase; font-size: 14px; float:left; margin-left:21%; text-align: center; display: inherit;"> {{ feature.heading }} </span>
       </div>
 		</div> 
           	          
@@ -47,7 +47,7 @@
     		<img src="{% version feature.feature_image 'large' %}"  style='object-fit: contain; width: 80%;' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
   		</a>
  
-       <span style="text-transform: uppercase; font-size: 14px; float:left; margin-right:21%; text-align: center;"> {{ feature.heading }} </div>
+       <span style="text-transform: uppercase; font-size: 14px; float:left; margin-right:21%; text-align: center; display: inherit;"> {{ feature.heading }} </div>
        </div>
 		</div> 
 		</div> 
