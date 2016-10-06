@@ -16,7 +16,7 @@
     {%else%} 
     <!-- full size img 'Fullpost'-->
     {% if feature.mediatype == 'F' %}
-    <div class="spanfullscreen">
+    <div class="spanfullscreen spanfullscreenminus">
       <a href="{{ feature.link_to }}">  
         <img src="/media/{{feature.feature_image}}" style='width: 100%; object-fit: contain;' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
       </a> 
