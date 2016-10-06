@@ -8,13 +8,13 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.core import mail
 from cart.views import _cart_id, totalsum, _new_cart_id, getnames 
-from products.models import ReaArticle
+from products.models import *
 from cart.models import Cart, CartItem
 from forms import CheckoutForm
 from models import Checkout
 import random
 from payex.service import PayEx
-from fortnox.fortnox import get_headers, get_art_temp, json_update, update_article, CreateCostumer, searchCustomer, customerExistOrCreate, updateCostumer, seekOrder, createOrder, create_invoice_rows, getOrders, seekOrderByNumber, formatJson
+from fortnox.fortnox import get_headers, get_art_temp, json_update, update_article, CreateCostumer, searchCustomer, customerExistOrCreate, updateCostumer, seekOrder, createOrder, createNewOrder, create_invoice_rows, getOrders, seekOrderByNumber, formatJson, create_order_rows
 import json
 import time
 import datetime
@@ -65,7 +65,7 @@ def checkout(request, test=''):
         if form.is_valid():
             # start the order process and store form values 
             new_order = form.save(commit=False)
-            
+
             # create a new order number
             new_order.order_number = get_ordernumber() 
 
@@ -598,6 +598,7 @@ def payexCallback(request):
 
 
 def fortnox(request): 
+    log = ''
     cart_id = _cart_id(request)
     try:
         ip = request.META['REMOTE_ADDR']
@@ -608,7 +609,7 @@ def fortnox(request):
         order_id = request.POST['order_id']
     except: 
         order_id = 0
-
+    # get order from databas
     if (order_id != 0):
         try: 
             order = Checkout.objects.get(order_number=order_id) 
@@ -618,26 +619,26 @@ def fortnox(request):
             log = 'Duplicate order nummer' 
             keepLog(request, log, 'WARN', ip)
 
-        # get all item in the cat
+        # - all item in the cat
         try:
             the_items = getCartItems(request)
         except:
             log = 'Error, cartitems'  
             keepLog(request, log, 'ERROR', ip)
-   
 
-        # create the json base for the fortnox order
+        # set the fortnox input to order and not invoice
+        what = "order"
+        
+        # create the json base for the fortnox order and save to database
         try: 
             json_order = the_items
-            final_orderjson = fortnoxOrderandCostumer(request, order, json_order)
+            final_orderjson = fortnoxOrderandCostumer(request, order, json_order, what)
             order.order = final_orderjson
             order.save()
-            log = 'Creating order_json bacis for order: ' + str(order_id) 
-            keepLog(request, log, 'INFO', ip, cart_id, final_orderjson)
+            log = log + ' Creating order_json bacis for order: ' + str(order_id) 
             order_ok_json = True
         except: 
-            log = 'Fortnox Error when adding Fortnox order'
-            keepLog(request, log, 'ERROR', ip, cart_id)
+            log = log + ' Fortnox Error when adding Fortnox order'
             order_ok_json = False
 
         # send the json order, log and save the order 
@@ -645,30 +646,32 @@ def fortnox(request):
            
             if order.paymentmethod != 'K': 
                 headers = get_headers() 
-                return_order = createOrder(headers, final_orderjson)
+                if what == 'invoice': 
+                    return_order = createOrder(headers, final_orderjson)
+                else: 
+                    return_order = createNewOrder(headers, final_orderjson)
+
                 order.fortnox_obj = return_order 
                 order.save()
                 
-                log = 'Creating final_order_json with Order id: ' + str(order_id) 
-                keepLog(request, log, 'INFO', ip, cart_id, return_order)
+                log = log + ' Creating final_order_json with Order id: ' + str(order_id) 
             else: 
                 order.fortnox_obj = 'not jet' 
                 order.save()
                 print "klarna not on"
        
         else:         
-            log = 'Fortnox order not created'
-            keepLog(request, log, 'ERROR', ip)
+            log = log + ' Fortnox order not created'
 
 
         # set the new stock
         try: 
             cleanCartandSetStock(request, the_items)
 
-            log = 'Cleaning cart'
+            log = log + ' Cleaning cart'
             keepLog(request, log, 'INFO', ip)
         except: 
-            log = 'error cleaning cart' 
+            log = log + ' Error cleaning cart' 
             keepLog(request, log, 'ERROR', ip)
 
         return HttpResponse(status=200)
@@ -683,8 +686,9 @@ def cleanCartandSetStock(request, the_items):
 
     # get cart, key and items 
 
-    # update rea stock internalty 
-    cartitems = the_items['cartitems'] 
+    # update rea stock in django databse
+    cartitems = the_items['cartitems']
+    print cartitems 
     bargains = the_items['bargains'] 
     voucher = the_items['voucher']  
     rea_items = the_items['rea_items'] 
@@ -700,9 +704,23 @@ def cleanCartandSetStock(request, the_items):
             item.reaArticle.save()
     except: 
         print "clean wrong"
- 
-    # remove all caritem from that cart and the cart 
 
+    for item in cartitems:
+        try: 
+            article = Article.objects.get(sku_number=item.article.sku_number)
+            pattern = Pattern.objects.get(order=item.pattern)
+            color = Color.objects.get(order=item.color)
+            variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+            full_var = FullVariation.objects.get(variation=variation, size=item.size)
+            
+            current_stock = full_var.stock
+            if current_stock > 0: 
+                new_stock = current_stock - 1
+                full_var.stock = new_stock
+                full_var.save()
+        except: 
+            pass    
+    # remove all caritem from that cart and the cart 
     try: 
         rea_items.delete()
     except:
@@ -763,7 +781,7 @@ def getCustumer(new_order):
         })
 
 # Run after order when customer is send to conferm url /thanks/
-def fortnoxOrderandCostumer(request, new_order, order_json):
+def fortnoxOrderandCostumer(request, new_order, order_json, what):
     customer_no = '0'
     customer = getCustumer(new_order)
     headers = get_headers()
@@ -778,13 +796,19 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
         keepLog(request, log, 'ERROR', '', customer)
 
 
-    # Creat the order part of the json from order_json and log 
-    try:         
-        invoice_rows = create_invoice_rows(order_json)
-    except: 
-        log = 'Fortnox order json not resolved' 
-        keepLog(request, log, 'ERROR', '', customer)
-
+    # Creat the order part of the json from order_json and log --> fortnox.py
+    if what == 'invoice': 
+        try:         
+            invoice_rows = create_invoice_rows(order_json)
+        except: 
+            log = 'Fortnox invoice json not resolved' 
+            keepLog(request, log, 'ERROR', '', customer)
+    else: 
+        try:         
+           order_rows = create_order_rows(order_json)
+        except: 
+            log = 'Fortnox order json not resolved' 
+            keepLog(request, log, 'ERROR', order_json, customer)
 
     # add addtional information to comment and invoice type feilds
     try:
@@ -819,17 +843,27 @@ def fortnoxOrderandCostumer(request, new_order, order_json):
             invoice_rows.append(obj_t)
         except:
             pass 
-     
-    customer_order = json.dumps({
-                "Invoice": {
-                    "InvoiceRows": invoice_rows,
-                    "CustomerNumber": customer_no, 
-                    "PriceList": "B",
-                    "Comments": comments,
-                    "YourOrderNumber": orderid_,
-                    "InvoiceType": invoice_type_value, 
+
+    if what == 'invoice': 
+        customer_order = json.dumps({
+                    "Invoice": {
+                        "InvoiceRows": invoice_rows,
+                        "CustomerNumber": customer_no, 
+                        "PriceList": "B",
+                        "Comments": comments,
+                        "YourOrderNumber": orderid_,
+                        "InvoiceType": invoice_type_value, 
+                    }
+                })  
+    else: 
+        customer_order = json.dumps(
+            {
+                "Order": 
+                { 
+                "CustomerNumber": customer_no,
+                "OrderRows": order_rows 
                 }
-            })  
+            })
 
     return customer_order 
 
@@ -1023,7 +1057,8 @@ def consumOrder(request, order_id, force):
         except: 
             order = "no order with that id"
 
-      # get all item in the cat
+        what = 'order'
+        # get all item in the cat
         try:
             the_items = getCartItems(request)
             print the_items
@@ -1042,7 +1077,7 @@ def consumOrder(request, order_id, force):
             if (len(seekorder) == 0):
                 print seekorder
 
-                resp = fortnoxOrderandCostumer(request, order, the_items)
+                resp = fortnoxOrderandCostumer(request, order, the_items, what)
 
         except: 
             seekorder = "None"
@@ -1050,7 +1085,7 @@ def consumOrder(request, order_id, force):
         if (force == '9'): 
             print "inforce order"
 
-            resp = fortnoxOrderandCostumer(request, order, the_items)
+            resp = fortnoxOrderandCostumer(request, order, the_items, what)
         else: 
             print "no force"
 
