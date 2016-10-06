@@ -314,13 +314,6 @@ $(".variation_imgs").click(function() {
 
 }); 
 
-$(".has_size").each(function() {
-    var current_size = $(this).text().trim();
-    var id_= "#"+current_size
-    console.log(id_)
-    $(id_).removeClass('disabled'); 
-       
-});
 
 $("#addreatocart").click(function() {
 	var item = $('#rea_pk').val();
