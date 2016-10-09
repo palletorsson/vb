@@ -97,7 +97,7 @@ def addtocart(request):
         update = False
 
         # if costumer edits cart
-        if (cartitem_id and add_or_edit == 'edit'):
+        if (add_or_edit == 'edit'):
             cartitem = CartItem.objects.get(pk=cartitem_id)
             cartitem.size = size
             cartitem.color = color
@@ -110,60 +110,40 @@ def addtocart(request):
             msg = u'Du har andrat till: </br>'
 
         # if costumer adds a full varation 
-        elif (cartitem_id and add_or_edit == 'full'):
-            cartitem = CartItem.objects.create(cart = cart)
-            cartitem.article = article_db
-            cartitem.pattern = pattern
-            cartitem.size = size
-            cartitem.color = color
-            cartitem.quantity = quantity
-            if(color2 > 0):
-                cartitem.color_2 = color2
-                cartitem.pattern_2 = pattern2
-            cartitem.save()
-            msg = u'Du har lagt till: <br/>'
+        if (add_or_edit == 'full' or add_or_edit == 'add'):
+            for item in existing_cartitems:
+                #look in the cart to see it it is the same item
+               if (str(item.article.sku_number) == str(sku) and str(item.pattern) == str(pattern) and str(item.color) == str(color) and str(item.size) == str(size)):
+                        print "lol"
+                        item.quantity = quantity
+                        msg = u'Antal 1,  %s <br/>' %(article_db.name)
+                        # same the item
+                        item.save()
+                        update = True 
+                
+            if (update != True): 
+                # this is a new cartitem
+                cartitem = CartItem.objects.create(cart = cart)
+                cartitem.article = article_db
+                cartitem.pattern = pattern
+                cartitem.size = size
+                cartitem.color = color
+                cartitem.quantity = quantity
+                if(color2 > 0):
+                    cartitem.color_2 = color2
+                    cartitem.pattern_2 = pattern2
+                msg = u'Du har lagt till: <br/>'
+                cartitem.save()
+                print "new"
 
-        # if costumer adds a varation 
-
-        elif (cartitem_id and add_or_edit == 'add'):
-            print "ist add"
-            cartitem = CartItem.objects.create(cart = cart)
-            cartitem.article = article_db
-            cartitem.pattern = pattern
-            cartitem.size = size
-            cartitem.color = color
-            cartitem.quantity = quantity
-            if(color2 > 0):
-                cartitem.color_2 = color2
-                cartitem.pattern_2 = pattern2
-            cartitem.save()
-            msg = u'Du har lagt till: <br/>'
         else: 
             print "o no"
             pass
 
         # if there is cart item in the shopping cart check if it is the same.     
-        if (existing_cartitems):
-            for item in existing_cartitems:
-                if (str(item.article.sku_number) == str(sku) and str(item.pattern) == str(pattern) and
-                    str(item.color) == str(color) and str(item.size) == str(size)):
-                    item.quantity = quantity
-                    item.save()
-                    msg = u'Antal 1,  %s <br/>' %(article_db.name)
-                    quantity = item.quantity
-                    update = True
-            if update != True:
-                cartitem = CartItem.objects.create(cart = cart)
-                cartitem.article = article_db
-                cartitem.pattern = pattern
-                if(color2 > 0):
-                    cartitem.color_2 = color2
-                    cartitem.pattern_2 = pattern2
-                cartitem.size = size
-                cartitem.color = color
-                cartitem.quantity = quantity
-                msg = u'Du har lagt till: <br/>'                   
-                cartitem.save()
+
+
+               
         try: 
             color_db = Color.objects.get(order=color)
             pattern_db = Pattern.objects.get(order=pattern)
