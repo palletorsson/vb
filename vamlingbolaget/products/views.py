@@ -454,7 +454,7 @@ def allFullArt(request):
 
 def agigateFortnoxProducts(): 
     allart = []
-    headers = get_vb_headers()
+    headers = get_headers()
     for page in range(0, 6):
         allart_part = get_articles(headers, str(page))  
         allart_part = json.loads(allart_part)
