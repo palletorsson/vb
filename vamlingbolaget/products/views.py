@@ -445,22 +445,27 @@ def allFullArt(request):
         if unicode(sku_num) in products:
             check_art.append("ok: " + str(sku_num))
         else:
-            check_art.append("error: " + str(sku_num) + " ----- " + unicode(art))
+            check_art.append("error: " + str(sku_num) + " ----- " + unicode(art.pk))
 
     return render_to_response('variation/admin_view.html', {
-        'articles': full_variations, 
+        'articles': '', 
         'check_art': check_art
     }, context_instance=RequestContext(request))
 
 def agigateFortnoxProducts(): 
     allart = []
     headers = get_headers()
-    for page in range(0, 6):
+    for page in range(0, 9):
         allart_part = get_articles(headers, str(page))  
         allart_part = json.loads(allart_part)
-        products = allart_part['Articles']
-        for product in products: 
-            allart.append(product['ArticleNumber'])
+        try: 
+            products = allart_part['Articles']
+
+            for product in products: 
+                print product['ArticleNumber']
+                allart.append(product['ArticleNumber'])
+        except: 
+            pass
 
     return allart 
 
