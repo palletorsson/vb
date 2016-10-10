@@ -431,6 +431,49 @@ def allArt(request):
         'check_art': check_art
     }, context_instance=RequestContext(request))
 
+
+def allFullArt(request):
+    full_variations = FullVariation.objects.filter(active=True) 
+
+    headers = get_headers()
+    check_art = []
+
+    products = agigateFortnoxProducts()
+
+    for art in full_variations: 
+        sku_num = str(art.variation.article.sku_number) + "_" + str(art.variation.pattern.order) + "_" + str(art.variation.color.order) + "_" +  str(art.size)      
+        if unicode(sku_num) in products:
+            check_art.append("ok: " + str(sku_num))
+        else:
+            check_art.append("error: " + str(sku_num) + " ----- " + unicode(art))
+
+    return render_to_response('variation/admin_view.html', {
+        'articles': full_variations, 
+        'check_art': check_art
+    }, context_instance=RequestContext(request))
+
+def agigateFortnoxProducts(): 
+    allart = []
+    headers = get_vb_headers()
+    for page in range(0, 6):
+        allart_part = get_articles(headers, str(page))  
+        allart_part = json.loads(allart_part)
+        products = allart_part['Articles']
+        for product in products: 
+            allart.append(product['ArticleNumber'])
+
+    return allart 
+
+def checkConsistDjangoFortnox(request): 
+    
+    # get all variation and articles from django 
+    articles = Article.objects.filter(active=True)
+    # get fortnox headers
+    headers = get_headers()
+    for art in articles: 
+      article_check = get_article(headers, art.sku_number)
+      print article_check
+
 def allreaArt(request):
     reaarticles = ReaArticle.objects.all().order_by('status')
     

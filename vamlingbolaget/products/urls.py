@@ -21,6 +21,8 @@ urlpatterns = patterns('products.views',
     url(r'^articles/article/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'artdetail'), 
     url(r'^fullvariation/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'fulldetail'), 
     url(r'^allart_admin/$', 'allArt'),
+    url(r'^allfullart_admin/$', 'allFullArt'),
+
     url(r'^allart_rea/$', 'allreaArt'),
     #url(r'^articles/$', 'articleList'),
     url(r'^articlescsv/$', 'articlesCsv'),
