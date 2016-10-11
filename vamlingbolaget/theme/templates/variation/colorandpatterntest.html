@@ -9,14 +9,11 @@
 
 
 </div>
+
 <div>
-    <hr/>
-    <button class="open_dialog btn btn-inverse">Fler färger och mönster</button>
-</div>
-<div class="color_and_pattern_choose">
 <br/>
     {% for item in colorsandpattern %}
-        <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="60" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+        <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="120"  id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
     {% endfor  %}
 </div>
         <input type="hidden" id="pattern" name="pattern" value="0" >
