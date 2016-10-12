@@ -621,7 +621,7 @@ set_first_page();
       var color_name = colorandpattern[2];
       var pattern_name = colorandpattern[3];
       var img_text = color_name + ' ' +pattern_name+ ' ';
-	  var image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="120"> <br />'+ color_name + ' ' +pattern_name+ ' ';
+	  var image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="200"> <br />';
 
       console.log(img_text)
       if ($(this).hasClass("inside")) {

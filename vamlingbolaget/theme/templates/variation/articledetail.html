@@ -54,14 +54,14 @@
 						</span> 
 					</h3>
 					<hr> 
-					<div class="span2">
-					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:160px;" />
+					<div class="span2 selectedpatternandcolor">
+					<img id="pattern_color_image r" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:160px;" />
 					<hr>
 			
 					</div>
 
 					<div class="span6">
-			{% trans "Färger och Mönster" %}: 		
+			{% trans "Färger och Mönster" %}:  <span class="selectedpatternandcolor_text"></span>	
 			<hr>
 				<div class="color_and_pattern_choose">
 					{% for item in colorsandpattern %}
