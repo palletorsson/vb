@@ -133,20 +133,20 @@
 	<div class='image_wrapper'>
 		<a href="{{product.link}}">
 		        <div class="collection_list img_container">
-	                {% with product.image_set.all|first as image %}
-	                <div class="force_image"> <img src="{% version image.image 'large' %}" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
+	        
+	                <div class="force_image"> <img src="{{product.image}}" class="lazy" alt="Vamlingbolaget {{ product.variation.article.name }}"  /></div>
 		        <br/>
 		        <div>
-		            {{ product.article.name }}<br/>
+		            {{ product.variation.article.name }}<br/>
 		            {% trans "Pris" %} :
-		            {%if product.article.discount%}
-		                <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK
+		            {%if product.variation.article.discount%}
+		                <span class="discount"> {{ product.variation.article.f_discount }} </span> ({{ product.variation.article.price }}) SEK
 		            {%else%}
-		                {{ product.article.price }} SEK
+		                {{ product.variation.article.price }} SEK
 		            {%endif%}
 		        </div>
 		    </div>
-		   {% endwith %}
+		 
 		</a>
 	
 	</div>

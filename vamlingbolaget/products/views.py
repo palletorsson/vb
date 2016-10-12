@@ -233,9 +233,17 @@ def detail(request, pk):
 def articleDetail(request, pk):
     try:
         product = Variation.objects.get(pk=pk)
-        print "hej", product.article.file
+        products = FullVariation.objects.filter(variation__article=product.article, size='3840')
 
-        products = Variation.objects.filter(article=product.article).order_by('color')
+        for full_var in products: 
+            color_pattern_str = str(full_var.variation.color.order)+"f_"+str(full_var.variation.pattern.order)+"m"
+            full_var.cp = color_pattern_str
+            num = int(full_var.pk)
+            link = "/products/fullvariation/"+ str(num) + "/#" + str(full_var.variation) + " " + str(full_var)
+            full_var.link = link
+            filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order) 
+            file = "/media/variations/"+ filename +"_1.jpg"  
+            full_var.image = file   
 
         color_id = product.color.order
         pattern_id = product.pattern.order
