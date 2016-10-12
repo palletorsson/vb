@@ -87,12 +87,20 @@ def create_invoice_rows(order_json):
 
         # on the other hand, if it is a choosen variation
         else:
-            print "see this"     
-            size = Size.objects.get(pk=item.size)
+            # check to see is it metervara
+            sku = int(item.article.sku_number)
+            if sku == 3: 
+                size = item.size
+            else: 
+                try: 
+                    size = Size.objects.get(pk=item.size)
+                except: 
+                    size = item.size
+
             obj = {
                 "DeliveredQuantity": int(item.quantity),
                 "ArticleNumber": int(item.article.sku_number), 
-                "Description": unicode(item.article.name) + " " + unicode(item.size) 
+                "Description": unicode(item.article.name) + " " + unicode(size) 
             }
 
             invoicerows.append(obj)
