@@ -308,6 +308,10 @@ text-shadow: 0 1px 0 #eeeeee;
    text-decoration: underline; 
 }
 
+.link {
+   color:black; 
+   text-decoration: underline; 
+}
 
 .add-to-cart-buttom {
   background-color: black;
