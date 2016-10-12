@@ -229,6 +229,60 @@ def detail(request, pk):
                    context_instance=RequestContext(request)
                    )
 
+
+def articleDetail(request, pk):
+    try:
+        product = Variation.objects.get(pk=pk)
+        print "hej", product.article.file
+
+        products = Variation.objects.filter(article=product.article).order_by('color')
+
+        color_id = product.color.order
+        pattern_id = product.pattern.order
+        qualities = Quality.objects.filter(active = True)
+        types = Type.objects.filter(active = True)
+        colors = Color.objects.filter(active=True, quality = product.article.quality)
+        patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
+
+
+
+        if (product.article.quality.order == 13):
+            sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
+        else:
+            sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
+
+        if (product.article.quality.order == 5 or product.article.quality.order == 14) :
+            colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
+        else:
+            colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
+        
+       
+    except:
+        raise Http404 
+
+    try:        
+        images = Image.objects.filter(variation__pk=pk)
+    except:
+        raise Http404 
+        
+
+    return render_to_response('variation/articledetail.html',
+                   {
+                   'product': product,
+                   'images': images,
+                   'colors': colors,
+                   'patterns': patterns,
+                   'sizes': sizes,
+                   'qualities': qualities,
+                   'types': types,
+                   'color_id':color_id,
+                   'pattern_id':pattern_id,
+                   'products': products,
+                   'colorsandpattern': colorsandpattern,
+                   },
+                   context_instance=RequestContext(request)
+                   )
+
 def readetail(request, pk):
     try:
         reaArticle = ReaArticle.objects.get(pk=pk)
