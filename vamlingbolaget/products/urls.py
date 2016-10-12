@@ -20,6 +20,7 @@ urlpatterns = patterns('products.views',
     url(r'^articles/$', 'articleindex'),    
     url(r'^articles/article/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'artdetail'), 
     url(r'^fullvariation/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'fulldetail'), 
+    url(r'^article/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'articleDetail'), 
     url(r'^allart_admin/$', 'allArt'),
     url(r'^allfullart_admin/$', 'allFullArt'),
 
