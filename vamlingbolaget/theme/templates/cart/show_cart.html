@@ -193,7 +193,7 @@
             {{ totalprice }}  {%trans "SEK"%}
         </th></tr>
 
- <tr>
+        <tr>
         <th id="totalprice" colspan="9" style="text-align: right">  
 		<div style="text-align:right"><a href="/checkout/"><button class="btn btn-success" type="button">{% trans "Beställ" %}</button></a></div>
 	    </th>
@@ -231,65 +231,66 @@
 
         </tbody>
 
-    {% else %}
+        {% else %}
         <tr id="empty">
             <td colspan="8">
                 {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet" %}!</a>
             </td>
         </tr>
         </tbody>
-    {% endif %}
-    </tbody>
-</table>
-</div>
+        {% endif %}
+
+    </table>
+</div> <!-- end hidden-xs -->
 
 <div class = "visible-xs">
 {%if cartitems or bargains or rea %}
 {% for item in cartitems %}  
-<div class="controls controls-row">
-	<div class="mobile_cart_article_div"> <img class="mobile_article_img" src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans 'i' %} {{ item.color|lower }}" /> </div>
-		</div>
-			<h5><strong> {{ item.article }} i {{item.article.quality|lower}} <small>
-			<span> | <a href="{%url removefromcart item.pk 'cartitem'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>  </span>
-			<span> | <a href="/cart/edititem/{{ item.id }}/"><i class="icon-edit glyphicon glyphicon-edit"> </i></a> </span></small>
-			</strong></h5>
-			<hr>
-			<div class="article_info_div">
-            <small>
-				<span> {% trans "Antal" %} : {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span><br>
-				<span> {% trans "Mönster" %} :
-			
-								    {{ item.pattern }}
-								    {% if item.pattern_2 > 0 %}
-								        / {{ item.pattern_2 }}
-								    {%endif%}
-				</span><br>
-				<span> {% trans "Färg" %} : 			
-				{{ item.color }}
-								{% if item.color_2 > 0 %}
-								    / {{ item.color_2 }}
-								{%endif%}
-				</span><br>
-				<span> {% trans "Storlek" %} : {% if item.article.type.order == 8 or  item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%}  </span><br>
-				<span> {% trans "Pris" %} :  {%if item.article.discount%}
-				<span class="discount"> {{ item.article.f_discount }}  {%trans "SEK"%}</span>
-					{%elif item.article.type.order == 8 %}
-						{{item.totalitemprice}} {%trans "SEK"%}
-					{%else%}
-						{% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} {%trans "SEK"%}	</span><br/> {%endif%} 
-				    {{ item.article.price }} {%trans "SEK"%}
-					{%endif%}
-				</span>
-			</small>
-		
+    <div class="controls controls-row">
+    	<div class="mobile_cart_article_div"> <img class="mobile_article_img" src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans 'i' %} {{ item.color|lower }}" /> 
         </div>
-		<hr>
+        <div>
+    		<h5><strong> {{ item.article }} i {{item.article.quality|lower}} <small>
+    		<span> | <a href="{%url removefromcart item.pk 'cartitem'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>  </span>
+    		<span> | <a href="/cart/edititem/{{ item.id }}/"><i class="icon-edit glyphicon glyphicon-edit"> </i></a> </span></small>
+    		</strong></h5>
+    		<hr>
+    		<div class="article_info_div">
+            <small>
+    			<span> {% trans "Antal" %} : {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span><br>
+    			<span> {% trans "Mönster" %} :
+    			    {{ item.pattern }}
+    			    {% if item.pattern_2 > 0 %}
+    			        / {{ item.pattern_2 }}
+    			    {%endif%}
+    			</span><br>
+    			<span> {% trans "Färg" %} : 			
+    			    {{ item.color }}
+    				{% if item.color_2 > 0 %}
+    				    / {{ item.color_2 }}
+    				{%endif%}
+    			</span><br>
+    			<span> {% trans "Storlek" %} : {% if item.article.type.order == 8 or  item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%}  </span><br>
+    			<span> {% trans "Pris" %} :  {%if item.article.discount%}
+    			<span class="discount"> {{ item.article.f_discount }}  {%trans "SEK"%}</span>
+    				{%elif item.article.type.order == 8 %}
+    					{{item.totalitemprice}} {%trans "SEK"%}
+    				{%else%}
+    					{% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} {%trans "SEK"%}	</span><br/> {%endif%} 
+    			    {{ item.article.price }} {%trans "SEK"%}
+    				{%endif%}
+    			</span>
+    	    </small>
+            </div>
+        </div>
+    </div>
+    <hr>
         {% endfor %}
         {% for b in bargains %}
-<div class="controls controls-row">
-	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px; 
-	marginpx;"> </div>
-		</div>
+        <div class="controls controls-row">
+        	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px; 
+        	marginpx;"> 
+            </div>
 	   		<h5>
 				<strong> {%trans "REA"%} <small>
 					<span> | <a href="{%url removefromcart b.pk 'bargain'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ b.id }}"></i></a></span></small>
@@ -304,36 +305,36 @@
 				</small>
 				<hr>
 			</div>
-		            
+        </div>
         {% endfor %}
     	<hr>    
         {% for item in rea %}
-<div class="controls controls-row">
-	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px; 
-	margin:10px;"> </div>
-		</div>
-	   		<h5>
-				<strong>   {{ item.reaArticle.article.name }} | {{ item.reaArticle.color }} | {{ item.reaArticle.pattern }} | {{ item.reaArticle.size }} | <span class="discount"> {%trans "REA"%} </span> </span><small>
-					<span> | <a href="{%url removefromcart item.pk 'rea'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a></span></small>
-				</strong>
-			</h5>
-			<hr>
-			<div class="article_info_div">
-				<small>
-				<span> {% trans "Antal" %} : 1 </span> <br/>
-				<span> {%trans "Artikel"%} : {{ item.reaArticle.article.name }} </span> <br/>
-				<span> {% trans "Pris" %} : {{ item.reaArticle.rea_price }} {%trans "SEK"%} (<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} </span>)</span> </span>
-				</small>
-				<hr>
-			</div>
-		            
+            <div class="controls controls-row">
+            	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px; 
+            	margin:10px;"> </div>
+            	<h5>
+            	<strong>   {{ item.reaArticle.article.name }} | {{ item.reaArticle.color }} | {{ item.reaArticle.pattern }} | {{ item.reaArticle.size }} | <span class="discount"> {%trans "REA"%} </span> </span><small>
+            			<span> | <a href="{%url removefromcart item.pk 'rea'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a></span></small>
+            	</strong>
+                </h5>
+                <hr>
+                <div class="article_info_div">
+                	<small>
+                    	<span> {% trans "Antal" %} : 1 </span> <br/>
+                    	<span> {%trans "Artikel"%} : {{ item.reaArticle.article.name }} </span> <br/>
+                    	<span> {% trans "Pris" %} : {{ item.reaArticle.rea_price }} {%trans "SEK"%} 
+                            (<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} </span>)
+                        </span> </span>
+                	</small>
+                	<hr>
+                </div>
+            </div> 
         {% endfor %}
 		<div class="totalprice" colspan="8" style="text-align: right">
-				    {% trans "Leverans" %}:
-				<span id="handling">
-				    {{ handling }}  {%trans "SEK"%}
-				</span>
-				
+			{% trans "Leverans" %}:
+			<span id="handling">
+				{{ handling }}  {%trans "SEK"%}
+			</span>	
 		</div>
 		<hr>
         <div class="totalprice" colspan="8" style="text-align: right">
@@ -344,44 +345,49 @@
 		    </span>
 		</div>
 		<hr>
-        
         <div class="voucher_show">
 			<div class="voucher" colspan="8" style="text-align: right">
-			{%if voucher %}
-				Rabattkod / Voucher: 
-			{% else %}
-				Rabattkod / Voucher: 
-			{% endif %}
+    			{%if voucher %}
+    				Rabattkod / Voucher: 
+    			{% else %}
+    				Rabattkod / Voucher: 
+    			{% endif %}
 			</div>
 
 			<div id="totalprice" colspan="8">
-			{%if voucher %}
-				<span class="label label-success">15% på dyraste plagget </span>
-			{% else %}
-
-			<div class="form-group">
-			   <div class="input-group">
-					<input type="text" id="id_voucher" name="voucher" maxlength="10" class="form-control">
-					<button type="button" class="btn btn-success btn-sm  btn-number" id="vocher-plus">
-						  OK
-					 </button>
-			   </div>
+    			{%if voucher %}
+    				<span class="label label-success">15% på dyraste plagget </span>
+    			{% else %}
+    			<div class="form-group">
+    			   <div class="input-group">
+    					<input type="text" id="id_voucher" name="voucher" maxlength="10" class="form-control">
+    					<button type="button" class="btn btn-success btn-sm  btn-number" id="vocher-plus">
+    						OK
+    					 </button>
+    			   </div>
+                </div>
             </div>
-              {% endif %}
-          </div>
-        
+            {% endif %}
+        </div> <!-- end voucher_show -->
+            
     {% else %}
     <div id="empty" class="mob_empty">
         <div colspan="8">
             {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet" %}!</a>
         </div>
     </div>
-</div>
+    </div>
+    {%if cartitems or bargains or rea %}   
+    <div style="text-align:right">
+        <a href="/checkout/">
+            <button class="btn btn-success" type="button">{% trans "Beställ" %}</button>
+        </a>
+        <br>
+    </div>
+   
+{% endif %}
     {% endif %}
 
-</div>
-{%if cartitems or bargains or rea %}   
-    <div style="text-align:right"><a href="/checkout/"><button class="btn btn-success" type="button">{% trans "Beställ" %}</button></a></div>
-    <br>
-{% endif %}
+</div> <!-- end hidden-xs -->
+
 {% endblock %}
