@@ -67,20 +67,13 @@
 
 					<div class="span1"> </div>
 					<div class="span5">
-			{% trans "Färger och Mönster" %}:
+			{% trans "Färger och Mönster" %}:  {{ product.variation.color }}  {{ product.variation.pattern }} 
 			<hr>
 			<div class="fullcolorpatterns">			
 			  {% for colorsandpattern in full_variations_article %}
 
 				<a href="{{ colorsandpattern.link }}"><img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ colorsandpattern.cp }}.jpg" style="width:60px;" /></a>
-
-
 			  {% endfor %}
-			  	<!-- <div class="color_and_pattern_choose span5">
-					{% for item in colorsandpatterns %}
-						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
-					{% endfor  %}
-				</div> -->
 
 			</div>
 			<span> 
@@ -142,6 +135,7 @@
 				<span> {{ product.variation.article.quality.description }} </span> 
 				 
 			<hr>
+			<span><a href="/products/article/{{product.variation.pk}}"> Välj bland fler färger och mönster </a></span> 
 			</div>
 		</div> <!-- end span7 -->
 	</div> <!-- end span12 -->
