@@ -5,11 +5,9 @@
 <meta name="description" content={% trans "Färger och Mönster" %} />
 {%endblock%}
 {% block allcontent %}
-<div class="selectedpatternandcolor">
-
-
-</div>
-
+{% block pagetitle %}
+    <legend>{% trans "Mönster och Färger" %} </legend>
+{% endblock %}
 <div>
 <br/>
     {% for item in colorsandpattern %}
