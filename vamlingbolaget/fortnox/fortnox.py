@@ -44,70 +44,65 @@ def json_update(articleNumber, QuantityInStock):
 def create_invoice_rows(order_json):
     custom = 0
     rea = 0
+    full = False
+
     invoicerows = []
     cartitems = order_json['cartitems'] 
     rea_items = order_json['rea_items']
 
+    # test each item 
+    x = 0
     for item in cartitems: 
+        x = x + 1
+        print x 
         full = False
         color = Color.objects.get(order=item.color)
         pattern = Pattern.objects.get(order=item.pattern)
-        variation = Variation.objects.get(article=item.article, color=color, pattern=pattern)
-        # use the try statment to check if it is a full varition  
+
+        # use the try statment to check if it is a full variation including size with full articlenumber
         try: 
+            variation = Variation.objects.get(article=item.article, color=color, pattern=pattern)
             full_var = FullVariation.objects.get(variation=variation, size=item.size)
             text = str(full_var)
+            print "text", text
+
             # create the full article number here
             size = getFortnoxSize(item.size)
+            print "size", size
             full_var_text = str(full_var.variation) + str(" - ") + str(size)
             full_var_num = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order)  + "_" + str(full_var.size)
             full = True
         except:
-            pass 
-
+           pass 
+        # if it is a full variation 
         if full == True: 
-            # here we it could be good to do get the size        
+
             obj = {
                 "DeliveredQuantity": int(item.quantity),
                 "ArticleNumber": full_var_num, 
                 "Description": full_var_text
             }
+            
             invoicerows.append(obj)
 
-    
-        if full == False: 
+        # on the other hand, if it is a choosen variation
+        else:
+            print "see this"     
             size = Size.objects.get(pk=item.size)
             obj = {
                 "DeliveredQuantity": int(item.quantity),
                 "ArticleNumber": int(item.article.sku_number), 
-                "Description": unicode(item.article.name) + " " + unicode(size) 
+                "Description": unicode(item.article.name) + " " + unicode(item.size) 
             }
 
             invoicerows.append(obj)
             invoicerows.append({
                 "Description": unicode(pattern) + " " + unicode(color) 
             })
-    
-    print "-----", invoicerows
+        
+        print invoicerows
 
-    if (custom == 1): 
-        for item in cartitems: 
-            color = Color.objects.get(order=item.color)
-            pattern = Pattern.objects.get(order=item.pattern)
-            size = Size.objects.get(pk=item.size)
-
-            obj = {
-                "DeliveredQuantity": int(item.quantity),
-                "ArticleNumber": int(item.article.sku_number), 
-                "Description": unicode(item.article.name) + " " + unicode(size) 
-            }
-
-            invoicerows.append(obj)
-            invoicerows.append({
-                "Description": unicode(pattern) + " " + unicode(color) 
-            })
-
-
+    # if it is a rea product
     if (rea == 1):
         for item in rea_items:   
             invoicerows.append({
@@ -121,13 +116,15 @@ def create_invoice_rows(order_json):
             invoicerows.append({
                 "Description": unicode(item.reaArticle.pattern) + " " + unicode(item.reaArticle.color)
             })
-    
+
+    # also add postal and handling fee 
     invoicerows.append({
         "DeliveredQuantity": 1,
         "ArticleNumber": 2, 
         "Description": "Postavgift"
      })
 
+    print "--", invoicerows
     return invoicerows  
 
 def getFortnoxSize(size): 
@@ -682,7 +679,10 @@ def get_stockvalue(article_num):
     headers = get_headers()
     article = get_article(headers, article_num)
     json_article = json.loads(article)
-    art_stock_int = json_article["Article"]["QuantityInStock"]
+    try: 
+        art_stock_int = json_article["Article"]["QuantityInStock"]
+    except: 
+        art_stock_int = 0 
     return art_stock_int
 
 # running som tests 
