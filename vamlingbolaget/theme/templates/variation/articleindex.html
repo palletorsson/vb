@@ -14,8 +14,9 @@
               <img src="{% version article.file 'medium' %}" alt="Vamlingbolaget {{ article.name }}" /></div>
               <div class='image_description'>
                 <span class="artname"> {{ article.name }} </span><br/>
-                {{ article.price }} {{ article.sku_number }}
-                </span> 
+                <span class="price">{{ article.price }} SEK</span> <br/> 
+                <span class="artnum"> Art.nr: {{ article.sku_number }}</span>
+                <hr> 
             </div>
     </div>
   {% endfor %}
