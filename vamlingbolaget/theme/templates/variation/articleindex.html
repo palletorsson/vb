@@ -10,7 +10,6 @@
 {% block allcontent %}
   {% for article in articles %}
      <div class="collection_list img_container" >
-        <a href="/products/article/{{article.pk}}/#{{ article.name }}">
             <div class="force_image">
               <img src="{% version article.file 'medium' %}" alt="Vamlingbolaget {{ article.name }}" /></div>
               <div class='image_description'>
@@ -18,7 +17,6 @@
                 {{ article.price }} {{ article.sku_number }}
                 </span> 
             </div>
-        </a>
     </div>
   {% endfor %}
 {% endblock %}
