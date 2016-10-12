@@ -73,7 +73,24 @@
 			<nav>
 				<ul class="pagination">
 				{% for size in sizes %}
-					<a><span  class="select_size {% if size.pk  == 3 %} size_active {%endif%}" id="{{ size.pk }}">{{ size.name }}</span> </a> 
+					{% if size.pk == 3 %}
+					 
+					 		<li class="select_size" id="{{ size.pk }}" data-size="none">
+						 		<span>
+									<a class="size_active">{{ size.name }}</a>
+								</span> 
+							</li>
+						
+					{% else  %}
+						<li class="select_size" id="{{ size.pk }}" data-size="none">
+						<span>
+							<a>{{ size.name }}</a>
+						</span> 
+					</li>
+					{% endif %}
+
+						 
+
 				 {% endfor %}
 				</ul>
             </nav>
@@ -92,7 +109,7 @@
 			<hr>			
 			<span> {% trans "Leverans:" %} 
 				
-				<span class="stock_text_no {% if stock_value > 0 %} hidden {% endif %}">{% trans "Fyra veckor" %} </span>
+				<span>{% trans "Fyra veckor" %} </span>
 
 		    </span>
 

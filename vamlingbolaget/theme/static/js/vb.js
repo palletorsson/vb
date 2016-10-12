@@ -113,7 +113,9 @@ if ($(".hasitems")[0]){
     $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff0000"}) 
 } 
 
+
 var counter = 0;
+
 $("#addtocart").off('click').on({
     click:function(e) {
         e.stopPropagation();
@@ -471,8 +473,6 @@ $('.icon-minus').click(function(e){
                     window.location.href = "/cart/show/"
                 }
         })
-
-
     }
 });
 
@@ -493,6 +493,7 @@ $('#vocher-plus').click(function(e){
         })
  
 });
+
 
 
 // --- setup welcome page animation
@@ -621,9 +622,8 @@ set_first_page();
       var color_name = colorandpattern[2];
       var pattern_name = colorandpattern[3];
       var img_text = color_name + ' ' +pattern_name+ ' ';
-	  var image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="200"> <br />';
+	  var image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="160"> <br />';
 
-      console.log(img_text)
       if ($(this).hasClass("inside")) {
 		$("#selectedpatternandcolor_inside").html(image_url);
         $('input[name="pattern_2"]').val(pattern);
@@ -634,9 +634,6 @@ set_first_page();
        $('input[name="pattern"]').val(pattern);
        $('input[name="color"]').val(color);
 	  }
-	  
-  
-
 
     });
 
@@ -647,6 +644,8 @@ set_first_page();
     
 	  $('.select_size').removeClass('size_active');
       $('.select_size').removeClass('active');
+      $('.size_active').removeClass('size_active');
+      $('.active').removeClass('active');
       var $this = $(this);
     if (!$this.hasClass('size_active')) {
         $this.addClass('size_active');
