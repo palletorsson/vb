@@ -339,12 +339,19 @@
 		<hr>
         <div class="totalprice" colspan="8" style="text-align: right">
             {% trans "Totalpris" %}:
-		    
 		    <span id="totalprice">
 		        {{ totalprice }}  {%trans "SEK"%}
 		    </span>
 		</div>
 		<hr>
+        {%if cartitems or bargains or rea %}   
+        <div style="text-align:right">
+            <a href="/checkout/">
+                <button class="btn btn-success" type="button">{% trans "Beställ" %}</button>
+            </a>
+            <br>
+        </div>
+        {% endif %}
         <div class="voucher_show">
 			<div class="voucher" colspan="8" style="text-align: right">
     			{%if voucher %}
@@ -355,9 +362,9 @@
 			</div>
 
 			<div id="totalprice" colspan="8">
-    			{%if voucher %}
-    				<span class="label label-success">15% på dyraste plagget </span>
-    			{% else %}
+			{%if voucher %}
+				<span class="label label-success">15% på dyraste plagget </span>
+			{% else %}
     			<div class="form-group">
     			   <div class="input-group">
     					<input type="text" id="id_voucher" name="voucher" maxlength="10" class="form-control">
@@ -366,10 +373,11 @@
     					 </button>
     			   </div>
                 </div>
-            </div>
             {% endif %}
+            </div>
         </div> <!-- end voucher_show -->
-            
+
+        
     {% else %}
     <div id="empty" class="mob_empty">
         <div colspan="8">
@@ -377,16 +385,7 @@
         </div>
     </div>
     </div>
-    {%if cartitems or bargains or rea %}   
-    <div style="text-align:right">
-        <a href="/checkout/">
-            <button class="btn btn-success" type="button">{% trans "Beställ" %}</button>
-        </a>
-        <br>
-    </div>
-   
-{% endif %}
-    {% endif %}
+        {% endif %}
 
 </div> <!-- end hidden-xs -->
 
