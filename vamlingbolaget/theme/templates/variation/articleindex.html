@@ -1,4 +1,4 @@
-{% extends "collection_base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
@@ -7,15 +7,15 @@
     <legend>{% trans "Artiklar" %} </legend>
 {% endblock %}
 
-{% block content %}
+{% block allcontent %}
   {% for article in articles %}
      <div class="collection_list img_container" >
-        <a href="/products/articles/article/{{article.pk}}/#{{ article.name }}">
+        <a href="/products/article/{{article.pk}}/#{{ article.name }}">
             <div class="force_image">
-              <img src="{% version article.file 'medium' %}" alt="Vamlingbolaget {{ article.name }}"  /></div>
+              <img src="{% version article.file 'medium' %}" alt="Vamlingbolaget {{ article.name }}" /></div>
               <div class='image_description'>
                 <span class="artname"> {{ article.name }} </span><br/>
-                {{ article.price }}  {{ article.sku_number }}
+                {{ article.price }} {{ article.sku_number }}
                 </span> 
             </div>
         </a>

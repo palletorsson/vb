@@ -13,7 +13,10 @@
 <div>
 <br/>
     {% for item in colorsandpattern %}
-        <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="120"  id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+        <div style="vertical-align: top; display: inline-block; text-align: center; width: 120px;">
+        <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="100%"  id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+        <span style="display: block;">{{ item.color.name }} {{ item.pattern.name }}</span>
+        </div>    
     {% endfor  %}
 </div>
         <input type="hidden" id="pattern" name="pattern" value="0" >
