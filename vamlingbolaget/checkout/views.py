@@ -806,10 +806,12 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
             keepLog(request, log, 'ERROR', '', customer)
     else: 
         try:         
-           order_rows = create_order_rows(order_json)
+            order_rows = create_order_rows(order_json)
+            log = 'Fortnox order json...' 
+            keepLog(request, log, 'INFO', customer, '', order_json)
         except: 
             log = 'Fortnox order json not resolved' 
-            keepLog(request, log, 'ERROR', order_json, customer)
+            keepLog(request, log, 'ERROR', customer, '', order_json)
 
     # add addtional information to comment and invoice type feilds
     try:
