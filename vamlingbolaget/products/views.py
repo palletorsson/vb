@@ -53,6 +53,18 @@ def fullindex(request):
                               },
                              context_instance=RequestContext(request))
 
+def fullindexlist(request):
+    full_variation = FullVariation.objects.filter(active=True, size=3840).order_by('-order')
+    qualities = Quality.objects.filter(active=True)
+    types = Category.objects.filter(active=True)
+  
+    return render_to_response('variation/fullindexlist.html',
+                             {'products': full_variation,
+                              'qualities': qualities,
+                              'types': types,
+                              },
+                             context_instance=RequestContext(request))
+
 def fullexport(request, what):
     full_variation = FullVariation.objects.filter(active=True).order_by('order')
 
@@ -185,7 +197,6 @@ def detail(request, pk):
         product = Variation.objects.get(pk=pk)
 
         products = Variation.objects.filter(article=product.article).order_by('color')
-
         color_id = product.color.order
         pattern_id = product.pattern.order
         qualities = Quality.objects.filter(active = True)
@@ -203,7 +214,7 @@ def detail(request, pk):
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
         
-
+       
     except:
         raise Http404 
 
@@ -257,6 +268,7 @@ def articleDetail(request, pk):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
             sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
+
 
         if (product.article.quality.order == 5 or product.article.quality.order == 14) :
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
@@ -329,11 +341,13 @@ def fulldetail(request, pk):
         file = "/media/variations/"+ filename +"_1.jpg"  
         full_var.image = file   
 
+
     #mapping name size to number
     for full_var in full_variations:
-        if full_var.size == '34':
+
+        if full_var.size == '34':         
             size_list.append('XS')
-            full_var.lettersize =  'XS'
+            full_var.lettersize = 'XS'
         elif full_var.size == '36': 
             size_list.append('S')   
             full_var.lettersize =  'S' 
@@ -467,7 +481,6 @@ def checkArticles(request):
 # to show all articels
 def allArt(request):
     articles = Article.objects.filter(active = True).order_by('name')
-    
     headers = get_headers()
     check_art = []
 
@@ -487,9 +500,7 @@ def allArt(request):
         except:  
             print res['Article']['ArticleNumber']
             check_art.append("ok: " + unicode(res['Article']['ArticleNumber']) + " is the same " + str(art.sku_number))
-
     
-
     return render_to_response('variation/admin_view.html', {
         'articles': articles, 
         'check_art': check_art
@@ -497,7 +508,7 @@ def allArt(request):
 
 
 def allFullArt(request):
-    full_variations = FullVariation.objects.filter(active=True) 
+    full_variations = FullVariation.objects.filter(active=True)
 
     headers = get_headers()
     check_art = []
@@ -530,7 +541,6 @@ def agigateFortnoxProducts():
                 allart.append(product['ArticleNumber'])
         except: 
             pass
-
     return allart 
 
 def checkConsistDjangoFortnox(request): 
@@ -644,8 +654,7 @@ def articleUpdateStock(request, sku_num, stock):
     sku_number = sku_num
     headers = get_headers()
     article = Article.objects.get(sku_number = sku_number)
-    
-    
+     
     res = get_article(headers, sku_number) 
     data = json.dumps({
         "Article": {
@@ -665,11 +674,12 @@ def articleUpdateStock(request, sku_num, stock):
 # import or update fullvaration from csv                     
 def fromCsvToDjango(article, pattern, color, size, stock):
     try: 
+        print article
         variation, created_variation = Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
         print "variation created or existed"
     except: 
         print "variation not created"
-        var = 1
+        var = 0
     if var == 1: 
         fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
         # if fullvariation exist only update the fullvaration with stockvalue
