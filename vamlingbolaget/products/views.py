@@ -675,10 +675,13 @@ def articleUpdateStock(request, sku_num, stock):
 def fromCsvToDjango(article, pattern, color, size, stock):
     print article, pattern, color, size, stock
     variation, created_variation = Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
+    print "--"
     fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
+    print "---"
     # if fullvariation exist only update the fullvaration with stockvalue
     if created_fullvariation == False: 
         fullvariation.stock = stock
+        print "---_"
         fullvariation.save()
     return True
 
