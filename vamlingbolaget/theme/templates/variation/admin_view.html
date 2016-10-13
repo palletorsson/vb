@@ -10,11 +10,19 @@
 {% block allcontent %}
 {% if user.is_authenticated %}
 	{{ articles }}
-
+<ul>
 {% for art in articles %}
-    { {{ art }} },
+    <li>{{ art }}</li> 
 
 {% endfor %}
+</ul>
+
+<ul>
+{% for art in check_art %}
+     <li>{{ art }}<ul>
+
+{% endfor %}
+</ul>
 
 <br>
 <br>
