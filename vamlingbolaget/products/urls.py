@@ -5,7 +5,6 @@ from models import Variation
 urlpatterns = patterns('products.views',
     url(r'^$', 'index'),
     url(r'^full/$', 'fullindex'),
-    url(r'^fullindexlist/$', 'fullindexlist'),
     url(r'^(?P<pk>\d+)/$', 'detail'),
     url(r'^rea/$', 'reaindex'),
     url(r'^rea/size/(?P<key>[a-zA-Z0-9_.-]+)/$', 'rea_by_size'),
