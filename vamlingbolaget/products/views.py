@@ -673,19 +673,12 @@ def articleUpdateStock(request, sku_num, stock):
 
 # import or update fullvaration from csv                     
 def fromCsvToDjango(article, pattern, color, size, stock):
-    try: 
-        print article
-        variation, created_variation = Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
-        print "variation created or existed"
-    except: 
-        print "variation not created"
-        var = 0
-    if var == 1: 
-        fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
-        # if fullvariation exist only update the fullvaration with stockvalue
-        if created_fullvariation == False: 
-            fullvariation.stock = stock
-            fullvariation.save()
+    variation, created_variation = Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
+    fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
+    # if fullvariation exist only update the fullvaration with stockvalue
+    if created_fullvariation == False: 
+        fullvariation.stock = stock
+        fullvariation.save()
     return True
 
 #read csv and insert full varations or products ini django database and fortnox 
