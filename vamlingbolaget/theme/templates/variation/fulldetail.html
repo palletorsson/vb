@@ -100,7 +100,7 @@
 			    {% else %}
 				    {% for size in full_variations %} 
 						
-				       {% if product.stock == '0' %}
+				       {% if product.stock == 0 %}
 
 						<li class="disabled select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
 							<a> {{ size.lettersize }}  </a>
