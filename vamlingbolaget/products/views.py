@@ -673,26 +673,10 @@ def articleUpdateStock(request, sku_num, stock):
 
 # import or update fullvaration from csv                     
 def fromCsvToDjango(article, pattern, color, size, stock):
-    not_created = 0 
+
     print "je", article, pattern, color, size, stock
-    try: 
-        variation, created_variation = Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
-        print "--"
-        fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
-        print "---"
-    except: 
-        not_created = 1
-
-    if not_created == 1: 
-        try:
-            obj = Variation.objects.get(article=article, pattern=pattern, color=color)
-            print "*", obj
-        except Variation.DoesNotExist:
-            obj = Variation(article=article, pattern=pattern, color=color)
-            print "**", obj 
-            obj.save()
-            fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
-
+    variation, created_variation =  Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
+    fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
 
     # if fullvariation exist only update the fullvaration with stockvalue
     if created_fullvariation == False: 
@@ -879,10 +863,9 @@ def readCsvManchester(request, what, start_at, end_at):
 
                 elif what == "django": 
                     # insert or update full_variation
-                    try:
-                        fromCsvToDjango(article, pattern, color, size, stock)
-                    except: 
-                        print "django wrong ", count, sepatated_values[1]
+                    
+                    fromCsvToDjango(article, pattern, color, size, stock)
+
                 else: 
                     print "hej"            
             else: 
