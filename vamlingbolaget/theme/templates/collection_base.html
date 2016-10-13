@@ -23,23 +23,8 @@
 
 
         <h5>..</h5>
-        {% for type in types %}
-    		{% if type.slug == 'bargain'%}
-				<li>
-					<a href="/products/{{type.slug}}"> {{ type.name }} </a>
-				</li>
-			{%else%}
-				<li>
-					<a href="/products/type/{{type.slug}}"> {{ type.name }} </a>
-				</li>
-			{% endif %}
-        {% endfor %}
-
-
-        
-        <br/>
-        <h5>..</h5>
-            <li>
+        <ul>
+          <li>
                 <a href="/products/full/"> Kvinna </a>
             </li>
             <li>
@@ -54,6 +39,18 @@
             <li>
                 <a href="/products/type/piece-goods"> Metervara </a>
             </li>
+        </ul>
+        <br/>
+        <h5>..</h5>
+        <ul>
+        {% for quality in qualities %}
+            {% if quality.order == 11 or quality.order == 10 or quality.order == 9 or quality.order == 1   %}
+                <li>
+                    <a href="/products/quality/{{quality.slug}}"> {{ quality.name }} </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
         <br/>
  
 
@@ -62,6 +59,9 @@
              <a href="/products/articles/">{% trans "Modeller" %} </a>
              <a href="/products/patternandcolortest/">{% trans "Mönster och Färger" %} </a>           
         </li>
+
+       
+
         <hr>
 
     </ul>
