@@ -863,7 +863,7 @@ def readCsvManchester(request, what, start_at, end_at):
 
                 elif what == "django": 
                     # insert or update full_variation
-                    
+                    print splitart[0]
                     fromCsvToDjango(article, pattern, color, size, stock)
 
                 else: 
