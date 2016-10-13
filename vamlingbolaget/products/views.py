@@ -145,6 +145,7 @@ def by_type(request, key):
     
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
+
     return render_to_response(template,
              {'products': products,
               'qualities': qualities,
@@ -252,8 +253,6 @@ def articleDetail(request, pk):
         colors = Color.objects.filter(active=True, quality = product.article.quality)
         patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
 
-
-
         if (product.article.quality.order == 13):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
@@ -310,6 +309,8 @@ def fulldetail(request, pk):
     except:
         raise Http404
 
+    colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
+
     full_variations_article = FullVariation.objects.filter(variation__article=full_variation.variation.article, size="42")  
 
     full_variations = FullVariation.objects.filter(variation=full_variation.variation)   
@@ -330,7 +331,7 @@ def fulldetail(request, pk):
 
     #mapping name size to number
     for full_var in full_variations:
-        if full_var.size == '34': 
+        if full_var.size == '34':
             size_list.append('XS')
             full_var.lettersize =  'XS'
         elif full_var.size == '36': 
@@ -374,7 +375,8 @@ def fulldetail(request, pk):
                    'init_sizes': init_sizes, 
                    'full_variations': full_variations, 
                    'stock_value': stock_value,
-                   'full_variations_article': full_variations_article
+                   'full_variations_article': full_variations_article, 
+                   'colorsandpatterns': colorsandpatterns                 
                    },
                    context_instance=RequestContext(request)
                     )
@@ -662,12 +664,18 @@ def articleUpdateStock(request, sku_num, stock):
 
 # import or update fullvaration from csv                     
 def fromCsvToDjango(article, pattern, color, size, stock):
-    variation, created_variation = Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
-    fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
-    # if fullvariation exist only update the fullvaration with stockvalue
-    if created_fullvariation == False: 
-        fullvariation.stock = stock
-        fullvariation.save()
+    try: 
+        variation, created_variation = Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
+        print "variation created or existed"
+    except: 
+        print "variation not created"
+        var = 1
+    if var == 1: 
+        fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
+        # if fullvariation exist only update the fullvaration with stockvalue
+        if created_fullvariation == False: 
+            fullvariation.stock = stock
+            fullvariation.save()
     return True
 
 #read csv and insert full varations or products ini django database and fortnox 
@@ -775,12 +783,68 @@ def readCsv(request, what, start_at, end_at):
                 except:
                     print "art wrong ", count, sepatated_values[1]
                     
+
+                if what == "fortnox": 
+                    # insert or update product in fortnox       
+                    try:
+                        error_or_create = fromCsvToFortnox(article_name_, full_article_sku, stock)
+                        print article_name
+                        #print error_or_create
+                    except:
+                        pass
+                        #print "fortnox wrong ", count, sepatated_values[1]
+
+                elif what == "django": 
+                    # insert or update full_variation
+                    try:
+                        fromCsvToDjango(article, pattern, color, size, stock)
+                    except: 
+                        print "django wrong ", count, sepatated_values[1]
+                else: 
+                    print "hej"            
+            else: 
+                pass
+    return HttpResponse(status=200)
+
+@login_required
+def readCsvManchester(request, what, start_at, end_at):
+    input_file = './manchester.csv'
+    count = 0 
+    # open file and sepate values 
+    with open(input_file, 'r') as i:
+        for line in i:
+            sepatated_values = line.split(",")
+
+            count = count + 1 
+            # see if values exist 
+            start_at = int(start_at)
+            end_at = int(end_at)
+            stock = sepatated_values[2]
+
+            if sepatated_values[1] != '' and count > 1 and count > start_at and count < end_at: 
+                stock = sepatated_values[4]
+                if stock == '':
+                    stock = 0
+
+                full_article_sku = sepatated_values[1]
+                #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
+                splitart = full_article_sku.split("_")
+                try: 
+                    article = Article.objects.get(sku_number=splitart[0])
+                    color = Color.objects.get(order=splitart[2])
+                    pattern = Pattern.objects.get(order=splitart[1])
+                    size = splitart[3]
+                    article_name_ = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
+                    print "art ok ", count, sepatated_values[1], article_name_
+                except:
+                    print "art wrong ", count, sepatated_values[1]
                     
 
                 if what == "fortnox": 
                     # insert or update product in fortnox       
                     try:
-                        error_or_create = fromCsvToFortnox(article_name, full_article_sku, stock)
+                        error_or_create = fromCsvToFortnox(article_name_, full_article_sku, stock)
+                        print article_name
                         #print error_or_create
                     except:
                         pass
