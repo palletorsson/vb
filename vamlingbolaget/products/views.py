@@ -674,6 +674,7 @@ def articleUpdateStock(request, sku_num, stock):
 # import or update fullvaration from csv                     
 def fromCsvToDjango(article, pattern, color, size, stock):
     variation, created_variation = Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
+    print "---", variation
     fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
     # if fullvariation exist only update the fullvaration with stockvalue
     if created_fullvariation == False: 
@@ -834,9 +835,13 @@ def readCsvManchester(request, what, start_at, end_at):
                 splitart = full_article_sku.split("_")
                 try: 
                     article = Article.objects.get(sku_number=splitart[0])
+                    print article
                     color = Color.objects.get(order=splitart[2])
+                    print color
                     pattern = Pattern.objects.get(order=splitart[1])
+                    print pattern
                     size = splitart[3]
+                    print size
                     article_name_ = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
                     print "art ok ", count, sepatated_values[1], article_name_
                 except:
