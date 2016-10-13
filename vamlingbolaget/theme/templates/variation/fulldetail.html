@@ -101,7 +101,12 @@
 				    {% for size in full_variations %} 
 						
 				       {% if size.stock < 1 %}
-							{% if product.size == size.size %}  
+							
+							<li class="disabled select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+							<a> {{ size.lettersize }}  </a>
+						</li> 
+						{% else %}
+						{% if product.size == size.size %}  
 							  <li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
 									<a> {{ size.lettersize }}  </a>
 							  </li> 
@@ -111,11 +116,7 @@
 								</li>
 								
 							{% endif %}
-							
-						{% else %}
-						<li class="disabled select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
-							<a> {{ size.lettersize }}  </a>
-						</li> 
+						
 					{% endif %}			 
 					
 				{% endfor %}
