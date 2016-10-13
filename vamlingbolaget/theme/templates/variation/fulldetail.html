@@ -99,13 +99,14 @@
 
 			    {% else %}
 				    {% for size in full_variations %} 
-				       {% if product.size > 0 %}
+
+				       {% if product.stock > 0 %}
 							{% if product.size == size.size %}  
 							  <li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
 									<a> {{ size.lettersize }}  </a>
 							  </li> 
 							{% else %}
-								<li class="select_size" id="{{ size.size  }}" data-size="{{ size.stock }}">
+								<li class="select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
 									<a> {{ size.lettersize }} </a>
 								</li>
 							{% endif %}
