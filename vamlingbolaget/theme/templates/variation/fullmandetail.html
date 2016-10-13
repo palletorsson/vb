@@ -62,6 +62,7 @@
 					<div class="span2">
 					<img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.variation.color.order }}f_{{ product.variation.pattern.order }}m.jpg" style="width:160px;" />
 										<hr>
+
 			
 					</div>
 
@@ -69,7 +70,8 @@
 					<div class="span5">
 			{% trans "Färger och Mönster" %}:  {{ product.variation.color }}  {{ product.variation.pattern }} 
 			<hr>
-			<div class="fullcolorpatterns">			
+
+			<div class="fullcolorpatterns pc_common">			
 			  {% for colorsandpattern in full_variations_article %}
 
 				<a href="{{ colorsandpattern.link }}"><img id="pattern_color_image" class="pattern_color_image_c" src="{{ MEDIA_URL }}/uploads/120/{{ colorsandpattern.cp }}.jpg" style="width:60px;" /></a>
@@ -81,45 +83,28 @@
 				
 			<nav>
 				<ul class="pagination">
-				{% if product.variation.article.quality.pk == 1 %} 
+			  			
 				{% for size in full_variations %} 
-			
-					{% if product.size == size.size %}  
-						<li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
-							<a> {{ size.lettersize }}  </a>
-						</li> 
-				
-					{% else %}
-						<li class="select_size" id="{{ size.size  }}" data-size="{{ size.stock }}">
-							<a> {{ size.lettersize }} </a>
-						</li>
-					{% endif %} 
-					
-				{% endfor %}
-
-			    {% else %}
-				    {% for size in full_variations %} 
-				       {% if product.size > 0 %}
-							{% if product.size == size.size %}  
-							  <li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
-									<a> {{ size.lettersize }}  </a>
-							  </li> 
-							{% else %}
-								<li class="select_size" id="{{ size.size  }}" data-size="{{ size.stock }}">
-									<a> {{ size.lettersize }} </a>
-								</li>
-							{% endif %}
-							
+			       {% if product.size > 0 %}
+						{% if product.size == size.size %}  
+						  <li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+								<a> {{ size.lettersize }}  </a>
+						  </li> 
 						{% else %}
-						<li class="disabled select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
-							<a> {{ size.lettersize }}  </a>
-						</li> 
-					{% endif %}			 
+							<li class="select_size" id="{{ size.size  }}" data-size="{{ size.stock }}">
+								<a> {{ size.lettersize }} </a>
+							</li>
+						{% endif %}
+						
+					{% else %}
+					<li class="disabled select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+						<a> {{ size.lettersize }}  </a>
+					</li> 
+					{% endif %}
+					 
 					
 				{% endfor %}
 
-			    {% endif %} 
-				
 			
 				</ul>
             </nav>
@@ -131,7 +116,7 @@
 
 			<input type="hidden" id="size" name="size" value="{{ product.size }}" >
 	    	<input type="hidden" id="quantity" name="quantity" value="1" >		
-
+	    	<input type="hidden" id="pc_sellection" name="pc_sellection" value="common" >
 			<hr>
 	        <div id="addtocart" style="display:block;">
 				<span style="padding-left: 30px;">
@@ -158,11 +143,8 @@
 				<span> {{ product.variation.article.quality.description }} </span> 
 				 
 			<hr>
-			{% if product.variation.article.quality.pk == 1 %} 
-				<span class="link"><a href="/products/article/{{product.variation.pk}}"> Välj bland fler färger och mönster </a></span> 
-			{% endif %}
+			
 			</div>
-
 		</div> <!-- end span7 -->
 	</div> <!-- end span12 -->
 
