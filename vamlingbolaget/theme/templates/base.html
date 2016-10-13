@@ -89,7 +89,7 @@ Vamlingbolaget." %} />
 				<span class = "visible-xs">
 					  <a id="token" href="/cart/show/">
 					   <span class="mob_shop_icon">
-             <span class="glyphicon glyphicon-gift" aria-hidden="true"  alt="Vamlingbolaget shopping cart" ></span> 
+             <h4 class="glyphicon glyphicon-gift" aria-hidden="true"  alt="Vamlingbolaget shopping cart" ></h4>
              </span>
 					  </a>
 				</span> 
@@ -106,9 +106,14 @@ Vamlingbolaget." %} />
                      <ul class = "nav navbar-nav navbar-right nav-list mainnav mob_nav">
                     
                         <li>
-                            <a href="/products/full/">{% trans "Shop" %}</a>
+                            <a href="/products/full/">{% trans "Shop" %} - {% trans "Kvinna" %}</a>
                         </li>
-                        
+                        <li>
+                            <a href="/products/type/man/">{% trans "Shop" %} - {% trans "Herr" %}</a>
+                        </li>
+                        <li>
+                            <a href="/products/products/type/barn/">{% trans "Shop" %} - {% trans "Barn" %}</a>
+                        </li>                  
 		              
                          <li class="visible-phone">
                                <a href="/cart/show/" >{% trans "Shoppinglåda" %}</a>

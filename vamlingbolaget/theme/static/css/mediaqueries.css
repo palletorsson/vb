@@ -7,8 +7,7 @@
 
 
 @media (max-width: 1200px) {
-
-   	.container {
+	.container {
 		background: #fff; // yellow;
 	}
 
@@ -30,7 +29,6 @@
 		width: 200px;
 		float:left;
 	}
-
 	.span4 {
 		width:33%;
 		float:left;
@@ -90,7 +88,6 @@
 		width:40%;
 	}
 
-
 	.span2 {
 		width: 200px;
 		float:left;
@@ -115,7 +112,7 @@
 @media (max-width: 767px) {
 	body {
 		padding-left: 0px;
-		padding-right: 0px 
+		padding-right: 0px;  
 	}
     .artname {
     	max-width: 300px; 
@@ -162,7 +159,7 @@
 
 	a {
 		font-size:12px;
-		padding:4px;
+
 	}
 	.navbar .nav > li > a {
 		color: #0C0C0C;
@@ -182,7 +179,7 @@
 	}
 
 	.span2 {
-		width: 200px;
+		width: 174px;
 		float:left;
 	}
 
@@ -191,6 +188,18 @@
 	}
 	.paywidth {
         width:100%;
+    }
+
+    .pattern_color_image_c {
+    	width:50px !important; 
+    }
+
+    .mob_shop_icon {
+    	margin-left: 4px; 
+    	margin-top: 1px;
+    }
+    h4 {
+    	margin-top: 1px;
     }
 
 }
@@ -221,7 +230,7 @@
 
 	.collection_list {
 		float:left;
-		width:100%;
+		width:96%;
 		margin:0:
 		height:350px;
 	}
@@ -279,7 +288,6 @@
 			font-weight: bold;
 			max-height: 38px;
 		 }
-
 	.navbar-collapse {
 		width: 100%;
 		padding-left: 35px; /*to compensate for bootstrap -15 px left-margin*/
@@ -303,6 +311,7 @@
       padding-left: 20px;
       z-index:1000;
 	}
+
 	.force_image {
 	  height: 100%;
 	  overflow: hidden;
@@ -311,7 +320,7 @@
     	margin-left: 30px; 
     }
 	.span4 {
-		width:100%;
+		width:96%;
 		float:left;
 	}
 	.input-group {
