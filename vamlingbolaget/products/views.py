@@ -829,7 +829,7 @@ def readCsv(request, what, start_at, end_at):
                     color = Color.objects.get(order=splitart[2])
                     pattern = Pattern.objects.get(order=splitart[1])
                     size = splitart[3]
-                    article_name = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
+                    article_name_ = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
                     print "art ok ", count, sepatated_values[1]
                 except:
                     print "art wrong ", count, sepatated_values[1]
