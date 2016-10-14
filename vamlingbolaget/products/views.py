@@ -816,7 +816,7 @@ def readCsv(request, what, start_at, end_at):
             stock = sepatated_values[2]
 
             if sepatated_values[1] != '' and count > 1 and count > start_at and count < end_at: 
-
+                print "read this line"
                 stock = sepatated_values[2]
                 if stock == '':
                     stock = 0
