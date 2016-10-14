@@ -860,10 +860,9 @@ def readCsv(request, what, start_at, end_at):
                         try: 
                             sizename = getFortnoxSize(size)
                             article_n = article_name_ + str(" (" + sizename +")")
-                            
-                         
-                        except: 
-                            pass    
+                        except:
+                            article_n = article_name_
+                                
                         error_or_create = fromCsvToFortnoxUpdate(article_n, full_article_sku, stock)
                         print error_or_create
                     except:
