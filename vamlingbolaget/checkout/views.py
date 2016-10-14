@@ -711,13 +711,18 @@ def cleanCartandSetStock(request, the_items):
             pattern = Pattern.objects.get(order=item.pattern)
             color = Color.objects.get(order=item.color)
             variation = Variation.objects.get(article=article, pattern=pattern, color=color)
-            full_var = FullVariation.objects.get(variation=variation, size=item.size)
-            
+            full_var = FullVariation.objects.get(variation=variation, size=item.size)           
             current_stock = full_var.stock
             if current_stock > 0: 
                 new_stock = current_stock - 1
                 full_var.stock = new_stock
                 full_var.save()
+                log = 'New stock'
+                try:  
+                    old_new_stock = "old: " + str(current_stock) + " new: " + str(new_stock) + " art: " + str(full_var)
+                    keepLog(request, log, 'INFO', '', old_new_stock)
+                except: 
+                    pass
         except: 
             pass  
 
