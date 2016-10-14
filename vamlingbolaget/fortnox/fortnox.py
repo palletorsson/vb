@@ -556,8 +556,8 @@ def update_article(articleNumber, data, headers):
     
     try:
         r = requests.put(
-            url="https://api.fortnox.se/3/articles/" + articleNumber,
-            headers = headers ,
+            url="https://api.fortnox.se/3/articles/" + str(articleNumber),
+            headers = headers,
             data = data
         )
         return r.content

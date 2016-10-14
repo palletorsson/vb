@@ -6,7 +6,7 @@ from products.models import *
 from blog.models import Post
 from gallery.models import *
 from django.http import Http404
-from fortnox.fortnox import get_headers, get_articles, get_article, create_article, update_article, get_stockvalue, delete_article
+from fortnox.fortnox import get_headers, get_articles, get_article, create_article, update_article, get_stockvalue, delete_article, getFortnoxSize
 #from fortnox.local_fortnox import get_vb_headers
 import json
 from django.core import serializers
@@ -68,7 +68,8 @@ def fullindexQuality(request, quality):
 
 
 def fullindexlist(request):
-    full_variation = FullVariation.objects.filter(active=True, size=3840).order_by('-order')
+    full_variation = FullVariation.objects.filter(active=True).order_by('-order')
+
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
   
@@ -80,7 +81,7 @@ def fullindexlist(request):
                              context_instance=RequestContext(request))
 
 def fullexport(request, what):
-    full_variation = FullVariation.objects.filter(active=True).order_by('order')
+    full_variation = FullVariation.objects.filter(active=True, size=3840).order_by('order')
 
     for var in full_variation:
         print var.variation.article.sku_number, "|", var.variation.color, "|", var.variation.pattern, "|", var.size, "|", var.stock, "|"
@@ -404,7 +405,7 @@ def fulldetail(request, pk):
                    'full_variations': full_variations, 
                    'stock_value': stock_value,
                    'full_variations_article': full_variations_article, 
-                   'colorsandpatterns': colorsandpatterns                 
+                   'colorsandpatterns': colorsandpatterns
                    },
                    context_instance=RequestContext(request)
                     )
@@ -663,7 +664,28 @@ def fromCsvToFortnox(name, sku_number, stock_value):
         pass
 
     return True    
-               
+              
+def fromCsvToFortnoxUpdate(name, sku_number, stock_value):
+    headers = get_headers()
+    data = json.dumps({
+        "Article": {
+            "Description": name,
+            "ArticleNumber": sku_number, 
+            "QuantityInStock": stock_value, 
+        }
+    })
+    error_or_create = update_article(sku_number, data, headers)
+    # If product exist the error message look like : {"ErrorInformation":{"error":1,"message":"Artikelnumret \"1510_7_6_46\" \u00e4r redan taget.","code":2000013}}
+    # then only update the product
+    try:
+        error_or_create = json.loads(error_or_create)
+        if error_or_create["ErrorInformation"]["code"] == 2000013: 
+            update_art = update_article(sku_number, data, headers)
+    except:
+        pass
+
+    return True 
+
 def articleUpdateStock(request, sku_num, stock): 
     sku_number = sku_num
     headers = get_headers()
@@ -700,7 +722,6 @@ def fromCsvToDjango(article, pattern, color, size, stock):
 
 
     fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
-
     # if fullvariation exist only update the fullvaration with stockvalue
     if created_fullvariation == False: 
         fullvariation.stock = stock
@@ -824,6 +845,31 @@ def readCsv(request, what, start_at, end_at):
                         pass
                         #print "fortnox wrong ", count, sepatated_values[1]
 
+                if what == "updatefortnox": 
+                    # insert or update product in fortnox       
+                    try:
+                        # get the stock value and update name 
+                        try: 
+                            variation = Variation.objects.filter(article=article, pattern=pattern, color=color)[0]
+                            full_var = FullVariation.objects.get(variation=variation, size=size)
+                            stock = full_var.stock
+                        except:
+                            pass
+                        #print full_var, size, article_name_, full_article_sku, stock
+                        #print error_or_create
+                        try: 
+                            sizename = getFortnoxSize(size)
+                            article_n = article_name_ + str(" (" + sizename +")")
+                            
+                         
+                        except: 
+                            pass    
+                        error_or_create = fromCsvToFortnoxUpdate(article_n, full_article_sku, stock)
+                        print error_or_create
+                    except:
+                        pass
+                        #print "fortnox wrong ", count, sepatated_values[1]
+
                 elif what == "django": 
                     # insert or update full_variation
                     try:
@@ -919,7 +965,6 @@ def removeCsv(request, start_at, end_at):
 
     return HttpResponse(status=200)
 
-
 @login_required
 def orderCsv(request):
     input_file = './order.csv'
@@ -959,4 +1004,3 @@ def orderCsv(request):
 
 
     return HttpResponse(status=200)
-
