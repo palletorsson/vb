@@ -79,8 +79,7 @@ def create_invoice_rows(order_json):
 
             obj = {
                 "DeliveredQuantity": int(item.quantity),
-                "ArticleNumber": full_var_num, 
-                "Description": full_var_text
+                "ArticleNumber": full_var_num            
             }
             
             invoicerows.append(obj)
