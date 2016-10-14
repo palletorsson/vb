@@ -489,6 +489,22 @@ def allArticles(request):
         'articles': articles
     }, context_instance=RequestContext(request))
 
+@login_required
+def variationduplicates(request, remove): 
+    variation = Variation.objects.all()
+    uniq = []
+    for var in variation:
+        greg = str(var.article.sku_number) + "_" + str(var.pattern) + "_" + str(var.color)  
+        if greg not in uniq: 
+            uniq.append(greg)
+            print "---------", greg
+        else:
+            print greg
+            if remove == 1: 
+                var.delete()
+    print uniq        
+    return HttpResponse(status=200)
+
 # to show all articels
 def allArt(request):
     articles = Article.objects.filter(active = True).order_by('name')
