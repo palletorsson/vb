@@ -483,15 +483,11 @@ def category(request, name):
 
 def allArticles(request): 
     headers = get_headers()
-    articles = get_articles(headers)
+    articles = get_articles(headers, 1)
 
     return render_to_response('variation/admin_view.html', {
         'articles': articles
     }, context_instance=RequestContext(request))
-
-def checkArticles(request): 
-    headers = get_headers()  
-    articles = get_articles(headers)
 
 # to show all articels
 def allArt(request):
@@ -650,7 +646,7 @@ def fromCsvToFortnox(name, sku_number, stock_value):
         "Article": {
             "Description": name,
             "ArticleNumber": sku_number, 
-            "QuantityInStock": stock_value, 
+            "QuantityInStock": int(stock_value), 
         }
     })
     error_or_create = create_article(sku_number, data, headers)
@@ -907,15 +903,11 @@ def readCsvManchester(request, what, start_at, end_at):
                 splitart = full_article_sku.split("_")
                 try: 
                     article = Article.objects.get(sku_number=splitart[0])
-                    print article
                     color = Color.objects.get(order=splitart[2])
-                    print color
                     pattern = Pattern.objects.get(order=splitart[1])
-                    print pattern
                     size = splitart[3]
-                    print size
                     article_name_ = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
-                    print "art ok ", count, sepatated_values[1], article_name_
+                    #print "art ok ", count, sepatated_values[1], article_name_
                 except:
                     print "art wrong ", count, sepatated_values[1]
                     
@@ -923,8 +915,14 @@ def readCsvManchester(request, what, start_at, end_at):
                 if what == "fortnox": 
                     # insert or update product in fortnox       
                     try:
-                        error_or_create = fromCsvToFortnox(article_name_, full_article_sku, stock)
-                        print article_name
+                        try: 
+                            sizename = getFortnoxSize(size)
+                            article_n = article_name_ + str(" (" + sizename +")")
+                        except:
+                            article_n = article_name_
+
+                        print "art --- ", article_n, full_article_sku   
+                        error_or_create = fromCsvToFortnox(article_n, full_article_sku, stock)
                         #print error_or_create
                     except:
                         pass
