@@ -128,7 +128,7 @@ $("#addtocart").off('click').on({
         	var sku_number = $('#sku_number').text(),
         		product_type = $('#product_type').text(),
         		quality = $(".quality").text(),
-        		size_id = $('#size').val() || size_id_default,
+        		size_id = $('#size').val() || 3840,
         		article_id = $('#article_pk').val(),
                 full_var = $('#full_var').val() || 0
 
