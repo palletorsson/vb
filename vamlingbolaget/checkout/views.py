@@ -706,19 +706,22 @@ def cleanCartandSetStock(request, the_items):
         print "clean wrong"
 
     for item in cartitems:
+        print item
         try: 
             article = Article.objects.get(sku_number=item.article.sku_number)
             pattern = Pattern.objects.get(order=item.pattern)
             color = Color.objects.get(order=item.color)
             variation = Variation.objects.get(article=article, pattern=pattern, color=color)
-            full_var = FullVariation.objects.get(variation=variation, size=item.size)           
+            full_var = FullVariation.objects.get(variation=variation, size=item.size)
             current_stock = full_var.stock
+            print "--", current_stock
             if current_stock > 0: 
                 new_stock = current_stock - 1
                 full_var.stock = new_stock
                 full_var.save()
                 log = 'New stock'
                 try:  
+                    print "----", new_stock
                     old_new_stock = "old: " + str(current_stock) + " new: " + str(new_stock) + " art: " + str(full_var)
                     keepLog(request, log, 'INFO', '', old_new_stock)
                 except: 
