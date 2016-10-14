@@ -928,6 +928,32 @@ def readCsvManchester(request, what, start_at, end_at):
                         pass
                         #print "fortnox wrong ", count, sepatated_values[1]
 
+                elif what == "updatefortnox": 
+                  print "uppdate: "
+                  # insert or update product in fortnox
+                         
+                  try:
+                      # get the stock value and update name 
+                      try: 
+                          variation = Variation.objects.filter(article=article, pattern=pattern, color=color)[0]
+                          full_var = FullVariation.objects.get(variation=variation, size=size)
+                          stock = full_var.stock
+                      except:
+                          pass
+                      #print full_var, size, article_name_, full_article_sku, stock
+                      #print error_or_create
+                      try: 
+                          sizename = getFortnoxSize(size)
+                          article_n = article_name_ + str(" (" + sizename +")")
+                      except:
+                          article_n = article_name_
+                              
+                      error_or_create = fromCsvToFortnoxUpdate(article_n, full_article_sku, stock)
+                      print error_or_create
+                  except:
+                      pass
+                      #print "fortnox wrong ", count, sepatated_values[1]
+
                 elif what == "django": 
                     # insert or update full_variation
                     print splitart[0]
