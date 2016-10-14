@@ -845,7 +845,8 @@ def readCsv(request, what, start_at, end_at):
                         pass
                         #print "fortnox wrong ", count, sepatated_values[1]
 
-                if what == "updatefortnox": 
+                elif what == "updatefortnox": 
+                    print "uppdate: ", article_name_ 
                     # insert or update product in fortnox       
                     try:
                         # get the stock value and update name 
