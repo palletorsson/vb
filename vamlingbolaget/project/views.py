@@ -18,6 +18,7 @@ import requests
 import io
 import urllib
 from bs4 import BeautifulSoup
+import csv
 
 @login_required
 def index(request):
