@@ -6,6 +6,9 @@ urlpatterns = patterns('project.views',
     url(r'flattran/(?P<pk>[a-zA-Z0-9_.-]+)/(?P<lang>[a-zA-Z0-9_.-]+)/$', 'translateflatpages'),
     url(r'trans/(?P<string>[a-zA-Z0-9_.-]+)/(?P<lang>[a-zA-Z0-9_.-]+)/$', 'transString'),
     url(r'fulltrans/(?P<lang>[a-zA-Z0-9_.-]+)/(?P<model>[a-zA-Z0-9_.-]+)$', 'full_tranlation'),
+    url(r'csvexport/(?P<model>[a-zA-Z0-9_.-]+)/(?P<what>[a-zA-Z0-9_.-]+)/(?P<lang>[a-zA-Z0-9_.-]+)/$', 'csvTransExport'),
+    url(r'csvimport/(?P<model>[a-zA-Z0-9_.-]+)/(?P<what>[a-zA-Z0-9_.-]+)/(?P<lang>[a-zA-Z0-9_.-]+)/$', 'csvTransImport'),
+
     url(r'(?P<pk>[a-zA-Z0-9_.-]+)/$', 'detail'),
     url(r'^$', 'index'),
 )

@@ -210,6 +210,219 @@ def full_tranlation(request, lang, model):
                     {'hej': hej},
                       context_instance=RequestContext(request))
 
+@login_required
+def csvTransExport(request, model, what='title', lang='en'):
+    tranlate_on = 1
+    log = "no action"
+    print model
+
+    # mode to each model 
+    if model == 'art':
+        the_model = Article.objects.all()
+        
+    elif model == 'color':
+        the_model = Color.objects.all()
+        print the_model
+
+    elif model == 'pattern':
+        the_model = Pattern.objects.all()
+
+    elif model == 'quality':
+        the_model = Quality.objects.all()
+
+    elif model == 'type':
+        the_model = Type.objects.all()
+
+    elif model == 'category':
+        the_model = Category.objects.all()
+
+    elif model == 'gallery':
+        the_model = Gallery.objects.all()
+  
+    else: 
+        return render_to_response('projects/tran.html',
+                {'hej': log},
+                  context_instance=RequestContext(request))
+
+    with open('modul_'+str(model)+'_'+str(what)+'_'+str(lang)+'.csv', 'w') as csvfile:
+        if lang == 'fi':
+            fieldnames = ['sv', 'fi', 'en',] 
+        elif lang == 'de':
+            fieldnames = ['sv', 'de', 'en',] 
+        elif lang == 'dk':
+            fieldnames = ['sv', 'dk', 'en',] 
+        else:    
+            writer.writerow({'sv': description_se, 'en': description_en,'fi': description_fi, 'de': description_de, 'dk': description_dk}) 
+     
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        if what == 'description': 
+
+            if tranlate_on == True: 
+                for art in the_model:
+                    print art
+                    description_se = art.description.encode('utf-8')
+                    try: 
+                        description_en = art.description_en.encode('utf-8') 
+                    except: 
+                        description_en = ''  
+                    try:  
+                        description_fi = art.description_fi.encode('utf-8') 
+                    except: 
+                        description_fi = '' 
+                    # note that da here is demark      
+                    try: 
+                        description_dk = art.description_da.encode('utf-8')
+                    except: 
+                        description_dk = ''
+                    try: 
+                        description_de = art.description_de.encode('utf-8')          
+                    except: 
+                        description_de = ''
+                    if lang == 'fi':
+                        writer.writerow({'sv': description_se, 'fi': description_fi, 'en': description_en}) 
+                    elif lang == 'de':
+                        writer.writerow({'sv': description_se, 'de': description_de, 'en': description_en}) 
+                    elif lang == 'dk':
+                        writer.writerow({'sv': description_se, 'dk': description_dk, 'en': description_en}) 
+                    else:    
+                        writer.writerow({'sv': description_se, 'en': description_en,'fi': description_fi, 'de': description_de, 'dk': description_dk}) 
+        else: 
+            if tranlate_on == True: 
+                for art in the_model:
+                    title_se = art.name.encode('utf-8')
+                    title_en = art.name_en.encode('utf-8') 
+                    try:  
+                        title_fi = art.name_fi.encode('utf-8') 
+                    except: 
+                        title_fi = ''    
+                    try: 
+                        title_dk = art.name_da.encode('utf-8')
+                    except: 
+                        title_dk = ''
+                    try: 
+                        title_de = art.name_de.encode('utf-8')          
+                    except: 
+                        title_de = ''
+
+                    if lang == 'fi':
+                        writer.writerow({'sv': title_se, 'fi': title_fi, 'en': title_en}) 
+                    elif lang == 'de':
+                        writer.writerow({'sv': title_se, 'de': title_de, 'en': title_en}) 
+                    elif lang == 'dk':
+                        writer.writerow({'sv': title_se, 'de': title_dk, 'en': title_en}) 
+                    else:    
+                        writer.writerow({'sv': title_se, 'en': title_en,'fi': title_fi, 'de': title_de, 'dk': title_dk}) 
+       
+        log = "exporting csv"
+
+    return render_to_response('projects/tran.html',
+                    {'hej': log},
+                      context_instance=RequestContext(request))
+
+
+@login_required
+def csvTransImport(request, model, what='title', lang='en'):
+    tranlate_on = 1
+    log = "no action"
+
+    if tranlate_on == True: 
+        input_file = './modul_'+str(model)+'_'+str(what)+'_'+str(lang)+'.csv'
+        print input_file
+        count = 0  
+        with open(input_file, 'r') as i:
+            print i
+            for line in i:
+                if count > 0: 
+                    print "line: ",  line
+
+                    sepatated_values = line.split(",")
+                    print sepatated_values
+                
+                    if what == 'description': 
+
+                        try: 
+                            description_se = sepatated_values[0]
+                            #print title_se
+                            description_en = sepatated_values[1]
+                            #print title_en
+                            description_fi = sepatated_values[2]
+                            description_dk = sepatated_values[3]
+                            description_de = sepatated_values[4]
+                            if model == 'art':
+                                art = Article.objects.get(description=description_se)    
+                            elif model == 'quality':
+                                art = Quality.objects.get(description=description_se)
+                            elif model == 'type':
+                                art = Type.objects.get(description=descriptione_se)
+                            elif model == 'category':
+                                art = Category.objects.get(description=description_se)
+                            else: 
+                                art = Article.objects.get(description=description_se)
+                            print art 
+                            art.name_en = title_en 
+                            art.name_fi = title_fi 
+
+                            try: 
+                                art.name_da = title_dk
+                            except: 
+                                art.name_da = ''
+                          
+                            art.name_de = title_de
+                            art.save()
+                        except: 
+                            pass
+                    else:
+                        
+                        try: 
+                            title_se = sepatated_values[0]
+                            print title_se
+                            if model == 'art':
+                                art = Article.objects.get(name=title_se)    
+                            elif model == 'color':
+                                art = Color.objects.get(name=title_se)
+                            elif model == 'pattern':
+                                art = Pattern.objects.get(name=title_se)
+                            elif model == 'quality':
+                                art = Quality.objects.get(name=title_se)
+                            elif model == 'type':
+                                art = Type.objects.get(name=title_se)
+                            elif model == 'category':
+                                art = Category.objects.get(name=title_se)
+                            else: 
+                                art = Article.objects.get(name=title_se)
+                            
+                            if lang == 'fi':
+                                art.name_fi = sepatated_values[1]
+                                print  art.name_fi
+                            elif lang == 'dk':
+                                try: 
+                                    art.name_da = sepatated_values[1] 
+                                except: 
+                                    pass     
+                            elif lang == 'de':
+                                art.name_de = sepatated_values[1]
+                            else:    
+                                art.name_en = title_en 
+                                art.name_fi = title_fi 
+                                try: 
+                                    art.name_da = title_dk
+                                except: 
+                                    art.name_da = ''  
+                                art.name_de = title_de
+                            art.save()
+                        except: 
+                            pass            
+                count = count + 1
+
+    log = "importin csv"
+
+    return render_to_response('projects/tran.html',
+                    {'hej': log},
+                      context_instance=RequestContext(request))
+
+
+
 def translateflatpages(request, lang, pk):
     tranlate_on = get_tranlatestatus()
     hej = 'no trans'
