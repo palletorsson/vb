@@ -61,7 +61,7 @@ def create_invoice_rows(order_json):
 
         # use the try statment to check if it is a full variation including size with full articlenumber
         try: 
-            print "start full"
+            print "start full", item.article, color, pattern
             variation = Variation.objects.get(article=item.article, color=color, pattern=pattern)
             print "variation", variation
             print "size", item.size
