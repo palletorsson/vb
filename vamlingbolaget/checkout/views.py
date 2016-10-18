@@ -647,7 +647,12 @@ def fortnox(request):
             if order.paymentmethod != 'K': 
                 headers = get_headers() 
                 if what == 'invoice': 
-                    return_order = createOrder(headers, final_orderjson)
+                    person = str(order.first_name)
+                    if person == 'Tester':
+                        log = log + ' ------ tester'
+                        return_order = ''
+                    else: 
+                        return_order = createOrder(headers, final_orderjson)
                 else: 
                     return_order = createNewOrder(headers, final_orderjson)
 
