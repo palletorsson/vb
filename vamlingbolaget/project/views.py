@@ -335,21 +335,10 @@ def csvTransImport(request, model, what='title', lang='en'):
             print i
             for line in i:
                 if count > 0: 
-                    print "line: ",  line
-
                     sepatated_values = line.split(",")
-                    print sepatated_values
-                
-                    if what == 'description': 
-
+                    if what == 'description':
                         try: 
                             description_se = sepatated_values[0]
-                            #print title_se
-                            description_en = sepatated_values[1]
-                            #print title_en
-                            description_fi = sepatated_values[2]
-                            description_dk = sepatated_values[3]
-                            description_de = sepatated_values[4]
                             if model == 'art':
                                 art = Article.objects.get(description=description_se)    
                             elif model == 'quality':
@@ -359,17 +348,32 @@ def csvTransImport(request, model, what='title', lang='en'):
                             elif model == 'category':
                                 art = Category.objects.get(description=description_se)
                             else: 
-                                art = Article.objects.get(description=description_se)
-                            print art 
-                            art.name_en = title_en 
-                            art.name_fi = title_fi 
-
-                            try: 
-                                art.name_da = title_dk
-                            except: 
-                                art.name_da = ''
-                          
-                            art.name_de = title_de
+                                art = Article.objects.get(description=description_se)          
+                            if lang == 'fi':
+                                art.description_fi = sepatated_values[1]
+                                print "fi", art.description_fi
+                            elif lang == 'dk':
+                                try: 
+                                    art.description_da = sepatated_values[1] 
+                                except: 
+                                    pass     
+                            elif lang == 'de':
+                                art.description_de = sepatated_values[1]
+                            else:    
+                                #print title_se
+                                description_en = sepatated_values[1]
+                                #print title_en
+                                description_fi = sepatated_values[2]
+                                description_dk = sepatated_values[3]
+                                description_de = sepatated_values[4]
+                                    
+                                art.description_en = description_en
+                                art.description_fi = description_fi 
+                                try: 
+                                    art.description_da = description_dk
+                                except: 
+                                    art.description_da = ''  
+                                art.description_de = description_de 
                             art.save()
                         except: 
                             pass
