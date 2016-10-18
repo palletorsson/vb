@@ -51,6 +51,9 @@ class Variation(TimeStampedActivate):
     def __unicode__(self):
         return "%s %s %s %s" % (self.article.sku_number, self.article.name, self.color, self.pattern)
 
+    class Meta:
+        unique_together = ('article', 'pattern', 'color',)
+
 
 class FullVariation(TimeStampedActivate):
     variation = models.ForeignKey('Variation')
