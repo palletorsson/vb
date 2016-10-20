@@ -5,60 +5,52 @@
 {% block allcontent %}
 
   {% if user.is_authenticated %}
-	<legend> Vamlingbolaget Web Orders </legend>
-		    <a href="/orders/orders/all/"><button type="button" id="activate_order" class="btn btn-large btn-info text-center">
+<legend> Vamlingbolaget Web Orders </legend>
+		    Filtrera: <a href="/orders/orders/all/"><button type="button" id="activate_order" class="btn btn-xs btn-info text-center">
 			All Orders </button></a> |     
-			<a href="/orders/orders/ordered/"><button type="button" id="activate_order" class="btn btn-large btn-danger text-center">
+			<a href="/orders/orders/ordered/"><button type="button" id="activate_order" class="btn btn-xs btn-danger text-center">
 			Ordered </button>
 			</a> |    
-			<a href="/orders/orders/making/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> 
+			<a href="/orders/orders/making/"><button type="button" id="activate_order" class="btn btn-xs btn-primary text-center"> 
 			In production</button>
 			</a> |      
-			<a href="/orders/orders/handling/"><button type="button" id="activate_order" class="btn btn-large btn-success text-center">
+			<a href="/orders/orders/handling/"><button type="button" id="activate_order" class="btn btn-xs btn-success text-center">
 			Packing </button> </a> |     
-			<a href="/orders/orders/shipped/"><button type="button" id="activate_order" class="btn btn-large btn-default text-center">
+			<a href="/orders/orders/shipped/"><button type="button" id="activate_order" class="btn btn-xs btn-default text-center">
 			Shipping </button> </a> |      
-			<a href="/orders/orders/finlized/"><button type="button" id="activate_order" class="btn btn-large btn-warning text-center">Arcived</button>
-			</a> 
-
-			<div class="pull-right"> 
-	        <input type="text" id="order_id" class="order_id_search form-control" placeholder="Search by order id...">
-	        <button class="btn btn-default"id="search_order" type="button">Go!</button>
-	   		</div>
-
-	   		<hr>
-
-
+			<a href="/orders/orders/finlized/"><button type="button" id="activate_order" class="btn btn-xs btn-warning text-center">Arcived</button>
+			</a>
+   		<hr>
 <table class="table table-bordered table-striped" >
 	    <thead><tr>
 		    <td>
 		        <div>
-		            <span> Order Number </span>
+		            <span> Order datum </span>
 		        </div>
 		    </td>
 		     <td>
 		        <div>
-		            <span> Order Status </span>
+		            <span> Status </span>
 		        </div>
 		    </td>
 		     <td>
 		        <div>
-		            <span> Costumer </span>
+		            <span> Order Nummer </span>
 		        </div>
 		    </td>
 		    		     <td>
 		        <div>
-		            <span> Payment Key </span>
+		            <span> Kundnamn </span>
 		        </div>
 		    </td>
 		     <td>
 		        <div>
-		            <span> Payment Method </span>
+		            <span> Betalmetod </span>
 		        </div>
 		    </td>
 		       <td>
 		        <div>
-		            <span> Manage Order </span>
+		            <span> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"> </span>
 		        </div>
 		    </td>
 		    </tr>
@@ -68,12 +60,12 @@
 	    <tr>
 		    <td>
 		        <div>
-		            <span> <a href="/orders/order/{{ order.order_number }}/">{{ order.order_number }}</a> </span>
+		            <span> <a href="/orders/order/{{ order.order_number }}/">{{ order.date_added }} </a></span>
 		        </div>
 		    </td>
 		     <td>
 		        <div>
-		            <span> <a href="/orders/order/{{ order.order_number }}/">
+		            <span><a href="/orders/order/{{ order.order_number }}/">
 						{% if order.status == 'O' or order.status = 'P' %}
 						<button type="button" id="activate_order" class="btn btn-xs btn-danger text-center"> Ordered </button>
 						{% endif %}
@@ -87,29 +79,29 @@
 						<button type="button" id="activate_order" class="btn btn-xs btn-default text-center"> Shipping </button>
 						{% endif %}
 						{% if order.status == 'F' %}
-						<button type="button" id="activate_order" class="btn btn-xs btn-warning text-center"> Achived </button>
+						<button type="button" id="activate_order" class="btn btn-xs btn-warning text-center"> Achived </button></a>
 						{% endif %}
 		            </a>
 		        </div>
 		    </td>
 		     <td>
 		        <div>
-		            <span> {{ order.first_name }}  {{ order.last_name }}</span>
+		            <span> <a href="/orders/order/{{ order.order_number }}/">{{ order.order_number }}</a> </span>
 		        </div>
 		    </td>
 		        <td>
 		        <div>
-		            <span> {{ order.payex_key }} </span>
+		            <span> <a href="/orders/order/{{ order.order_number }}/">  {{ order.first_name }}  {{ order.last_name }}</a> </span>
 		        </div>
 		    </td>
 		         <td>
 		        <div>
-		            <span> {{ order.paymentmethod }} </span>
+		            <span> <a href="/orders/order/{{ order.order_number }}/">{{ order.paymentmethod }}</a> </span>
 		        </div>
 		    </td>
 		    <td>
 		        <div>
-		            <span> <a href="/orders/order/{{ order.order_number }}/"> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></span></a> </span>
+		            <span> <a href="/orders/order/{{ order.order_number }}/"> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></span></a> </span></a>
 		        </div>
 		    </td>
 

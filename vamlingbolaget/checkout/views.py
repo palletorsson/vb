@@ -10,6 +10,7 @@ from django.core import mail
 from cart.views import _cart_id, totalsum, _new_cart_id, getnames 
 from products.models import *
 from cart.models import Cart, CartItem
+from orders.models import OrderItem, ReaOrderItem
 from forms import CheckoutForm
 from models import Checkout
 import random
@@ -22,8 +23,7 @@ from translator import toEnglish
 from klarna import get_order, confirm_order, klarna_cart, get_data_defaults, get_testcart, confirm_order_with_klarna
 from django.contrib.sessions.backends.db import SessionStore
 from django.core.exceptions import ObjectDoesNotExist
-from make_messages import head_part_of_message, adress_part_of_message, cart_part_of_message, cartsum_part_of_message, final_part_of_message, personal_part_of_message
-from orders.views import CheckoutTransfer
+from make_messages import head_part_of_message, adress_part_of_message, cart_part_of_message, cartsum_part_of_message, final_part_of_message, personal_part_of_message, email_one
 from logger.views import keepLog
 
 # --> from /checkout/ pay --> with card | on delivery   
@@ -1328,4 +1328,18 @@ def LookAtDict(request, checkout_order_id):
         'firstOrderExist': first_order_exist, 
         'shipping_exist': shipping_exist
     }, context_instance=RequestContext(request))
+
+def CheckoutTransfer(checkout, cartitem, reaitems):
+
+    if (cartitem):
+        for item in cartitem:
+            orderitem = OrderItem(checkout=checkout, article=item.article, color=item.color, color_2=item.color_2, pattern=item.pattern, pattern_2=item.pattern_2, size=item.size, date_added=item.date_added, quantity=item.quantity)
+            orderitem.save()
+    if (reaitems):  
+        for item in reaitems:
+            reaorderitem = ReaOrderItem(checkout=checkout, reaArticle=item.reaArticle, date_added=item.date_added)
+            reaorderitem.save()    
+
+    log = "Tranfer made from cart to order"
+    keepLog('', log, 'INFO', '', checkout.order_number) 
 

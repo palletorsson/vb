@@ -1,6 +1,7 @@
 #-*-coding:utf-8-*-
 from django.shortcuts import render
 from checkout.models import Checkout
+from checkout.views import fortnoxOrderandCostumer
 from products.models import Article, ReaArticle
 from cart.views import getnames,totalsum
 from models import OrderItem, ReaOrderItem
@@ -8,8 +9,9 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.db.models import Q
-from fortnox.fortnox import create_invoice_rows, searchCustomer, get_headers, createOrder, get_stockvalue, get_articles
+from fortnox.fortnox import create_invoice_rows, searchCustomer, get_headers, createOrder, get_stockvalue, get_articles, create_order_rows, InvoicefromOrder, create_invoice_rows, customerExistOrCreate, formatJson
 from cart.views import getsize
+from fortnox.fortnox import get_headers
 from django.http import HttpResponseRedirect
 import json
 from logger.views import keepLog
@@ -20,24 +22,7 @@ import json
 import base64
 from vamlingbolaget.settings import ROOT_DIR
 import datetime
-
-def CheckoutTransfer(checkout, cartitem, reaitems):
-
-    if (cartitem):
-        for item in cartitem:
-            orderitem = OrderItem(checkout=checkout, article=item.article, color=item.color, color_2=item.color_2, pattern=item.pattern, pattern_2=item.pattern_2, size=item.size, date_added=item.date_added, quantity=item.quantity)
-            orderitem.save()
-    if (reaitems):  
-        for item in reaitems:
-            reaorderitem = ReaOrderItem(checkout=checkout, reaArticle=item.reaArticle, date_added=item.date_added)
-            reaorderitem.save()    
-
-    log = "Tranfer made from cart to order"
-    keepLog('', log, 'INFO', '', checkout.order_number) 
-
-    return True
-
-
+import re
  
 def ShowOrders(request, stage='all'):
 	if request.user.is_authenticated:
@@ -89,7 +74,7 @@ def ShowOrder(request, order_id):
             customer_number = 'New Customer'
         else:
             customer_number = fortnox_custumer.rsplit('/', 1)[-1]
-
+    
         secondmessage = None
         if checkout.status == 'O': 
             secondmessage = u'Hej! \n\nVi på Vamlingbolaget har nu tagit emot och registerat din order. \nSå fort ordern är klar kommer vi att skicka dina produkter.  \nDå får du också ett mail eller sms från Posten så du kan följa din beställning tills den kommer fram till dig. \n\nVänliga Hälsningar \nVamlingbolaget. \n\nDitt ordernummer är: '+ str(checkout.order_number)
@@ -98,7 +83,7 @@ def ShowOrder(request, order_id):
         fortnox = None
         if checkout.status == 'M': 
             allitems = {'cartitems': cartis, 'bargains': {}, 'voucher': {}, 'rea_items': reaitems}
-            invoice_rows = create_invoice_rows(allitems)
+            invoice_rows = create_order_rows(allitems)
             file_name = checkout.order_number
             incolor_path = '../../media/'+str(file_name)+'.txt'
             fortnox = 'Preview the order and customer information for the Fortnox invoice. The order will be added to Fortnox.'
@@ -155,66 +140,97 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
 
     if request.user.is_authenticated:
         current_user = request.user
-        order = Checkout.objects.filter(order_number=order_number)[0]
-
+        checkout = Checkout.objects.filter(order_number=order_number)[0]
+        new_order_json = checkout.order
+        what = 'invoice'
         if (stage == 'production'): 
             if todo == 'activate': 
-                order.status = 'M'
-                if order.paymentmethod == 'K': 
-                    klarna_id = order.payex_key
+                checkout.status = 'M'
+                if checkout.paymentmethod == 'K': 
+                    klarna_id = checkout.payex_key
                     requestKlarna(klarna_id)
                 try:
-                    makeLeaf(order)
+                    makeLeaf(checkout)
                 except: 
                     pass
                 # send second email 
                 #log process
-                log = 'Order: ' + str(order.order_number) + ', Second email sent to: ' + order.email 
-                keepLog(request, log, 'INFO', current_user, order.order_number) 
+                log = 'Order: ' + str(checkout.order_number) + ', Second email sent to: ' + checkout.email 
+                keepLog(request, log, 'INFO', current_user, checkout.order_number) 
 
-
+        # init fortnox
         if (stage == 'packaging'): 
 
             if todo == 'activate': 
-                order.status = 'H'	
+                checkout.status = 'H'
+                headers = get_headers()	
                 # make Fortnox invoice 
-                new_order = order.order
-                if len(order.fortnox_obj) < 100:
-                    headers = get_headers()
-                    # we can do this in fortnox to with url put
-                    resp = createOrder(headers, new_order)
-                    order.fortnox_obj = resp
-                    order.save()
 
+                #print new_order_json
+                if len(checkout.fortnox_obj) < 200:
+                    
+                    # we can do this in fortnox to with url put
+                    
+                    # we have to try to remake it
+                
+                    # we need to make it if not made if failed in making order.order 
+                    if len(new_order_json) < 40:
+                        order_items = OrderItem.objects.filter(checkout=checkout)
+                        new_order_json = {'cartitems': order_items, 'bargains': [], 'voucher': [], 'rea_items': []}
+                        
+                        invoice_result = fortnoxOrderandCostumer(request, checkout, new_order_json, what)
+                        checkout.order = invoice_result
+                        checkout.save()
+                        # reload and check 
+                        new_order_json = json.loads(invoice_result)
+                        print "'''", new_order_json
+                        num = int(new_order_json["Invoice"]["YourOrderNumber"])
+                        if (num > 0):   
+                            print "int", num
+                            print "order json", new_order_json 
+                        else: 
+                            print "not int"
+
+                    invoice_result = fortnoxOrderandCostumer(request, checkout, new_order_json, what)
+
+                    headers = get_headers()                        
+                    resp = createOrder(headers, invoice_result)
+                    print "resp", resp
+                    checkout.fortnox_obj = resp
+                    print "----",  resp
+                    checkout.save()
+                
                     #log process
                     if len(resp) < 100: 
-                        log = 'Order: ' + str(order.order_number) + ', Fortnox order could not be created, view details'  
-                        keepLog(request, log, 'WARN', current_user, order.order_number, resp)
+                        log = 'Order: ' + str(checkout.order_number) + ', Fortnox order could not be created, view details'  
+                        keepLog(request, log, 'WARN', current_user, checkout.order_number, resp)
                     else:  
-                        log = 'Order: ' + str(order.order_number) + ', Fortnox order created, view details'  
-                        keepLog(request, log, 'INFO', current_user, order.order_number, resp) 
+                        log = 'Order: ' + str(checkout.order_number) + ', Fortnox order created, view details'  
+                        keepLog(request, log, 'INFO', current_user, checkout.order_number, resp) 
                 else:
-                    log = 'Order: ' + str(order.order_number) + ', Fortnox order already created, view details'  
-                    keepLog(request, log, 'WARN', current_user, order.order_number, order.fortnox_obj)
-
+                    pass
+                    #log = 'Order: ' + str(order.order_number) + ', Fortnox order already created, view details'  
+                    #keepLog(request, log, 'WARN', current_user, order.order_number, order.fortnox_obj)
+                    
+                    #fortnoXobj = json.loads(checkout.fortnox_obj) 
+                    #orderNum = fortnoXobj["Invoice"]["YourOrderNumber"]
+                    #resp = InvoicefromOrder(headers, orderNum)
+                    #checkout.fortnox_obj = resp
+                    #checkout.save()
 
         if (stage == 'shipping'): 
             if todo == 'activate': 
-                order.status = 'S'
+                checkout.status = 'S'
                 # make the Unifaun order 
-                name = order.first_name +' '+ order.last_name
+                name = checkout.first_name +' '+ checkout.last_name
                 #unifaunShipmentCall()
-                receiver = getReceiver(name, order.email, order.street, order.postcode, order.city, order.country, order.phone)
-                order_json = order.order
-                if len(order_json) > 100:
-                    parcel_json_len = 'long'
-                else: 
-                    parcel_json_len = 'short' 
-                parcels = getParcels(order_json, parcel_json_len)
+                receiver = getReceiver(name, checkout.email, checkout.street, checkout.postcode, checkout.city, checkout.country, checkout.phone)
+                checkout_json = checkout.order
+                parcels = getParcels(checkout.fortnox_obj)
                 pdfConf = getPdfConfig()
                 service = getService(send_type)
                 vamlingbolaget = getSender()
-                opt =  getOptions(order.email)
+                opt =  getOptions(checkout.email)
                 senderpartner = senderPartner(send_type)
                 #checkZip(order.postcode)
                 unifaunObj = {
@@ -222,7 +238,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                 "shipment": {
                     "sender": vamlingbolaget,
                     "parcels": parcels,
-                    "orderNo": str(order.order_number),
+                    "orderNo": str(checkout.order_number),
                     "receiver": receiver,
                     "service": service,
                     "senderReference": "Vamlingbolaget", 
@@ -245,36 +261,33 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                     pdf_href = shipment_obj[0]['pdfs'][0]['href']
                     shipment_id = shipment_obj[0]['id']
                     pdf = unifaunShipmentGetPDF(pdf_href, shipment_id)
-                    order.unifaun_obj = shipment_id
-                    order.save()
+                    checkout.unifaun_obj = shipment_id
+                    checkout.save()
                     #log process
-                    log = 'Order: ' + str(order.order_number) + ', Unifaun print created'
-                    keepLog(request, log, 'INFO', current_user, order.order_number, pdf) 
+                    log = 'checkout: ' + str(checkout.order_number) + ', Unifaun print created'
+                    keepLog(request, log, 'INFO', current_user, checkout.order_number, pdf) 
 
         if (stage == 'finalize'): 
-            order.status = 'F'
+            checkout.status = 'F'
             # send shipping information to customer 
             # log process
 
             removeShipment('15977071')
             getShipmentsByDate('20160623')
-            log = 'Order: ' + str(order.order_number) + ', Order Finlized '  
-            keepLog(request, log, 'INFO', current_user, order.order_number, '')
+            log = 'checkout: ' + str(checkout.order_number) + ', Order Finlized '  
+            keepLog(request, log, 'INFO', current_user, checkout.order_number, '')
 
         if todo == 'cancel':
-
             if stage == 'cancel':
-               
-                order.status = 'C'    	
+                checkout.status = 'C'    	
                 #log process
-                log = 'Order: ' + str(order.order_number) + ', Order was cancelled'
-                keepLog(request, log, 'INFO', current_user, order.order_number) 
+                log = 'Order: ' + str(checkout.order_number) + ', Order was cancelled'
+                keepLog(request, log, 'INFO', current_user, checkout.order_number) 
 
             if stage == 'shipment': 
-                shipment_id = order.unifaun_obj 
+                shipment_id = checkout.unifaun_obj 
                 remove = removeShipment(shipment_id)
-
-        order.save()
+        checkout.save()
 
 
         
@@ -342,7 +355,6 @@ def getAllShipment():
             url, 
             headers=headers
             )
-    print r
     return r.content
 
 def getShipments(): 
@@ -352,7 +364,6 @@ def getShipments():
             url, 
             headers=headers
             )
-    print r
     return True
 
 def getShipment(id): 
@@ -362,8 +373,6 @@ def getShipment(id):
             url, 
             headers=headers
             )
-    print r
-
     return r.content
 
 
@@ -374,7 +383,6 @@ def removeShipment(id):
             url, 
             headers=headers
             )
-    print r
     return r.content
 
 def getShipmentsByDate(date):
@@ -419,7 +427,6 @@ def getShipmentPara():
     return json2
 
 def senderPartner(sender_type):
-    print sender_type 
     if sender_type == "PAF": 
         senderpartner = "PBREV" 
         custno = "011111118"
@@ -435,30 +442,28 @@ def senderPartner(sender_type):
 
 
 
-def getParcels(parcel_json, parcel_json_len):
+def getParcels(parcel_json):
     weight = 0
-    if parcel_json_len == 'long':
-        return_parcels = []
-        parcel_json = json.loads(parcel_json)
-        parcel_json = parcel_json["Invoice"]["InvoiceRows"]
-        
-        for item in parcel_json: 
-            if len(parcel_json) == 2:
-                
-                return_parcels = [{
-                    "copies": "1",
-                    "weight": "1",
-                    "contents": item[0]["Description"]
-                }]
-                weight = weight + 0.5
-            
-    else:
-        return_parcels = [{
-      "copies": "1",
-      "weight": str(weight),
-      "contents": "Vamlingbolaget kläder",
-    }]
 
+    return_parcels = []
+    parcel_json = json.loads(parcel_json)
+
+    parcel_json = parcel_json["Invoice"]["InvoiceRows"]
+    print "form parcel", parcel_json 
+    for item in parcel_json: 
+        art_num = item['ArticleNumber']
+        artnum = re.sub(r'[\W_]+', '', art_num)
+        artnum = int(artnum)
+        print "art", artnum
+        if artnum > 10: 
+            
+            return_parcels.append({
+                "copies": "1",
+                "weight": "1",
+                "contents": item['Description']
+            })
+            weight = weight + 0.5
+        
     return return_parcels 
 
 def getPdfConfig(): 
@@ -553,39 +558,45 @@ def LookAtDict(checkout):
     try: 
         firsTorder = json.loads(checkout.order) 
         
-        firstorder = firsTorder['Invoice']['YourOrderNumber']
+        firstorder = firsTorder['Invoice']['CustomerNumber']
         first_order_exist = True
-        check_string = '["1":"OK"]'
+        check_string = 'Order:OK | '
     except:
         first_order_exist = False
-        check_string = '["1":"NA"]'
+        check_string = 'Order.^ | '
 
 
     try: 
         fortnoXobj = json.loads(checkout.fortnox_obj) 
-        orderNum = fortnoXobj['Invoice']['YourOrderNumber']
+
+        orderNum = fortnoXobj['Invoice']['DocumentNumber']
         order_exist = True 
-        check_string = check_string + '["2":"OK"]'
+        check_string = check_string + 'Fortnox:OK | '
 
     except:
         order_exist = False
-        check_string = check_string + '["2":"NA"]'
-       
+        check_string = check_string + 'Fortnox.^ | '
+    
+    # make a request to see if 
+
     try: 
         shipment_id = checkout.unifaun_obj
         if len(shipment_id) > 3: 
             shipping_exist = True 
-            check_string = check_string + '["3":"OK"]'
+            check_string = check_string + 'Unifaun:OK'
+        else: 
+
+            shipping_exist = False
+            check_string = check_string + 'Unifaun.^'    
     except:
         shipping_exist = False
-        check_string = check_string + '["3":"NA"]'
+        check_string = check_string + 'Unifaun.^'
 
     return check_string
 
 
 def makeLeaf(checkout):
     cartitems = checkout.orderitem_set.all()
-    print cartitems
     headers = get_headers()
     searchCustomer(headers, '', checkout.email)
     getnames(cartitems)
@@ -608,7 +619,6 @@ def makeLeaf(checkout):
         f.write('KUND: ' + fortnox_custumer.rsplit('/', 1)[-1] + '  ---------------  ')
         f.write('ORDER NR: ' + str(checkout.order_number) + '\n' )
         f.write('-------------------------------------------\n')
-        print item.article.name.encode('iso-8859-1')
 
         f.write('\n')
         f.write('ARTIKEL: \n')        
@@ -625,7 +635,6 @@ def makeLeaf(checkout):
         f.write('-------------------------------------------\n')      
 
         f.write('ANTAL: '+ str(item.quantity) + '\n' )
-        print ('ANTAL: '+ str(item.quantity) + '\n' )
         f.write('\n')
         f.write('KOMMENTAR:\n')  
         f.write('-------------------------------------------\n\n\n\n\n')  

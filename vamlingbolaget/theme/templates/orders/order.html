@@ -5,23 +5,28 @@
 {% block allcontent %}
 
   {% if user.is_authenticated %}
-	<legend> <span class="glyphicon glyphicon-user" aria-hidden="true"> </span> Costumer </legend>
+	<legend> <span class="glyphicon glyphicon-user" aria-hidden="true"> </span> Kund information </legend>
 
 <table class="table table-bordered table-striped" >
 	    <thead><tr>
 		    <td>
 		        <div>
-		            <span> Costumer </span>
+		            <span> Kundnamn </span>
 		        </div>
 		    </td>
 		     <td>
 		        <div>
-		            <span> Street </span>
+		            <span> Adress </span>
 		        </div>
 		    </td>
 		     <td>
 		        <div>
-		            <span> City </span>
+		            <span> Postkod</span>
+		        </div>
+		    </td>
+		    		     <td>
+		        <div>
+		            <span> Stad  </span>
 		        </div>
 		    </td>
 		    		     <td>
@@ -31,12 +36,12 @@
 		    </td>
 		     <td>
 		        <div>
-		            <span> Telephone </span>
+		            <span> Telefon </span>
 		        </div>
 		    </td>
 		     <td>
 		        <div>
-		            <span>Fortnox Nr.</span>
+		            <span>Fortnox Id.</span>
 		        </div>
 		    </td>
 
@@ -55,6 +60,11 @@
 		     <td>
 		        <div>
 		            <span>  {{ order.street }}   </span>
+		        </div>
+		    </td>
+		    		     <td>
+		        <div>
+		            <span>  {{ order.postcode }}   </span>
 		        </div>
 		    </td>
 		     <td>
@@ -83,33 +93,33 @@
 		</tbody>
 </table>
 
-<legend> <span class="glyphicon glyphicon-tags" aria-hidden="true"> </span>  Order details </legend>
+<legend> <span class="glyphicon glyphicon-tags" aria-hidden="true"> </span>  Order detaljer </legend>
 <table class="table table-bordered table-striped" >
 	    <thead><tr>
 		    <td>
 		        <div>
-		            <span> Order Number </span>
+		            <span> Ordernummer </span>
 		        </div>
 		    </td>
 		     <td>
 		        <div>
-		            <span> Order Status </span>
+		            <span> Orderstatus </span>
 		        </div>
 		    </td>
 		    
 		    		     <td>
 		        <div>
-		            <span> Payment Key </span>
+		            <span> Betalnyckel </span>
 		        </div>
 		    </td>
 		     <td>
 		        <div>
-		            <span> Payment Method </span>
+		            <span> Betalmetod </span>
 		        </div>
 		    </td>
 		    <td>
 		        <div>
-		            <span>Process status</span>
+		            <span>Processtatus</span>
 		        </div>
 		    </td>
 		    </tr>
@@ -145,7 +155,7 @@
 						{% if order.status == 'F' %}
 						<button type="button" id="activate_order" class="btn btn-xs btn-warning text-center">  Achived </button>
 						{% endif %}
-						</span>
+						</span> 
 		        </div>
 		    </td>
 		  
@@ -214,7 +224,7 @@
 	    </td>
 	    <td>
 	        <div>
-	            <span> {{ item.article }} i {{item.article.quality|lower}}</span>
+	            <span> {{ item.article }} i {{item.article.quality|lower}} (stock : {{ stock }})</span>
 	        </div>
 	    </td>
 	    <td>
@@ -308,125 +318,137 @@
 			    {{ totalprice }} {%trans "SEK"%}
 			</th>
 		</tr>
-{{returntotal}}
+		{{returntotal}}
 		<tbody>
 	</tbody>
 </table>
 
+<table class="table table-bordered table-striped" >
+	<tr>
+	    <th width="33%">
+	    	 <span class="glyphicon glyphicon-star" aria-hidden="true"> </span> Detta steg  
+	    </th>
+	    <th width="33%">
+	        <span class="glyphicon glyphicon-bell" aria-hidden="true"> </span> Nästa steg 
+	    </th>
+	    <th width="33%">
+			 <span class="glyphicon glyphicon-comment" aria-hidden="true" > </span> Vad händer nu?
+	    </th>
+	</tr>
+	<tbody>
+	<tr>
+    	<td> 
+		{% if order.status == 'O' or order.status == 'P' %}
+		    <div class="text-center"> 
+		    	Detta är en ny order, aktivera den.
+		    </div>
+		{% endif %}
+		{% if order.status == 'M' %}
+		    <div class="text-center"> 
+		    	<span class="glyphicon glyphicon-print" aria-hidden="true"> </span> 
+		    	<a href="/{{ incolor_path }}">Skriv ut: Produktionssedel</a>
+		    </div>
+		{% endif %}
+		{% if order.status == 'H' %}
+			<div class="text-center">
+			 Välj Fraktsätt --->
+			</div>
+		{% endif %}
+		{% if order.status == 'S' %}
+		    <div class="text-center"><a href="/media/{{ pdf }}.pdf">    	
+		    	<span class="glyphicon glyphicon-print" aria-hidden="true"> </span> Frakt Pdf</a>  
+		    </div> 
+		    <hr>
+			<a href="/orders/order/action/cancel/shipment/{{ order.order_number }}/">(ta bort frakten)</a> 
+			</div>
+		{% endif %}
+		{% if order.status == 'F' %}
+		    Den här ordern är arkiverad.
+		{% endif %}
+		{% if order.status == 'C' %}
+		    Den här order är avskriven.
+		{% endif %}
+		</td>
+    	<td> 
+		{% if order.status == 'O' or order.status == 'P'%}
+			<div class="text-center"><a href="/orders/order/action/activate/production/{{ order.order_number }}/">
+				<button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Aktivera Order </button></a>
+			</div>
+		{% endif %}
+		{% if order.status == 'M' %}
+			<div class="text-center">
+				<a href="/orders/order/action/activate/packaging/{{ order.order_number }}/">
+				<button type="button" id="activate_order" class="btn btn-large btn-success text-center"> Emballage / Faktura</button></a>
+				
+			</div>
+		{% endif %}
+		{% if order.status == 'H' %}
+			<div class="text-center">
+			
+			<select name="Service" id="Service" size="0" tabindex="1">
+				Välj fraktsätt: <option value="*SELECT*">- Välj -</option>
+				<option value="PAF">PostNord - Brevpostförskott</option>
+				<option value="PUA">PostNord - Varubrev 1:a klass</option>
+				<option value="P15" selected="selected">PostNord DPD Företagspaket</option>
+			</select>
 
-<legend> <span class="glyphicon glyphicon-bell" aria-hidden="true"> </span>  Order Action </legend>
-<tr>
+		<div id="urlbase" class="hidden">/orders/order/action/activate/shipping/{{ order.order_number }}/</div>
+			 <a id="target_url" href="/orders/order/action/activate/shipping/{{ order.order_number }}/PAF/">
+			    <br><button type="button" id="activate_order" class="btn btn-large btn-warning text-center"> Aktivera Frakt </button>
+			    </a>
+		         
+			</div>
+		{% endif %}
+		{% if order.status == 'S' %}
+			<div class="text-center">
+			<a href="/orders/order/action/finalize/finalize/{{ order.order_number }}/">
+			<button type="button" id="activate_order" class="btn btn-large btn-danger text-center"> Arkivera Order </button></a>	
+		{% endif %}
+		{% if order.status == 'F' %}
+	
+				<div class="text-center"><a href="/orders/order/action/activate/production/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-xs btn-primary text-center"> Återaktivera ordern för produktion </button></a></div>
+		{% endif %}
+		{% if order.status == 'C' %}
+			<div class="text-center"><button type="button" id="activate_order" class="btn btn-large btn-default text-center"> Den här orden är struken</button></div>
+			<div class="text-center"><hr><a href="/orders/order/action/activate/production/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Återaktivera ordern för produktion </button></a><hr></div>
+		{% endif %}
+		</td>
+		<td> 
+		{% if order.status == 'O' or order.status == 'P' %}
+		    <div class="text-center"> 
+		    	Ett bekräftelsemail kommer att skicka till Kunden. se nedan.
+		    </div>
+		{% endif %}
+		{% if order.status == 'M' %}
+			<div class="text-center">En faktura skapas i Fortnox</div> 
+		 {% endif %}
+		 {% if order.status == 'H' %}
+			En Unifaun-Postnord order kommer att skapas och lagras i Unifaun för utskrift.
+		 {% endif %}
+	     {% if order.status == 'S' %}
+			Du kan skriva ut Unifaun-Postnord-slippen nu eller senare i Unifaun. 
+		{% endif %}
+		{% if order.status == 'F' %}
+		            <a href="/orders/">{% trans "Se Alla Ordrar" %}</a
+		{% endif %}
+		</td> 
+	</tr> 
 
-    <th>
-{% if order.status == 'O' or order.status == 'P'%}
-	<div class="text-center"><hr><a href="/orders/order/action/activate/production/{{ order.order_number }}/">
-		<button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Activate Order For Production </button></a>
-		<hr>
-		<a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a>
-		<hr>
-	</div>
-{% endif %}
-{% if order.status == 'M' %}
-    <div class="text-center"> 
-    	<span class="glyphicon glyphicon-print" aria-hidden="true"> </span> 
-    	<a href="/{{ incolor_path }}">Produktionssedel </a>
-    </div>
-	<div class="text-center"><hr><a href="/orders/order/action/activate/packaging/{{ order.order_number }}/">
-		<button type="button" id="activate_order" class="btn btn-large btn-success text-center"> Activate Order For Packaging </button></a>
-		<hr>
-		<br><small><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a></small><hr>
-	</div>
-
-{% endif %}
-{% if order.status == 'H' %}
-	<div class="text-center">
-	<hr> Välj Fraktsätt: <br><br>
-	<select name="Service" id="Service" size="0" tabindex="1">
-		Välj fraktsätt: <option value="*SELECT*">- Välj -</option>
-		<option value="PAF">PostNord - Brevpostförskott</option>
-		<option value="PUA">PostNord - Varubrev 1:a klass</option>
-		<option value="P15" selected="selected">PostNord DPD Företagspaket</option>
-	<</select>
-
-<div id="urlbase" class="hidden">/orders/order/action/activate/shipping/{{ order.order_number }}/</div>
-	 <a id="target_url" href="/orders/order/action/activate/shipping/{{ order.order_number }}/PAF/">
-	    <br><button type="button" id="activate_order" class="btn btn-large btn-warning text-center"> Activate Order For Shipping </button>
-	    </a>
-        <hr>  
-	<br><small><a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a></small><hr>
-	</div>
-{% endif %}
-{% if order.status == 'S' %}
-
-    <div class="text-center"><a href="/media/{{ pdf }}.pdf">    	
-    <span class="glyphicon glyphicon-print" aria-hidden="true"> </span> Shipment Pdf</a>  
-    </div> 
-	<div class="text-center">
-	<hr>
-	<a href="/orders/order/action/finalize/finalize/{{ order.order_number }}/">
-	<button type="button" id="activate_order" class="btn btn-large btn-danger text-center"> Achvie Order </button></a>
-	<br><hr>
-	<br><a href="/orders/order/action/cancel/shipment/{{ order.order_number }}/">(remove shipment)</a> <a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(cancel this order)</a>
-	<hr>
-	</div>
-{% endif %}
-
-{% if order.status == 'F' %}
-	<div class="text-center"><button type="button" id="activate_order" class="btn btn-large btn-default text-center"> Order Achived </button></div>
-		<div class="text-center"><hr><a href="/orders/order/action/activate/production/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Reactivate Order For Production </button></a><hr></div>
-{% endif %}
-{% if order.status == 'C' %}
-	<div class="text-center"><button type="button" id="activate_order" class="btn btn-large btn-default text-center"> This order has been cancelled</button></div>
-	<div class="text-center"><hr><a href="/orders/order/action/activate/production/{{ order.order_number }}/"><button type="button" id="activate_order" class="btn btn-large btn-primary text-center"> Reactivate Order For Production </button></a><hr></div>
-{% endif %}
-
-</th>
-</tr>
-</table> 
-<legend> <span class="glyphicon glyphicon-comment" aria-hidden="true"> </span>  Communication </legend> 
-{% if fortnox %}
-	<table class="table table-bordered table-striped" >
-		<tr>
-			<td>
-				<div class="text-center">{{ fortnox }}</div>
-			 </td>
-			</tr> 
-	</table>	
-{% endif %}
-
-{% if lastmessage %}
-<pre>{{ lastmessage }}</pre>
-{% endif %}
+</tbody>
+</table>
 
 {% if secondmessage %}
-	<legend> This email notifcation about the order will be sent to the custumer. </legend> 
-	<table class="table table-bordered table-striped" >
+	<legend>Bekräftelsemail</legend> 
 		<tr>
 			<td>
 				<pre>{{ secondmessage }}</pre>
 			 </td>
 		</tr> 	
-	</table>	
 {% endif %}
-
-{% if order.status == 'H' %}
-	<pre>A Unifaun, Postnord order will be created and stored in Unifaun and for printing.</pre>
-{% endif %}
-
-{% if order.status == 'O' %}
-	kolla klarna
-<legend> This Message has been sent to the customer: </legend>
-<table class="table table-bordered table-striped" >
-<tr>
-    <td>
-      <pre> {{ order.message }}</pre>
-    </td>
-</tr>
-</table>
-{% endif %}
-
-
-
+	    <th>
+	        <legend><span class="glyphicon glyphicon-minus" aria-hidden="true"> </span> Överigt <br></legend>
+	        <a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(ta bort ordern)</a>
+	    </th>
     {% else %}
         <p> please ... </p>
     {% endif %}
