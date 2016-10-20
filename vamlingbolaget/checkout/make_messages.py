@@ -2,6 +2,11 @@
 
 from string import Template
 from django.utils import translation
+from django.http import HttpResponse
+from django.template import Context
+from django.template.loader import render_to_string, get_template
+from django.core.mail import EmailMessage
+from products.models import Pattern, Color
 
 # start by creating the costumer message header 
 def head_part_of_message(lang): 
@@ -79,6 +84,7 @@ def cart_part_of_message(cartitems, rea_items, lang, i=1):
                 
     return cartitems_str
 
+# continue to build summery of the message from form values
 def cartsum_part_of_message(handling, totalprice, lang):
 
     transporthandling = 'Frakt och hantering'
@@ -92,7 +98,7 @@ def cartsum_part_of_message(handling, totalprice, lang):
     sum = u.substitute(transporthandling_=transporthandling, handling=handling, totalprice_=totalprice)
     return sum
 
-
+# continue and add if costumer added personal message 
 def personal_part_of_message(message, lang):
     yourmess = 'Ditt Meddelande till oss'
 
@@ -119,23 +125,24 @@ def adress_part_of_message(new_order, lang):
     s = Template('\n$youradress_ :\n------------- \n$first_name $last_name \n$street \n$postcode $city \n$country \n--------------------------------- \n$yourphone_ : $phone \n')
     address_str = s.substitute(youradress_=youradress, first_name=new_order.first_name, last_name=new_order.last_name, street=new_order.street, postcode=new_order.postcode, city=new_order.city, country=new_order.country, yourphone_=yourphone, phone=new_order.phone)
     return address_str
-    
+
+# finalize the message     
 def final_part_of_message(new_order, lang): 
     last_part_message = ''
     handling = 'En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. Reaplagg tar ca 1 vecka.'
     youpaypostal = 'Du betalar med postforskott'
     youpaypayex = 'Du valde Payex kortbetalning'
     youpayklarna = 'Du valde Klarna checkout'
-    sms_notice='sms-avisering kommer'
-    yourordernumber='Ditt ordernummer'
+    sms_notice = 'sms-avisering kommer'
+    yourordernumber = 'Ditt ordernummer'
 
     if lang == 'en': 
         handling = 'An order to Vamlingbolaget takes about 3 weeks since we sew your garments. Rea items takes about 1 week. '
         youpaypostal = 'You pay cash on delivery '
         youpaypayex = 'You chose Payex card payments '
         youpayklarna = 'You chose Klarna checkout'
-        sms_notice='You will receive an SMS notification'
-        yourordernumber='Your order number is'
+        sms_notice = 'You will receive an SMS notification'
+        yourordernumber = 'Your order number is'
 
     s = Template('----------------------------------------------------------------------------------------------------------\n* $handling_ \n')
     last_part_message = last_part_message + s.substitute(handling_=handling, )
@@ -158,3 +165,107 @@ def final_part_of_message(new_order, lang):
     last_part_message = last_part_message + s.substitute(yourordernumber_=yourordernumber, ordernumber=new_order.order_number, )
 
     return last_part_message
+
+
+def getAllMessages(lang): 
+    #
+    yourorderto = 'Din order till Vamlingbolaget'
+    yourorder = 'Din order'
+    #
+    product = 'Produkt'
+    amount = 'st'
+    itsin = 'i'
+    outsida = 'utsida'
+    insida = 'insida'
+    itsand = 'och'
+    size = 'Storlek'
+    priceperproduct = "Pris per produkt"
+    #
+    transporthandling = 'Frakt och hantering'
+    #
+    youradress = 'Din adress'
+    yourphone = 'Ditt telefonnummer'
+    #
+    last_part_message = ''
+    handling = 'En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. Reaplagg tar ca 1 vecka.'
+    youpaypostal = 'Du betalar med postforskott'
+    youpaypayex = 'Du valde Payex kortbetalning'
+    youpayklarna = 'Du valde Klarna checkout'
+    sms_notice = 'sms-avisering kommer'
+    yourordernumber = 'Ditt ordernummer'
+
+    if lang == 'en': 
+        #
+        yourorderto = 'Your order to Vamlingbolaget'
+        yourorder = 'Your order'
+        #
+        product = 'Product'
+        amount = ''
+        itsin = 'in'
+        outsida = 'outside'
+        insida = 'inside'
+        itsand = 'and'
+        size = 'Size'
+        priceperproduct = "Price per product"
+        #
+        transporthandling = 'Shipping and handling'
+        #
+        youradress = 'Your address'
+        yourphone = 'Your phone number'
+        #
+        handling = 'An order to Vamlingbolaget takes about 3 weeks if we sew your garments. Otherwise about a week. '
+        youpaypostal = 'You pay cash on delivery '
+        youpaypayex = 'You chose Payex card payments '
+        youpayklarna = 'You chose Klarna checkout'
+        sms_notice = 'You will receive an SMS notification'
+        yourordernumber = 'Your order number is'
+
+
+
+def email_one(request, new_order, cartitems, handling, totalprice):
+
+    # get the name of color and patterns
+    for item in cartitems:
+        color = Color.objects.get(order=item.color)
+        item.color_text = color.name
+        pattern = Pattern.objects.get(order=item.pattern)
+        item.pattern_text = pattern.name
+        if (item.color_2):
+            color = Color.objects.get(order=item.color_2)
+            item.color_text_2 = color.name
+            pattern = Pattern.objects.get(order=item.pattern)
+            item.pattern_text_2 = pattern.name
+
+    ctx = {
+        'handling' : handling,
+        'totalprice' : totalprice,
+        'cartitems' : cartitems,
+        'new_order': new_order
+    }
+
+    # save the langage code
+    lang = request.LANGUAGE_CODE 
+
+    # Make messages
+    translation.activate('se')
+    message_se = render_to_string('checkout/email_se.txt', ctx)
+    translation.activate('en')
+    message_en  = render_to_string('checkout/email_en.txt', ctx)
+    translation.activate('fi')
+    message_fi  = render_to_string('checkout/email_fi.txt', ctx)
+
+
+    # reset the language
+    translation.activate(lang) 
+
+    # return the right combiantion of message
+    if lang == 'en': 
+        message = message_en 
+    elif lang == 'se': 
+        message = message_se + message_en
+    elif lang == 'fi': 
+        message = message_fi + message_en
+    else: 
+        message = message_en 
+      
+    return message 
