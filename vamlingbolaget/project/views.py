@@ -261,7 +261,7 @@ def csvTransExport(request, model, what='title', lang='en'):
 
             if tranlate_on == True: 
                 for art in the_model:
-                    print art
+                    print "description", art
                     description_se = art.description.encode('utf-8')
                     try: 
                         description_en = art.description_en.encode('utf-8') 
@@ -291,6 +291,7 @@ def csvTransExport(request, model, what='title', lang='en'):
         else: 
             if tranlate_on == True: 
                 for art in the_model:
+                    print "title", art
                     title_se = art.name.encode('utf-8')
                     title_en = art.name_en.encode('utf-8') 
                     try:  
@@ -336,6 +337,7 @@ def csvTransImport(request, model, what='title', lang='en'):
             for line in i:
                 if count > 0: 
                     sepatated_values = line.split(",")
+                    print "sp", sepatated_values
                     if what == 'description':
                         try: 
                             description_se = sepatated_values[0]
@@ -343,10 +345,6 @@ def csvTransImport(request, model, what='title', lang='en'):
                                 art = Article.objects.get(description=description_se)    
                             elif model == 'quality':
                                 art = Quality.objects.get(description=description_se)
-                            elif model == 'type':
-                                art = Type.objects.get(description=descriptione_se)
-                            elif model == 'category':
-                                art = Category.objects.get(description=description_se)
                             else: 
                                 art = Article.objects.get(description=description_se)          
                             if lang == 'fi':
@@ -381,11 +379,12 @@ def csvTransImport(request, model, what='title', lang='en'):
                         
                         try: 
                             title_se = sepatated_values[0]
-                            print title_se
+                            print "title", title_se
                             if model == 'art':
                                 art = Article.objects.get(name=title_se)    
                             elif model == 'color':
                                 art = Color.objects.get(name=title_se)
+                                print "art", art
                             elif model == 'pattern':
                                 art = Pattern.objects.get(name=title_se)
                             elif model == 'quality':
@@ -399,7 +398,7 @@ def csvTransImport(request, model, what='title', lang='en'):
                             
                             if lang == 'fi':
                                 art.name_fi = sepatated_values[1]
-                                print  art.name_fi
+                                print "fiart", art.name_fi
                             elif lang == 'dk':
                                 try: 
                                     art.name_da = sepatated_values[1] 
