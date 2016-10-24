@@ -313,7 +313,14 @@ $(".variation_imgs").click(function() {
    img = $(this).attr('src');
    $(".variation_img").attr("src", img)
    $(".variation_link").attr("href", img)
+}); 
 
+
+$('#widget_size').filter(function () {
+    var lang_text = $(this).text(); 
+    if (lang_text != 'Storlek') {
+       $('#ethics').parent().remove() 
+    }
 }); 
 
 

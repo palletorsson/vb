@@ -11,10 +11,10 @@
                   info@vamlingbolaget.com
                   </address><br/>
               <strong>{% trans "Öppettider" %} </strong><br/>
-              {% trans "Midsommar" %}- 1 {% trans "September" %} <br/>
+              {% trans "Midsommar" %}- 15 {% trans "Augusti" %} <br/>
               {% trans "Vardagar" %} 11.00 - 17.00 <br/>
               {% trans "Lördagar" %} 11.00 - 15.00 <br/>
-              <br/>
+              {% trans "Söndagar" %} 12.00 - 15.00 <br/><br/>
 
            <strong>{% trans "Övriga året" %} </strong><br/>
            {% trans "Vardagar" %} 11.00 - 16.00 <br/> 
@@ -47,10 +47,10 @@
               </address><br/>
 
               <strong>{% trans "Öppettider" %} </strong><br/>
-              {% trans "September" %} - {% trans "Maj" %}: <br/>
+              {% trans "september" %} - {% trans "maj" %}: <br/>
               {% trans "mån, tor, fre" %} 12.00 - 18.00 <br/>
               {% trans "Lördagar" %} 11.00 - 14.00 <br/><br/>
-              {% trans "Juni" %} - {% trans "Augusti" %}: <br/>
+              {% trans "juni" %} - {% trans "augusti" %}: <br/>
               {% trans "Vardagar" %} 11.00 - 18.00 <br/>
               {% trans "Lördagar" %} 11.00 - 15.00 <br/><br/>
            </div>
@@ -63,7 +63,8 @@
               <ul>
                   {% include "order_terms_links.html" %}
                  
-              </ul>
+              </ul> 
+              
               <ul class="visible-xs">
                 <li>
                     <form action="/i18n/setlang/" method="post" id="lang_bottom" >
