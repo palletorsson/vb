@@ -67,7 +67,7 @@
             <td>
             <div>
                 {%if item.article.discount%}
-                    <span class="discount"> {{ item.article.f_discount }}  </span>
+                    <span class="discount"> {{ item.article.f_discount }} SEK</span>
                 {%elif item.article.type.order == 8 %}
                     {{item.totalitemprice}} 
                 {%else%}

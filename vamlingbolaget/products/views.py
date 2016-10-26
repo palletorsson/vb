@@ -1046,3 +1046,20 @@ def orderCsv(request):
 
 
     return HttpResponse(status=200)
+
+
+@login_required
+def setDiscount(request, what=''):
+    articles = Article.objects.all()
+    if what == 'set': 
+        discount = Discount.objects.get(reason='survive2016')
+    elif what == 'reset': 
+        discount = None
+    else: 
+        discount == False
+
+    if discount != False:     
+      for art in articles:
+        art.discount = discount 
+        art.save()
+    return HttpResponse(status=200)

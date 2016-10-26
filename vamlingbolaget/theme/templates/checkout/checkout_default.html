@@ -47,7 +47,7 @@
         <td>
         	<div>
 	            {%if item.article.discount%}
-	            <span class="discount"> {{ item.article.f_discount }} </span>
+	            <span class="discount"> {{ item.article.f_discount }} SEK </span>
 	            {%else%}
 	              {% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}}	</span><br/> {%endif%} 
 	            {{ item.article.price }}

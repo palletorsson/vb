@@ -33,6 +33,7 @@ urlpatterns = patterns('products.views',
     url(r'^readcsvman/(?P<what>[a-zA-Z0-9_.-]+)/(?P<start_at>[a-zA-Z0-9_.-]+)/(?P<end_at>[a-zA-Z0-9_.-]+)/$', 'readCsvManchester'),
     url(r'^checkcsv/$', 'readCsvOnlyCheck'),
     url(r'^ordercsv/$', 'orderCsv'),
+    url(r'^setdiscount/(?P<what>[a-zA-Z0-9_.-]+)/$', 'setDiscount'),
     url(r'^delfromcsv/(?P<start_at>[a-zA-Z0-9_.-]+)/(?P<end_at>[a-zA-Z0-9_.-]+)$', 'removeCsv'),
     
     url(r'^articlestrans/$', 'articlesTranferToFortnox'),
