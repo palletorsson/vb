@@ -1,0 +1,34 @@
+
+--- English ... -------------
+Your order to Vamlingbolaget:
+-----------------------------
+Order :
+-------------
+{% for item in cartitems %}* Product: {{ item.article }}
+* Amount: {{ item.quantity }} 
+* Color: {{ item.color_text }} {% if item.color_text_2 > 0 %} (outside) * Color 2: {{ item.color_text_2 }} (inside) {%endif%}
+* Pattern: {{ item.pattern_text }} {% if item.pattern_text_2 > 0 %} (outside) * Pattern 2: {{ item.pattern_2 }} (inside) {%endif%}
+* Size: {{ item.size_text }} ({{ item.size }})
+* Price per product: {% if item.discount_price > 0 %} Rea: {{ item.discount_price }} SEK ( Regular price: {%endif%} {{ item.article.price }} {% if item.discount_price > 0 %} ) {%endif%} SEK 
+-------------- 
+{%endfor%}
+-------------------------------
+Shipping and handling:  {{ handling }} SEK
+------------------------------
+Sum ---------------- {{ totalprice }} SEK
+------------------------------
+Your address :
+---------------
+{{ new_order.first_name }} {{ new_order.last_name }}
+{{ new_order.street }}
+{{ new_order.postcode }} {{ new_order.city}}
+{{ new_order.country }}
+---------------------------------
+Your phone number : {{ new_order.phone }}
+--------------------------------------------
+* An order to Vamlingbolaget takes about 3 weeks if we sew your garments. Otherwise about a week. 
+{% if new_order.paymentmethod == 'P' %}* You pay cash on delivery {%endif%} {% if new_order.paymentmethod == 'C' %}* You chose Payex card payments {%endif%} {% if new_order.paymentmethod == 'K' %}* You chose Klarna checkout {%endif%}
+{% if new_order.post %}* You will receive an SMS notification {%endif%}
+---------------------------------
+* Your order number is : {{ new_order.order_number }}
+-----------------------------------------------------------------------------------------------------

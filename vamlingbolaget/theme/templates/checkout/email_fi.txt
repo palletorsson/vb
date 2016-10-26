@@ -1,0 +1,34 @@
+
+---- Suomalainen ... --------
+Tilauksesi on Vamlingbolaget:
+-----------------------------
+Tilauksesi :
+-------------
+{% for item in cartitems %}* Tuote: {{ item.article }}
+* Määrä: {{ item.quantity }} 
+* Väri: {{ item.color_text }} {% if item.color_2 > 0 %} (ulkopuolella) * Väri 2: {{ item.color_text_2  }} ( sisällä) {%endif%}
+* Kuvio: {{ item.pattern_text }} {% if item.pattern_2 > 0 %} (ulkopuolella) *  Kuvio 2: {{ item.color_pattern_2  }} (sisällä) {%endif%}
+* Koko: {{ item.size_text }} ({{ item.size }})
+* Hinta per tuote: {% if item.discount_price > 0 %} Rea: {{ item.discount_price }} SEK ( Regular price: {%endif%} {{ item.article.price }} {% if item.discount_price > 0 %} ) {%endif%} SEK 
+-------------- 
+{%endfor%}
+-------------------------------
+Toimitus ja käsittely:  {{ handling }} SEK
+------------------------------
+Sum ---------------- {{ totalprice }} SEK
+------------------------------
+Osoitteesi :
+---------------
+{{ new_order.first_name }} {{ new_order.last_name }}
+{{ new_order.street }}
+{{ new_order.postcode }} {{ new_order.city}}
+{{ new_order.country }}
+---------------------------------
+Puhelinnumerosi: {{ new_order.phone }}
+--------------------------------------------
+* Määräys Vamlingbolaget kestää noin 3 viikkoa, jos me ommella oman vaatteita. Muuten noin viikon. 
+{% if new_order.paymentmethod == 'P' %}* Maksat postiennakolla {%endif%} {% if new_order.paymentmethod == 'C' %}* Valitsitte PayEx korttimaksut {%endif%} {% if new_order.paymentmethod == 'K' %}* Valitsitte Klarna checkout {%endif%}
+{% if new_order.post %}* Saat tekstiviesti-ilmoituksen {%endif%}
+---------------------------------
+* Tilausnumerosi on:{{ new_order.order_number }}
+-----------------------------------------------------------------------------------------------------

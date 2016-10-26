@@ -1,0 +1,34 @@
+
+-- Svenska ... ----------------
+Din order till Vamlingbolaget:
+------------------------------
+Din order:
+----------
+{% for item in cartitems %}* Artikel: {{ item.article }}
+* Antal: {{ item.quantity }} 
+* Färg: {{ item.color_text }} {% if item.color_text_2 > 0 %} (utsida) * Färg 2: {{ item.color_text_2 }} (insida) {%endif%}
+* Mönster: {{ item.pattern_text }} {% if item.pattern_text_2 > 0 %} (utsida) * Mönster 2: {{ item.pattern_2 }} (insida) {%endif%}
+* Storlek: {{ item.size_text }} ({{ item.size }})
+* Pris per produkt: {% if item.discount_price > 0 %} Rea: {{ item.discount_price }} SEK ( Regular price: {%endif%} {{ item.article.price }} {% if item.discount_price > 0 %} ) {%endif%} SEK 
+-------------- 
+{%endfor%}
+------------------------------
+Frakt och hantering :  {{ handling }} SEK
+------------------------------
+Summa ---------------- {{ totalprice }} SEK
+------------------------------
+Din adress:
+-----------
+{{ new_order.first_name }} {{ new_order.last_name }} 
+{{ new_order.street }}
+{{ new_order.postcode }} {{ new_order.city}}
+{{ new_order.country }}
+---------------------------------
+Ditt telefonnummer : {{ new_order.phone }}
+--------------------------------------------
+* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. Reaplagg och färdiga plagg tar ca 1 vecka.
+{% if new_order.paymentmethod == 'P' %}* Du betalar med postforskott {%endif%}{% if new_order.paymentmethod == 'C' %}* Du valde Payex kortbetalning {%endif%}{% if new_order.paymentmethod == 'K' %}* Du valde Klarna checkout {%endif%}
+{% if new_order.post %}* sms-avisering kommer {%endif%}
+---------------------------------
+Ditt ordernummer : {{ new_order.order_number }}
+---------------------------------
