@@ -25,13 +25,16 @@
 	        	<a href="{{ image }}" class="variation_link"><img src="{{ image }}" alt="article image" class="variation_img" /></a>
 			{% endwith %}
 		  	</div>
-		  	<div class="text-center hidden-xs">
-            {% for image in images %}
-            	<button>
-	                <img src="{{ image }}" alt="article image" width="100px" class="variation_imgs" />
-	        	</button>
-	  		{% endfor %}
-	  		</div>
+		  	{%if product.variation.article.quality.order > 15 %}
+            {%else%}
+			  	<div class="text-center hidden-xs">
+	            {% for image in images %}
+	            	<button>
+		                <img src="{{ image }}" alt="article image" width="100px" class="variation_imgs" />
+		        	</button>
+		  		{% endfor %}
+		  		</div>
+	  		{%endif%}
 		</div>
 			   	
 		<div class="span7">
