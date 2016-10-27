@@ -1055,16 +1055,20 @@ def orderCsv(request):
 
 @login_required
 def setDiscount(request, what=''):
+    discount = None
     articles = Article.objects.all()
     if what == 'set': 
         discount = Discount.objects.get(reason='survive2016')
     elif what == 'reset': 
         discount = None
+    elif what == 'setplysch20': 
+        discount = Discount.objects.get(reason='plysch20') 
+        articles = Article.objects.filter(quality__slug__contains = 'plysch')
     else: 
         discount == False
 
     if discount != False:     
-      for art in articles:
-        art.discount = discount 
-        art.save()
+        for art in articles:
+          art.discount = discount 
+          art.save()
     return HttpResponse(status=200)
