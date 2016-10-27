@@ -541,22 +541,24 @@ def allArt(request):
     }, context_instance=RequestContext(request))
 
 
-def allFullArt(request):
-    full_variations = FullVariation.objects.filter(active=True)
+def allFullArt(request, quality):
 
-    headers = get_headers()
+    full_variations = FullVariation.objects.filter(active=True, variation__article__quality__slug__contains=quality)
+    
+    headers = get_vb_headers()
     check_art = []
 
     products = agigateFortnoxProducts()
-
+    
     for art in full_variations: 
         art_exist = False
         sku_num = str(art.variation.article.sku_number) + "_" + str(art.variation.pattern.order) + "_" + str(art.variation.color.order) + "_" +  str(art.size)     
-        res = get_article(headers, str(sku_num)) 
+        
+        res = get_article(headers, sku_num) 
         res = json.loads(res)
-       
+        
         try:
-            print res['Article']['ArticleNumber']
+            d = res['Article']['ArticleNumber']
             check_art.append("ok")
             art_exist = True 
         except:  
@@ -577,7 +579,7 @@ def allFullArt(request):
             #print created
     
     return render_to_response('variation/admin_view.html', {
-        'articles': '', 
+        'articles': full_variations, 
         'check_art': check_art
     }, context_instance=RequestContext(request))
 
