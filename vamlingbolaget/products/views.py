@@ -556,13 +556,14 @@ def allFullArt(request):
         res = json.loads(res)
        
         try:
-            check_art.append("ok: " + unicode(res['Article']['ArticleNumber']) + " : " + str(art.sku_number))
+            print res['Article']['ArticleNumber']
+            check_art.append("ok")
             art_exist = True 
         except:  
             check_art.append("error: " + str(art.variation.article.sku_number) + " **** " + unicode(art.variation.article))
             headers = get_headers()
 
-        if art_exist == True:    
+        if art_exist == False:    
             article_name = unicode(art.variation.article.name) + " " + unicode(art.variation.pattern) + " " + unicode(art.variation.color) + " " + unicode(art.size)
                  
             data = json.dumps({
@@ -573,8 +574,8 @@ def allFullArt(request):
                 }
             })
             created = create_article(sku_num, data, headers)
-            print created
-    print check_art
+            #print created
+    
     return render_to_response('variation/admin_view.html', {
         'articles': '', 
         'check_art': check_art
