@@ -545,7 +545,7 @@ def allFullArt(request, quality):
 
     full_variations = FullVariation.objects.filter(active=True, variation__article__quality__slug__contains=quality)
     
-    headers = get_vb_headers()
+    headers = get_headers()
     check_art = []
 
     products = agigateFortnoxProducts()
