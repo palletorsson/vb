@@ -25,21 +25,28 @@ import datetime
 import re
  
 def ShowOrders(request, stage='all'):
-	if request.user.is_authenticated:
-	    if stage == 'all': 
-	        checkouts = Checkout.objects.filter(~Q(status='C')).exclude(status='F').order_by('-id')[:100]
-	    elif stage == 'ordered' or stage == 'card':
-	         checkouts = Checkout.objects.filter(status='O').order_by('-id')[:50]
-	    elif stage == 'making':
-	         checkouts = Checkout.objects.filter(status='M').order_by('-id')[:50]
-	    elif stage == 'handling':
-	         checkouts = Checkout.objects.filter(status='H').order_by('-id')[:50]
-	    elif stage == 'shipped':
-	         checkouts = Checkout.objects.filter(status='S').order_by('-id')[:50]
-	    else: 
-	    	 checkouts = Checkout.objects.filter(status='F').order_by('-id')[:50]
+    if request.user.is_authenticated:
+        if stage == 'all': 
+            checkouts = Checkout.objects.filter(~Q(status='C')).exclude(status='F').order_by('-id')[:100]
+        elif stage == 'ordered' or stage == 'card':
+            checkouts = Checkout.objects.filter(status='O').order_by('-id')[:50]
+        elif stage == 'making':
+            checkouts = Checkout.objects.filter(status='M').order_by('-id')[:50]
+        elif stage == 'handling':
+            checkouts = Checkout.objects.filter(status='H').order_by('-id')[:50]
+        elif stage == 'shipped':
+            checkouts = Checkout.objects.filter(status='S').order_by('-id')[:50]
+        else: 
+            checkouts = Checkout.objects.filter(status='F').order_by('-id')[:50]
 
-	    return render_to_response('orders/orders.html', {
+        for checkout in checkouts: 
+            print "-",  checkout
+            if len(checkout.fortnox_obj) > 200:
+                checkout.fortnoxed = 1
+            else: 
+                checkout.fortnoxed = 0
+
+        return render_to_response('orders/orders.html', {
 	        'checkouts': checkouts,
 	        },
 	        context_instance=RequestContext(request))

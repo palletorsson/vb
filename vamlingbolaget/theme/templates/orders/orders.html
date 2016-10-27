@@ -80,7 +80,7 @@
 						{% endif %}
 						{% if order.status == 'F' %}
 						<button type="button" id="activate_order" class="btn btn-xs btn-warning text-center"> Achived </button></a>
-						{% endif %}
+						{% endif %} ({% if order.fortnoxed  == 1 %} + {% else %} - {% endif %})
 		            </a>
 		        </div>
 		    </td>
