@@ -57,6 +57,11 @@ def fullindexQuality(request, quality):
     full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__quality__slug__contains = quality).order_by('order')
     qualities = Quality.objects.filter(active=True)
 
+    if quality == 'plysch': 
+        for item in full_variation: 
+            item.oneimg = str(item.variation.article.sku_number) + "_" + str(item.variation.pattern.order) + "_" + str(item.variation.color.order) 
+            print item.oneimg
+
     types = Category.objects.filter(active=True)
   
     return render_to_response('variation/fullindex.html',
