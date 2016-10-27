@@ -13,9 +13,9 @@
         {% for product in products %}
              <div class="collection_list img_container" >
                 <a href="/products/fullvariation/{{product.pk}}/#{{ product.variation.article.name }} {% trans "i" %} {{ product.variation.color|lower }} {{ product.pattern|lower }}">
-                        <span class="hidden"> {{ product.variation.article.quality }}</span>
-                            {%if product.variation.article.quality == 'plysch' %}
-                            <div class="force_image"> <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}.jpg" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
+                        <span class="hidden">{{ product.variation.article.quality }}</span>
+                            {%if product.variation.article.quality == 'Velour TJ' or product.variation.article.quality == 'Velour TD' %}
+                            <div class="force_image"> <img src="{{ product.oneimg }}.jpg" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
                             {%else%}
                                     <div class="force_image"> <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_1.jpg" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
                             {%endif%}
