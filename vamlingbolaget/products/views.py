@@ -550,12 +550,31 @@ def allFullArt(request):
     products = agigateFortnoxProducts()
 
     for art in full_variations: 
-        sku_num = str(art.variation.article.sku_number) + "_" + str(art.variation.pattern.order) + "_" + str(art.variation.color.order) + "_" +  str(art.size)      
-        if unicode(sku_num) in products:
-            check_art.append("ok: " + str(sku_num))
-        else:
-            check_art.append("error: " + str(sku_num) + " ----- " + unicode(art.pk))
+        art_exist = False
+        sku_num = str(art.variation.article.sku_number) + "_" + str(art.variation.pattern.order) + "_" + str(art.variation.color.order) + "_" +  str(art.size)     
+        res = get_article(headers, str(sku_num)) 
+        res = json.loads(res)
+       
+        try:
+            check_art.append("ok: " + unicode(res['Article']['ArticleNumber']) + " : " + str(art.sku_number))
+            art_exist = True 
+        except:  
+            check_art.append("error: " + str(art.variation.article.sku_number) + " **** " + unicode(art.variation.article))
+            headers = get_headers()
 
+        if art_exist == True:    
+            article_name = unicode(art.variation.article.name) + " " + unicode(art.variation.pattern) + " " + unicode(art.variation.color) + " " + unicode(art.size)
+                 
+            data = json.dumps({
+                "Article": {
+                    "Description": article_name ,
+                    "ArticleNumber": sku_num, 
+                    "WebshopArticle": True, 
+                }
+            })
+            created = create_article(sku_num, data, headers)
+            print created
+    print check_art
     return render_to_response('variation/admin_view.html', {
         'articles': '', 
         'check_art': check_art
