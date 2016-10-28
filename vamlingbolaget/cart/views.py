@@ -460,6 +460,7 @@ def totalsum(cartitems, bargains, request, voucher, rea):
         for item in cartitems:
             if item.article.discount:
                 discount_price = f_discount(item.article)
+                item.discount_price = discount_price
                 temp_p = temp_p + discount_price * item.quantity
                 item.totalitemprice = discount_price * item.quantity
             else:
