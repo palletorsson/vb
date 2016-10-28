@@ -149,15 +149,24 @@ def addtocart(request):
             color_db = Color.objects.get(order=1)
             pattern_db = Pattern.objects.get(order=1)
 
+        
         try: 
-            size_db = Size.objects.get(pk=size)
-            print size_db 
-            size_db = size_db.name
-            print size_db
-        except:
-            print "--", int(size)
             size_db = getsize(int(size))
-            print "---", size_db
+            print "size found"
+            newsize = True
+        except: 
+            newsize = False
+        
+        if (newsize == False): 
+            try: 
+                size_db = Size.objects.get(pk=size)
+                print size_db 
+                size_db = size_db.name
+                print size_db
+            except:
+                print "--", int(size)
+                size_db = getsize(int(size))
+                print "---", size_db
 
         if(color2 == '0'):
             pass
