@@ -84,9 +84,7 @@ def addtocart(request):
             quantity = 1
 
         cartitem_id = 1
-        print "cart id", cartitem_id
         add_or_edit = d['add_or_edit']
-        print "add or edit", add_or_edit
 
         cart_id = _cart_id(request)
         cart, created = Cart.objects.get_or_create(key = cart_id)
@@ -153,9 +151,13 @@ def addtocart(request):
 
         try: 
             size_db = Size.objects.get(pk=size)
+            print size_db 
             size_db = size_db.name
+            print size_db
         except:
+            print "--", int(size)
             size_db = getsize(int(size))
+            print "---", size_db
 
         if(color2 == '0'):
             pass
