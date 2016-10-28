@@ -152,7 +152,7 @@ def addtocart(request):
         
         try: 
             size_db = getsize(int(size))
-            print "size found"
+            print "size found", size, size_db 
             newsize = True
         except: 
             newsize = False
