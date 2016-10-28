@@ -40,7 +40,7 @@ def ShowOrders(request, stage='all'):
             checkouts = Checkout.objects.filter(status='F').order_by('-id')[:50]
 
         for checkout in checkouts: 
-            print "-",  checkout
+
             if len(checkout.fortnox_obj) > 200:
                 checkout.fortnoxed = 1
             else: 
@@ -195,19 +195,12 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                         checkout.save()
                         # reload and check 
                         new_order_json = json.loads(invoice_result)
-                        print "'''", new_order_json
                         num = int(new_order_json["Invoice"]["YourOrderNumber"])
-                        if (num > 0):   
-                            print "int", num
-                            print "order json", new_order_json 
-                        else: 
-                            print "not int"
 
                     invoice_result = fortnoxOrderandCostumer(request, checkout, new_order_json, what)
 
                     headers = get_headers()                        
                     resp = createOrder(headers, invoice_result)
-
                     checkout.fortnox_obj = resp
                     checkout.save()
                 
