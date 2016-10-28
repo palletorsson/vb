@@ -7,6 +7,7 @@ from django.template import Context
 from django.template.loader import render_to_string, get_template
 from django.core.mail import EmailMessage
 from products.models import Pattern, Color
+from fortnox.fortnox import getFortnoxSize
 
 # start by creating the costumer message header 
 def head_part_of_message(lang): 
@@ -232,9 +233,17 @@ def email_one(request, new_order, cartitems, handling, totalprice):
         item.pattern_text = pattern.name
         if (item.color_2):
             color = Color.objects.get(order=item.color_2)
-            item.color_text_2 = color.name
-            pattern = Pattern.objects.get(order=item.pattern)
-            item.pattern_text_2 = pattern.name
+            item.color_text_2 = color
+            pattern = Pattern.objects.get(order=item.pattern_2)
+            item.pattern_text_2 = pattern
+        try:
+            text_size = getFortnoxSize(item.size)
+        except: 
+            text_size = ''
+        item.size_text = text_size
+
+    # get the name of the size 
+        
 
     ctx = {
         'handling' : handling,
@@ -247,13 +256,7 @@ def email_one(request, new_order, cartitems, handling, totalprice):
     lang = request.LANGUAGE_CODE 
 
     # Make messages
-    translation.activate('se')
-    message_se = render_to_string('checkout/email_se.txt', ctx)
-    translation.activate('en')
     message_en  = render_to_string('checkout/email_en.txt', ctx)
-    translation.activate('fi')
-    message_fi  = render_to_string('checkout/email_fi.txt', ctx)
-
 
     # reset the language
     translation.activate(lang) 
@@ -261,10 +264,51 @@ def email_one(request, new_order, cartitems, handling, totalprice):
     # return the right combiantion of message
     if lang == 'en': 
         message = message_en 
+    elif lang == 'sv': 
+        message_se = render_to_string('checkout/email_se.txt', ctx)
+        message = message_se
+    elif lang == 'fi':
+        message_fi  = render_to_string('checkout/email_fi.txt', ctx) 
+        message = message_fi + message_en
+    elif lang == 'dk': 
+        message_dk  = render_to_string('checkout/email_en.txt', ctx)
+        message = message_dk + message_en
+    elif lang == 'de': 
+        message_de  = render_to_string('checkout/email_en.txt', ctx)
+        message = message_de + message_en
+    else: 
+        message = message_en 
+      
+    return message 
+
+def email_two(request, new_order):
+
+    # get the name of color and patterns
+    
+    ctx = {
+        'new_order': new_order
+    }
+
+    # save the langage code
+    lang = request.LANGUAGE_CODE 
+
+    # Make messages
+    translation.activate('se')
+    message_se = render_to_string('checkout/email2_se.txt', ctx)
+    message_en = render_to_string('checkout/email2_se.txt', ctx)
+    translation.activate(lang) 
+
+    # return the right combiantion of message
+    if lang == 'en': 
+        message = message_en 
     elif lang == 'se': 
-        message = message_se + message_en
+        message = message_se
     elif lang == 'fi': 
         message = message_fi + message_en
+    elif lang == 'dk': 
+        message = message_en + message_en
+    elif lang == 'de': 
+        message = message_en + message_en
     else: 
         message = message_en 
       

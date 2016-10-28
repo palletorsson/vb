@@ -91,17 +91,17 @@ def checkout(request, test=''):
                 new_order.post = False
 
             # start creating the costumer message 
-            temp_msg = head_part_of_message(lang) 
-            temp_msg = temp_msg + cart_part_of_message(cartitems, rea_items, lang)
-            temp_msg = temp_msg + cartsum_part_of_message(handling, totalprice, lang)
+            #temp_msg = head_part_of_message(lang) 
+            #temp_msg = temp_msg + cart_part_of_message(cartitems, rea_items, lang)
+            #temp_msg = temp_msg + cartsum_part_of_message(handling, totalprice, lang)
 
 
-            mess = request.POST['message']
-            if len(mess) > 2: 
-                temp_msg = temp_msg + personal_part_of_message(mess, lang)
+            #mess = request.POST['message']
+            #if len(mess) > 2: 
+                #temp_msg = temp_msg + personal_part_of_message(mess, lang)
 
             #save the message at this stage to continue on for klarna
-            new_order.message = temp_msg
+            #new_order.message = temp_msg
 
 
             # get the session_key for look up 
@@ -109,23 +109,29 @@ def checkout(request, test=''):
 
 
             new_order.save()
+            # make an email body
 
             # add adress part of message 
-            temp_msg = temp_msg + adress_part_of_message(new_order, lang)
+            #temp_msg = temp_msg + adress_part_of_message(new_order, lang)
 
             #finalize the message including ordernumber and session key
-            the_message = temp_msg + final_part_of_message(new_order, lang)
-
-            try:
-                the_items = getCartItems(request)
-                cartitems = the_items['cartitems'] 
-                reaitems = the_items['rea_items'] 
-                CheckoutTransfer(new_order, cartitems, reaitems)
-                log = 'Checkout Transfer Succcess' 
-                keepLog(request, log, 'INFO', new_order.ip, key) 
-            except:
-                log = 'Checkout Transfer failed' 
-                keepLog(request, log, 'ERROR', new_order.ip, key) 
+            #the_message = temp_msg + final_part_of_message(new_order, lang)
+            the_items = getCartItems(request)
+            cartitems = the_items['cartitems'] 
+            returntotal = totalsum(cartitems, bargains, request, voucher, rea_items)
+            reaitems = the_items['rea_items'] 
+            
+            CheckoutTransfer(new_order, cartitems, reaitems)
+            log = 'Checkout Transfer Success' 
+            keepLog(request, log, 'INFO', new_order.ip, key) 
+            
+            for item in cartitems: 
+                if (item.article.discount.discount > 0):
+                    new_order.payment_log = item.article.discount.discount           
+    
+            email_body = email_one(request, new_order, cartitems, handling, totalprice)
+            new_order.message = email_body
+            new_order.save()
 
 
             # payment logic start
@@ -135,7 +141,7 @@ def checkout(request, test=''):
             # we also save the order in json that we can use with fortnox, as well as staring the payment log 
             if (new_order.paymentmethod == 'P'):
 
-                new_order.message = the_message
+                #new_order.message = the_message
 
                 # start payment log
                 log = 'New Order - Pay on Delivery, ' + request.POST['email'] 
@@ -143,16 +149,16 @@ def checkout(request, test=''):
                 log = 'Sending Mail order to ' + request.POST['email'] 
                 keepLog(request, log, 'INFO', new_order.ip, key)
 
-                # save the order 
+                # save the order again                 
                 new_order.save()
 
                 
                 # send email verifaction to customer if name not Tester
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
                 if (new_order.first_name == "Tester"):
-                    pass
+                    mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %email_body, 'palle.torsson@gmail.com', to,  fail_silently=False)
                 else:
-                    mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %the_message, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
+                    mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %email_body, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
                 return HttpResponseRedirect('thanks/')
 
@@ -234,7 +240,7 @@ def checkout(request, test=''):
                     PayExRefKey = 1
 
                 new_order.payex_key = PayExRefKey
-                new_order.message = the_message
+                #new_order.message = the_message
                 # log 
                 log = 'Initialize PayEx Process, ' + request.POST['email'] 
                 keepLog(request, log, 'INFO', new_order.ip, key) 
