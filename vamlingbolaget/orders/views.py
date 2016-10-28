@@ -81,11 +81,12 @@ def ShowOrder(request, order_id):
             customer_number = 'New Customer'
         else:
             customer_number = fortnox_custumer.rsplit('/', 1)[-1]
-    
+
         secondmessage = None
         if checkout.status == 'O': 
-            secondmessage = u'Hej! \n\nVi på Vamlingbolaget har nu tagit emot och registerat din order. \nSå fort ordern är klar kommer vi att skicka dina produkter.  \nDå får du också ett mail eller sms från Posten så du kan följa din beställning tills den kommer fram till dig. \n\nVänliga Hälsningar \nVamlingbolaget. \n\nDitt ordernummer är: '+ str(checkout.order_number)
-        
+            secondmessage = email_two(request, checkout)
+            # check if order exist in fortnox
+
         incolor_path = None
         fortnox = None
         if checkout.status == 'M': 
@@ -161,6 +162,10 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                 except: 
                     pass
                 # send second email 
+                secondmessage = email_two(request, checkout)
+                to = [checkout.email, 'palle.torsson@gmail.com']
+                mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %secondmessage, checkout.email, to,  fail_silently=False)
+                
                 #log process
                 log = 'Order: ' + str(checkout.order_number) + ', Second email sent to: ' + checkout.email 
                 keepLog(request, log, 'INFO', current_user, checkout.order_number) 
@@ -202,9 +207,8 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
 
                     headers = get_headers()                        
                     resp = createOrder(headers, invoice_result)
-                    print "resp", resp
+
                     checkout.fortnox_obj = resp
-                    print "----",  resp
                     checkout.save()
                 
                     #log process
@@ -318,7 +322,6 @@ def getOrderStock(cartitems):
             size = getsizenumber(item.size)
             
         fortnox_id = str(item.article.sku_number) + "_" + str(item.pattern.order) + "_" + str(item.color.order) + "_" + str(size)
-        print fortnox_id
         in_stock = get_stockvalue(fortnox_id)
         return in_stock
         
@@ -338,7 +341,7 @@ def getsizenumber(size):
         return_size = 46
     else: 
         return_size = 'NO' 
-    print return_size
+
     return return_size
 
 def unifaunShipmentCall(shipmentparams):
@@ -456,12 +459,12 @@ def getParcels(parcel_json):
     parcel_json = json.loads(parcel_json)
 
     parcel_json = parcel_json["Invoice"]["InvoiceRows"]
-    print "form parcel", parcel_json 
+
     for item in parcel_json: 
         art_num = item['ArticleNumber']
         artnum = re.sub(r'[\W_]+', '', art_num)
         artnum = int(artnum)
-        print "art", artnum
+
         if artnum > 10: 
             
             return_parcels.append({

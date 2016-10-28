@@ -60,7 +60,7 @@ def fullindexQuality(request, quality):
     if quality == 'plysch': 
         for item in full_variation: 
             item.oneimg = str(item.variation.article.sku_number) + "_" + str(item.variation.pattern.order) + "_" + str(item.variation.color.order) 
-            print item.oneimg
+  
 
     types = Category.objects.filter(active=True)
   
