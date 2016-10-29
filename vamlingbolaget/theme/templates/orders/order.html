@@ -416,7 +416,7 @@
 		<td> 
 		{% if order.status == 'O' or order.status == 'P' %}
 		    <div class="text-center"> 
-		    	Ett bekräftelsemail kommer att skicka till Kunden. se nedan.
+		    	Ett bekräftelsemail kommer att skicka till {{ order.email }}. se nedan.
 		    </div>
 		{% endif %}
 		{% if order.status == 'M' %}
@@ -437,14 +437,26 @@
 </tbody>
 </table>
 
-{% if secondmessage %}
-	<legend>Bekräftelsemail</legend> 
-		<tr>
-			<td>
-				<pre>{{ secondmessage }}</pre>
-			 </td>
-		</tr> 	
-{% endif %}
+		{% if secondmessage %}
+			<legend>Bekräftels-email, email2</legend> 
+				<tr>
+					<td>
+						<pre>{{ secondmessage }}</pre>
+					 </td>
+				</tr> 
+					
+		{% endif %}
+
+		
+		{% if order.status == 'O' or order.status == 'P' %}
+			<legend>Order-email</legend> 
+				<tr>
+					<td>
+						<pre>{{ order.message }}</pre>
+					 </td>
+				</tr> 
+					
+		{% endif %}
 	    <th>
 	        <legend><span class="glyphicon glyphicon-minus" aria-hidden="true"> </span> Överigt <br></legend>
 	        <a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(ta bort ordern)</a>
