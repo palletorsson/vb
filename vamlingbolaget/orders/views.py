@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from checkout.models import Checkout
 from checkout.views import fortnoxOrderandCostumer
+from checkout.make_messages import email_two
 from products.models import Article, ReaArticle
 from cart.views import getnames,totalsum
 from models import OrderItem, ReaOrderItem
