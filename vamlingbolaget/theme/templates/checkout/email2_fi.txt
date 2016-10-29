@@ -1,0 +1,9 @@
+Hej {{ new_order.last_name }}! 
+
+Vi på Vamlingbolaget har nu tagit emot och registerat din order. 
+Så fort ordern är klar kommer vi att skicka dina produkter.  
+
+Vänliga Hälsningar 
+Vamlingbolaget. 
+
+Ditt ordernummer är: {{ new_order.order_number }}
