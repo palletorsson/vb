@@ -74,8 +74,7 @@ def create_invoice_rows(order_json):
             text = str(full_var)
             #print "text", text
             # create the full article number here
-            size = getFortnoxSize(item.size)
-            #print "size", size
+
             full_var_text = str(full_var.variation) + str(" - ") + str(size)
             full_var_num = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order)  + "_" + str(full_var.size)
             #print "full_var_num", full_var_num
@@ -83,6 +82,11 @@ def create_invoice_rows(order_json):
             full = True
         except:
            pass 
+        size = getFortnoxSize(item.size)        
+        if size == False: 
+            item.size = Size.objects.get(pk=item.size)
+
+
         # if it is a full variation 
         if full == True: 
 
@@ -164,7 +168,7 @@ def getFortnoxSize(size):
         the_size = 'XXL'
 
     else: 
-        the_size = 'No SUCH SIZE'
+        the_size = False
 
     return the_size
 
