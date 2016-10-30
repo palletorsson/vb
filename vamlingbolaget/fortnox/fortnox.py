@@ -82,11 +82,17 @@ def create_invoice_rows(order_json):
             full = True
         except:
            pass 
-        size = getFortnoxSize(item.size)        
+           
+        size = getFortnoxSize(item.size)
+        print "------------------------", size
+        
         if size == False: 
             item.size = Size.objects.get(pk=item.size)
 
-
+            print "----i--", item.size
+            print size
+            print "size", size
+        
         # if it is a full variation 
         if full == True: 
 
