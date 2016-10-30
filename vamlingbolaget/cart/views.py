@@ -550,8 +550,13 @@ def getnames(cartitems):
 
         try: 
             size_db = getsize(int(item.size))
-            item.size = size_db 
-            newsize = True
+
+            if size_db == 'NO':
+               newsize = False
+            else:
+                item.size = size_db 
+                print "---",  size_db
+                newsize = True
         except: 
             newsize = False
 
@@ -559,7 +564,8 @@ def getnames(cartitems):
             try: 
                 item.size = Size.objects.get(pk=item.size)
             except:
-                item.size = getsize(int(item.size))
+                pass
+                #item.size = getsize(int(item.size))
 
 
         if item.color_2:
