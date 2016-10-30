@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import render_to_string, get_template
 from django.core.mail import EmailMessage
-from products.models import Pattern, Color
+from products.models import Pattern, Color, Size
 from fortnox.fortnox import getFortnoxSize
 
 # start by creating the costumer message header 
@@ -236,10 +236,11 @@ def email_one(request, new_order, cartitems, handling, totalprice):
             item.color_text_2 = color
             pattern = Pattern.objects.get(order=item.pattern_2)
             item.pattern_text_2 = pattern
-        try:
-            text_size = getFortnoxSize(item.size)
-        except: 
-            text_size = ''
+
+        text_size = getFortnoxSize(item.size)
+        if text_size == False: 
+            text_size = Size.objects.get(pk=item.size)
+
         item.size_text = text_size
 
     # get the name of the size 
