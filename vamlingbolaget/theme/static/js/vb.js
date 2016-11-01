@@ -504,6 +504,7 @@ $('#vocher-plus').click(function(e){
 
 $('.abouts').filter(function () {
     var about = $("#about").text().trim(); 
+    console.log(about); 
     if(about == 'Om oss') {
         remove = false;
     } else if (about == 'About') {
