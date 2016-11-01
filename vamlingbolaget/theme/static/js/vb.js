@@ -502,6 +502,22 @@ $('#vocher-plus').click(function(e){
 });
 
 
+$('.abouts').filter(function () {
+    var about = $("#about").text().trim(); 
+    if(about == 'Om oss') {
+        remove = false;
+    } else if (about == 'About') {
+        remove = false; 
+    } else {
+        remove = true;
+    }
+    if (remove == true) {
+        $('.onlysv').remove(); 
+    }
+}); 
+  
+
+
 
 // --- setup welcome page animation
 
