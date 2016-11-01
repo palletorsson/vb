@@ -513,7 +513,10 @@ $('.abouts').filter(function () {
         remove = true;
     }
     if (remove == true) {
+        console.log("remove");
         $('.onlysv').remove(); 
+    } else {
+        console.log("keep");
     }
 }); 
   
