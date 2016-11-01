@@ -125,10 +125,12 @@ def checkout(request, test=''):
             log = 'Checkout Transfer Success' 
             keepLog(request, log, 'INFO', new_order.ip, key) 
             
-            for item in cartitems: 
-                if (item.article.discount.discount > 0):
-                    new_order.payment_log = item.article.discount.discount           
-    
+            try: 
+                for item in cartitems: 
+                    if (item.article.discount.discount > 0):
+                        new_order.payment_log = item.article.discount.discount           
+            except:
+                pass 
             email_body = email_one(request, new_order, cartitems, handling, totalprice)
             new_order.message = email_body
             new_order.save()
