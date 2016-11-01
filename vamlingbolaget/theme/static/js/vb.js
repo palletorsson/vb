@@ -597,6 +597,11 @@ var set_first_page = function(){
 }
 
 
+$('#continue_payment').click(function(e) {
+    console.log("overlay");
+    var overlay = $('<div id="overlay" ></div>');
+    overlay.appendTo(document.body);        
+}); 
 
 $( window ).resize(function() {
     set_first_page();
