@@ -312,7 +312,7 @@ def csvTransExport(request, model, what='title', lang='en'):
                     elif lang == 'de':
                         writer.writerow({'sv': title_se, 'de': title_de, 'en': title_en}) 
                     elif lang == 'dk':
-                        writer.writerow({'sv': title_se, 'de': title_dk, 'en': title_en}) 
+                        writer.writerow({'sv': title_se, 'dk': title_dk, 'en': title_en}) 
                     else:    
                         writer.writerow({'sv': title_se, 'en': title_en,'fi': title_fi, 'de': title_de, 'dk': title_dk}) 
        
