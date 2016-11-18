@@ -258,25 +258,23 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
 
                 shipmentparams = json.dumps(unifaunObj)
 
-                shipment = unifaunShipmentCall(shipmentparams) 
-                printing = 0 
+                shipment = unifaunShipmentStoredCall(shipmentparams) 
                 if len(shipment) < 100:
                     log = 'Order: ' + str(shipment) + ', Unifaun order creation error'
                     keepLog(request, log, 'ERROR', current_user, shipment) 
                 else:
-                    if printing == 1: 
-                        shipment_obj = json.loads(shipment)
+                
+                    shipment_obj = json.loads(shipment)
 
-                        pdf_href = shipment_obj[0]['pdfs'][0]['href']
-                        shipment_id = shipment_obj[0]['id']
-                        pdf = unifaunShipmentGetPDF(pdf_href, shipment_id)
-                        checkout.unifaun_obj = shipment_id
-                        checkout.save()
-                        #log process
-                        log = 'checkout: ' + str(checkout.order_number) + ', Unifaun print created'
-                        keepLog(request, log, 'INFO', current_user, checkout.order_number, pdf) 
-                    else: 
-                        print "no print"
+                    pdf_href = shipment_obj[0]['pdfs'][0]['href']
+                    shipment_id = shipment_obj[0]['id']
+                    pdf = unifaunShipmentGetPDF(pdf_href, shipment_id)
+                    checkout.unifaun_obj = shipment_id
+                    checkout.save()
+                    #log process
+                    log = 'checkout: ' + str(checkout.order_number) + ', Unifaun print created'
+                    keepLog(request, log, 'INFO', current_user, checkout.order_number, pdf) 
+
         if (stage == 'finalize'): 
             checkout.status = 'F'
             # send shipping information to customer 
@@ -352,6 +350,18 @@ def unifaunShipmentCall(shipmentparams):
     			headers=headers, 
     			data=shipmentparams, 
     			)
+    return r.content
+
+
+def unifaunShipmentStoredCall(shipmentparams):
+    url = 'https://api.unifaun.com/rs-extapi/v1/stored-shipments' 
+    headers = GetHeaders() 
+    
+    r = requests.post(
+                url, 
+                headers=headers, 
+                data=shipmentparams, 
+                )
     return r.content
 
 # https://www.unifaunonline.se/ufoweb-prod-201606211020/rs-extapi/v1/stored-shipments
