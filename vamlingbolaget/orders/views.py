@@ -251,7 +251,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                     "senderReference": "Vamlingbolaget", 
 				    "senderPartners": senderpartner,
                     "options": opt,
-                    "test": "true"
+                 
 
                     }
                 }
