@@ -240,26 +240,40 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                 opt =  getOptions(checkout.email)
                 senderpartner = senderPartner(send_type)
                 #checkZip(order.postcode)
-                unifaunObj = {
-                "pdfConfig": pdfConf,
-                "shipment": {
-                    "sender": vamlingbolaget,
-                    "parcels": parcels,
-                    "orderNo": str(checkout.order_number),
-                    "receiver": receiver,
-                    "service": service,
-                    "senderReference": "Vamlingbolaget", 
-				    "senderPartners": senderpartner,
-                    "options": opt,
-                 
-
+                printing = 0
+                if printing == 1: 
+                    unifaunObj = {
+                    "pdfConfig": pdfConf,
+                    "shipment": {
+                        "sender": vamlingbolaget,
+                        "parcels": parcels,
+                        "orderNo": str(checkout.order_number),
+                        "receiver": receiver,
+                        "service": service,
+                        "senderReference": "Vamlingbolaget", 
+    				    "senderPartners": senderpartner,
+                        "options": opt, 
+                        "test": True               
+                        }
                     }
-                }
+                else: 
+                    unifaunObj = {
+                        "sender": vamlingbolaget,
+                        "parcels": parcels,
+                        "orderNo": str(checkout.order_number),
+                        "receiver": receiver,
+                        "service": service,
+                        "senderReference": "Vamlingbolaget", 
+                        "senderPartners": senderpartner,
+                        "options": opt,
+                        "test": True,                 
+                    }
 
                 shipmentparams = json.dumps(unifaunObj)
 
                 shipment = unifaunShipmentStoredCall(shipmentparams) 
-                printing = 0 
+
+ 
                 if len(shipment) < 100:
                     log = 'Order: ' + str(shipment) + ', Unifaun order creation error'
                     keepLog(request, log, 'ERROR', current_user, shipment) 
@@ -277,6 +291,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                         keepLog(request, log, 'INFO', current_user, checkout.order_number, pdf) 
                     else: 
                         print "no print"
+
         if (stage == 'finalize'): 
             checkout.status = 'F'
             # send shipping information to customer 
