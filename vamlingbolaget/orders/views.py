@@ -24,7 +24,9 @@ import base64
 from vamlingbolaget.settings import ROOT_DIR
 import datetime
 import re
- 
+from django.core.mail import send_mail
+from django.core import mail
+
 def ShowOrders(request, stage='all'):
     if request.user.is_authenticated:
         if stage == 'all': 
@@ -165,7 +167,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                 # send second email 
                 secondmessage = email_two(request, checkout)
                 to = [checkout.email, 'palle.torsson@gmail.com']
-                mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %secondmessage, checkout.email, to,  fail_silently=False)
+                #mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %secondmessage, checkout.email, to,  fail_silently=False)
                 
                 #log process
                 log = 'Order: ' + str(checkout.order_number) + ', Second email sent to: ' + checkout.email 
