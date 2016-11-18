@@ -259,22 +259,24 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                 shipmentparams = json.dumps(unifaunObj)
 
                 shipment = unifaunShipmentStoredCall(shipmentparams) 
+                printing = 0 
                 if len(shipment) < 100:
                     log = 'Order: ' + str(shipment) + ', Unifaun order creation error'
                     keepLog(request, log, 'ERROR', current_user, shipment) 
                 else:
-                
-                    shipment_obj = json.loads(shipment)
+                    if printing == 1: 
+                        shipment_obj = json.loads(shipment)
 
-                    pdf_href = shipment_obj[0]['pdfs'][0]['href']
-                    shipment_id = shipment_obj[0]['id']
-                    pdf = unifaunShipmentGetPDF(pdf_href, shipment_id)
-                    checkout.unifaun_obj = shipment_id
-                    checkout.save()
-                    #log process
-                    log = 'checkout: ' + str(checkout.order_number) + ', Unifaun print created'
-                    keepLog(request, log, 'INFO', current_user, checkout.order_number, pdf) 
-
+                        pdf_href = shipment_obj[0]['pdfs'][0]['href']
+                        shipment_id = shipment_obj[0]['id']
+                        pdf = unifaunShipmentGetPDF(pdf_href, shipment_id)
+                        checkout.unifaun_obj = shipment_id
+                        checkout.save()
+                        #log process
+                        log = 'checkout: ' + str(checkout.order_number) + ', Unifaun print created'
+                        keepLog(request, log, 'INFO', current_user, checkout.order_number, pdf) 
+                    else: 
+                        print "no print"
         if (stage == 'finalize'): 
             checkout.status = 'F'
             # send shipping information to customer 
