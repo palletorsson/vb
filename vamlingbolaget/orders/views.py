@@ -457,19 +457,22 @@ def getParcels(parcel_json):
     parcel_json = parcel_json["Invoice"]["InvoiceRows"]
 
     for item in parcel_json: 
-        art_num = item['ArticleNumber']
-        artnum = re.sub(r'[\W_]+', '', art_num)
-        artnum = int(artnum)
+        try: 
+            art_num = item['ArticleNumber']
+            artnum = re.sub(r'[\W_]+', '', art_num)
+            artnum = int(artnum)
 
-        if artnum > 10: 
-            
-            return_parcels.append({
-                "copies": "1",
-                "weight": "1",
-                "contents": item['Description']
-            })
-            weight = weight + 0.5
-        
+            if artnum > 10: 
+                
+                return_parcels.append({
+                    "copies": "1",
+                    "weight": "1",
+                    "contents": item['Description']
+                })
+                weight = weight + 0.5
+        except: 
+            pass     
+
     return return_parcels 
 
 def getPdfConfig(): 
