@@ -189,8 +189,10 @@ def create_order_rows(order_json):
         full = False
         color = Color.objects.get(order=item.color)
         pattern = Pattern.objects.get(order=item.pattern)
-        variation = Variation.objects.get(article=item.article, color=color, pattern=pattern)
-
+        try: 
+            variation = Variation.objects.get(article=item.article, color=color, pattern=pattern)
+        except: 
+            pass 
         # use the try statment to check if it is a full varition  
         try: 
             full_var = FullVariation.objects.get(variation=variation, size=item.size)
