@@ -5,7 +5,7 @@
 {% block allcontent %}
 
   {% if user.is_authenticated %}
-	<legend> <span class="glyphicon glyphicon-user" aria-hidden="true"> </span> Kund information </legend>
+	<legend> <span class="glyphicon glyphicon-user" aria-hidden="true"> </span> Kund information (<a href="/admin/checkout/checkout/{{ order.pk }} "><span class="glyphicon glyphicon-edit" aria-hidden="true">Ändra</span></a>)</legend>
 
 <table class="table table-bordered table-striped" >
 	    <thead><tr>
@@ -119,7 +119,7 @@
 		    </td>
 		    <td>
 		        <div>
-		            <span>Processtatus</span>
+		            <span width="300px">Processtatus</span>
 		        </div>
 		    </td>
 		    </tr>
@@ -172,19 +172,19 @@
 		        <div>
 		            <span> 
 		            	{% if order.paymentmethod == 'C' %}
-						Card Payment with Payex
+						Payex
 						{% endif %}
 						{% if order.paymentmethod == 'P' %}
-						Pay on Delivery
+						Postförskott
 						{% endif %}
 						{% if order.paymentmethod == 'K' %}
 						Klarna Checkout
 						{% endif %}
 		        </div>
 		    </td>
-		    <td>
+		    <td width="400px">
 		        <div>
-		            <span>  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> {{ process_status }} </span> </span>
+		            <span>  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> {{ process_status | safe }} </span> </span>
 		        </div>
 		    </td>
 		</tr> 
@@ -224,7 +224,7 @@
 	    </td>
 	    <td>
 	        <div>
-	            <span> {{ item.article }} i {{item.article.quality|lower}} (stock : {{ stock }})</span>
+	            <span> {{ item.article }} i {{item.article.quality|lower}} (stock : {{ stock }}) </span>
 	        </div>
 	    </td>
 	    <td>
@@ -326,10 +326,10 @@
 <table class="table table-bordered table-striped" >
 	<tr>
 	    <th width="33%">
-	    	 <span class="glyphicon glyphicon-star" aria-hidden="true"> </span> Detta steg  
+	    	 <span class="glyphicon glyphicon-star" aria-hidden="true"> </span> Detta steg: {% if order.status == 'O' or order.status == 'P' %} 1 {% endif %} {% if order.status == 'M' %} 2 {% endif %} {% if order.status == 'H' %} 3 {% endif %}{% if order.status == 'S' %} 4 {% endif %}
 	    </th>
 	    <th width="33%">
-	        <span class="glyphicon glyphicon-bell" aria-hidden="true"> </span> Nästa steg 
+	        <span class="glyphicon glyphicon-bell" aria-hidden="true"> </span> Händelse 
 	    </th>
 	    <th width="33%">
 			 <span class="glyphicon glyphicon-comment" aria-hidden="true" > </span> Vad händer nu?
@@ -340,7 +340,7 @@
     	<td> 
 		{% if order.status == 'O' or order.status == 'P' %}
 		    <div class="text-center"> 
-		    	Detta är en ny order, aktivera den.
+		    	Detta är en ny order, kontrollera och aktivera den.
 		    </div>
 		{% endif %}
 		{% if order.status == 'M' %}
@@ -355,11 +355,9 @@
 			</div>
 		{% endif %}
 		{% if order.status == 'S' %}
-		    <div class="text-center"><a href="/media/{{ pdf }}.pdf">    	
-		    	<span class="glyphicon glyphicon-print" aria-hidden="true"> </span> Frakt Pdf</a>  
+		    <div class="text-center">   	
+		    	<span class="glyphicon glyphicon-print" aria-hidden="true"> </span> Frakt dokument samlas i <a href="https://www.unifaunonline.se/"> Unifaun </a>  
 		    </div> 
-		    <hr>
-			<a href="/orders/order/action/cancel/shipment/{{ order.order_number }}/">(ta bort frakten)</a> 
 			</div>
 		{% endif %}
 		{% if order.status == 'F' %}
@@ -378,7 +376,7 @@
 		{% if order.status == 'M' %}
 			<div class="text-center">
 				<a href="/orders/order/action/activate/packaging/{{ order.order_number }}/">
-				<button type="button" id="activate_order" class="btn btn-large btn-success text-center"> Emballage / Faktura</button></a>
+				<button type="button" id="activate_order" class="btn btn-large btn-success text-center"> Skapa Emballage och Faktura</button></a>
 				
 			</div>
 		{% endif %}
@@ -426,7 +424,7 @@
 			En Unifaun-Postnord order kommer att skapas och lagras i Unifaun för utskrift.
 		 {% endif %}
 	     {% if order.status == 'S' %}
-			Du kan skriva ut Unifaun-Postnord-slippen nu eller senare i Unifaun. 
+			Du kan skriva ut Unifaun-Postnord-slippen nu eller senare i <a href="https://www.unifaunonline.se/"> Unifaun </a>. 
 		{% endif %}
 		{% if order.status == 'F' %}
 		            <a href="/orders/">{% trans "Se Alla Ordrar" %}</a
@@ -459,7 +457,7 @@
 		{% endif %}
 	    <th>
 	        <legend><span class="glyphicon glyphicon-minus" aria-hidden="true"> </span> Överigt <br></legend>
-	        <a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(ta bort ordern)</a>
+	        <a href="/orders/order/action/cancel/cancel/{{ order.order_number }}/">(ta bort ordern från orderlistan)</a>
 	    </th>
     {% else %}
         <p> please ... </p>

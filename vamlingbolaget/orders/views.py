@@ -272,8 +272,11 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                 shipmentparams = json.dumps(unifaunObj)
 
                 shipment = unifaunShipmentStoredCall(shipmentparams) 
-
- 
+                shipment_obj = json.loads(shipment)
+                shipment_id = shipment_obj['id']
+                checkout.unifaun_obj = shipment_id
+                checkout.save()
+                
                 if len(shipment) < 100:
                     log = 'Order: ' + str(shipment) + ', Unifaun order creation error'
                     keepLog(request, log, 'ERROR', current_user, shipment) 
@@ -599,10 +602,10 @@ def LookAtDict(checkout):
         
         firstorder = firsTorder['Invoice']['CustomerNumber']
         first_order_exist = True
-        check_string = 'Order:OK | '
+        check_string = 'Order: <span class="glyphicon glyphicon-ok" aria-hidden="true"> </span> | '
     except:
         first_order_exist = False
-        check_string = 'Order.^ | '
+        check_string = 'Order: <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"> </span> | '
 
 
     try: 
@@ -610,11 +613,11 @@ def LookAtDict(checkout):
 
         orderNum = fortnoXobj['Invoice']['DocumentNumber']
         order_exist = True 
-        check_string = check_string + 'Fortnox:OK | '
+        check_string = check_string + 'Fortnox: <span class="glyphicon glyphicon-ok" aria-hidden="true"> </span> | '
 
     except:
         order_exist = False
-        check_string = check_string + 'Fortnox.^ | '
+        check_string = check_string + 'Fortnox: <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"> </span> | '
     
     # make a request to see if 
 
@@ -622,14 +625,14 @@ def LookAtDict(checkout):
         shipment_id = checkout.unifaun_obj
         if len(shipment_id) > 3: 
             shipping_exist = True 
-            check_string = check_string + 'Unifaun:OK'
+            check_string = check_string + 'Unifaun: <span class="glyphicon glyphicon-ok" aria-hidden="true"> </span>'
         else: 
 
             shipping_exist = False
-            check_string = check_string + 'Unifaun.^'    
+            check_string = check_string + 'Unifaun: <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"> </span> '    
     except:
         shipping_exist = False
-        check_string = check_string + 'Unifaun.^'
+        check_string = check_string + 'Unifaun: <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"> </span> '
 
     return check_string
 

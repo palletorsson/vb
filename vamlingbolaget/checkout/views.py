@@ -322,22 +322,16 @@ def success(request):
             if (order != 1 and order.status == 'O'):
 
                 try:
-                    transnumber_ = response['transactionNumber']
-
                     order_obj = formatJson(order.order)
                     order_obj = json.loads(order_obj)
-                    order_obj["transnumber"] = str(transnumber_)
                     order.order = order_obj
                     order.save()
-                    # logging 
-                    log = 'Log Trans: Adding transnumber' + str(transnumber_) 
-                    keepLog(request, log, 'INFO', ip, cart_id)
                 except:
-                    log = 'Log Trans: Fail, transnumber'
-                    keepLog(request, log, 'ERROR', ip, cart_id)
+                    pass
 
                 try:
                     transnumber = response['transactionNumber']
+                    order.shipping_country = transnumber
                     order.message = order.message + 'PayEx transaktion: ' + str(transnumber) 
                     order.status = 'P'   
                     order.save()
@@ -346,7 +340,7 @@ def success(request):
                     keepLog(request, log, 'INFO', ip, cart_id)          
                 except:
                     log = 'Log Success Fail, PayEx transaktion not found: ' + str(transnumber) 
-                    keepLog(request, log, 'ERROR', ip, cart_id) 
+                    keepLog(request, log, 'ERROR', ip, cart_id)
                 try:
                     to = [order.email, 'info@vamlingbolaget.com']
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.message, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
@@ -421,7 +415,7 @@ def get_ordernumber():
         order_exist = 0 
 
     if (order_exist == 1):
-        get_ordernumber()
+        rand = get_ordernumber()
     else: 
         return rand  
 
@@ -649,34 +643,7 @@ def fortnox(request):
             log = log + ' Fortnox Error when adding Fortnox order'
             order_ok_json = False
 
-        # send the json order, log and save the order 
-        if order_ok_json == True: 
-           
-            if order.paymentmethod != 'K': 
-                headers = get_headers() 
-                if what == 'invoice': 
-                    person = str(order.first_name)
-                    if person == 'Tester':
-                        log = log + ' ------ tester'
-                        return_order = ''
-                    else: 
-                        return_order = createOrder(headers, final_orderjson)
-                else: 
-                    return_order = createNewOrder(headers, final_orderjson)
-
-                order.fortnox_obj = return_order 
-                order.save()
-                
-                log = log + ' Creating final_order_json with Order id: ' + str(order_id) 
-            else: 
-                order.fortnox_obj = 'not jet' 
-                order.save()
-                print "klarna not on"
-       
-        else:         
-            log = log + ' Fortnox order not created'
-
-
+          
         # set the new stock
         try: 
             cleanCartandSetStock(request, the_items)
@@ -690,7 +657,6 @@ def fortnox(request):
         return HttpResponse(status=200)
     else: 
         return HttpResponseRedirect('/')
-
 
 # clean cart and chang stockquanity 
 def cleanCartandSetStock(request, the_items): 

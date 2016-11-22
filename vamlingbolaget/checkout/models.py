@@ -44,7 +44,7 @@ class Checkout(models.Model):
     shipping_address = models.CharField(_("Gatuadress2"), max_length=80, blank=True)
     shipping_city = models.CharField(_("Postort2"), max_length=80, blank=True)
     shipping_postcode = models.CharField(_("Postnummer2"), max_length=10, blank=True)
-    shipping_country = models.CharField(_("Land2"), max_length=80, blank=True)
+    shipping_country = models.CharField(_("transkey"), max_length=80, blank=True)
     fortnox_obj = models.TextField(blank=True)
     unifaun_obj = models.TextField(blank=True)
     language = models.CharField(max_length=10, blank=True)
