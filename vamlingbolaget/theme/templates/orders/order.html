@@ -165,7 +165,10 @@
 		            	{% if order.paymentmethod == 'P' %}
 						-
 						{% endif %}
-						TransId: {{ order.shipping_country }}  </span>
+						{% if order.paymentmethod == 'C' %}
+						TransId: {{ order.shipping_country }}  
+						{% endif %}
+						</span>
 		        </div>
 		    </td>
 		         <td>
