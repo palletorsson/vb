@@ -1043,7 +1043,7 @@ def orderCsv(request):
     with open(input_file, 'r') as i:
 
         for line in i:
-            print line 
+            #print line 
             sepatated_values = line.split(",")
             count = count + 1 
             # see if values exist 
