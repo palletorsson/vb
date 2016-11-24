@@ -525,7 +525,7 @@ def getsize(size):
     elif size == 44 or size == 6: 
         return_size = 'XL'  
     elif size == 46 or size == 7:
-        return_size = 'XLL'
+        return_size = 'XXL'
     else: 
         return_size = 'NO'
 
