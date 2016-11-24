@@ -354,7 +354,7 @@ def getsizenumber(size):
         return_size = 42
     elif size == 'XL': 
         return_size =   44
-    elif size == 'XLL':
+    elif size == 'XXL':
         return_size = 46
     else: 
         return_size = 'NO' 
