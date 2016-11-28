@@ -18,6 +18,13 @@ class VariationAdmin(admin.ModelAdmin):
     search_fields = ['article']
     list_per_page = 20
     ordering = ['active','article']
+    
+class ArticleCostAdmin(admin.ModelAdmin):
+    model = ArticleCost
+    list_display = ('pk', 'article', 'fabric_m', 'cuttime', 'sawtime', 'addtime', 'attachment', 'get_final_cost', 'get_gross_cost', 'get_out_cost', 'get_current_price')
+    list_display_links = ('pk', 'article',)
+    list_editable = ('fabric_m', 'cuttime', 'sawtime', 'addtime', 'attachment',)
+    list_per_page = 20
  
 class FullVariationAdmin(admin.ModelAdmin):
     model = FullVariation

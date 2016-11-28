@@ -191,6 +191,42 @@ class Article(TimeStampedActivate):
     def __unicode__(self):
         return unicode(self.name) + " (" + unicode(self.sku_number)+ ")"
 
+class ArticleCost(models.Model):
+    article = models.ForeignKey('Article')
+    fabric_m = models.IntegerField("fabric required in cemtimeters")
+    cuttime = models.IntegerField("cutting time")
+    sawtime = models.IntegerField("sawing time")
+    addtime = models.IntegerField("time for thread cutting and iron")
+    attachment = models.IntegerField("additional attachments in SEK")
+
+    def get_final_cost(self):
+        kg_price = 20 # also adding shipment 0.5
+        unit_meter = 3.1
+        euro = 9.8  
+        meter_cost_sek = int((kg_price / unit_meter) * euro) 
+        meter_cost = meter_cost_sek * 0.01 
+        minutes_cost = 3.5
+        minutes_added = self.cuttime + self.sawtime + self.addtime 
+        product_cost = (self.fabric_m * meter_cost) + (minutes_added * minutes_cost) + (self.attachment)
+        return product_cost
+
+    def get_gross_cost(self):
+        cost = self.get_final_cost()
+        gross_pris = cost * 2
+        return gross_pris
+
+    def get_out_cost(self):
+        cost = self.get_final_cost()
+        out_pris = ((cost * 2) * 25) / 10
+        return out_pris    
+
+    def get_current_price(self):
+        return self.article.price    
+
+    def __unicode__(self):
+        return "%s %s" % (self.article.sku_number, self.article.name)
+
+
 TYPE_CHOICES = (
     ('P', 'Percent'),
     ('A', 'Amount')
