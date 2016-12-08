@@ -804,8 +804,8 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
         except: 
             log = 'Fortnox order json not resolved' 
             keepLog(request, log, 'ERROR', customer, '', order_json)
-            invoice_rows = order_json
-            
+            invoice_rows = new_order.order
+
     # add addtional information to comment and invoice type feilds
     try:
         orderid_ = new_order.order_number 
