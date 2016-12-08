@@ -212,7 +212,11 @@ def create_order_rows(order_json):
             invoicerows.append(obj)
     
         if full == False: 
-            size = Size.objects.get(pk=item.size)
+            try: 
+                size = Size.objects.get(pk=item.size)
+            except: 
+                size = item.size
+                
             obj = {
                 "OrderedQuantity": int(item.quantity),
                 "ArticleNumber": int(item.article.sku_number), 
