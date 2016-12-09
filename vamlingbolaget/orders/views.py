@@ -15,6 +15,7 @@ from cart.views import getsize
 from fortnox.fortnox import get_headers
 from django.http import HttpResponseRedirect
 import json
+from django.contrib.auth.decorators import login_required
 from logger.views import keepLog
 import requests
 from requests.auth import HTTPDigestAuth
@@ -709,3 +710,17 @@ def getFornoxArticles(request, page):
         'articles': r_articles,
         },
         context_instance=RequestContext(request))
+
+@login_required
+def getAllemail(request):
+    checkouts = Checkout.objects.all()
+    emaillist = []
+    file = open('emails.txt', 'w+')
+    
+    for checkout in checkouts:
+        if not checkout.email in emaillist:
+            emaillist.append(checkout.email)
+            file.write(checkout.email + ", ")
+
+    return HttpResponse(status=200)
+

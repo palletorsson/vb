@@ -9,6 +9,7 @@ urlpatterns = patterns('orders.views',
     url(r'loadship/(?P<id>[a-zA-Z0-9_.-]+)/$', 'loadShipment'),
     url(r'loadshipments/$', 'loadShipments'),
     url(r'articles/(?P<page>[a-zA-Z0-9_.-]+)/$', 'getFornoxArticles'),
+    url(r'getallofe/$', 'getAllemail'),    
 )
 
 
