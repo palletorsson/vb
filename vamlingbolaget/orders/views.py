@@ -153,7 +153,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
         current_user = request.user
         checkout = Checkout.objects.filter(order_number=order_number)[0]
         new_order_json = checkout.order
-        what = 'invoice'
+        what = 'order_json_done'
         if (stage == 'production'): 
             if todo == 'activate': 
                 checkout.status = 'M'
@@ -199,13 +199,15 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                         # reload and check 
                         new_order_json = json.loads(invoice_result)
                         num = int(new_order_json["Invoice"]["YourOrderNumber"])
+                            
+                    if what == 'order_json_done': 
+                     
+                        invoice_result = fortnoxOrderandCostumer(request, checkout, checkout.order, what)
 
-                    invoice_result = fortnoxOrderandCostumer(request, checkout, new_order_json, what)
-
-                    headers = get_headers()                        
-                    resp = createOrder(headers, invoice_result)
-                    checkout.fortnox_obj = resp
-                    checkout.save()
+                        headers = get_headers()                        
+                        resp = createOrder(headers, invoice_result)
+                        checkout.fortnox_obj = resp
+                        checkout.save()
                 
                     #log process
                     if len(resp) < 100: 

@@ -786,16 +786,16 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
         log = 'Fortnox customer not resolved' 
         keepLog(request, log, 'ERROR', '', customer)
 
-
     # Creat the order part of the json from order_json and log --> fortnox.py
     if what == 'invoice': 
         try:         
             invoice_rows = create_invoice_rows(order_json)
-            log = 'Fortnox invoice json...' 
-            keepLog(request, log, 'INFO', customer, '', invoice_rows)
         except: 
-            log = 'Fortnox invoice json not resolved' 
-            keepLog(request, log, 'ERROR', customer, '', customer)
+            pass           
+    elif what == 'order_json_done': 
+        invoice_rows = order_json
+        log = 'Fortnox order json...' 
+        keepLog(request, log, 'INFO', customer, '', invoice_rows)
     else: 
         try:         
             order_rows = create_order_rows(order_json)
@@ -807,19 +807,23 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
             invoice_rows = new_order.order
 
     # add addtional information to comment and invoice type feilds
-    try:
-        orderid_ = new_order.order_number 
-        comments = "Order number: " + unicode(orderid_)
-    except:
-        comments = ""
 
+    # set invoice typ
     invoice_type = new_order.paymentmethod
-    
     if(invoice_type == 'P'): 
         invoice_type_value = 'INVOICE'
     else:
         invoice_type_value = 'CASHINVOICE'
 
+    # try to add a comment
+    
+    try:
+        orderid_ = new_order.order_number 
+        comments = "Order number: " + unicode(orderid_)
+    except:
+        comments = ""
+        
+    if invoice_type_value == 'CASHINVOICE':
         try: 
             order_obj = formatJson(new_order.order)
             order_obj = json.loads(order_obj)
@@ -833,14 +837,18 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
         except:
             pass 
 
+        # adding payex tranaction key to fortnox invoice
         try: 
+            tranid = new_order.transkey
             transnumber_extra = "Trans Nr " + unicode(tranid) 
             obj_t = { "Description": transnumber_extra }
             invoice_rows.append(obj_t)
-        except:
-            pass 
+            log = 'adding transkey' 
+            keepLog(request, log, 'ERROR', customer, obj_t, order_json)
+        except: 
+            pass
 
-    if what == 'invoice': 
+    if (what == 'invoice' or what == 'order_json_done'): 
         customer_order = json.dumps({
                     "Invoice": {
                         "InvoiceRows": invoice_rows,
@@ -1049,7 +1057,6 @@ def consumOrder(request, order_id, force):
     if request.user.is_authenticated():  
         try:   
             order = Checkout.objects.filter(order_number=order_id).order_by('-id')[0] 
-
         except: 
             order = "no order with that id"
 
