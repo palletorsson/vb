@@ -377,41 +377,42 @@ def csvTransImport(request, model, what='title', lang='en'):
                             pass
                     else:
                         
-
-                        title_se = sepatated_values[0]
-                        print "title", title_se
-                        if model == 'art':
-                            art = Article.objects.get(name=title_se)    
-                        elif model == 'color':
-                            art = Color.objects.get(name=title_se)
-                            print "art", art
-                        elif model == 'pattern':
-                            art = Pattern.objects.get(name=title_se)
-                        elif model == 'quality':
-                            art = Quality.objects.get(name=title_se)
-                        elif model == 'type':
-                            art = Type.objects.get(name=title_se)
-                        elif model == 'category':
-                            art = Category.objects.get(name=title_se)
-                        else: 
-                            art = Article.objects.get(name=title_se)
-                        
-                        if lang == 'fi':
-                            art.name_fi = sepatated_values[1]
-                            print "fiart", art.name_fi
-                        elif lang == 'dk':
-                            try: 
-                                art.name_da = sepatated_values[1] 
-                            except: 
-                                pass     
-                        elif lang == 'de':
-                            art.name_de = sepatated_values[1]
-                        elif lang == 'dk':
-                            art.name_da = sepatated_values[1] 
-                            print art.name_da                               
-                        else:    
-                            print "nothing"
-                        art.save()
+                        try: 
+                            title_se = sepatated_values[0]
+                            print "title", title_se
+                            if model == 'art':
+                                art = Article.objects.get(name=title_se)    
+                            elif model == 'color':
+                                art = Color.objects.get(name=title_se)
+                                print "art", art
+                            elif model == 'pattern':
+                                art = Pattern.objects.get(name=title_se)
+                            elif model == 'quality':
+                                art = Quality.objects.get(name=title_se)
+                            elif model == 'type':
+                                art = Type.objects.get(name=title_se)
+                            elif model == 'category':
+                                art = Category.objects.get(name=title_se)
+                            else: 
+                                art = Article.objects.get(name=title_se)
+                            
+                            if lang == 'fi':
+                                art.name_fi = sepatated_values[1]
+                                print "fiart", art.name_fi
+                            elif lang == 'dk':
+                                try: 
+                                    art.name_da = sepatated_values[1] 
+                                except: 
+                                    pass     
+                            elif lang == 'de':
+                                art.name_de = sepatated_values[1]
+                            elif lang == 'dk':
+                                art.name_da = sepatated_values[1]                                
+                            else:    
+                                print "nothing"
+                            art.save()
+                        except: 
+                            pass            
                 count = count + 1
 
     log = "importin csv"
