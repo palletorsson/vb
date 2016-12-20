@@ -398,12 +398,7 @@ def csvTransImport(request, model, what='title', lang='en'):
                             
                             if lang == 'fi':
                                 art.name_fi = sepatated_values[1]
-                                print "fiart", art.name_fi
-                            elif lang == 'dk':
-                                try: 
-                                    art.name_da = sepatated_values[1] 
-                                except: 
-                                    pass     
+                                print "fiart", art.name_fi    
                             elif lang == 'de':
                                 art.name_de = sepatated_values[1]
                             elif lang == 'dk':
