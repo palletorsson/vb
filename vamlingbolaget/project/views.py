@@ -382,19 +382,20 @@ def csvTransImport(request, model, what='title', lang='en'):
 
                         try: 
                             if model == 'art':
-                                    art = Article.objects.filter(name=title_se)[0]  
+                                art = Article.objects.filter(name=title_se)[0]  
                             elif model == 'color':
-                                    art = Color.objects.filter(name=title_se)[0]
+                                art = Color.objects.filter(name=title_se)[0]
                             elif model == 'pattern':
-                                    art = Pattern.objects.filter(name=title_se)[0]
+                                art = Pattern.objects.filter(name=title_se)[0]
                             elif model == 'quality':
-                                    art = Quality.objects.filter(name=title_se)[0]
+                                art = Quality.objects.filter(name=title_se)[0]
                             elif model == 'type':
-                                    art = Type.objects.filter(name=title_se)[0]
+                                art = Type.objects.filter(name=title_se)[0]
                             elif model == 'category':
-                                    art = Category.objects.filter(name=title_se)[0]
+                                art = Category.objects.filter(name=title_se)[0]
                             else: 
                                 art = Article.objects.get(name_en=title_se)
+                            print art    
                         except:
                             pass
                         try:     
