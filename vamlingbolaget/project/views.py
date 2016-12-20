@@ -375,28 +375,27 @@ def csvTransImport(request, model, what='title', lang='en'):
                             art.save()
                         except: 
                             pass
-                    else:
-                        
+                    else:                        
                         try: 
-                            title_se = unicode(sepatated_values[0])
+                            title_se = unicode(sepatated_values[2])
                             print "title", title_se, model
                             if model == 'art':
-                                art = Article.objects.get(name=title_se)    
+                                art = Article.objects.get(name_en=title_se)    
                             elif model == 'color':
-                                art = Color.objects.get(name=title_se)
+                                art = Color.objects.get(name_en=title_se)
                                 print "art", art
                             elif model == 'pattern':
                                 print "-----"
-                                art = Pattern.objects.get(name=title_se)
+                                art = Pattern.objects.get(name_en=title_se)
                                 print "-----", art
                             elif model == 'quality':
-                                art = Quality.objects.get(name=title_se)
+                                art = Quality.objects.get(name_en=title_se)
                             elif model == 'type':
-                                art = Type.objects.get(name=title_se)
+                                art = Type.objects.get(nam_en=title_se)
                             elif model == 'category':
-                                art = Category.objects.get(name=title_se)
+                                art = Category.objects.get(name_en=title_se)
                             else: 
-                                art = Article.objects.get(name=title_se)
+                                art = Article.objects.get(name_en=title_se)
                             
                             if lang == 'fi':
                                 art.name_fi = sepatated_values[1]
