@@ -407,7 +407,8 @@ def csvTransImport(request, model, what='title', lang='en'):
                             elif lang == 'de':
                                 art.name_de = sepatated_values[1]
                             elif lang == 'dk':
-                                art.name_da = sepatated_values[1]                                
+                                art.name_da = sepatated_values[1]         
+                                print art.name_da                        
                             else:    
                                 print "nothing"
                             art.save()
