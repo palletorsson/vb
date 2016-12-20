@@ -386,7 +386,9 @@ def csvTransImport(request, model, what='title', lang='en'):
                                 art = Color.objects.get(name=title_se)
                                 print "art", art
                             elif model == 'pattern':
+                                print "-----"
                                 art = Pattern.objects.get(name=title_se)
+                                print "-----", art
                             elif model == 'quality':
                                 art = Quality.objects.get(name=title_se)
                             elif model == 'type':
