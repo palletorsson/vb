@@ -386,7 +386,9 @@ def csvTransImport(request, model, what='title', lang='en'):
                             elif model == 'color':
                                 art = Color.objects.filter(name=title_se)[0]
                             elif model == 'pattern':
+                                print "before p"
                                 art = Pattern.objects.filter(name=title_se)[0]
+                                print "after p"
                             elif model == 'quality':
                                 art = Quality.objects.filter(name=title_se)[0]
                             elif model == 'type':
@@ -395,7 +397,7 @@ def csvTransImport(request, model, what='title', lang='en'):
                                 art = Category.objects.filter(name=title_se)[0]
                             else: 
                                 art = Article.objects.get(name_en=title_se)
-                            print art    
+                            print "----", art    
                         except:
                             pass
                         try:     
