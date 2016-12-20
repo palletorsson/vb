@@ -378,8 +378,8 @@ def csvTransImport(request, model, what='title', lang='en'):
                     else:
                         
                         try: 
-                            title_se = sepatated_values[0]
-                            print "title", title_se
+                            title_se = unicode(sepatated_values[0])
+                            print "title", title_se, model
                             if model == 'art':
                                 art = Article.objects.get(name=title_se)    
                             elif model == 'color':
