@@ -423,8 +423,10 @@ def csvTransImport(request, model, what='title', lang='en'):
                             print art.name_da                        
                         else:    
                             print "nothing"
-                        art.save()
-           
+                        try: 
+                            art.save()
+                        except: 
+                            pass 
                 count = count + 1
 
     log = "importin csv"
