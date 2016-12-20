@@ -40,9 +40,9 @@ class FullVariationAdmin(admin.ModelAdmin):
 class ArticleAdmin(TranslationAdmin):
     model = Article
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'sku_number', 'name', 'description', 'price', 'type', 'quality', 'file', 'pk')
+    list_display = ('active', 'sku_number', 'name', 'name_da', 'description', 'price', 'type', 'quality', 'file', 'pk')
     list_display_links = ('active', )
-    list_editable = ('file', 'name', 'description', )
+    list_editable = ('file', 'name', 'description', 'name_da',)
     list_filter = ('active', 'type',)
     search_fields = ['sku_number', 'name']
     list_per_page = 20
@@ -62,9 +62,9 @@ class ReaArticleAdmin(admin.ModelAdmin):
 class ColorAdmin(TranslationAdmin):
     model = Color
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name', 'order', 'quality',)
+    list_display = ('active', 'name', 'name_da', 'order', 'quality',)
     list_display_links = ('name',)
-    list_editable = ('active', 'order', 'quality',)
+    list_editable = ('active', 'order', 'quality', 'name_da',)
     list_filter = ('active',)
     ordering = ['order', 'name',]
 
@@ -72,9 +72,9 @@ class ColorAdmin(TranslationAdmin):
 class PatternAdmin(TranslationAdmin):
     model = Pattern
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name', 'order', 'quality',)
+    list_display = ('pk', 'active', 'name', 'name_da', 'order', 'quality', 'slug', )
     list_display_links = ('name',)
-    list_editable = ('active', 'order', 'quality',)
+    list_editable = ('active', 'order', 'quality', 'name_da', )
     list_filter = ('active',)
     ordering = ['order', 'name',]
 
@@ -94,9 +94,9 @@ class PatternAndColorAdmin(admin.ModelAdmin):
 class QualityAdmin(TranslationAdmin):
     model = Quality
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'name', 'description', 'order',)
+    list_display = ('active', 'name', 'name_da', 'description', 'order',)
     list_display_links = ('name',)
-    list_editable = ('active', 'order',)
+    list_editable = ('active', 'order', 'name_da',)
     list_filter = ('active', )
     ordering = ['order']
     
