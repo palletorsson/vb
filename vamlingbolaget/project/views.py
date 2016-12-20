@@ -406,14 +406,10 @@ def csvTransImport(request, model, what='title', lang='en'):
                                     pass     
                             elif lang == 'de':
                                 art.name_de = sepatated_values[1]
+                            elif lang == 'dk':
+                                art.name_da = sepatated_values[1]                                
                             else:    
-                                art.name_en = title_en 
-                                art.name_fi = title_fi 
-                                try: 
-                                    art.name_da = sepatated_values[1]
-                                except: 
-                                    art.name_da = ''  
-                                art.name_de = title_de
+                                print "nothing"
                             art.save()
                         except: 
                             pass            
