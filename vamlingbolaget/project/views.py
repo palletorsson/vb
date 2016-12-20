@@ -379,54 +379,40 @@ def csvTransImport(request, model, what='title', lang='en'):
                       
                         title_se = unicode(sepatated_values[0], "UTF-8")
                         print "title", title_se, model
-                        if model == 'art':
-                            try: 
-                                art = Article.objects.filter(name=title_se)[0]  
-                            except:
-                                pass
-                        elif model == 'color':
-                            try: 
-                                art = Color.objects.filter(name=title_se)[0]
-                            except: 
-                                pass
-                        elif model == 'pattern':
-                            try: 
-                                art = Pattern.objects.filter(name=title_se)[0]
-                            except: 
-                                pass
-                        elif model == 'quality':
-                            try: 
-                                art = Quality.objects.filter(name=title_se)[0]
-                            except: 
-                                pass               
-                        elif model == 'type':
-                            try: 
-                                art = Type.objects.filter(name=title_se)[0]
-                            except: 
-                                pass                            
-                        elif model == 'category':
-                            try: 
-                                art = Category.objects.filter(name=title_se)[0]
-                            except: 
-                                pass 
-                         
-                        else: 
-                            art = Article.objects.get(name_en=title_se)
-                        
-                        if lang == 'fi':
-                            art.name_fi = sepatated_values[1]
-                            print "fiart", art.name_fi    
-                        elif lang == 'de':
-                            art.name_de = sepatated_values[1]
-                        elif lang == 'dk':
-                            art.name_da = sepatated_values[1]         
-                            print art.name_da                        
-                        else:    
-                            print "nothing"
+
+                        try: 
+                            if model == 'art':
+                                    art = Article.objects.filter(name=title_se)[0]  
+                            elif model == 'color':
+                                    art = Color.objects.filter(name=title_se)[0]
+                            elif model == 'pattern':
+                                    art = Pattern.objects.filter(name=title_se)[0]
+                            elif model == 'quality':
+                                    art = Quality.objects.filter(name=title_se)[0]
+                            elif model == 'type':
+                                    art = Type.objects.filter(name=title_se)[0]
+                            elif model == 'category':
+                                    art = Category.objects.filter(name=title_se)[0]
+                            else: 
+                                art = Article.objects.get(name_en=title_se)
+                        except:
+                            pass
+                        try:     
+                            if lang == 'fi':
+                                art.name_fi = sepatated_values[1]
+                            elif lang == 'de':
+                                art.name_de = sepatated_values[1]
+                            elif lang == 'dk':
+                                art.name_da = sepatated_values[1]                                                       
+                            else:    
+                                print "nothing"
+                        except:
+                            pass
                         try: 
                             art.save()
-                        except: 
-                            pass 
+                        except:
+                            pass
+
                 count = count + 1
 
     log = "importin csv"
