@@ -410,7 +410,7 @@ def csvTransImport(request, model, what='title', lang='en'):
                                 art.name_en = title_en 
                                 art.name_fi = title_fi 
                                 try: 
-                                    art.name_da = title_dk
+                                    art.name_da = sepatated_values[1]
                                 except: 
                                     art.name_da = ''  
                                 art.name_de = title_de
