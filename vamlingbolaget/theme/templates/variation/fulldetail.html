@@ -85,9 +85,8 @@
 			<nav>
 				<ul class="pagination">
 				{% if product.variation.article.quality.pk == 1 %} 
-				{{ product.active }}
+
 					{% if product.active %} 
-						+
 					    {% for size in full_variations %} 
 							{% if product.size == size.size %}  
 								<li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
@@ -101,7 +100,6 @@
 							{% endif %} 
 					    {% endfor %}
 					{% else %}
-						-
 						{% for size in full_variations %} 
 							
 					       {% if size.stock < 1 %}								
