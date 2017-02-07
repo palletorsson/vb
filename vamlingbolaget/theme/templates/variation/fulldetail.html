@@ -85,7 +85,7 @@
 			<nav>
 				<ul class="pagination">
 				{% if product.variation.article.quality.pk == 1 %} 
-				
+				{{ product.active }}
 					{% if product.active == True %} 
 						true silk
 					    {% for size in full_variations %} 
