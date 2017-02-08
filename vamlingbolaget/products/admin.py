@@ -54,8 +54,8 @@ class ReaArticleAdmin(admin.ModelAdmin):
     list_display_links = ('article', )
     list_editable = ('status', 'image')
     list_filter = ('status', 'article',)
-    search_fields = ['sku_number', 'article',]
-    list_per_page = 4
+    search_fields = ['id', 'pattern', 'color', 'article',]
+    list_per_page = 20
     ordering = ['status', 'id', ]
 
 
