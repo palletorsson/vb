@@ -13,7 +13,7 @@
 {% block allcontent %}
 <div class="hidden-xs">
 {%if cartitems or bargains or rea%}
-    <table class="table table-bordered small">
+    <table class="table table-bordered small table-striped">
     <thead>
    	{% include "cart/table_head.html" %}
     </thead>
@@ -89,11 +89,6 @@
             <div>
                 <a href="{%url removefromcart item.pk 'rea'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>
 
-            </div>
-        </td>
-        <td>
-            <div>
-              
             </div>
         </td>
         <td>

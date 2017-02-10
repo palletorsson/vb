@@ -1,5 +1,5 @@
 
--- Svenska ... ----------------
+------------------------------
 Din order till Vamlingbolaget:
 ------------------------------
 Din order:
@@ -10,8 +10,14 @@ Din order:
 * Mönster: {{ item.pattern_text }} {% if item.pattern_text_2 > 0 %} (utsida) * Mönster 2: {{ item.pattern_2 }} (insida) {%endif%}
 * Storlek: {{ item.size_text }} ({{ item.size }})
 * Pris per produkt: {% if item.discount_price > 0 %} Rea: {{ item.discount_price }} SEK ( Regular price: {%endif%} {{ item.article.price }} {% if item.discount_price > 0 %} ) {%endif%} SEK 
--------------- 
-{%endfor%}
+-------------- {%endfor%}
+{% for item in reaitems %}* Rea-artikel: {{ item.reaArticle.article }}
+* Antal: 1 
+* Färg: {{ item.reaArticle.color }} 
+* Mönster: {{ item.reaArticle.pattern }}
+* Storlek: {{ item.reaArticle.size }} 
+* Pris per produkt: Reapris: {{ item.reaArticle.rea_price }} SEK 
+-------------- {%endfor%}
 ------------------------------
 Frakt och hantering :  {{ handling }} SEK
 ------------------------------

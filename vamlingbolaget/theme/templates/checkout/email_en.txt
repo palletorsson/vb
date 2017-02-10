@@ -1,5 +1,5 @@
 
---- English ... -------------
+-----------------------------
 Your order to Vamlingbolaget:
 -----------------------------
 Order :
@@ -10,8 +10,14 @@ Order :
 * Pattern: {{ item.pattern_text }} {% if item.pattern_text_2 > 0 %} (outside) * Pattern 2: {{ item.pattern_2 }} (inside) {%endif%}
 * Size: {{ item.size_text }} ({{ item.size }})
 * Price per product: {% if item.discount_price > 0 %} Rea: {{ item.discount_price }} SEK ( Regular price: {%endif%} {{ item.article.price }} {% if item.discount_price > 0 %} ) {%endif%} SEK 
--------------- 
-{%endfor%}
+-------------- {%endfor%}
+{% for item in cartitems %}* Rea product: {{ item.reaArticle.article }}
+* Amount: 1
+* Color: {{ item.reaArticle.color }} 
+* Pattern: {{ item.reaArticle.pattern }}
+* Size: {{ item.reaArticle.size }} 
+* Price per product: {{ item.reaArticle.rea_price }} SEK (Rea) 
+-------------- {%endfor%}
 -------------------------------
 Shipping and handling:  {{ handling }} SEK
 ------------------------------

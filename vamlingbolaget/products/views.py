@@ -108,7 +108,7 @@ def reaindex(request):
     types = Category.objects.filter(active=True) 
     atypes = Type.objects.filter(order__lte=5, active=True)
 
-    rea = "false"
+    rea = "true"
     sizes = SIZES
 
     return render_to_response('variation/reaindex.html',
@@ -191,6 +191,9 @@ def by_quality(request, key):
         products = FullVariation.objects.filter(variation__article__quality__slug__contains = 'silkestrika', active=True, size=3840).order_by('order')
     elif key == 'manchester': 
         products = FullVariation.objects.filter(variation__article__quality__slug__contains = 'manchester', active=True, size=3840).order_by('order')
+    elif key == 'plysch': 
+        products = FullVariation.objects.filter(variation__article__quality__slug__contains = 'plysch', active=True, size=3840).order_by('order')
+        template = 'variation/plyschindex.html'
     else: 
         products = Variation.objects.filter(article__quality__slug__contains = key, order__lte=100, active=True).order_by('-order', 'article__quality')
         template = 'variation/index.html'

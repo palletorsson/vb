@@ -131,7 +131,7 @@ def checkout(request, test=''):
                         new_order.payment_log = item.article.discount.discount           
             except:
                 pass 
-            email_body = email_one(request, new_order, cartitems, handling, totalprice)
+            email_body = email_one(request, new_order, cartitems, reaitems, handling, totalprice)
             new_order.message = email_body
             new_order.save()
 
