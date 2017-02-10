@@ -223,7 +223,7 @@ def getAllMessages(lang):
 
 
 
-def email_one(request, new_order, cartitems, handling, totalprice):
+def email_one(request, new_order, cartitems, reaitems, handling, totalprice):
 
     # get the name of color and patterns
     for item in cartitems:
@@ -250,6 +250,7 @@ def email_one(request, new_order, cartitems, handling, totalprice):
         'handling' : handling,
         'totalprice' : totalprice,
         'cartitems' : cartitems,
+        'reaitems' : reaitems, 
         'new_order': new_order
     }
 
