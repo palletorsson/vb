@@ -43,7 +43,7 @@ def json_update(articleNumber, QuantityInStock):
 
 def create_invoice_rows(order_json):
     custom = 0
-    rea = 0
+    rea = 1
     full = False
 
     invoicerows = []
@@ -134,7 +134,7 @@ def create_invoice_rows(order_json):
             invoicerows.append({
     	        "DeliveredQuantity": 1,
     	        "ArticleNumber": int(item.reaArticle.article.sku_number), 
-    		    "Description": "Rea: " + unicode(item.reaArticle.article.name) + " "  + unicode(item.reaArticle.size),
+    		    "Description": "Rea - " + unicode(item.reaArticle.article.name) + " "  + unicode(item.reaArticle.size),
                 "Price": item.reaArticle.article.price,
                 "Discount": 30,
                 "DiscountType": "PERCENT"
@@ -205,7 +205,7 @@ def create_order_rows(order_json):
         if full == True: 
             # here we it could be good to do get the size        
             obj = {
-                "OrderedQuantity": int(item.quantity),
+                "DeliveredQuantity": int(item.quantity),
                 "ArticleNumber": full_var_num, 
                 "Description": unicode(full_var) 
             }
@@ -216,9 +216,9 @@ def create_order_rows(order_json):
                 size = Size.objects.get(pk=item.size)
             except: 
                 size = item.size
-                
+
             obj = {
-                "OrderedQuantity": int(item.quantity),
+                "DeliveredQuantity": int(item.quantity),
                 "ArticleNumber": int(item.article.sku_number), 
                 "Description": unicode(item.article.name) + " " + unicode(size) 
             }
@@ -229,23 +229,30 @@ def create_order_rows(order_json):
             })
     
     try:
-        for item in rea_items:   
+        for item in rea_items: 
             invoicerows.append({
-                "OrderedQuantity": 1,
+                "DeliveredQuantity": 1,
                 "ArticleNumber": int(item.reaArticle.article.sku_number), 
-                "Description": "Rea: " + unicode(item.reaArticle.article.name) + " "  + unicode(item.reaArticle.size),
-                "Price": item.reaArticle.article.price,
+                "Description": "Rea - " + unicode(item.reaArticle.article.name) + unicode(" ") + unicode(item.reaArticle.size),
+                "Price": item.reaArticle.article.price, 
                 "Discount": 30,
                 "DiscountType": "PERCENT"
             })
+
             invoicerows.append({
-                "Description": unicode(item.reaArticle.pattern) + " " + unicode(item.reaArticle.color)
+                "Description": unicode(item.reaArticle.pattern) + unicode(" ") + unicode(item.reaArticle.color) 
             })
+
+            invoicerows.append({
+                "Description": unicode("Rea priset - ") + unicode(item.reaArticle.rea_price) + unicode(" , Ordinarie priset - ") + unicode(item.reaArticle.article.price)
+            })
+            
+            print "-----------", invoicerows            
     except:
         print "no reaitem"
 
     invoicerows.append({
-        "OrderedQuantity": 1,
+        "DeliveredQuantity": 1,
         "ArticleNumber": 2, 
         "Description": "Postavgift"
     })
