@@ -184,28 +184,22 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
 
                 #print new_order_json
                 if len(checkout.fortnox_obj) < 200:
-                    
-                    # we can do this in fortnox to with url put
-                    
-                    # we have to try to remake it
-                
-                    # we need to make it if not made if failed in making order.order 
                     if len(new_order_json) < 40:
-                        order_items = OrderItem.objects.filter(checkout=checkout)
-                        new_order_json = {'cartitems': order_items, 'bargains': [], 'voucher': [], 'rea_items': []}
-                        
-                        invoice_result = fortnoxOrderandCostumer(request, checkout, new_order_json, what)
-                        checkout.order = invoice_result
-                        checkout.save()
-                        # reload and check 
-                        new_order_json = json.loads(invoice_result)
-                        num = int(new_order_json["Invoice"]["YourOrderNumber"])
-                            
-                    if what == 'order_json_done': 
-                     
-                        invoice_result = fortnoxOrderandCostumer(request, checkout, checkout.order, what)
+                            cartitems = checkout.orderitem_set.all()
+                            reaitems = checkout.reaorderitem_set.all()
+                            allitems = {'cartitems': cartitems, 'bargains': {}, 'voucher': {}, 'rea_items': reaitems}
+                            invoice_rows = create_order_rows(allitems)
+                            #invoice_result = fortnoxOrderandCostumer(request, checkout, invoice_rows, what)
+                            checkout.order = invoice_rows
+                            checkout.save()
+                            # reload and check 
+                            # new_order_json = json.loads(invoice_result)
 
-                        headers = get_headers()                        
+                            #num = int(new_order_json["Invoice"]["YourOrderNumber"])
+
+                    if what == 'order_json_done':    
+                        invoice_result = fortnoxOrderandCostumer(request, checkout, checkout.order, what)  
+                        checkout.unifaun_obj = invoice_result                     
                         resp = createOrder(headers, invoice_result)
                         checkout.fortnox_obj = resp
                         checkout.save()
