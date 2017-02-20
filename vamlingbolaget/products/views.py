@@ -150,7 +150,7 @@ def rea_by_size(request, key):
 
 def rea_by_type(request, key):
 
-    products = ReaArticle.objects.filter(article__type__order = key, status='A').order_by('article__name')
+    products = ReaArticle.objects.filter(article__type__order = key, status='A').order_by('article__name').order_by('pattern').order_by('color')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     atypes = Type.objects.filter(order__lte=5, active=True)
