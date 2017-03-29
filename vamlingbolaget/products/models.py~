@@ -10,15 +10,6 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Adjust
 #from products.fortnox import get_headers, get_art_temp, get_articles, get_article, create_article, update_article
 
-SIZES = (
-        ('XS', 'XS'), 
-        ('S', 'S'),
-        ('M', 'M'),
-        ('L', 'L'),
-        ('XL', 'XL'),
-        ('XLL', 'XLL'),
-        )
-
 class TimeStampedActivate(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -49,32 +40,8 @@ class Variation(TimeStampedActivate):
     get_image.allow_tags = True
     
     def __unicode__(self):
-        return "%s %s %s %s" % (self.article.sku_number, self.article.name, self.color, self.pattern)
+        return unicode(self.article)
 
-    class Meta:
-        unique_together = ('article', 'pattern', 'color',)
-
-
-class FullVariation(TimeStampedActivate):
-    variation = models.ForeignKey('Variation')
-    size  = models.CharField(max_length=10)
-    stock = models.IntegerField(default=1)
-    order = models.IntegerField("order items", default=100)
-    
-    def get_art_num(self):
-        return "%s_%s_%s_%s" % (self.variation.article.sku_number, self.variation.color.order, self.variation.pattern.order, self.size)
-
-    def get_sizes(self): 
-        return SIZES
-
-    def get_sku(self): 
-        return str(self.variation.article.sku_number) + "_" +  str(self.variation.color) + "_" + str(self.variation.pattern) + "_" + str(self.size)
-
-    def __unicode__(self):
-        return "%s %s %s %s" % (self.variation.article.sku_number, self.variation.color, self.variation.pattern, self.size)
-
-    class Meta:
-        unique_together = ('variation', 'size',)
 
 class Size(models.Model):
     """
@@ -103,9 +70,7 @@ class Type(ChoiceBase):
     """
     Type used in Article Model
     """
-    
-    def __unicode__(self):
-        return unicode(self.name)
+    pass
 
 class Category(ChoiceBase):
     """
@@ -114,18 +79,11 @@ class Category(ChoiceBase):
     class Meta:
         verbose_name_plural = 'Categories'
 
-    def __unicode__(self):
-        return unicode(self.name)
-
-
 class Color(ChoiceBase):
     """
     Color used in Product Model         
     """
     quality = models.ForeignKey('Quality', default=1)
-
-    def __unicode__(self):
-        return unicode(self.name)
 
 
 class Pattern(ChoiceBase):
@@ -133,10 +91,6 @@ class Pattern(ChoiceBase):
     Pattern used in Product Model         
     """
     quality = models.ForeignKey('Quality', default=1)
-
-    def __unicode__(self):
-        return unicode(self.name)
-
 
 class Quality(ChoiceBase):
     """
@@ -146,8 +100,7 @@ class Quality(ChoiceBase):
     class Meta:
         verbose_name_plural = 'Qualies'
 
-    def __unicode__(self):
-        return unicode(self.name)
+
 
 class Article(TimeStampedActivate):
     """
@@ -163,8 +116,7 @@ class Article(TimeStampedActivate):
     price = models.IntegerField()
     file = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg", ".gif", ".png"], blank=True, null=True)
     discount = models.ForeignKey('Discount', blank=True, null=True)
-    ondemand_cost = models.IntegerField(default=160)
-    
+
     def f_discount(self):
         if (self.discount.type == 'P'):
             f_discount = (self.price * (100-self.discount.discount)) / 100
@@ -191,42 +143,6 @@ class Article(TimeStampedActivate):
 
     def __unicode__(self):
         return unicode(self.name) + " (" + unicode(self.sku_number)+ ")"
-
-class ArticleCost(models.Model):
-    article = models.ForeignKey('Article')
-    fabric_m = models.IntegerField("fabric required in cemtimeters")
-    cuttime = models.IntegerField("cutting time")
-    sawtime = models.IntegerField("sawing time")
-    addtime = models.IntegerField("time for thread cutting and iron")
-    attachment = models.IntegerField("additional attachments in SEK")
-
-    def get_final_cost(self):
-        kg_price = 20 # also adding shipment 0.5
-        unit_meter = 3.1
-        euro = 9.8  
-        meter_cost_sek = int((kg_price / unit_meter) * euro) 
-        meter_cost = meter_cost_sek * 0.01 
-        minutes_cost = 3.5
-        minutes_added = self.cuttime + self.sawtime + self.addtime 
-        product_cost = (self.fabric_m * meter_cost) + (minutes_added * minutes_cost) + (self.attachment)
-        return product_cost
-
-    def get_gross_cost(self):
-        cost = self.get_final_cost()
-        gross_pris = cost * 2
-        return gross_pris
-
-    def get_out_cost(self):
-        cost = self.get_final_cost()
-        out_pris = ((cost * 2) * 25) / 10
-        return out_pris    
-
-    def get_current_price(self):
-        return self.article.price    
-
-    def __unicode__(self):
-        return "%s %s" % (self.article.sku_number, self.article.name)
-
 
 TYPE_CHOICES = (
     ('P', 'Percent'),
@@ -280,8 +196,8 @@ class ReaArticle(models.Model):
     modified = models.DateTimeField(auto_now = True)
     status = models.CharField(max_length=2, choices = STATUS)
     stockquantity = models.IntegerField()
-    image = FileBrowseField("Image", max_length=200, directory="bargains/", extensions=[".jpg", ".jpeg", ".gif", ".png"], blank=True, null=True)
-  
+    image = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg", ".gif", ".png"], blank=True, null=True)
+ 
     def __unicode__(self):
         return unicode(self.article)
  
