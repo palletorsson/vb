@@ -10,6 +10,10 @@ class Cart(models.Model):
     def __unicode__(self):
         return '%s' %self.pk
 
+S_TYPE = (
+    ('STOCK', 'FromStock'),
+    ('COD', 'CutOnDemand'),
+    )
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, default=1)
@@ -21,6 +25,7 @@ class CartItem(models.Model):
     size = models.SmallIntegerField(default=1)
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.PositiveIntegerField(default=1)
+    s_type = models.CharField(max_length=5, choices=S_TYPE, default="STOCK")
 
     class Meta:
         ordering=['date_added']

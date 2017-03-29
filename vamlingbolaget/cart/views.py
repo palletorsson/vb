@@ -54,8 +54,12 @@ def addtocart(request):
         msg = ''
         sku = d['article_sku']
         article_db = Article.objects.get(sku_number = sku)
- 
- 
+        
+        try: 
+            s_type = d['s_type']          
+        except: 
+            s_type = 'STOCK'
+
         try: 
             color = d['color']
             pattern = d['pattern']
@@ -127,6 +131,7 @@ def addtocart(request):
                 cartitem.size = size
                 cartitem.color = color
                 cartitem.quantity = quantity
+                cartitem.s_type = s_type
                 if(color2 > 0):
                     cartitem.color_2 = color2
                     cartitem.pattern_2 = pattern2
