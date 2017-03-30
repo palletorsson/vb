@@ -240,8 +240,8 @@ def email_one(request, new_order, cartitems, reaitems, handling, totalprice):
         text_size = getFortnoxSize(item.size)
         if text_size == False: 
             text_size = Size.objects.get(pk=item.size)
-
-    item.size_text = text_size
+        item.size_text = text_size
+        
     mess = request.POST['message']
 
     # get the name of the size 
