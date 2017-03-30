@@ -392,6 +392,8 @@
 		    Den här order är avskriven.
 		{% endif %}
 		</td>
+
+
     	<td> 
 		{% if order.status == 'O' or order.status == 'P'%}
 			<div class="text-center"><a href="/orders/order/action/activate/production/{{ order.order_number }}/">
