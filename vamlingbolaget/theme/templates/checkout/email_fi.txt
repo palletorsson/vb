@@ -37,5 +37,7 @@ Puh: {{ new_order.phone }}
 * Toimitus Vamlingbolagilta kestää noin 3 viikoa koska ompelemme tuotteenne. Alennettujen- ja valmiiksi ommeltujen tuotteiden toimitusaika noin 1 viikko. {% if new_order.paymentmethod == 'P' %}* Maksat postiennakolla {%endif%} {% if new_order.paymentmethod == 'C' %}* Maksoit Payex korttimaksulla {%endif%} {% if new_order.paymentmethod == 'K' %}* Valitsit Klarna checkout {%endif%}
 {% if new_order.post %}* Lähetetys vahvistetaan tekstiviestillä {%endif%}
 ---------------------------------
+Viestisi: - {{ consumer_message }}
+---------------------------------
 * Tilausnumero:{{ new_order.order_number }}
 -----------------------------------------------------------------------------------------------------

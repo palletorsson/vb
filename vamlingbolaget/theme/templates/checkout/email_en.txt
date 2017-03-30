@@ -38,5 +38,7 @@ Your phone number : {{ new_order.phone }}
 {% if new_order.paymentmethod == 'P' %}* You pay cash on delivery {%endif%} {% if new_order.paymentmethod == 'C' %}* You chose Payex card payments {%endif%} {% if new_order.paymentmethod == 'K' %}* You chose Klarna checkout {%endif%}
 {% if new_order.post %}* You will receive an SMS notification {%endif%}
 ---------------------------------
+Your Message: - {{ consumer_message }}
+---------------------------------
 * Your order number is : {{ new_order.order_number }}
 -----------------------------------------------------------------------------------------------------

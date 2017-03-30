@@ -37,6 +37,8 @@ Ditt telefonnummer : {{ new_order.phone }}
 * En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. Reaplagg och färdiga plagg tar ca 1 vecka.
 {% if new_order.paymentmethod == 'P' %}* Du betalar med postforskott {%endif%}{% if new_order.paymentmethod == 'C' %}* Du valde Payex kortbetalning {%endif%}{% if new_order.paymentmethod == 'K' %}* Du valde Klarna checkout {%endif%}
 {% if new_order.post %}* sms-avisering kommer {%endif%}
+------------------------------
+Ditt Meddelande: - {{ consumer_message }}
 ---------------------------------
 Ditt ordernummer : {{ new_order.order_number }}
 ---------------------------------

@@ -241,7 +241,8 @@ def email_one(request, new_order, cartitems, reaitems, handling, totalprice):
         if text_size == False: 
             text_size = Size.objects.get(pk=item.size)
 
-        item.size_text = text_size
+    item.size_text = text_size
+    mess = request.POST['message']
 
     # get the name of the size 
         
@@ -251,7 +252,8 @@ def email_one(request, new_order, cartitems, reaitems, handling, totalprice):
         'totalprice' : totalprice,
         'cartitems' : cartitems,
         'reaitems' : reaitems, 
-        'new_order': new_order
+        'new_order': new_order,
+        'consumer_message': mess
     }
 
     # save the langage code
