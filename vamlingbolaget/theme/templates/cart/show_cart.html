@@ -76,6 +76,28 @@
                 {%endif%}
             </div>
         </td>
+        {%if item.s_type == 'COD' %}       
+        </tr>
+        <tr>
+
+
+            <td colspan="3"> 
+            +
+            </td>
+
+            <td colspan="1"> 
+               Cut on demand för {{ item.article.name }} 
+            </td>
+
+            <td colspan="3"> 
+                 Cut on demand
+            </td>
+            <td> 
+                {{ item.article.ondemand_cost }} SEK
+            </td>
+        </tr>
+        {%endif%}
+        
         {% endfor %}
        
 		{% for item in rea %}

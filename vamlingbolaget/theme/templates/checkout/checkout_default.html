@@ -54,6 +54,26 @@
 	            {%endif%}
 	        </div>
 	    </td>
+	     {%if item.s_type == 'COD' %}       
+        </tr>
+        <tr>
+
+            <td colspan="1"> 
+            +
+            </td>
+
+            <td colspan="1"> 
+               Cut on demand för {{ item.article.name }} 
+            </td>
+
+            <td colspan="3"> 
+                 Cut on demand
+            </td>
+            <td> 
+                 140 SEK
+            </td>
+        </tr>
+        {%endif%}
 	    {% endfor %}
 	</tr>
 	    {% for b in bargains %}
