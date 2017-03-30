@@ -58,7 +58,6 @@ def create_invoice_rows(order_json):
         full = False
         color = Color.objects.get(order=item.color)
         pattern = Pattern.objects.get(order=item.pattern)
-
         # use the try statment to check if it is a full variation including size with full articlenumber
         try: 
             #print "start full", item.article, color, pattern
@@ -67,32 +66,21 @@ def create_invoice_rows(order_json):
             except: 
                 variation = Variation.objects.filter(article=item.article, color=color, pattern=pattern)[0]
 
-            #print "variation", variation
-            #print "size", item.size
             full_var = FullVariation.objects.get(variation=variation, size=item.size)
-            #print "full_var", full_var 
             text = str(full_var)
-            #print "text", text
-            # create the full article number here
 
+            # create the full article number here
             full_var_text = str(full_var.variation) + str(" - ") + str(size)
             full_var_num = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order)  + "_" + str(full_var.size)
-            #print "full_var_num", full_var_num
-
             full = True
         except:
            pass 
            
         size = getFortnoxSize(item.size)
-        print "------------------------", size
         
         if size == False: 
             item.size = Size.objects.get(pk=item.size)
 
-            print "----i--", item.size
-            print size
-            print "size", size
-        
         # if it is a full variation 
         if full == True: 
 
@@ -125,7 +113,15 @@ def create_invoice_rows(order_json):
             invoicerows.append({
                 "Description": unicode(pattern) + " " + unicode(color) 
             })
-        
+
+            if item.s_type == "COD":
+                obj1 = {
+                        "DeliveredQuantity": 1,
+                        "ArticleNumber": 1, 
+                        "Description": "Cut On Demand"
+                    }
+                invoicerows.append(obj1)
+
         print invoicerows
 
     # if it is a rea product
