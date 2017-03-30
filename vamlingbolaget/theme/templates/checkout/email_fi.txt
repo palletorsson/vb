@@ -4,14 +4,22 @@ Tilauksesi Vamlingbolagille:
 -----------------------------
 Tilauksesi:
 -------------
-{% for item in cartitems %}* Artikkeli: {{ item.article }}
+{% for item in cartitems %}
+* Artikkeli: {{ item.article }}
 * Määrä: {{ item.quantity }} 
 * Väri: {{ item.color_text }} {% if item.color_2 > 0 %} (ulkopuoli) * Väri 2: {{ item.color_text_2  }} (sisäpuoli) {%endif%}
 * Kuvio: {{ item.pattern_text }} {% if item.pattern_2 > 0 %} (ulkopuoli) *  Kuvio 2: {{ item.color_pattern_2  }} (sisäpuoli) {%endif%}
 * Koko: {{ item.size_text }} ({{ item.size }})
 *  Hinta/tuote: {% if item.discount_price > 0 %} Rea: {{ item.discount_price }} SEK ( Käyvän hinnan: {%endif%} {{ item.article.price }} {% if item.discount_price > 0 %} ) {%endif%} SEK 
--------------- 
-{%endfor%}
+{% if item.s_type == 'COD' %}* + Cut on demand: {{ item.article.ondemand_cost }} SEK {%endif%}
+-------------- {%endfor%}
+{% for item in reaitems %}* Rea-artikel: {{ item.reaArticle.article }}
+* Määrä: 1 
+* Väri: {{ item.reaArticle.color }} 
+* Kuvio: {{ item.reaArticle.pattern }}
+* Koko: {{ item.reaArticle.size }} 
+* Hinta/tuote:: Rea: {{ item.reaArticle.rea_price }} SEK 
+-------------- {%endfor%}
 -------------------------------
 Toimitus ja käsittely:  {{ handling }} SEK
 ------------------------------

@@ -4,14 +4,16 @@ Your order to Vamlingbolaget:
 -----------------------------
 Order :
 -------------
-{% for item in cartitems %}* Product: {{ item.article }}
+{% for item in cartitems %}
+* Product: {{ item.article }}
 * Amount: {{ item.quantity }} 
 * Color: {{ item.color_text }} {% if item.color_text_2 > 0 %} (outside) * Color 2: {{ item.color_text_2 }} (inside) {%endif%}
 * Pattern: {{ item.pattern_text }} {% if item.pattern_text_2 > 0 %} (outside) * Pattern 2: {{ item.pattern_2 }} (inside) {%endif%}
 * Size: {{ item.size_text }} ({{ item.size }})
 * Price per product: {% if item.discount_price > 0 %} Rea: {{ item.discount_price }} SEK ( Regular price: {%endif%} {{ item.article.price }} {% if item.discount_price > 0 %} ) {%endif%} SEK 
+{% if item.s_type == 'COD' %}* + Cut on demand: {{ item.article.ondemand_cost }} SEK {%endif%}
 -------------- {%endfor%}
-{% for item in cartitems %}* Rea product: {{ item.reaArticle.article }}
+{% for item in reaitems %}* Rea product: {{ item.reaArticle.article }}
 * Amount: 1
 * Color: {{ item.reaArticle.color }} 
 * Pattern: {{ item.reaArticle.pattern }}
