@@ -1321,7 +1321,7 @@ def CheckoutTransfer(checkout, cartitem, reaitems):
 
     if (cartitem):
         for item in cartitem:
-            orderitem = OrderItem(checkout=checkout, article=item.article, color=item.color, color_2=item.color_2, pattern=item.pattern, pattern_2=item.pattern_2, size=item.size, date_added=item.date_added, quantity=item.quantity)
+            orderitem = OrderItem(checkout=checkout, article=item.article, color=item.color, color_2=item.color_2, pattern=item.pattern, pattern_2=item.pattern_2, size=item.size, date_added=item.date_added, quantity=item.quantity, s_type=item.s_type)
             orderitem.save()
     if (reaitems):  
         for item in reaitems:
