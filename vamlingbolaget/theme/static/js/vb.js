@@ -122,8 +122,16 @@ $("#addtocart").off('click').on({
         if(counter == 0){
             counter++;
             setTimeout(function(){counter = 0},2000)
+            
+            full = $('#add_or_edit').val();
+            s_type = $('#s_type').val();
 
-        	var add_or_edit = 'add';
+            if (full == 'full') { 
+                var add_or_edit = 'full'
+            }
+            else {
+                var add_or_edit = 'add'; 
+            }
 
         	var sku_number = $('#sku_number').text(),
         		product_type = $('#product_type').text(),

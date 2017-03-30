@@ -452,7 +452,7 @@ def isincart(request, key, cartitem):
 def totalsum(cartitems, bargains, request, voucher, rea):
     temp_p = 0
     temp_q = 0
-    
+
     if (voucher and cartitems):
 		try:
 			ordered = sorted(cartitems, key=operator.attrgetter('article.price'), reverse=True)
@@ -461,7 +461,7 @@ def totalsum(cartitems, bargains, request, voucher, rea):
 		except:
 			pass 
 				
-    if (cartitems):			
+    if (cartitems):	
         for item in cartitems:
             if item.article.discount:
                 discount_price = f_discount(item.article)
@@ -471,6 +471,9 @@ def totalsum(cartitems, bargains, request, voucher, rea):
             else:
                 temp_p = temp_p + item.article.price * item.quantity
                 item.totalitemprice = item.article.price * item.quantity
+            
+            if item.s_type == 'COD':    
+                temp_p = temp_p + item.article.ondemand_cost
 
             temp_q = temp_q + item.quantity
 
@@ -509,7 +512,7 @@ def totalsum(cartitems, bargains, request, voucher, rea):
         if (temp_q > 3):
             handling = 200
         else:
-            handling = 100
+            handling = 80
         temp_p = temp_p + handling
 
 

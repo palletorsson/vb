@@ -38,16 +38,22 @@
 					<input type="hidden" id="pattern" name="pattern" value="{{ product.pattern.order}}" >							
 					<input type="hidden" id="color" name="color" value="{{ product.color.order }}" >
 					<input type="hidden" id="full_var" name="full_var" value="1" >
+					<input type="hidden" id="s_type" name="s_type" value="COD" >
+					 
 					<h4>{{ product.article.name }} | 
 						<span> 
 							{%if product.article.discount %}
 								<span class="discount"> {{ product.article.f_discount }} </span> :- * <br />
 								<span class="smaller">({% trans "tidigare pris" %} </span>  
-								<span id="the_price"> {{ product.article.price }} </span>    
-								<span class="smaller"> :-) <br />
-		   						* {{ product.article.discount.reason }} </span>
+								<span id="the_price"><span class="smaller"> {{ product.article.price }}  ) </span> </span> <br />  
+								 <hr>
+		   						Cut on Demand: 
+							    <span id="cod_price"> {{ product.article.ondemand_cost }} :-</span>
 							{%else%}
-							<span id="the_price"> {{ product.article.price }}</span> :- 
+							<span id="the_price"> {{ product.article.price }}</span> :- <br />
+							 <hr>
+		   						Cut on Demand: 
+							    <span id="cod_price"> {{ product.article.ondemand_cost }} :-</span>
 							{%endif%}  
 							
 
