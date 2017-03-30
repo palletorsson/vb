@@ -31,17 +31,17 @@ from django.core import mail
 def ShowOrders(request, stage='all'):
     if request.user.is_authenticated:
         if stage == 'all': 
-            checkouts = Checkout.objects.filter(~Q(status='C')).exclude(status='F').order_by('-id')[:100]
+            checkouts = Checkout.objects.filter(~Q(status='C')).exclude(status='F').order_by('-id')[:200]
         elif stage == 'ordered' or stage == 'card':
-            checkouts = Checkout.objects.filter(status='O').order_by('-id')[:50]
+            checkouts = Checkout.objects.filter(status='O').order_by('-id')[:100]
         elif stage == 'making':
-            checkouts = Checkout.objects.filter(status='M').order_by('-id')[:50]
+            checkouts = Checkout.objects.filter(status='M').order_by('-id')[:100]
         elif stage == 'handling':
-            checkouts = Checkout.objects.filter(status='H').order_by('-id')[:50]
+            checkouts = Checkout.objects.filter(status='H').order_by('-id')[:100]
         elif stage == 'shipped':
-            checkouts = Checkout.objects.filter(status='S').order_by('-id')[:50]
+            checkouts = Checkout.objects.filter(status='S').order_by('-id')[:100]
         else: 
-            checkouts = Checkout.objects.filter(status='F').order_by('-id')[:50]
+            checkouts = Checkout.objects.filter(status='F').order_by('-id')[:100]
 
         for checkout in checkouts: 
 
