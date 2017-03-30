@@ -4,6 +4,11 @@ from django.utils.translation import ugettext as _
 from products.models import *
 from checkout.models import Checkout
 
+S_TYPE = (
+    ('STOCK', 'FromStock'),
+    ('COD', 'CutOnDemand'),
+    )    
+
 class OrderItem(models.Model):
     checkout = models.ForeignKey(Checkout, default=1)
     article = models.ForeignKey(Article, default=1)
@@ -14,6 +19,7 @@ class OrderItem(models.Model):
     size = models.SmallIntegerField(default=1)
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.PositiveIntegerField(default=1)
+    s_type = models.CharField(max_length=5, choices=S_TYPE, default="STOCK")
 
     class Meta:
         ordering=['date_added']

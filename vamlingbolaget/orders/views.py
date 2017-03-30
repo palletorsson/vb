@@ -180,48 +180,25 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
             if todo == 'activate': 
                 checkout.status = 'H'
                 headers = get_headers()	
-                # make Fortnox invoice 
-
-                #print new_order_json
-                if len(checkout.fortnox_obj) < 200:
-                    if len(new_order_json) < 40:
-                            cartitems = checkout.orderitem_set.all()
-                            reaitems = checkout.reaorderitem_set.all()
-                            allitems = {'cartitems': cartitems, 'bargains': {}, 'voucher': {}, 'rea_items': reaitems}
-                            invoice_rows = create_order_rows(allitems)
-                            #invoice_result = fortnoxOrderandCostumer(request, checkout, invoice_rows, what)
-                            checkout.order = invoice_rows
-                            checkout.save()
-                            # reload and check 
-                            # new_order_json = json.loads(invoice_result)
-
-                            #num = int(new_order_json["Invoice"]["YourOrderNumber"])
-
-                    if what == 'order_json_done':    
-                        invoice_result = fortnoxOrderandCostumer(request, checkout, checkout.order, what)  
-                        checkout.unifaun_obj = invoice_result                     
-                        resp = createOrder(headers, invoice_result)
-                        checkout.fortnox_obj = resp
-                        checkout.save()
+                # load invoice
+                what = 'order_json_done'
+                if what == 'order_json_done':    
+                    invoice_result = fortnoxOrderandCostumer(request, checkout, checkout.order, what)  
+                    checkout.unifaun_obj = invoice_result                   
+                    resp = createOrder(headers, invoice_result)
+                    log = ' fortnox view details'  
+                    keepLog(request, log, 'INFO', current_user, checkout.order_number, resp)
+                    checkout.fortnox_obj = resp
+                    checkout.save()       
+                #log process
+                if len(resp) < 100: 
+                    log = 'Order: ' + str(checkout.order_number) + ', Fortnox order could not be created, view details'  
+                    keepLog(request, log, 'WARN', current_user, checkout.order_number, resp)
+                else:  
+                    log = 'Order: ' + str(checkout.order_number) + ', Fortnox order created, view details'  
+                    keepLog(request, log, 'INFO', current_user, checkout.order_number, resp) 
                 
-                    #log process
-                    if len(resp) < 100: 
-                        log = 'Order: ' + str(checkout.order_number) + ', Fortnox order could not be created, view details'  
-                        keepLog(request, log, 'WARN', current_user, checkout.order_number, resp)
-                    else:  
-                        log = 'Order: ' + str(checkout.order_number) + ', Fortnox order created, view details'  
-                        keepLog(request, log, 'INFO', current_user, checkout.order_number, resp) 
-                else:
-                    pass
-                    #log = 'Order: ' + str(order.order_number) + ', Fortnox order already created, view details'  
-                    #keepLog(request, log, 'WARN', current_user, order.order_number, order.fortnox_obj)
-                    
-                    #fortnoXobj = json.loads(checkout.fortnox_obj) 
-                    #orderNum = fortnoXobj["Invoice"]["YourOrderNumber"]
-                    #resp = InvoicefromOrder(headers, orderNum)
-                    #checkout.fortnox_obj = resp
-                    #checkout.save()
-
+                   
         if (stage == 'shipping'): 
             if todo == 'activate': 
                 checkout.status = 'S'
@@ -266,6 +243,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                         "test": True,                 
                     }
 
+
                 shipmentparams = json.dumps(unifaunObj)
 
                 shipment = unifaunShipmentStoredCall(shipmentparams) 
@@ -278,6 +256,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                     log = 'Order: ' + str(shipment) + ', Unifaun order creation error'
                     keepLog(request, log, 'ERROR', current_user, shipment) 
                 else:
+
                     if printing == 1: 
                         shipment_obj = json.loads(shipment)
 
@@ -336,6 +315,7 @@ def getOrderStock(cartitems):
             size = getsizenumber(item.size)
             
         fortnox_id = str(item.article.sku_number) + "_" + str(item.pattern.order) + "_" + str(item.color.order) + "_" + str(size)
+
         in_stock = get_stockvalue(fortnox_id)
         return in_stock
         
@@ -485,7 +465,6 @@ def getParcels(parcel_json):
     parcel_json = json.loads(parcel_json)
 
     parcel_json = parcel_json["Invoice"]["InvoiceRows"]
-
     for item in parcel_json: 
         try: 
             art_num = item['ArticleNumber']
