@@ -67,7 +67,10 @@ def checkout(request, test=''):
             new_order = form.save(commit=False)
 
             # create a new order number
-            new_order.order_number = 0 
+ 
+            epoch = int(time.time())
+            order_num = (epoch -1400000000)
+            new_order.order_number = order_num
             new_order.order_number = get_ordernumber() 
 
             new_order.ip = request.META['REMOTE_ADDR']
@@ -106,13 +109,8 @@ def checkout(request, test=''):
 
 
             # get the session_key for look up 
-            new_order.session_key = _cart_id(request)
-             
-            if new_order.order_number == 0:  
-                print "ordernumer not created, use epoch"
-                epoch = int(time.time())
-                order_num = (epoch -1400000000)
-                new_order.order_number = order_num
+            new_order.session_key = _cart_id(request) 
+
 
             new_order.save()
             # make an email body

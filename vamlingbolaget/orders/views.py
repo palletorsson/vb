@@ -42,13 +42,15 @@ def ShowOrders(request, stage='all'):
             checkouts = Checkout.objects.filter(status='S').order_by('-id')[:100]
         else: 
             checkouts = Checkout.objects.filter(status='F').order_by('-id')[:100]
-
+        number = 1
         for checkout in checkouts: 
 
             if len(checkout.fortnox_obj) > 200:
                 checkout.fortnoxed = 1
             else: 
                 checkout.fortnoxed = 0
+            checkout.num = number
+            number = number + 1 
 
         return render_to_response('orders/orders.html', {
 	        'checkouts': checkouts,

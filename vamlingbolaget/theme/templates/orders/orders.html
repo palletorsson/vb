@@ -23,6 +23,11 @@
    		<hr>
 <table class="table table-bordered table-striped" >
 	    <thead><tr>
+	     <td>
+		        <div>
+		            <span> Num. </span>
+		        </div>
+		    </td>
 		    <td>
 		        <div>
 		            <span> Order datum </span>
@@ -30,7 +35,7 @@
 		    </td>
 		     <td>
 		        <div>
-		            <span> Status </span>
+		            <span> Status  </span>
 		        </div>
 		    </td>
 		     <td>
@@ -58,6 +63,11 @@
 	<tbody>
 	    {% for order in checkouts %}
 	    <tr>
+	    <td>
+		        <div>
+		            <span> <a href="/orders/order/{{ order.order_number }}/">{{ order.num }} </a></span>
+		        </div>
+		    </td>
 		    <td>
 		        <div>
 		            <span> <a href="/orders/order/{{ order.order_number }}/">{{ order.date_added }} </a></span>
