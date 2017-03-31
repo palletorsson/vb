@@ -3,8 +3,7 @@
 Your order to Vamlingbolaget:
 -----------------------------
 Order :
--------------
-{% for item in cartitems %}
+------------- {% for item in cartitems %}
 * Product: {{ item.article }}
 * Amount: {{ item.quantity }} 
 * Color: {{ item.color_text }} {% if item.color_text_2 > 0 %} (outside) * Color 2: {{ item.color_text_2 }} (inside) {%endif%}

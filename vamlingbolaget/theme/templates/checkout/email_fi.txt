@@ -3,8 +3,7 @@
 Tilauksesi Vamlingbolagille:
 -----------------------------
 Tilauksesi:
--------------
-{% for item in cartitems %}
+------------- {% for item in cartitems %}
 * Artikkeli: {{ item.article }}
 * Määrä: {{ item.quantity }} 
 * Väri: {{ item.color_text }} {% if item.color_2 > 0 %} (ulkopuoli) * Väri 2: {{ item.color_text_2  }} (sisäpuoli) {%endif%}

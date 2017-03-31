@@ -3,8 +3,7 @@
 Din order till Vamlingbolaget:
 ------------------------------
 Din order:
-----------
-{% for item in cartitems %}
+---------- {% for item in cartitems %}
 * Artikel: {{ item.article }}
 * Antal: {{ item.quantity }} 
 * Färg: {{ item.color_text }} {% if item.color_text_2 > 0 %} (utsida) * Färg 2: {{ item.color_text_2 }} (insida) {%endif%}
@@ -20,7 +19,6 @@ Din order:
 * Storlek: {{ item.reaArticle.size }} 
 * Pris per produkt: Reapris: {{ item.reaArticle.rea_price }} SEK 
 -------------- {%endfor%}
-------------------------------
 Frakt och hantering :  {{ handling }} SEK
 ------------------------------
 Summa ---------------- {{ totalprice }} SEK
