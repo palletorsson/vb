@@ -826,7 +826,7 @@ def readCsvOnlyCheck(request):
                     image = "ok: " + img_name
                 else: 
                     image = "fail: " + img_name
-                    if img_count == 1: 
+                    if size == '3840': 
                         filefails.append(image)
 
 
