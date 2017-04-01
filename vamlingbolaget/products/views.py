@@ -825,8 +825,9 @@ def readCsvOnlyCheck(request):
                 if file_exist: 
                     image = "ok: " + img_name
                 else: 
-                    image = "fail: " + img_name
-                    if size == '3840': 
+                    image = "fail: " + img_name + " - " + str(article) + " - " + str(color) + " - " + str(pattern)
+                    if size == '3840':
+
                         filefails.append(image)
 
 
