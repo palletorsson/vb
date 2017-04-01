@@ -23,5 +23,13 @@
 
 {% endfor %}
 </ul>
+
+<h3> Failed </h3>
+<ul>
+{% for art in failed %}
+   <li> {{ art }} </li>
+
+{% endfor %}
+</ul>
 {% endif %}
 {% endblock %}

@@ -783,6 +783,7 @@ def readCsvOnlyCheck(request):
     # open file and sepate values 
     articles = []
     images = []
+    filefails = [] 
     check_art = "mjau"
     with open(input_file, 'r') as i:
         for line in i:
@@ -825,6 +826,9 @@ def readCsvOnlyCheck(request):
                     image = "ok: " + img_name
                 else: 
                     image = "fail: " + img_name
+                    if img_count == 1: 
+                        filefails.append(image)
+
 
                 check = unicode(article) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size) + "  " + unicode(full_article_sku)
                 articles.append(check)
@@ -840,7 +844,9 @@ def readCsvOnlyCheck(request):
 
     return render_to_response('variation/csv_view.html', {
         'articles': articles, 
-        'images': images
+        'images': images, 
+        'failed': filefails
+    
     }, context_instance=RequestContext(request))
 
 #read csv and insert full varations or products ini django database and fortnox          
