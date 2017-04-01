@@ -1045,6 +1045,19 @@ def removeCsv(request, start_at, end_at):
 
     return HttpResponse(status=200)
 
+# 10, 6, 8, 
+@login_required
+def removeByColor(request, color):
+    print "remove color: " + str(color)
+    count = 0 
+    fullart_bycolor  = FullVariation.objects.filter(active=True, variation__article__quality=1) 
+    for art in fullart_bycolor: 
+        if art.variation.color.order == color:
+            removed = art.delete()
+
+    return HttpResponse(status=200)
+
+
 @login_required
 def orderCsv(request):
     input_file = './order.csv'
