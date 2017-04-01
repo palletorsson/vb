@@ -1050,10 +1050,11 @@ def removeCsv(request, start_at, end_at):
 def removeByColor(request, color):
     print "remove color: " + str(color)
     count = 0 
-    fullart_bycolor  = FullVariation.objects.filter(active=True, variation__article__quality=1) 
+    fullart_bycolor = FullVariation.objects.filter(active=True, variation__article__quality=1) 
     for art in fullart_bycolor: 
         if art.variation.color.order == color:
-            removed = art.delete()
+            print art
+            art.delete()
 
     return HttpResponse(status=200)
 
