@@ -1164,3 +1164,40 @@ def setDiscount(request, what=''):
           art.discount = discount 
           art.save()
     return HttpResponse(status=200)
+
+@login_required
+def setPriceFromlist(request):
+    input_file = './newprices.csv'
+    count = 0 
+    # open file and sepate values 
+    with open(input_file, 'r') as i:
+        for line in i:
+            print line 
+            sepatated_values = line.split(",")
+            sku = sepatated_values[0]
+            price = sepatated_values[1] 
+            ondemandpris = sepatated_values[2] 
+            count = count + 1
+            # see if values exist 
+            if count > 1: 
+                try: 
+                    article = Article.objects.get(sku_number=sku)
+                    print article
+                    article.price = price                
+                    article.ondemand_cost = ondemandpris
+                    article.save()
+                except: 
+                    print "no such article"
+
+    return HttpResponse(status=200)
+
+@login_required
+def articlecostindex(request):
+    artCost = ArticleCost.objects.all()
+
+
+    return render_to_response('variation/articlecostindex.html',
+                             {'artCost': artCost,
+
+                              },
+                             context_instance=RequestContext(request))
