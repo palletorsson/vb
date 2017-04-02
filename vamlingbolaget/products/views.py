@@ -1103,6 +1103,47 @@ def orderCsv(request):
 
     return HttpResponse(status=200)
 
+@login_required
+def downFromCsv(request):
+    input_file = './downlist.csv'
+
+    # open file and sepate values 
+    with open(input_file, 'r') as i:
+        for line in i:
+            #print line 
+            sepatated_values = line.split(",")
+            # see if values exist 
+            if sepatated_values[0] != '': 
+                fullart = sepatated_values[0] 
+                splitart = fullkey.split("_")
+                article = Article.objects.get(sku_number=splitart[0])
+                pattern = Pattern.objects.get(order=splitart[2])
+                color = Color.objects.get(order=splitart[1])
+                size = splitart[3]
+                variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+                fullvar = FullVariation.objects.get(variation=variation, size=size)
+                if (fullvar.stock > 0): 
+                    fullvar.stock = fullvar.stock - 1 
+                    fullvar.save()    
+                print fullvar.stock
+    return HttpResponse(status=200)
+
+@login_required
+def FullDown(request, fullkey):
+    splitart = fullkey.split("_")
+    article = Article.objects.get(sku_number=splitart[0])
+    pattern = Pattern.objects.get(order=splitart[2])
+    color = Color.objects.get(order=splitart[1])
+    size = splitart[3]
+    variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+    fullvar = FullVariation.objects.get(variation=variation, size=size)
+    if (fullvar.stock > 0): 
+        fullvar.stock = fullvar.stock - 1 
+        fullvar.save()    
+    print fullvar.stock
+
+    return HttpResponse(status=200)
+
 
 @login_required
 def setDiscount(request, what=''):
