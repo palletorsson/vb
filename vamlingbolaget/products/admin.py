@@ -40,9 +40,9 @@ class FullVariationAdmin(admin.ModelAdmin):
 class ArticleAdmin(TranslationAdmin):
     model = Article
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('active', 'sku_number', 'name', 'description', 'price', 'type', 'quality', 'file', 'pk')
-    list_display_links = ('active', )
-    list_editable = ('file', 'name', 'description',)
+    list_display = ('active',  'name', 'sku_number', 'price', 'pk',)
+    list_display_links = ('name', )
+    list_editable = ('active', 'price',)
     list_filter = ('active', 'type',)
     search_fields = ['sku_number', 'name']
     list_per_page = 20
