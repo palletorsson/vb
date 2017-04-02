@@ -40,25 +40,18 @@
 					<input type="hidden" id="full_var" name="full_var" value="1" >
 					<input type="hidden" id="s_type" name="s_type" value="COD" >
 					 
-					<h4>{{ product.article.name }} | 
+					<h4>{{ product.article.name }} :
 						<span> 
 							{%if product.article.discount %}
-								<span class="discount"> {{ product.article.f_discount }} </span> :- * <br />
-								<span class="smaller">({% trans "tidigare pris" %} </span>  
-								<span id="the_price"><span class="smaller"> {{ product.article.price }}  ) </span> </span> <br />  
-								 <hr>
-		   						Cut on Demand: 
-							    <span id="cod_price"> {{ product.article.ondemand_cost }} :-</span>
+								<span class="discount"> {{ product.article.f_discount }} </span> * SEK
+								</span> + Cut on Demand : 
+							    <span id="cod_price"> {{ product.article.ondemand_cost }} SEK</span> <hr>
+							    <small>* {% trans "tidigare pris" %}  <span id="the_price">{{ product.article.price }} </span>  SEK </small>
 							{%else%}
-							<span id="the_price"> {{ product.article.price }}</span> :- <br />
-							 <hr>
-		   						Cut on Demand: 
-							    <span id="cod_price"> {{ product.article.ondemand_cost }} :-</span>
+							<span id="the_price"> {{ product.article.price }}</span> SEK + Cut on Demand: <span id="cod_price"> {{ product.article.ondemand_cost }} SEK</span>
 							{%endif%}  
-							
-
 						</span> 
-					</h3>
+					</h4>
 					<hr> 
 					<div class="span2 selectedpatternandcolor">
 					<img id="pattern_color_image r" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:160px;" />
