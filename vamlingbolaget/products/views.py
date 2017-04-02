@@ -1172,14 +1172,15 @@ def setPriceFromlist(request):
     # open file and sepate values 
     with open(input_file, 'r') as i:
         for line in i:
-            print line 
-            sepatated_values = line.split(",")
-            sku = sepatated_values[0]
-            price = sepatated_values[1] 
-            ondemandpris = sepatated_values[2] 
+
             count = count + 1
-            # see if values exist 
-            if count > 1: 
+            if count > 1:
+                sepatated_values = line.split(",")
+                
+                sku = sepatated_values[3]
+                price = sepatated_values[4]
+                ondemandpris = sepatated_values[5]
+            
                 try: 
                     article = Article.objects.get(sku_number=sku)
                     print article
@@ -1187,8 +1188,8 @@ def setPriceFromlist(request):
                     article.ondemand_cost = ondemandpris
                     article.save()
                 except: 
-                    print "no such article"
-
+                    print "no article"
+                
     return HttpResponse(status=200)
 
 @login_required
