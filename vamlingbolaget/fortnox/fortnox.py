@@ -60,17 +60,13 @@ def create_invoice_rows(order_json):
         pattern = Pattern.objects.get(order=item.pattern)
         # use the try statment to check if it is a full variation including size with full articlenumber
         try: 
-            #print "start full", item.article, color, pattern
+            #print " ----------------- start full", item.article, color, pattern
             try: 
                 variation = Variation.objects.get(article=item.article, color=color, pattern=pattern)
             except: 
                 variation = Variation.objects.filter(article=item.article, color=color, pattern=pattern)[0]
-
+            
             full_var = FullVariation.objects.get(variation=variation, size=item.size)
-            text = str(full_var)
-
-            # create the full article number here
-            full_var_text = str(full_var.variation) + str(" - ") + str(size)
             full_var_num = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order)  + "_" + str(full_var.size)
             full = True
         except:
@@ -86,9 +82,11 @@ def create_invoice_rows(order_json):
 
             obj = {
                 "DeliveredQuantity": int(item.quantity),
-                "ArticleNumber": full_var_num            
+                "ArticleNumber": full_var_num,
+                "Description": unicode(item.article) + " "  + unicode(color) + " "  + unicode(pattern) + " " + unicode(size), 
+                "Price": int(item.article.price),                            
             }
-            
+            #"Description": full_var_text
             invoicerows.append(obj)
 
         # on the other hand, if it is a choosen variation
@@ -122,8 +120,6 @@ def create_invoice_rows(order_json):
                     }
                 invoicerows.append(obj1)
 
-        print invoicerows
-
     # if it is a rea product
     if (rea == 1):
         for item in rea_items:   
@@ -145,8 +141,7 @@ def create_invoice_rows(order_json):
         "ArticleNumber": 2, 
         "Description": "Postavgift"
      })
-
-    print "--", invoicerows
+    print invoicerows
     return invoicerows  
 
 def getFortnoxSize(size): 

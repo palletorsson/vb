@@ -795,7 +795,8 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
         try:         
             invoice_rows = create_invoice_rows(order_json)
         except: 
-            pass           
+            pass    
+
     elif what == 'order_json_done': 
         invoice_rows = order_json
         log = 'Fortnox order json...' 
@@ -810,7 +811,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
             keepLog(request, log, 'ERROR', customer, '', order_json)
             invoice_rows = new_order.order
 
-    # add addtional information to comment and invoice type feilds
+    # add additional information to comment and invoice type feilds
 
     # set invoice typ
     invoice_type = new_order.paymentmethod
@@ -826,33 +827,30 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
         comments = "Order number: " + unicode(orderid_)
     except:
         comments = ""
-        
-    if invoice_type_value == 'CASHINVOICE':
-        try: 
-            order_obj = formatJson(new_order.order)
-            order_obj = json.loads(order_obj)
-            tranid = order_obj['transnumber']
-            comments = comments + " Payextransactionnumber: " + unicode(tranid) 
-        except: 
-            pass 
 
-        try: 
-            comments = comments + " Payexkey: " + unicode(new_order.payex_key) 
-        except:
-            pass 
+    try: 
+        comments = comments + " Payexkey: " + unicode(new_order.payex_key) 
+    except:
+        pass 
 
-        # adding payex tranaction key to fortnox invoice
-        try: 
-            tranid = new_order.transkey
-            transnumber_extra = "Trans Nr " + unicode(tranid) 
-            obj_t = { "Description": transnumber_extra }
-            invoice_rows.append(obj_t)
-            log = 'adding transkey' 
-            keepLog(request, log, 'ERROR', customer, obj_t, order_json)
-        except: 
-            pass
+    try: 
+        comments = comments + "Trans Nr :"  + unicode(new_orderr.tanskey)
+    except:
+        pass 
 
-    if (what == 'invoice' or what == 'order_json_done'): 
+    if (what == 'order_json_done'):        
+        all_rows = json.dumps({
+                "Invoice": {
+                    "InvoiceRows": invoice_rows["Invoice"]["InvoiceRows"],
+                    "CustomerNumber": customer_no, 
+                    "PriceList": "B",
+                    "Comments": comments,
+                    "YourOrderNumber": orderid_,
+                    "InvoiceType": invoice_type_value, 
+                }
+            }) 
+
+    if what == 'invoice': 
         customer_order = json.dumps({
                     "Invoice": {
                         "InvoiceRows": invoice_rows,
@@ -862,7 +860,10 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
                         "YourOrderNumber": orderid_,
                         "InvoiceType": invoice_type_value, 
                     }
-                })  
+                }) 
+
+    elif what == 'order_json_done': 
+        customer_order = all_rows
     else: 
         customer_order = json.dumps(
             {
