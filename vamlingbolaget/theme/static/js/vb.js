@@ -246,7 +246,7 @@ $("#addtofullcart").off('click').on({
                 quality = $(".quality").text(),
                 size_id = $('#size').val() || size_id_default,
                 article_id = $('#article_pk').val(),
-
+                mess = $('#id_message').text(),
                 quantity = $('#quantity').val(),
                 color = $('#color').val() || $('#color option:selected').val() || $('#hidden_colorpattern').val(),
                 the_price = $("#the_price").text(),
@@ -272,7 +272,8 @@ $("#addtofullcart").off('click').on({
                 csrfmiddlewaretoken: csrftoken,
                 cartitem_id: '1',
                 quantity: quantity,
-                add_or_edit : add_or_edit
+                add_or_edit : add_or_edit, 
+                message: mess
                 },
                 
                 success: function(data){
@@ -918,12 +919,10 @@ set_first_page();
     
     // serach order by order id
 
-    $("#search_order").click(function(e) {
-
+    $("#search_order").click(function(e) {      
         var order_id = $('#order_id').val();
-        window.location = '/orders/order/'+order_id
-
-
+        console.log("search_order ", order_id); 
+        window.location = '/orders/order/'+order_id+"/"
     }); 
     // for pacsoft autoaddress 
 	$(".address_button").click(function() {
