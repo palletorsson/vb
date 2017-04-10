@@ -229,7 +229,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                         "senderReference": "Vamlingbolaget", 
     				    "senderPartners": senderpartner,
                         "options": opt, 
-                        "test": True               
+                        "test": False              
                         }
                     }
                 else: 
@@ -242,7 +242,7 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                         "senderReference": "Vamlingbolaget", 
                         "senderPartners": senderpartner,
                         "options": opt,
-                        "test": True,                 
+                        "test": False,                 
                     }
 
 
