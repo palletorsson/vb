@@ -171,7 +171,7 @@ def by_type(request, key):
         products = FullVariation.objects.filter(variation__article__category__slug = key, order__lte=100, size=3840, active=True).order_by('order')
         template = 'variation/fullindex.html'
     if key == 'man':
-        products = FullVariation.objects.filter(variation__article__category__slug = key, size=3840, active=True).order_by('order')
+        products = FullVariation.objects.filter(variation__article__category__slug = key, active=True).order_by('order')
         template = 'variation/fullindex.html'
     else: 
         products = Variation.objects.filter(article__category__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
