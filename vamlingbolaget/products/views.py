@@ -108,7 +108,7 @@ def reaindex(request):
     types = Category.objects.filter(active=True) 
     atypes = Type.objects.filter(order__lte=5, active=True)
 
-    rea = "true"
+    rea = "false"
     sizes = SIZES
 
     return render_to_response('variation/reaindex.html',
@@ -172,7 +172,7 @@ def by_type(request, key):
         template = 'variation/fullindex.html'
     else: 
         products = Variation.objects.filter(article__category__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
-        template = 'variation/index.html'
+        template = 'variation/fullindex.html'
 
     
     qualities = Quality.objects.filter(active=True)
@@ -300,7 +300,7 @@ def articleDetail(request, pk):
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
         
-       
+     
     except:
         raise Http404 
 
