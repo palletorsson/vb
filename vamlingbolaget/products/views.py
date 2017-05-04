@@ -60,7 +60,7 @@ def fullindexQuality(request, quality):
     if quality == 'plysch': 
         for item in full_variation: 
             item.oneimg = str(item.variation.article.sku_number) + "_" + str(item.variation.pattern.order) + "_" + str(item.variation.color.order) 
-  
+
 
     types = Category.objects.filter(active=True)
   
@@ -582,8 +582,7 @@ def allFullArt(request, quality):
                 }
             })
             created = create_article(sku_num, data, headers)
-            #print created
-    
+
     return render_to_response('variation/admin_view.html', {
         'articles': full_variations, 
         'check_art': check_art
@@ -599,7 +598,7 @@ def agigateFortnoxProducts():
             products = allart_part['Articles']
 
             for product in products: 
-                print product['ArticleNumber']
+
                 allart.append(product['ArticleNumber'])
         except: 
             pass
@@ -701,16 +700,8 @@ def fromCsvToFortnox(name, sku_number, stock_value):
         }
     })
     error_or_create = create_article(sku_number, data, headers)
-    # If product exist the error message look like : {"ErrorInformation":{"error":1,"message":"Artikelnumret \"1510_7_6_46\" \u00e4r redan taget.","code":2000013}}
-    # then only update the product
-    try:
-        error_or_create = json.loads(error_or_create)
-        if error_or_create["ErrorInformation"]["code"] == 2000013: 
-            update_art = update_article(articleNumber, data, headers)
-    except:
-        pass
 
-    return True    
+    return error_or_create   
               
 def fromCsvToFortnoxUpdate(name, sku_number, stock_value):
     headers = get_headers()
@@ -718,20 +709,19 @@ def fromCsvToFortnoxUpdate(name, sku_number, stock_value):
         "Article": {
             "Description": name,
             "ArticleNumber": sku_number, 
-            "QuantityInStock": stock_value, 
+            "QuantityInStock": float(stock_value), 
         }
     })
-    error_or_create = update_article(sku_number, data, headers)
+
     # If product exist the error message look like : {"ErrorInformation":{"error":1,"message":"Artikelnumret \"1510_7_6_46\" \u00e4r redan taget.","code":2000013}}
     # then only update the product
     try:
-        error_or_create = json.loads(error_or_create)
-        if error_or_create["ErrorInformation"]["code"] == 2000013: 
-            update_art = update_article(sku_number, data, headers)
+        update_art = update_article(sku_number, data, headers)
     except:
+        update_art = "error -------------"
         pass
 
-    return True 
+    return update_art 
 
 def articleUpdateStock(request, sku_num, stock): 
     sku_number = sku_num
@@ -859,6 +849,9 @@ def readCsvOnlyCheck(request):
 def readCsv(request, what, start_at, end_at):
     input_file = './modeller.csv'
     count = 0 
+    articles = []
+    images = []
+    filefails = [] 
     # open file and sepate values 
     with open(input_file, 'r') as i:
         for line in i:
@@ -878,29 +871,33 @@ def readCsv(request, what, start_at, end_at):
                 full_article_sku = sepatated_values[1]
                 #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
                 splitart = full_article_sku.split("_")
+                article_name_ = ''
                 try: 
                     article = Article.objects.get(sku_number=splitart[0])
                     color = Color.objects.get(order=splitart[2])
                     pattern = Pattern.objects.get(order=splitart[1])
                     size = splitart[3]
                     article_name_ = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
-                    print "art ok ", count, sepatated_values[1]
+                    print article_name_
+                    articles.append(article_name_)
                 except:
                     print "art wrong ", count, sepatated_values[1]
+                    articles.append("-------------")
                     
 
                 if what == "fortnox": 
                     # insert or update product in fortnox       
                     try:
                         error_or_create = fromCsvToFortnox(article_name_, full_article_sku, stock)
-                        print article_name
+                        filefails.append(error_or_create)
+                        #print article_name
                         #print error_or_create
                     except:
                         pass
                         #print "fortnox wrong ", count, sepatated_values[1]
 
                 elif what == "updatefortnox": 
-                    print "uppdate: ", article_name_ 
+                    print "update: ", article_name_ 
                     # insert or update product in fortnox       
                     try:
                         # get the stock value and update name 
@@ -920,6 +917,7 @@ def readCsv(request, what, start_at, end_at):
                                 
                         error_or_create = fromCsvToFortnoxUpdate(article_n, full_article_sku, stock)
                         print error_or_create
+                        filefails.append(error_or_create)
                     except:
                         pass
                         #print "fortnox wrong ", count, sepatated_values[1]
@@ -935,12 +933,20 @@ def readCsv(request, what, start_at, end_at):
                     print "hej"            
             else: 
                 pass
-    return HttpResponse(status=200)
+    return render_to_response('variation/csv_view.html', {
+        'articles': articles, 
+        'images': images, 
+        'failed': filefails
+    
+    }, context_instance=RequestContext(request))
 
 @login_required
 def readCsvManchester(request, what, start_at, end_at):
     input_file = './manchester.csv'
     count = 0 
+    articles = []
+    images = []
+    filefails = []
     # open file and sepate values 
     with open(input_file, 'r') as i:
         for line in i:
@@ -966,10 +972,11 @@ def readCsvManchester(request, what, start_at, end_at):
                     pattern = Pattern.objects.get(order=splitart[1])
                     size = splitart[3]
                     article_name_ = unicode(article.name) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size)
-                    #print "art ok ", count, sepatated_values[1], article_name_
+                    articles.append(article_name_)
                 except:
                     print "art wrong ", count, sepatated_values[1]
-                    
+                    article_name_ = ''
+                    articles.append(article_name_)
 
                 if what == "fortnox": 
                     # insert or update product in fortnox       
@@ -977,8 +984,10 @@ def readCsvManchester(request, what, start_at, end_at):
                         try: 
                             sizename = getFortnoxSize(size)
                             article_n = article_name_ + str(" (" + sizename +")")
+                            articles.append(article_name_)
                         except:
                             article_n = article_name_
+                            articles.append(article_name_)
 
                         print "art --- ", article_n, full_article_sku   
                         error_or_create = fromCsvToFortnox(article_n, full_article_sku, stock)
@@ -988,9 +997,9 @@ def readCsvManchester(request, what, start_at, end_at):
                         #print "fortnox wrong ", count, sepatated_values[1]
 
                 elif what == "updatefortnox": 
-                  print "uppdate: "
+                  print "update: ", article_name_ 
                   # insert or update product in fortnox
-                         
+
                   try:
                       # get the stock value and update name 
                       try: 
@@ -1004,11 +1013,14 @@ def readCsvManchester(request, what, start_at, end_at):
                       try: 
                           sizename = getFortnoxSize(size)
                           article_n = article_name_ + str(" (" + sizename +")")
+                          articles.append(article_n)
                       except:
                           article_n = article_name_
+                          articles.append(article_n)
                               
                       error_or_create = fromCsvToFortnoxUpdate(article_n, full_article_sku, stock)
                       print error_or_create
+                      filefails.append(error_or_create)
                   except:
                       pass
                       #print "fortnox wrong ", count, sepatated_values[1]
@@ -1022,7 +1034,12 @@ def readCsvManchester(request, what, start_at, end_at):
                     print "hej"            
             else: 
                 pass
-    return HttpResponse(status=200)
+    return render_to_response('variation/csv_view.html', {
+        'articles': articles, 
+        'images': images, 
+        'failed': filefails
+    
+    }, context_instance=RequestContext(request))
 
 @login_required
 def removeCsv(request, start_at, end_at):
@@ -1175,7 +1192,6 @@ def setPriceFromlist(request):
     # open file and sepate values 
     with open(input_file, 'r') as i:
         for line in i:
-
             count = count + 1
             if count > 1:
                 sepatated_values = line.split(",")
