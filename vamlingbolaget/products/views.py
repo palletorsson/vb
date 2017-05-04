@@ -766,6 +766,30 @@ def fromCsvToDjango(article, pattern, color, size, stock):
         fullvariation.save()
     return True
 
+def fromCsvToDjangoDisable(article, pattern, color, size):
+    no_simpel_create = 0
+    print "je", article, pattern, color, size
+    try: 
+        variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+    except: 
+        no_simpel_create = 1
+    # 
+    if no_simpel_create == 1: 
+        variation = Variation.objects.filter(article=article, pattern=pattern, color=color)[0]
+        print "one var", variation
+
+
+    fullvariation = FullVariation.objects.get(variation=variation, size=size)
+    print fullvariation
+    # if fullvariation exist only update the fullvaration with stockvalue
+    try: 
+        fullvariation.active = False
+        fullvariation.save()
+    except: 
+        print "disable error"
+
+    return True
+
 #read csv and insert full varations or products ini django database and fortnox 
 
 @login_required         
@@ -927,6 +951,14 @@ def readCsv(request, what, start_at, end_at):
                     stock = 10
                     try:
                         fromCsvToDjango(article, pattern, color, size, stock)
+                    except: 
+                        print "django wrong ", count, sepatated_values[1]
+                elif what == "djangodisable": 
+                    # insert or update full_variation
+
+                    stock = 10
+                    try:
+                        fromCsvToDjangoDisable(article, pattern, color, size)
                     except: 
                         print "django wrong ", count, sepatated_values[1]
                 else: 
