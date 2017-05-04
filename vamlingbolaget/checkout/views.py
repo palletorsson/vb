@@ -799,7 +799,17 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
 
     elif what == 'order_json_done': 
         invoice_rows = order_json
-        log = 'Fortnox order json...' 
+        print "-###", invoice_rows
+        
+        try:      
+            invoice_rows = formatJson(order_json)
+            print "after format: --------- ", invoice_rows
+            invoice_rows = json.loads(invoice_rows)
+            print "####", type(invoice_rows), invoice_rows 
+        except: 
+            print invoice_rows
+        print "--?",  invoice_rows            
+        log = 'order this done json, its invoices...' 
         keepLog(request, log, 'INFO', customer, '', invoice_rows)
     else: 
         try:         
@@ -838,10 +848,15 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
     except:
         pass 
 
+    try: 
+        invoice_rows = invoice_rows["Invoice"]["InvoiceRows"]
+    except: 
+        invoice_rows = invoice_rows
+
     if (what == 'order_json_done'):        
         all_rows = json.dumps({
                 "Invoice": {
-                    "InvoiceRows": invoice_rows["Invoice"]["InvoiceRows"],
+                    "InvoiceRows": invoice_rows,
                     "CustomerNumber": customer_no, 
                     "PriceList": "B",
                     "Comments": comments,
