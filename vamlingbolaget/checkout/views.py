@@ -799,16 +799,13 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
 
     elif what == 'order_json_done': 
         invoice_rows = order_json
-        print "-###", invoice_rows
         
         try:      
             invoice_rows = formatJson(order_json)
-            print "after format: --------- ", invoice_rows
             invoice_rows = json.loads(invoice_rows)
-            print "####", type(invoice_rows), invoice_rows 
         except: 
-            print invoice_rows
-        print "--?",  invoice_rows            
+            pass
+                   
         log = 'order this done json, its invoices...' 
         keepLog(request, log, 'INFO', customer, '', invoice_rows)
     else: 
@@ -830,7 +827,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
     else:
         invoice_type_value = 'CASHINVOICE'
 
-    # try to add a comment
+    # try to add a comments and add it to as a description row in fortnox
     
     try:
         orderid_ = new_order.order_number 
@@ -839,15 +836,24 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
         comments = ""
 
     try: 
-        comments = comments + " Payexkey: " + unicode(new_order.payex_key) 
+        if (new_order.payex_key != ''):
+            comments = comments + " Payex key: " + unicode(new_order.payex_key) 
     except:
         pass 
 
     try: 
-        comments = comments + "Trans Nr :"  + unicode(new_orderr.tanskey)
+        if (new_order.transkey != ''):
+            comments = comments + " Trans Nr :"  + unicode(new_order.transkey)
     except:
         pass 
 
+    try: 
+        invoice_rows["Invoice"]["InvoiceRows"].append({
+                "Description": unicode(comments) 
+            })
+    except:
+        pass
+           
     try: 
         invoice_rows = invoice_rows["Invoice"]["InvoiceRows"]
     except: 
