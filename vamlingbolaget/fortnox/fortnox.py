@@ -584,6 +584,37 @@ def update_article(articleNumber, data, headers):
             data = data
         )
         return r.content
+
+    except requests.exceptions.RequestException as e:
+        return ('HTTP Request failed')
+
+
+def get_price(ArticleNumber, headers):
+    # Article (GET https://api.fortnox.se/3/prices/sublist/{PriceList}/{ArticleNumber})
+    
+    try:
+        r = requests.get(
+            url="https://api.fortnox.se/3/prices/sublist/A/"+ArticleNumber,
+            headers = headers,
+        )
+        return r.content
+
+    except requests.exceptions.RequestException as e:
+        return ('HTTP Request failed')
+
+# Request: Acco
+
+def update_price(data, headers):
+    # Article (POST https://api.fortnox.se/3/prices)
+    
+    try:
+        r = requests.post(
+            url="https://api.fortnox.se/3/prices",
+            headers = headers,
+            data = data
+        )
+        return r.content
+
     except requests.exceptions.RequestException as e:
         return ('HTTP Request failed')
 

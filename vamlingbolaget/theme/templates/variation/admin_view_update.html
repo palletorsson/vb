@@ -1,0 +1,28 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{%block title%}
+<title>Vamlingbolaget | {% trans "pacsoft " %}  </title>
+<meta name="description" content={% trans "Tack för din Beställning av Vamlingbolagets produkter " %} />
+
+{%endblock%}
+
+
+{% block allcontent %}
+	{% if user.is_authenticated %}
+	<h2>You can update article and prices here.</h2> 
+	<h4> You can look at products in django: /products/allart_admin/look/0/15/ <br>
+	You can add unregisted products to fortnox: /products/allart_admin/addifnotexist/0/15/ <br>
+	You can add unregisted prices to fortnox: /products/allart_admin/setprice/10/15/ </h4>
+
+	{{ art_length }}
+    <h3>Result</h3>
+	<ul>
+	{% for art in check_art %}
+	     <li> {{ art }} <ul>
+	{% endfor %}
+	</ul>
+
+	<br>
+
+	{% endif %}
+{% endblock %}

@@ -6,7 +6,7 @@ from products.models import *
 from blog.models import Post
 from gallery.models import *
 from django.http import Http404
-from fortnox.fortnox import get_headers, get_articles, get_article, create_article, update_article, get_stockvalue, delete_article, getFortnoxSize
+from fortnox.fortnox import get_headers, get_articles, get_article, create_article, update_article, get_stockvalue, delete_article, getFortnoxSize, get_price, update_price
 #from fortnox.local_fortnox import get_vb_headers
 import json
 from django.core import serializers
@@ -518,31 +518,109 @@ def variationduplicates(request, remove):
     return HttpResponse(status=200)
 
 # to show all articels
-def allArt(request):
+def allArt(request, what='', start_at=1, end_at=10):
+
+    status = ''
+    indx = int(start_at)
+
     articles = Article.objects.filter(active = True).order_by('name')
+    full_variations = FullVariation.objects.filter(active=True) 
+
     headers = get_headers()
     check_art = []
+    new_art_set = []
 
-    for art in articles: 
-        try: 
-            sku_num = int(art.sku_number)
-            sku_num = str(sku_num)
-        except: 
-            sku_num = art.sku_number 
-         
-        res = get_article(headers, str(sku_num)) 
-        res = json.loads(res)
+    for fullvar in full_variations: 
+        data = {}
+        art_num = str(fullvar.variation.article.sku_number) + "_" + str(fullvar.variation.pattern.order) + "_" + str(fullvar.variation.color.order) + "_" + str(fullvar.size) 
         
-        try:
-            print res["ErrorInformation"]["Error"]
-            check_art.append("error: " + str(art.sku_number) + " " + unicode(art.name))
-        except:  
-            print res['Article']['ArticleNumber']
-            check_art.append("ok: " + unicode(res['Article']['ArticleNumber']) + " is the same " + str(art.sku_number))
+        data["Article"] = {}
+        data["Article"]["Description"] = unicode(fullvar)
+        data["Article"]["ArticleNumber"] = art_num
+        data["Article"]["Price"] = str(fullvar.variation.article.price)
+
+        new_art_set.append(data) 
     
-    return render_to_response('variation/admin_view.html', {
+    for art in articles:
+        data = {}
+        art_num = art.sku_number
+
+        data["Article"] = {}
+        data["Article"]["Description"] = unicode(art)
+        data["Article"]["ArticleNumber"] = art_num
+        data["Article"]["Price"] = str(art.price)
+        new_art_set.append(data) 
+    
+    art_length = len(new_art_set)
+    
+    for art in new_art_set: 
+        indx = indx + 1
+        if indx < int(end_at):
+            sku_num = art['Article']['ArticleNumber']
+            descript = art['Article']['Description']
+
+            res = get_article(headers, str(sku_num)) 
+            res = json.loads(res)
+
+            if what == 'look':
+                try:
+                    check_art.append("ok: " + str(sku_num) + " - " + unicode(descript))
+                except:  
+                    check_art.append("error: " + str(sku_num))
+            
+            elif what == 'addifnotexist': 
+
+                try:
+                    check_art.append("Exist: " + str(sku_num) + " " + unicode(descript)) 
+                    status = 'found'
+                except:  
+                    status = 'notfound'
+
+                if status == "notfound": 
+                    check_art.append("Add ------------ Article: " + unicode(sku_num))
+                    data = json.dumps({
+                    "Article": {
+                        "Description": unicode(descript),
+                        "ArticleNumber": unicode(sku_num), 
+                        "WebshopArticle": True, 
+                      }
+                    })
+                    created = create_article(str(sku_num), data, headers)
+                    check_art.append(created)
+
+
+            elif what == 'setprice': 
+                check_art.append("Add ------------ Price: " + unicode(sku_num))
+                price_res = get_price(str(sku_num), headers)
+                check_art.append(price_res)
+                price = json.loads(price_res)
+                
+                try: 
+                    if price['ErrorInformation']['code'] != '': 
+                        status = 'pricenotset'
+                except: 
+                    status = 'priceexist'
+
+                status = 'pricenotset'
+
+                if status == "pricenotset":
+                    data = json.dumps({
+                          "Price": {
+                            "ArticleNumber": unicode(sku_num),
+                            "FromQuantity": 1,
+                            "Price": int(art["Article"]["Price"]), 
+                            "PriceList": "A"
+                        }
+                    })  
+                    updated = update_price(data, headers)
+            else:
+                print "no of the above"
+
+   
+    return render_to_response('variation/admin_view_update.html', {
         'articles': articles, 
-        'check_art': check_art
+        'check_art': check_art,
+        'art_length': art_length
     }, context_instance=RequestContext(request))
 
 
