@@ -564,14 +564,14 @@ def allArt(request, what='', start_at=1, end_at=10):
 
             if what == 'look':
                 try:
-                    check_art.append(str(indx) + " : " + str(sku_num) + " - " + unicode(descript))
+                    check_art.append(str(indx) + " : " + str(sku_num) + " - " + unicode(res['Article']['Description']))
                 except:  
                     check_art.append("error: " + str(sku_num))
             
             elif what == 'addifnotexist': 
 
                 try:
-                    check_art.append("Exist: " + str(sku_num) + " " + unicode(descript)) 
+                    check_art.append("Exist: " + str(sku_num) + " " + unicode(res['Article']['Description'])) 
                     status = 'found'
                 except:  
                     status = 'notfound'
