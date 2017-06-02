@@ -840,10 +840,10 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
             comments = comments + " Payex key: " + unicode(new_order.payex_key) 
     except:
         pass 
-
+    # I use shipping_country to store the payex transkey
     try: 
-        if (new_order.transkey != ''):
-            comments = comments + " Trans Nr :"  + unicode(new_order.transkey)
+        if (new_order.shipping_country != ''):
+            comments = comments + " Payex trans Nr. :"  + unicode(new_order.shipping_country)
     except:
         pass 
 
