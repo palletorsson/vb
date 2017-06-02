@@ -564,7 +564,7 @@ def allArt(request, what='', start_at=1, end_at=10):
 
             if what == 'look':
                 try:
-                    check_art.append("ok: " + str(sku_num) + " - " + unicode(descript))
+                    check_art.append(str(indx) + " : " + str(sku_num) + " - " + unicode(descript))
                 except:  
                     check_art.append("error: " + str(sku_num))
             
