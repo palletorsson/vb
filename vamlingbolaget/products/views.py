@@ -555,7 +555,7 @@ def allArt(request, what='', start_at=1, end_at=10):
     
     for art in new_art_set: 
         indx = indx + 1
-        if indx < int(end_at):
+        if indx > 1 and indx > int(start_at) and indx < int(end_at):
             sku_num = art['Article']['ArticleNumber']
             descript = art['Article']['Description']
 
