@@ -845,19 +845,19 @@ def fromCsvToDjango(article, pattern, color, size, stock):
 
 def fromCsvToDjangoDisable(article, pattern, color, size):
     no_simpel_create = 0
-    print "je", article, pattern, color, size
+
     try: 
         variation = Variation.objects.get(article=article, pattern=pattern, color=color)
     except: 
         no_simpel_create = 1
-    # 
+
     if no_simpel_create == 1: 
         variation = Variation.objects.filter(article=article, pattern=pattern, color=color)[0]
         print "one var", variation
 
 
     fullvariation = FullVariation.objects.get(variation=variation, size=size)
-    print fullvariation
+
     # if fullvariation exist only update the fullvaration with stockvalue
     try: 
         fullvariation.active = False
