@@ -935,15 +935,27 @@ set_first_page();
 
     $('#Service').on('change', function () {
           var extra = $(this).val(); 
+          var weight = $('#weight').val();
+          console.log(weight); 
+          if (weight == '') {
+            weight = 1000; 
+          }
           var base_url = $('#urlbase').html();
-          var final_url = base_url + extra;
+          var final_url = base_url + extra + "/" + weight;
           $('#target_url').attr('href', final_url); 
           return true;
       });
 
-    $('#weight').on('change', function () {
-          var weight = $(this).val(); 
+    $('input[name=weight]').on('change', function () {
+          var weight = $(this).val();
+          
+          if (weight == '') {
+            weight = 1000; 
+          }
+          console.log(weight); 
+          
           var base_url = $('#urlbase').html();
+
           var extra = $("#Service :selected").val();
           var final_url = base_url + extra + "/" + weight + "/";
 

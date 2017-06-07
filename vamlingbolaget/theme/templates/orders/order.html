@@ -420,15 +420,23 @@
 		{% if order.status == 'H' %}
 			<div class="text-center">
 			
-			<select name="Service" id="Service" size="0" tabindex="1">
+			 <select name="Service" id="Service" size="0" tabindex="1">
 				Välj fraktsätt: <option value="*SELECT*">- Välj -</option>
 				<option value="PAF">PostNord - Brevpostförskott</option>
 				<option value="PUA">PostNord - Varubrev 1:a klass</option>
 				<option value="P15" selected="selected">PostNord DPD Företagspaket</option>
 			</select>
+			<br><label>Vikt: </label>
+			<div class="input-group"> 	
+		    	<input type="text" name="weight" id="weight" class="form-control">
+      			<span class="input-group-addon">milligram</span>
+  		    </div>
+  		   
+			 
+
 
 		<div id="urlbase" class="hidden">/orders/order/action/activate/shipping/{{ order.order_number }}/</div>
-			 <a id="target_url" href="/orders/order/action/activate/shipping/{{ order.order_number }}/PAF/">
+			 <a id="target_url" href="/orders/order/action/activate/shipping/{{ order.order_number }}/PAF/1000/">
 			    <br><button type="button" id="activate_order" class="btn btn-large btn-warning text-center"> Aktivera Frakt </button>
 			    </a>
 		         
