@@ -13,7 +13,7 @@
         {% for product in products %}
         
              <div class="collection_list img_container" >
-                <a href="/products/article/{{ product.variation.article.sku_number }}/#{{ product.variation.article.name }} {% trans "i" %} {{ product.variation.color|lower }} {{ product.pattern|lower }}">
+                <a href="/products/article/{{ product.variation.pk }}/#{{ product.variation.article.name }} {% trans "i" %} {{ product.variation.color|lower }} {{ product.pattern|lower }}">
 
                         <span class="hidden">{{ product.variation.article.quality }}</span>
                             {%if product.variation.article.quality.order > 15 or product.variation.article.quality.order == 2   %}
