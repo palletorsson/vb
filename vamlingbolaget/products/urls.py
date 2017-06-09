@@ -4,7 +4,9 @@ from models import Variation
 
 urlpatterns = patterns('products.views',
     url(r'^$', 'index'),
+    url(r'^fullcut/$', 'fullindexarticle'),
     url(r'^full/$', 'fullindex'),
+    url(r'^preview/$', 'fulllastindex'),
     url(r'^fullindexlist/$', 'fullindexlist'),
     url(r'^full/quality/(?P<quality>[a-zA-Z0-9_.-]+)/$', 'fullindexQuality'),
     url(r'^(?P<pk>\d+)/$', 'detail'),

@@ -52,6 +52,34 @@ def fullindex(request):
                               },
                              context_instance=RequestContext(request))
 
+
+def fullindexarticle(request):
+    full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__quality=1).order_by('variation__article__type', 'order') 
+    qualities = Quality.objects.filter(active=True)
+    types = Category.objects.filter(active=True)
+    return render_to_response('variation/fullindexarticle.html',
+                             {'products': full_variation,
+                              'qualities': qualities,
+                              'types': types,
+                              'rea': True
+                              },
+                             context_instance=RequestContext(request))
+
+
+def fulllastindex(request):
+    full_variation = FullVariation.objects.filter(size=3840, variation__article__quality=1).order_by('id')[:10] 
+    qualities = Quality.objects.filter(active=True)
+    types = Category.objects.filter(active=True)
+    
+    return render_to_response('variation/fullindex.html',
+                             {'products': full_variation,
+                              'qualities': qualities,
+                              'types': types,
+                              'rea': True
+                              },
+                             context_instance=RequestContext(request))
+
+
 def fullindexQuality(request, quality):
     full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__quality__slug__contains = quality).order_by('order')
     qualities = Quality.objects.filter(active=True)

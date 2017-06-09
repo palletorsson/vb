@@ -14,6 +14,10 @@ body html {
   font-size: 13.5px; 
 }
 
+.cutondemand {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+}
 
 .seventeen_bottom {
     margin-bottom: 45px;
@@ -199,7 +203,6 @@ font-size: 0.9em;
   .nav .nav-collapse {
   text-transform: uppercase;
   }
-
   .nav-collapse > .collapse {
       background-color: black;
   }
@@ -404,7 +407,6 @@ margin-right: -49px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
   .pattern_row {
       color:#000;
       font-weight: bold;
