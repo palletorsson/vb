@@ -25,13 +25,14 @@
                             {%endif%}
                             </div>
                             <div class='image_description'>
-                               <span class="cutondemand">CUT ON DEMAND</span> <hr>
+                               
                                <span class="artname"> {{ product.variation.article.name }}</span><br/>
                                 {%if product.variation.article.discount %}
                                     <span class="discount"> {{ product.variation.article.f_discount }} </span> (<span style="text-decoration: line-through;">{{ product.variation.article.price }} </span>) SEK
                                 {%else%}
                                     <span class="price">{{ product.variation.article.price }} SEK</span>
                                 {%endif%}
+                                <hr><span class="cutondemand">CUT ON DEMAND</span> 
                             </div>
 <hr>
                    
