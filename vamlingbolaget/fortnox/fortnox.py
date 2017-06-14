@@ -84,7 +84,7 @@ def create_invoice_rows(order_json):
                 "DeliveredQuantity": int(item.quantity),
                 "ArticleNumber": full_var_num,
                 "Description": unicode(item.article) + " "  + unicode(color) + " "  + unicode(pattern) + " " + unicode(size), 
-                "Price": int(item.article.price),                            
+                "Price": int(item.article.price) * 0.8,                            
             }
             #"Description": full_var_text
             invoicerows.append(obj)
@@ -104,7 +104,8 @@ def create_invoice_rows(order_json):
             obj = {
                 "DeliveredQuantity": int(item.quantity),
                 "ArticleNumber": int(item.article.sku_number), 
-                "Description": unicode(item.article.name) + " " + unicode(size) 
+                "Description": unicode(item.article.name) + " " + unicode(size), 
+                "Price": int(item.article.price) * 0.8,  
             }
 
             invoicerows.append(obj)

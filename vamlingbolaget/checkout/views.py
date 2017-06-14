@@ -864,7 +864,6 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
                 "Invoice": {
                     "InvoiceRows": invoice_rows,
                     "CustomerNumber": customer_no, 
-                    "PriceList": "B",
                     "Comments": comments,
                     "YourOrderNumber": orderid_,
                     "InvoiceType": invoice_type_value, 
@@ -876,7 +875,6 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
                     "Invoice": {
                         "InvoiceRows": invoice_rows,
                         "CustomerNumber": customer_no, 
-                        "PriceList": "B",
                         "Comments": comments,
                         "YourOrderNumber": orderid_,
                         "InvoiceType": invoice_type_value, 
