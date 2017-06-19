@@ -98,6 +98,7 @@ def ShowOrder(request, order_id):
         if checkout.status == 'M': 
             allitems = {'cartitems': cartis, 'bargains': {}, 'voucher': {}, 'rea_items': reaitems}
             invoice_rows = create_order_rows(allitems)
+
             file_name = checkout.order_number
             incolor_path = '../../media/'+str(file_name)+'.txt'
             fortnox = 'Preview the order and customer information for the Fortnox invoice. The order will be added to Fortnox.'
@@ -150,7 +151,7 @@ def loadShipments(request, id=''):
         },
         context_instance=RequestContext(request))
 
-def OrderAction(request, todo, stage, order_number, send_type=''): 
+def OrderAction(request, todo, stage, order_number, send_type='', weight=''): 
 
     if request.user.is_authenticated:
         current_user = request.user
@@ -203,13 +204,14 @@ def OrderAction(request, todo, stage, order_number, send_type=''):
                    
         if (stage == 'shipping'): 
             if todo == 'activate': 
+                 
                 checkout.status = 'S'
                 # make the Unifaun order 
                 name = checkout.first_name +' '+ checkout.last_name
                 #unifaunShipmentCall()
                 receiver = getReceiver(name, checkout.email, checkout.street, checkout.postcode, checkout.city, checkout.country, checkout.phone)
                 checkout_json = checkout.order
-                parcels = getParcels(checkout.fortnox_obj)
+                parcels = getParcels(checkout.fortnox_obj, weight)
                 pdfConf = getPdfConfig()
                 service = getService(send_type)
                 vamlingbolaget = getSender()
@@ -460,29 +462,16 @@ def senderPartner(sender_type):
 
 
 
-def getParcels(parcel_json):
-    weight = 0
-
+def getParcels(parcel_json, weight):
+    
     return_parcels = []
     parcel_json = json.loads(parcel_json)
-
-    parcel_json = parcel_json["Invoice"]["InvoiceRows"]
-    for item in parcel_json: 
-        try: 
-            art_num = item['ArticleNumber']
-            artnum = re.sub(r'[\W_]+', '', art_num)
-            artnum = int(artnum)
-
-            if artnum > 10: 
-                
-                return_parcels.append({
-                    "copies": "1",
-                    "weight": "1",
-                    "contents": item['Description']
-                })
-                weight = weight + 0.5
-        except: 
-            pass     
+    
+    return_parcels.append({
+        "copies": "1",
+        "weight": str(weight),
+        "contents": "Vamlingbolaget produkter"
+    })
 
     return return_parcels 
 
