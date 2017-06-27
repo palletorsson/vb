@@ -229,6 +229,8 @@ $("#addtocart").off('click').on({
     	   });
         }
     }
+    }
+
 });//end of click
 
 
