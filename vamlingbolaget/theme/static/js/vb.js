@@ -118,9 +118,18 @@ if ($(".hasitems")[0]){
 
 var counter = 0;
 
-       
+$('#nosize').hide();  
+
 $("#addtocart").off('click').on({
     click:function(e) {
+        var size_val = $('#size').val(); 
+        if (size_val == ''){
+           $('#nosize').show(); 
+           $('#nosize').delay(2000).fadeOut(3000);
+            
+
+           
+        } else {
         e.stopPropagation();
         if(counter == 0){
             counter++;
