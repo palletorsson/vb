@@ -837,7 +837,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
 
     # I use shipping_country to store the payex transkey
     try: 
-        comments = comments + " | Payex transaktion Nr. :"  + unicode(new_order.shipping_country)
+        comments = comments + " - Payex transaktion Nr. :"  + unicode(new_order.shipping_country)
     except:
         pass 
 
