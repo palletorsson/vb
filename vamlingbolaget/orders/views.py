@@ -449,13 +449,13 @@ def getShipmentPara():
 def senderPartner(sender_type):
     if sender_type == "PAF": 
         senderpartner = "PBREV" 
-        custno = "011111118"
+        custno = "20510523"
     if sender_type == "P15": 
         senderpartner = "PLAB" 
-        custno = "0111111118"
+        custno = "0205105232"
     if sender_type == "PUA":
         senderpartner = "PBREV" 
-        custno = "01111118" 
+        custno = "20510523" 
 
     return [{ "id": senderpartner,
         "custNo": custno }]
