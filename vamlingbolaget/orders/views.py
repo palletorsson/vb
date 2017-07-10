@@ -220,11 +220,11 @@ def OrderAction(request, todo, stage, order_number, send_type='', weight=''):
                 checkout_json = checkout.order
                 parcels = getParcels(checkout.fortnox_obj, weight)
                 pdfConf = getPdfConfig()
-                service = getService(send_type)
+                service = getService(send_type, returntotal)
                 vamlingbolaget = getSender()
                 opt =  getOptions(checkout.email)
                 senderpartner = senderPartner(send_type)
-                getaddon = getAddon(returntotal)
+               
                 #checkZip(order.postcode)
                 printing = 0
                 if printing == 1: 
@@ -238,7 +238,6 @@ def OrderAction(request, todo, stage, order_number, send_type='', weight=''):
                         "service": service,
                         "senderReference": "Vamlingbolaget", 
     				    "senderPartners": senderpartner,
-                        "addons": getaddon, 
                         "options": opt, 
                         "test": False              
                         }
@@ -506,7 +505,7 @@ def getPdfConfig():
     }
 
 # "id": "P15"
-def getService(service):
+def getService(service, amount):
     if service == "PAF": 
         return {
           "id": service,
@@ -516,7 +515,8 @@ def getService(service):
                 },
                 {
                 "id": "COD",
-                "amount": 100
+                "amount": amount, 
+                "account": "5234-3027"
                 },
                 { 
                 "id": "NOT"
