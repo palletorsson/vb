@@ -206,6 +206,13 @@ def OrderAction(request, todo, stage, order_number, send_type='', weight=''):
             if todo == 'activate': 
                  
                 checkout.status = 'S'
+                cartis = checkout.orderitem_set.all()
+                cartitems = checkout.orderitem_set.all()
+        
+                reaitems = checkout.reaorderitem_set.all()
+                bargains = {}
+                voucher = {}
+                returntotal = totalsum(cartitems, bargains, request, voucher, reaitems)
                 # make the Unifaun order 
                 name = checkout.first_name +' '+ checkout.last_name
                 #unifaunShipmentCall()
@@ -217,6 +224,7 @@ def OrderAction(request, todo, stage, order_number, send_type='', weight=''):
                 vamlingbolaget = getSender()
                 opt =  getOptions(checkout.email)
                 senderpartner = senderPartner(send_type)
+                getaddon = getAddon(returntotal)
                 #checkZip(order.postcode)
                 printing = 0
                 if printing == 1: 
@@ -230,6 +238,7 @@ def OrderAction(request, todo, stage, order_number, send_type='', weight=''):
                         "service": service,
                         "senderReference": "Vamlingbolaget", 
     				    "senderPartners": senderpartner,
+                        "addons": getaddon, 
                         "options": opt, 
                         "test": False              
                         }
@@ -456,9 +465,14 @@ def senderPartner(sender_type):
     if sender_type == "PUA":
         senderpartner = "PBREV" 
         custno = "20510523" 
-
+     
     return [{ "id": senderpartner,
-        "custNo": custno }]
+            "custNo": custno }]
+   
+
+def getAddon(amount): 
+    obj = {"account":"5234-3027","amount":amount}
+    return obj
 
 
 
@@ -469,8 +483,8 @@ def getParcels(parcel_json, weight):
     weight = int(weight)/1000
     return_parcels.append({
         "copies": "1",
-        "weight": str(weight),
-        "contents": "Vamlingbolaget produkter"
+        "weight": weight,
+        "contents": "Textil"
     })
 
     return return_parcels 
