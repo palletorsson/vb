@@ -516,7 +516,7 @@ def getService(service, amount):
                 {
                 "id": "COD",
                 "amount": amount, 
-                "account": "5234-3027"
+                "bank": "5234-3027"
                 },
                 { 
                 "id": "NOT"
