@@ -218,7 +218,7 @@ def OrderAction(request, todo, stage, order_number, send_type='', weight=''):
                 #unifaunShipmentCall()
                 receiver = getReceiver(name, checkout.email, checkout.street, checkout.postcode, checkout.city, checkout.country, checkout.phone)
                 checkout_json = checkout.order
-                parcels = getParcels(checkout.fortnox_obj, weight)
+                parcels = getParcels(checkout.fortnox_obj, weight, checkout.phone)
                 pdfConf = getPdfConfig()
                 service = getService(send_type, returntotal['totalprice'])
                 vamlingbolaget = getSender()
@@ -505,7 +505,7 @@ def getPdfConfig():
     }
 
 # "id": "P15"
-def getService(service, amount):
+def getService(service, amount, phone):
     if service == "PAF": 
         return {
           "id": service,
@@ -520,7 +520,8 @@ def getService(service, amount):
                 "accountType": "bg"
                 },
                 { 
-                "id": "NOTSMS"
+                "id": "NOTSMS", 
+                "phone": phone,
                 }
                 ],
         }
