@@ -218,9 +218,10 @@ def OrderAction(request, todo, stage, order_number, send_type='', weight=''):
                 #unifaunShipmentCall()
                 receiver = getReceiver(name, checkout.email, checkout.street, checkout.postcode, checkout.city, checkout.country, checkout.phone)
                 checkout_json = checkout.order
-                parcels = getParcels(checkout.fortnox_obj, weight, checkout.phone)
+                parcels = getParcels(checkout.fortnox_obj, weight)
                 pdfConf = getPdfConfig()
-                service = getService(send_type, returntotal['totalprice'])
+                service = getService(send_type, returntotal['totalprice'], checkout.phone)
+
                 vamlingbolaget = getSender()
                 opt =  getOptions(checkout.email)
                 senderpartner = senderPartner(send_type)
