@@ -520,7 +520,7 @@ def getService(service, amount):
                 "accountType": "bg"
                 },
                 { 
-                "id": "NOT"
+                "id": "NOTSMS"
                 }
                 ],
         }
@@ -528,7 +528,7 @@ def getService(service, amount):
         return {
           "id": service, 
           "addons": [{
-            "id": "NOT"
+            "id": "NOTSMS"
             }]
         }
         
