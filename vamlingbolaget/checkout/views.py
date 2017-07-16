@@ -891,15 +891,84 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
 
 # to show all checkouts
 def admin_view(request, limit):
-    orders = Checkout.objects.all().order_by('-id')[:limit]   
-    for order in orders:
+    orders = Checkout.objects.all()
+    the_art = False
+    numbers = []
+    res = []
+
+    for order in orders: 
+        order.art = "----"
+        # ta fram artikelnummet
         try:
             start = order.order.index(' st ') + len(' st ')
-            end = order.order.index( ' i ', start )
+            end = order.order.index( ') i ', start )
             if (len(order.order[start:end]) < 120):
-                order.art = order.order[start:end]     
+                order.art = order.order[start:end]
+                order.art = order.art[-4:]
+                print order.art, order.id
+                the_art = True
+                     
         except: 
+            the_art = False
             pass
+
+        if the_art == False:   
+            try:
+                start = order.order.index('uct 1:') + len('uct 1:')
+                end = order.order.index( ') i ', start )
+                
+                if (len(order.order[start:end]) < 120):
+                    order.art = order.order[start:end]
+                    print "-Pc!", order.art, order.id
+                    the_art = True
+                         
+            except: 
+                the_art = False
+                pass
+
+        if the_art == False:  
+            try:
+                start = order.order.index('ArticleNumber":') + len('ArticleNumber":')
+                end = order.order.index( ',', start )
+                
+                if (len(order.order[start:end]) < 120):
+                    order.art = order.order[start:end]
+                    order.art = order.art.replace("\"", "")
+                    print "-Arti!-", order.art, order.id
+                    the_art = True
+                         
+            except:
+                the_art = False 
+                pass
+
+        if the_art == False:  
+            try:
+                start = order.message.index('kel:') + len('kel:')
+                end = order.message.index( ')', start )
+                
+                if (len(order.message[start:end]) < 120):
+                    order.art = order.message[start:end]
+                    print "-MessArti!-", order.art, order.id 
+                  
+                    start = 3
+                    end = start + 4
+                    order.art = order.art[-4:]
+                    print "-MessArti! 2-", order.art 
+                    the_art = True
+                         
+            except:
+                the_art = False 
+                pass
+        #print "----- end: ", the_art, order.id
+
+        try:
+            start = order.order.index(' st ') + len(' st ')
+            end = order.order.index( ' (', start )
+            if (len(order.order[start:end]) < 120):
+                order.artname = order.order[start:end]     
+        except: 
+            pass  
+        # ta fram storlek      
         try:
             start = order.order.index('Storlek: ') + len('Storlek: ')
             end = order.order.index( 'Pris', start )
@@ -925,8 +994,25 @@ def admin_view(request, limit):
 
         order.order = order.order[86:]
         order.order = order.order[:100]
+        if (the_art != False): 
+            numbers.append(order.art)
+    set_art = set()
+    for n in numbers:
+        set_art.add(n)
+     
+    #set_art = sorted(set_art)
+    for art in set_art:
+        i = {}
+        i['art'] = art
+        i['occ'] = str(numbers.count(art))
+        res.append(i)
+         
+        
+          
     return render_to_response('checkout/admin_view.html', {
-        'orders': orders
+        'orders': orders,
+        'res': res
+    
     }, context_instance=RequestContext(request))
 
 

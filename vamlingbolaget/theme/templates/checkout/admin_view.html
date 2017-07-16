@@ -7,15 +7,25 @@
 {% endblock %}
 
 {% block allcontent %}
+{% if user.is_authenticated %}
 
-	{% if user.is_authenticated %}
+{% for art in res %}
+<li>   {{ art.art }} : {{ art.occ }} </li>
 
-        {% for order in orders %}
+{% endfor %}
+<ul>
 
-            '{{ order.art }}' ,  ' {{ order.pattern }}' , '{{ order.color }}' , '{{ order.size }}' <br>
-          
-	    {% endfor %}
+	{{ orders }}
+<ul>
+{% for art in orders %}
+<li>   {{ art }} </li>
 
-	{% endif %}
+{% endfor %}
+<ul>
+<br>
+<br>
+<br>
 
+
+{% endif %}
 {% endblock %}
