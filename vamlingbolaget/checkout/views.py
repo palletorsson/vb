@@ -54,12 +54,12 @@ def checkout(request, test=''):
     # handel the form
     form = CheckoutForm()
     returntotal['form'] = form
-
+        
     try: 
         lang = request.LANGUAGE_CODE
     except: 
         lang = 'sv'            
-    
+
     if request.method == 'POST':
         form = CheckoutForm(request.POST)
         if form.is_valid():
@@ -107,7 +107,7 @@ def checkout(request, test=''):
             #save the message at this stage to continue on for klarna
             #new_order.message = temp_msg
 
-
+            
             # get the session_key for look up 
             new_order.session_key = _cart_id(request) 
 
@@ -157,7 +157,6 @@ def checkout(request, test=''):
 
                 # save the order again                 
                 new_order.save()
-
                 
                 # send email verifaction to customer if name not Tester
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
@@ -344,7 +343,8 @@ def success(request):
                     keepLog(request, log, 'INFO', ip, cart_id)          
                 except:
                     log = 'Log Success Fail, PayEx transaktion not found: ' + str(transnumber) 
-                    keepLog(request, log, 'ERROR', ip, cart_id)
+                    keepLog(request, log, 'ERROR', ip, cart_id) 
+
                 try:
                     to = [order.email, 'info@vamlingbolaget.com']
                     mail.send_mail('Din order med Vamlingbolaget: ',u'%s' %order.message, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
@@ -647,7 +647,8 @@ def fortnox(request):
             log = log + ' Fortnox Error when adding Fortnox order'
             order_ok_json = False
 
-          
+       
+       
         # set the new stock
         try: 
             cleanCartandSetStock(request, the_items)
@@ -780,7 +781,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
     customer_no = '0'
     customer = getCustumer(new_order)
     headers = get_headers()
-
+    
     # To make an Fortnox order we need a Custumer
     # first check if customer exist 
     # and update or create customer and get customer number back and log
@@ -796,7 +797,7 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
             invoice_rows = create_invoice_rows(order_json)
         except: 
             pass    
-
+    # order_json is a string
     elif what == 'order_json_done': 
         invoice_rows = order_json
         
@@ -831,13 +832,14 @@ def fortnoxOrderandCostumer(request, new_order, order_json, what):
     
     try:
         orderid_ = new_order.order_number 
-        comments = "Order Nr. :" + unicode(orderid_)
+        comments = "OrderNr:" + unicode(orderid_)
     except:
         comments = ""
 
     # I use shipping_country to store the payex transkey
     try: 
-        comments = comments + " - Payex transaktion Nr. :"  + unicode(new_order.shipping_country)
+        if int(new_order.shipping_country) > 1:
+            comments = comments + " - PayexNr:"  + unicode(new_order.shipping_country)
     except:
         pass 
 
@@ -1007,8 +1009,7 @@ def admin_view(request, limit):
         i['occ'] = str(numbers.count(art))
         res.append(i)
          
-        
-          
+            
     return render_to_response('checkout/admin_view.html', {
         'orders': orders,
         'res': res
@@ -1416,7 +1417,6 @@ def LookAtDict(request, checkout_order_id):
     }, context_instance=RequestContext(request))
 
 def CheckoutTransfer(checkout, cartitem, reaitems):
-
     if (cartitem):
         for item in cartitem:
             orderitem = OrderItem(checkout=checkout, article=item.article, color=item.color, color_2=item.color_2, pattern=item.pattern, pattern_2=item.pattern_2, size=item.size, date_added=item.date_added, quantity=item.quantity, s_type=item.s_type)
