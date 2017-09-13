@@ -111,8 +111,14 @@ def checkout(request, test=''):
             # get the session_key for look up 
             new_order.session_key = _cart_id(request) 
 
-
-            new_order.save()
+            try: 
+                new_order.save()
+            except: 
+                epoch = int(time.time())
+                order_num = (epoch -1400000000)
+                new_order.order_number = order_num
+                new_order.save()
+            
             # make an email body
 
             # add adress part of message 
