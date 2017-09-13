@@ -510,7 +510,7 @@ def getService(service, amount, phone):
     if service == "PAF": 
         return {
           "id": service,
-          "paymentMethodType": "invodn",  
+          "paymentMethodType": "invo", 
            "addons": [{
                  "id": "PAF"
                 },
