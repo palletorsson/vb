@@ -147,6 +147,26 @@ def reaindex(request):
                               'sizes': sizes, 
                               },
                              context_instance=RequestContext(request))
+
+def jsonReaindex(request):
+    products = ReaArticle.objects.filter(status='A').order_by('-article__name')
+    allproducts = []
+    for p in products:
+        allproducts.append({
+          "article": p.article.name,
+          "sku": p.article.sku_number,
+          "color": p.color.name,
+          "pattern": p.pattern.name,
+          "size": p.size.name, 
+          "price": p.article.price,
+          "reaprice": p.rea_price,
+          "img": p.image.path 
+          })                  
+        
+    products = json.dumps(allproducts)
+    response = HttpResponse(products)
+    return response
+    
 def articleindex(request):
 
     articles = Article.objects.filter(active='A').order_by('name')
