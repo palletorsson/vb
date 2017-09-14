@@ -162,11 +162,10 @@ def jsonReaindex(request):
           "reaprice": p.rea_price,
           "img": p.image.path 
           })                  
-        
-    products = json.dumps(allproducts)
-    response = HttpResponse(products)
-    return response
+    resp = json.dumps(allproducts)
     
+    return HttpResponse(resp, content_type="application/json")
+
 def articleindex(request):
 
     articles = Article.objects.filter(active='A').order_by('name')
