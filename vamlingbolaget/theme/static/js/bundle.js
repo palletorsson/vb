@@ -22244,14 +22244,15 @@
 	      defPatterns: {
 	        "stripes": {
 	          pattern: "stripes",
-	          family: ["Three Stripe", "Thin Stripe", "Diagonal"],
+	          family: ["Tre rand", "Smal Rand", "Three Stripe", "Thin Stripe", "Diagonal"],
 	          icon: "stripes.jpg"
 	        },
 	        "dotts": {
 	          pattern: "dotts",
-	          family: ["Bean"],
+	          family: ["Bean", "Böna"],
 	          icon: "dotts.jpg"
 	        },
+
 	        "zack": {
 	          pattern: "zack",
 	          family: ["Labyrint", "Twin Peaks", "Wicky Leeks"],
@@ -22259,22 +22260,23 @@
 	        },
 	        "animals": {
 	          pattern: "animals",
-	          family: ["Light Tiger", "Dark Tiger", "Feather", "Heather", "Heather "],
+	          family: ["Light Tiger", "Tiger ljus botten", "Dark Tiger", "Tiger mörk botten", "Fjäder", "Fågel", "Feather", "Heather", "Heather "],
 	          icon: "animals.jpg"
 	        },
 	        "flowers": {
 	          pattern: "flowers",
-	          family: ["Mah-Jongflower", "ginkgo", "Varm Meadow", "Ginkgo Fantasy", "Big Flower", "Little meadow"],
+	          family: ["Mah-Jongblomma", "Ginkgo", "Ljung", "Varma Backen", "Ginkgo Fantasi", "Ljung ", "Stor Blomma", "Lilla Backen", "Mah-Jongflower", "ginkgo", "Varm Meadow", "Ginkgo Fantasy", "Big Flower", "Little meadow"],
 	          icon: "flowers.jpg"
 	        },
+
 	        "symbols": {
 	          pattern: "symbols",
-	          family: ["Pyramid", "Red Rose", "The Seed", "Pyramid"],
+	          family: ["Pyramid", "The Seed", "Kärna", "Pyramid"],
 	          icon: "symbols.jpg"
 	        },
 	        "unpattern": {
 	          pattern: "unpattern",
-	          family: ["one color"],
+	          family: ["one color", "Enfärgad"],
 	          icon: "unpattern.jpg"
 	        }
 	      },
@@ -22426,6 +22428,7 @@
 	          temp_colors.push(value.color);
 	        }
 	      });
+	      console.log(temp_colors);
 	      this.setState({ allColors: temp_colors });
 	    }
 	  }, {
