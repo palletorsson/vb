@@ -1,0 +1,57 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% load endless %}
+{% block pagetitle %}
+    <legend>{% trans "Shop" %} / REA</legend>
+{% endblock %}
+{% block content %}
+
+<style type="text/css">
+    	.force_image
+			{
+			float: right;
+			width: 162px;
+			height: 300px;
+			border: 1px solid #999;
+			margin: 0 15px 15px 0;
+			padding: 5px;
+			display: inline-block;
+			}
+		.box {
+		  float: left;
+		  width: 20px;
+		  height: 20px;
+		  margin: 5px;
+		  border: 1px solid rgba(0, 0, 0, .2);
+		}
+		.sizes {
+		  float: left;
+		  padding-right: 5px;
+		  padding-left: 5px;
+		  padding-top: 2px;
+		  height: 20px;
+		  margin: 5px;
+		  border: 1px solid rgba(0, 0, 0, .2);
+		}
+		.iconimg {
+					  width: 20px;
+		  height: 20px;
+		}
+
+
+
+    </style>
+</head>
+<body>
+
+
+    <div id="react-container"></div>
+    <div id="container"></div>
+    
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bundle.js"></script>
+</body>
+</html>
+
+{% endblock %}
