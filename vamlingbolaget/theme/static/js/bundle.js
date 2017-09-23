@@ -22283,39 +22283,41 @@
 	      defColors: {
 	        "red": {
 	          color: "red",
-	          family: ["Red Purple", "Red Rose", "Poopy Red"],
+	          family: ["Red Purple", "Red Rose", "Poopy Red", "Röd Rosa", "Rödlila", "Vallmoröd"],
 	          colorvalue: { background: "#FF0000" }
 	        },
 	        "white": {
 	          color: "white",
-	          family: ["Black White"],
+	          family: ["Black White", "Svart Vit"],
 	          colorvalue: { background: "#FFF" }
 	        },
 	        "green": {
 	          color: "green",
-	          family: ["Pistagegreen-green", "Pea Green", "Green"],
+	          family: ["Pistagegreen-green", "Pea Green", "Green", "Grön", "Pistagegrön", "Ärtgrön", "Sommarfärgen Pistagegrön"],
 	          colorvalue: { background: "#0F0" }
 	        },
 	        "blue": {
 	          color: "blue",
-	          family: ["Aqua", "Heaven Blue", "Indigo Blue", "Indigo ", "Lavendel Blue", "Purple Black"],
+	          family: ["Aqua", "Heaven Blue", "Himmelsblå", "Påfågelblå", "Indigoblå", "Indigo Blue", "Indigo ", "Lavendel Blue", "Jade Ceris", "Purple Black", "Aqua", "Klarblå", "Havsturkos svart", "Jade Turkos", "Lavendel Cikoria"],
 	          colorvalue: { background: "#00F" }
 	        },
+
 	        "lilic": {
 	          color: "lilic",
-	          family: ["Lilac", "Vine-Greyish rose", "Cyclamen", "Ceris Apricot"],
+	          family: ["Lilac", "Vine-Greyish rose", "Syrén Lila ", "Lila Rosa", "Lila Svart", "Cyclamen", "Ceris Apricot", "Ceris Aprikos"],
 	          colorvalue: { background: "#A26BA2" }
 	        },
 	        "orange": {
 	          color: "orange",
-	          family: ["Chocolate Nougat", "Cognac", "Amber", "Rasberryapricot", "Rasberry-apricot"],
+	          family: ["Chocolate Nougat", "Cognac", "Amber", "Guldnougat", "Konjak", "Rasberryapricot", "Rasberry-apricot", "Orange Aprikos", "Bärnsten"],
 	          colorvalue: { background: "#FF7F00" }
 	        },
 	        "pink": {
 	          color: "pink",
-	          family: ["Pink", "Purple Pink"],
+	          family: ["Pink", "Purple Pink", "Rosa", "Lilarosa ", "Vin Grårosa", "Hallonaprikos"],
 	          colorvalue: { background: "#FF69B4" }
 	        }
+
 	      }
 
 	    };
