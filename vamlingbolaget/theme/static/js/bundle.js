@@ -22997,7 +22997,8 @@
 	        color = _ref.color,
 	        size = _ref.size,
 	        img = _ref.img,
-	        sku = _ref.sku;
+	        sku = _ref.sku,
+	        id = _ref.id;
 	    return React.createElement(
 	        "div",
 	        { className: "collection_list img_container" },
@@ -23006,7 +23007,7 @@
 	            { className: "force_image" },
 	            React.createElement(
 	                "a",
-	                { href: "/products/rea/" + sku + "/" },
+	                { href: "/products/rea/" + id + "/" },
 	                React.createElement("img", { src: "http://www.vamlingbolaget.com/media/" + img, width: "160px", className: "lazy", alt: "Vamlingbolaget" }),
 	                React.createElement(
 	                    "div",
