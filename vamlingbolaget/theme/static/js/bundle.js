@@ -22996,52 +22996,57 @@
 	        pattern = _ref.pattern,
 	        color = _ref.color,
 	        size = _ref.size,
-	        img = _ref.img;
+	        img = _ref.img,
+	        sku = _ref.sku;
 	    return React.createElement(
 	        "div",
 	        { className: "collection_list img_container" },
 	        React.createElement(
 	            "div",
 	            { className: "force_image" },
-	            React.createElement("img", { src: "http://www.vamlingbolaget.com/media/" + img, width: "160px", className: "lazy", alt: "Vamlingbolaget" }),
 	            React.createElement(
-	                "div",
-	                { className: "image_description" },
+	                "a",
+	                { href: "/products/rea/{{sku}}/" },
+	                React.createElement("img", { src: "http://www.vamlingbolaget.com/media/" + img, width: "160px", className: "lazy", alt: "Vamlingbolaget" }),
 	                React.createElement(
-	                    "span",
-	                    { className: "artname" },
-	                    " ",
-	                    article,
-	                    " "
-	                ),
-	                React.createElement("br", null),
-	                React.createElement(
-	                    "span",
-	                    { className: "price" },
-	                    " ",
-	                    price,
-	                    " SEK "
-	                ),
-	                React.createElement(
-	                    "span",
-	                    { className: "pattern" },
-	                    " ",
-	                    pattern,
-	                    " "
-	                ),
-	                React.createElement(
-	                    "span",
-	                    { className: "color" },
-	                    " ",
-	                    color,
-	                    " "
-	                ),
-	                React.createElement(
-	                    "span",
-	                    { className: "size" },
-	                    " ",
-	                    size,
-	                    " "
+	                    "div",
+	                    { className: "image_description" },
+	                    React.createElement(
+	                        "span",
+	                        { className: "artname" },
+	                        " ",
+	                        article,
+	                        " "
+	                    ),
+	                    React.createElement("br", null),
+	                    React.createElement(
+	                        "span",
+	                        { className: "price" },
+	                        " ",
+	                        price,
+	                        " SEK "
+	                    ),
+	                    React.createElement(
+	                        "span",
+	                        { className: "pattern" },
+	                        " ",
+	                        pattern,
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "span",
+	                        { className: "color" },
+	                        " ",
+	                        color,
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "span",
+	                        { className: "size" },
+	                        " ",
+	                        size,
+	                        " "
+	                    )
 	                )
 	            )
 	        )
