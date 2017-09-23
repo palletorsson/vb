@@ -23006,7 +23006,7 @@
 	            { className: "force_image" },
 	            React.createElement(
 	                "a",
-	                { href: "/products/rea/{{sku}}/" },
+	                { href: "/products/rea/{sku}/" },
 	                React.createElement("img", { src: "http://www.vamlingbolaget.com/media/" + img, width: "160px", className: "lazy", alt: "Vamlingbolaget" }),
 	                React.createElement(
 	                    "div",
