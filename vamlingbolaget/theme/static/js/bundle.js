@@ -22213,6 +22213,8 @@
 
 	var _sizeList = __webpack_require__(193);
 
+	var _paging = __webpack_require__(195);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22232,6 +22234,9 @@
 	    var _this = _possibleConstructorReturn(this, (Products.__proto__ || Object.getPrototypeOf(Products)).call(this, props));
 
 	    _this.state = {
+	      vPages: [{
+	        "page": 1
+	      }],
 	      patternsX: [],
 	      allColors: [],
 	      products: [{
@@ -22329,6 +22334,8 @@
 	    _this.createPatternList = _this.createPatternList.bind(_this);
 	    _this.filterByPattern = _this.filterByPattern.bind(_this);
 	    _this.createColorList = _this.createColorList.bind(_this);
+	    _this.filterByPage = _this.filterByPage.bind(_this);
+	    _this.createPages = _this.createPages.bind(_this);
 	    return _this;
 	  }
 
@@ -22340,16 +22347,13 @@
 	      (0, _isomorphicFetch2.default)('/products/reajson/').then(function (response) {
 	        return response.json();
 	      }).then(function (json) {
-	        console.log(json);
-	        console.log(json.products);
 	        var new_products = json;
 	        _this2.setState({ products: new_products,
 	          allProducts: new_products
 	        });
-
 	        _this2.createPatternList(new_products);
 	        _this2.createColorList(new_products);
-	        console.log(_this2.state.allProducts, _this2.state.products);
+	        _this2.createPages(new_products);
 	      });
 	    }
 	  }, {
@@ -22363,7 +22367,6 @@
 	    value: function filterByPattern(event) {
 	      var updatedList = this.state.allProducts;
 	      var st = this.state;
-	      console.log(event.target.id);
 	      updatedList = updatedList.filter(function (item) {
 	        var ret = $.inArray(item.pattern, st.defPatterns[event.target.id].family) !== -1;
 	        return ret;
@@ -22381,15 +22384,16 @@
 	    }
 	  }, {
 	    key: 'filterByPage',
-	    value: function filterByPage(event, from, to) {
+	    value: function filterByPage(event, page) {
 	      var updatedList = this.state.allProducts;
-
+	      var the_page = event.target.id;
+	      var page_index = the_page * 40;
+	      var index = 0;
 	      updatedList = updatedList.filter(function (item) {
-	        if (item.id > from && item.id < to) {
+	        if (index < page_index && index > page_index - 40) {
 	          return item;
-	        } else {
-	          console.log("");
 	        }
+	        index++;
 	      });
 	      this.setState({ products: updatedList });
 	    }
@@ -22401,12 +22405,24 @@
 	      var list = [];
 	      updatedList = updatedList.filter(function (item) {
 	        var ret = $.inArray(item.color, st.defColors[event.target.id].family) !== -1;
-	        //console.dir(st.defColors[event.target.id].family)
-	        //console.log(item.color.toLowerCase());
 	        return ret;
 	      });
 
 	      this.setState({ products: updatedList });
+	    }
+	  }, {
+	    key: 'createPages',
+	    value: function createPages(products) {
+	      var temp_patterns = [];
+	      var shown = 40;
+	      var _pages = Math.ceil(products.length / shown);
+	      var pageArray = [];
+	      for (var i = 1; i < _pages + 1; i++) {
+	        pageArray.push({
+	          "page": i
+	        });
+	      }
+	      this.setState({ vPages: pageArray });
 	    }
 	  }, {
 	    key: 'createPatternList',
@@ -22417,7 +22433,6 @@
 	          temp_patterns.push(value.pattern);
 	        }
 	      });
-	      console.log(temp_patterns);
 
 	      this.setState({ patternsX: temp_patterns });
 	    }
@@ -22430,7 +22445,7 @@
 	          temp_colors.push(value.color);
 	        }
 	      });
-	      console.log(temp_colors);
+
 	      this.setState({ allColors: temp_colors });
 	    }
 	  }, {
@@ -22457,12 +22472,9 @@
 	        _react2.default.createElement(_sizeList.SizeList, { sizes: this.state.defSizes,
 	          filterBySize: this.filterBySize
 	        }),
+	        _react2.default.createElement(_paging.PageList, { vpages: this.state.vPages,
+	          filterByPage: this.filterByPage }),
 	        _react2.default.createElement('input', { type: 'text', placeholder: 'Search', id: 'textsearch', onChange: this.filterSearchList }),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.filterResetList },
-	          'reset filter'
-	        ),
 	        _react2.default.createElement(_ProductList.ProductList, { products: this.state.products })
 	      );
 	    }
@@ -22993,6 +23005,7 @@
 	var ProductRow = exports.ProductRow = function ProductRow(_ref) {
 	    var article = _ref.article,
 	        price = _ref.price,
+	        reaprice = _ref.reaprice,
 	        pattern = _ref.pattern,
 	        color = _ref.color,
 	        size = _ref.size,
@@ -23023,10 +23036,21 @@
 	                    React.createElement(
 	                        "span",
 	                        { className: "price" },
-	                        " ",
-	                        price,
-	                        " SEK "
+	                        React.createElement(
+	                            "span",
+	                            { className: "discount" },
+	                            reaprice,
+	                            " SEK "
+	                        ),
+	                        React.createElement(
+	                            "span",
+	                            null,
+	                            "( \u25BC ",
+	                            price,
+	                            ")"
+	                        )
 	                    ),
+	                    React.createElement("br", null),
 	                    React.createElement(
 	                        "span",
 	                        { className: "pattern" },
@@ -23188,6 +23212,51 @@
 			"span",
 			{ className: "sizes", id: size },
 			size
+		);
+	};
+
+/***/ }),
+/* 195 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+			value: true
+	});
+	exports.PageList = undefined;
+
+	var _pageRow = __webpack_require__(196);
+
+	var PageList = exports.PageList = function PageList(_ref) {
+			var vpages = _ref.vpages,
+			    filterByPage = _ref.filterByPage;
+			return React.createElement(
+					"div",
+					{ name: "pages", onClick: filterByPage },
+					console.log(vpages),
+					vpages.map(function (vpage, i) {
+							return React.createElement(_pageRow.PageRow, { key: i,
+									vpage: vpage.page });
+					})
+			);
+	};
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var PageRow = exports.PageRow = function PageRow(_ref) {
+		var vpage = _ref.vpage;
+		return React.createElement(
+			"span",
+			{ className: "box sizes", id: vpage },
+			vpage
 		);
 	};
 
