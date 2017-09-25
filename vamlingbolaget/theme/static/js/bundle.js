@@ -23000,82 +23000,82 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	       value: true
 	});
 	var ProductRow = exports.ProductRow = function ProductRow(_ref) {
-	    var article = _ref.article,
-	        price = _ref.price,
-	        reaprice = _ref.reaprice,
-	        pattern = _ref.pattern,
-	        color = _ref.color,
-	        size = _ref.size,
-	        img = _ref.img,
-	        sku = _ref.sku,
-	        id = _ref.id;
-	    return React.createElement(
-	        "div",
-	        { className: "collection_list img_container" },
-	        React.createElement(
-	            "div",
-	            { className: "force_image" },
-	            React.createElement(
-	                "a",
-	                { href: "/products/rea/" + id + "/" },
-	                React.createElement("img", { src: "http://www.vamlingbolaget.com/media/" + img, width: "160px", className: "lazy", alt: "Vamlingbolaget" }),
-	                React.createElement(
-	                    "div",
-	                    { className: "image_description" },
-	                    React.createElement(
-	                        "span",
-	                        { className: "artname" },
-	                        " ",
-	                        article,
-	                        " "
-	                    ),
-	                    React.createElement("br", null),
-	                    React.createElement(
-	                        "span",
-	                        { className: "price" },
-	                        React.createElement(
-	                            "span",
-	                            { className: "discount" },
-	                            reaprice,
-	                            " SEK "
-	                        ),
-	                        React.createElement(
-	                            "span",
-	                            null,
-	                            "( \u25BC ",
-	                            price,
-	                            ")"
-	                        )
-	                    ),
-	                    React.createElement("br", null),
-	                    React.createElement(
-	                        "span",
-	                        { className: "pattern" },
-	                        " ",
-	                        pattern,
-	                        " "
-	                    ),
-	                    React.createElement(
-	                        "span",
-	                        { className: "color" },
-	                        " ",
-	                        color,
-	                        " "
-	                    ),
-	                    React.createElement(
-	                        "span",
-	                        { className: "size" },
-	                        " ",
-	                        size,
-	                        " "
-	                    )
-	                )
-	            )
-	        )
-	    );
+	       var article = _ref.article,
+	           price = _ref.price,
+	           reaprice = _ref.reaprice,
+	           pattern = _ref.pattern,
+	           color = _ref.color,
+	           size = _ref.size,
+	           img = _ref.img,
+	           sku = _ref.sku,
+	           id = _ref.id;
+	       return React.createElement(
+	              "div",
+	              { className: "collection_list img_container" },
+	              React.createElement(
+	                     "a",
+	                     { href: "/products/rea/" + id + "/" },
+	                     React.createElement(
+	                            "div",
+	                            { className: "force_image" },
+	                            React.createElement("img", { src: "http://www.vamlingbolaget.com/media/" + img, width: "160px", className: "lazy", alt: "Vamlingbolaget" })
+	                     ),
+	                     React.createElement(
+	                            "div",
+	                            { className: "image_description" },
+	                            React.createElement(
+	                                   "span",
+	                                   { className: "artname" },
+	                                   " ",
+	                                   article,
+	                                   " "
+	                            ),
+	                            React.createElement("br", null),
+	                            React.createElement(
+	                                   "span",
+	                                   { className: "price" },
+	                                   React.createElement(
+	                                          "span",
+	                                          { className: "discount" },
+	                                          reaprice,
+	                                          " SEK "
+	                                   ),
+	                                   React.createElement(
+	                                          "span",
+	                                          null,
+	                                          "( \u25BC ",
+	                                          price,
+	                                          ")"
+	                                   )
+	                            ),
+	                            React.createElement("br", null),
+	                            React.createElement(
+	                                   "span",
+	                                   { className: "pattern" },
+	                                   " ",
+	                                   pattern,
+	                                   " "
+	                            ),
+	                            React.createElement(
+	                                   "span",
+	                                   { className: "color" },
+	                                   " ",
+	                                   color,
+	                                   " "
+	                            ),
+	                            React.createElement(
+	                                   "span",
+	                                   { className: "size" },
+	                                   " ",
+	                                   size,
+	                                   " "
+	                            )
+	                     )
+	              )
+	       );
 	};
 
 /***/ }),
