@@ -22240,9 +22240,9 @@
 	      patternsX: [],
 	      allColors: [],
 	      products: [{
-	        "product": "Dress",
-	        "price": "234",
-	        "img": "dress.jpg"
+	        "product": "Loading rea...",
+	        "price": "... please wait",
+	        "img": ""
 	      }],
 	      allProducts: [],
 	      defSizes: ["S", "M", "L"],
