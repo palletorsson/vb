@@ -35,7 +35,7 @@
             {%else%}
 			  	<div class="text-center hidden-xs">
 	            {% for image in images %}
-	            	<button>
+	            	<button class="image_button">
 		                <img src="{{ image }}" alt="article image" width="100px" class="variation_imgs" />
 		        	</button>
 		  		{% endfor %}
@@ -159,14 +159,10 @@
 
 		<div class="span7">
 			<hr>
+			{% trans "Art.Nr." %} : {{ product.get_art_num }} |
 			<span class="quality" id="{{ product.article.quality }}">{{ product.variation.article.quality }}</span> : 
 			<span> {{ product.variation.article.quality.description }} </span> 		 
-		
-		</div>
-		<div class="span7">
-			<hr>
-			{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.get_art_num }}
-			<hr>	 
+			 
 		</div>
 	</div> <!-- end span12 -->			
 	<div class="span12"> 
