@@ -61,15 +61,18 @@
 			<div class="span2 selectedpatternandcolor">
 				<img id="pattern_color_image r" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:160px;" />
 			</div>
-		<div class="span4">
-			{% trans "Färger och Mönster" %}:  
-			<span class="selectedpatternandcolor_text"></span>	
-			<hr>
-			<div class="color_and_pattern_choose">
-				{% for item in colorsandpattern %}
-					<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
-				{% endfor  %}
+			<div class="span5">
+				{% trans "Färger och Mönster" %}:  
+				<span class="selectedpatternandcolor_text"></span>	
+				<hr>
+				<div class="color_and_pattern_choose">
+					{% for item in colorsandpattern %}
+						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+					{% endfor  %}
+				</div>
 			</div>
+		</div>
+        <div class="span7">
 			<hr>
 			<nav>
 				<ul class="pagination">
