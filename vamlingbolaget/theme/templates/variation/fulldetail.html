@@ -74,11 +74,11 @@
 						<a href="{{ colorsandpattern.link }}"><img id="pattern_color_image" class="pattern_color_image_c" src="{{ MEDIA_URL }}/uploads/120/{{ colorsandpattern.cp }}.jpg" style="width:60px;" /></a>
 	  				{% endfor %}
 				</div>	
-				<hr>	
-				
+				<hr>			
 				<nav>
 					<ul class="pagination">
-						<il id="nosize" class="alert alert-danger select_size">* {% trans "Välj" %}</il>
+					<span class="remove_on_size"> (* {% trans "Välj" %}) </span>
+					<span id="nosize"> <--- </span> 
 							{% if product.variation.article.quality.pk == 1 %} 
 								{% if product.active %} 
 								    {% for size in full_variations %} 
