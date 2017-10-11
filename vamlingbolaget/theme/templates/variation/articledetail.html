@@ -61,16 +61,15 @@
 				</span> 
 			</span>
 		</div>
-
 		<div class="span6">
 			{% trans "Färger och Mönster" %}:  
 			<span class="selectedpatternandcolor_text"></span>	
 			<hr>
-				<div class="color_and_pattern_choose">
-					{% for item in colorsandpattern %}
-						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
-					{% endfor  %}
-				</div>
+			<div class="color_and_pattern_choose">
+				{% for item in colorsandpattern %}
+					<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+				{% endfor  %}
+			</div>
 			<hr>
 			<nav>
 				<ul class="pagination">
@@ -93,37 +92,36 @@
 					 {% endfor %}
 				</ul>
             </nav>
-
 			<input type="hidden" id="size" name="size" value="3" >
 	    	<input type="hidden" id="quantity" name="quantity" value="1" >		
-
+			<input type="hidden" id="add_or_edit" name="add" value="add" > 
+			<span class="hidden" id="sku_number">{{ product.article.sku_number }}</span>
+		</div>
+		<div class="span7">
 			<hr>
-	        <div id="addtocart" style="display:block;">
-				<span style="padding-left: 30px;">
-					<button class="btn btn-success btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
-					<input type="hidden" id="add_or_edit" name="add" value="add" > 
-					<span class="hidden" id="sku_number">{{ product.article.sku_number }}</span>
-				</span>
-		    </div>
-			<hr>			
-			<span> {% trans "Leverans:" %} 
-				
-				<span>{% trans "Fyra veckor" %} </span>
+			<div class="span2">
+		        <span id="addtocart" >
+					<span style="padding-left: 30px;">
+						<button class="btn btn-success btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
+					</span>
+			    </span>
+			</div>
 
-		    </span>
-
-			<hr>
-				{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.article.sku_number }}
-				<hr>
-				
-				<span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span> : 
-				<span> {{ product.article.quality.description }} </span> 
-				 
-			<hr>
+			<div class="span4">
+				<div class="pulldown">			
+					<span> {% trans "Leverans:" %}  {% trans "Fyra veckor" %} </span>
+				</div>
 			</div>
 		</div> <!-- end span7 -->
+		<div class="span7">
+			<hr>
+			{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.article.sku_number }}	
+			<hr>
+			<span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }} </span> : 
+						<span> {{ product.article.quality.description }} </span>
+			<hr>
+		</div>
 	</div> <!-- end span12 -->
-
 <div class="span12" > 
 	<hr/>
 	<strong>{% trans "Produkter" %}  </strong>  
