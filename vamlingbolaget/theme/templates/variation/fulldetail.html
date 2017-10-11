@@ -3,10 +3,8 @@
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {%block title%}
-    <title>Vamlingbolaget | {% trans "Kollektion" %} | {{ product.article.name }} 
-    ,  {{ product.variation }} </title>
-    <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }} 
-    ,  {{ product.variation }}" %}/>
+    <title>Vamlingbolaget | {% trans "Kollektion" %} | {{ product.article.name }},  {{ product.variation }} </title>
+    <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }},  {{ product.variation }}" %}/>
 {%endblock%}
 
 {% block pagetitle %}
