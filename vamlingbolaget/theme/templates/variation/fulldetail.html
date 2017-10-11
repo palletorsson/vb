@@ -78,83 +78,85 @@
 				</div>	
 				<hr>	
 				
-			<nav>
-				<ul class="pagination">
-					<il id="nosize" class="alert alert-danger select_size">* {% trans "Välj" %}</il>
-						{% if product.variation.article.quality.pk == 1 %} 
-							{% if product.active %} 
-							    {% for size in full_variations %} 
-									{% if product.size == size.size %}  
-										<li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
-											<a> {{ size.lettersize }}  </a>
-										</li> 							
-									{% else %}
-										<li class="select_size" id="{{ size.size  }}" data-size="{{ size.stock }}">
-											<a> {{ size.lettersize }} </a>
-										</li>
-									{% endif %} 
-							    {% endfor %}
-							{% else %}
-								{% for size in full_variations %} 	
-							       {% if size.stock < 1 %}								
-									<li class="disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
-										<a> {{ size.lettersize }}  </a>
-									</li> 
-									{% else %}
-									{% if product.size == size.size %}  
-										  <li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+				<nav>
+					<ul class="pagination">
+						<il id="nosize" class="alert alert-danger select_size">* {% trans "Välj" %}</il>
+							{% if product.variation.article.quality.pk == 1 %} 
+								{% if product.active %} 
+								    {% for size in full_variations %} 
+										{% if product.size == size.size %}  
+											<li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
 												<a> {{ size.lettersize }}  </a>
-										  </li> 
+											</li> 							
+										{% else %}
+											<li class="select_size" id="{{ size.size  }}" data-size="{{ size.stock }}">
+												<a> {{ size.lettersize }} </a>
+											</li>
+										{% endif %} 
+								    {% endfor %}
+								{% else %}
+									{% for size in full_variations %} 	
+								       {% if size.stock < 1 %}								
+										<li class="disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
+											<a> {{ size.lettersize }}  </a>
+										</li> 
+										{% else %}
+										{% if product.size == size.size %}  
+											  <li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+													<a> {{ size.lettersize }}  </a>
+											  </li> 
+											{% else %}
+												<li class="select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
+													<a> {{ size.lettersize }} </a>
+												</li>
+											{% endif %}
+										{% endif %}	
+								    {% endfor %}
+								{% endif %}
+							{% else %}
+							    {% for size in full_variations %} 	
+							        {% if size.stock < 1 %}
+										<li class="disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
+											<a> {{ size.lettersize }}  </a>
+										</li> 
+									{% else %}
+									    {% if product.size == size.size %}  
+											<li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+												<a> {{ size.lettersize }}  </a>
+										  	</li> 
 										{% else %}
 											<li class="select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
 												<a> {{ size.lettersize }} </a>
 											</li>
 										{% endif %}
-									{% endif %}	
+								    {% endif %}
 							    {% endfor %}
-							{% endif %}
-						{% else %}
-						    {% for size in full_variations %} 	
-						        {% if size.stock < 1 %}
-									<li class="disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
-										<a> {{ size.lettersize }}  </a>
-									</li> 
-								{% else %}
-								    {% if product.size == size.size %}  
-										<li class="active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
-											<a> {{ size.lettersize }}  </a>
-									  	</li> 
-									{% else %}
-										<li class="select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
-											<a> {{ size.lettersize }} </a>
-										</li>
-									{% endif %}
-							    {% endif %}
-						    {% endfor %}
-					    {% endif %} 
-				</ul>
-            </nav>
-			<input type="hidden" id="size" name="size" value="3840" >
-	    	<input type="hidden" id="quantity" name="quantity" value="1" >		
-	    	<input type="hidden" id="pc_sellection" name="pc_sellection" value="common" >
+						    {% endif %} 
+					</ul>
+	            </nav>
+				<input type="hidden" id="size" name="size" value="3840" >
+		    	<input type="hidden" id="quantity" name="quantity" value="1" >		
+		    	<input type="hidden" id="pc_sellection" name="pc_sellection" value="common" >
+		    	<input type="hidden" id="add_or_edit" name="full" value="full" > 
+				<span class="hidden" id="sku_number">{{ product.variation.article.sku_number }}</span>
+			</div>
 		</div>
 		<div class="span7">
+
 			<hr>
-			<div class="span3">
-		        <div id="addtocart" style="display:block;">
-					<span style="padding-left: 30px;">
-						<button class="btn btn-success btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
-						<input type="hidden" id="add_or_edit" name="full" value="full" > 
-						<span class="hidden" id="sku_number">{{ product.variation.article.sku_number }}</span>
-					</span>
-			    </div>
- 			</div>
-			<div class="span3 pulldown">
-				<span> {% trans "Leverans" %}:  		
-					<span class="stock_text_no {% if stock_value > 0 %} hidden {% endif %}">{% trans "En till tre veckor" %} </span>
-					<span class="stock_text_yes {% if stock_value < 1 %} hidden {% endif %}"> {% trans "En till tre veckor" %} </span>
+			<div class="span2">
+		        <span id="addtocart">
+						<div class="btn btn-success  add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</div>
 			    </span>
 			</div>
+			<div class="span4">
+				<div class="pulldown">
+					<span> {% trans "Leverans" %}:  		
+						<span class="stock_text_no {% if stock_value > 0 %} hidden {% endif %}">{% trans "En till tre veckor" %} </span>
+						<span class="stock_text_yes {% if stock_value < 1 %} hidden {% endif %}"> {% trans "En till tre veckor" %} </span>
+				    </span>
+				</div>
+			</div>	
 		</div>
 
 		<div class="span7">
