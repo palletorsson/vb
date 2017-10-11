@@ -74,24 +74,23 @@
 			<hr>
 			<nav>
 				<ul class="pagination">
-				{% for size in sizes %}
-					{% if size.pk == 3 %}
-					 	<li class="select_size" id="{{ size.pk }}" data-size="none">
-					 		<span>
-								<a class="size_active">{{ size.name }}</a>
-							</span> 
+					<span class="remove_on_size"> (* {% trans "Välj" %}) </span>
+					<span id="nosize"> <--- </span> 
+					{% for size in sizes %}
+						{% if size.pk == 3 %}
+						 	<li class="select_size" id="{{ size.pk }}" data-size="none">
+						 		<span>
+									<a class="size_active">{{ size.name }}</a>
+								</span> 
+							</li>
+						{% else  %}
+							<li class="select_size" id="{{ size.pk }}" data-size="none">
+								<span>
+									<a>{{ size.name }}</a>
+								</span> 
 						</li>
-					{% else  %}
-						<li class="select_size" id="{{ size.pk }}" data-size="none">
-							<span>
-								<a>{{ size.name }}</a>
-							</span> 
-					</li>
-					{% endif %}
-
-						 
-
-				 {% endfor %}
+						{% endif %}
+					 {% endfor %}
 				</ul>
             </nav>
 
