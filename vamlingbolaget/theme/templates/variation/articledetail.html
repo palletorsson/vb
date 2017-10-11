@@ -3,15 +3,16 @@
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {%block title%}
-    <title>Vamlingbolaget | {% trans "Kollektion" %} | {{ product.article.name }},  {{ product.variation }} </title>
-    <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }},  {{ product.variation }}" %}/>
+    <title>Vamlingbolaget | {% trans "Kollektion" %} | {{ product.article.name }} 
+    ,  {{ product.variation }} </title>
+    <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }} 
+    ,  {{ product.variation }}" %}/>
 {%endblock%}
 
 {% block pagetitle %}
 	<div class="row-fluid">
 		<div class="span12" >
-			<div class="bread" >
-				<a href="/products/fullcut"> << {% trans "Shop" %}</a> / <a href="#"> {{ product.article }}  </a> </div> 
+<div class="bread" ><a href="/products/fullcut"> << {% trans "Shop" %}</a> / <a href="#"> {{ product.article }}  </a> </div> 
 			<hr>
 		</div>
 {% endblock %}
@@ -21,17 +22,17 @@
 		<div class="span3 article_background" id="fadeifchangeorder">
 	        <div id="images_container" class="img_container">
 				<div class="ribbon">
-				  	<div>Cut On Demand</div>
+				  <div>Cut On Demand</div>
 				</div>
-	        	<a href="{{ image }}" class="variation_link">
-	        		<img src="/media/{{ product.article.file }}"  alt="article image" class="cut_detail_img" />
-	        	</a>
+	        	<a href="{{ image }}" class="variation_link"><img src="/media/{{ product.article.file }}"  alt="article image" class="cut_detail_img" /></a>
+
 		  	</div> 
 		  	<div class="text-center hidden-xs">
-		  		<hr>
-            	<div> {{ product.article.description }} </div> 
+		  	<hr>
+            <div> {{ product.article.description }} </div> 
 	  		</div>
-		</div>	   	
+		</div>
+			   	
 		<div class="span">
 			<span class="articlehead">
 				<span id="articlename">
@@ -40,6 +41,7 @@
 					<input type="hidden" id="color" name="color" value="{{ product.color.order }}" >
 					<input type="hidden" id="full_var" name="full_var" value="1" >
 					<input type="hidden" id="s_type" name="s_type" value="COD" >
+					 
 					<h4>{{ product.article.name }} :
 						<span> 
 							{%if product.article.discount %}
@@ -56,38 +58,47 @@
 					<div class="span2 selectedpatternandcolor">
 					<img id="pattern_color_image r" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:160px;" />
 					<hr>
-					Cut on demand betyder att vi syr upp ditt unika plagg - du kan välja mellan alla aktuella färger och mönster.  
-					<hr>
-				</span> 
-			</span>
-		</div>
+			Cut on demand betyder att vi syr upp ditt unika plagg - du kan välja mellan alla aktuella färger och mönster.  
+			<hr>
+					</div>
 
+<<<<<<< HEAD
 		<div class="span7">
 			{% trans "Färger och Mönster" %}:  
 			<span class="selectedpatternandcolor_text"></span>	
+=======
+					<div class="span6">
+			{% trans "Färger och Mönster" %}:  <span class="selectedpatternandcolor_text"></span>	
+>>>>>>> parent of 18c868b... indentation
 			<hr>
 				<div class="color_and_pattern_choose">
 					{% for item in colorsandpattern %}
 						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
 					{% endfor  %}
 				</div>
+			<span> 
 			<hr>
 			<nav>
 				<ul class="pagination">
 				{% for size in sizes %}
 					{% if size.pk == 3 %}
-					 	<li class="select_size" id="{{ size.pk }}" data-size="none">
-					 		<span>
-								<a class="size_active">{{ size.name }}</a>
-							</span> 
-						</li>
+					 
+					 		<li class="select_size" id="{{ size.pk }}" data-size="none">
+						 		<span>
+									<a class="size_active">{{ size.name }}</a>
+								</span> 
+							</li>
+						
 					{% else  %}
 						<li class="select_size" id="{{ size.pk }}" data-size="none">
-							<span>
-								<a>{{ size.name }}</a>
-							</span> 
-						</li>
+						<span>
+							<a>{{ size.name }}</a>
+						</span> 
+					</li>
 					{% endif %}
+
+						 
+
 				 {% endfor %}
 				</ul>
             </nav>
@@ -107,13 +118,18 @@
 		    </div>
 			<hr>			
 			<span> {% trans "Leverans:" %} 
+				
 				<span>{% trans "Fyra veckor" %} </span>
+
 		    </span>
+
 			<hr>
-			{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.article.sku_number }}
-			<hr>	
-			<span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span> : 
-			<span> {{ product.article.quality.description }} </span>  
+				{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.article.sku_number }}
+				<hr>
+				
+				<span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span> : 
+				<span> {{ product.article.quality.description }} </span> 
+				 
 			<hr>
 			</div>
 		</div> <!-- end span7 -->
