@@ -124,12 +124,10 @@ $("#addtocart").off('click').on({
     click:function(e) {
         var size_val = $('#size').val(); 
         if (size_val == ''){
+           $('.remove_on_size').addClass('add_size_message'); 
            $('#nosize').show(); 
            $('#nosize').delay(2000).fadeOut(3000);
-            
-
-           
-        } else {
+      } else {
         e.stopPropagation();
         if(counter == 0){
             counter++;
@@ -708,6 +706,7 @@ set_first_page();
       $('.select_size').removeClass('active');
       $('.size_active').removeClass('size_active');
       $('.active').removeClass('active');
+      $(".remove_on_size").remove();
       var $this = $(this);
       console.log($this.a); 
 
