@@ -12,7 +12,7 @@
 {% block pagetitle %}
 	<div class="row-fluid">
 		<div class="span12" >
-<div class="bread" ><a href="/products/fullcut"> << {% trans "Shop" %}</a> / <a href="/products/full"> {{ product.article }}  </a> Cut on demand - Vi syr upp dit unika plagg </div> 
+<div class="bread" ><a href="/products/fullcut"> << {% trans "Shop" %}</a> / <a href="#"> {{ product.article }}  </a> </div> 
 			<hr>
 		</div>
 {% endblock %}
@@ -26,7 +26,7 @@
 				</div>
 	        	<a href="{{ image }}" class="variation_link"><img src="/media/{{ product.article.file }}"  alt="article image" class="cut_detail_img" /></a>
 
-		  	</div>
+		  	</div> 
 		  	<div class="text-center hidden-xs">
 		  	<hr>
             <div> {{ product.article.description }} </div> 
@@ -58,7 +58,8 @@
 					<div class="span2 selectedpatternandcolor">
 					<img id="pattern_color_image r" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:160px;" />
 					<hr>
-			
+			Cut on demand betyder att vi syr upp ditt unika plagg - du kan välja mellan alla aktuella färger och mönster.  
+			<hr>
 					</div>
 
 					<div class="span6">
