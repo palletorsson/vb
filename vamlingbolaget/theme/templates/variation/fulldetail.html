@@ -159,14 +159,14 @@
 
 		<div class="span7">
 			<hr>
-			{% trans "Art.Nr." %} : {{ product.get_art_num }} |
+			{% trans "Art.Nr." %} : {{ product.get_art_num }} <br>
 			<span class="quality" id="{{ product.article.quality }}">{{ product.variation.article.quality }}</span> : 
 			<span> {{ product.variation.article.quality.description }} </span> 		 
 		
 		</div>
 		<div class="span7">
 			<hr>
-			{{ product.article.description }} 
+			{{ product.variation.article.description }} 
 		</div>
 		
 	</div> <!-- end span12 -->			
