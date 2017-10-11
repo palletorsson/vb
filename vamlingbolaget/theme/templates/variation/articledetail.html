@@ -28,11 +28,10 @@
 	        	</a>
 		  	</div> 
 		  	<div class="text-center hidden-xs">
-		  		<hr>
             	<div> {{ product.article.description }} </div> 
 	  		</div>
 		</div>	   	
-		<div class="span">
+		<div class="span7">
 			<span class="articlehead">
 				<span id="articlename">
 					<input id="article_pk" type="hidden" value="{{ product.article.sku_number}}">
@@ -53,11 +52,11 @@
 						</span> 
 					</h4>
 					<hr> 
-					<div class="span2 selectedpatternandcolor">
-					<img id="pattern_color_image r" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:160px;" />
-					<hr>
 					Cut on demand betyder att vi syr upp ditt unika plagg - du kan välja mellan alla aktuella färger och mönster.  
 					<hr>
+					<div class="span2 selectedpatternandcolor">
+					<img id="pattern_color_image r" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:160px;" />
+					
 				</span> 
 			</span>
 		</div>
