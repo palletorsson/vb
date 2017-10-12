@@ -80,7 +80,7 @@
 
     }
 	.container {
-		background: green;
+		background: #fff; // green;
 	}
 
 	.span9 {
