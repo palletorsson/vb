@@ -1,7 +1,72 @@
-@media (min-width: 992px) {
-	.container {
-	     max-width: 1200px; 
+
+@media (min-width: 1200px)
+	.span2 {
+	  width: 120px;
 	}
+}
+
+
+@media (min-width: 768px) and (max-width: 1200px) {
+	body {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.container {
+	  background: blue;
+	}
+
+	.leftside{
+		position:absolute;
+		top:4px;
+		left:160px;
+		width:180px;
+		padding-left: 30px;
+		padding-top: 10px;
+		margin-right: 1px;
+	}
+	.container{
+		margin-left:0;
+		width: 100%;
+		max-width: 100%;
+	}
+	  .content {
+		margin-top: 0px;
+		min-height: 450px;
+
+	}
+
+.span9 {
+    float: left;
+    width: 500px;
+}
+
+
+
+
+	.collection_list {
+		float:left;
+		width:40%;
+	}
+
+	.span2 {
+		width: 200px;
+		float:left;
+		margin-left: 0;
+	}
+
+	.span2 ul{
+		padding-left:0;
+	}
+
+
+	.span9 {
+		float:left;
+	}
+	.paywidth {
+        width:100%;
+    }
+
+
 }
 
 @media (max-width: 767px) {
