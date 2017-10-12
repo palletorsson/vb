@@ -8,23 +8,18 @@
 
 @media (max-width: 1200px) {
 	.container {
-		background: #fff; // yellow;
+		background: yellow;
 	}
-
 	.leftside{
 		width: 250px;
 		padding-left: 3px;
 		padding-top: 4px;
 		margin-right: 1px;
 	}
-
-
-
 	.collection_list {
 		float:left;
 		width:35%;
 	}
-
 	.span2 {
 		width: 200px;
 		float:left;
@@ -33,12 +28,10 @@
 		width:33%;
 		float:left;
 	}
-
 	.span9 {
 		float:left;
 		width:700px;
 	}
-
     .paywidth {
         width:0%;
     }
@@ -51,7 +44,7 @@
 		padding-right: 0px;
 	}
 	.container {
-	  background: #fff; //  blue;
+	  background: blue;
 	}
 
 	.leftside{
@@ -66,7 +59,6 @@
 	.container{
 		margin-left:0;
 		width: 100%;
-
 		max-width: 100%;
 	}
 	  .content {
@@ -120,7 +112,7 @@
 
     }
 	.container {
-		background: #fff; // green;
+		background: green;
 	}
 
 	.span9 {
