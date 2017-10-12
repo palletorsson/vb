@@ -14,7 +14,7 @@
 					<a href="/products/full"> << {% trans "Shop" %}</a> / 
 					<span> {{ product.variation.article.name }}  </span>
 				{% if product.variation.article.quality.pk == 1 %} 
-					<span class="link pull-right"><a href="/products/article/{{product.variation.pk}}"> {% trans "Välj bland fler färger och mönster" %} >> </a></span> 
+					<span class="link pull-right"><a href="/products/article/{{product.variation.pk}}"> {% trans "Välj bland fler färger och mönster" %} </a> Cut on Demand  >>  </span> 
 				{% endif %}
 			</div> 
 		</div>		
@@ -143,7 +143,7 @@
 			<hr>
 			<div class="span2">
 		        <span id="addtocart">
-						<div class="btn btn-success  add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</div>
+						<div class="btn btn-success  add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppingbag" %}</div>
 			    </span>
 			</div>
 			<div class="span4">
