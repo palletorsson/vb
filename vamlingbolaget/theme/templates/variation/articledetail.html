@@ -58,7 +58,9 @@
 			</span>
 		</div>
 		<div class="span7">
+			<span class="articlehead">
 			{% trans "Välj" %} {% trans "Storlek" %}, {% trans "Färger och Mönster" %}:  
+			</span>
 			<span class="selectedpatternandcolor_text"></span>	
 			<hr>
 			<div class="span2 selectedpatternandcolor">
@@ -76,7 +78,7 @@
         	<hr>
 			<nav>
 				<ul class="pagination">
-					<span class="remove_on_size"> (* {% trans "Välj" %}) </span>
+					<span class="remove_on_size articlehead"> (* {% trans "Välj" %}) </span>
 					<span id="nosize"> <--- </span> 
 					{% for size in sizes %}
 						{% if size.pk == 3 %}
@@ -105,7 +107,7 @@
 		<div class="span3"> </div>
 		<div class="span7">
 			<div class="span2">
-		        <span id="addtocart" >
+		        <span id="addtocart articlehead" >
 					<span style="padding-left: 30px;">
 						<button class="btn btn-success btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
 					</span>
@@ -113,7 +115,7 @@
 			</div>
 
 			<div class="span4">
-				<div class="pulldown_cod">			
+				<div class="pulldown_cod articlehead">			
 					<span> {% trans "Leverans:" %}  {% trans "Fyra veckor" %} </span>
 				</div>
 			</div>
