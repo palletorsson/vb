@@ -438,7 +438,8 @@ margin-right: -49px;
 .change_lang{
   cursor: pointer;
   margin-right: 5px;
-  padding : 10px;
+  padding-top: 5px;
+  display: block;
 }
 .post_body{
   max-width:100%;
@@ -868,11 +869,4 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
 .add_size_message {
     color: red;
     font-size: 14px;  
-}
-
-.paddingtopdown {
-  padding-top: 3px;
-  margin-top: 3px;
-  padding-bottom: : 3px;
-  margin-bottom: : 3px;
 }
