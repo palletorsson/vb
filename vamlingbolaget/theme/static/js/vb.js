@@ -975,17 +975,15 @@ set_first_page();
 function init() {
     window.addEventListener('scroll', function(e){
         var distanceY = window.pageYOffset || document.documentElement.scrollTop; 
-        var shrinkOn = 30; 
+        var shrinkOn = 100; 
         var header = document.querySelector("header");
         if (distanceY > shrinkOn) {
             $('.menu_container').animate({
-                opacity: 0.80,
-                left: "+=50",
                 height: "100px"
               }, 3000, function() {
                
             });
-              console.log(distanceY, shrinkOn)
+            console.log(distanceY, shrinkOn)
         }  //else {
            // if (classie.has(header,"smaller")) {
               //  classie.remove(header,"smaller");
