@@ -978,21 +978,22 @@ function scroll_init() {
         var shrinkOn = 100; 
         var header = document.querySelector("header");
         if (distanceY > shrinkOn) {
-            $('.menu_container').animate({ height: "50px" }, 1000 ).addClass('shriked')
-            
+            $('.menu_container').animate({ height: "50px" }, 1000 ).addClass('shriked'); 
+            $('.vb_logo').animate({ width: "70px" }, 1000 );
             $('.main_nav').animate({ top: "-11px" }, 1000, function() {
-                $('.navbar-brand').hide()
-                $('.midhead').hide()
+                $('.navbar-brand').hide(); 
+                $('.midhead').hide();
             });
 
             
         }  else {
            if ($('.menu_container').hasClass('shriked')) {
-              $('.menu_container').removeClass('shriked')
-              $('.menu_container').animate({ height: "160px" }, 1000 )
+              $('.menu_container').removeClass('shriked');
+              $('.menu_container').animate({ height: "160px" }, 1000 );
+              $('.vb_logo').animate({ width: "120px" }, 1000 );
               $('.main_nav').animate({ top: "80px" }, 1000, function() {
-                $('.navbar-brand').show()
-                $('.midhead').show()
+                $('.navbar-brand').show();
+                $('.midhead').show():
             });
               console.log(distanceY, shrinkOn)
            }
