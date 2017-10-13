@@ -985,8 +985,8 @@ function init() {
               }, 3000, function() {
                
             });
-        }  else {
-           if (classie.has(header,"smaller")) {
+        }  //else {
+           // if (classie.has(header,"smaller")) {
               //  classie.remove(header,"smaller");
            // }
         // }
