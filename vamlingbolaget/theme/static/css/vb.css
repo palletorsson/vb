@@ -877,15 +877,15 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
     width: 50%;
     padding: 10px;
     position: fixed;
-    left: 40%;
+    left: 42%;
 }
 
 .main_nav {
     margin: auto;
     padding: 10px;
     position: fixed;
-    left: 45%;
-    top: 55px;
+    left: 46%;
+    top: 61px;
 }
 
 .vb_logo { 
