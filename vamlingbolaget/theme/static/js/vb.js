@@ -977,13 +977,13 @@ function init() {
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
             shrinkOn = 300,
             //header = document.querySelector("header");
-        if (distanceY > shrinkOn) {
+        //if (distanceY > shrinkOn) {
             
-        } else {
+        //} else {
            // if (classie.has(header,"smaller")) {
               //  classie.remove(header,"smaller");
            // }
-        }
+        // }
         console.log(distanceY, shrinkOn)
     });
 }
