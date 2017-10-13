@@ -332,8 +332,10 @@ $("#addtofullcart").off('click').on({
     }
 });//end of click
 
-$(".variation_imgs").click(function() {
-
+$(".variation_imgs").click(function(e) {
+   console.log()
+   img = $(this).find('img').attr('src')
+   console.log(img)
    img = $(this).attr('src');
    console.log(img)
    $(".variation_img").attr("src", img)
