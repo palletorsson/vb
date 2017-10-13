@@ -333,10 +333,7 @@ $("#addtofullcart").off('click').on({
 });//end of click
 
 $(".variation_imgs").click(function(e) {
-   var img= $(e).attr("src");
-   console.log(img)
-   img = $(this).find('img').attr('src')
-   console.log(img)
+   console.log(this, e)
    img = $(this).attr('src');
    console.log(img)
    $(".variation_img").attr("src", img)
