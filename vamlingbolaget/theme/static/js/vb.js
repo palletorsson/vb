@@ -975,7 +975,7 @@ set_first_page();
 function scroll_init() {
     window.addEventListener('scroll', function(e){
         var distanceY = window.pageYOffset || document.documentElement.scrollTop; 
-        var shrinkOn = 100; 
+        var shrinkOn = 200; 
         var header = document.querySelector("header");
         if (distanceY > shrinkOn) {
             $('.menu_container').animate({ height: "50px" }, 500 ).addClass('shriked'); 
