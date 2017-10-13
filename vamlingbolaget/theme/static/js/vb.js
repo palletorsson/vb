@@ -976,19 +976,19 @@ function scroll_init() {
     window.addEventListener('scroll', function(e){
         var distanceY = window.pageYOffset || document.documentElement.scrollTop; 
         var shrinkOn = 200; 
-        var header = document.querySelector("header");
+        
         if (distanceY > shrinkOn) {
             $('.menu_container').animate({ height: "50px" }, 500 ).addClass('shriked'); 
-            $('.vb_logo').animate({ width: "10px" }, 500 );
+            $('.vb_logo').animate({ width: "100px" }, 500 );
             $('.main_nav').animate({ top: "-11px" }, 500, function() {
                 $('.navbar-brand').hide(); 
-                $('.midhead').hide();
+                //$('.midhead').hide();
             });     
         }  else {
-           if (distanceY < shrinkOn && $('.menu_container').hasClass('shriked')) {
+           if (distanceY < shrinkOn+1000 && $('.menu_container').hasClass('shriked')) {
               
               $('.navbar-brand').show();
-                $('.midhead').show(); 
+               // $('.midhead').show(); 
               $('.menu_container').animate({ height: "160px" }, 500 );
               $('.vb_logo').animate({ width: "120px" }, 500 );
               $('.main_nav').animate({ top: "80px" }, 500, function() {
