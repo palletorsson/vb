@@ -972,7 +972,22 @@ set_first_page();
           return true;
       });
 
-
+function init() {
+    window.addEventListener('scroll', function(e){
+        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+            shrinkOn = 300,
+            //header = document.querySelector("header");
+        if (distanceY > shrinkOn) {
+            
+        } else {
+           // if (classie.has(header,"smaller")) {
+              //  classie.remove(header,"smaller");
+           // }
+        }
+        console.log(distanceY, shrinkOn)
+    });
+}
+window.onload = init();
 
 
 
