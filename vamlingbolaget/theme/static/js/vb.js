@@ -975,11 +975,17 @@ set_first_page();
 function init() {
     window.addEventListener('scroll', function(e){
         var distanceY = window.pageYOffset || document.documentElement.scrollTop; 
-            shrinkOn = 300; 
-            //header = document.querySelector("header");
-        //if (distanceY > shrinkOn) {
-            
-        //} else {
+        var shrinkOn = 300; 
+        var header = document.querySelector("header");
+        if (distanceY > shrinkOn) {
+            $('.container').animate({
+                opacity: 0.25,
+                left: "+=50",
+                height: "100px"
+              }, 3000, function() {
+                // Animation complete.
+            });
+        } // else {
            // if (classie.has(header,"smaller")) {
               //  classie.remove(header,"smaller");
            // }
