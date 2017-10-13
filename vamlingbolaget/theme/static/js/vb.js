@@ -983,11 +983,9 @@ function scroll_init() {
             $('.main_nav').animate({ top: "-11px" }, 1000, function() {
                 $('.navbar-brand').hide(); 
                 $('.midhead').hide();
-            });
-
-            
+            });     
         }  else {
-           if (distanceY < shrinkOn) {
+           if (distanceY < shrinkOn && $('.menu_container').hasClass('shriked')) {
               $('.menu_container').removeClass('shriked');
               $('.menu_container').animate({ height: "160px" }, 1000 );
               $('.vb_logo').animate({ width: "120px" }, 1000 );
