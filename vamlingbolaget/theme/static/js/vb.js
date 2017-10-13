@@ -979,7 +979,7 @@ function init() {
         var header = document.querySelector("header");
         if (distanceY > shrinkOn) {
             $('.menu_container').animate({ height: "120px" }, 1000 )
-            $('.navbar-brand').animate({ width: "0%" }, 1000 )
+            $('.navbar-brand').hide()
             console.log(distanceY, shrinkOn)
         }  //else {
            // if (classie.has(header,"smaller")) {
