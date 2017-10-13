@@ -975,7 +975,7 @@ set_first_page();
 function init() {
     window.addEventListener('scroll', function(e){
         var distanceY = window.pageYOffset || document.documentElement.scrollTop; 
-        var shrinkOn = 300; 
+        var shrinkOn = 30; 
         var header = document.querySelector("header");
         if (distanceY > shrinkOn) {
             $('.menu_container').animate({
@@ -985,12 +985,13 @@ function init() {
               }, 3000, function() {
                
             });
+              console.log(distanceY, shrinkOn)
         }  //else {
            // if (classie.has(header,"smaller")) {
               //  classie.remove(header,"smaller");
            // }
         // }
-        console.log(distanceY, shrinkOn)
+      
     });
 }
 window.onload = init();
