@@ -993,7 +993,7 @@ function scroll_init() {
               $('.vb_logo').animate({ width: "120px" }, 1000 );
               $('.main_nav').animate({ top: "80px" }, 1000, function() {
                 $('.navbar-brand').show();
-                $('.midhead').show():
+                $('.midhead').show(); 
             });
               console.log(distanceY, shrinkOn)
            }
