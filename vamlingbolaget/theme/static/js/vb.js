@@ -972,24 +972,31 @@ set_first_page();
           return true;
       });
 
-function init() {
+function scroll_init() {
     window.addEventListener('scroll', function(e){
         var distanceY = window.pageYOffset || document.documentElement.scrollTop; 
         var shrinkOn = 100; 
         var header = document.querySelector("header");
         if (distanceY > shrinkOn) {
-            $('.menu_container').animate({ height: "120px" }, 1000 )
+            $('.menu_container').animate({ height: "60px" }, 1000 ).addClass('shriked')
             $('.navbar-brand').hide()
+            $('.midhead').hide()
+            $('.main_nav').animate({ top: "20px" }, 1000 )
+
             console.log(distanceY, shrinkOn)
-        }  //else {
-           // if (classie.has(header,"smaller")) {
-              //  classie.remove(header,"smaller");
-           // }
-        // }
+        }  else {
+           if ($('.menu_container').hasClass('shriked')) {
+              $('.menu_container').removeClass('shriked')
+              $('.menu_container').animate({ height: "120px" }, 1000 )
+            $('.navbar-brand').show()
+            $('.midhead').show()
+            $('.main_nav').animate({ top: "60px" }, 1000 )
+           }
+        }
       
     });
 }
-window.onload = init();
+window.onload = scroll_init();
 
 
 
