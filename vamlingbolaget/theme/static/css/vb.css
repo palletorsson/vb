@@ -180,6 +180,8 @@ font-size: 0.9em;
 	padding-left: 10px;
 	margin-right: 15px;
 	margin-left: 7%;
+      height: 100px;
+}
 	}
   .scrollable {
       overflow: auto;
