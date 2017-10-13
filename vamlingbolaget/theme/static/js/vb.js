@@ -978,20 +978,21 @@ function scroll_init() {
         var shrinkOn = 100; 
         var header = document.querySelector("header");
         if (distanceY > shrinkOn) {
-            $('.menu_container').animate({ height: "50px" }, 1000 ).addClass('shriked'); 
-            $('.vb_logo').animate({ width: "70px" }, 1000 );
-            $('.main_nav').animate({ top: "-11px" }, 1000, function() {
+            $('.menu_container').animate({ height: "50px" }, 500 ).addClass('shriked'); 
+            $('.vb_logo').animate({ width: "10px" }, 500 );
+            $('.main_nav').animate({ top: "-11px" }, 500, function() {
                 $('.navbar-brand').hide(); 
                 $('.midhead').hide();
             });     
         }  else {
            if (distanceY < shrinkOn && $('.menu_container').hasClass('shriked')) {
               $('.menu_container').removeClass('shriked');
-              $('.menu_container').animate({ height: "160px" }, 1000 );
-              $('.vb_logo').animate({ width: "120px" }, 1000 );
-              $('.main_nav').animate({ top: "80px" }, 1000, function() {
-                $('.navbar-brand').show();
+              $('.navbar-brand').show();
                 $('.midhead').show(); 
+              $('.menu_container').animate({ height: "160px" }, 500 );
+              $('.vb_logo').animate({ width: "120px" }, 500 );
+              $('.main_nav').animate({ top: "80px" }, 500, function() {
+                
             });
               console.log(distanceY, shrinkOn)
            }
