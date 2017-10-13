@@ -333,7 +333,9 @@ $("#addtofullcart").off('click').on({
 });//end of click
 
 $(".variation_imgs").click(function() {
+
    img = $(this).attr('src');
+   console.log(img)
    $(".variation_img").attr("src", img)
    $(".variation_link").attr("href", img)
 }); 
