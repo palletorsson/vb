@@ -976,8 +976,8 @@ function scroll_init() {
     window.addEventListener('scroll', function(e){
         var distanceY = window.pageYOffset || document.documentElement.scrollTop; 
         var shrinkOn = 200; 
-        console.log(document.documentElement.scrollTop); 
-        if (distanceY > shrinkOn) {
+        console.log(); 
+        if (document.documentElement.scrollTop > shrinkOn) {
             $('.menu_container').animate({ height: "50px" }, 500 ).addClass('shriked'); 
             $('.vb_logo').animate({ width: "100px" }, 500 );
             $('.main_nav').animate({ top: "-11px" }, 500, function() {
@@ -985,7 +985,7 @@ function scroll_init() {
                 //$('.midhead').hide();
             });     
         }  else {
-           if (distanceY < shrinkOn+1000 && $('.menu_container').hasClass('shriked')) {
+           if (document.documentElement.scrollTop < shrinkOn+1000 && $('.menu_container').hasClass('shriked')) {
               
               $('.navbar-brand').show();
                // $('.midhead').show(); 
