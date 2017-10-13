@@ -978,16 +978,8 @@ function init() {
         var shrinkOn = 100; 
         var header = document.querySelector("header");
         if (distanceY > shrinkOn) {
-            $('.menu_container').animate({
-                height: "100px"
-              }, 3000, function() {
-               
-            });
-            $('.navbar-brand').animate({
-                height: "0px"
-              }, 3000, function() {
-               
-            });
+            $('.menu_container').animate({ height: "120px" }, 1000 )
+            $('.navbar-brand').animate({ width: "0%" }, 1000 )
             console.log(distanceY, shrinkOn)
         }  //else {
            // if (classie.has(header,"smaller")) {
