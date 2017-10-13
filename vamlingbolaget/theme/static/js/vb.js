@@ -976,7 +976,7 @@ function scroll_init() {
     window.addEventListener('scroll', function(e){
         var distanceY = window.pageYOffset || document.documentElement.scrollTop; 
         var shrinkOn = 200; 
-        
+        console.log(document.documentElement.scrollTop); 
         if (distanceY > shrinkOn) {
             $('.menu_container').animate({ height: "50px" }, 500 ).addClass('shriked'); 
             $('.vb_logo').animate({ width: "100px" }, 500 );
