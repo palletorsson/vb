@@ -987,7 +987,7 @@ function scroll_init() {
 
             
         }  else {
-           if ($('.menu_container').hasClass('shriked')) {
+           if (DistanceY < shrinkOn) {
               $('.menu_container').removeClass('shriked');
               $('.menu_container').animate({ height: "160px" }, 1000 );
               $('.vb_logo').animate({ width: "120px" }, 1000 );
