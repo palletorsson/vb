@@ -332,18 +332,26 @@ $("#addtofullcart").off('click').on({
     }
 });//end of click
 
-$(".variation_imgs").click(function(e) {
-   e.stopPropagation();
-   
-   console.log("-----", this, e)
-   
-   img = $(this).attr('src');
-   
-   console.log(img)
-   
-   $(".variation_img").attr("src", img)
-   $(".variation_link").attr("href", img)
+$(".variation_imgs").on( {
+
+    'click': function(e) {
+
+        e.stopPropagation();
+
+        console.log("-----", this, e)
+           
+        var img = $(this).attr('src');
+           
+        console.log(img)
+           
+        $(".variation_img").attr("src", img)
+        $(".variation_link").attr("href", img)
+    }, 
+    'contextmenu' : function(e) {
+        console.log("......", this, e)
+    }
 }); 
+
 
 
 $('#widget_size').filter(function () {
