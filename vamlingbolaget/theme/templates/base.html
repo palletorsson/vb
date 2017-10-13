@@ -35,31 +35,33 @@
           <div class="navbar-inner hidden-phone">
             <div class="container_first">
                 <div class="nav pull-left flags">
-                <div class="btn-group">
-                    <a type="button" href="#" class="btn dropdown-toggle"  data-toggle="dropdown" >
-                      <span> <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> {% trans "LANGUAGE" %}
-                        <b class="caret"> </b>
-                      </span>
-                    </a>
-                    <ul class ="dropdown-menu">
-                        <li> <a href="#" > <span class="change_lang" id="sv">Svenska</span></a></li>
-                        <li role="separator" class="divider"></li>
-                        <li> <a href="#"> <span class="change_lang" id="en">English</span>  </a></li>
-                        <li role="separator" class="divider"></li>
-                        <li> <a href="#"> <span class="change_lang" id="fi">Suomalainen</span>  </a></li>
-                        <li role="separator" class="divider"></li>
-                        <li> <a href="#" > <span class="change_lang" id="de">Deutsch</span>  </a></li>
-                        <li role="separator" class="divider"></li>
-                        <li> <a href="#"> <span class="change_lang" id="da">Dansk</span>  </a></li>
-                    </ul>
-                </div>
+                    <div class="btn-group">
+                        <a type="button" href="#" class="btn dropdown-toggle"  data-toggle="dropdown" >
+                          <span> <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> {% trans "LANGUAGE" %}
+                            <b class="caret"> </b>
+                          </span>
+                        </a>
+                        <ul class ="dropdown-menu">
+                            <li> <a href="#" > <span class="change_lang" id="sv">Svenska</span></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li> <a href="#"> <span class="change_lang" id="en">English</span>  </a></li>
+                            <li role="separator" class="divider"></li>
+                            <li> <a href="#"> <span class="change_lang" id="fi">Suomalainen</span>  </a></li>
+                            <li role="separator" class="divider"></li>
+                            <li> <a href="#" > <span class="change_lang" id="de">Deutsch</span>  </a></li>
+                            <li role="separator" class="divider"></li>
+                            <li> <a href="#"> <span class="change_lang" id="da">Dansk</span>  </a></li>
+                        </ul>
+                    </div>
                     <form action="/i18n/setlang/" method="post" id="lang" >
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ redirect_to }}" />
                         <input name="language" type="hidden" value="en"/>
                     </form>
-              </div>
-              <div class="midhead">Svensk design och produktion</div>
+              </div> <!-- end left -->
+
+              <span class="midhead">Svensk design och produktion</span>
+
               <ul class="nav pull-right flags">
                   <li>
                       <a id="token" href="/cart/show/" >
