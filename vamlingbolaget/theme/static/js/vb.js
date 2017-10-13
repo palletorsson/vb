@@ -1000,7 +1000,7 @@ function scroll_init() {
       
     });
 }
-window.onload = scroll_init();
+
 
 
 
