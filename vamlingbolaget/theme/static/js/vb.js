@@ -983,6 +983,11 @@ function init() {
               }, 3000, function() {
                
             });
+            $('.navbar-brand').animate({
+                height: "0px"
+              }, 3000, function() {
+               
+            });
             console.log(distanceY, shrinkOn)
         }  //else {
            // if (classie.has(header,"smaller")) {
