@@ -986,13 +986,13 @@ function scroll_init() {
             });     
         }  else {
            if (distanceY < shrinkOn && $('.menu_container').hasClass('shriked')) {
-              $('.menu_container').removeClass('shriked');
+              
               $('.navbar-brand').show();
                 $('.midhead').show(); 
               $('.menu_container').animate({ height: "160px" }, 500 );
               $('.vb_logo').animate({ width: "120px" }, 500 );
               $('.main_nav').animate({ top: "80px" }, 500, function() {
-                
+                $('.menu_container').removeClass('shriked');
             });
               console.log(distanceY, shrinkOn)
            }
