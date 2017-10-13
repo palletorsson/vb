@@ -978,10 +978,10 @@ function scroll_init() {
         var shrinkOn = 100; 
         var header = document.querySelector("header");
         if (distanceY > shrinkOn) {
-            $('.menu_container').animate({ height: "40px" }, 1000 ).addClass('shriked')
+            $('.menu_container').animate({ height: "50px" }, 1000 ).addClass('shriked')
             $('.navbar-brand').hide()
             $('.midhead').hide()
-            $('.main_nav').animate({ top: "10px" }, 1000 )
+            $('.main_nav').animate({ top: "1px" }, 1000 )
 
             
         }  else {
