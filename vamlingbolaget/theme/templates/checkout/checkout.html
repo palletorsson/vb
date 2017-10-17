@@ -10,12 +10,9 @@
 
 {% endblock %}
 
-{% block pagetitle %}
-    <legend> {% trans "Din Beställning" %} </legend>
-{% endblock %}
 
-{% block allcontent %}
-
+{% block stretchpage %}
+   <legend> {% trans "Din Beställning" %} </legend>
 	<div class="hidden-xs">
 	{% include "checkout/checkout_default.html" %}
 	</div>
