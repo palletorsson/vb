@@ -91,7 +91,7 @@ line-height: 1em;
 .nav, a{
   text-transform: uppercase;
   }
-  
+
   .nav {
     color: #ef7c43 ;
   }
@@ -122,13 +122,16 @@ line-height: 1em;
     color: #ef7c43 !important;
   }
 
+.btn-default {
+    
+    border-color: #ef7c43 !important;
+    color: #ef7c43 !important;
+}
+
 	.nav > li > a {
 	padding: 1px 15px;
 	}
 
-	. {
-	padding: 10px 15px;
-	}
 
 
    a {
@@ -168,6 +171,7 @@ line-height: 1em;
   }
   .coll_menu_ul {
     font-size: 0.9em;
+
   }
 legend {
 text-transform: uppercase;
