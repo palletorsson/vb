@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block allcontent %}
-<div class="span12">
+
     {% for product in products %}
          <div class="collection_list img_container" >
             <a href="/products/article/{{ product.variation.pk }}/#{{ product.variation.article.name }} {% trans "i" %} {{ product.variation.color|lower }} {{ product.pattern|lower }}"> 
@@ -35,7 +35,6 @@
             </a>
         </div>
     {% endfor %}
-</div>
 {% endblock %}
 
 
