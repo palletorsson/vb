@@ -122,11 +122,10 @@ line-height: 1em;
     color: #ef7c43 !important;
   }
 
-.btn-default {
-    
-    border-color: #ef7c43 !important;
-    color: #ef7c43 !important;
-}
+  .btn-default {
+      border-color: #ef7c43 !important;
+      color: #ef7c43 !important;
+  }
 
 	.nav > li > a {
 	padding: 1px 15px;
