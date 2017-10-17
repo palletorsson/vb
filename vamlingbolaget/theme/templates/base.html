@@ -127,36 +127,32 @@
             </div>
         </div>
     </div>
-     <div class="container content"> <!--this is for the left margin -->
+    <div class="container content"> <!--this is for the left margin -->
     {% block stretchpage %}
-   
-      <div id="changetext"></div>
-        <div class="pagetitle">
-        {% block pagetitle %} {% endblock %}
-        {% block pagedesc %} {% endblock %}
-
-      </div>
-     {% block shopmenu %} {% endblock %}
-    {% block allcontent %}
-      <div class="span2">
-           {% block sidebar %}
-
-           {% endblock %}
-      </div>
-      <div class="span12">
-           {% block content %}
-                 FEATURED COLLECTION
-          {% endblock %}
-      </div>
-    {% endblock %}
-  </div>
-  {% block footer %}
-  <footer>
-	{% include "footer.html" %}
-  </footer>
- {% endblock %}
+        <div id="changetext"></div>
+            <div class="pagetitle">
+            {% block pagetitle %} {% endblock %}
+            {% block pagedesc %} {% endblock %}
+        </div>
+        {% block shopmenu %} {% endblock %}
+        {% block allcontent %}
+            <div class="span2">
+              {% block sidebar %} {% endblock %}
+            </div>
+            <div class="span12">
+                {% block content %}
+                    FEATURED COLLECTION
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+    
 {% endblock %}
-
+{% block footer %}
+    <footer>
+       {% include "footer.html" %}
+    </footer>
+    {% endblock %}
   <div class="hidden" id="widget_text_start" >{% trans "+" %}</div>
   <div class="hidden" id="widget_size" >{% trans "Storlek" %}</div>
   <div class="hidden" id="widget_exist" >{% trans "Det finns" %}</div>
