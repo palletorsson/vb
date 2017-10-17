@@ -168,7 +168,7 @@ line-height: 1em;
     width: 100%;
  
   }
-  .coll_menu_ul {
+  .coll_menu_ul > li > a {
     font-size: 0.9em;
     text-transform: capitalize  !important;
     font-weight: bold; 
