@@ -4,12 +4,10 @@
 
 {% version model.field_name version_prefix %}
 
-{% block pagetitle %} 
-    <legend>{% trans "Shop" %} / CUT ON DEMAND - {% trans "Vi syr upp ditt unika pĺagg" %} </legend>
-{% endblock %}
+
 
 {% block allcontent %}
-
+ <legend>{% trans "Shop" %} / CUT ON DEMAND - {% trans "Vi syr upp ditt unika pĺagg" %} </legend>
         {% for product in products %}
         
              <div class="collection_list img_container" >
