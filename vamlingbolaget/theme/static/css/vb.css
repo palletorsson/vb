@@ -87,8 +87,13 @@ line-height: 1em;
       padding-top: 20px;
   }
 
-  .nav, a{
+
+.nav, a{
   text-transform: uppercase;
+  }
+  
+  .nav {
+    color: #ef7c43 ;
   }
 
 .article_background {
