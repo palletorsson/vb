@@ -123,6 +123,7 @@ $('#nosize').hide();
 $("#addtocart").off('click').on({
     click:function(e) {
         var size_val = $('#size').val(); 
+        console.log("check size")
         if (size_val == ''){
            $('.remove_on_size').addClass('add_size_message'); 
            $('#nosize').show(); 
@@ -130,6 +131,7 @@ $("#addtocart").off('click').on({
       } else {
         e.stopPropagation();
         if(counter == 0){
+            console.log("first when size ok")
             counter++;
             setTimeout(function(){counter = 0},2000)
             
