@@ -1,7 +1,13 @@
 {% extends "collection_base.html" %}
 {% load i18n %}
 {% load fb_versions %}
+
 {% version model.field_name version_prefix %}
+
+{% block pagetitle %}
+    <legend>{% trans "Shop" %}</legend>
+{% endblock %}
+
 {% block allcontent %}
         <div class="shop_images">
         {% for product in products %}
