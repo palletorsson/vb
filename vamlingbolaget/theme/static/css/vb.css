@@ -110,7 +110,7 @@ line-height: 1em;
 	}
 	
   .orange > li {
-    color: #ef7c43;
+    color: #ef7c43 !important;
   }
 
  .orange {
