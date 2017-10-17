@@ -10,22 +10,18 @@
 	<div class="row-fluid">
 
 {% block stretchpage %}
-	{% block pagetitle %}
-			<div class="span12" >
-				<div class="bread" >
+	<div class="span12">
+		<div class="bread">
 					<a href="/products/fullcut"> << {% trans "Shop" %}</a> / <span> {{ product.article }}  </span>
 				</div> 
 				<hr>
-			</div>
-	{% endblock %}
-	<div class="span12">
 		<div class="span3 article_background" id="fadeifchangeorder">
 	        <div id="images_container" class="img_container">
 				<div class="ribbon">
 				  	<div>Cut On Demand</div>
 				</div>
 	        	<a href="{{ image }}" class="variation_link">
-	        		<img src="/media/{{ product.article.file }}"  alt="article image" class="cut_detail_img" />
+	        		<img src="/media/{{ product.article.file }}" alt="article image" class="cut_detail_img" />
 	        	</a>
 		  	</div> 
 		  	<div class="text-center hidden-xs">
