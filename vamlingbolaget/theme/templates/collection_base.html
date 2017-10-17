@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block shopmenu %}
-
+    <div class="span12"> 
         {% if rea == 'true' %}
 		<ul class="pagination">Rea Filter
     		<li>{% trans "Filter" %} : {% trans "Storlek" %}</li> 
@@ -51,7 +51,7 @@
                  <a href="/products/rea/">{% trans "REA" %} </a>          
             </li>
         </ul>
-
+    </div>
  
 
 {% endblock %}

@@ -134,7 +134,9 @@
         {% block pagetitle %} {% endblock %}
         {% block pagedesc %} {% endblock %}
         </div>
+
         {% block shopmenu %} {% endblock %}
+
         {% block allcontent %}
             <div class="span2">
               {% block sidebar %} {% endblock %}
@@ -144,14 +146,13 @@
                     FEATURED COLLECTION
                 {% endblock %}
             </div>
-      {% endblock %}
+        {% endblock %}
+    {% endblock %}
     </div>
-    
-{% endblock %}
-{% block footer %}
-    <footer>
-       {% include "footer.html" %}
-    </footer>
+    {% block footer %}
+        <footer>
+           {% include "footer.html" %}
+        </footer>
     {% endblock %}
   <div class="hidden" id="widget_text_start" >{% trans "+" %}</div>
   <div class="hidden" id="widget_size" >{% trans "Storlek" %}</div>
