@@ -21,16 +21,10 @@
         <hr>
 
 		{% endif %}
-
-
-        <h5>..</h5>
         <ul class="pagination">
             <li>
                  <a href="/products/rea/" class="discount">{% trans "REA" %} </a>          
             </li>
-        </ul>
-        <h5>..</h5>
-        <ul class="pagination" >
           <li>
                 <a href="/products/full/"> {% trans "Kvinna" %} </a>
             </li>
@@ -46,33 +40,20 @@
             <li>
                 <a href="/products/type/piece-goods"> {% trans "Metervara" %} </a>
             </li>
-        </ul>
-        <br/>
-        <h5>..</h5>
-        <ul class="pagination">
-        {% for quality in qualities %}
-            {% if quality.order == 11 or quality.order == 10 or quality.order == 9 or quality.order == 1   %}
-                <li>
-                    <a href="/products/quality/{{quality.slug}}"> {{ quality.name }} </a>
-                </li>
-            {% endif %}
-
-        {% endfor %}
+                {% for quality in qualities %}
+                    {% if quality.order == 11 or quality.order == 10 or quality.order == 9 or quality.order == 1   %}
+                        <li>
+                            <a href="/products/quality/{{quality.slug}}"> {{ quality.name }} </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
              <li>
                 <a href="/products/full/quality/plysch/"> {% trans "Plysch" %}  </a>
             </li>
-        </ul>
-        <br/>
- 
-        <h5>..</h5>
-        <ul>
         <li>
              <a href="/products/fullcut/">{% trans "CUT ON DEMAND" %} </a>
                        
         </li>
-        </ul>
-        <h5>..</h5>
-        <ul>
         <li>
              <a href="/products/articles/">{% trans "Modeller" %} </a> <br>
              <a href="/products/patternandcolortest/">{% trans "Mönster och Färger" %} </a>           
