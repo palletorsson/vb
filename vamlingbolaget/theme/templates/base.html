@@ -33,12 +33,12 @@
             <div class="container_first">
                 <div class="nav pull-left flags">
                     <div class="btn-group">
-                        <a type="button" href="#" class="btn dropdown-toggle"  data-toggle="dropdown" >
-                          <span> <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> {% trans "LANGUAGE" %}
-                            <b class="caret"> </b>
+                        <a type="button" href="#" class="btn dropdown-toggle orange"  data-toggle="dropdown" >
+                          <span class="orange"> <span class="glyphicon glyphicon-flag orange" aria-hidden="true"></span> {% trans "LANGUAGE" %}
+                            <b class="caret orange"> </b>
                           </span>
                         </a>
-                        <ul class ="dropdown-menu">
+                        <ul class ="dropdown-menu orange">
                             <li> <a href="#" > <span class="change_lang" id="sv">Svenska</span></a></li>
                             <li role="separator" class="divider"></li>
                             <li> <a href="#"> <span class="change_lang" id="en">English</span>  </a></li>
@@ -60,11 +60,11 @@
                   <img src="/media/tagline.png" alt="tagline - svensk produktion och design" class="tagline_img" />
               </span>
 
-              <ul class="nav pull-right flags">
+              <ul class="nav pull-right flags orange">
                   <li>
                       <a id="token" href="/cart/show/" >
                       <button type="button" class="btn btn-default button_has_item"> 
-    							        <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+    							        <span class="glyphicon glyphicon-gift orange" aria-hidden="true"></span>
                             {% load cart_tags %}
                             {% cart_total %}
                           <div id="updatecart"></div>
@@ -79,7 +79,7 @@
 				        <span class = "visible-xs">
       					  <a id="token" href="/cart/show/">
       					   <span class="mob_shop_icon">
-                   <h4 class="glyphicon glyphicon-gift" aria-hidden="true"  alt="Vamlingbolaget shopping cart" ></h4>
+                   <h4 class="glyphicon glyphicon-gift orange" aria-hidden="true"  alt="Vamlingbolaget shopping cart" ></h4>
                    </span>
       					  </a>
       				  </span> 
@@ -93,7 +93,7 @@
                 </button>
                 <div class = "collapse navbar-collapse navHeaderCollapse main_nav">
 
-                     <ul class = "nav navbar-nav  nav-list mainnav mob_nav">                   
+                     <ul class = "nav navbar-nav  nav-list mainnav mob_nav orange">                   
                         <li>
                             <a href="/products/full/">{% trans "Shop" %}<span class="visible-phone"> - {% trans "Kvinna" %} </span></a>
                         </li>

@@ -109,6 +109,9 @@ line-height: 1em;
 		margin-top: 19px;
 	}
 	
+  .orange {
+    color: #ef7c43;
+  }
 
 	.nav > li > a {
 	padding: 1px 15px;
