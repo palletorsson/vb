@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block shopmenu %}
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-defadivt navbar-fixed-top">
   <div class="container">
-    <ul class=" nav navbar-default navbar-nav hidden-phone coll_menu_ul">
+    <div class=" nav navbar-defadivt navbar-nav hidden-phone coll_menu_div">
         {% if rea == 'true' %}
 		<h5>Rea Filter</h5> 
 		<h6>{% trans "Filter" %} : {% trans "Storlek" %}</h6> 
@@ -24,65 +24,65 @@
 
 
         <h5>..</h5>
-        <ul>
-            <li>
+        <div>
+            <div>
                  <a href="/products/rea/" class="discount">{% trans "REA" %} </a>          
-            </li>
-        </ul>
+            </div>
+        </div>
         <h5>..</h5>
-        <ul>
-          <li>
-                <a href="/products/full/"> {% trans "Kvinna" %} </a>
-            </li>
-            <li>
+        <div>
+          <div>
+                <a href="/products/fdivl/"> {% trans "Kvinna" %} </a>
+            </div>
+            <div>
                 <a href="/products/type/man"> {% trans "Man" %} </a>
-            </li>
-            <li>
+            </div>
+            <div>
                 <a href="/products/type/barn"> {% trans "Barn" %} </a>
-            </li>
-            <li>
+            </div>
+            <div>
                 <a href="/products/type/accessoarer"> {% trans "Accessoarer" %} {% trans "sängkläder" %} </a>
-            </li>
-            <li>
+            </div>
+            <div>
                 <a href="/products/type/piece-goods"> {% trans "Metervara" %} </a>
-            </li>
-        </ul>
+            </div>
+        </div>
         <br/>
         <h5>..</h5>
-        <ul>
-        {% for quality in qualities %}
-            {% if quality.order == 11 or quality.order == 10 or quality.order == 9 or quality.order == 1   %}
-                <li>
-                    <a href="/products/quality/{{quality.slug}}"> {{ quality.name }} </a>
-                </li>
+        <div>
+        {% for quadivty in quadivties %}
+            {% if quadivty.order == 11 or quadivty.order == 10 or quadivty.order == 9 or quadivty.order == 1   %}
+                <div>
+                    <a href="/products/quadivty/{{quadivty.slug}}"> {{ quadivty.name }} </a>
+                </div>
             {% endif %}
 
         {% endfor %}
-             <li>
-                <a href="/products/full/quality/plysch/"> {% trans "Plysch" %}  </a>
-            </li>
-        </ul>
+             <div>
+                <a href="/products/fdivl/quadivty/plysch/"> {% trans "Plysch" %}  </a>
+            </div>
+        </div>
         <br/>
  
         <h5>..</h5>
-        <ul>
-        <li>
-             <a href="/products/fullcut/">{% trans "CUT ON DEMAND" %} </a>
+        <div>
+        <div>
+             <a href="/products/fdivlcut/">{% trans "CUT ON DEMAND" %} </a>
                        
-        </li>
-        </ul>
+        </div>
+        </div>
         <h5>..</h5>
-        <ul>
-        <li>
+        <div>
+        <div>
              <a href="/products/articles/">{% trans "Modeller" %} </a> <br>
              <a href="/products/patternandcolortest/">{% trans "Mönster och Färger" %} </a>           
-        </li>
-        </ul>
+        </div>
+        </div>
        
 
         <hr>
 
-    </ul>
+    </div>
 </div>
 </nav>
 {% endblock %}
