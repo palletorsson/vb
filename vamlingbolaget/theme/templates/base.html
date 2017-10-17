@@ -80,13 +80,13 @@
 				        <span class = "visible-xs">
       					  <a id="token" href="/cart/show/">
       					   <span class="mob_shop_icon">
-                   <h4 class="glyphicon glyphicon-gift orange" aria-hidden="true"  alt="Vamlingbolaget shopping cart" ></h4>
+                      <h4 class="glyphicon glyphicon-gift orange" aria-hidden="true" alt="Vamlingbolaget shopping cart" ></h4>
                    </span>
       					  </a>
       				  </span> 
 
                 <a href="/" class="navbar-brand hidden-phone"><img src="/media/Vamlingbolaget_orange.png" alt="Vamlingbolaget logo" class="align-middle vb_logo" /></a> 
-                <a href="/" class="navbar-brand visible-phone orange">vamlingbolaget</a>
+                <a href="/" class="navbar-brand visible-phone orange">Vamlingbolaget</a>
 
                 <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
                         <span class = "icon-bar"></span>
@@ -127,12 +127,16 @@
             </div>
         </div>
     </div>
+    {% block shopmenu %}
+
+    {% endblock %}
 {% block stretchpage %}
     <div class="container content"> <!--this is for the left margin -->
       <div id="changetext"></div>
         <div class="pagetitle">
         {% block pagetitle %} {% endblock %}
         {% block pagedesc %} {% endblock %}
+
       </div>
 
     {% block allcontent %}
