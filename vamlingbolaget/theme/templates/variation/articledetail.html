@@ -7,16 +7,18 @@
     <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }},  {{ product.variation }}" %}/>
 {%endblock%}
 
-{% block pagetitle %}
 	<div class="row-fluid">
-		<div class="span12" >
-			<div class="bread" >
-				<a href="/products/fullcut"> << {% trans "Shop" %}</a> / <span> {{ product.article }}  </span> </div> 
-			<hr>
-		</div>
-{% endblock %}
 
-{% block allcontent %}
+
+{% block stretchpage  %}
+	{% block pagetitle %}
+			<div class="span12" >
+				<div class="bread" >
+					<a href="/products/fullcut"> << {% trans "Shop" %}</a> / <span> {{ product.article }}  </span>
+				</div> 
+				<hr>
+			</div>
+	{% endblock %}
 	<div class="span12">
 		<div class="span3 article_background" id="fadeifchangeorder">
 	        <div id="images_container" class="img_container">
