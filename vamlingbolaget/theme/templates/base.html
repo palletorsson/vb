@@ -127,10 +127,7 @@
             </div>
         </div>
     </div>
-    {% block shopmenu %}
-
-    {% endblock %}
-{% block stretchpage %}
+    {% block stretchpage %}
     <div class="container content"> <!--this is for the left margin -->
       <div id="changetext"></div>
         <div class="pagetitle">
@@ -138,7 +135,7 @@
         {% block pagedesc %} {% endblock %}
 
       </div>
-
+     {% block shopmenu %} {% endblock %}
     {% block allcontent %}
       <div class="span2">
            {% block sidebar %}
