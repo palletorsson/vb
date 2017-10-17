@@ -2,26 +2,7 @@
 {% load i18n %}
 {% block shopmenu %}
     <div class="span12"> 
-        {% if rea == 'true' %}
-		<ul class="pagination">Rea Filter
-    		<li>{% trans "Filter" %} : {% trans "Storlek" %}</li> 
-
-            {% for size in sizes %}
-                <il>
-                    <a href="/products/rea/size/{{size}}"> {{ size }} </a> 
-                </il>
-            {% endfor %}
-
-    		<li>{% trans "Filter" %} : {% trans "Typ" %}</li> 
-            {% for t in atypes %}
-             <li>
-                <a href="/products/rea/type/{{t.order}}"> {{ t }} </a> 
-            </li>
-            {% endfor %}
-        </ul>
-		{% endif %}
-        <ul class="pagination">
-           
+        <ul class="pagination">       
             <li>
                 <a href="/products/full/"> {% trans "Kvinna" %} </a>
             </li>
