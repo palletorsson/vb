@@ -76,6 +76,11 @@ line-height: 1em;
     width: 100%;
 }
 
+.pagination > li > a, .pagination > li > span {
+    border: none;
+    border-left: 1px solid #dddddd
+  }
+
   /* menu line beside logo vamlingbolaget */
   .leftsideline{
       position:relative;
