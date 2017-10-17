@@ -188,7 +188,10 @@ font-size: 0.9em;
     padding-bottom: 15px;
     }
 
+.collapse.in {
 
+    border-radius: 10px;
+}
 	.menu_container {
 	padding-right: 15px;
 	padding-left: 10px;
