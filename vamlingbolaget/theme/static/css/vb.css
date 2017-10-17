@@ -170,7 +170,7 @@ line-height: 1em;
   }
   .coll_menu_ul {
     font-size: 0.9em;
-    text-transform: capitalize;
+    text-transform: capitalize  !important;
     font-weight: bold; 
 
   }
