@@ -6,11 +6,10 @@
 <title>Vamlingbolaget | {% trans "Din beställning " %} </title>
 <meta name="description" content={% trans "Din beställning av Vamlingbolagets produkter " %} />
 {%endblock%}
-{% block pagetitle %}
-<legend xmlns="http://www.w3.org/1999/html"> {% trans "Din shoppinglåda" %} </legend>
-{% endblock %}
+
 
 {% block stretchpage %}
+<legend xmlns="http://www.w3.org/1999/html"> {% trans "Din shoppinglåda" %} </legend>
 <div class="hidden-xs">
 {%if cartitems or bargains or rea%}
     <table class="table table-bordered small table-striped">
