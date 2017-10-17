@@ -264,7 +264,7 @@ text-shadow: 0 1px 0 #eeeeee;
 
 .collection_list {
   float:left;
-  width:200px;
+  width:284px;
 }
 
 	.input-group {
@@ -762,7 +762,7 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
 }
 
 .force_image {
-     height: 300px;
+     height: 430px;
      overflow:hidden;
 }
 
