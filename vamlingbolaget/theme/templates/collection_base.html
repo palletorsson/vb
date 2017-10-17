@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block shopmenu %}
-    <ul class="hidden-phone nav navbar-default navbar-nav coll_menu_ul">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <ul class=" nav navbar-default navbar-nav hidden-phone coll_menu_ul">
         {% if rea == 'true' %}
 		<h5>Rea Filter</h5> 
 		<h6>{% trans "Filter" %} : {% trans "Storlek" %}</h6> 
@@ -81,4 +83,6 @@
         <hr>
 
     </ul>
+</div>
+</nav>
 {% endblock %}
