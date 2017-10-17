@@ -1,9 +1,7 @@
 {% extends "collection_base.html" %}
 {% load i18n %}
 {% load fb_versions %}
-
 {% version model.field_name version_prefix %}
-
 {% block allcontent %}
         <div class="shop_images">
         {% for product in products %}
