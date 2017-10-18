@@ -115,6 +115,9 @@ if ($(".hasitems")[0]){
     $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff0000"}) 
 } 
 
+if($('#nosize')) {
+    console.log("there are size here"); 
+}
 
 var counter = 0;
 
