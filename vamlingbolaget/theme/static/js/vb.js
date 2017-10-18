@@ -127,7 +127,7 @@ if($('#nosize')[0]) {
     var thetargetsize = $(sellec); 
 
     console.log(thetargetsize.length, thetargetsize); 
-    thetargetsize.addClass( "size_active active" ); 
+    thetargetsize.addClass( "active" ); 
 
     $("#size").val(allsizes[some_size].id);  
 } 
