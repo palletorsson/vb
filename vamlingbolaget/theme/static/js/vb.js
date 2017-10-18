@@ -120,7 +120,7 @@ if($('#nosize')[0]) {
     allsizes = $(".select_size"); 
     allsizes.each(function( value, index ) {
         console.log("---", value, index)
-    }
+    }); 
 } 
 
 var counter = 0;
