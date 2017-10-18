@@ -126,8 +126,8 @@ if($('#nosize')[0]) {
     $thetargetsize.addClass('size_active');
     $thetargetsize.addClass('active');
     var sizeval = $("#size"); 
-    $sizeval.val(allsizes[some_size].id);  
-    
+    sizeval.val(allsizes[some_size].id);  
+
 } 
 
 
