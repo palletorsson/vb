@@ -126,8 +126,7 @@ if($('#nosize')[0]) {
     }); 
     var addactive = $("#"+allsizes[some_size].id); 
     console.log(addactive)
-    addactive.addClass("active"); 
-    addactive.addClass("size_active")
+    addactive.addClass("active size_active"); 
     var sizeinputvalue = $("#size"); 
     console.log(sizeinputvalue)
     sizeinputvalue.val(allsizes[some_size].id)
