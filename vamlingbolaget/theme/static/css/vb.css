@@ -93,6 +93,8 @@ line-height: 1em;
   }
 
 
+.nav, a { font-weight: bold; }
+
   .nav {
     color: #ef7c43 ;
   }
