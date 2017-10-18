@@ -217,7 +217,7 @@ font-size: 0.9em;
   }
 
   .spanfullscreen {
-    padding-top: 49px;
+    padding-top: 49px !important;
   }
 
   .navbar-static-top .container,
