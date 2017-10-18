@@ -120,10 +120,10 @@ if($('#nosize')[0]) {
     var some_size = Math.floor(allsizes.length/2)-1; 
     if (some_size < 0) { some_size = 0; }
     console.log(allsizes[some_size].id)
-    var thetargetsize = $("#"+allsizes[some_size].id)[0]; 
+    var thetargetsize = $("#"+allsizes[some_size].id); 
 
     console.log(thetargetsize.length, thetargetsize[0], thetargetsize[1] ); 
-    $(thetargetsize).addClass( "select_size size_active active" ); 
+    $(thetargetsize).addClass( "size_active active" ); 
 
     $("#size").val(allsizes[some_size].id);  
 } 
