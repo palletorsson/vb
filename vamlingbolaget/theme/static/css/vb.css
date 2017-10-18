@@ -45,7 +45,7 @@ body html {
   width:100%;
 }
 .artname {
-  text-decoration: none !important; 
+  font-weight: normal !important; 
 }
 /* menu Logo vamlingoblaget  */
 .leftside {
