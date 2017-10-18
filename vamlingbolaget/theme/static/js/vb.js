@@ -122,7 +122,9 @@ if($('#nosize')[0]) {
     console.log(allsizes[some_size].id)
     $(this).addClass('classOne');
     //$(this)[some_size].addClass( "size_active active" ); 
-    var thetargetsize = $(".select_size#"+allsizes[some_size].id); 
+    var sellec = "#"+allsizes[some_size].id+".select_size"; 
+    console.llg(sellec)
+    var thetargetsize = $(sellec); 
 
     console.log(thetargetsize.length, thetargetsize); 
     thetargetsize.addClass( "size_active active" ); 
