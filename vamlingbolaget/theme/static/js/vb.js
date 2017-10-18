@@ -122,8 +122,8 @@ if($('#nosize')[0]) {
     console.log(allsizes[some_size].id)
     var thetargetsize = $("li #"+allsizes[some_size].id); 
 
-    console.log(thetargetsize.length, thetargetsize[0], thetargetsize ); 
-    $(thetargetsize).addClass( "size_active active" ); 
+    console.log(thetargetsize.length, thetargetsize); 
+    thetargetsize.addClass( "size_active active" ); 
 
     $("#size").val(allsizes[some_size].id);  
 } 
