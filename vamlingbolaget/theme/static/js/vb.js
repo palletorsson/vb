@@ -128,6 +128,8 @@ if($('#nosize')[0]) {
         }
 
     }); 
+  
+    var sizeval = $("#size"); 
     sizeval.val(allsizes[some_size].id);  
 
 } 
