@@ -126,10 +126,11 @@ line-height: 1em;
 
  .orange {
     color: #ff6900 !important;
-  }
+  }a
   .btn {
     font-size: 12px;
   }
+
   .btn-default {
       border-color: #ef7c43 !important;
       color: #ff6900 !important;
@@ -179,7 +180,7 @@ line-height: 1em;
   }
   .coll_menu_ul > li > a {
     font-size: 0.9em;
-    text-transform: capitalize  !important;
+    text-transform: capitalize !important;
     font-weight: bold; 
 
   }
@@ -190,7 +191,7 @@ font-size: 0.9em;
   .navbar-inner {
 
       background-color: white;
-      background-image: noƒ‹ne;
+  
 
   }
   .container_first {
@@ -231,7 +232,7 @@ font-size: 0.9em;
   }
 
   li  {list-style-type: none;  }
-  .nav > li > a:hover { color: #ff0c1c; }
+  .nav > li > a:hover { color: #ff6900; }
   .nav .nav-collapse {
   text-transform: uppercase;
   }
