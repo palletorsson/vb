@@ -128,7 +128,8 @@ if($('#nosize')[0]) {
 
     console.log(thetargetsize.length, thetargetsize); 
     thetargetsize.addClass( "active" ); 
-
+$thetargetsize.addClass('size_active');
+            $thetargetsize.addClass('active');
     $("#size").val(allsizes[some_size].id);  
 } 
 
