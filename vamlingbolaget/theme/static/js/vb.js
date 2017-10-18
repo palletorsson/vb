@@ -123,7 +123,7 @@ if($('#nosize')[0]) {
     allsizes.each(function( value, index ) {
         console.log(this, allsizes[some_size].id)
         if (this.id == parseInt(allsizes[some_size].id)) {
-            this.addClass('size_active active'); 
+            $(this).addClass('size_active active'); 
             console.log(this, allsizes[some_size].id)
         }
 
