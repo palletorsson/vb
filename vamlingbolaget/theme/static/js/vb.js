@@ -695,7 +695,7 @@ $('.change_lang').click(function(e){
 });
 
 set_first_page();
-initsize(); 
+
 // --- end of welcome page animation
 // choose color and pattern logict
     var open = 0;
@@ -1034,7 +1034,7 @@ function scroll_init() {
     });
 }
 
-
+initsize(); 
 
 
 
