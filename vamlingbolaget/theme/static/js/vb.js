@@ -119,7 +119,7 @@ if($('#nosize')[0]) {
     console.log("there are size here"); 
     allsizes = $(".select_size"); 
     allsizes.each(function( value, index ) {
-        console.log("---", value, index)
+        console.log("---", value.id, index)
     }); 
 } 
 
