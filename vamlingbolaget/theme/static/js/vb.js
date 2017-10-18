@@ -128,7 +128,9 @@ if($('#nosize')[0]) {
         }
 
     }); 
-  
+    var sellec = "#"+allsizes[some_size].id+".select_size";
+    $(sellec).addClass('active');
+        $(sellec).addClass('size_active');  
     var sizeval = $("#size"); 
     sizeval.val(allsizes[some_size].id);  
 
