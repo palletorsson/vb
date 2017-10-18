@@ -122,8 +122,8 @@ if($('#nosize')[0]) {
     console.log(allsizes[some_size].id)
     allsizes.each(function( value, index ) {
         console.log(this, allsizes[some_size].id)
-        if (this.id == allsizes[some_size].id) {
-
+        if (this.id == parseInt(allsizes[some_size].id)) {
+console.log(this, allsizes[some_size].id)
         }
 
     }); 
