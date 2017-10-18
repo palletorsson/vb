@@ -115,26 +115,28 @@ if ($(".hasitems")[0]){
     $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff0000"}) 
 } 
 
-if($('#nosize')[0]) {
-    var allsizes = $(".select_size"); 
-    var some_size = Math.floor(allsizes.length/2)-1; 
-    if (some_size < 0) { some_size = 0; }
-    console.log(allsizes[some_size].id)
- 
-    allsizes.each(function( value, index ) {
-        if (this.id == parseInt(allsizes[some_size].id)) {
-            $(this).addClass('size_active active'); 
-            console.log(this, allsizes[some_size].id); 
-        }
+var initsize = function(){
+    if($('#nosize')[0]) {
+        var allsizes = $(".select_size"); 
+        var some_size = Math.floor(allsizes.length/2)-1; 
+        if (some_size < 0) { some_size = 0; }
+        console.log(allsizes[some_size].id)
+     
+        allsizes.each(function( value, index ) {
+            if (this.id == parseInt(allsizes[some_size].id)) {
+                $(this).addClass('size_active active'); 
+                console.log(this, allsizes[some_size].id); 
+            }
 
-    }); 
-    var sellec = "#"+allsizes[some_size].id+".select_size";
-    $(sellec).addClass('active');
-        $(sellec).addClass('size_active');  
-    var sizeval = $("#size"); 
-    sizeval.val(allsizes[some_size].id);  
+        }); 
+        var sellec = "#"+allsizes[some_size].id+".select_size";
+        $(sellec).addClass('active');
+            $(sellec).addClass('size_active');  
+        var sizeval = $("#size"); 
+        sizeval.val(allsizes[some_size].id);  
 
-} 
+    } 
+}; 
 
 
 var counter = 0;
@@ -693,7 +695,7 @@ $('.change_lang').click(function(e){
 });
 
 set_first_page();
-
+initsize(); 
 // --- end of welcome page animation
 // choose color and pattern logict
     var open = 0;
