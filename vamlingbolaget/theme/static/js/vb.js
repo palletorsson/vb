@@ -120,7 +120,8 @@ if($('#nosize')[0]) {
     var allsizes = $(".select_size"); 
     var some_size = Math.floor(allsizes.length/2)-1; 
     if (some_size < 0) { some_size = 0; }
-    $("#"+allsizes[some_size].id).addClass("active size_active"); 
+    console.log(allsizes[some_size].id)
+    $("#"+allsizes[some_size].id).addClass( "selected highlight" );
     $("#size").val(allsizes[some_size].id);  
 } 
 
