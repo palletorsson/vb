@@ -117,14 +117,20 @@ if ($(".hasitems")[0]){
 
 if($('#nosize')[0]) {
     console.log("there are size here"); 
-    allsizes = $(".select_size"); 
-    some_size = Math.floor(allsizes.length/2)-1; 
+    var allsizes = $(".select_size"); 
+    var some_size = Math.floor(allsizes.length/2)-1; 
+    if (some_size < 0) { some_size = 0; }
     console.log(some_size, allsizes[some_size].id); 
     allsizes.each(function( value, index ) {
         console.log("---",  this.id , value, index)
     }); 
-
+    var addactive = $("#"+allsizes[some_size].id); 
+    addactive.addClass("active"); 
+    addactive.addClass("size_active")
+    var sizeinputvalue = $("#size"); 
+    sizeinputvalue.val(allsizes[some_size].id)
 } 
+
 
 var counter = 0;
 
