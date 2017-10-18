@@ -9,8 +9,8 @@
 
     <h1> ... Ingen rea just nu  ... </h1>
     {% else %}
-    <hr>
 
+{% paginate products %}
         {% for product in products %}
              <div class="collection_list img_container" >
                 <a href="/products/rea/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
@@ -32,6 +32,26 @@
                 </a>
             </div>
         {% endfor %}
+<div>
+
+
+<nav  class="page_num">
+  <ul class="pagination"><li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li>
+ {% show_pages %} 
+ <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+ </ul>
+</nav>
+</div>
 {% endblock %}
 
 
