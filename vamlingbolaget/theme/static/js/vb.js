@@ -121,16 +121,13 @@ if($('#nosize')[0]) {
     if (some_size < 0) { some_size = 0; }
     console.log(allsizes[some_size].id)
     $(this).addClass('classOne');
-    //$(this)[some_size].addClass( "size_active active" ); 
-    var sellec = "#"+allsizes[some_size].id+".select_size"; 
-    console.log(sellec)
-    var thetargetsize = $(sellec).addClass( "active" ); 
-
-    console.log(thetargetsize.length, thetargetsize); 
-    thetargetsize.addClass( "active" ); 
-$thetargetsize.addClass('size_active');
-            $thetargetsize.addClass('active');
-    $("#size").val(allsizes[some_size].id);  
+    var sellec = "#"+allsizes[some_size].id+".select_size";
+    var thetargetsize = $(sellec); 
+    $thetargetsize.addClass('size_active');
+    $thetargetsize.addClass('active');
+    var sizeval = $("#size"); 
+    $sizeval.val(allsizes[some_size].id);  
+    
 } 
 
 
