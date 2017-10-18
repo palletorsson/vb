@@ -120,16 +120,8 @@ if($('#nosize')[0]) {
     var allsizes = $(".select_size"); 
     var some_size = Math.floor(allsizes.length/2)-1; 
     if (some_size < 0) { some_size = 0; }
-    console.log(some_size, allsizes[some_size].id); 
-    allsizes.each(function( value, index ) {
-        console.log("---",  this.id , value, index)
-    }); 
-    var addactive = $("#"+allsizes[some_size].id); 
-    console.log(addactive)
-    addactive.addClass("active size_active"); 
-    var sizeinputvalue = $("#size"); 
-    console.log(sizeinputvalue)
-    sizeinputvalue.val(allsizes[some_size].id)
+    $("#"+allsizes[some_size].id).addClass("active size_active"); 
+    $("#size").val(allsizes[some_size].id);  
 } 
 
 
