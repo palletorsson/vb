@@ -216,6 +216,11 @@ font-size: 0.9em;
      min-height: 800px;
   }
 
+  .spanfullscreen {
+    margin-left: 3px;
+    margin-right:0px;
+  }
+
   .navbar-static-top .container,
   .navbar-fixed-top .container,
   .navbar-fixed-bottom .container {
