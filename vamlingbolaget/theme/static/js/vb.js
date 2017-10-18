@@ -120,8 +120,8 @@ if($('#nosize')[0]) {
     var some_size = Math.floor(allsizes.length/2)-1; 
     if (some_size < 0) { some_size = 0; }
     console.log(allsizes[some_size].id)
-    $("#"+allsizes[some_size].id).addClass( " active " );
-    $("#"+allsizes[some_size].id).addClass( " size_active " );
+    $("#"+allsizes[some_size].id).removeClass( "select_size" ).addClass( "select_size size_active active" ); 
+
     $("#size").val(allsizes[some_size].id);  
 } 
 
