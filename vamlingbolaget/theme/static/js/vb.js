@@ -121,6 +121,7 @@ if($('#nosize')[0]) {
     if (some_size < 0) { some_size = 0; }
     console.log(allsizes[some_size].id)
     $("#"+allsizes[some_size].id).addClass( "size_active active" );
+    $("#"+allsizes[some_size].id).addClass( "selected highlight" );
     $("#size").val(allsizes[some_size].id);  
 } 
 
