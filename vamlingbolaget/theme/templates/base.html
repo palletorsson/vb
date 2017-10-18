@@ -127,6 +127,7 @@
             </div>
         </div>
     </div>
+    {% block superstretchpage %}
     <div class="container content"> <!--this is for the left margin -->
     {% block stretchpage %}
         <div id="changetext"></div>
@@ -149,6 +150,7 @@
         {% endblock %}
     {% endblock %}
     </div>
+      {% endblock %}
     {% block footer %}
         <footer>
            {% include "footer.html" %}
