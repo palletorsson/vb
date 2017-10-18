@@ -4,7 +4,7 @@
 {% version model.field_name version_prefix %}
 
 {% block allcontent %}
-        <div class="container">
+        <div class="shop_images">
         {% for product in products %}
              <div class="collection_list img_container" >
                 <a href="/products/fullvariation/{{product.pk}}/#{{ product.variation.article.name }} {% trans "i" %} {{ product.variation.color|lower }} {{ product.pattern|lower }}">
