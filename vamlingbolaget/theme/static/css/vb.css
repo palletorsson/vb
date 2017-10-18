@@ -47,6 +47,7 @@ body html {
 .artname {
   font-weight: normal !important; 
 }
+
 /* menu Logo vamlingoblaget  */
 .leftside {
   width: 400px;
@@ -126,7 +127,9 @@ line-height: 1em;
  .orange {
     color: #ff6900 !important;
   }
-
+  .btn {
+    font-size: 12px;
+  }
   .btn-default {
       border-color: #ef7c43 !important;
       color: #ff6900 !important;
