@@ -115,9 +115,13 @@ if ($(".hasitems")[0]){
     $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff0000"}) 
 } 
 
-if($('#nosize')) {
+if($('#nosize')[0]) {
     console.log("there are size here"); 
-}
+    allsizes = $(".select_size"); 
+    allsizes.each(function( value, index ) {
+        console.log("---", value, index)
+    }
+} 
 
 var counter = 0;
 
@@ -717,41 +721,34 @@ set_first_page();
     });
 
     $(".select_size").click(function(e) {
+        e.stopPropagation();
+        var size_id = this.id; 
+        var ok = $('input[name="size"]').val(size_id);;
+        $('.select_size').removeClass('size_active');
+        $('.select_size').removeClass('active');
+        $('.size_active').removeClass('size_active');
+        $('.active').removeClass('active');
+        $(".remove_on_size").remove();
+        var $this = $(this);
 
-      e.stopPropagation();
-      var size_id = this.id; 
-      var ok = $('input[name="size"]').val(size_id);;
-      var re_m = 
-	  $('.select_size').removeClass('size_active');
-      $('.select_size').removeClass('active');
-      $('.size_active').removeClass('size_active');
-      $('.active').removeClass('active');
-      $(".remove_on_size").remove();
-      var $this = $(this);
-      console.log($this.a); 
+        if (!$this.hasClass('size_active')) {
+            $this.addClass('size_active');
+            $this.addClass('active');
+        }
 
-    if (!$this.hasClass('size_active')) {
+        var a = $this.data('size'); 
 
-        $this.addClass('size_active');
-        $this.addClass('active');
-
-
-    }
-
-    var a = $this.data('size'); 
-    if (a < 1) {
+        if (a < 1) {
 
             $('.stock_text_no').removeClass('hidden');
             $('.stock_text_yes').addClass('hidden');
-    } else if (a == 'none') {
-        console.log(a)
-    } else {
-        $('.stock_text_yes').removeClass('hidden');
-        $('.stock_text_no').addClass('hidden');
-    }
-
-
-    e.preventDefault();
+        } else if (a == 'none') {
+            console.log(a)
+        } else {
+            $('.stock_text_yes').removeClass('hidden');
+            $('.stock_text_no').addClass('hidden');
+        }
+        e.preventDefault();
     });
 
     $(".select_quantity").click(function(e) {
