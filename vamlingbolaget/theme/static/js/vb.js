@@ -116,12 +116,11 @@ if ($(".hasitems")[0]){
 } 
 
 if($('#nosize')[0]) {
-    console.log("there are size here"); 
     var allsizes = $(".select_size"); 
     var some_size = Math.floor(allsizes.length/2)-1; 
     if (some_size < 0) { some_size = 0; }
     console.log(allsizes[some_size].id)
-    $("#"+allsizes[some_size].id).addClass( "selected highlight" );
+    $("#"+allsizes[some_size].id).addClass( "size_active active" );
     $("#size").val(allsizes[some_size].id);  
 } 
 
