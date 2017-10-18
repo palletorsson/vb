@@ -217,8 +217,7 @@ font-size: 0.9em;
   }
 
   .spanfullscreen {
-      margin-left: -33.33%;
-  margin-right: -33.33%;
+    padding-top: 49px;
   }
 
   .navbar-static-top .container,
