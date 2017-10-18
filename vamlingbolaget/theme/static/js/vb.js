@@ -120,6 +120,12 @@ if($('#nosize')[0]) {
     var some_size = Math.floor(allsizes.length/2)-1; 
     if (some_size < 0) { some_size = 0; }
     console.log(allsizes[some_size].id)
+    allsizes.each(function( value, index ) {
+        if (this.id == allsizes[some_size].id) {
+            console.log(this, allsizes[some_size].id)
+        }
+
+    }); 
     var sellec = "#"+allsizes[some_size].id+".select_size";
     $(sellec).addClass('active');
         $(sellec).addClass('size_active');  
