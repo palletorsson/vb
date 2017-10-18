@@ -127,7 +127,9 @@
             </div>
         </div>
     </div>
-    <div class="content"> <!--this is for the left margin -->
+    <div class="container"> <!--this is for the left margin -->
+    {% block stretchpage %}
+      <div class="content">
     {% block stretchpage %}
         <div id="changetext"></div>
         <div class="pagetitle">
@@ -147,6 +149,8 @@
                 {% endblock %}
             </div>
         {% endblock %}
+      {% endblock %}
+      </div>
     {% endblock %}
     </div>
     {% block footer %}
