@@ -44,7 +44,9 @@ body html {
 .mobile_image {
   width:100%;
 }
-
+.artname {
+  text-decoration: none !important; 
+}
 /* menu Logo vamlingoblaget  */
 .leftside {
   width: 400px;
@@ -96,7 +98,7 @@ line-height: 1em;
 .nav, a { font-weight: bold; }
 
   .nav {
-    color: #ef7c43 ;
+    color: #ff6900;
   }
 
 .article_background {
@@ -118,16 +120,17 @@ line-height: 1em;
 	}
 	
   .orange > li {
-    color: #ef7c43 !important;
+    color: #ff6900 !important;
   }
 
  .orange {
-    color: #ef7c43 !important;
+    color: #ff6900 !important;
   }
 
   .btn-default {
       border-color: #ef7c43 !important;
-      color: #ef7c43 !important;
+      color: #ff6900 !important;
+      font-size: 12px;
   }
 
 	.nav > li > a {
@@ -255,7 +258,7 @@ font-size: 0.9em;
   }
 
 .navbar .nav > li > a {
-color: #ef7c43; 
+color: #ff6900; 
 text-shadow: 0 1px 0 #eeeeee;
 }
 
@@ -333,7 +336,7 @@ text-shadow: 0 1px 0 #eeeeee;
 }
 
 .size_active {
-   color: #ef7c43; 
+   color: #ff6900; 
    text-decoration: underline; 
 }
 
@@ -624,7 +627,7 @@ margin-right: -49px;
 }
 
 .size_active {
-   color:red; 
+   color:#ff6900; 
    text-decoration: underline; 
 }
 
