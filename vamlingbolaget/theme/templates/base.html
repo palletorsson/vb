@@ -128,29 +128,28 @@
         </div>
     </div>
     {% block superstretchpage %}
-      <div class="container content"> <!--this is for the left margin -->
-      {% block stretchpage %}
-        <div id="changetext"></div>
-        <div class="pagetitle">
-        {% block pagetitle %} {% endblock %}
-        {% block pagedesc %} {% endblock %}
-        </div>
-
-        {% block shopmenu %} {% endblock %}
-
-        {% block allcontent %}
-            <div class="span2">
-              {% block sidebar %} {% endblock %}
+    <div class="container content"> <!--this is for the left margin -->
+        {% block stretchpage %}
+            <div id="changetext"></div>
+            <div class="pagetitle">
+            {% block pagetitle %} {% endblock %}
+            {% block pagedesc %} {% endblock %}
             </div>
-            <div class="span9">
-                {% block content %}
-                    FEATURED COLLECTION
-                {% endblock %}
-            </div>
-        {% endblock %}
-      {% endblock %}
-      </div>
-    {% endblock %}
+
+            {% block shopmenu %} {% endblock %}
+
+            {% block allcontent %}
+                <div class="span2">
+                {% block sidebar %} {% endblock %}
+                </div>
+                <div class="span9">
+                {% block content %} {% endblock %}
+                </div>
+            {% endblock %} <!-- end allcontent -->
+        {% endblock %} <!-- end stretchpage -->
+    </div>
+    {% endblock %}  <!-- end superstretchpage -->
+
     {% block footer %}
         <footer>
            {% include "footer.html" %}
