@@ -345,8 +345,17 @@
   		font-size: 12px;        
 
 	}
-.lb-outerContainer {
-	width: 100%; height: auto;
-}
+	.lb-outerContainer {
+		width: 100%; height: auto;
+	}
+
+	.images_container {
+	    position: relative;
+	    display: block;
+	    padding: 5px 7px;
+	    margin-bottom: -1px;
+	    background-color: #ffffff;
+	    border: 1px solid #dddddd;
+	}
 
 }
