@@ -127,9 +127,12 @@ line-height: 1em;
  .orange {
     color: #ff6900 !important;
   }a
+
   .btn {
-    font-size: 12px;
+    font-size: 12px !important;
+    font-weight: bold !important;
   }
+
 
   .btn-default {
       border-color: #ef7c43 !important;
