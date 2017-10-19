@@ -1,5 +1,7 @@
 
-
+@media (min-width: 768px) {
+    margin-left: -7px;
+}
 
 
 @media (min-width: 1200px) {
@@ -7,7 +9,6 @@
 	  width: 120px;
 	}
 }
-
 
 
 
