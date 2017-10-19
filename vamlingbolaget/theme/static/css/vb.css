@@ -668,7 +668,6 @@ img.pattern_color_image {
 .color_and_pattern_choose {
  overflow-y: scroll;
  height:277px;
- padding-left: 39px;
 }
 .floating {
  float:right;
@@ -891,12 +890,12 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
 
 .pulldown {
   padding-top: 7px;
-  padding-left: 160px; 
+  padding-left: 140px; 
 }
 
 .pulldown_cod {
   padding-top: 23px;
-  padding-left: 160px; 
+  padding-left: 140px; 
 }
 
 .image_button {
