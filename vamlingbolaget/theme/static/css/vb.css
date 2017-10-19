@@ -133,6 +133,11 @@ line-height: 1em;
     font-weight: bold !important;
   }
 
+  .forcebtn {
+    font-size: 12px !important;
+    font-weight: bold !important;
+  }
+
 
   .btn-default {
       border-color: #ef7c43 !important;
