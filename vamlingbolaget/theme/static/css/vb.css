@@ -663,7 +663,8 @@ img.sample{
 
 img.pattern_color_image {
     cursor:pointer;
-    width: 64px
+    width: 64px; 
+    height: 98px;
 }
 .color_and_pattern_choose {
  overflow-y: scroll;
