@@ -357,5 +357,9 @@
 	    background-color: #ffffff;
 	    border: 1px solid #dddddd;
 	}
+	.pulldown {
+    padding: 7px;
+    padding-left: 1px; 
+}
 
 }
