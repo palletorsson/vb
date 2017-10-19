@@ -166,7 +166,7 @@
 	        <input type="hidden" id="quantity" name="quantity" value="1">
 		{%else%}
 			<div> 
-			<span id="nosize" class="alert alert-danger select_size">* {% trans "Välj" %}</span>
+			<span id="nosize" class="alert alert-danger select_size">* </span>
              {% trans "Välj" %} .. |
 			 {% for size in sizes %}
 				<span  class="select_size {% if size.pk  == 3 %} size_active {%endif%}" id="{{ size.pk }}">{{ size.name }}</span>  | 
