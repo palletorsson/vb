@@ -14,7 +14,7 @@
 					<a href="/products/full"> << {% trans "Shop" %}</a> / 
 					<span> {{ product.variation.article.name }}  </span>
 				{% if product.variation.article.quality.pk == 1 %} 
-					<span class="link pull-right"><a href="/products/article/{{product.variation.pk}}"> {% trans "Välj bland fler färger och mönster" %} Cut on Demand  >> </a>   </span> 
+					<span class="link pull-right"><a href="/products/article/{{product.variation.pk}}"> <span class="hidden-xs"> {% trans "Välj bland fler färger och mönster" %} </span> Cut on Demand  >> </a>   </span> 
 				{% endif %}
 			</div> 
 		</div>		
