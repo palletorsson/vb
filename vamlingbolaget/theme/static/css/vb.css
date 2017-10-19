@@ -953,4 +953,8 @@ address {
     font-weight: normal;
 }
 
+h4, .h4 {
+    font-size: 15px;
+}
+
 
