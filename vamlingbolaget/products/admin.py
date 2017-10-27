@@ -31,7 +31,7 @@ class FullVariationAdmin(admin.ModelAdmin):
     list_display = ('active', 'variation', 'size', 'order', 'stock',)
     list_editable = ('active', 'stock',)
     list_display_links = ('variation',)
-    list_filter = ('variation', 'size',)
+    list_filter = ('variation', 'size', 'variation.article.category')
     search_fields = ['variation']
     list_per_page = 20
     ordering = ['variation']
