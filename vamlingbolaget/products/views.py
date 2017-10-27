@@ -986,7 +986,7 @@ def readCsvOnlyCheck(request):
                         filefails.append(image)
 
 
-                check = unicode(article) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size) + "  " + unicode(full_article_sku)
+                check = str(article) + " " + str(pattern) + " " + str(color) + " " + str(size) + "  " + str(full_article_sku) + " --  " + str(sepatated_values[0])
                 articles.append(check)
                 images.append(image)
 
