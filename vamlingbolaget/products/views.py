@@ -334,8 +334,6 @@ def articleDetail(request, pk):
     try:
         product = Article.objects.get(pk=pk)
         products = FullVariation.objects.filter(variation__article=product, size='3840', active=True)
-        print "--"
-        print products
 
         for full_var in products: 
             color_pattern_str = str(full_var.variation.color.order)+"f_"+str(full_var.variation.pattern.order)+"m"
@@ -346,26 +344,30 @@ def articleDetail(request, pk):
             filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order) 
             file = "/media/variations/"+ filename +"_1.jpg"  
             full_var.image = file   
-        print "---"
+        
         qualities = Quality.objects.filter(active = True)
-        print qualities
-
         types = Type.objects.filter(active = True)
-        print "--_-"
         colors = Color.objects.filter(active=True, quality = product.quality)
         patterns = Pattern.objects.filter(active=True, quality = product.quality)
-        print "----"
+
         if (product.quality.order == 13):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
             sizes = Size.objects.filter(quality=product.quality).order_by('-pk')
-        print "______"
-
-        if (product.quality.order == 5 or product.quality.order == 14) :
+        copa_res = []
+        if (product.quality.order == 5 or product.quality.order == 14):
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.quality)
         
+        for copa in colorsandpattern: 
+            splited = copa.name.split("&")
+            if splited.length > 1: 
+                print "-"
+            else: 
+                copa_res.append(item)
+
+
      
     except:
         raise Http404 
@@ -386,7 +388,7 @@ def articleDetail(request, pk):
                    'qualities': qualities,
                    'types': types,
                    'products': products,
-                   'colorsandpattern': colorsandpattern,
+                   'colorsandpattern': copa_res,
                    },
                    context_instance=RequestContext(request)
                    )
