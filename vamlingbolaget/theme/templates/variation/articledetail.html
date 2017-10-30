@@ -106,7 +106,7 @@
 			<input type="hidden" id="size" name="size" value="3" >
 	    	<input type="hidden" id="quantity" name="quantity" value="1" >		
 			<input type="hidden" id="add_or_edit" name="add" value="add" > 
-			<span class="hidden" id="sku_number">{{ product.article.sku_number }}</span>
+			<span class="hidden" id="sku_number">{{ product.sku_number }}</span>
 		</div>
 		<div class="span7">
 			<div class="span2">
@@ -125,10 +125,10 @@
 		</div> <!-- end span7 -->
 			<div class="span7">
 				<hr>
-				{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.article.sku_number }}	 - {{ product.article.description }}
+				{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.sku_number }}	 - {{ product.description }}
 				<hr>
-				<span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }} </span> : 
-							<span> {{ product.article.quality.description }} </span>
+				<span class="quality" id="{{ product.quality }}">{{ product.quality }} </span> : 
+							<span> {{ product.quality.description }} </span>
 				<hr>
 			</div>
 		</div> <!-- end span12 -->
