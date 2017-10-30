@@ -17,10 +17,10 @@
                 {%if product.quality.order > 15 or product.quality.order == 2   %} 
                     <div class="force_image"> <img src="media/{{ product.file }}" class="lazy" alt="Vamlingbolaget {{ product.name }}"  />
                 {%else%}
-                    <div class="force_image"> <img src="/media/{{ product.file }}" class="lazy" alt="Vamlingbolaget {{ product.name }}"  />
+                    <div class="force_image image_force_art"> <img src="/media/{{ product.file }}" class="lazy" alt="Vamlingbolaget {{ product.name }}"  />
                 {%endif%}
                     </div>
-                <div class='image_description image_description_art'>
+                <div class='image_description'>
                    <span class="artname"> {{ product.name }}</span><br/>
                     {%if product.discount %}
                         <span class="discount"> {{ product.f_discount }} </span> (<span style="text-decoration: line-through;">{{ product.price }} </span>) SEK

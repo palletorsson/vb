@@ -390,8 +390,8 @@ text-shadow: 0 1px 0 #eeeeee;
 	overflow: hidden
 }
 
-.image_description_art {
-  margin-top: -12px;
+.image_force_art {
+  height: 360px; 
 }
 
 .articlehead {
