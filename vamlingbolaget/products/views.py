@@ -373,7 +373,7 @@ def articleDetail(request, pk):
     copa_res = []
     for copa in colorsandpattern: 
         splited = copa.name.split("&")
-        if splited.length > 1: 
+        if len(splited) > 1: 
             print "-"
         else: 
             copa_res.append(copa)
