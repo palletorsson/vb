@@ -1288,7 +1288,44 @@ def orderCsv(request):
                             print "no such size"
                         print fullvar
                 except:
-                    print "knas"
+                    print "error"
+
+
+    return HttpResponse(status=200)
+@login_required
+def setfullstockCsv(request):
+    input_file = './modeller.csv'
+
+    # open file and sepate values 
+    with open(input_file, 'r') as i:
+
+        for line in i:
+            sepatated_values = line.split(",")
+            if sepatated_values[0] != '': 
+                art_and_partner = sepatated_values[0] 
+                splitart = art_and_partner.split("_")
+
+                try: 
+                    print variation 
+                    print art_and_partner, splitart, order
+                    article = Article.objects.get(sku_number=splitart[0])
+                    pattern = Pattern.objects.get(order=splitart[1])
+                    color = Color.objects.get(order=splitart[2])
+                    variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+                    fullvar = FullVariation.objects.get(variation=variation, size=splitart[3])
+                    for size in sizes: 
+                         
+                        try:
+                            fullvar = FullVariation.objects.get(variation=variation, size=size)
+                            fullvar.stock = sepatated_values[2]
+                            print "it worked"
+                            #fullvar.save()
+                        except:
+                            print "no such size"
+          
+
+                except:
+                    print "error"
 
 
     return HttpResponse(status=200)
