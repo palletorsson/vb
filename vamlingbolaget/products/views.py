@@ -371,14 +371,18 @@ def articleDetail(request, pk):
         raise Http404 
 
     copa_res = []
+    ziper = []
     for copa in colorsandpattern: 
         splited = copa.name.split("&")
         if len(splited) > 1: 
             print "-"
+            ziper.append(copa)
         else: 
             copa_res.append(copa)
             print "+"
-    print copa_res
+    
+    if product.id = 12:
+         copa_res = ziper
 
     return render_to_response('variation/articledetail.html',
                    {
