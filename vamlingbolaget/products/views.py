@@ -1313,6 +1313,7 @@ def setfullstockCsv(request):
                     print variation 
                     fullvar = FullVariation.objects.get(variation=variation, size=splitart[3])
                     fullvar.stock = sepatated_values[2]
+                    fullvar.save()
                     print "it worked"
                 except:
                     print "error"
