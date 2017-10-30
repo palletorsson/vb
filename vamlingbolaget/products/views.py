@@ -1311,8 +1311,10 @@ def setfullstockCsv(request):
                     color = Color.objects.get(order=splitart[2])
                     variation = Variation.objects.get(article=article, pattern=pattern, color=color)
                     print variation 
+                    print splitart[3]
                     fullvar = FullVariation.objects.get(variation=variation, size=splitart[3])
                     fullvar.stock = sepatated_values[2]
+                    print sepatated_values[2]
                     fullvar.save()
                     print "it worked"
                 except:
