@@ -334,7 +334,7 @@ def articleDetail(request, pk):
     try:
         product = Article.objects.get(pk=pk)
         print product
-        products = FullVariation.objects.filter(variation__article=article, size='3840', active=True)
+        products = FullVariation.objects.filter(variation__article=product, size='3840', active=True)
         print "--"
         print products
 
