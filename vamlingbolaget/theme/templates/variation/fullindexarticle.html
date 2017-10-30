@@ -9,23 +9,23 @@
 
     {% for product in products %}
          <div class="collection_list img_container" >
-            <a href="/products/article/{{ product.variation.pk }}/#{{ product.variation.article.name }} {% trans "i" %} {{ product.variation.color|lower }} {{ product.pattern|lower }}"> 
+            <a href="/products/article/{{ product.pk }}/"> 
                 <div class="ribbon ribbonl">
                     <div class="ribbonlist">Cut On Demand</div>
                 </div>
-                <span class="hidden">{{ product.variation.article.quality }}</span>
-                {%if product.variation.article.quality.order > 15 or product.variation.article.quality.order == 2   %} 
-                    <div class="force_image"> <img src="media/{{ product.variation.article.file }}" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
+                <span class="hidden">{{ product.quality }}</span>
+                {%if product.quality.order > 15 or product.quality.order == 2   %} 
+                    <div class="force_image"> <img src="media/{{ product.file }}" class="lazy" alt="Vamlingbolaget {{ product.name }}"  />
                 {%else%}
-                    <div class="force_image"> <img src="/media/{{ product.variation.article.file }}" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
+                    <div class="force_image"> <img src="/media/{{ product.file }}" class="lazy" alt="Vamlingbolaget {{ product.name }}"  />
                 {%endif%}
                     </div>
                 <div class='image_description'>
-                   <span class="artname"> {{ product.variation.article.name }}</span><br/>
-                    {%if product.variation.article.discount %}
-                        <span class="discount"> {{ product.variation.article.f_discount }} </span> (<span style="text-decoration: line-through;">{{ product.variation.article.price }} </span>) SEK
+                   <span class="artname"> {{ product.name }}</span><br/>
+                    {%if product.discount %}
+                        <span class="discount"> {{ product.f_discount }} </span> (<span style="text-decoration: line-through;">{{ product.price }} </span>) SEK
                     {%else%}
-                        <span class="price">{{ product.variation.article.price }} SEK</span>
+                        <span class="price">{{ product.price }} SEK</span>
                     {%endif%}
                 </div>
                 <hr>          
