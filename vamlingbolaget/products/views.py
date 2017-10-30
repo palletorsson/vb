@@ -333,7 +333,9 @@ def detail(request, pk):
 def articleDetail(request, pk):
     try:
         product = Article.objects.get(pk=pk)
+        print product
         products = FullVariation.objects.filter(variation__article=article, size='3840')
+        print products
 
         for full_var in products: 
             color_pattern_str = str(full_var.variation.color.order)+"f_"+str(full_var.variation.pattern.order)+"m"
