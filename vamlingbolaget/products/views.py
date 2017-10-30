@@ -365,7 +365,7 @@ def articleDetail(request, pk):
             if splited.length > 1: 
                 print "-"
             else: 
-                copa_res.append(item)
+                copa_res.append(copa)
 
 
      
