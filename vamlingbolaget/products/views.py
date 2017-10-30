@@ -348,9 +348,6 @@ def articleDetail(request, pk):
             file = "/media/variations/"+ filename +"_1.jpg"  
             full_var.image = file   
         print "---"
-        color_id = product.order
-        pattern_id = product.order
-        print color_id, pattern_id
         qualities = Quality.objects.filter(active = True)
 
         types = Type.objects.filter(active = True)
