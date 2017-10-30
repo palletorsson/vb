@@ -390,7 +390,7 @@ def articleDetail(request, pk):
                    'qualities': qualities,
                    'types': types,
                    'products': products,
-                   'colorsandpattern': colorsandpattern,
+                   'colorsandpattern': copa_res,
                    },
                    context_instance=RequestContext(request)
                    )
