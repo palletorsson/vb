@@ -334,7 +334,8 @@ def articleDetail(request, pk):
     try:
         product = Article.objects.get(pk=pk)
         print product
-        products = FullVariation.objects.filter(variation__article=article, size='3840')
+        products = FullVariation.objects.filter(variation__article=article, size='3840', active=True)
+        print "--"
         print products
 
         for full_var in products: 
@@ -346,14 +347,14 @@ def articleDetail(request, pk):
             filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order) 
             file = "/media/variations/"+ filename +"_1.jpg"  
             full_var.image = file   
-
+        print "---"
         color_id = product.color.order
         pattern_id = product.pattern.order
         qualities = Quality.objects.filter(active = True)
         types = Type.objects.filter(active = True)
         colors = Color.objects.filter(active=True, quality = product.article.quality)
         patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
-
+        print "----"
         if (product.quality.order == 13):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
