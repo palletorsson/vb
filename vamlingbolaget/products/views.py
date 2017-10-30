@@ -354,19 +354,12 @@ def articleDetail(request, pk):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
             sizes = Size.objects.filter(quality=product.quality).order_by('-pk')
-        copa_res = []
+        
         if (product.quality.order == 5 or product.quality.order == 14):
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.quality)
         
-        for copa in colorsandpattern: 
-            splited = copa.name.split("&")
-            if splited.length > 1: 
-                print "-"
-            else: 
-                copa_res.append(copa)
-
 
      
     except:
@@ -376,7 +369,16 @@ def articleDetail(request, pk):
         images = Image.objects.filter(variation__pk=pk)
     except:
         raise Http404 
-        
+
+    copa_res = []
+    for copa in colorsandpattern: 
+        splited = copa.name.split("&")
+        if splited.length > 1: 
+            print "-"
+        else: 
+            copa_res.append(copa)
+            print "+"
+    print copa_res
 
     return render_to_response('variation/articledetail.html',
                    {
@@ -388,7 +390,7 @@ def articleDetail(request, pk):
                    'qualities': qualities,
                    'types': types,
                    'products': products,
-                   'colorsandpattern': copa_res,
+                   'colorsandpattern': colorsandpattern,
                    },
                    context_instance=RequestContext(request)
                    )
