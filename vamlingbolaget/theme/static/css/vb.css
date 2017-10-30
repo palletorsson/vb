@@ -382,12 +382,16 @@ text-shadow: 0 1px 0 #eeeeee;
 }
 
 .image_description_detail {
-    padding: 4px;
-    margin-top: 6px;
+  padding: 4px;
+  margin-top: 6px;
 	margin-left: 10px;
 	margin-bottom: 4px;
 	margin-right: 4px; 	
 	overflow: hidden
+}
+
+.image_description_art {
+  margin-top: -12px;
 }
 
 .articlehead {
