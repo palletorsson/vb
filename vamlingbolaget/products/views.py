@@ -54,7 +54,7 @@ def fullindex(request):
 
 
 def fullindexarticle(request):
-    full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__quality=1).order_by('variation__article__type', 'order') 
+    full_variation = Article.objects.filter(active='A').order_by('name')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     return render_to_response('variation/fullindexarticle.html',
