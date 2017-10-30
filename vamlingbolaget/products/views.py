@@ -350,6 +350,7 @@ def articleDetail(request, pk):
         print "---"
         color_id = product.color.order
         pattern_id = product.pattern.order
+        print color_id, pattern_id
         qualities = Quality.objects.filter(active = True)
 
         types = Type.objects.filter(active = True)
