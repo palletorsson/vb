@@ -375,12 +375,10 @@ def articleDetail(request, pk):
     for copa in colorsandpattern: 
         splited = copa.name.split("&")
         if len(splited) > 1: 
-            print "-"
             ziper.append(copa)
         else: 
             copa_res.append(copa)
-            print "+"
-    
+
     if product.id == 12:
          copa_res = ziper
 
