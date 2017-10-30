@@ -1299,6 +1299,8 @@ def orderCsv(request):
 
 
     return HttpResponse(status=200)
+
+
 @login_required
 def setfullstockCsv(request):
     input_file = './modeller.csv'
@@ -1329,6 +1331,36 @@ def setfullstockCsv(request):
                 except:
                     print "error"
 
+    return HttpResponse(status=200)
+
+@login_required
+def orderfromCsv(request):
+    input_file = './ordercsv.csv'
+
+    # open file and sepate values 
+    with open(input_file, 'r') as i:
+
+        for line in i:
+            print i 
+            sepatated_values = line.split(",")
+            print sepatated_values
+            if sepatated_values[0] != '': 
+                art_and_partner = sepatated_values[0] 
+                splitart = art_and_partner.split("_")
+                try: 
+                    print splitart
+                    article = Article.objects.get(sku_number=splitart[0])
+                    pattern = Pattern.objects.get(order=splitart[1])
+                    color = Color.objects.get(order=splitart[2])
+                    variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+                    print variation 
+                    
+                    fullvar = FullVariation.objects.get(variation=variation, size=splitart[3])
+                    fullvar.order = i + 200 
+                    
+                    print "it worked"
+                except:
+                    print "error"
 
     return HttpResponse(status=200)
 
