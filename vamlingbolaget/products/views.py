@@ -332,8 +332,8 @@ def detail(request, pk):
 
 def articleDetail(request, pk):
     try:
-        product = Variation.objects.get(pk=pk)
-        products = FullVariation.objects.filter(variation__article=product.article, size='3840')
+        product = Article.objects.get(pk=pk)
+        products = FullVariation.objects.filter(variation__article=article, size='3840')
 
         for full_var in products: 
             color_pattern_str = str(full_var.variation.color.order)+"f_"+str(full_var.variation.pattern.order)+"m"
@@ -352,16 +352,16 @@ def articleDetail(request, pk):
         colors = Color.objects.filter(active=True, quality = product.article.quality)
         patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
 
-        if (product.article.quality.order == 13):
+        if (product.quality.order == 13):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
-            sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
+            sizes = Size.objects.filter(quality=product.quality).order_by('-pk')
 
 
-        if (product.article.quality.order == 5 or product.article.quality.order == 14) :
+        if (product.quality.order == 5 or product.quality.order == 14) :
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
-            colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
+            colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.quality)
         
      
     except:
