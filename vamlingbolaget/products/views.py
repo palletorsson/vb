@@ -333,7 +333,6 @@ def detail(request, pk):
 def articleDetail(request, pk):
     try:
         product = Article.objects.get(pk=pk)
-        print product
         products = FullVariation.objects.filter(variation__article=product, size='3840', active=True)
         print "--"
         print products
@@ -349,6 +348,7 @@ def articleDetail(request, pk):
             full_var.image = file   
         print "---"
         qualities = Quality.objects.filter(active = True)
+        print qualities
 
         types = Type.objects.filter(active = True)
         print "--_-"
@@ -385,8 +385,6 @@ def articleDetail(request, pk):
                    'sizes': sizes,
                    'qualities': qualities,
                    'types': types,
-                   'color_id':color_id,
-                   'pattern_id':pattern_id,
                    'products': products,
                    'colorsandpattern': colorsandpattern,
                    },
