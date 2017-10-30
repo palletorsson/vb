@@ -381,7 +381,7 @@ def articleDetail(request, pk):
             copa_res.append(copa)
             print "+"
     
-    if product.id = 12:
+    if product.id == 12:
          copa_res = ziper
 
     return render_to_response('variation/articledetail.html',
