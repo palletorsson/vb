@@ -1302,7 +1302,7 @@ def setfullstockCsv(request):
         for line in i:
             sepatated_values = line.split(",")
             if sepatated_values[0] != '': 
-                art_and_partner = sepatated_values[0] 
+                art_and_partner = sepatated_values[1] 
                 splitart = art_and_partner.split("_")
                 try: 
                     print art_and_partner, splitart
