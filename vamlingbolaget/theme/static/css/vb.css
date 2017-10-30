@@ -391,7 +391,7 @@ text-shadow: 0 1px 0 #eeeeee;
 }
 
 .image_force_art {
-  height: 360px; 
+  height: 360px !important; 
 }
 
 .articlehead {
