@@ -351,7 +351,9 @@ def articleDetail(request, pk):
         color_id = product.color.order
         pattern_id = product.pattern.order
         qualities = Quality.objects.filter(active = True)
+
         types = Type.objects.filter(active = True)
+        print "--_-"
         colors = Color.objects.filter(active=True, quality = product.quality)
         patterns = Pattern.objects.filter(active=True, quality = product.quality)
         print "----"
@@ -359,7 +361,7 @@ def articleDetail(request, pk):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
             sizes = Size.objects.filter(quality=product.quality).order_by('-pk')
-
+        print "______"
 
         if (product.quality.order == 5 or product.quality.order == 14) :
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
