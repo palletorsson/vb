@@ -1304,26 +1304,16 @@ def setfullstockCsv(request):
             if sepatated_values[0] != '': 
                 art_and_partner = sepatated_values[0] 
                 splitart = art_and_partner.split("_")
-
                 try: 
-                    print variation 
-                    print art_and_partner, splitart, order
+                    print art_and_partner, splitart
                     article = Article.objects.get(sku_number=splitart[0])
                     pattern = Pattern.objects.get(order=splitart[1])
                     color = Color.objects.get(order=splitart[2])
                     variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+                    print variation 
                     fullvar = FullVariation.objects.get(variation=variation, size=splitart[3])
-                    for size in sizes: 
-                         
-                        try:
-                            fullvar = FullVariation.objects.get(variation=variation, size=size)
-                            fullvar.stock = sepatated_values[2]
-                            print "it worked"
-                            #fullvar.save()
-                        except:
-                            print "no such size"
-          
-
+                    fullvar.stock = sepatated_values[2]
+                    print "it worked"
                 except:
                     print "error"
 
