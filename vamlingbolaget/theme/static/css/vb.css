@@ -965,3 +965,11 @@ h4, .h4 {
 .mainnav {
    font-size: 14px;
 }
+
+.image_off, .force_image:hover .image_on{
+
+   display:none
+}
+.image_on, .orce_image:hover .image_off{
+   display:block
+}

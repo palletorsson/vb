@@ -9,10 +9,13 @@
              <div class="collection_list img_container" >
                 <a href="/products/fullvariation/{{product.pk}}/#{{ product.variation.article.name }} {% trans "i" %} {{ product.variation.color|lower }} {{ product.pattern|lower }}">
                     <span class="hidden">{{ product.variation.article.quality }}</span>
-                    {%if product.variation.article.quality.order > 15 or product.variation.article.quality.order == 2   %}
-                    <div class="force_image"> <img src="/media/variations/thumb/{{ product.oneimg }}.jpg" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
+                    {%if product.variation.article.quality.order > 15 or product.variation.article.quality.order == 2 %}
+                    <div class="force_image"> 
+                        <img src="/media/variations/thumb/{{ product.oneimg }}.jpg" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
                     {%else%}
-                            <div class="force_image"> <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_1.jpg" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
+                            <div class="force_image"> 
+                                <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_1.jpg" class="image_on lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
+                                <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_2.jpg" class="image_off lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
                     {%endif%}
                     </div>
                     <div class='image_description'>
