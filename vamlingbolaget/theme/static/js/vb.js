@@ -425,6 +425,7 @@ $(".changonselectupdate").change(function () {
     });
 
     $("#changetextupdate").text(str);
+
     $("#pattern_color_image").attr("src", img);
     if(pattern2_id){
         $("#pattern_color_image2").attr("src", img2);
