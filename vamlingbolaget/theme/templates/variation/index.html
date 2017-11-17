@@ -1,33 +1,26 @@
 {% extends "collection_base.html" %}
 {% load i18n %}
 {% load fb_versions %}
-
 {% version model.field_name version_prefix %}
-{% block pagetitle %}
-    <legend>{% trans "Shop" %}</legend>
-{% endblock %}
 
-{% block content %}
-        {% for product in products %}
-             <div class="collection_list img_container" >
-                <a href="/products/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
-                    {% with product.image_set.all|first as image %}
-
-                            <div class="force_image"> <img src="../../..{% version image.image 'large' %}" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
-                            <div class='image_description'>
-                               <span class="artname"> {{ product.article.name }}</span><br/>
-                                {%if product.article.discount%}
-                                    <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) :-
-                                {%else%}
-                                    <span class="price">{{ product.article.price }} SEK</span>
-                                {%endif%}
-                            </div>
-
-                    {% endwith %}
-                </a>
-            </div>
-        {% endfor %}
-
+{% block allcontent %}
+    {% for product in products %}
+         <div class="collection_list img_container" >
+            <a href="/products/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
+                {% with product.image_set.all|first as image %}
+                        <div class="force_image"> <img src="../../..{% version image.image 'large' %}" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
+                        <div class='image_description'>
+                           <span class="artname"> {{ product.article.name }}</span><br/>
+                            {%if product.article.discount%}
+                                <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) :-
+                            {%else%}
+                                <span class="price">{{ product.article.price }} SEK</span>
+                            {%endif%}
+                        </div>
+                {% endwith %}
+            </a>
+        </div>
+    {% endfor %}
 {% endblock %}
 
 

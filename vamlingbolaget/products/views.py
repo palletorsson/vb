@@ -42,7 +42,7 @@ def index(request):
 SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
 
 def fullindex(request):
-    full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__quality=1).order_by('variation__article__type', 'order') 
+    full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__quality=1).order_by('order') 
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     return render_to_response('variation/fullindex.html',
@@ -54,7 +54,7 @@ def fullindex(request):
 
 
 def fullindexarticle(request):
-    full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__quality=1).order_by('variation__article__type', 'order') 
+    full_variation = Article.objects.filter(active='A', quality=1).order_by('category')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     return render_to_response('variation/fullindexarticle.html',
@@ -231,7 +231,7 @@ def by_type(request, key):
         products = FullVariation.objects.filter(variation__article__category__slug = key, order__lte=100, size=3840, active=True).order_by('order')
         template = 'variation/fullindex.html'
     if key == 'man':
-        products = FullVariation.objects.filter(variation__article__category__slug = key, size=3840, active=True).order_by('variation__article__sku_number','order')
+        products = FullVariation.objects.filter(variation__article__category__slug = key, size=3840, active=True).order_by('-order')
         template = 'variation/fullindex.html'
     else: 
         products = Variation.objects.filter(article__category__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
@@ -332,8 +332,8 @@ def detail(request, pk):
 
 def articleDetail(request, pk):
     try:
-        product = Variation.objects.get(pk=pk)
-        products = FullVariation.objects.filter(variation__article=product.article, size='3840')
+        product = Article.objects.get(pk=pk)
+        products = FullVariation.objects.filter(variation__article=product, size='3840', active=True)
 
         for full_var in products: 
             color_pattern_str = str(full_var.variation.color.order)+"f_"+str(full_var.variation.pattern.order)+"m"
@@ -344,25 +344,23 @@ def articleDetail(request, pk):
             filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order) 
             file = "/media/variations/"+ filename +"_1.jpg"  
             full_var.image = file   
-
-        color_id = product.color.order
-        pattern_id = product.pattern.order
+        
         qualities = Quality.objects.filter(active = True)
         types = Type.objects.filter(active = True)
-        colors = Color.objects.filter(active=True, quality = product.article.quality)
-        patterns = Pattern.objects.filter(active=True, quality = product.article.quality)
+        colors = Color.objects.filter(active=True, quality = product.quality)
+        patterns = Pattern.objects.filter(active=True, quality = product.quality)
 
-        if (product.article.quality.order == 13):
+        if (product.quality.order == 13):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
-            sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
-
-
-        if (product.article.quality.order == 5 or product.article.quality.order == 14) :
+            sizes = Size.objects.filter(quality=product.quality).order_by('-pk')
+        
+        if (product.quality.order == 5 or product.quality.order == 14):
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
-            colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
+            colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.quality)
         
+
      
     except:
         raise Http404 
@@ -371,7 +369,18 @@ def articleDetail(request, pk):
         images = Image.objects.filter(variation__pk=pk)
     except:
         raise Http404 
-        
+
+    copa_res = []
+    ziper = []
+    for copa in colorsandpattern: 
+        splited = copa.name.split("&")
+        if len(splited) > 1: 
+            ziper.append(copa)
+        else: 
+            copa_res.append(copa)
+
+    if product.id == 12:
+         copa_res = ziper
 
     return render_to_response('variation/articledetail.html',
                    {
@@ -382,10 +391,8 @@ def articleDetail(request, pk):
                    'sizes': sizes,
                    'qualities': qualities,
                    'types': types,
-                   'color_id':color_id,
-                   'pattern_id':pattern_id,
                    'products': products,
-                   'colorsandpattern': colorsandpattern,
+                   'colorsandpattern': copa_res,
                    },
                    context_instance=RequestContext(request)
                    )
@@ -986,7 +993,7 @@ def readCsvOnlyCheck(request):
                         filefails.append(image)
 
 
-                check = unicode(article) + " " + unicode(pattern) + " " + unicode(color) + " " + unicode(size) + "  " + unicode(full_article_sku)
+                check = str(article) + " " + str(pattern) + " " + str(color) + " " + str(size) + "  " + str(full_article_sku) + " --  " + str(sepatated_values[0])
                 articles.append(check)
                 images.append(image)
 
@@ -1288,8 +1295,72 @@ def orderCsv(request):
                             print "no such size"
                         print fullvar
                 except:
-                    print "knas"
+                    print "error"
 
+
+    return HttpResponse(status=200)
+
+
+@login_required
+def setfullstockCsv(request):
+    input_file = './modeller.csv'
+
+    # open file and sepate values 
+    with open(input_file, 'r') as i:
+
+        for line in i:
+            sepatated_values = line.split(",")
+            print sepatated_values
+            if sepatated_values[1] != '': 
+                art_and_partner = sepatated_values[1] 
+                splitart = art_and_partner.split("_")
+                print splitart 
+                try: 
+                    print art_and_partner, splitart
+                    article = Article.objects.get(sku_number=splitart[0])
+                    pattern = Pattern.objects.get(order=splitart[1])
+                    color = Color.objects.get(order=splitart[2])
+                    variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+                    print variation 
+                    print splitart[3]
+                    fullvar = FullVariation.objects.get(variation=variation, size=splitart[3])
+                    fullvar.stock = sepatated_values[2]
+                    print sepatated_values[2]
+                    fullvar.save()
+                    print "it worked"
+                except:
+                    print "error"
+
+    return HttpResponse(status=200)
+
+@login_required
+def orderfromCsv(request):
+    input_file = './ordercsv.csv'
+
+    # open file and sepate values 
+    with open(input_file, 'r') as i:
+
+        for line in i:
+            print i 
+            sepatated_values = line.split(",")
+            print sepatated_values
+            if sepatated_values[0] != '': 
+                art_and_partner = sepatated_values[0] 
+                splitart = art_and_partner.split("_")
+                try: 
+                    print splitart
+                    article = Article.objects.get(sku_number=splitart[0])
+                    pattern = Pattern.objects.get(order=splitart[1])
+                    color = Color.objects.get(order=splitart[2])
+                    variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+                    print variation 
+                    
+                    fullvar = FullVariation.objects.get(variation=variation, size=splitart[3])
+                    fullvar.order = i + 200 
+                    
+                    print "it worked"
+                except:
+                    print "error"
 
     return HttpResponse(status=200)
 

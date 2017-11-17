@@ -1,35 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block sidebar %}
-    <ul class="hidden-phone nav coll_menu_ul">
-        {% if rea == 'true' %}
-		<h5>Rea Filter</h5> 
-		<h6>{% trans "Filter" %} : {% trans "Storlek" %}</h6> 
-
-         {% for size in sizes %}
-                    <a href="/products/rea/size/{{size}}"> {{ size }} </a> | 
-         {% endfor %}
-
-		<h6>{% trans "Filter" %} : {% trans "Typ" %}</h6> 
-
-
-         {% for t in atypes %}
-                    <a href="/products/rea/type/{{t.order}}"> {{ t }} </a> | 
-         {% endfor %}
-        <hr>
-
-		{% endif %}
-
-
-        <h5>..</h5>
-        <ul>
+{% block shopmenu %}
+    <div class="span12"> 
+        <ul class="pagination">      
             <li>
-                 <a href="/products/rea/" class="discount">{% trans "REA" %} </a>          
-            </li>
-        </ul>
-        <h5>..</h5>
-        <ul>
-          <li>
                 <a href="/products/full/"> {% trans "Kvinna" %} </a>
             </li>
             <li>
@@ -39,44 +13,28 @@
                 <a href="/products/type/barn"> {% trans "Barn" %} </a>
             </li>
             <li>
-                <a href="/products/type/accessoarer"> {% trans "Accessoarer" %} {% trans "sängkläder" %} </a>
+                <a href="/products/type/accessoarer"> {% trans "Accessoarer" %} </a>
             </li>
             <li>
                 <a href="/products/type/piece-goods"> {% trans "Metervara" %} </a>
             </li>
-        </ul>
-        <br/>
-        <h5>..</h5>
-        <ul>
-        {% for quality in qualities %}
-            {% if quality.order == 11 or quality.order == 10 or quality.order == 9 or quality.order == 1   %}
-                <li>
-                    <a href="/products/quality/{{quality.slug}}"> {{ quality.name }} </a>
-                </li>
-            {% endif %}
 
         {% endfor %}
             
+                <li>
+                    <a href="/products/fullcut/">{% trans "CUT ON DEMAND" %} </a>
+                           
+                </li>
+          
+           <li>
+                 <a href="/products/patternandcolor/">{% trans "mönster och färger" %}</a>          
+            </li>
+             <li>
+                 <a href="/products/rea/">{% trans "REA" %} </a>          
+            </li>
+
         </ul>
-        <br/>
+    </div>
  
-        <h5>..</h5>
-        <ul>
-        <li>
-             <a href="/products/fullcut/">{% trans "CUT ON DEMAND" %} </a>
-                       
-        </li>
-        </ul>
-        <h5>..</h5>
-        <ul>
-        <li>
-             <a href="/products/articles/">{% trans "Modeller" %} </a>
-             <a href="/products/patternandcolortest/">{% trans "Mönster och Färger" %} </a>           
-        </li>
-        </ul>
-       
 
-        <hr>
-
-    </ul>
 {% endblock %}

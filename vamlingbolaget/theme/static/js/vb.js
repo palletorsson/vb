@@ -115,6 +115,29 @@ if ($(".hasitems")[0]){
     $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff0000"}) 
 } 
 
+var initsize = function(){
+    if($('#nosize')[0]) {
+        var allsizes = $(".select_size"); 
+        var some_size = Math.floor(allsizes.length/2)-1; 
+        if (some_size < 0) { some_size = 0; }
+        console.log(allsizes[some_size].id)
+     
+        allsizes.each(function( value, index ) {
+            if (this.id == parseInt(allsizes[some_size].id)) {
+                $(this).addClass('size_active active'); 
+                console.log(this, allsizes[some_size].id); 
+            }
+
+        }); 
+        var sellec = "#"+allsizes[some_size].id+".select_size";
+        $(sellec).addClass('active');
+            $(sellec).addClass('size_active');  
+        var sizeval = $("#size"); 
+        sizeval.val(allsizes[some_size].id);  
+
+    } 
+}; 
+
 
 var counter = 0;
 
@@ -123,6 +146,7 @@ $('#nosize').hide();
 $("#addtocart").off('click').on({
     click:function(e) {
         var size_val = $('#size').val(); 
+        console.log("check size")
         if (size_val == ''){
            $('.remove_on_size').addClass('add_size_message'); 
            $('#nosize').show(); 
@@ -130,6 +154,7 @@ $("#addtocart").off('click').on({
       } else {
         e.stopPropagation();
         if(counter == 0){
+            console.log("first when size ok")
             counter++;
             setTimeout(function(){counter = 0},2000)
             
@@ -332,11 +357,26 @@ $("#addtofullcart").off('click').on({
     }
 });//end of click
 
-$(".variation_imgs").click(function() {
-   img = $(this).attr('src');
-   $(".variation_img").attr("src", img)
-   $(".variation_link").attr("href", img)
+$(".variation_imgs").on( {
+
+    'click': function(e) {
+
+        e.stopPropagation();
+
+        console.log("-----", this, e)
+           
+        var img = $(this).attr('src');
+           
+        console.log(img)
+           
+        $(".variation_img").attr("src", img)
+        $(".variation_link").attr("href", img)
+    }, 
+    'contextmenu' : function(e) {
+        console.log("......", this, e)
+    }
 }); 
+
 
 
 $('#widget_size').filter(function () {
@@ -682,7 +722,7 @@ set_first_page();
       var color_name = colorandpattern[2];
       var pattern_name = colorandpattern[3];
       var img_text = color_name + ' ' +pattern_name+ ' ';
-	  var image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="160"> <br />';
+	  var image_url = '<img src="/media/uploads/120/'+color+'f_'+pattern+'m.jpg" class="img_selected" width="180"> <br />';
 
       if ($(this).hasClass("inside")) {
 		$("#selectedpatternandcolor_inside").html(image_url);
@@ -698,41 +738,34 @@ set_first_page();
     });
 
     $(".select_size").click(function(e) {
+        e.stopPropagation();
+        var size_id = this.id; 
+        var ok = $('input[name="size"]').val(size_id);;
+        $('.select_size').removeClass('size_active');
+        $('.select_size').removeClass('active');
+        $('.size_active').removeClass('size_active');
+        $('.active').removeClass('active');
+        $(".remove_on_size").remove();
+        var $this = $(this);
 
-      e.stopPropagation();
-      var size_id = this.id; 
-      var ok = $('input[name="size"]').val(size_id);;
-      var re_m = 
-	  $('.select_size').removeClass('size_active');
-      $('.select_size').removeClass('active');
-      $('.size_active').removeClass('size_active');
-      $('.active').removeClass('active');
-      $(".remove_on_size").remove();
-      var $this = $(this);
-      console.log($this.a); 
+        if (!$this.hasClass('size_active')) {
+            $this.addClass('size_active');
+            $this.addClass('active');
+        }
 
-    if (!$this.hasClass('size_active')) {
+        var a = $this.data('size'); 
 
-        $this.addClass('size_active');
-        $this.addClass('active');
-
-
-    }
-
-    var a = $this.data('size'); 
-    if (a < 1) {
+        if (a < 1) {
 
             $('.stock_text_no').removeClass('hidden');
             $('.stock_text_yes').addClass('hidden');
-    } else if (a == 'none') {
-        console.log(a)
-    } else {
-        $('.stock_text_yes').removeClass('hidden');
-        $('.stock_text_no').addClass('hidden');
-    }
-
-
-    e.preventDefault();
+        } else if (a == 'none') {
+            console.log(a)
+        } else {
+            $('.stock_text_yes').removeClass('hidden');
+            $('.stock_text_no').addClass('hidden');
+        }
+        e.preventDefault();
     });
 
     $(".select_quantity").click(function(e) {
@@ -973,8 +1006,36 @@ set_first_page();
           return true;
       });
 
+function scroll_init() {
+    window.addEventListener('scroll', function(e){
+        var distanceY = window.pageYOffset || document.documentElement.scrollTop; 
+        var shrinkOn = 200; 
+        console.log(); 
+        if (document.documentElement.scrollTop > shrinkOn) {
+            $('.menu_container').animate({ height: "50px" }, 500 ).addClass('shriked'); 
+            $('.vb_logo').animate({ width: "100px" }, 500 );
+            $('.main_nav').animate({ top: "-11px" }, 500, function() {
+                $('.navbar-brand').hide(); 
+                //$('.midhead').hide();
+            });     
+        }  else {
+           if (document.documentElement.scrollTop < shrinkOn+1000 && $('.menu_container').hasClass('shriked')) {
+              
+              $('.navbar-brand').show();
+               // $('.midhead').show(); 
+              $('.menu_container').animate({ height: "160px" }, 500 );
+              $('.vb_logo').animate({ width: "120px" }, 500 );
+              $('.main_nav').animate({ top: "80px" }, 500, function() {
+                $('.menu_container').removeClass('shriked');
+            });
+              console.log(distanceY, shrinkOn)
+           }
+        }
+      
+    });
+}
 
-
+initsize(); 
 
 
 

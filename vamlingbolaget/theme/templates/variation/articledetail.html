@@ -7,16 +7,17 @@
     <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }},  {{ product.variation }}" %}/>
 {%endblock%}
 
-{% block pagetitle %}
 	<div class="row-fluid">
-		<div class="span12" >
-			<div class="bread" >
-				<a href="/products/fullcut"> << {% trans "Shop" %}</a> / <a href="#"> {{ product.article }}  </a> </div> 
-			<hr>
-		</div>
-{% endblock %}
 
-{% block allcontent %}
+{% block stretchpage %}
+	{% block pagetitle %}
+			<div class="span12">
+				<div class="bread">
+					<a href="/products/fullcut"> << {% trans "Cut on demand" %}</a> / <span> {{ product.article }}  </span>
+				</div> 
+				<hr>
+			</div>
+	{% endblock %}
 	<div class="span12">
 		<div class="span3 article_background" id="fadeifchangeorder">
 	        <div id="images_container" class="img_container">
@@ -24,108 +25,120 @@
 				  	<div>Cut On Demand</div>
 				</div>
 	        	<a href="{{ image }}" class="variation_link">
-	        		<img src="/media/{{ product.article.file }}"  alt="article image" class="cut_detail_img" />
+	        		<img src="/media/{{ product.file }}" alt="article image" class="cut_detail_img" />
 	        	</a>
 		  	</div> 
 		  	<div class="text-center hidden-xs">
 		  		<hr>
-            	<div> {{ product.article.description }} </div> 
+            	<div>  
+            		<b> CUT ON DEMAND </b> – vi syr upp ditt unika plagg utifrån våra modeller! Välj modell, storlek, mönster och färg. 
+					<hr>
+            		Ditt drömplagg sys upp i vår verkstad i Vamlingbo. På så sätt kan vi tillmötesgå dina önskemål och plagget får en längre livslängd.
+
+					<hr>
+	 
+					Detta erbjudande gäller plagg i silkestrikå. Observera att dessa plagg inte kan lämnas tillbaka för återköp eller byte.
+	            	<hr> 
+				</div>
+            	<hr> 
 	  		</div>
 		</div>	   	
-		<div class="span">
+		<div class="span7">
 			<span class="articlehead">
 				<span id="articlename">
 					<input id="article_pk" type="hidden" value="{{ product.article.sku_number}}">
-					<input type="hidden" id="pattern" name="pattern" value="{{ product.pattern.order}}" >							
-					<input type="hidden" id="color" name="color" value="{{ product.color.order }}" >
+					<input type="hidden" id="pattern" name="pattern" value="7" >							
+					<input type="hidden" id="color" name="color" value="1" >
 					<input type="hidden" id="full_var" name="full_var" value="1" >
 					<input type="hidden" id="s_type" name="s_type" value="COD" >
-					<h4>{{ product.article.name }} :
+					<h4>{{ product.name }} :
 						<span> 
-							{%if product.article.discount %}
-								<span class="discount"> {{ product.article.f_discount }} </span> * SEK
+							
+							{%if product.discount %}
+								<span class="discount"> {{ product.f_discount }} </span> * SEK
 								</span> + Cut on Demand : 
-							    <span id="cod_price"> {{ product.article.ondemand_cost }} SEK</span> <hr>
-							    <small>* {% trans "tidigare pris" %}  <span id="the_price">{{ product.article.price }} </span>  SEK </small>
+							    <span id="cod_price"> {{ product.ondemand_cost }} SEK</span> <hr>
+							    <small>* {% trans "tidigare pris" %}  <span id="the_price">{{ product.price }} </span>  SEK </small>
 							{%else%}
-							<span id="the_price"> {{ product.article.price }}</span> SEK + Cut on Demand: <span id="cod_price"> {{ product.article.ondemand_cost }} SEK</span>
+							<span id="the_price"> {{ product.price }}</span> SEK + Cut on Demand: <span id="cod_price"> {{ product.ondemand_cost }} SEK</span>
 							{%endif%}  
 						</span> 
-					</h4>
-					<hr> 
-					<div class="span2 selectedpatternandcolor">
-					<img id="pattern_color_image r" src="{{ MEDIA_URL }}/uploads/120/{{ product.color.order }}f_{{ product.pattern.order }}m.jpg" style="width:160px;" />
-					<hr>
-					Cut on demand betyder att vi syr upp ditt unika plagg - du kan välja mellan alla aktuella färger och mönster.  
+					</h4>  
 					<hr>
 				</span> 
 			</span>
 		</div>
-
-		<div class="span6">
-			{% trans "Färger och Mönster" %}:  
+		<div class="span7">
+			<span class="articlehead">
+			{% trans "Välj" %} {% trans "Storlek" %}, {% trans "Färger och Mönster" %}:  
+			</span>
 			<span class="selectedpatternandcolor_text"></span>	
 			<hr>
+			<div class="span2 selectedpatternandcolor">
+				<img id="pattern_color_image r" src="{{ MEDIA_URL }}/uploads/120/7f_1m.jpg" style="width:180px;" />
+			</div>
+			<div class="span5">
 				<div class="color_and_pattern_choose">
 					{% for item in colorsandpattern %}
 						<img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" class="pattern_color_image" id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
 					{% endfor  %}
 				</div>
-			<hr>
+			</div>
+		</div>
+        <div class="span7">
+        	<hr>
 			<nav>
 				<ul class="pagination">
-				{% for size in sizes %}
-					{% if size.pk == 3 %}
-					 	<li class="select_size" id="{{ size.pk }}" data-size="none">
-					 		<span>
-								<a class="size_active">{{ size.name }}</a>
-							</span> 
+					<span class="remove_on_size articlehead"> (* {% trans "Välj" %}) </span>
+					<span id="nosize"> <--- </span> 
+					{% for size in sizes %}
+						{% if size.pk == 3 %}
+						 	<li class="select_size" id="{{ size.pk }}" data-size="none">
+						 		<span>
+									<a class="size_active">{{ size.name }}</a>
+								</span> 
+							</li>
+						{% else  %}
+							<li class="select_size" id="{{ size.pk }}" data-size="none">
+								<span>
+									<a>{{ size.name }}</a>
+								</span> 
 						</li>
-					{% else  %}
-						<li class="select_size" id="{{ size.pk }}" data-size="none">
-							<span>
-								<a>{{ size.name }}</a>
-							</span> 
-					</li>
-					{% endif %}
-
-						 
-
-				 {% endfor %}
+						{% endif %}
+					 {% endfor %}
 				</ul>
             </nav>
-
 			<input type="hidden" id="size" name="size" value="3" >
 	    	<input type="hidden" id="quantity" name="quantity" value="1" >		
+			<input type="hidden" id="add_or_edit" name="add" value="add" > 
+			<span class="hidden" id="sku_number">{{ product.sku_number }}</span>
+		</div>
+		<div class="span7">
+			<div class="span2">
+		        <span id="addtocart" class="articlehead" >
+					<span style="padding-left: 30px;">
+						<button class="btn btn-success btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppingbag" %}</button>
+					</span>
+			    </span>
+			</div>
 
-			<hr>
-	        <div id="addtocart" style="display:block;">
-				<span style="padding-left: 30px;">
-					<button class="btn btn-success btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
-					<input type="hidden" id="add_or_edit" name="add" value="add" > 
-					<span class="hidden" id="sku_number">{{ product.article.sku_number }}</span>
-				</span>
-		    </div>
-			<hr>			
-			<span> {% trans "Leverans:" %} 
-				
-				<span>{% trans "Fyra veckor" %} </span>
-
-		    </span>
-
-			<hr>
-				{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.article.sku_number }}
-				<hr>
-				
-				<span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span> : 
-				<span> {{ product.article.quality.description }} </span> 
-				 
-			<hr>
+			<div class="span4">
+				<div class="pulldown_cod articlehead">			
+					<span> {% trans "Leverans:" %}  {% trans "Fyra veckor" %} </span>
+				</div>
 			</div>
 		</div> <!-- end span7 -->
-	</div> <!-- end span12 -->
+			<div class="span7">
+				<hr>
+				{% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.sku_number }}	 - {{ product.description }}
+				<hr>
+				<span class="quality" id="{{ product.quality }}">{{ product.quality }} </span> : 
+							<span> {{ product.quality.description }} </span>
+				<hr>
+			</div>
+		</div> <!-- end span12 -->
 
-<div class="span12" > 
+<div class="span12"> 
 	<hr/>
 	<strong>{% trans "Produkter" %}  </strong>  
 	<hr/>

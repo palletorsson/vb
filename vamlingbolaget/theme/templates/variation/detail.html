@@ -7,15 +7,12 @@
     <meta name="description" content={% trans "Vamlingbolaget kollektion " %} {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" %}/>
 {%endblock%}
 
-{% block pagetitle %}
-	<div class="row-fluid">
-		<div class="span12" >
-<div class="bread" ><a href="javascript:history.go(-1)"> << {% trans "Shop" %}</a> / </div> 
+<div class="row-fluid">
+{% block stretchpage %}
+	<div class="span12" >
+		<div class="bread" ><a href="javascript:history.go(-1)"> << {% trans "Shop" %}</a> / </div> 
 			<hr>
-		</div>
-{% endblock %}
-
-{% block allcontent %}
+	</div>
 	<div class="span12">
 		<div class="span4 img_container article_background" id="fadeifchangeorder">
 			{% for image in images %}
@@ -169,7 +166,7 @@
 	        <input type="hidden" id="quantity" name="quantity" value="1">
 		{%else%}
 			<div> 
-			<span id="nosize" class="alert alert-danger select_size">* {% trans "Välj" %}</span>
+			<span id="nosize" class="alert alert-danger select_size">* </span>
              {% trans "Välj" %} .. |
 			 {% for size in sizes %}
 				<span  class="select_size {% if size.pk  == 3 %} size_active {%endif%}" id="{{ size.pk }}">{{ size.name }}</span>  | 

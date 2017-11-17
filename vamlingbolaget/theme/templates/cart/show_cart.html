@@ -6,11 +6,10 @@
 <title>Vamlingbolaget | {% trans "Din beställning " %} </title>
 <meta name="description" content={% trans "Din beställning av Vamlingbolagets produkter " %} />
 {%endblock%}
-{% block pagetitle %}
-<legend xmlns="http://www.w3.org/1999/html"> {% trans "Din shoppinglåda" %} </legend>
-{% endblock %}
 
-{% block allcontent %}
+
+{% block stretchpage %}
+<legend xmlns="http://www.w3.org/1999/html"> {% trans "Din shoppinglåda" %} </legend>
 <div class="hidden-xs">
 {%if cartitems or bargains or rea%}
     <table class="table table-bordered small table-striped">
@@ -251,7 +250,10 @@
         {% else %}
         <tr id="empty">
             <td colspan="8">
-                {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet" %}!</a>
+                <div class="alert alert-info">
+                    {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/full/">{% trans "Börja utforska utbudet" %}!</a>
+                </div>
+                <img src="/media/uploads/ckd/2017/04/02/mirjam-klipper-till.jpg" style="width:100%"/>
             </td>
         </tr>
         </tbody>
@@ -398,7 +400,8 @@
     {% else %}
     <div id="empty" class="mob_empty">
         <div colspan="8">
-            {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/">{% trans "Börja utforska utbudet" %}!</a>
+            {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/full/">{% trans "Börja utforska utbudet" %}!</a>
+            <img src="/media/uploads/ckd/2017/04/02/mirjam-klipper-till.jpg" />
         </div>
     </div>
     </div>

@@ -4,111 +4,102 @@
 <html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
   <head>
     {%block title%}
-        <title>Vamlingbolaget | vamlingbolaget.com</title>
-        <meta name="description" content="Vamlingbolaget - Stockholm and Gotland, Sweden" />
+    <title>Vamlingbolaget | vamlingbolaget.com</title>
+    <meta name="description" content="Vamlingbolaget - Stockholm and Gotland, Sweden" />
     {%endblock%}
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Vamlingbolaget" />
     <meta name="keywords" content="Vamlingbolaget,vamlingbolaget.com,vamlingbolaget stockholm,vamlingbolaget gotland" />
-	<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/vamlingbolaget.ico"/>
+	  <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/vamlingbolaget.ico"/>
     <!-- The styles -->
-
-     
     <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap_new.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/vb.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/mediaqueries.css" rel="stylesheet">
-	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.12.3.min.js"></script>
-	<!--[if (lt IE 9)]><!-->
-	<script src="{{ STATIC_URL }}js/css3media.js" type="text/javascript"> </script>
-	<script src="{{ STATIC_URL }}js/respond.min.js" type="text/javascript"> </script>
+  	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-3.2.1.min.js"></script>
+  	<!--[if (lt IE 9)]><!-->
+  	<script src="{{ STATIC_URL }}js/css3media.js" type="text/javascript"> </script>
+  	<script src="{{ STATIC_URL }}js/respond.min.js" type="text/javascript"> </script>
     <!--<![endif]-->
-
-
     <!-- The scripts -->
-   
-      {% block extra_head %}{% endblock %}
-	<script src="{{ STATIC_URL }}js/underscore.js" type="text/javascript"> </script>
-	<script src="{{ STATIC_URL }}js/backbone.js" type="text/javascript"> </script>
-	<script src="{{ STATIC_URL }}js/backbone-tastypie.js" type="text/javascript"> </script>
+    {% block extra_head %}{% endblock %}
 </head>
-
  <body data-spy="scroll" data-target=".bs-docs-sidebar">
-
     <!-- Navbar ================================================== -->
     <div class="navbar navbar-default navbar-fixed-top">
           <div class="navbar-inner hidden-phone">
             <div class="container_first">
                 <div class="nav pull-left flags">
-                <div class="btn-group">
-             
-                    <a type="button" href="#" class="btn dropdown-toggle"  data-toggle="dropdown" >
-                      <span> <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> {% trans "LANGUAGE" %}
-                        <b class="caret"> </b>
-                      </span>
-                    </a>
- 
-                    <ul class ="dropdown-menu">
-                   
-                        <li> <a href="#" > <span class="change_lang" id="sv">Svenska</span> <img src="/theme/static/img/svensk_flagga.gif"> </a></li>
-                        <li role="separator" class="divider"></li>
-                        <li> <a href="#"> <span class="change_lang" id="en">English</span>  </a></li>
-                        <li role="separator" class="divider"></li>
-                        <li> <a href="#"> <span class="change_lang" id="fi">Suomalainen</span>  </a></li>
-                        <li role="separator" class="divider"></li>
-                        <li> <a href="#"> <span class="change_lang" id="de">Deutsch</span>  </a></li>
-                        <li role="separator" class="divider"></li>
-                        <li> <a href="#"> <span class="change_lang" id="da">Dansk</span>  </a></li>
-                    </ul>
-                </div>
-
-                 <form action="/i18n/setlang/" method="post" id="lang" >
+                    <div class="btn-group">
+                        <a type="button" href="#" class="btn dropdown-toggle"  data-toggle="dropdown" >
+                          <span class="orange forcebtn"> 
+                            <span class="glyphicon glyphicon-flag forcebtn" aria-hidden="true"></span> {% trans "Language" %}
+                            <b class="caret"> </b>
+                          </span>
+                        </a>
+                        <ul class ="dropdown-menu">
+                            <li> <a href="#" > <span class="change_lang" id="sv">Svenska</span></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li> <a href="#"> <span class="change_lang" id="en">English</span>  </a></li>
+                            <li role="separator" class="divider"></li>
+                            <li> <a href="#"> <span class="change_lang" id="fi">Suomalainen</span>  </a></li>
+                            <li role="separator" class="divider"></li>
+                            <li> <a href="#" > <span class="change_lang" id="de">Deutsch</span>  </a></li>
+                            <li role="separator" class="divider"></li>
+                            <li> <a href="#"> <span class="change_lang" id="da">Dansk</span>  </a></li>
+                        </ul>
+                    </div>
+                    <form action="/i18n/setlang/" method="post" id="lang" >
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ redirect_to }}" />
                         <input name="language" type="hidden" value="en"/>
                     </form>
-              </div>
-              <ul class="nav pull-right flags">
+              </div> <!-- end left -->
+              <span class="midhead">
+                  <img src="/media/tagline_orange.png" alt="tagline - svensk produktion och design" class="tagline_img" />
+              </span>
 
+              <ul class="nav pull-right flags orange">
                   <li>
-                  <a id="token" href="/cart/show/" >
-                  <button type="button" class="btn btn-default button_has_item">
-                    
-							        <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
-                        {% load cart_tags %}
-                        {% cart_total %}
-                   
-                    <div id="updatecart"></div>
-                    </button>
-                     </a>
+                      <a id="token" href="/cart/show/" >
+                      <button type="button" class="btn btn-default button_has_item"> 
+    							        <span class="glyphicon glyphicon-gift orange" aria-hidden="true"></span>
+                            {% load cart_tags %}
+                            {% cart_total %}
+                          <div id="updatecart orange"></div>
+                      </button>
+                      </a>
                   </li>
                 </ul>
             </div>
-          </div>
-          <div class="navbar-inner">
-            <div class="container">
+        </div>
+        <div class="navbar-inner">
+            <div class="menu_container">
+				        <span class = "visible-xs">
+      					  <a id="token" href="/cart/show/">
+      					   <span class="mob_shop_icon">
+                      <h4 class="glyphicon glyphicon-gift orange" aria-hidden="true" alt="Vamlingbolaget shopping cart" ></h4>
+                   </span>
+      					  </a>
+      				  </span> 
 
-				<span class = "visible-xs">
-					  <a id="token" href="/cart/show/">
-					   <span class="mob_shop_icon">
-             <h4 class="glyphicon glyphicon-gift" aria-hidden="true"  alt="Vamlingbolaget shopping cart" ></h4>
-             </span>
-					  </a>
-				</span> 
+                <a href="/" class="navbar-brand hidden-phone">
+                  <img src="/media/Vamlingbolaget_orange.png" alt="Vamlingbolaget logo" class="align-middle vb_logo" />
+                </a> 
+                <a href="/" class="navbar-brand visible-phone orange">
+                  <img src="/media/Vamlingbolaget_orange.png" style="width:180px" alt="Vamlingbolaget logo"/>
+                </a>
 
-                <a href="/" class="navbar-brand"><img src="{{ STATIC_URL }}img/vb_logo_r.png" alt="Vamlingbolaget logo" class="leftside" /></a>
                 <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
                         <span class = "icon-bar"></span>
                         <span class = "icon-bar"></span>
                         <span class = "icon-bar"></span>
                 </button>
+                <div class = "collapse navbar-collapse navHeaderCollapse main_nav">
 
-                <div class = "collapse navbar-collapse navHeaderCollapse pull-left">
-
-                     <ul class = "nav navbar-nav navbar-right nav-list mainnav mob_nav">
-                    
+                     <ul class = "nav navbar-nav nav-list mainnav mob_nav orange">                   
                         <li>
                             <a href="/products/full/">{% trans "Shop" %}<span class="visible-phone"> - {% trans "Kvinna" %} </span></a>
                         </li>
@@ -118,76 +109,65 @@
                         <li class="visible-phone">
                             <a href="/products/type/barn/">{% trans "Shop" %} - {% trans "Barn" %}</a>
                         </li>                  
-                  
                          <li class="visible-phone">
-                               <a href="/cart/show/" >{% trans "Shoppinglåda" %}</a>
+                            <a href="/cart/show/" >{% trans "Shoppinglåda" %}</a>
                         </li>
                         <li> 
-                          <a href="/about/" id="about">{% trans "Om oss" %}</a>
+                            <a href="/about/" id="about">{% trans "Om oss" %}</a>
                         </li>
                         <li class = "dropdown visible-xs">
-
-                              <a href="/about/" class = "dropdown-toggle" data-toggle = "dropdown">{% trans "Om oss" %}<b class = "caret"></b></a>
-
-
-                                <ul class = "dropdown-menu">
-                                        <li><a href="/about/">{% trans "Om oss" %}</a></li>
-                                        <li><a href="/shops/">{% trans "Butiker" %}</a></li>
-                                        <li><a href="/order/">{% trans "Beställ" %}</a></li>
-										<li><a href="/galleries/">{% trans "Bildgallerier" %}</a></li>
-                                        <li><a href="/newsletter/">{% trans "Nyhetsbrev" %}</a></li>
-
-                                </ul>
-
+                            <a href="/about/" class = "dropdown-toggle" data-toggle = "dropdown">{% trans "Om oss" %}<b class = "caret"></b></a>
+                            <ul class = "dropdown-menu">
+                                <li><a href="/about/">{% trans "Om oss" %}</a></li>
+                                <li><a href="/shops/">{% trans "Butiker" %}</a></li>
+                                <li><a href="/order/">{% trans "Beställ" %}</a></li>
+						                    <li><a href="/galleries/">{% trans "Bildgallerier" %}</a></li>
+                                <li><a href="/newsletter/">{% trans "Nyhetsbrev" %}</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
+
             </div>
-          </div>
+        </div>
     </div>
-
-{% block stretchpage %}
+    {% block superstretchpage %}
     <div class="container content"> <!--this is for the left margin -->
-      <div id="changetext"></div>
-        <div class="pagetitle">
-        {% block pagetitle %} {% endblock %}
-        {% block pagedesc %} {% endblock %}
-      </div>
+        {% block stretchpage %}
+            <div id="changetext"></div>
+            <div class="pagetitle">
+            {% block pagetitle %} {% endblock %}
+            {% block pagedesc %} {% endblock %}
+            </div>
 
-    {% block allcontent %}
-      <div class="span2">
-           {% block sidebar %}
+            {% block shopmenu %} {% endblock %}
 
-           {% endblock %}
-      </div>
-      <div class="span9">
-           {% block content %}
-                 FEATURED COLLECTION
-          {% endblock %}
-      </div>
+            {% block allcontent %}
+                <div class="span2">
+                {% block sidebar %} {% endblock %}
+                </div>
+                <div class="span9">
+                {% block content %} {% endblock %}
+                </div>
+            {% endblock %} <!-- end allcontent -->
+        {% endblock %} <!-- end stretchpage -->
+    </div>
+    {% endblock %}  <!-- end superstretchpage -->
+
+    {% block footer %}
+        <footer>
+           {% include "footer.html" %}
+        </footer>
     {% endblock %}
-  </div>
+  <div class="hidden" id="widget_text_start" >{% trans "+" %}</div>
+  <div class="hidden" id="widget_size" >{% trans "Storlek" %}</div>
+  <div class="hidden" id="widget_exist" >{% trans "Det finns" %}</div>
+  <div class="hidden" id="widget_text_end" >{% trans "av denna artikel" %}</div>
+  <div class="hidden" id="widget_text_in" >{% trans "i" %}</div>
+  <div class="hidden" id="widget_text_remove" >{% trans "Vill du ta bort denna post?" %}</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-
-{% block footer %}
-
-  <footer>
-	{% include "footer.html" %}
-  </footer>
- {% endblock %}
-{% endblock %}
-
-
-    <div class="hidden" id="widget_text_start" >{% trans "+" %}</div>
-    <div class="hidden" id="widget_size" >{% trans "Storlek" %}</div>
-    <div class="hidden" id="widget_exist" >{% trans "Det finns" %}</div>
-    <div class="hidden" id="widget_text_end" >{% trans "av denna artikel" %}</div>
-    <div class="hidden" id="widget_text_in" >{% trans "i" %}</div>
-    <div class="hidden" id="widget_text_remove" >{% trans "Vill du ta bort denna post?" %}</div>
-
-
-
-	<script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
 	<script src="{{ STATIC_URL }}js/lightbox.js" type="text/javascript"> </script>
         

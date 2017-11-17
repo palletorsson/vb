@@ -44,10 +44,13 @@ body html {
 .mobile_image {
   width:100%;
 }
+.artname {
+  font-weight: normal !important; 
+}
 
 /* menu Logo vamlingoblaget  */
 .leftside {
-  width: 340px;
+  width: 400px;
   left: 300px;
   margin-right: 10px;
 }
@@ -76,6 +79,11 @@ line-height: 1em;
     width: 100%;
 }
 
+.pagination > li > a, .pagination > li > span {
+    border: none;
+    border-left: 1px solid #dddddd
+  }
+
   /* menu line beside logo vamlingbolaget */
   .leftsideline{
       position:relative;
@@ -87,8 +95,11 @@ line-height: 1em;
       padding-top: 20px;
   }
 
-  .nav, a{
-  text-transform: uppercase;
+
+.nav, a { font-weight: bold; }
+
+  .nav {
+    color: #FF6900;
   }
 
 .article_background {
@@ -109,14 +120,35 @@ line-height: 1em;
 		margin-top: 19px;
 	}
 	
+  .orange > li {
+    color: #ff6900 !important;
+  }
+
+ .orange {
+    color: #ff6900 !important;
+  }a
+
+  .btn {
+    font-size: 12px !important;
+    font-weight: bold !important;
+  }
+
+  .forcebtn {
+    font-size: 12px !important;
+    font-weight: bold !important;
+  }
+
+
+  .btn-default {
+      border-color: #ef7c43 !important;
+      color: #ff6900 !important;
+      font-size: 12px;
+  }
 
 	.nav > li > a {
 	padding: 1px 15px;
 	}
 
-	. {
-	padding: 10px 15px;
-	}
 
 
    a {
@@ -154,8 +186,11 @@ line-height: 1em;
     width: 100%;
  
   }
-  .coll_menu_ul {
+  .coll_menu_ul > li > a {
     font-size: 0.9em;
+    text-transform: capitalize !important;
+    font-weight: bold; 
+
   }
 legend {
 text-transform: uppercase;
@@ -163,33 +198,39 @@ font-size: 0.9em;
 }
   .navbar-inner {
 
-      background-color: #F8F8FF;
-      background-image: none;
+      background-color: white;
+  
 
   }
   .container_first {
     padding-right: 15px;
     padding-left: 15px;
-    padding-bottom: 30px;
-    margin-right: 1px;
-    margin-left: 1px;
-       border-bottom: 1px solid #e5e5e5;
-
+    padding-bottom: 15px;
     }
 
-	.container {
+.collapse.in {
+
+    border-radius: 10px;
+}
+	.menu_container {
 	padding-right: 15px;
 	padding-left: 10px;
 	margin-right: 15px;
 	margin-left: 7%;
+      height: 100px;
+}
 	}
   .scrollable {
       overflow: auto;
   }
 
   .content{
-     margin-top: 100px;
-     min-height: 450px;
+     margin-top: 140px;
+     min-height: 800px;
+  }
+
+  .spanfullscreen {
+    padding-top: 49px !important;
   }
 
   .navbar-static-top .container,
@@ -199,7 +240,7 @@ font-size: 0.9em;
   }
 
   li  {list-style-type: none;  }
-  .nav > li > a:hover { color: #ff0c1c; }
+  .nav > li > a:hover { color: #ff6900; }
   .nav .nav-collapse {
   text-transform: uppercase;
   }
@@ -229,7 +270,7 @@ font-size: 0.9em;
   }
 
 .navbar .nav > li > a {
-color: #2d2d2d;
+color: #ff6900; 
 text-shadow: 0 1px 0 #eeeeee;
 }
 
@@ -247,7 +288,7 @@ text-shadow: 0 1px 0 #eeeeee;
 
 .collection_list {
   float:left;
-  width:200px;
+  width:284px;
 }
 
 	.input-group {
@@ -307,7 +348,7 @@ text-shadow: 0 1px 0 #eeeeee;
 }
 
 .size_active {
-   color:red; 
+   color: #ff6900; 
    text-decoration: underline; 
 }
 
@@ -341,12 +382,16 @@ text-shadow: 0 1px 0 #eeeeee;
 }
 
 .image_description_detail {
-    padding: 4px;
-    margin-top: 6px;
+  padding: 4px;
+  margin-top: 6px;
 	margin-left: 10px;
 	margin-bottom: 4px;
 	margin-right: 4px; 	
 	overflow: hidden
+}
+
+.image_force_art {
+  height: 360px !important; 
 }
 
 .articlehead {
@@ -438,7 +483,9 @@ margin-right: -49px;
 .change_lang{
   cursor: pointer;
   margin-right: 5px;
-  padding : 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  display: block;
 }
 .post_body{
   max-width:100%;
@@ -524,9 +571,10 @@ margin-right: -49px;
 }
 
 .mob_shop_icon {
-    padding-left: 36px;
-    padding-top: 16px;
-    float:left;
+      padding-left: 16px;
+    padding-right: 24px;
+    padding-top: 13px;
+    float: left;
 }
 
 
@@ -595,7 +643,7 @@ margin-right: -49px;
 }
 
 .size_active {
-   color:red; 
+   color:#ff6900; 
    text-decoration: underline; 
 }
 
@@ -619,11 +667,12 @@ img.sample{
 
 img.pattern_color_image {
     cursor:pointer;
-    width:60px
+    width: 64px; 
+    height: 98px;
 }
 .color_and_pattern_choose {
  overflow-y: scroll;
- height:200px;
+ height:277px;
 }
 .floating {
  float:right;
@@ -742,8 +791,9 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
 }
 
 .force_image {
-     height: 300px;
+     height: 430px;
      overflow:hidden;
+     margin: 2px;
 }
 
 .no_padding {
@@ -781,7 +831,7 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
 	width: 340px; 
 	height: 190px; 
 	overflow: hidden;
-    margin-bottom: 10px; 
+  margin-bottom: 10px; 
 }
 
 
@@ -815,8 +865,8 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
 }
 
 .ribbonl {
-  left: -81px;
-  top: 9px;
+  left: -105px;
+  top: 22px;
 }
 
 .ribbon div {
@@ -849,6 +899,11 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
   padding-left: 140px; 
 }
 
+.pulldown_cod {
+  padding-top: 23px;
+  padding-left: 140px; 
+}
+
 .image_button {
   border: none;
   margin: 2px;
@@ -863,4 +918,59 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
 .add_size_message {
     color: red;
     font-size: 14px;  
+}
+
+.midhead {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    position: fixed;
+    left: 40%;
+}
+
+.main_nav {
+    margin: auto;
+    padding: 10px;
+    position: fixed;
+    left: 43%;
+    top: 61px;
+    z-index: 10; 
+    background-color: white; 
+}
+
+.vb_logo { 
+   width: 400px;
+   position: fixed;
+   left: 36%;
+   top: 43px;
+      z-index: 11; 
+ }
+
+ .tagline_img {
+  width: 240px; 
+ }
+
+ .navbar-default {
+    background-color: white; 
+    border-color: white; 
+}
+
+address {
+    font-weight: normal;
+}
+
+h4, .h4 {
+    font-size: 15px;
+}
+
+.mainnav {
+   font-size: 14px;
+}
+
+.image_off, .force_image:hover .image_on{
+
+   display:none
+}
+.image_on, .force_image:hover .image_off{
+   display:block
 }
