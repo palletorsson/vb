@@ -9,26 +9,33 @@
 
 {% block allcontent %}
  <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#home">{% trans "Artiklar" %} </a></li>
+  <li class="active"><a data-toggle="tab" href="#intro">{% trans "Artiklar" %} </a></li>
   <li> --> </li>
-  <li><a data-toggle="tab" href="#menu1">{% trans "Färger och Mönster" %} </a></li>
+  <li class="active"><a data-toggle="tab" href="#art">{% trans "Artiklar" %} </a></li>
   <li> --> </li>
-  <li><a data-toggle="tab" href="#menu2">{% trans "Slutför" %} </a></li>
+  <li><a data-toggle="tab" href="#patterandcolor">{% trans "Färger och Mönster" %} </a></li>
+  <li> --> </li>
+  <li><a data-toggle="tab" href="#summary">{% trans "Slutför" %} </a></li>
 </ul>
 
 <div class="tab-content">
-  <div id="home" class="tab-pane fade in active">
-    <h3>HOME</h3>
-    <p>Some content.</p>
+  <div id="intro" class="tab-pane fade in active">
+    <h3>Intro</h3>
+    <p>cut on demand is ... </p>
   </div>
-  <div id="menu1" class="tab-pane fade">
-    <h3>Menu 1</h3>
-    <p>Some content in menu 1.</p>
+  <div id="art" class="tab-pane fade">
+    <h3>Välj artiklar</h3>
+    <p>Artiklar</p>
   </div>
-  <div id="menu2" class="tab-pane fade">
-    <h3>Menu 2</h3>
-    <p>Some content in menu 2.</p>
+  <div id="patterandcolor" class="tab-pane fade">
+    <h3>Välj fönster och mönster</h3>
+    <p>Färger och Mönster</p>
   </div>
+  <div id="summary" class="tab-pane fade">
+    <h3>Summary</h3>
+    <p>välj mönster och lägg till i shoppinglåda</p>
+  </div>
+
 </div>
 {% endblock %}
 
