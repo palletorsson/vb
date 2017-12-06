@@ -409,13 +409,22 @@ def readetail(request, pk):
                    },
                    context_instance=RequestContext(request)
                     )
+    
+def codwizard(request, pk):
+    product = "products"
+
+    return render_to_response('variation/codwizard.html',
+                   {'product': product,
+                   },
+                   context_instance=RequestContext(request)
+                    )
 
 def fulldetail(request, pk):
     try:
         full_variation = FullVariation.objects.get(pk=pk)
     except:
         raise Http404
-
+    
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
 
     full_variations_article = FullVariation.objects.filter(variation__article=full_variation.variation.article, size="42")  
