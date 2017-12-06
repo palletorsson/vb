@@ -409,8 +409,8 @@ def readetail(request, pk):
                    },
                    context_instance=RequestContext(request)
                     )
-    
-def codwizard(request, pk):
+
+def codwizard(request):
     product = "products"
 
     return render_to_response('variation/codwizard.html',
