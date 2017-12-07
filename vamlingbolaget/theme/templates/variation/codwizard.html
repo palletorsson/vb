@@ -8,7 +8,9 @@
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#intro"> <span class="glyphicon glyphicon-info-sign" aria-hidden="true"> </span> </span> {% trans "Cut on Demand" %} </a> </li>
     <li><a data-toggle="tab" href="#art"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> </span> {% trans "Artiklar" %} </a> </li>
+    
     <li><a data-toggle="tab" href="#patterandcolor"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> </span> {% trans "Färger och Mönster" %} </a></li>
+
     <li><a data-toggle="tab" href="#summary"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true" ></span> {% trans "Slutför" %} </a></li>
   </ul>
 </div>
@@ -43,14 +45,14 @@
     <h3>Välj bland fönster och mönster</h3>
     <hr/>
      <span class="pull-right"><a data-toggle="tab" href="#summary"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true" ></span> {% trans "Slutför" %} </a></span>
-  </div>
+
         {% for item in colorsandpatterns %}
         <div style="vertical-align: top; display: inline-block; text-align: center; width: 120px;">
         <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="100%"  id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
         <span style="display: block;">{{ item.color.name }} {{ item.pattern.name }}</span>
         </div>    
     {% endfor  %}
-    
+     </div> 
   <div id="summary" class="tab-pane fade">
     <h3>Summary</h3>
     <div class="span12">
