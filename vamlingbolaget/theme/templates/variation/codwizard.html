@@ -16,16 +16,17 @@
 <div class="tab-content">
   <div id="intro" class="tab-pane fade in active">
     <h3>Intro</h3><span class="pull-right"><a data-toggle="tab" href="#art"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> </span> {% trans "Välj bland Artiklar" %} </a> </span>
+    <hr/>
     <p><img src="/media/cod.jpg"> </p>
     
   </div>
   <div id="art" class="tab-pane fade">
-    <h3>Välj artiklar</h3>
-
+    <h3>Välj bland artiklar</h3>
+    <hr/>
       <div class="pull-right"><a data-toggle="tab" href="#patterandcolor"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> </span> {% trans "Färger och Mönster" %} </a>
         </div>
       {% for article in articles %}
-     <div class="collection_list img_container" >
+     <div class="collection_list img_container article_small_icons" >
             <div class="force_image">
               <img src="{% version article.file 'medium' %}" alt="Vamlingbolaget {{ article.name }}" /></div>
               <div class='image_description'>
@@ -39,7 +40,8 @@
  
   </div>
   <div id="patterandcolor" class="tab-pane fade">
-    <h3>Välj fönster och mönster</h3>
+    <h3>Välj bland fönster och mönster</h3>
+    <hr/>
      <div class="pull-right"><a data-toggle="tab" href="#summary"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true" ></span> {% trans "Slutför" %} </a></div>
   </div>
         {% for item in colorsandpatterns %}
