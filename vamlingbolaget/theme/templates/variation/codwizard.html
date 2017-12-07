@@ -21,6 +21,9 @@
   </div>
   <div id="art" class="tab-pane fade">
     <h3>Välj artiklar</h3>
+
+      <div class="pull-right"><a data-toggle="tab" href="#patterandcolor"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> </span> {% trans "Färger och Mönster" %} </a>
+        </div>
       {% for article in articles %}
      <div class="collection_list img_container" >
             <div class="force_image">
@@ -33,19 +36,19 @@
             </div>
     </div>
   {% endfor %}
-   <div><a data-toggle="tab" href="#patterandcolor"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> </span> {% trans "Färger och Mönster" %} </a>
-        </div>
+ 
   </div>
   <div id="patterandcolor" class="tab-pane fade">
     <h3>Välj fönster och mönster</h3>
+     <div class="pull-right"><a data-toggle="tab" href="#summary"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true" ></span> {% trans "Slutför" %} </a></div>
+  </div>
         {% for item in colorsandpatterns %}
         <div style="vertical-align: top; display: inline-block; text-align: center; width: 120px;">
         <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="100%"  id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
         <span style="display: block;">{{ item.color.name }} {{ item.pattern.name }}</span>
         </div>    
     {% endfor  %}
-     <div><a data-toggle="tab" href="#summary"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true" ></span> {% trans "Slutför" %} </a></div>
-  </div>
+    
   <div id="summary" class="tab-pane fade">
     <h3>Summary</h3>
     <p>välj storlek och lägg till i shoppinglåda</p>
