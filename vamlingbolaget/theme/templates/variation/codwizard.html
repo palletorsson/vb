@@ -35,7 +35,7 @@
   </div>
   <div id="patterandcolor" class="tab-pane fade">
     <h3>Välj fönster och mönster</h3>
-        {% for item in colorsandpattern %}
+        {% for item in colorsandpatterns %}
         <div style="vertical-align: top; display: inline-block; text-align: center; width: 120px;">
         <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="100%"  id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
         <span style="display: block;">{{ item.color.name }} {{ item.pattern.name }}</span>
