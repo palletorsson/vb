@@ -411,10 +411,14 @@ def readetail(request, pk):
                     )
 
 def codwizard(request):
-    product = "products"
-
+    articles = Article.objects.filter(active = True).order_by('name')
+    # qualities = Quality.objects.filter(active=True)
+    # types = Category.objects.filter(active=True)
+    colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     return render_to_response('variation/codwizard.html',
-                   {'product': product,
+                   {'articles': articles,
+                    'colorsandpatterns': colorsandpatterns, 
+                    'sizes': SIZES
                    },
                    context_instance=RequestContext(request)
                     )

@@ -20,11 +20,27 @@
   </div>
   <div id="art" class="tab-pane fade">
     <h3>Välj artiklar</h3>
-    <p>Artiklar</p>
+      {% for article in articles %}
+     <div class="collection_list img_container" >
+            <div class="force_image">
+              <img src="{% version article.file 'medium' %}" alt="Vamlingbolaget {{ article.name }}" /></div>
+              <div class='image_description'>
+                <span class="artname"> {{ article.name }} </span><br/>
+                <span class="price">{{ article.price }} SEK</span> <br/> 
+                <span class="artnum"> Art.nr: {{ article.sku_number }}</span>
+                <hr> 
+            </div>
+    </div>
+  {% endfor %}
   </div>
   <div id="patterandcolor" class="tab-pane fade">
     <h3>Välj fönster och mönster</h3>
-    <p>Färger och Mönster</p>
+        {% for item in colorsandpattern %}
+        <div style="vertical-align: top; display: inline-block; text-align: center; width: 120px;">
+        <img src="/media/uploads/120/{{ item.color.order }}f_{{ item.pattern.order }}m.jpg" width="100%"  id="{{ item.color.order }}_{{ item.pattern.order }}_{{ item.color.name }}_{{ item.pattern.name }}">
+        <span style="display: block;">{{ item.color.name }} {{ item.pattern.name }}</span>
+        </div>    
+    {% endfor  %}
   </div>
   <div id="summary" class="tab-pane fade">
     <h3>Summary</h3>
