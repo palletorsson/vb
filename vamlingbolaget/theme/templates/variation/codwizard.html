@@ -23,8 +23,8 @@
   <div id="art" class="tab-pane fade">
     <h3>Välj bland artiklar</h3>
     <hr/>
-      <div class="pull-right"><a data-toggle="tab" href="#patterandcolor"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> </span> {% trans "Färger och Mönster" %} </a>
-        </div>
+      <span class="pull-right"><a data-toggle="tab" href="#patterandcolor"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> </span> {% trans "Färger och Mönster" %} </a>
+        </span>
       {% for article in articles %}
      <div class="collection_list img_container article_small_icons" >
             <div class="force_image">
@@ -42,7 +42,7 @@
   <div id="patterandcolor" class="tab-pane fade">
     <h3>Välj bland fönster och mönster</h3>
     <hr/>
-     <div class="pull-right"><a data-toggle="tab" href="#summary"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true" ></span> {% trans "Slutför" %} </a></div>
+     <span class="pull-right"><a data-toggle="tab" href="#summary"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true" ></span> {% trans "Slutför" %} </a></span>
   </div>
         {% for item in colorsandpatterns %}
         <div style="vertical-align: top; display: inline-block; text-align: center; width: 120px;">
@@ -53,7 +53,119 @@
     
   <div id="summary" class="tab-pane fade">
     <h3>Summary</h3>
-    <p>välj storlek och lägg till i shoppinglåda</p>
+    <div class="span12">
+    <div class="span3 article_background" id="fadeifchangeorder">
+          <div id="images_container" class="img_container">
+        <div class="ribbon">
+            <div>Cut On Demand</div>
+        </div>
+            <a href="{{ image }}" class="variation_link">
+              <img src="/media/{{ product.file }}" alt="article image" class="cut_detail_img" />
+            </a>
+        </div> 
+        <div class="text-center hidden-xs">
+          <hr>
+              <div>  
+                <b> CUT ON DEMAND </b> – vi syr upp ditt unika plagg utifrån våra modeller! Välj modell, storlek, mönster och färg. 
+          <hr>
+                Ditt drömplagg sys upp i vår verkstad i Vamlingbo. På så sätt kan vi tillmötesgå dina önskemål och plagget får en längre livslängd.
+
+          <hr>
+   
+          Detta erbjudande gäller plagg i silkestrikå. Observera att dessa plagg inte kan lämnas tillbaka för återköp eller byte.
+                <hr> 
+        </div>
+              <hr> 
+        </div>
+    </div>      
+    <div class="span7">
+      <span class="articlehead">
+        <span id="articlename">
+          <input id="article_pk" type="hidden" value="{{ product.article.sku_number}}">
+          <input type="hidden" id="pattern" name="pattern" value="7" >              
+          <input type="hidden" id="color" name="color" value="1" >
+          <input type="hidden" id="full_var" name="full_var" value="1" >
+          <input type="hidden" id="s_type" name="s_type" value="COD" >
+          <h4>{{ product.name }} :
+            <span> 
+              
+              {%if product.discount %}
+                <span class="discount"> {{ product.f_discount }} </span> * SEK
+                </span> + Cut on Demand : 
+                  <span id="cod_price"> {{ product.ondemand_cost }} SEK</span> <hr>
+                  <small>* {% trans "tidigare pris" %}  <span id="the_price">{{ product.price }} </span>  SEK </small>
+              {%else%}
+              <span id="the_price"> {{ product.price }}</span> SEK + Cut on Demand: <span id="cod_price"> {{ product.ondemand_cost }} SEK</span>
+              {%endif%}  
+            </span> 
+          </h4>  
+          <hr>
+        </span> 
+      </span>
+    </div>
+    <div class="span7">
+      <span class="articlehead">
+      {% trans "Vald" %} {% trans "Storlek" %} - {% trans "Färger och Mönster" %}:  
+      </span>
+      <span class="selectedpatternandcolor_text"></span>  
+      <hr>
+      <div class="span5 selectedpatternandcolor">
+        <img id="pattern_color_image r" src="{{ MEDIA_URL }}/uploads/120/7f_1m.jpg" style="width:180px;" />
+      </div>
+   
+    </div>
+        <div class="span7">
+          <hr>
+      <nav>
+        <ul class="pagination">
+          <span class="remove_on_size articlehead"> (* {% trans "Välj" %}) </span>
+          <span id="nosize"> <--- </span> 
+          {% for size in sizes %}
+            {% if size.pk == 3 %}
+              <li class="select_size" id="{{ size.pk }}" data-size="none">
+                <span>
+                  <a class="size_active">{{ size.name }}</a>
+                </span> 
+              </li>
+            {% else  %}
+              <li class="select_size" id="{{ size.pk }}" data-size="none">
+                <span>
+                  <a>{{ size.name }}</a>
+                </span> 
+            </li>
+            {% endif %}
+           {% endfor %}
+        </ul>
+            </nav>
+      <input type="hidden" id="size" name="size" value="3" >
+        <input type="hidden" id="quantity" name="quantity" value="1" >    
+      <input type="hidden" id="add_or_edit" name="add" value="add" > 
+      <span class="hidden" id="sku_number">{{ product.sku_number }}</span>
+    </div>
+    <div class="span7">
+      <div class="span2">
+            <span id="addtocart" class="articlehead" >
+          <span style="padding-left: 30px;">
+            <button class="btn btn-success btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppingbag" %}</button>
+          </span>
+          </span>
+      </div>
+
+      <div class="span4">
+        <div class="pulldown_cod articlehead">      
+          <span> {% trans "Leverans:" %}  {% trans "Fyra veckor" %} </span>
+        </div>
+      </div>
+    </div> <!-- end span7 -->
+      <div class="span7">
+        <hr>
+        {% trans "Detaljer" %} {% trans "Art.Nr." %} : {{ product.sku_number }}  - {{ product.description }}
+        <hr>
+        <span class="quality" id="{{ product.quality }}">{{ product.quality }} </span> : 
+              <span> {{ product.quality.description }} </span>
+        <hr>
+      </div>
+    </div> <!-- end span12 -->
   </div>
 
 </div>
