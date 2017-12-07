@@ -32,9 +32,9 @@
                 <hr> 
             </div>
     </div>
-        <div><a data-toggle="tab" href="#patterandcolor"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> </span> {% trans "Färger och Mönster" %} </a>
-        </div>
   {% endfor %}
+   <div><a data-toggle="tab" href="#patterandcolor"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> </span> {% trans "Färger och Mönster" %} </a>
+        </div>
   </div>
   <div id="patterandcolor" class="tab-pane fade">
     <h3>Välj fönster och mönster</h3>
@@ -44,6 +44,7 @@
         <span style="display: block;">{{ item.color.name }} {{ item.pattern.name }}</span>
         </div>    
     {% endfor  %}
+     <div><a data-toggle="tab" href="#summary"> <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true" ></span> {% trans "Slutför" %} </a></div>
   </div>
   <div id="summary" class="tab-pane fade">
     <h3>Summary</h3>
