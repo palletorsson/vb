@@ -52,8 +52,15 @@ def cutondemandApi(request):
     allpossiblities["colorspatterns"] = []
     
     for csps in colorsandpatterns:
-      print csps
-
+      allpossiblities["colorspatterns"].append({
+          "color_num": csps.color.order,
+          "color_name": csps.color.name,
+          "pattern_num": csps.pattern.order,
+          "pattern_name": csps.pattern.name,
+          "quality_name": csps.quality.name, 
+          "quality_num": csps.quality.order
+          }) 
+   
     for a in articles:
         allpossiblities["articles"].append({
           "article": a.name,
