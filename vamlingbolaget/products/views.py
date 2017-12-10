@@ -50,6 +50,7 @@ def cutondemandApi(request):
     allpossiblities["colorspatterns"] = []
     try:
         sellart = FullVariation.objects.get(pk=1994)
+        print sellart.variation.article.name
         allpossiblities["single"] = [{
           "article": sellart.variation.article.name,
           "sku": sellart.variation.article.sku_number,
