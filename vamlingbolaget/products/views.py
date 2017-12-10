@@ -47,7 +47,7 @@ def cutondemandApi(request):
     active_articles = ""
     active_fabric = ""
     active_sizes = ""
-    allpossiblities = []
+    allpossiblities = {}
     allpossiblities["articles"] = []
     allpossiblities["colorspatterns"] = []
     
