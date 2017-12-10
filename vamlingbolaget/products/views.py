@@ -43,14 +43,19 @@ SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
 
 def cutondemandApi(request): 
     articles = Article.objects.filter(active=True).order_by('-category')
-  
+    colorsandpatterns = PatternAndColor.objects.filter(active=True)
     active_articles = ""
     active_fabric = ""
     active_sizes = ""
     allpossiblities = []
-   # allpossiblities["articles"] = []
+    allpossiblities["articles"] = []
+    allpossiblities["colorspatterns"] = []
+    
+    for csps in colorsandpatterns:
+      print csps
+
     for a in articles:
-        allpossiblities.append({
+        allpossiblities["articles"].append({
           "article": a.name,
           "sku": a.sku_number,
           "price": a.price,
@@ -62,9 +67,7 @@ def cutondemandApi(request):
           "quality": a.quality.name,
           "cod_cost": a.ondemand_cost,
           })  
-       
     # TODO add sizes
-    
     resp = json.dumps(allpossiblities)
     return HttpResponse(resp, content_type="application/json")
         
