@@ -41,6 +41,29 @@ def index(request):
 
 SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
 
+def cutondemandApi(request): 
+    articles = Article.objects.filter(active=True).order_by('-category')
+  
+    active_articles = ""
+    active_fabric = ""
+    active_sizes = ""
+    allpossiblities = []
+   # allpossiblities["articles"] = []
+    for a in articles:
+        allpossiblities.append({
+          "article": a.article.name,
+          "sku": a.article.sku_number,
+          "price": a.article.price,
+          #"img": a.image.path, # this has to be made  
+          "id": a.id
+          })  
+  
+    # TODO add sizes
+    
+    resp = json.dumps(allpossiblities)
+    return HttpResponse(resp, content_type="application/json")
+        
+
 def fullindex(request):
     full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='kvinna').order_by('order') 
     qualities = Quality.objects.filter(active=True)
