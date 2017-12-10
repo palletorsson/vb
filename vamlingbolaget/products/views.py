@@ -58,9 +58,9 @@ def cutondemandApi(request):
           "id": a.id,
           "type": a.type, 
           "category": a.category, 
-          "description": a.description
-          "quality": a.quality
-          "cod_cost": a.ondemand_cost
+          "description": a.description,
+          "quality": a.quality,
+          "cod_cost": a.ondemand_cost,
           })  
        
     # TODO add sizes
