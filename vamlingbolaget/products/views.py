@@ -51,13 +51,18 @@ def cutondemandApi(request):
    # allpossiblities["articles"] = []
     for a in articles:
         allpossiblities.append({
-          "article": a.article.name,
-          "sku": a.article.sku_number,
-          "price": a.article.price,
-          #"img": a.image.path, # this has to be made  
-          "id": a.id
+          "article": a.name,
+          "sku": a.sku_number,
+          "price": a.price,
+          "img": a.file, # this has to be made  
+          "id": a.id,
+          "type": a.type, 
+          "category": a.category, 
+          "description": a.description
+          "quality": a.quality
+          "cod_cost": a.ondemand_cost
           })  
-  
+       
     # TODO add sizes
     
     resp = json.dumps(allpossiblities)
