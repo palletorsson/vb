@@ -56,9 +56,9 @@ def cutondemandApi(request):
           "price": a.price,
           #"img": a.file, # this has to be made  
           "id": a.id,
-          "type": a.type, 
+          "type": a.type.name, 
           "category": a.category.name, 
-          "description": a.description.name,
+          "description": a.description,
           "quality": a.quality.name,
           "cod_cost": a.ondemand_cost,
           })  
