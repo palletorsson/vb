@@ -44,29 +44,27 @@ SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
 def cutondemandApi(request): 
     articles = Article.objects.filter(active=True).order_by('-category')
     colorsandpatterns = PatternAndColor.objects.filter(active=True)
-    active_sizes = ""
+    active_sizes = SIZES
     allpossiblities = {}
     allpossiblities["articles"] = []
     allpossiblities["colorspatterns"] = []
-    #ry:
-    sellart = FullVariation.objects.get(pk=1994)
-    print sellart.variation.article.name
-    allpossiblities["single"] = [{
-      "article": sellart.variation.article.name,
-      "sku": sellart.variation.article.sku_number,
-      "price": sellart.variation.article.price,
-      "img": sellart.variation.article.file.url, 
-      "id": sellart.variation.article.id,
-      "type": sellart.variation.article.type.name, 
-      "category": sellart.variation.article.category.name, 
-      "description": sellart.variation.article.description,
-      "quality": sellart.variation.article.quality.name,
-      "cod_cost": sellart.variation.article.ondemand_cost
-    }]
-    #except:
-    #print "no such art"
-    
-
+    allpossiblities["sizes"] = active_sizes
+    try:
+        sellart = FullVariation.objects.get(pk=1994)
+        allpossiblities["single"] = [{
+          "article": sellart.variation.article.name,
+          "sku": sellart.variation.article.sku_number,
+          "price": sellart.variation.article.price,
+          "img": sellart.variation.article.file.url, 
+          "id": sellart.variation.article.id,
+          "type": sellart.variation.article.type.name, 
+          "category": sellart.variation.article.category.name, 
+          "description": sellart.variation.article.description,
+          "quality": sellart.variation.article.quality.name,
+          "cod_cost": sellart.variation.article.ondemand_cost
+        }]
+    except:
+        print "no such art"
 
     for csps in colorsandpatterns:
         allpossiblities["colorspatterns"].append({
