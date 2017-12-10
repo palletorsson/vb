@@ -61,7 +61,7 @@ def cutondemandApi(request):
       "category": sellart.variation.article.category.name, 
       "description": sellart.variation.article.description,
       "quality": sellart.variation.article.quality.name,
-      "cod_cost": asellart.variation.article.ondemand_cost
+      "cod_cost": sellart.variation.article.ondemand_cost
     }]
     #except:
     #print "no such art"
