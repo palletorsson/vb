@@ -71,20 +71,20 @@ def cutondemandApi(request, category):
 
     for prod in products: 
       allpossiblities["products"].append({
-          "article": sellart.variation.article.name,
-          "sku": sellart.variation.article.sku_number,
-          "price": sellart.variation.article.price,
-          "id": sellart.variation.article.id,
-          "type": sellart.variation.article.type.name, 
-          "category": sellart.variation.article.category.name, 
-          "description": sellart.variation.article.description,
-          "quality": sellart.variation.article.quality.name,
-          "cod_cost": sellart.variation.article.ondemand_cost,
-          "pattern": unicode(sellart.variation.pattern), 
-          "pattern_id": sellart.variation.pattern.order, 
-          "color": unicode(sellart.variation.color), 
-          "color_id": sellart.variation.color.order,   
-          "size": sellart.size, 
+          "article": prod.variation.article.name,
+          "sku": prod.variation.article.sku_number,
+          "price": prod.variation.article.price,
+          "id": prod.variation.article.id,
+          "type": prod.variation.article.type.name, 
+          "category": prod.variation.article.category.name, 
+          "description": prod.variation.article.description,
+          "quality": prod.variation.article.quality.name,
+          "cod_cost": prod.variation.article.ondemand_cost,
+          "pattern": unicode(prod.variation.pattern), 
+          "pattern_id": prod.variation.pattern.order, 
+          "color": unicode(prod.variation.color), 
+          "color_id": prod.variation.color.order,   
+          "size": prod.size, 
         }) 
 
     for csps in colorsandpatterns:
