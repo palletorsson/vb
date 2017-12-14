@@ -74,7 +74,7 @@ def cutondemandApi(request, category):
           "article": sellart.variation.article.name,
           "sku": sellart.variation.article.sku_number,
           "price": sellart.variation.article.price,
-          "img": sellart.get_art_num, 
+          "img": unicode(sellart.get_art_num), 
           "id": sellart.variation.article.id,
           "type": sellart.variation.article.type.name, 
           "category": sellart.variation.article.category.name, 
