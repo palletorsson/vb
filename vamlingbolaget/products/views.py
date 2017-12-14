@@ -41,13 +41,16 @@ def index(request):
 
 SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
 
-def cutondemandApi(request): 
-    articles = Article.objects.filter(active=True).order_by('-category')
+def cutondemandApi(request, category): 
+    models = Article.objects.filter(active=True).order_by('-category')
+    products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
     colorsandpatterns = PatternAndColor.objects.filter(active=True)
     active_sizes = SIZES
     allpossiblities = {}
     allpossiblities["articles"] = []
     allpossiblities["colorspatterns"] = []
+
+    allpossiblities["products"] = []
     allpossiblities["sizes"] = active_sizes
     try:
         sellart = FullVariation.objects.get(pk=1994)
@@ -66,6 +69,20 @@ def cutondemandApi(request):
     except:
         print "no such art"
 
+    for prod in products: 
+      allpossiblities["products"].append({
+          "article": sellart.variation.article.name,
+          "sku": sellart.variation.article.sku_number,
+          "price": sellart.variation.article.price,
+          "img": sellart.variation.article.file.url, 
+          "id": sellart.variation.article.id,
+          "type": sellart.variation.article.type.name, 
+          "category": sellart.variation.article.category.name, 
+          "description": sellart.variation.article.description,
+          "quality": sellart.variation.article.quality.name,
+          "cod_cost": sellart.variation.article.ondemand_cost
+        }) 
+
     for csps in colorsandpatterns:
         allpossiblities["colorspatterns"].append({
           "color_num": csps.color.order,
@@ -76,7 +93,7 @@ def cutondemandApi(request):
           "quality_num": csps.quality.order
           }) 
    
-    for a in articles:
+    for a in models:
         allpossiblities["articles"].append({
           "article": a.name,
           "sku": a.sku_number,
