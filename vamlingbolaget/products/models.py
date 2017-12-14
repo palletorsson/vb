@@ -68,7 +68,7 @@ class FullVariation(TimeStampedActivate):
         return SIZES
 
     def get_sku(self): 
-        return str(self.variation.article.sku_number) + "_" +  str(self.variation.color) + "_" + str(self.variation.pattern) + "_" + str(self.size)
+        return unicode(self.variation.article.sku_number) + "_" +  unicode(self.variation.color.order) + "_" + unicode(self.variation.pattern.order) + "_" + unicode(self.size)
 
     def __unicode__(self):
         return "%s %s %s %s" % (self.variation.article.sku_number, self.variation.color, self.variation.pattern, self.size)
