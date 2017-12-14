@@ -80,7 +80,7 @@ def cutondemandApi(request, category):
           "category": sellart.variation.article.category.name, 
           "description": sellart.variation.article.description,
           "quality": sellart.variation.article.quality.name,
-          "cod_cost": sellart.variation.article.ondemand_cost
+          "cod_cost": sellart.variation.article.ondemand_cost,
           "pattern": sellart.variation.pattern,  
           "color": sellart.variation.color,  
           "size": sellart.size, 
