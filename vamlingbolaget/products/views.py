@@ -45,7 +45,6 @@ def cutondemandApi(request, category):
     models = Article.objects.filter(active=True).order_by('-category')
     if (category == 'all'): 
         products = FullVariation.objects.filter(active=True, size=3840).order_by('order') 
-        products2 = Variation.objects.filter(article__category__slug='barn', order__lte=100, active=True).order_by('order', 'article__quality')
     else: 
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
 
@@ -90,24 +89,6 @@ def cutondemandApi(request, category):
           "color": unicode(prod.variation.color), 
           "color_id": prod.variation.color.order,   
           "size": prod.size, 
-        }) 
-      
-      for prod in products2: 
-          allpossiblities["products"].append({
-              "article": prod.article.name,
-              "sku": prod.article.sku_number,
-              "price": prod.article.price,
-              "id": prod.article.id,
-              "type": prod.article.type.name, 
-              "category": prod.article.category.name, 
-              "description": prod.article.description,
-              "quality": prod.article.quality.name,
-              "cod_cost": prod.article.ondemand_cost,
-              "pattern": unicode(prod.pattern), 
-              "pattern_id": prod.pattern.order, 
-              "color": unicode(prod.color), 
-              "color_id": prod.color.order,   
-              "size": "M", 
         }) 
 
     for csps in colorsandpatterns:
