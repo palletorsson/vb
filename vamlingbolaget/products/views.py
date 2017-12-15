@@ -43,7 +43,11 @@ SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
 
 def cutondemandApi(request, category): 
     models = Article.objects.filter(active=True).order_by('-category')
-    products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
+    if (category == 'all'): 
+        products = FullVariation.objects.filter(active=True, size=3840).order_by('order') 
+    else: 
+        products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
+
     colorsandpatterns = PatternAndColor.objects.filter(active=True)
     active_sizes = SIZES
     allpossiblities = {}
