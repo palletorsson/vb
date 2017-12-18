@@ -48,8 +48,8 @@ def cutondemandApi(request, category):
     else: 
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
  
-    children = Article.objects.filter(category__slug='barn', active=True, ).order_by('quality')
-    accessories = Article.objects.filter(category__slug='accessoarer', active=True).order_by('quality')
+    children = Variation.objects.filter(article__category__slug='barn', order__lte=100, active=True).order_by('order', 'article__quality')
+    accessories = Variation.objects.filter(article__category__slug='accessoarer', order__lte=100, active=True).order_by('order', 'article__quality')
    
     colorsandpatterns = PatternAndColor.objects.filter(active=True)
     active_sizes = SIZES
@@ -97,15 +97,15 @@ def cutondemandApi(request, category):
       
       for chil in children: 
           allpossiblities["children"].append({
-              "article": chil.name,
-              "sku": chil.sku_number,
-              "price": chil.price,
-              "id": chil.id,
-              "type": chil.type.name, 
-              "category":chil.category.name, 
-              "description": chil.description,
-              "quality": chil.quality.name,
-              "cod_cost": chil.ondemand_cost,
+              "article": chil.article.name,
+              "sku": chil.article.sku_number,
+              "price": chil.article.price,
+              "id": chil.article.id,
+              "type": chil.article.type.name, 
+              "category":chil.article.category.name, 
+              "description": chil.article.description,
+              "quality": chil.article.quality.name,
+              "cod_cost": chil.article.ondemand_cost,
               "pattern": unicode(chil.pattern), 
               "pattern_id": chil.pattern.order, 
               "color": unicode(chil.color), 
@@ -115,15 +115,15 @@ def cutondemandApi(request, category):
 
       for access in accessories: 
           allpossiblities["assessories"].append({
-              "article": access.name,
-              "sku": access.sku_number,
-              "price": access.price,
-              "id": access.id,
-              "type": access.type.name, 
-              "category": access.category.name, 
-              "description": access.description,
-              "quality": access.quality.name,
-              "cod_cost": access.ondemand_cost,
+              "article": access.article.name,
+              "sku": access.article.sku_number,
+              "price": access.article.price,
+              "id": access.article.id,
+              "type": access.article.type.name, 
+              "category": access.article.category.name, 
+              "description": access.article.description,
+              "quality": access.article.quality.name,
+              "cod_cost": access.article.ondemand_cost,
               "pattern": unicode(access.pattern), 
               "pattern_id": access.pattern.order, 
               "color": unicode(access.color), 
