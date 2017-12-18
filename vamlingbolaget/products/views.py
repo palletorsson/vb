@@ -48,9 +48,8 @@ def cutondemandApi(request, category):
         products = FullVariation.objects.filter(active=True, size=3840).order_by('order') 
     else: 
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
-    children = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('order', 'article__quality')
-    accessories = Variation.objects.filter(order__lte=100, article__category__slug='accessoarer', active=True).order_by('order', 'article__quality')
-   
+    variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('order', 'article__quality')
+    
     colorsandpatterns = PatternAndColor.objects.filter(active=True)
     active_sizes = SIZES
     allpossiblities = {}
@@ -96,7 +95,7 @@ def cutondemandApi(request, category):
           "size": prod.size, 
         }) 
       
-    for chil in children:
+    for chil in variations:
         pf =  chil.pk
         img = Image.objects.get(variation__pk=pf)
         allpossiblities["children"].append({
@@ -115,28 +114,6 @@ def cutondemandApi(request, category):
             "pattern_id": chil.pattern.order, 
             "color": unicode(chil.color), 
             "color_id": chil.color.order,   
-            "size": "M", 
-    }) 
-
-    for access in accessories: 
-        pf = access.pk
-        img = Image.objects.get(variation__pk=pf)
-        allpossiblities["assessories"].append({
-            "article": access.article.name,
-            "sku": access.article.sku_number,
-            "price": access.article.price,
-            "id": access.article.id,
-            "type": access.article.type.name, 
-            "img":img.image.url,
-            "pk": access.pk,
-            "category": access.article.category.name, 
-            "description": access.article.description,
-            "quality": access.article.quality.name,
-            "cod_cost": access.article.ondemand_cost,
-            "pattern": unicode(access.pattern), 
-            "pattern_id": access.pattern.order, 
-            "color": unicode(access.color), 
-            "color_id": access.color.order,   
             "size": "M", 
     }) 
 
