@@ -112,7 +112,7 @@ def cutondemandApi(request, category):
             "color": unicode(chil.color), 
             "color_id": chil.color.order,   
             "size": "M", 
-      }) 
+    }) 
 
     for access in accessories: 
         allpossiblities["assessories"].append({
@@ -130,7 +130,7 @@ def cutondemandApi(request, category):
             "color": unicode(access.color), 
             "color_id": access.color.order,   
             "size": "M", 
-      }) 
+    }) 
 
     for csps in colorsandpatterns:
         allpossiblities["colorspatterns"].append({
