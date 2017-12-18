@@ -40,8 +40,9 @@ class Variation(TimeStampedActivate):
 
     def get_first_img(self, pk):
         image = Image.objects.get(variation__pk=pk)[0]
+        print image
         return image
-        
+
     def get_index_images(self):
         images = Image.objects.all()
         return images

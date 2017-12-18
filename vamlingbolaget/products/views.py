@@ -49,7 +49,6 @@ def cutondemandApi(request, category):
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
  
     children = Variation.objects.filter(article__category__slug='barn', order__lte=100, active=True).order_by('order', 'article__quality')
-    print children
     accessories = Variation.objects.filter(article__category__slug='accessoarer', order__lte=100, active=True).order_by('order', 'article__quality')
    
     colorsandpatterns = PatternAndColor.objects.filter(active=True)
