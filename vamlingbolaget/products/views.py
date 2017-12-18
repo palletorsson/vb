@@ -55,7 +55,7 @@ def cutondemandApi(request, category):
     allpossiblities = {}
     allpossiblities["articles"] = []
     allpossiblities["colorspatterns"] = []
-    allpossiblities["children"] = []
+    allpossiblities["variations"] = []
     allpossiblities["products"] = []
     allpossiblities["assessories"] = []
     allpossiblities["sizes"] = active_sizes
