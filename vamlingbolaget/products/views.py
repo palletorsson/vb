@@ -47,14 +47,18 @@ def cutondemandApi(request, category):
         products = FullVariation.objects.filter(active=True, size=3840).order_by('order') 
     else: 
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
-
+ 
+    children = Variation.objects.filter(article__category__slug = 'barn', order__lte=100, active=True).order_by('order', 'article__quality')
+    accessories = Variation.objects.filter(article__category__slug = 'accessoarer', order__lte=100, active=True).order_by('order', 'article__quality')
+   
     colorsandpatterns = PatternAndColor.objects.filter(active=True)
     active_sizes = SIZES
     allpossiblities = {}
     allpossiblities["articles"] = []
     allpossiblities["colorspatterns"] = []
-
+    allpossiblities["children"] = []
     allpossiblities["products"] = []
+    allpossiblities["accessories"] = []
     allpossiblities["sizes"] = active_sizes
     try:
         sellart = FullVariation.objects.get(pk=1994)
@@ -90,7 +94,43 @@ def cutondemandApi(request, category):
           "color_id": prod.variation.color.order,   
           "size": prod.size, 
         }) 
+      
+      for prod in children: 
+          allpossiblities["children"].append({
+              "article": prod.article.name,
+              "sku": prod.article.sku_number,
+              "price": prod.article.price,
+              "id": prod.article.id,
+              "type": prod.article.type.name, 
+              "category": prod.article.category.name, 
+              "description": prod.article.description,
+              "quality": prod.article.quality.name,
+              "cod_cost": prod.article.ondemand_cost,
+              "pattern": unicode(prod.pattern), 
+              "pattern_id": prod.pattern.order, 
+              "color": unicode(prod.color), 
+              "color_id": prod.color.order,   
+              "size": "M", 
+        }) 
 
+      for prod in accessories: 
+          allpossiblities["accessories"].append({
+              "article": prod.article.name,
+              "sku": prod.article.sku_number,
+              "price": prod.article.price,
+              "id": prod.article.id,
+              "type": prod.article.type.name, 
+              "category": prod.article.category.name, 
+              "description": prod.article.description,
+              "quality": prod.article.quality.name,
+              "cod_cost": prod.article.ondemand_cost,
+              "pattern": unicode(prod.pattern), 
+              "pattern_id": prod.pattern.order, 
+              "color": unicode(prod.color), 
+              "color_id": prod.color.order,   
+              "size": "M", 
+        }) 
+          
     for csps in colorsandpatterns:
         allpossiblities["colorspatterns"].append({
           "color_num": csps.color.order,
