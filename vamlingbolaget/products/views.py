@@ -48,7 +48,7 @@ def cutondemandApi(request, category):
     else: 
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
  
-    children = Variation.objects.filter(article__category__slug='barn', order__lte=100, active=True).order_by('order', 'article__quality')
+    children = Variation.objects.filter(article__category__slug='barn', order__lte=100, active=True, ).order_by('order', 'article__quality')
     accessories = Variation.objects.filter(article__category__slug='accessoarer', order__lte=100, active=True).order_by('order', 'article__quality')
    
     colorsandpatterns = PatternAndColor.objects.filter(active=True)
@@ -95,39 +95,39 @@ def cutondemandApi(request, category):
           "size": prod.size, 
         }) 
       
-      for prod in children: 
+      for chil in children: 
           allpossiblities["children"].append({
-              "article": prod.article.name,
-              "sku": prod.article.sku_number,
-              "price": prod.article.price,
-              "id": prod.article.id,
-              "type": prod.article.type.name, 
-              "category": prod.article.category.name, 
-              "description": prod.article.description,
-              "quality": prod.article.quality.name,
-              "cod_cost": prod.article.ondemand_cost,
-              "pattern": unicode(prod.pattern), 
-              "pattern_id": prod.pattern.order, 
-              "color": unicode(prod.color), 
-              "color_id": prod.color.order,   
+              "article": chil.article.name,
+              "sku": chil.article.sku_number,
+              "price": chil.article.price,
+              "id": chil.article.id,
+              "type": chil.article.type.name, 
+              "category":chil.article.category.name, 
+              "description": chil.article.description,
+              "quality": chil.article.quality.name,
+              "cod_cost": chil.article.ondemand_cost,
+              "pattern": unicode(chil.pattern), 
+              "pattern_id": chil.pattern.order, 
+              "color": unicode(chil.color), 
+              "color_id": chil.color.order,   
               "size": "M", 
         }) 
 
-      for prod in accessories: 
+      for access in accessories: 
           allpossiblities["assessories"].append({
-              "article": prod.article.name,
-              "sku": prod.article.sku_number,
-              "price": prod.article.price,
-              "id": prod.article.id,
-              "type": prod.article.type.name, 
-              "category": prod.article.category.name, 
-              "description": prod.article.description,
-              "quality": prod.article.quality.name,
-              "cod_cost": prod.article.ondemand_cost,
-              "pattern": unicode(prod.pattern), 
-              "pattern_id": prod.pattern.order, 
-              "color": unicode(prod.color), 
-              "color_id": prod.color.order,   
+              "article": access.article.name,
+              "sku": access.article.sku_number,
+              "price": access.article.price,
+              "id": access.article.id,
+              "type": access.article.type.name, 
+              "category": access.article.category.name, 
+              "description": access.article.description,
+              "quality": access.article.quality.name,
+              "cod_cost": access.article.ondemand_cost,
+              "pattern": unicode(access.pattern), 
+              "pattern_id": access.pattern.order, 
+              "color": unicode(access.color), 
+              "color_id": access.color.order,   
               "size": "M", 
         }) 
 
