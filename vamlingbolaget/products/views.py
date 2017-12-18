@@ -96,41 +96,41 @@ def cutondemandApi(request, category):
           "size": prod.size, 
         }) 
       
-      for chil in children: 
-          allpossiblities["children"].append({
-              "article": chil.article.name,
-              "sku": chil.article.sku_number,
-              "price": chil.article.price,
-              "id": chil.article.id,
-              "type": chil.article.type.name, 
-              "category":chil.article.category.name, 
-              "description": chil.article.description,
-              "quality": chil.article.quality.name,
-              "cod_cost": chil.article.ondemand_cost,
-              "pattern": unicode(chil.pattern), 
-              "pattern_id": chil.pattern.order, 
-              "color": unicode(chil.color), 
-              "color_id": chil.color.order,   
-              "size": "M", 
-        }) 
+    for chil in children: 
+        allpossiblities["children"].append({
+            "article": chil.article.name,
+            "sku": chil.article.sku_number,
+            "price": chil.article.price,
+            "id": chil.article.id,
+            "type": chil.article.type.name, 
+            "category":chil.article.category.name, 
+            "description": chil.article.description,
+            "quality": chil.article.quality.name,
+            "cod_cost": chil.article.ondemand_cost,
+            "pattern": unicode(chil.pattern), 
+            "pattern_id": chil.pattern.order, 
+            "color": unicode(chil.color), 
+            "color_id": chil.color.order,   
+            "size": "M", 
+      }) 
 
-      for access in accessories: 
-          allpossiblities["assessories"].append({
-              "article": access.article.name,
-              "sku": access.article.sku_number,
-              "price": access.article.price,
-              "id": access.article.id,
-              "type": access.article.type.name, 
-              "category": access.article.category.name, 
-              "description": access.article.description,
-              "quality": access.article.quality.name,
-              "cod_cost": access.article.ondemand_cost,
-              "pattern": unicode(access.pattern), 
-              "pattern_id": access.pattern.order, 
-              "color": unicode(access.color), 
-              "color_id": access.color.order,   
-              "size": "M", 
-        }) 
+    for access in accessories: 
+        allpossiblities["assessories"].append({
+            "article": access.article.name,
+            "sku": access.article.sku_number,
+            "price": access.article.price,
+            "id": access.article.id,
+            "type": access.article.type.name, 
+            "category": access.article.category.name, 
+            "description": access.article.description,
+            "quality": access.article.quality.name,
+            "cod_cost": access.article.ondemand_cost,
+            "pattern": unicode(access.pattern), 
+            "pattern_id": access.pattern.order, 
+            "color": unicode(access.color), 
+            "color_id": access.color.order,   
+            "size": "M", 
+      }) 
 
     for csps in colorsandpatterns:
         allpossiblities["colorspatterns"].append({
