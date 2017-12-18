@@ -97,7 +97,7 @@ def cutondemandApi(request, category):
       
     for chil in children:
         pf =  chil.pk
-        img = Image.objects.get(variation__pk=pf)[0] 
+        img = Image.objects.get(variation__pk=pf)
         allpossiblities["children"].append({
             "article": chil.article.name,
             "sku": chil.article.sku_number,
@@ -118,7 +118,7 @@ def cutondemandApi(request, category):
 
     for access in accessories: 
         pf = access.pk
-        img = Image.objects.get(variation__pk=pf)[0] 
+        img = Image.objects.get(variation__pk=pf)
         allpossiblities["assessories"].append({
             "article": access.article.name,
             "sku": access.article.sku_number,
