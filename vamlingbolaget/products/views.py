@@ -15,6 +15,7 @@ import csv
 import os
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 def first_page(request):
     variations = Variation.objects.filter(active=True).order_by('article__quality')
@@ -47,9 +48,9 @@ def cutondemandApi(request, category):
         products = FullVariation.objects.filter(active=True, size=3840).order_by('order') 
     else: 
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
- 
-    children = Variation.objects.filter(article__category__slug='barn', order__lte=100, active=True).order_by('order', 'article__quality')
-    accessories = Variation.objects.filter( order__lte=100, active=True).order_by('order', 'article__quality')
+
+    children = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer'), order__lte=100, active=True).order_by('order', 'article__quality')
+    accessories = Variation.objects.filter(order__lte=100, article__category__slug='accessoarer', active=True).order_by('order', 'article__quality')
    
     colorsandpatterns = PatternAndColor.objects.filter(active=True)
     active_sizes = SIZES
