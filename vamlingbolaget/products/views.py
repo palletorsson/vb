@@ -58,7 +58,7 @@ def cutondemandApi(request, category):
     allpossiblities["colorspatterns"] = []
     allpossiblities["children"] = []
     allpossiblities["products"] = []
-    allpossiblities["accessories"] = []
+    allpossiblities["assessories"] = []
     allpossiblities["sizes"] = active_sizes
     try:
         sellart = FullVariation.objects.get(pk=1994)
@@ -114,7 +114,7 @@ def cutondemandApi(request, category):
         }) 
 
       for prod in accessories: 
-          allpossiblities["accessories"].append({
+          allpossiblities["assessories"].append({
               "article": prod.article.name,
               "sku": prod.article.sku_number,
               "price": prod.article.price,
