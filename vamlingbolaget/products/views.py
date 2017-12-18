@@ -48,8 +48,8 @@ def cutondemandApi(request, category):
     else: 
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
  
-    children = Article.objects.filter(category__slug='barn', order__lte=100, active=True, ).order_by('quality')
-    accessories = Article.objects.filter(category__slug='accessoarer', order__lte=100, active=True).order_by('quality')
+    children = Article.objects.filter(category__slug='barn', active=True, ).order_by('quality')
+    accessories = Article.objects.filter(category__slug='accessoarer', active=True).order_by('quality')
    
     colorsandpatterns = PatternAndColor.objects.filter(active=True)
     active_sizes = SIZES
