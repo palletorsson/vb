@@ -37,7 +37,11 @@ class Variation(TimeStampedActivate):
     def get_images(self, pk):
         images = Image.objects.get(variation__pk=pk)
         return images
-    
+
+    def get_first_img(self, pk):
+        image = Image.objects.get(variation__pk=pk)[0]
+        return image
+        
     def get_index_images(self):
         images = Image.objects.all()
         return images
