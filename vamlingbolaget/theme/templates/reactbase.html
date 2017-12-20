@@ -137,7 +137,42 @@
             {% block pagedesc %} {% endblock %}
             </div>
 
-            {% block shopmenu %} {% endblock %}
+            {% block shopmenu %}
+    <div class="span12"> 
+        <ul class="pagination">      
+            <li>
+                <a href="/products/full/"> {% trans "Kvinna" %} </a>
+            </li>
+            <li>
+                <a href="/products/type/man"> {% trans "Man" %} </a>
+            </li>
+            <li>
+                <a href="/products/type/barn"> {% trans "Barn" %} </a>
+            </li>
+            <li>
+                <a href="/products/type/accessoarer"> {% trans "Accessoarer" %} </a>
+            </li>
+            <li>
+                <a href="/products/type/piece-goods"> {% trans "Metervara" %} </a>
+            </li>
+   
+            <li>
+                <a href="/products/fullcut/">{% trans "CUT ON DEMAND" %} </a>
+                       
+            </li>
+          
+           <li>
+                 <a href="/products/patternandcolor/">{% trans "mönster och färger" %}</a>          
+            </li>
+             <li>
+                 <a href="/products/rea/">{% trans "REA" %} </a>          
+            </li>
+
+        </ul>
+    </div>
+ 
+
+{% endblock %}
 
             {% block allcontent %}
                 <div class="span2">
