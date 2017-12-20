@@ -8,6 +8,7 @@
 
     <script type="text/javascript" src="{{ STATIC_URL }}js/bundle.js"></script>
     <div id="translations" class="invisible">
+         <span class="csrf_token invisible"> {% csrf_token %}</span>
       <span class="colorsandpatterns" id="colorsandpatterns"> {% trans "Färger och Mönster" %} </span
 
     </div> 
