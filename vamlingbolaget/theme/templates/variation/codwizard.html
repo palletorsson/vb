@@ -4,7 +4,13 @@
 {% version model.field_name version_prefix %}
 
 {% block allcontent %}
- test
+div id="react-container" style={padding-top:"200px"}></div>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bundle.js"></script>
+    <div id="translations" class="invisible">
+      <span class="colorsandpatterns" id="colorsandpatterns"> {% trans "Färger och Mönster" %} </span
+
+    </div> 
 {% endblock %}
 
 
