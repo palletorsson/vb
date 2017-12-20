@@ -15,7 +15,6 @@
     <!-- The styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     
-
     <!-- The scripts -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
@@ -159,12 +158,13 @@
 }
    </style>
 </head>
+
  <body data-spy="scroll" data-target=".bs-docs-sidebar">
     <!-- Navbar ================================================== -->
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar sticky-top navbar-light bg-light fixed-top">
           <div class="navbar-inner hidden-phone">
             <div class="container_first">
-                <div class="nav pull-left flags">
+                <div class="nav-item dropdown text-left flags">
                     <div class="btn-group">
                         <a type="button" href="#" class="btn dropdown-toggle"  data-toggle="dropdown" >
                           <span class="orange forcebtn"> 
@@ -194,7 +194,7 @@
                   <img src="/media/tagline_orange.png" alt="tagline - svensk produktion och design" class="tagline_img" />
               </span>
 
-              <ul class="nav pull-right flags orange">
+              <ul class="nnav-item dropdown text-right flags orange">
                   <li>
                       <a id="token" href="/cart/show/" >
                       <button type="button" class="btn btn-default button_has_item"> 
