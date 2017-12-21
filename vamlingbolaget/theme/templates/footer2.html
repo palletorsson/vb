@@ -1,0 +1,89 @@
+{% load i18n %}
+<hr>
+<br>
+  <div class="nav">
+      <div class="row">
+          <div class="col-md-3">
+              <address>
+                  <strong>Vamlingbolaget</strong><br/>
+                  623 31 Burgsvik<br/>
+                  <abbr title="Phone">Tel:</abbr> 0498-498080 <br/>
+                  info@vamlingbolaget.com
+                  </address><br/>
+              <strong>{% trans "Öppettider" %} </strong><br/>
+              <address>
+              {% trans "Midsommar" %}- 15 {% trans "Augusti" %} <br/>
+              {% trans "Vardagar" %} 11.00 - 17.00 <br/>
+              {% trans "Lördagar" %} 12.00 - 15.00 <br/>
+              {% trans "Söndagar" %} 12.00 - 15.00 <br/><br/>
+                                                    
+              {% trans "Augusti" %} <br/>
+              {% trans "Vardagar" %} 11.00 - 17.00 <br/><br/>
+           {% trans "Övriga året" %} <br/>
+           {% trans "Vardagar" %} 11.00 - 16.00 <br/> 
+         </address>
+                 
+         
+          </div>
+	
+          <div class="col-md-3">
+              <address>
+                  <strong>Vamlingbolaget Stockholm </strong><br/>
+                  Åsögatan 112 <br/>
+                  116 24 Stockholm<br/>
+                  <abbr title="Phone">Tel:</abbr> 08 - 640 31 37 <br/>
+                  stockholm@vamlingbolaget.com
+              </address><br/>
+
+              <strong>{% trans "Öppettider" %} </strong><br/>
+              <address>
+              {% trans "Vardagar" %} 11.00 - 18.00 <br/>
+              {% trans "Lördagar" %} 11.00 - 16.00 <br/><br/>
+              </address>
+           </div>
+
+          <div class="col-md-3">
+              <address>
+                  <strong>GKF - Gotländska Konsthantverkare Formgivare</strong><br/>
+                  Wallérs plats 5 <br/>
+
+                  621 56 Visby <br/>
+                  <abbr title="Phone">Tel:</abbr> 0498 21 03 49 <br/>
+                  info@gkf.nu
+              </address><br/>
+
+              <strong>{% trans "Öppettider" %} </strong><br/>
+              <address>
+                  {% trans "september" %} - {% trans "maj" %}: <br/>
+                  {% trans "mån, tor, fre" %} 12.00 - 18.00 <br/>
+                  {% trans "Lördagar" %} 11.00 - 14.00 <br/><br/>
+                  {% trans "juni" %} - {% trans "augusti" %}: <br/>
+                  {% trans "Vardagar" %} 11.00 - 18.00 <br/>
+                  {% trans "Lördagar" %} 11.00 - 15.00 <br/><br/>
+              </address>
+           </div>
+          <div class="col-md-3">
+           <strong>...</strong>
+                  <ul>
+                   {% include "about_links.html" %}
+                  </ul>
+              <strong> ... </strong><br/>
+              <ul>
+                  {% include "order_terms_links.html" %}
+                 
+              </ul> 
+              
+              <ul class="visible-xs">
+                <li>
+                    <form action="/i18n/setlang/" method="post" id="lang_bottom" >
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}" />
+                        <input name="language" type="hidden" value=""  />
+                        <img src="{{STATIC_URL}}img/english_flag.gif" alt="flag english" id="en" class="change_lang" /> 
+                        <img src="{{STATIC_URL}}img/svensk_flagga.gif" alt="flagga svensk"  id="sv"  class="change_lang" />
+                    </form>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
