@@ -122,9 +122,7 @@
     text-shadow: 0 1px 0 #eeeeee;
  }
  .tagline_img {
-    width: 16%;
-    max-width: 230px; 
-    min-width: 10px; 
+    width: 235px;
     top: -30px;
     position: relative;
     left: -30px;
@@ -194,6 +192,13 @@
     background-color: white !important;
     border-color: white;
 }
+@media (max-width: 640px) 
+{
+    .removesmaller
+    {
+        display: none;
+    }
+}
    </style>
 </head>
 
@@ -225,7 +230,7 @@
                 </div> 
               </div>
               <span class="logo">
-                  <img src="/media/tagline_orange.png" alt="tagline - svensk produktion och design" class="tagline_img hidden-sm" />
+                  <img src="/media/tagline_orange.png" alt="tagline - svensk produktion och design" class="tagline_img removesmaller" />
                    <a href="/" class="navbar-brand hidden-phone">
                     <img src="/media/Vamlingbolaget_orange.png" alt="Vamlingbolaget logo" class="align-middle vb_logo " />
                   </a> 
