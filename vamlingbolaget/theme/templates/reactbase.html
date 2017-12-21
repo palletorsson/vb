@@ -271,11 +271,19 @@ a .btn {
                       </form>
                 </div> 
               </div>
-              <span class="logo">
+              <span class="logo  mx-auto">
                   <img src="/media/tagline_orange.png" alt="tagline - svensk produktion och design" class="tagline_img removesmaller" />
                    <a href="/" class="navbar-brand hidden-phone">
                     <img src="/media/Vamlingbolaget_orange.png" alt="Vamlingbolaget logo" class="align-middle vb_logo " />
                   </a> 
+                   <ul class="nav orange">                   
+                        <li class="nav-item">
+                            <a href="/products/cod/" class="nav-link">{% trans "Shop" %} </span></a>
+                        </li>
+                          <li> 
+                            <a href="/about/" class="nav-link" id="about">{% trans "Om oss" %}</a>
+                        </li>
+                </ul>
               </span>
 
               <ul class="nav-item dropdown float-right cartdiv removesmaller flags orange">
@@ -302,14 +310,7 @@ a .btn {
       					  </a>
       				  </div> 
 
-               <ul class="nav orange mx-auto">                   
-                        <li class="nav-item">
-                            <a href="/products/cod/" class="nav-link">{% trans "Shop" %} </span></a>
-                        </li>
-                          <li> 
-                            <a href="/about/" class="nav-link" id="about">{% trans "Om oss" %}</a>
-                        </li>
-                </ul>
+              
                 <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
                         <span class = "icon-bar"></span>
                         <span class = "icon-bar"></span>
