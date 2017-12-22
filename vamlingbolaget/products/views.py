@@ -64,14 +64,14 @@ def cutondemandApi(request, category):
         allpossiblities["single"] = [{
           "article": unicode("..."),
           "sku": sellart.variation.article.sku_number,
-          "price": sellart.variation.article.price,
+          "price": "...",
           "img": "...", 
           "id": sellart.variation.article.id,
           "type": sellart.variation.article.type.name, 
           "category": sellart.variation.article.category.name, 
           "description": sellart.variation.article.description,
           "quality": sellart.variation.article.quality.name,
-          "cod_cost": sellart.variation.article.ondemand_cost,
+          "cod_cost": "...",
           "pattern": unicode("..."),
           "color": unicode("...")
         }]
