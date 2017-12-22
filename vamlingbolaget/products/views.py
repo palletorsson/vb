@@ -55,7 +55,7 @@ def cutondemandApiSingle(request, sku_number):
             active_sizes = ("90cl", "100cl", "110cl", "120cl", "130cl", "140cl", "150cl")
             allpossiblities["sizes"] = active_sizes
         
-        allpossiblities["single"] = [{
+        allpossiblities["single"] = {
           "article": art.name,
           "sku": art.sku_number,
           "price": art.price,
@@ -67,7 +67,7 @@ def cutondemandApiSingle(request, sku_number):
           "quality": art.quality.name,
           "cod_cost": art.ondemand_cost,
 
-        }]
+        }
     except:
         print "no such art"
 
