@@ -50,7 +50,7 @@ def cutondemandApiSingle(request, pk):
 
     try:
         art = Article.objects.get(pk=pk)
-        if (art.category.slug = 'barn') {
+        if (art.category.slug == 'barn') {
           active_sizes = ("90", "100", "110", "120", "130", "140", "150")
         }
         allpossiblities["single"] = [{
