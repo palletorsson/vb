@@ -44,6 +44,7 @@ SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
 
 def cutondemandApi(request, category): 
     models = Article.objects.filter(active=True).order_by('-category')
+
     if (category == 'all'): 
         products = FullVariation.objects.filter(active=True, size=3840).order_by('order') 
     else: 
@@ -53,12 +54,10 @@ def cutondemandApi(request, category):
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     active_sizes = SIZES
     allpossiblities = {}
-    allpossiblities["articles"] = []
+
     allpossiblities["colorspatterns"] = []
-    allpossiblities["variations"] = []
-    allpossiblities["products"] = []
-    allpossiblities["assessories"] = []
     allpossiblities["sizes"] = active_sizes
+
     try:
         sellart = FullVariation.objects.get(pk=1994)
         allpossiblities["single"] = [{
@@ -78,46 +77,49 @@ def cutondemandApi(request, category):
     except:
         print "no such art"
 
-    for prod in products: 
-      allpossiblities["products"].append({
-          "article": prod.variation.article.name,
-          "sku": prod.variation.article.sku_number,
-          "price": prod.variation.article.price,
-          "id": prod.variation.article.id,
-          "pk": prod.pk,
-          "type": prod.variation.article.type.name, 
-          "category": prod.variation.article.category.name, 
-          "description": prod.variation.article.description,
-          "quality": prod.variation.article.quality.name,
-          "cod_cost": prod.variation.article.ondemand_cost,
-          "pattern": unicode(prod.variation.pattern), 
-          "pattern_id": prod.variation.pattern.order, 
-          "color": unicode(prod.variation.color), 
-          "color_id": prod.variation.color.order,   
-          "size": prod.size, 
+    if (category == 'all'): 
+        allpossiblities["products"] = []
+        for prod in products: 
+          allpossiblities["products"].append({
+              "article": prod.variation.article.name,
+              "sku": prod.variation.article.sku_number,
+              "price": prod.variation.article.price,
+              "id": prod.variation.article.id,
+              "pk": prod.pk,
+              "type": prod.variation.article.type.name, 
+              "category": prod.variation.article.category.name, 
+              "description": prod.variation.article.description,
+              "quality": prod.variation.article.quality.name,
+              "cod_cost": prod.variation.article.ondemand_cost,
+              "pattern": unicode(prod.variation.pattern), 
+              "pattern_id": prod.variation.pattern.order, 
+              "color": unicode(prod.variation.color), 
+              "color_id": prod.variation.color.order,   
+              "size": prod.size, 
+            }) 
+    if (category == 'all'):   
+        allpossiblities["variations"] = []   
+        for chil in variations:
+            pf =  chil.pk
+            img = Image.objects.get(variation__pk=pf)
+            allpossiblities["variations"].append({
+                "article": chil.article.name,
+                "sku": chil.article.sku_number,
+                "price": chil.article.price,
+                "id": chil.article.id,
+                "pk": chil.pk,
+                "img": img.image.url,
+                "type": chil.article.type.name, 
+                "category":chil.article.category.name, 
+                "description": chil.article.description,
+                "quality": chil.article.quality.name,
+                "cod_cost": chil.article.ondemand_cost,
+                "pattern": unicode(chil.pattern), 
+                "pattern_id": chil.pattern.order, 
+                "color": unicode(chil.color), 
+                "color_id": chil.color.order,   
+                "size": "M", 
         }) 
-      
-    for chil in variations:
-        pf =  chil.pk
-        img = Image.objects.get(variation__pk=pf)
-        allpossiblities["variations"].append({
-            "article": chil.article.name,
-            "sku": chil.article.sku_number,
-            "price": chil.article.price,
-            "id": chil.article.id,
-            "pk": chil.pk,
-            "img": img.image.url,
-            "type": chil.article.type.name, 
-            "category":chil.article.category.name, 
-            "description": chil.article.description,
-            "quality": chil.article.quality.name,
-            "cod_cost": chil.article.ondemand_cost,
-            "pattern": unicode(chil.pattern), 
-            "pattern_id": chil.pattern.order, 
-            "color": unicode(chil.color), 
-            "color_id": chil.color.order,   
-            "size": "M", 
-    }) 
 
     for csps in colorsandpatterns:
         allpossiblities["colorspatterns"].append({
@@ -128,20 +130,22 @@ def cutondemandApi(request, category):
           "quality_name": csps.quality.name, 
           "quality_num": csps.quality.order
           }) 
-   
-    for a in models:
-        allpossiblities["articles"].append({
-          "article": a.name,
-          "sku": a.sku_number,
-          "price": a.price,
-          "img": a.file.url, # this has to be made  
-          "id": a.id,
-          "type": a.type.name, 
-          "category": a.category.name, 
-          "description": a.description,
-          "quality": a.quality.name,
-          "cod_cost": a.ondemand_cost
-          })  
+
+    if (category == 'all'):         
+        allpossiblities["articles"] = []   
+        for a in models:
+            allpossiblities["articles"].append({
+              "article": a.name,
+              "sku": a.sku_number,
+              "price": a.price,
+              "img": a.file.url, # this has to be made  
+              "id": a.id,
+              "type": a.type.name, 
+              "category": a.category.name, 
+              "description": a.description,
+              "quality": a.quality.name,
+              "cod_cost": a.ondemand_cost
+              })  
     # TODO add sizes
     resp = json.dumps(allpossiblities)
     return HttpResponse(resp, content_type="application/json")
