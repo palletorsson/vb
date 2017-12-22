@@ -50,7 +50,7 @@ def cutondemandApi(request, category):
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
     variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('order', 'article__quality')
     
-    colorsandpatterns = PatternAndColor.objects.filter(active=True)
+    colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     active_sizes = SIZES
     allpossiblities = {}
     allpossiblities["articles"] = []
@@ -63,7 +63,7 @@ def cutondemandApi(request, category):
         sellart = FullVariation.objects.get(pk=1994)
         allpossiblities["single"] = [{
           "article": unicode("..."),
-          "sku": sellart.variation.article.sku_number,
+          "sku": "...",
           "price": "...",
           "img": "...", 
           "id": sellart.variation.article.id,
