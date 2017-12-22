@@ -50,7 +50,7 @@ def cutondemandApiSingle(request, sku_number):
 
     try:
         art = Article.objects.get(sku_number=sku_number)
-        print art.category.slug
+
         if (art.category.slug == 'barn'):
             active_sizes = ("90cl", "100cl", "110cl", "120cl", "130cl", "140cl", "150cl")
             allpossiblities["sizes"] = active_sizes
