@@ -62,18 +62,18 @@ def cutondemandApi(request, category):
     try:
         sellart = FullVariation.objects.get(pk=1994)
         allpossiblities["single"] = [{
-          "article": unicode("Välj artikel"),
+          "article": unicode("..."),
           "sku": sellart.variation.article.sku_number,
           "price": sellart.variation.article.price,
-          "img": sellart.variation.article.file.url, 
+          "img": "...", 
           "id": sellart.variation.article.id,
           "type": sellart.variation.article.type.name, 
           "category": sellart.variation.article.category.name, 
           "description": sellart.variation.article.description,
           "quality": sellart.variation.article.quality.name,
           "cod_cost": sellart.variation.article.ondemand_cost
-          "pattern": unicode("Mönster"),
-          "color": unicode("Färg")
+          "pattern": unicode("..."),
+          "color": unicode("...")
         }]
     except:
         print "no such art"
