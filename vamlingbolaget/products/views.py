@@ -43,12 +43,13 @@ def index(request):
 SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
 
 def cutondemandApi(request, category): 
-    models = Article.objects.filter(active=True).order_by('-category')
+    models = Article.objects.filter(active=True).order_by('category')
 
     if (category == 'all'): 
         products = FullVariation.objects.filter(active=True, size=3840).order_by('order') 
     else: 
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
+
     variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('order', 'article__quality')
     
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
