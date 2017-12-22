@@ -145,34 +145,7 @@
 		</div> <!-- end span7 -->
 	</div> <!-- end span12 -->
 
-<div class="span12" > 
-	<hr/>
-	<strong>{% trans "Fler produkter av" %}  {{ product.variation.article.name }} </strong>  
-	<hr/>
-	{% for product in full_variations_article %}
-	<div class='image_wrapper'>
-		<a href="{{product.link}}">
 
-		        <div class="collection_list img_container">
-		        <img src="{{ product.image }}" alt="{{ product.variation.article.name }}"  />
-		        <br/>
-		        <div>
-		            {{ product.variation.article.name }}<br/>
-		            {% trans "Pris" %} :
-		            {%if product.variation.article.discount%}
-		                <span class="discount"> {{ product.variation.article.f_discount }} </span> ({{ product.variation.article.price }}) SEK
-		            {%else%}
-		                {{ product.variation.article.price }} SEK
-		            {%endif%}
-		        </div>
-		    </div>
-		   
-		</a>
-	
-	</div>
-	{% endfor %}
-
-</div>
 </div>
 
 {% endblock %}

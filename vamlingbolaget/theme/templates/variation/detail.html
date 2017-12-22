@@ -232,35 +232,6 @@
       
 		</div> <!-- end span7 -->
 	</div> <!-- end span12 -->
-
-<div class="span12" > 
-	<hr/>
-	<strong>{% trans "Fler produkter av" %} {{ product.article.name }} </strong>  
-	<hr/>
-	{% for product in products %}
-	<div class='image_wrapper'>
-		<a href="/products/{{product.pk}}">
-		    {% with product.image_set.all|first as image %}
-		         <div class="collection_list img_container" >
-		        <img src="{% version image.image 'medium' %}" alt="{{ product.article.name }}"  />
-		        <br/>
-		        <div>
-		            {{ product.article.name }}<br/>
-		            {% trans "Pris" %} :
-		            {%if product.article.discount%}
-		                <span class="discount"> {{ product.article.f_discount }} </span> ({{ product.article.price }}) SEK
-		            {%else%}
-		                {{ product.article.price }} SEK
-		            {%endif%}
-		        </div>
-		    </div>
-		    {% endwith %}
-		</a>
-	
-	</div>
-	{% endfor %}
-
-</div>
 </div>
 
 {% endblock %}
