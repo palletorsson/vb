@@ -40,7 +40,38 @@ def index(request):
                               },
                              context_instance=RequestContext(request))
 
-SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL', )
+SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL')
+
+def cutondemandApiSingle(request, pk): 
+    models = Article.objects.filter(active=True).order_by('category')
+    active_sizes = SIZES
+    allpossiblities = {}  
+    allpossiblities["sizes"] = active_sizes
+
+    try:
+        art = Article.objects.get(pk=pk)
+        if (art.category.slug = 'barn') {
+          active_sizes = ("90", "100", "110", "120", "130", "140", "150")
+        }
+        allpossiblities["single"] = [{
+          "article": art.name,
+          "sku": art.sku_number,
+          "price": art.price,
+          "img": "...",
+          "id": art.id,
+          "type": art.type.name, 
+          "category": art.category.name, 
+          "description": art.description,
+          "quality": art.quality.name,
+          "cod_cost": art.ondemand_cost,
+
+        }]
+    except:
+        print "no such art"
+
+    resp = json.dumps(allpossiblities)
+    return HttpResponse(resp, content_type="application/json")    
+
 
 def cutondemandApi(request, category): 
     models = Article.objects.filter(active=True).order_by('category')
