@@ -42,14 +42,14 @@ def index(request):
 
 SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL')
 
-def cutondemandApiSingle(request, pk): 
+def cutondemandApiSingle(request, sku_number): 
     models = Article.objects.filter(active=True).order_by('category')
     active_sizes = SIZES
     allpossiblities = {}  
     allpossiblities["sizes"] = active_sizes
 
     try:
-        art = Article.objects.get(pk=pk)
+        art = Article.objects.get(sku_number=sku_number)
         if (art.category.slug == 'barn'):
             active_sizes = ("90", "100", "110", "120", "130", "140", "150")
         
