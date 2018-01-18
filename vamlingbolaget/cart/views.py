@@ -494,7 +494,7 @@ def totalsum(cartitems, bargains, request, voucher, rea):
 
     if (country == 'SE'):
         se = True
-        handling = 0 #80
+        handling = 80
         
         if (temp_p > 3000 or temp_p < 11):
             handling = 0
