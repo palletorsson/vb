@@ -1252,7 +1252,6 @@ def readCsv(request, what, start_at, end_at):
 
                 elif what == "django": 
                     # insert or update full_variation
-                    stock = 10
                     try:
                         fromCsvToDjango(article, pattern, color, size, stock)
                     except: 
