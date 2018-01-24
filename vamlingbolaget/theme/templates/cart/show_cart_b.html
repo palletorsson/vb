@@ -12,6 +12,7 @@
 <legend> {% trans "Din shoppinglåda" %}  -------- </legend>
 <div class="invisable-xs">
 {%if cartitems or bargains or rea%}
+<div class="mx-auto">
     <table class="table">
     <thead>
    	{% include "cart/table_head.html" %}
@@ -245,6 +246,7 @@
         {% endif %}
 
     </table>
+</div>
 </div> <!-- end hidden-xs -->
 
 <div class = "visible-xs">
