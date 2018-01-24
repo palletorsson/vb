@@ -6,9 +6,7 @@
     <title>Vamlingbolaget | {% trans "Kollektion" %} | {{ product.article.name }},  {{ product.variation }} </title>
     <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }},  {{ product.variation }}" %}/>
 {%endblock%}
-
 {% block allcontent %}
-
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="row">
             <div class="col-md-6">
@@ -39,17 +37,25 @@
                             <div>
                                 {%if product.variation.article.discount %}
                                     <span class="discount"> {{ product.variation.article.f_discount }} </span> SEK * <br />
-                                    <hr>
-                                    <span class="smaller">({% trans "tidigare pris" %} </span>  
-                                    <span id="the_price"> {{ product.variation.article.price }} </span>  
-                                    <span class="smaller"> SEK) <br /></span>
                                 {%else%}
                                     <span id="the_price"> {{ product.variation.article.price }}</span> SEK
-                                {%endif%}  
+                                {%endif%} 
                             </div>
                         </div>
                     </div>
                 </div>
+                {%if product.variation.article.discount %}
+                <div class="media pt-3">
+                    <div class="media-body pb-3 mb-0 border-bottom border-gray">
+                        <div class="d-flex justify-content-between align-items-center w-100">          
+                            <span class="smaller">({% trans "tidigare pris" %} </span>  
+                            <span id="the_price"> {{ product.variation.article.price }} </span>  
+                            <span class="smaller"> SEK) <br /></span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                {%endif%} 
                 <div class="media text-muted pt-3 ">
                     <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
@@ -106,13 +112,12 @@
                                             {% endif %}
                                         {% endfor %}
                                     {% endif %} 
-                                    </ul>
-                                </div>
-                            <div class="text-gray-dark"><-- {% trans "Välj Storlek" %}</div>
-                        </div>
+                                </ul>
+                            </div>
+                        <div class="text-gray-dark"><-- {% trans "Välj Storlek" %}</div>
                     </div>
                 </div>
-                
+            </div>           
             <div class="media text-muted pt-3 ">
                 <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
                     <div class="d-flex align-items-center w-100">
@@ -169,9 +174,7 @@
                         {% endfor %}
                     </div>
                 </div>
-            </div>
-			
+            </div>		
         </div> <!-- end of row -->
     </main>
-
 {% endblock %}
