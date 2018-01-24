@@ -10,13 +10,6 @@
 {% block allcontent %}
 
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
-        <div class="my-3 p-3 bg-white justify-content-between">
-            <div> <a href="/products/full"> << {% trans "Shop" %}</a></div>
-			{% if product.variation.article.quality.pk == 1 %} 
-            <div><span class="link pull-right"><a href="/products/article/{{product.variation.article.pk}}"> <span class="hidden-xs"> {% trans "Välj bland fler färger och mönster" %} </span> Cut on Demand  >> </a>   </span> </div>
-            {% endif %}
-        </div>
-        </hr>
         <div class="row">
             <div class="col-md-6">
                 {% with images|first as image %}
@@ -149,7 +142,7 @@
                         <input type="hidden" id="quantity" name="quantity" value="1" >		
                         <input type="hidden" id="pc_sellection" name="pc_sellection" value="common" >
                         <input type="hidden" id="add_or_edit" name="full" value="full" > 
-                        <span class="hidden" id="sku_number">{{ product.variation.article.sku_number }}</span>
+                        <span class="invistable" id="sku_number">{{ product.variation.article.sku_number }}</span>
                       
                     
                     </div>
