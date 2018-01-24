@@ -27,10 +27,14 @@ def first_page(request):
 def first_page_b(request):
     frontpage, created = Frontpage.objects.get_or_create(pk=1)
     theme1 = FrontpageTheme.objects.filter(status='A').order_by('order')[:1]
+    features = FrontpageExtended.objects.filter(status='A', theme__title='rightNow').order_by('order')
+  
 
     return render_to_response('frontpage/first_page_b.html',
-        {'frontpage': frontpage,
-         'theme1': theme1
+        {
+            'frontpage': frontpage,
+            'theme1': theme1,
+            'features': features,
         },
         context_instance=RequestContext(request))
 
