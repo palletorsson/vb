@@ -65,13 +65,11 @@
         {%if item.s_type == 'COD' %}       
         </tr>
         <tr>
-
-
             <td colspan="3"> 
             +
             </td>
 
-            <td colspan="1"> 
+            <td colspan="2"> 
                Cut on demand för {{ item.article.name }} 
             </td>
 
@@ -214,7 +212,7 @@
 			{% endif %}
           </th>
           
-           <th id="totalprice" colspan="8">
+           <th id="totalprice" colspan="7">
 			{%if voucher %}
 				<span class="label label-success">15% på dyraste plagget </span>
             {% else %}
@@ -294,8 +292,7 @@
         {% endfor %}
         {% for b in bargains %}
         <div class="controls controls-row">
-        	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px; 
-        	marginpx;"> 
+        	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px"> 
             </div>
 	   		<h5>
 				<strong> {%trans "REA"%} <small>
