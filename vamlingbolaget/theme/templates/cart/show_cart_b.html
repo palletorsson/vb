@@ -47,6 +47,7 @@
     <thead>
    	{% include "cart/table_head.html" %}
     </thead>
+    <tbody>
         {% for item in cartitems %}
         <tr>
         <td scope="row">
@@ -167,6 +168,7 @@
            	<span class="discount"> {{ item.reaArticle.rea_price }} </span>(<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} </span>)</span>
             </div>
         </td>
+    </tbody>
         {% endfor %}
         
         {% for b in bargains %}
@@ -204,7 +206,7 @@
 
             <td>
                 <div>
-                    <span> {{ b.bargain.price }} </span>
+                    <span> {{ b.bargain.price }}  {%trans "SEK"%} </span>
                 </div>
             </td>
             {% endfor %}
