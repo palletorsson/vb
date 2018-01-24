@@ -661,7 +661,7 @@ def fulldetail(request, pk):
                    context_instance=RequestContext(request)
                 )
 
-def fulldetail_b(request, pk):
+def lastindex(request, pk):
     try:
         full_variation = FullVariation.objects.get(pk=pk)
     except:
