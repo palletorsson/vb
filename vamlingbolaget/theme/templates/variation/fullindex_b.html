@@ -18,7 +18,7 @@
                     {%endif%}
                         <p class="text-muted mb-0"> {{ product.variation.article.name }} </p>
                     {%if product.variation.article.discount %}
-                        <span class="text-muted discount"> {{ product.variation.article.f_discount }} </span> (<span style="text-decoration: line-through;">{{ product.variation.article.price }} </span>) SEK
+                        <span class="text-muted discount"> {{ product.variation.article.f_discount }} </span> (<span class="text-muted" style="text-decoration: line-through;">{{ product.variation.article.price }} </span>) SEK
                     {%else%}
                         <p class="text-muted price">{{ product.variation.article.price }} SEK</p>
                     {%endif%}
