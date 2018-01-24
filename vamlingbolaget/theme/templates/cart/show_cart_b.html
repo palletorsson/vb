@@ -10,8 +10,9 @@
 
 {% block stretchpage %}
 <h4 class="mb-3">{% trans "Din shoppinglåda" %}  </h4> 
+
 <div class="d-none d-md-block d-xs-none">
-{%if cartitems or bargains or rea%}
+    {%if cartitems or bargains or rea%}
 
     <table class="table">
     <thead>
@@ -247,7 +248,7 @@
     </table>
 </div> <!-- end hidden-xs -->
 
-<div class = "d-none d-sm-block d-xs-block d-md-none">
+<div class = "d-none d-xs-block  d-md-none">
 {%if cartitems or bargains or rea %}
 {% for item in cartitems %}  
     <div class="controls controls-row">
