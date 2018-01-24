@@ -19,7 +19,7 @@
         {% if feature.mediatype == 'F' %}
         <div class="row">
             <a href="/products/full/">
-                <img src="/media/{{features.feature_image}}" width="100%"/>
+                <img src="{% version feature.feature_image 'large' %}" width="100%"/>
             </a>	
         </div>
         
