@@ -41,7 +41,9 @@
                 <div class="media pt-3">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
-                            <strong id="articlename"></strong>{{ product.variation.article.name }}</strong>
+                            <div>
+                                <strong id="articlename">{{ product.variation.article.name }}</strong>
+                            </div>
                             <div>
                                 {%if product.variation.article.discount %}
                                     <span class="discount"> {{ product.variation.article.f_discount }} </span> SEK * <br />
