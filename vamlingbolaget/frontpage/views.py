@@ -24,6 +24,15 @@ def first_page(request):
         },
         context_instance=RequestContext(request))
 
+def first_page_b(request):
+    frontpage, created = Frontpage.objects.get_or_create(pk=1)
+    theme1 = FrontpageTheme.objects.filter(status='A').order_by('order')[:1]
+
+    return render_to_response('frontpage/first_page_b.html',
+        {'frontpage': frontpage,
+         'theme1': theme1
+        },
+        context_instance=RequestContext(request))
 
 def first_page_opt(request, opt):
 
