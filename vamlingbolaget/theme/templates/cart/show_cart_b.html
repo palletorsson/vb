@@ -10,7 +10,7 @@
 
 {% block stretchpage %}
 <legend> {% trans "Din shoppinglåda" %}  -------- </legend>
-<div class="invisable-xs">
+<div class="d-none d-md-block d-xs-none">
 {%if cartitems or bargains or rea%}
 
     <table class="table">
@@ -247,7 +247,7 @@
     </table>
 </div> <!-- end hidden-xs -->
 
-<div class = "d-none d-md-block">
+<div class = "d-none d-xs-block">
 {%if cartitems or bargains or rea %}
 {% for item in cartitems %}  
     <div class="controls controls-row">
