@@ -341,6 +341,28 @@ def showcart(request):
         returntotal,
         context_instance=RequestContext(request))
 
+	 
+def showcart_b(request):
+    cart_id = _cart_id(request)
+    cart, created = Cart.objects.get_or_create(key=cart_id)
+    cartitems = cart.cartitem_set.all()
+    bargains = cart.bargaincartitem_set.all()
+    rea = cart.reacartitem_set.all()
+    voucher = cart.vouchercart_set.all()
+
+    returntotal = totalsum(cartitems, bargains, request, voucher, rea)
+    getnames(cartitems)
+
+
+    returntotal['cartitems'] =  cartitems
+    returntotal['bargains'] =  bargains
+    returntotal['voucher'] = voucher
+    returntotal['rea'] = rea
+
+    return render_to_response('cart/show_cart_b.html',
+        returntotal,
+        context_instance=RequestContext(request))
+        
 def showcartBySessionId(request, session_id):
     if request.user.is_authenticated:
         key = session_id

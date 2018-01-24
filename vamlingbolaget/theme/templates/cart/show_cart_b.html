@@ -1,0 +1,412 @@
+{% extends "collection_base_b.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{%block title%}
+<title>Vamlingbolaget | {% trans "Din beställning " %} </title>
+<meta name="description" content={% trans "Din beställning av Vamlingbolagets produkter " %} />
+{%endblock%}
+
+
+{% block stretchpage %}
+<legend> {% trans "Din shoppinglåda" %} </legend>
+<div class="hidden-xs">
+{%if cartitems or bargains or rea%}
+    <table class="table">
+    <thead>
+   	{% include "cart/table_head.html" %}
+    </thead>
+        
+        {% for item in cartitems %}
+        <tr>
+        <td>
+            <div>
+                <span> {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <a href="{%url removefromcart item.pk 'cartitem'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>
+
+            </div>
+        </td>
+        <td>
+            <img src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans "i" %} {{ item.color|lower }}" width="80"/>
+        </td>
+        <td>
+            <div>
+                <span> {{ item.article }} i {{item.article.quality|lower}}</span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span>{{ item.color }}
+                {% if item.color_2 > 0 %}
+                    / {{ item.color_2 }}
+                {%endif%}
+                </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span>
+                    {{ item.pattern }}
+                    {% if item.pattern_2 > 0 %}
+                        / {{ item.pattern_2 }}
+                    {%endif%}
+                </span>
+            </div>
+        </td>
+            <td>
+                <div>
+                    <span>{% if item.article.type.order == 8 or  item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%} </span>
+                </div>
+            </td>
+
+            <td>
+            <div>
+                {%if item.article.discount%}
+                    <span class="discount"> {{ item.article.f_discount }} SEK</span>
+                {%elif item.article.type.order == 8 %}
+                    {{item.totalitemprice}} 
+                {%else%}
+                {% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} 	</span><br/> {%endif%} 
+                    {{ item.article.price }}
+                {%endif%}
+            </div>
+        </td>
+        {%if item.s_type == 'COD' %}       
+        </tr>
+        <tr>
+
+
+            <td colspan="3"> 
+            +
+            </td>
+
+            <td colspan="1"> 
+               Cut on demand för {{ item.article.name }} 
+            </td>
+
+            <td colspan="3"> 
+                 Cut on demand
+            </td>
+            <td> 
+                {{ item.article.ondemand_cost }} SEK
+            </td>
+        </tr>
+        {%endif%}
+        
+        {% endfor %}
+       
+		{% for item in rea %}
+        <tr>
+        <td>
+            <div>
+                <span> 1 </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <a href="{%url removefromcart item.pk 'rea'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>
+
+            </div>
+        </td>
+        <td>
+             <img src="{{ item.reaArticle.image.url }}" alt="REA : {{ item.reaArticle.name }} {% trans 'i' %} {{ item.reaArticle.color|lower }} {{ item.reaArticle.pattern|lower }}" width="80" />
+			
+        </td>
+        <td>
+            <div>
+                <span>  {{ item.reaArticle.article.name }} i {{item.reaArticle.article.quality|lower}} <span class="discount"> (REA) </span>  </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span>{{ item.reaArticle.color }}
+                {% if item.reaArticle.color_2 > 0 %}
+                    / {{ item.reaArticle.color_2 }}
+                {%endif%}
+                </span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <span>
+                    {{ item.reaArticle.pattern }}
+                    {% if item.reaArticle.pattern_2 > 0 %}
+                        / {{ item.reaArticle.pattern_2 }}
+                    {%endif%}
+                </span>
+            </div>
+        </td>
+            <td>
+                <div>
+                    <span>{{ item.reaArticle.size }} </span>
+                </div>
+            </td>
+
+            <td>
+            <div>
+           	<span class="discount"> {{ item.reaArticle.rea_price }} </span>(<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} </span>)</span>
+            </div>
+        </td>
+        {% endfor %}
+        
+        {% for b in bargains %}
+        <tr>
+            <td>
+                <div>
+                    <span> 1</span>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a href="{%url removefromcart b.pk 'bargain'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ b.id }}"></i></a>
+                </div>
+            </td>
+            <td>
+                <div>   </div>
+            </td>
+            <td>
+                <div>
+                    <span> {{ b.bargain.title }}  </span>
+                </div>
+            </td>
+            <td>
+                <div> {{ b.bargain.description }} </div>
+            </td>
+              <td>
+                <div> - </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+            <td>
+                <div> - </div>
+            </td>
+
+            <td>
+                <div>
+                    <span> {{ b.bargain.price }} </span>
+                </div>
+            </td>
+            {% endfor %}
+        </tbody>
+        <td class="totalprice" colspan="7" style="text-align: right">
+            {% trans "Leverans" %}:
+        </td>
+        <td id="handling">
+            {{ handling }}  {%trans "SEK"%}
+        </td>
+        </tr>
+
+        <tr>
+        <th class="totalprice" colspan="7" style="text-align: right">
+            {% trans "Totalpris" %}:
+        </th>
+        <th id="totalprice">
+            {{ totalprice }}  {%trans "SEK"%}
+        </th></tr>
+
+        <tr>
+        <th id="totalprice" colspan="9" style="text-align: right">  
+		<div style="text-align:right"><a href="/checkout/"><button class="btn btn-success" type="button">{% trans "Beställ" %}</button></a></div>
+	    </th>
+
+        </tr>
+        <tr class="voucher_show">
+			
+
+          <th class="voucher" colspan="8" style="text-align: right">
+			{%if voucher %}
+				Rabattkod / Voucher: 
+            {% else %}
+				Rabattkod / Voucher: 
+			{% endif %}
+          </th>
+          
+           <th id="totalprice" colspan="8">
+			{%if voucher %}
+				<span class="label label-success">15% på dyraste plagget </span>
+            {% else %}
+            <div class="form-group">
+               <div class="input-group">
+					<input type="text" id="id_voucher" name="voucher" maxlength="10" class="form-control">
+					<button type="button" class="btn btn-success btn-sm  btn-number" id="vocher-plus">
+						  OK
+					 </button>
+              </div>
+            </div>
+
+              {% endif %}
+
+          </th>
+
+        </tr>
+
+        </tbody>
+
+        {% else %}
+        <tr id="empty">
+            <td colspan="8">
+                <div class="alert alert-info">
+                    {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/full/">{% trans "Börja utforska utbudet" %}!</a>
+                </div>
+                <img src="/media/uploads/ckd/2017/04/02/mirjam-klipper-till.jpg" style="width:100%"/>
+            </td>
+        </tr>
+        </tbody>
+        {% endif %}
+
+    </table>
+</div> <!-- end hidden-xs -->
+
+<div class = "visible-xs">
+{%if cartitems or bargains or rea %}
+{% for item in cartitems %}  
+    <div class="controls controls-row">
+    	<div class="mobile_cart_article_div"> <img class="mobile_article_img" src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans 'i' %} {{ item.color|lower }}" /> 
+        </div>
+        <div>
+    		<h5><strong> {{ item.article }} i {{item.article.quality|lower}} <small>
+    		<span> | <a href="{%url removefromcart item.pk 'cartitem'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>  </span>
+    		<span> | <a href="/cart/edititem/{{ item.id }}/"><i class="icon-edit glyphicon glyphicon-edit"> </i></a> </span></small>
+    		</strong></h5>
+    		<hr>
+    		<div class="article_info_div">
+            <small>
+    			<span> {% trans "Antal" %} : {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span><br>
+    			<span> {% trans "Mönster" %} :
+    			    {{ item.pattern }}
+    			    {% if item.pattern_2 > 0 %}
+    			        / {{ item.pattern_2 }}
+    			    {%endif%}
+    			</span><br>
+    			<span> {% trans "Färg" %} : 			
+    			    {{ item.color }}
+    				{% if item.color_2 > 0 %}
+    				    / {{ item.color_2 }}
+    				{%endif%}
+    			</span><br>
+    			<span> {% trans "Storlek" %} : {% if item.article.type.order == 8 or  item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%}  </span><br>
+    			<span> {% trans "Pris" %} :  {%if item.article.discount%}
+    			<span class="discount"> {{ item.article.f_discount }}  {%trans "SEK"%}</span>
+    				{%elif item.article.type.order == 8 %}
+    					{{item.totalitemprice}} {%trans "SEK"%}
+    				{%else%}
+    					{% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} {%trans "SEK"%}	</span><br/> {%endif%} 
+    			    {{ item.article.price }} {%trans "SEK"%}
+    				{%endif%}
+    			</span>
+    	    </small>
+            </div>
+        </div>
+    </div>
+    <hr>
+        {% endfor %}
+        {% for b in bargains %}
+        <div class="controls controls-row">
+        	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px; 
+        	marginpx;"> 
+            </div>
+	   		<h5>
+				<strong> {%trans "REA"%} <small>
+					<span> | <a href="{%url removefromcart b.pk 'bargain'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ b.id }}"></i></a></span></small>
+				</strong>
+			</h5>
+			<hr>
+			<div class="article_info_div">
+				<small>
+				<span> {% trans "Antal" %} : 1 </span> <br/>
+				<span> {%trans "Artikel"%} : {{ b.bargain.description }} </span> <br/>
+				<span> {% trans "Pris" %} : {{ b.bargain.price }} {%trans "SEK"%} </span>
+				</small>
+				<hr>
+			</div>
+        </div>
+        {% endfor %}
+    	<hr>    
+        {% for item in rea %}
+            <div class="controls controls-row">
+            	<div class="mobile_cart_article_div"> <img src="/theme/static/img/rea.jpg" style="width:80px; 
+            	margin:10px;"> </div>
+            	<h5>
+            	<strong>   {{ item.reaArticle.article.name }} | {{ item.reaArticle.color }} | {{ item.reaArticle.pattern }} | {{ item.reaArticle.size }} | <span class="discount"> {%trans "REA"%} </span> </span><small>
+            			<span> | <a href="{%url removefromcart item.pk 'rea'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a></span></small>
+            	</strong>
+                </h5>
+                <hr>
+                <div class="article_info_div">
+                	<small>
+                    	<span> {% trans "Antal" %} : 1 </span> <br/>
+                    	<span> {%trans "Artikel"%} : {{ item.reaArticle.article.name }} </span> <br/>
+                    	<span> {% trans "Pris" %} : {{ item.reaArticle.rea_price }} {%trans "SEK"%} 
+                            (<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} </span>)
+                        </span> </span>
+                	</small>
+                	<hr>
+                </div>
+            </div> 
+        {% endfor %}
+		<div class="totalprice" colspan="8" style="text-align: right">
+			{% trans "Leverans" %}:
+			<span id="handling">
+				{{ handling }}  {%trans "SEK"%}
+			</span>	
+		</div>
+		<hr>
+        <div class="totalprice" colspan="8" style="text-align: right">
+            {% trans "Totalpris" %}:
+		    <span id="totalprice">
+		        {{ totalprice }}  {%trans "SEK"%}
+		    </span>
+		</div>
+		<hr>
+        {%if cartitems or bargains or rea %}   
+        <div style="text-align:right">
+            <a href="/checkout/">
+                <button class="btn btn-success" type="button">{% trans "Beställ" %}</button>
+            </a>
+            <br>
+        </div>
+        {% endif %}
+        <div class="voucher_show">
+			<div class="voucher" colspan="8" style="text-align: right">
+    			{%if voucher %}
+    				Rabattkod / Voucher: 
+    			{% else %}
+    				Rabattkod / Voucher: 
+    			{% endif %}
+			</div>
+
+			<div id="totalprice" colspan="8">
+			{%if voucher %}
+				<span class="label label-success">15% på dyraste plagget </span>
+			{% else %}
+    			<div class="form-group">
+    			   <div class="input-group">
+    					<input type="text" id="id_voucher" name="voucher" maxlength="10" class="form-control">
+    					<button type="button" class="btn btn-success btn-sm  btn-number" id="vocher-plus">
+    						OK
+    					 </button>
+    			   </div>
+                </div>
+            {% endif %}
+            </div>
+        </div> <!-- end voucher_show -->
+
+        
+    {% else %}
+    <div id="empty" class="mob_empty">
+        <div colspan="8">
+            {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/full/">{% trans "Börja utforska utbudet" %}!</a>
+            <img src="/media/uploads/ckd/2017/04/02/mirjam-klipper-till.jpg" />
+        </div>
+    </div>
+    </div>
+        {% endif %}
+
+</div> <!-- end hidden-xs -->
+
+{% endblock %}
