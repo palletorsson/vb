@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-6">
                 {% with images|first as image %}
-                    <a href="{{ image }}" class="variation_link"><img src="{{ image }}" alt="article image" class="variation_img" /></a>
+                    <a href="{{ image }}" class="variation_link"><img src="{{ image }}" alt="article image" width="100%" class="variation_img" /></a>
                 {% endwith %}
                 {%if product.variation.article.quality.order > 15 %}
                 {%else%}
@@ -41,7 +41,7 @@
                 <div class="media pt-3">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
-                            <strong  id="articlename"></strong>>{{ product.variation.article.name }}</strong>
+                            <strong id="articlename"></strong>{{ product.variation.article.name }}</strong>
                             <div>
                                 {%if product.variation.article.discount %}
                                     <span class="discount"> {{ product.variation.article.f_discount }} </span> SEK * <br />
@@ -121,8 +121,7 @@
             <div class="media text-muted pt-3 ">
                 <div class="media-body pb-1 mb-0 small lh-125 border-gray">
                     <div class="d-flex justify-content-between align-items-center w-100">
-                        <div class="text-gray-dark">{% trans "Färger och Mönster" %}:  {{ product.variation.color }}  {{ product.variation.pattern }} 
-                            </div>
+                        <div class="text-gray-dark">{% trans "Färger och Mönster" %}:  {{ product.variation.color }}  {{ product.variation.pattern }} </div>
                     </div>
                 </div>
             </div>
@@ -130,7 +129,7 @@
                 <div class="media-body pb-1 mb-0 small lh-125 border-gray">
                     <div class="d-flex justify-content-between align-items-center w-100">
                         {% for colorsandpattern in full_variations_article %}
-                            <a href="{{ colorsandpattern.link }}"><img id="pattern_color_image" class="pattern_color_image_c" src="{{ MEDIA_URL }}/uploads/120/{{ colorsandpattern.cp }}.jpg" style="width:60px;" /></a>
+                            <a href="{{ colorsandpattern.link }}"><img id="pattern_color_image" class="pattern_color_image_c" src="{{ MEDIA_URL }}/uploads/120/{{ colorsandpattern.cp }}.jpg" style="width:120px;" /></a>
                         {% endfor %}
                     </div>
                 </div>
@@ -147,8 +146,7 @@
                         <input type="hidden" id="pc_sellection" name="pc_sellection" value="common" >
                         <input type="hidden" id="add_or_edit" name="full" value="full" > 
                         <span class="hidden" id="sku_number">{{ product.variation.article.sku_number }}</span>
-                        <img id="pattern_color_image" src="{{ MEDIA_URL }}/uploads/120/{{ product.variation.color.order }}f_{{ product.variation.pattern.order }}m.jpg" style="width:160px;" />
-	
+                      
                     
                     </div>
                 </div>
