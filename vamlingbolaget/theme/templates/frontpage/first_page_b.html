@@ -15,10 +15,11 @@
     {% for feature in features %}
         {% if forloop.first%} 
         {%else%} 
-        <!-- full size img 'Fullpost'-->
+       
         {% if feature.mediatype == 'F' %}
+         <!-- full size img 'Fullpost'-->
         <div class="row">
-            <a href="/products/full/">
+            <a href="/products/full/">{{features.feature_image}}
                 <img src="{% version feature.feature_image 'large' %}" width="100%"/>
             </a>	
         </div>
