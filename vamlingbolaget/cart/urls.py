@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('cart.views',
-    url(r'^b_show/$', 'showcart', name='showcart_b'),
+    url(r'^s_how/$', 'showcart', name='showcart_b'),
     url(r'^show/$', 'showcart', name='showcart'),
     url(r'^showbyid/(?P<session_id>[a-zA-Z0-9_.-]+)/$', 'showcartBySessionId', name='showcart'),
     url(r'^addtocart/$', 'addtocart'),
