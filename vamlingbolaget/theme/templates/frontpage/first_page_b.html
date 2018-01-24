@@ -26,56 +26,49 @@
         {% elif feature.mediatype == 'L' %}
         <!-- 'halfpostfullLeft' starts -->  
         <div class="row">
-        
             <div class="col-md-6 mb-6">
                 <a href="{{ feature.link_to }}">  
                 <img src="{% version feature.feature_image 'large' %}" alt="{{ feature.heading }}" width="100%"> 
                 </a>
             </div>             
-      
         {% elif feature.mediatype == 'H' %}
         <!-- 'halfpostfullRight' ends -->   
-       
             <div class="col-md-6 mb-6">
                 <a href="{{ feature.link_to }}">  
                 <img src="{% version feature.feature_image 'large' %}" alt="{{ feature.heading }}" width="100%"> 
                 </a>
             </div>             
-        </div>
+        </div> <!-- end row -->  
+
         {% elif feature.mediatype == 'T' %}
         <!-- 'halfposttopLeft' start -->
-
         <div class="row">
-
-            <div class="col-md-5">
+            <div class="col-md-6 mb-6">
                 <div class="grid-item top0" style="text-align:right;" >
-                    <h4> {{ feature.heading }} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span></h4>
-                    <h4> {{ feature.heading_extra}} <span style="font-size:1.2em; top: 10px; margin-right: 10px;"  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"> </span></h4>
+                    <h4> {{ feature.heading }} </h4>
+                    <h4> {{ feature.heading_extra}}  </span></h4>
                     <a href="{{ feature.link_to }}">  
-                        <img src="{% version feature.feature_image 'large' %}"  style=' width: 70%; max-height:704px; object-fit: fill; margin-left:30px' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+                        <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                     </a>
                 </div> 
             </div> 
-            <div class="col-md-1">.</div>
+         
         {% elif feature.mediatype == 'P' %}
         <!-- 'halfposttopRight' ends -->
-
-            <div class="col-md-5">
+            <div class="col-md-6 mb-6">
                 <div class="grid-item top0">
-                    <h4 style="margin-left: 40px;"> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span> {{ feature.heading }} </h4>
-                    <h4 style="margin-left: 40px;"> <span style="font-size:1.2em; top: 10px; margin-left: 10px;"  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"> </span> {{ feature.heading_extra}} </h4>
+                    <h4 style="margin-left: 40px;"> {{ feature.heading }} </h4>
+                    <h4 style="margin-left: 40px;"> {{ feature.heading_extra}} </h4>
                     <a href="{{ feature.link_to }}">  
-                        <img src="{% version feature.feature_image 'large' %}"  style=' width: 70%; object-fit: fill; margin-left:30px' class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+                        <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                     </a>
                 </div> 
             </div> 
             <div class="col-md-1">.</div>
-        </div>   <!-- end row -->    
-    <div class="seventeen_bottom clearfix" style='color:white;'>.</div>
+        </div> <!-- end row -->   
+
         {% elif feature.mediatype == 'B' %}
-
         <!-- 'halfpostbottomLeft' starts--> 
-
         <row>
             <div class="col-md-5" style="text-align:right;">
                 <div>	
