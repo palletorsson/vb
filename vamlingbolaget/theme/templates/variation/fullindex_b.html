@@ -1,0 +1,36 @@
+{% extends "collection_base_b.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+
+{% block allcontent %}
+<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4 "> 
+        {% for product in products %}
+              <!-- 3 img shop -->
+  
+                <div class="row scroll_div">
+                  <div class="col-md-4 mb-3">
+                    <a href="/products/fullvariation/{{product.pk}}/#{{ product.variation.article.name }} {% trans "i" %} {{ product.variation.color|lower }} {{ product.pattern|lower }}">
+                        <span class="hidden">{{ product.variation.article.quality }}</span>
+                        {%if product.variation.article.quality.order > 15 or product.variation.article.quality.order == 2 %}
+                            <img src="/media/variations/thumb/{{ product.oneimg }}.jpg" class="lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
+                        {%else%}
+                            <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_1.jpg" class="image_on lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
+                            <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_2.jpg" class="image_off lazy" alt="Vamlingbolaget {{ product.article.name }}"  />
+                        {%endif%}
+                        <p> {{ product.variation.article.name }} </p>
+                        {%if product.variation.article.discount %}
+                            <p class="discount"> {{ product.variation.article.f_discount }} </p> (<span style="text-decoration: line-through;">{{ product.variation.article.price }} </span>) SEK
+                        {%else%}
+                            <p class="price">{{ product.variation.article.price }} SEK</p>
+                        {%endif%}
+                    </a>
+            </div>
+        </div>
+
+        {% endfor %}
+    </main>
+{% endblock %}
+
+
+

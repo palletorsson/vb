@@ -1,0 +1,51 @@
+{% extends "base_b.html" %}
+{% load i18n %}
+{% block shopmenu %}
+<div class="container-fluid"> <!-- container -->
+    <div class="row firstrow">
+      <!-- sidebar -->
+      <nav class="col-md-2 d-none d-md-block sidebar">
+        <div class="pt-2">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active vb_link l-s-1" href="#">KVINNA</a>
+              <ul class="nav flex-column">
+                <li>
+                    <a class="nav-link active vb_link ml-3" href="#">Jackor</a>
+                </li>
+                <li>
+                    <a class="nav-link vb_link ml-3" href="#">Toppar</a>
+                </li>
+                <li>
+                    <a class="nav-link vb_link ml-3 pb-4" href="#">Byxor</a>
+                </li>
+               
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link vb_link l-s-1" href="#">MAN</a>
+              <ul class="nav flex-column">
+                  <li>
+                      <a class="nav-link vb_link ml-3" href="#">Skjortor </a>
+                  </li>
+                  <li>
+                      <a class="nav-link vb_link ml-3" href="#">Tröjor</a>
+                  </li>
+                  <li>
+                      <a class="nav-link vb_link ml-3 pb-4" href="#">Byxor</a>
+                  </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link vb_link" href="#">BARN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link vb_link" href="#">LAKAN</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!-- /sidebar -->
+ 
+
+{% endblock %}
