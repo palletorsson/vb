@@ -24,7 +24,7 @@
             <span> {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span>    
         </td>
         <td>
-            <a href="{%url removefromcart item.pk 'cartitem'%}"> <span class="icon-minus" id="{{ item.id }}">-</span></a>           
+            <a href="{%url removefromcart item.pk 'cartitem'%}"> <span class="icon-minus badge badge-secondar" id="{{ item.id }}">-</span></a>           
         </td>
         <td>
             <img src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans "i" %} {{ item.color|lower }}" width="80"/>
@@ -95,7 +95,7 @@
         </td>
         <td>
             <div>
-                <a href="{%url removefromcart item.pk 'rea'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>
+                <a href="{%url removefromcart item.pk 'rea'%}"><span class="badge badge-secondar icon-minus" id="{{ item.id }}">-</span></a>
 
             </div>
         </td>
@@ -150,7 +150,7 @@
             </td>
             <td>
                 <div>
-                    <a href="{%url removefromcart b.pk 'bargain'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ b.id }}"></i></a>
+                    <a href="{%url removefromcart b.pk 'bargain'%}"><span class="badge badge-secondaricon-minus" id="{{ b.id }}">-</span></a>
                 </div>
             </td>
             <td>
