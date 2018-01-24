@@ -1,4 +1,4 @@
-{% extends "collection_base.html" %}
+{% extends "collection_base_b.html" %}
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
@@ -8,7 +8,7 @@
 {%endblock%}
 
 {% block allcontent %}
-<!-- comment -->
+
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="my-3 p-3 bg-white justify-content-between">
             <div> </div><a href="/products/full"> << {% trans "Shop" %}</a>
