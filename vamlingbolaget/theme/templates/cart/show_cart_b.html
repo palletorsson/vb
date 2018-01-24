@@ -16,54 +16,39 @@
     <thead>
    	{% include "cart/table_head.html" %}
     </thead>
-        
         {% for item in cartitems %}
         <tr>
-        <td>
-            <div>
-                <span> {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span>
-            </div>
+        <td scope="row">
+            <span> {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span>    
         </td>
         <td>
-            <div>
-                <a href="{%url removefromcart item.pk 'cartitem'%}"><i class="glyphicon glyphicon-minus icon-minus" id="{{ item.id }}"></i></a>
-
-            </div>
+            <a href="{%url removefromcart item.pk 'cartitem'%}"> <span class="icon-minus" id="{{ item.id }}">-</span></a>           
         </td>
         <td>
             <img src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans "i" %} {{ item.color|lower }}" width="80"/>
         </td>
         <td>
-            <div>
-                <span> {{ item.article }} i {{item.article.quality|lower}}</span>
-            </div>
+            <span> {{ item.article }} i {{item.article.quality|lower}}</span>
         </td>
         <td>
-            <div>
-                <span>{{ item.color }}
-                {% if item.color_2 > 0 %}
-                    / {{ item.color_2 }}
+            <span>{{ item.color }}
+            {% if item.color_2 > 0 %}
+                / {{ item.color_2 }}
+            {%endif%}
+            </span>
+        </td>
+        <td>
+            <span>
+                {{ item.pattern }}
+                {% if item.pattern_2 > 0 %}
+                    / {{ item.pattern_2 }}
                 {%endif%}
-                </span>
-            </div>
+            </span>
         </td>
         <td>
-            <div>
-                <span>
-                    {{ item.pattern }}
-                    {% if item.pattern_2 > 0 %}
-                        / {{ item.pattern_2 }}
-                    {%endif%}
-                </span>
-            </div>
+            <span>{% if item.article.type.order == 8 or  item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%} </span>
         </td>
-            <td>
-                <div>
-                    <span>{% if item.article.type.order == 8 or  item.article.type.order == 7 %} - {%else%} {{ item.size }} {%endif%} </span>
-                </div>
-            </td>
-
-            <td>
+        <td>
             <div>
                 {%if item.article.discount%}
                     <span class="discount"> {{ item.article.f_discount }} SEK</span>
@@ -249,7 +234,7 @@
 
         {% else %}
         <tr id="empty">
-            <td colspan="8">
+            <td scope="row" colspan="8">
                 <div class="alert alert-info">
                     {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/full/">{% trans "Börja utforska utbudet" %}!</a>
                 </div>
