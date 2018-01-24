@@ -659,7 +659,88 @@ def fulldetail(request, pk):
                    'colorsandpatterns': colorsandpatterns
                    },
                    context_instance=RequestContext(request)
-                    )
+                )
+
+def fulldetail_b(request, pk):
+    try:
+        full_variation = FullVariation.objects.get(pk=pk)
+    except:
+        raise Http404
+    
+    colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
+
+    full_variations_article = FullVariation.objects.filter(variation__article=full_variation.variation.article, size="42")  
+
+    full_variations = FullVariation.objects.filter(variation=full_variation.variation)   
+
+    init_sizes = ['XS','S','M','L', 'XL', 'XXL']
+
+    size_list = []                           
+
+    for full_var in full_variations_article: 
+        color_pattern_str = str(full_var.variation.color.order)+"f_"+str(full_var.variation.pattern.order)+"m"
+        full_var.cp = color_pattern_str
+        num = int(full_var.pk)
+        link = "/products/fullvariation/"+ str(num) + "/#" + str(full_var.variation) + " " + str(full_var)
+        full_var.link = link
+        filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order) 
+        file = "/media/variations/"+ filename +"_1.jpg"  
+        full_var.image = file   
+
+
+    #mapping name size to number
+    for full_var in full_variations:
+
+        if full_var.size == '34':         
+            size_list.append('XS')
+            full_var.lettersize = 'XS'
+        elif full_var.size == '36': 
+            size_list.append('S')   
+            full_var.lettersize =  'S' 
+        elif full_var.size == '3840': 
+            size_list.append('M')  
+            full_var.lettersize = 'M'
+        elif full_var.size == '42': 
+            size_list.append('L') 
+            full_var.lettersize = 'L' 
+        elif full_var.size == '44': 
+            size_list.append('XL')
+            full_var.lettersize = 'XL'  
+        elif full_var.size == '46':
+            size_list.append('XXL')
+            full_var.lettersize =  'XXL'  
+        else: 
+            print "no such size"
+
+    variation_sizes  = f7(full_variations)
+
+    full_variations_article = Counter(full_variations_article) 
+    full_variations_article = list(full_variations_article)
+
+    path_dir = settings.ROOT_DIR
+    filename = str(full_variation.variation.article.sku_number) + "_" + str(full_variation.variation.pattern.order) + "_" + str(full_variation.variation.color.order) 
+
+    images = [] 
+
+    for x in range(0, 3):
+        file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"        
+        images.append(file)
+
+    stock_value = full_variation.stock
+
+    return render_to_response('variation/fulldetail_b.html',
+                   {'product': full_variation,
+                   'images': images,
+                   'sizes': variation_sizes,
+                   'init_sizes': init_sizes, 
+                   'full_variations': full_variations, 
+                   'stock_value': stock_value,
+                   'full_variations_article': full_variations_article, 
+                   'colorsandpatterns': colorsandpatterns
+                   },
+                   context_instance=RequestContext(request)
+                )
+
 
 def f7(seq):
     seen = set()
