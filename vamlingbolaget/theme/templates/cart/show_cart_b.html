@@ -1,4 +1,4 @@
-{% extends "collection_base_b.html" %}
+{% extends "base_b.html" %}
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
@@ -10,7 +10,7 @@
 
 {% block stretchpage %}
 <legend> {% trans "Din shoppinglåda" %}  -------- </legend>
-<div class="hidden-xs">
+<div class="invisable-xs">
 {%if cartitems or bargains or rea%}
     <table class="table">
     <thead>
