@@ -1,6 +1,6 @@
 {% load i18n %}
 <hr>
-<footer class="bg-footer py-6 vb_top_color">
+<footer class="bg-footer py-6 vb_top_color footer_size_text">
         <div class="row">
           <div class="col-6 pl-5 col-md">
             <h5>Vamlingbolaget</h5>
@@ -84,17 +84,7 @@
                    
                 </ul> 
                 
-                <ul class="invisible-xs">
-                  <li>
-                      <form action="/i18n/setlang/" method="post" id="lang_bottom" >
-                          {% csrf_token %}
-                          <input name="next" type="hidden" value="{{ redirect_to }}" />
-                          <input name="language" type="hidden" value=""  />
-                          <img src="{{STATIC_URL}}img/english_flag.gif" alt="flag english" id="en" class="change_lang" /> 
-                          <img src="{{STATIC_URL}}img/svensk_flagga.gif" alt="flagga svensk"  id="sv"  class="change_lang" />
-                      </form>
-                  </li>
-                </ul>
+            
            
           </div>
         </div>
