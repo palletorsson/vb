@@ -82,7 +82,7 @@
       <div class="row">
           <div class="col-4 pt-1 pl-4">
 
-              <div style="position: fixed; top: 12px; left: 16px"><!-- language --> 
+              <div style="position: fixed; top: 12px; left: 16px" class="d-none d-md-block d-xs-none"></div><!-- language --> 
                <button class="btn vb_top_color dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  Language
                </button>
@@ -128,8 +128,10 @@
                     <a id="token" class="nav-item nav-link mr-md-2 px-2 vb_top_color" href="/cart/show/">
                       <button type="button" class="btn btn-light button_has_item vb_top_color"> 
                           <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                          {% load cart_tags %}
-                          {% cart_total %}
+                          <span class="d-none d-md-block d-xs-none">
+                            {% load cart_tags %}
+                            {% cart_total %}
+                          </span>
                       </button>
                       </a>
                 </li>
