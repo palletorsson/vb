@@ -16,13 +16,11 @@
     <div class="card-columns">
     {% if posts %}
         {% for post in posts %} 
-            <div class="card w-50">
+            <div class="card w-40">
                     <div class="card-body">
-                    <h4 class="card-title"> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h4>
-                    
-                    <div>
+                   
                         {{ post.body|safe}}
-                    </div>
+                    
             </div>   
             {% endfor %}
         {% endif %}
