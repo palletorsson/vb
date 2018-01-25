@@ -1,2 +1,2 @@
 {% load i18n %}
-<span id="widget_quantity" {% if has_items %} class="hasitems orange" {% endif%}>{{ numbers }}</span> {% trans "Plagg" %} |  <span id="widget_total" class="orange">{{ total }}</span> SEK
+<span id="widget_quantity" class="invisible">{{ numbers }}</span> <span class="invisible">{% trans "Plagg" %} | </span><span id="widget_total" class="vb_top_color">{{ total }}</span> sek
