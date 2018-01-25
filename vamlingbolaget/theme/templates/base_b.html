@@ -131,6 +131,7 @@
     </header> <!-- / vb-header -->
     {% block superstretchpage %}
     <div class="container-fluid"> <!--this is for the left margin -->
+      <div class="row firstrow">
         {% block stretchpage %}
             <div id="changetext"></div>
             <div class="pagetitle">
@@ -143,7 +144,7 @@
             {% block allcontent %}
             <nav class="col-md-2 d-none d-md-block sidebar d-none d-xs-block d-md-none">
                 
-                  <div class="pt-2">
+                  <div class="row">
        
                     {% block sidebar %} {% endblock %}
                   </div>
@@ -157,6 +158,7 @@
             {% endblock %} <!-- end allcontent -->
         {% endblock %} <!-- end stretchpage -->
     </div>
+  </div> <!-- end of firstrow -->
     {% endblock %}  <!-- end superstretchpage -->
 
     {% block footer %}
