@@ -648,7 +648,7 @@ $('.overlay').each(function(){
 var path = location.pathname
 links = $('a[href="'+window.location.pathname+'"]')
 links.addClass('active');
-console.log(path); 
+console.log("thepath", path); 
 
 
 var set_first_page = function(){
