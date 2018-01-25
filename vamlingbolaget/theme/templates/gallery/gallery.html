@@ -9,6 +9,7 @@
 
 {% block content %}
 
+        <div class="row">
         {%if galleries%}
             {%for status in statuses%}
                 {%for gallery in galleries%}
@@ -37,6 +38,6 @@
            </div>    
         {%endif%}
     </div> <!-- end of row -->
-</main>
+
 
 {% endblock %}
