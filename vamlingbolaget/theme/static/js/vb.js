@@ -387,9 +387,10 @@ $('#widget_size').filter(function () {
     }
 }); 
 
-$("#linksactive").click(function() { 
+('nav ul li a').on('click', function () {
+    $(this).closest('nav ul').find('a.active').removeClass('active');
+    $(this).addClass('active');
     console.log(this); 
-    console.log(this.target.id)
 });
 
 $("#addreatocart").click(function() {
