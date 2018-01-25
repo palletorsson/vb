@@ -9,21 +9,19 @@
 
 {% block allcontent %}
 
-<main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
-    <div class="vb_important_text"> {% trans "Nyheter och Blog" %} 
+<div class="vb_important_text"> {% trans "Nyheter och Blog" %} 
 
-    </div>
-    <div class="card-columns">
-    {% if posts %}
-        {% for post in posts %} 
-            <div class="card w-40">
-                    <div class="card-body">
-                   
-                        {{ post.body|safe}}
-                    
-            </div>   
-            {% endfor %}
-        {% endif %}
-    {% endblock %}
-    </div>
-</main>
+</div>
+<div class="card-columns">
+{% if posts %}
+    {% for post in posts %} 
+        <div class="card">
+                <div class="card-body">
+                
+                    {{ post.body|safe}}
+                
+        </div>   
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+</div>
