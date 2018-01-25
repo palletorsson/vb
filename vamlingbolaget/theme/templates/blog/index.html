@@ -6,10 +6,6 @@
     <meta name="description" content={% trans "Vamlingbolaget nyheter och blogg, alla nyheter." %} />
 {%endblock%}
 {% block content %}
-
-
-    <div class="vb_important_text"> {% trans "Nyheter och Blog" %} </div>
-    <hr/>
     {% if posts %}
         {% for post in posts %} 
             <div class="card" style="width:100%">
