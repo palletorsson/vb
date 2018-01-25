@@ -8,8 +8,9 @@
 {% version model.field_name version_prefix %}
 
 {% block content %}
-
+<div class="vb_important_text"> {% trans "Gallerier" %} 
         <div class="row">
+
         {%if galleries%}
             {%for status in statuses%}
                 {%for gallery in galleries%}
