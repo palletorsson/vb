@@ -80,21 +80,21 @@
     <header class="vb-header py-1 sticky-top bg-white" >
       <div class="row">
           <div class="col-4 pt-1 pl-4">
-            <div class="btn-group mr-md-2 pl-2 align-top" style="position: fixed; top: 16px; left: 16px">
+    
                 <!-- language --> 
                <button class="btn vb_top_color dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  Language
                </button>
                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                 <a class="dropdown-item active change_lang" id="sv">Svenska</a>
+                  <a href="#"> <span class="change_lang" id="sv">Svenska</span></a>
                  <div class="dropdown-divider"></div>
-                 <a class="dropdown-item change_lang" id="en">English</a>
+                  <a href="#"> <span class="change_lang" id="en">English</span>
                  <div class="dropdown-divider"></div>
-                 <a class="dropdown-item change_lang" id="fi">Suomalainen</span>
+                  <a href="#"> <span class="change_lang" id="de">Deutsch</span>
                  <div class="dropdown-divider"></div>
-                 <a class="dropdown-item change_lang" id="de">Deutsch </a>
+                  <a href="#"> <span class="change_lang" id="fi">Suomalainen</span>  </a>
                  <div class="dropdown-divider"></div>
-                 <a class="dropdown-item change_lang" id="da">Dansk</a>
+                  <a href="#"> <span class="change_lang" id="da">Dansk</span>  </a>
                </div>
              </div> <!-- / language -->
         </div> <!-- / col-4 --> 
@@ -119,13 +119,13 @@
             <div>  <!-- cart -->
               <ul class="navbar-brand align-top mr-md-2 navbar-nav flex-row pull-right d-md-flex pl-4" style="position: fixed; top: 12px; right: 16px">
                 <li class="nav-item dropdown">
-                  <a class="nav-item nav-link btn btn-outline-secondary mr-md-2 px-2 vb_top_color" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Plagg: 0 | Summa: 0
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="bd-versions">
-                    <a class="dropdown-item active" href="#">xyz</a>
-                    <a class="dropdown-item" href="#">xyz</a>
-                  </div>
+                    <a id="token"  class="nav-item nav-link btn btn-outline-secondary mr-md-2 px-2 vb_top_color" href="/cart/show/">
+                      <button type="button" class="btn btn-default button_has_item" style="border-style: groove; border-width: 5px; border-color: rgb(255, 0, 0);"> 
+    							        <span class="glyphicon glyphicon-gift orange" aria-hidden="true"></span>
+                              <span id="widget_quantity" class="hasitems orange">1</span> Plagg |  Summa: <span id="widget_total" class="orange">2055</span> SEK
+                          <div id="updatecart orange"></div>
+                      </button>
+                      </a>
                 </li>
               </ul>
               </div>  <!-- / cart -->
