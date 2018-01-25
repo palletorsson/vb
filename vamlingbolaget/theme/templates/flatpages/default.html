@@ -5,13 +5,13 @@
 <meta name="description" content="{{ flatpage.title }}" />
 {%endblock%}
 {% block pagetitle %}
-<legend>{{ flatpage.title }}</legend>
+<h4>{{ flatpage.title }}</h4>
 
 {% endblock %}
 
 {% block content %}
-<div class="flatpages_container">
+<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
 {{ flatpage.content }}
-</div>
+</main>
 {% endblock %}
 
