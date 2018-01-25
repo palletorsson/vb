@@ -12,35 +12,13 @@
 <hr/>
 <div class="vb_important_text"> {% trans "Nyheter och Blog" %} </div>
 {% if posts %}
-    {% for post in posts %}
-                    {% ifequal post.blog.id 1 %}
-                    <h3><a href="{{ post.slug }}/">  {{ post.title }}</a>  <small> ( {{ post.publish_at }} ) </small> </h3>
-                    <hr />
-                    <div class="post_body">
-                    {{ post.body|safe|truncatewords:150}}  <br /> <h4><a href="{{ post.slug }}/"> {% trans "läs hela artikeln" %} </a></h4>
-                        </div>
-                    {% else %}
-                        <blockquote>
-                            <h4> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h4>
-                            <div class="post_body">
-                            {{ post.body|safe}}
-                            </div>
-                        </blockquote>
-                    {% endifequal %}
-                <div class="tags">
-                    {% if tag in post.tags.all %}
-                    {{ tag }} {% if not forloop.last %}, {% endif %}
-                    {% endif %}
-                </div>
-                <hr />
+    {% for post in posts %} 
+        <div>
+            <h4> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h4>
+            <div>
+                {{ post.body|safe}}
+            </div>
+        </div>   
 		{% endfor %}
 	{% endif %}
-    <script type="text/javascript">
-        var width = $( window ).width();
-        var metaTag=document.createElement('meta');
-        metaTag.name = "viewport"
-        metaTag.content = "width='+ width +, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        document.getElementsByTagName('head')[0].appendChild(metaTag);
-        $('head').append('<meta name="viewport" content="width=, initial-scale=1.0, maximum-scale=1.0">');
-    </script>
 {% endblock %}
