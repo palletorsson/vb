@@ -11,14 +11,15 @@
 
 <main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
 <div class="vb_important_text"> {% trans "Nyheter och Blog" %} </div>
-<div class="row">
+<div class="card-columns">
 {% if posts %}
     {% for post in posts %} 
-        <div class="col-md-6 pr-4 pr-5">
-            <h4> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h4>
-            <div>
-                {{ post.body|safe}}
-            </div>
+  
+        <div class="card">
+                <h4> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h4>
+                <div>
+                    {{ post.body|safe}}
+                </div>
         </div>   
 		{% endfor %}
 	{% endif %}
