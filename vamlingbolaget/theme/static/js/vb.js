@@ -112,7 +112,7 @@ $("#pattern_color_image").attr("src", img);
 
 
 if ($(".hasitems")[0]){
-    $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff0000"}) 
+    $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff6900"}) 
 } 
 
 var initsize = function(){
