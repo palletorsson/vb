@@ -1,0 +1,47 @@
+{% extends "base_b.html" %}
+{% load i18n %}
+{% block sidebar %}
+ <span class="abouts">
+    <ul class="hidden-xs nav coll_menu_ul">
+
+        {% include "about_links.html" %}
+        
+        <hr>
+        {% include "order_terms_links.html" %}
+        <hr>
+        <li>
+            <a href="/sthlm/"> {% trans "Vamlingbolaget Stockholm" %} </a>
+        </li>
+
+        <hr>
+        <li>
+            <a href="/mah-jong/"> {% trans "Om Mah-Jong" %} </a>
+        </li>
+        <hr>
+
+
+            <li><a href="/galleries/">{% trans "Bildgallerier" %}</a></li>
+        <hr>  
+        <li>
+            <a href="/news/">{% trans "Nyheter" %}</a>
+        </li>                                           
+        <li>
+            <a href="/newsletter/">{% trans "Nyhetsbrev" %}</a>
+        </li>
+        <hr>
+        <li>
+        <a href="http://www.facebook.com/VamlingbolagetStockholm" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=http://www.facebook.com/VamlingbolagetStockholm&amp;source=gmail&amp;ust=1462995515849000&amp;usg=AFQjCNFa3CUpPuy-zD7ldYEF5kdQWgth-g"> <img src="/media/facebook.png" width="20" />
+         {% trans "Gilla oss på Facebook" %}  </a>
+        </li>
+        <li>
+        <a href="https://www.instagram.com/vamlingbolaget/" target="_blank"> <img src="/media/instagram.png" width="20" /> 
+        {% trans "Följ oss på Instagram" %} </a>
+        </li>
+        <hr>
+        <li>
+            <a href="/press/"> {% trans "Press" %} </a>
+        </li>
+
+    </ul>
+ </span>
+{% endblock %}
