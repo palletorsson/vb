@@ -5,11 +5,9 @@
     <title>Vamlingbolaget | {% trans "Nyheter och Blog" %}  </title>
     <meta name="description" content={% trans "Vamlingbolaget nyheter och blogg, alla nyheter." %} />
 {%endblock%}
-
-
 {% block content %}
 
-<main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
+
     <div class="vb_important_text"> {% trans "Nyheter och Blog" %} </div>
     <hr/>
     {% if posts %}
@@ -22,4 +20,3 @@
             {% endfor %}
         {% endif %}
     {% endblock %}
-</main>
