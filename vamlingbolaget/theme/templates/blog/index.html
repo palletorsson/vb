@@ -13,7 +13,7 @@
 <div class="vb_important_text"> {% trans "Nyheter och Blog" %} </div>
 {% if posts %}
     {% for post in posts %} 
-        <div>
+        <div class="col-md-6 pr-4 pr-5">
             <h4> {{ post.title }} <small> ( {{ post.publish_at }} ) </small> </h4>
             <div>
                 {{ post.body|safe}}
