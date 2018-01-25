@@ -109,13 +109,6 @@ $("#pattern_color_image").attr("src", img);
 
 });
 
-
-
-
-if ($(".hasitems")[0]){
-    $(".button_has_item").css({borderStyle: "groove", borderWidth: "3px", borderColor: "#ff6900"}) 
-} 
-
 var initsize = function(){
     if($('#nosize')[0]) {
         var allsizes = $(".select_size"); 
