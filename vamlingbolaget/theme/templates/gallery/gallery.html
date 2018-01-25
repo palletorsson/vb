@@ -12,12 +12,11 @@
         <div class="row">
         {%if galleries%}
             {%for status in statuses%}
-                <h4>{{status.name}}</h4>
                 {%for gallery in galleries%}
                     {% if gallery.status = status %}
                     <div class="col-md-4 mb-4">
-                        <div class="galleries_list">
-                            <a class="gallery_img_title" href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}"  title="Fotograf: {{feature_image.photographer.name}}"/></a>
+                        <div>
+                            <a class="gallery_img_title" href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" class="img-thumbnail gallery_img" title="Fotograf: {{feature_image.photographer.name}}"/></a>
                         </div>
                         <div class="gallery_title">&nbsp;{{gallery.name}}</div>
                     </div>
@@ -29,11 +28,11 @@
         {%else%}
         <div class="col-md-4 mb-4">
                 <a href="{% version gallery.feature_image 'large' %}" title="{{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
-                    <img src="{% version gallery.feature_image 'medium' %}" class="imgborder isfeatured gallery_img" />
+                    <img src="{% version gallery.feature_image 'medium' %}" class="img-thumbnailgallery_img" />
                 </a>
                 {%for image in images%}
                     <a href="{% version image.image 'large' %}" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
-                        <img src="{% version image.image 'medium' %}" class="imgborder enlarge gallery_img" />
+                        <img src="{% version image.image 'medium' %}" class="img-thumbnail gallery_img" />
                     </a>       
                 {%endfor%}
            </div>    
