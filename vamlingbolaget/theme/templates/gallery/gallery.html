@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "about_base_b.html" %}
 {% load fb_versions %}
 {% load i18n %}
 {%block title%}
@@ -16,47 +16,38 @@
     
 {% endblock %}
 
-{% block allcontent %}
-    <div class="gallery_list">
+{% block content %}
+<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4"> 
+        <div class="row">
         {%if galleries%}
             {%for status in statuses%}
                 <h4>{{status.name}}</h4>
                 {%for gallery in galleries%}
                     {% if gallery.status = status %}
-                        <div style="float: left; display: inline;">
-
-                            <div class="galleries_list">
-                                <a class="gallery_img_title" href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}"  title="Fotograf: {{feature_image.photographer.name}}"/></a>
-
-                            </div>
-                            <div class="gallery_title">&nbsp;{{gallery.name}}</div>
+                    <div class="col-md-6 mb-6">
+                        <div class="galleries_list">
+                            <a class="gallery_img_title" href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}"  title="Fotograf: {{feature_image.photographer.name}}"/></a>
                         </div>
+                        <div class="gallery_title">&nbsp;{{gallery.name}}</div>
+                    </div>
                     {%endif%}
                 {%endfor%}
-                <div style="clear: both"></div>
-                <br />
+               
             {%endfor%}
-    </div>
+
         {%else%}
-                <table border="0" cellpadding="0" class="gallery_table">
-                    <tr>
-                    <td valign="top" style="width: 240px;">
-                        <a href="{% version gallery.feature_image 'large' %}" title="{{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
-                            <img src="{% version gallery.feature_image 'medium' %}" class="imgborder isfeatured gallery_img" />
-                        </a>
-                        {%for image in images%}
-                            <a href="{% version image.image 'large' %}" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
-                                <img src="{% version image.image 'medium' %}" class="imgborder enlarge gallery_img" />
-                            </a>    
-                            {% if forloop.counter == break1 or forloop.counter == break2 or forloop.counter == break3 %}
-                                </td>
-                                <td valign="top" class="gallery_td">
-                            {%endif%}
-                        {%endfor%}
-                        </td>
-                     </tr>
-                </table>
+        <div class="col-md-6 mb-6">
+                <a href="{% version gallery.feature_image 'large' %}" title="{{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
+                    <img src="{% version gallery.feature_image 'medium' %}" class="imgborder isfeatured gallery_img" />
+                </a>
+                {%for image in images%}
+                    <a href="{% version image.image 'large' %}" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
+                        <img src="{% version image.image 'medium' %}" class="imgborder enlarge gallery_img" />
+                    </a>       
+                {%endfor%}
+           </div>    
         {%endif%}
-    </div>
+    </div> <!-- end of row -->
+</main>
 
 {% endblock %}
