@@ -111,6 +111,7 @@ $("#pattern_color_image").attr("src", img);
 
 
 
+
 if ($(".hasitems")[0]){
     $(".button_has_item").css({borderStyle: "groove", borderWidth: "2px", borderColor: "#ff6900"}) 
 } 
@@ -386,7 +387,11 @@ $('#widget_size').filter(function () {
     }
 }); 
 
-  
+$("#linksactive").click(function() { 
+    console.log(this); 
+    console.log(this.target.id)
+});
+
 $("#addreatocart").click(function() {
 	var item = $('#rea_pk').val();
 	the_price = $("#the_price").text(),
