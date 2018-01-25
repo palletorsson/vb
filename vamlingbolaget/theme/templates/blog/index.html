@@ -9,7 +9,7 @@
 
 {% block allcontent %}
 
-<hr/>
+<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
 <div class="vb_important_text"> {% trans "Nyheter och Blog" %} </div>
 {% if posts %}
     {% for post in posts %} 
@@ -22,3 +22,4 @@
 		{% endfor %}
 	{% endif %}
 {% endblock %}
+</main>
