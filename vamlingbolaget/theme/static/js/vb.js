@@ -387,11 +387,7 @@ $('#widget_size').filter(function () {
     }
 }); 
 
-('nav ul li a').on('click', function () {
-    $(this).closest('nav ul').find('a.active').removeClass('active');
-    $(this).addClass('active');
-    console.log(this); 
-});
+
 
 $("#addreatocart").click(function() {
 	var item = $('#rea_pk').val();
