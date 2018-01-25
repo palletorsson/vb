@@ -9,7 +9,7 @@
 {% block allcontent %}
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 {% with images|first as image %}
                     <a href="{{ image }}" class="variation_link"><img src="{{ image }}" alt="article image" width="100%" class="variation_img" /></a>
                 {% endwith %}
@@ -24,7 +24,7 @@
                       </div>
                   {%endif%}         
             </div>
-            <div class="col-md-6 pr-4 pr-5">
+            <div class="col-md-5 pr-4 pr-5">
                 <input id="article_pk" type="hidden" value="{{ product.variation.article.sku_number}}">
                 <input type="hidden" id="pattern" name="pattern" value="{{ product.variation.pattern.order}}" >							
                 <input type="hidden" id="color" name="color" value="{{ product.variation.color.order }}" >
@@ -135,7 +135,7 @@
                     <div class="d-flex justify-content-between align-items-center w-100">
                         <div>
                             <span id="addtocart">
-                                <button class="btn btn-dark btn-lg btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppingbag" %}</button>
+                                <button class="btn btn-sm btn-light btn-lg btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppingbag" %}</button>
                             </span>
                         </div>
                         <div>
