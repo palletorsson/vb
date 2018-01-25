@@ -113,7 +113,7 @@ $("#pattern_color_image").attr("src", img);
 
 
 if ($(".hasitems")[0]){
-    $(".button_has_item").css({borderStyle: "groove", borderWidth: "2px", borderColor: "#ff6900"}) 
+    $(".button_has_item").css({borderStyle: "groove", borderWidth: "3px", borderColor: "#ff6900"}) 
 } 
 
 var initsize = function(){
@@ -247,7 +247,7 @@ $("#addtocart").off('click').on({
         			var old_price = $("#widget_total").text();
         			var new_price = parseInt(the_price) + parseInt(old_price);
         			$('#widget_total').text(new_price);
-                    $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff0000"}) 
+                    $(".button_has_item").css({borderStyle: "groove", borderWidth: "2px", borderColor: "#ff0000"}) 
 
     		  }
     	   });
@@ -350,7 +350,7 @@ $("#addtofullcart").off('click').on({
                     var old_price = $("#widget_total").text();
                     var new_price = parseInt(the_price) + parseInt(old_price);
                     $('#widget_total').text(new_price);
-                    $(".button_has_item").css({borderStyle: "groove", borderWidth: "5px", borderColor: "#ff0000"}) 
+                    $(".button_has_item").css({borderStyle: "groove", borderWidth: "2px", borderColor: "#ff0000"}) 
 
               }
            });
