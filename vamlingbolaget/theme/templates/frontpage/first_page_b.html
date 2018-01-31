@@ -18,11 +18,13 @@
        
         {% if feature.mediatype == 'F' %}
          <!-- full size img 'Fullpost'-->
-        <div class="mx-4 py-4">
-            <a href="{{ feature.link_to }}">
-            
-                <img src="{% version feature.feature_image 'large' %}" width="100%"/>
-            </a>	
+        <div class="row">
+            <div class="mx-4 py-4">
+                <a href="{{ feature.link_to }}">
+                
+                    <img src="{% version feature.feature_image 'large' %}" width="100%"/>
+                </a>	
+            </div>
         </div>
         
         {% elif feature.mediatype == 'L' %}
@@ -45,7 +47,7 @@
         {% elif feature.mediatype == 'T' %}
         <!-- 'halfposttopLeft' start -->
         <div class="row">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 mb-6">
                 
                     <span> {{ feature.heading }} </span>
                     <span class="muted"> {{ feature.heading_extra}}  </span>
@@ -57,7 +59,7 @@
          
         {% elif feature.mediatype == 'P' %}
         <!-- 'halfposttopRight' ends -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 mb-6">
          
                     <span style="margin-left: 40px;"> {{ feature.heading }} </span>
                     <span class="muted" style="margin-left: 40px;"> {{ feature.heading_extra}} </span>
