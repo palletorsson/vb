@@ -281,7 +281,7 @@
 	{% endif %}
 </table>
 
-<table id="adress_form" class="table table-sm mb-3 border-bottom">
+<table id="adress_form" class="table table-sm border-bottom">
 	<tr>
 		<th>
             <h5 class="mb-3">{% trans "Adressuppgifter" %} </h5>
@@ -380,12 +380,9 @@
 
 			<div class="control-group" id="sms">
 			
-					<label for="sms">{% trans "Sms-avisering" %} </label>
-		
-				 <div>
-					<input type="checkbox" class="form-control"  id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> {% trans "Jag vill ha sms-avisering" %} <br>
+					<input type="checkbox" class="form-control"  id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> <label for="sms-checkbox"> {% trans "Jag vill ha sms-avisering" %} </label>
 					<input type="hidden" name="sms" id="id_sms" value="yes">
-				</div>
+				
 			</div>
 
 			<div style="clear: both;"></div>
