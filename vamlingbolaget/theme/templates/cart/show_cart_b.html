@@ -190,16 +190,22 @@
         </tr>
 
         <tr>
-        <th class="totalprice" colspan="7" style="text-align: right">
-            {% trans "Totalpris" %}:
-        </th>
-        <th id="totalprice">
-            {{ totalprice }}  {%trans "SEK"%}
-        </th></tr>
+            <th colspan="6">
+                    
+            </th>
+            <th class="totalprice">
+                {% trans "Totalpris" %}:
+            </th>
+            <th id="totalprice">
+                {{ totalprice }}  {%trans "SEK"%}
+            </th></tr>
 
         <tr>
-        <th id="totalprice" colspan="8" style="text-align: right">  
-		<div style="text-align:right"><a href="/checkout/"><button class="btn btn-success" type="button">{% trans "Beställ" %}</button></a></div>
+                <th colspan="7">
+                    
+                    </th>
+        <th id="totalprice">  
+		<div style="text-align:right"><a href="/checkout/"><button class="btn btn-success rounded-0 py-1" type="button">{% trans "Beställ" %}</button></a></div>
 	    </th>
 
         </tr>
