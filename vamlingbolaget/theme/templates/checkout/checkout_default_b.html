@@ -192,15 +192,10 @@
 
 	{{ form.subject.post }}
 		<input type=hidden name="paymentmethod" id="id_paymentmethod" value="C">
-	{{ form.paymentmethod.errors }}
-
+    {{ form.paymentmethod.errors }}
+    
+<h5 class="mb-3">{% trans "Välj betalningsmetod" %}</h5>
 <table class="table table-sm">
-	
-	<tr>
-		<th>
-            <h5 class="mb-3">{% trans "Välj betalningsmetod" %}</h5>	
-		</th>
-	</tr>
 
 	<tr height="45px">
 	    <td>
@@ -286,7 +281,7 @@
 	{% endif %}
 </table>
 
-<table id="adress_form" class="table table-sm">
+<table id="adress_form" class="table table-sm mt-5">
 	<tr>
 		<th>
             <h5 class="mb-3">{% trans "Adressuppgifter" %} </h5>
