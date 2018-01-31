@@ -19,12 +19,12 @@
         {% if feature.mediatype == 'F' %}
          <!-- full size img 'Fullpost'-->
         <div class="mx-4 py-4">
-            <a href="/products/full/">
+            <a href="{{ feature.link_to }}">
             
                 <img src="{% version feature.feature_image 'large' %}" width="100%"/>
             </a>	
         </div>
-        
+        ß
         {% elif feature.mediatype == 'L' %}
         <!-- 'halfpostfullLeft' starts -->  
         <div class="row">
