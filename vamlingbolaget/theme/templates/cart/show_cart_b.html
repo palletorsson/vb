@@ -26,7 +26,7 @@
             <span> {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span>    
         </td>
         <td>
-            <a href="{%url removefromcart item.pk 'cartitem'%}"> <span class="icon-minus badge badge-secondary" id="{{ item.id }}">-</span></a>           
+            <a href="{%url removefromcart item.pk 'cartitem'%}"> <span class="icon-minus badge badge-secondary rounded-0" id="{{ item.id }}">-</span></a>           
         </td>
         <td>
             <img src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans "i" %} {{ item.color|lower }}" width="80"/>
@@ -150,7 +150,7 @@
             </td>
             <td>
                 <div>
-                    <a href="{%url removefromcart b.pk 'bargain'%}"><span class="badge badge-secondary icon-minus" id="{{ b.id }}">-</span></a>
+                    <a href="{%url removefromcart b.pk 'bargain'%}"><span class="badge badge-secondary icon-minus rounded-0" id="{{ b.id }}">-</span></a>
                 </div>
             </td>
             <td>
@@ -307,7 +307,7 @@
             </div>
 	   		<h5>
 				<strong> {%trans "REA"%} <small>
-					<span> | <a href="{%url removefromcart b.pk 'bargain'%}"><span class="badge badge-secondary icon-minus" id="{{ b.id }}">-</span></a></span></small>
+					<span> | <a href="{%url removefromcart b.pk 'bargain'%}"><span class="badge badge-secondary icon-minus rounded-0" id="{{ b.id }}">-</span></a></span></small>
 				</strong>
 			</h5>
 			<hr>
