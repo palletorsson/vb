@@ -195,7 +195,7 @@
     {{ form.paymentmethod.errors }}
     
 <h5 class="mb-3">{% trans "Välj betalningsmetod" %}</h5>
-<table class="table table-sm mb-3 border-bottom">
+<table class="table table-sm mb-5 border-bottom">
 
 	<tr height="45px">
 	    <td>
@@ -293,9 +293,11 @@
 	<tr>
 		<td>
 		    <div class="form-group" id="first_name">
+                   
 		        <label class="col-lg-3 control-label" > <label for="id_first_name">{% trans "Förnamn" %} </label> </label>
-		        {{ form.subject.first_name}}
-		         <div class="col-lg-9">
+                <input id="id_first_name" type="text" class="form-control" name="first_name" maxlength="80" required="">
+              
+		         <div class="col-lg-9 invalid-feedback">
 		            {{ form.first_name }} *
 		            {{ form.first_name.errors }}
 		        </div>
