@@ -71,14 +71,14 @@
 
         {% elif feature.mediatype == 'B' %}
         <!-- 'halfpostbottomLeft' starts--> 
-        <div class="row">
+ 
             <div class="col-md-4 mb-4" style="text-align:right;">
                 <a href="{{ feature.link_to }}">  
                     <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                 </a>
              
-                    <span style="margin-left: 40px;"> {{ feature.heading }} </span>
-                    <span class="muted" style="margin-left: 40px;"> {{ feature.heading_extra}} </span>
+                    <span> {{ feature.heading }} </span>
+                    <span class="muted" > {{ feature.heading_extra}} </span>
             
            
        
@@ -95,7 +95,7 @@
               
         
            
-        </div>	<!-- end row -->  
+       
         {% else %}
         {%endif%} 
 
