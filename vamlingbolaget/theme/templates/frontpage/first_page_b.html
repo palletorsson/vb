@@ -5,7 +5,7 @@
 
 {% block superstretchpage %}
 <div class="container-fluid"> <!-- fluid-container  -->
-    <div class="text-center mx-4 start">  <!---  start --> 
+    <div class="text-center mx-4 py-4">  <!---  start --> 
         <div class="row">
             <a href="/products/full/">
                 <img src="/media/{{features.0.feature_image}}" width="100%"/>
@@ -18,7 +18,7 @@
        
         {% if feature.mediatype == 'F' %}
          <!-- full size img 'Fullpost'-->
-        <div>
+        <div class="mx-4 py-4">
             <a href="/products/full/">
             
                 <img src="{% version feature.feature_image 'large' %}" width="100%"/>
@@ -28,7 +28,7 @@
         {% elif feature.mediatype == 'L' %}
         <!-- 'halfpostfullLeft' starts -->  
         <div class="row">
-            <div class="col-md-6 my-5">
+            <div class="col-md-6 mb-6">
                 <a href="{{ feature.link_to }}">  
                 <img src="{% version feature.feature_image 'large' %}" alt="{{ feature.heading }}" width="100%"> 
                 </a>
