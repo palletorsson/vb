@@ -9,7 +9,7 @@
 
 	<tbody class="mb-3">
 	    {% for item in cartitems %}
-	    <tr>
+	    <tr class="pb3">
 	    <td>
 	        <div>
 	            <span> {{ item.quantity }} {% if item.article.type.order == 8 %} meter {%endif%} </span>
