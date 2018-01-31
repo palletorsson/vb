@@ -1,0 +1,25 @@
+{% extends "collection_base.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{%block title%}
+<title>Vamlingbolaget | {% trans "Din Beställning" %}  </title>
+<meta name="description" content={% trans "Din Beställning av Vamlingbolagets produkter " %} />
+{%endblock%}
+{% block extra_head %}
+
+{% endblock %}
+
+
+{% block stretchpage %}
+   <legend> {% trans "Din Beställning" %} </legend>
+	<div class="hidden-xs">
+	{% include "checkout/checkout_default_b.html" %}
+	</div>
+
+	<div class="visible-xs"> 
+	{% include "checkout/checkout_phone.html" %}
+	</div>
+
+{% endblock %}
+

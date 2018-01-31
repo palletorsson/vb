@@ -265,7 +265,7 @@ def checkout(request, test=''):
     else: 
         klarna_test = '0' 
 
-    return render_to_response('checkout/checkout.html', {
+    return render_to_response('checkout/checkout_b.html', {
         'form': form,
         'totalprice': totalprice,
         'totalitems': totalitems,
