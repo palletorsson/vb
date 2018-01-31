@@ -12,6 +12,7 @@
 
 
 {% block stretchpage %}
+<main role="main" class="col-md-12 ml-sm-auto col-lg-12pt-3 px-4"> 
    <div class="mb-3 vb_important_text"> {% trans "Din Beställning" %} </div>
 	<div class="hidden-xs">
 	{% include "checkout/checkout_default_b.html" %}
@@ -20,6 +21,6 @@
 	<div class="visible-xs"> 
 	{% include "checkout/checkout_phone.html" %}
 	</div>
-
+</main>
 {% endblock %}
 
