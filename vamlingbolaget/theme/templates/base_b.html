@@ -97,7 +97,7 @@
           </div>
           
         </div>
-
+        {% if language %} 
         <div style="position: fixed; top: 12px; left: 16px" class="d-none d-md-block d-sm-none"><!-- language --> 
           <button class="btn vb_top_color dropdown-toggle top_widget_text" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Language
@@ -119,6 +119,7 @@
              <input name="language" type="hidden" value="en"/>
          </form>
          </div> <!-- / language -->
+         {% endif %}
          <div>  <!-- cart -->
           <ul class="navbar-brand align-top mr-md-2 navbar-nav flex-row pull-right d-md-flex pt-0 pl-4" style="position: fixed; top: 0px; right: 16px">
             <li class="nav-item">
@@ -134,7 +135,7 @@
             </li>
           </ul>
           </div>  <!-- / cart -->
-     
+  
       </header> 
       {% if showtopmenu %} 
     <!-- 3 parts inbetween -->
