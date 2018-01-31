@@ -57,10 +57,10 @@
                 {%if item.article.discount%}
                     <span class="discount"> {{ item.article.f_discount }} SEK</span>
                 {%elif item.article.type.order == 8 %}
-                    {{item.totalitemprice}} 
+                    {{item.totalitemprice}} SEK
                 {%else%}
                 {% if item.article.oldprice %} <span style=" text-decoration: line-through;" >{{item.article.oldprice}} 	</span><br/> {%endif%} 
-                    {{ item.article.price }}
+                    {{ item.article.price }} SEK
                 {%endif%}
             </div>
         </td>
@@ -135,7 +135,7 @@
 
             <td>
             <div>
-           	<span class="discount"> {{ item.reaArticle.rea_price }} </span>(<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} </span>)</span>
+           	<span class="discount"> {{ item.reaArticle.rea_price }} </span>(<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} SEK </span>)</span>
             </div>
         </td>
     </tbody>
