@@ -35,6 +35,7 @@ def first_page_b(request):
             'frontpage': frontpage,
             'theme1': theme1,
             'features': features,
+            'showtopmenu': True
         },
         context_instance=RequestContext(request))
 
