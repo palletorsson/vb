@@ -32,14 +32,14 @@
         <div class="row">
             <div class="col-md-6 mb-6">
                 <a href="{{ feature.link_to }}">  
-                <img src="{% version feature.feature_image 'large' %}" alt="{{ feature.heading }}" width="100%"> 
+                <img src="{% version feature.feature_image 'large' %}" class="img-fluid" alt="{{ feature.heading }}" width="100%"> 
                 </a>
             </div>             
         {% elif feature.mediatype == 'H' %}
         <!-- 'halfpostfullRight' ends -->   
             <div class="col-md-6 mb-6">
                 <a href="{{ feature.link_to }}">  
-                <img src="{% version feature.feature_image 'large' %}" alt="{{ feature.heading }}" width="100%"> 
+                <img src="{% version feature.feature_image 'large' %}"  class="img-fluid"  alt="{{ feature.heading }}" width="100%"> 
                 </a>
             </div>             
         </div> <!-- end row -->  
@@ -52,7 +52,7 @@
                     <span> {{ feature.heading }} </span>
                     <span class="muted"> {{ feature.heading_extra}}  </span>
                     <a href="{{ feature.link_to }}">  
-                        <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+                        <img src="{% version feature.feature_image 'large' %}"  class="img-fluid"  data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                     </a>
                
             </div> 
@@ -64,7 +64,7 @@
                     <span style="margin-left: 40px;"> {{ feature.heading }} </span>
                     <span class="muted" style="margin-left: 40px;"> {{ feature.heading_extra}} </span>
                     <a href="{{ feature.link_to }}">  
-                        <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+                        <img src="{% version feature.feature_image 'large' %}"  class="img-fluid"  data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                     </a>
           
             </div> 
@@ -76,7 +76,7 @@
         <div class="row">
             <div class="col-md-6 mb-6">
                 <a href="{{ feature.link_to }}">  
-                    <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+                    <img src="{% version feature.feature_image 'large' %}" class="img-fluid"  data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                 </a>
                 <div> {{ feature.heading }} </div>
                 <div class="muted" > {{ feature.heading_extra}} </div>
@@ -85,7 +85,7 @@
         <!-- 'halfpostbottomRight' end --> 
             <div class="col-md-6 mb-6">
                 <a href="{{ feature.link_to }}">  
-                    <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
+                    <img src="{% version feature.feature_image 'large' %}"  class="img-fluid"  data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                 </a>
                 <div> {{ feature.heading }} </div>
                 <div class="muted"> {{ feature.heading_extra}} </div>             
