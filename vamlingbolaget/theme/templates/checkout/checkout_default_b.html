@@ -291,7 +291,7 @@
 		</th>
 	</tr>
 	<tr>
-		<td>
+		<td class="col-md-6 mb-3" >
 		    <div class="form-group" id="first_name">
                    
 		    <label for="id_first_name">{% trans "Förnamn" %} </label> 
@@ -357,7 +357,7 @@
 	        <input id="your_post" type="hidden" value="{% trans 'Du betalar mot postförskatt' %}">
 
 		</td>
-		<td>
+		<td class="col-md-6 mb-3">
 			<div class="control-group" id="email">
 				 <label for="id_email">{% trans "Email" %} </label>
              
@@ -370,7 +370,7 @@
 			</div>
 
 			<div class="control-group" id="phone">
-				<label class="col-lg-3 control-label" > <label for="id_phone">{% trans "Telefon" %} </label></label>
+				<label for="id_phone">{% trans "Telefon" %} </label>
 				<input id="id_phone" type="text" class="form-control" required="" name="phone" maxlength="20">
 				 <div class="invalid-feedback">
 					{{ form.phone }}
@@ -380,7 +380,7 @@
 
 			<div class="control-group" id="sms">
 				<label class="col-lg-3 control-label" > 
-					<label for="sms">{% trans "Sms-avisering" %} </label>
+					<label for="sms-checkbox">{% trans "Sms-avisering" %} </label>
 				</label>
 				 <div class="col-lg-9">
 					<input type="checkbox" class="form-control"  id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> {% trans "Jag vill ha sms-avisering" %} <br>
