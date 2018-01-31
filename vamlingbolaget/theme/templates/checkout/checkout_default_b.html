@@ -341,7 +341,7 @@
 	   
 		    <div class="control-group" id="country">
 		     <label for="id_country">{% trans "Land" %} </label> </label>
-		        <select class="w-100" name="country" id="id_country">
+		        <select class="w-100  control-label" name="country" id="id_country">
                         <option value="Sverige">Sverige</option>
                         <option value="Finland">Suomi</option>
                         <option value="Tyskland">Deutschland</option>
@@ -349,9 +349,6 @@
                         <option value="Norge">Norge</option>
                         <option value="Other">Other</option>
                 </select>
-		          <div class="">
-		            {{ form.country }}
-		        </div>
 		    </div>
 
 	        <input id="your_order" type="hidden" value="{% trans 'Din beställning' %}">
@@ -386,9 +383,7 @@
 					<label for="sms">{% trans "Sms-avisering" %} </label>
 				</label>
 				 <div class="col-lg-9">
-                       
-                    
-					<input type="checkbox" id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> {% trans "Jag vill ha sms-avisering" %} <br>
+					<input type="checkbox" class="form-control"  id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> {% trans "Jag vill ha sms-avisering" %} <br>
 					<input type="hidden" name="sms" id="id_sms" value="yes">
 				</div>
 			</div>
@@ -399,10 +394,8 @@
 
 			<div class="control-group" id="message">
              <label for="id_message">{% trans "Meddelande till beställning" %}  </label>  
-                <textarea id="id_message" rows="10" cols="40" name="message"></textarea>
-				 <div class="col-lg-9">
-					{{ form.message }}
-				</div>
+                <textarea id="id_message" class="form-control" rows="10" cols="40" name="message"></textarea>
+				 
 			</div>
 
 		</td>
