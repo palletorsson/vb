@@ -10,12 +10,12 @@
 
 {% block stretchpage %}
 <main role="main" class="col-md-12 ml-sm-auto col-lg-12pt-3 px-4"> 
-<h4 class="mb-3 vb_important_text">{% trans "Din shoppinglåda" %}  </h4> 
+<div class="mb-3 vb_important_text">{% trans "Din shoppinglåda" %}  </div> 
 
 <div class="d-none d-md-block d-xs-none">
     {%if cartitems or bargains or rea%}
 
-    <table class="table table-responsive table-sm table-hover">
+    <table class="table table-sm">
     <thead>
    	{% include "cart/table_head.html" %}
     </thead>
