@@ -331,7 +331,7 @@
 		    </div>
 
 		    <div class="form-group" id="city">
-		        <label class="col-lg-3 control-label" > <label for="id_city">{% trans "Postort" %}</label> </label>
+		        <label class="control-label" > <label for="id_city">{% trans "Postort" %}</label> </label>
 		        <input id="id_city" type="text" class="form-control" required="" name="city" maxlength="80">
 		         <div class="invalid-feedback">
 		            {{ form.city }}
@@ -341,7 +341,7 @@
 	   
 		    <div class="form-group" id="country">
 		     <label for="id_country">{% trans "Land" %} </label> </label>
-		        <select class="w-100  control-label" name="country" id="id_country">
+		        <select class="w-100 form-control" name="country" id="id_country">
                         <option value="Sverige">Sverige</option>
                         <option value="Finland">Suomi</option>
                         <option value="Tyskland">Deutschland</option>
@@ -387,9 +387,6 @@
             </div>
             <hr/>
           
-
-
-
 			<div class="form-group" id="message">
              <label for="id_message">{% trans "Meddelande till beställning" %}  </label>  
                 <textarea id="id_message" class="form-control" rows="10" cols="40" name="message"></textarea>
