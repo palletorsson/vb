@@ -60,7 +60,7 @@
             <div class="col-md-5 mb-5">
          
                     <div style="margin-left: 40px;"> {{ feature.heading }} </div>
-                    <div style="margin-left: 40px;"> {{ feature.heading_extra}} </div>
+                    <div class="muted" style="margin-left: 40px;"> {{ feature.heading_extra}} </div>
                     <a href="{{ feature.link_to }}">  
                         <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                     </a>
@@ -77,8 +77,8 @@
                     <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                 </a>
                 <div style="text-align:right;" >
-                    <h4 style="margin-left: 40px;"> {{ feature.heading }} </h4>
-                    <h4 style="margin-left: 40px;"> {{ feature.heading_extra}} </h4>
+                    <div style="margin-left: 40px;"> {{ feature.heading }} </div>
+                    <div class="muted" style="margin-left: 40px;"> {{ feature.heading_extra}} </div>
                 </div> 
             </div> 
        
@@ -90,8 +90,8 @@
                 </a>
                 
                
-                <h4 style="margin-left: 40px;"> {{ feature.heading }} </h4>
-                <h4 style="margin-left: 40px;"> {{ feature.heading_extra}} </h4>
+                <div style="margin-left: 40px;"> {{ feature.heading }} </div>
+                <div class="muted" style="margin-left: 40px;"> {{ feature.heading_extra}} </div>
               
             </div> 
            
