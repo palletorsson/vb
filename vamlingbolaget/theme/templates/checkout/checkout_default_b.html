@@ -198,7 +198,7 @@
 	
 	<tr>
 		<th>
-			{% trans "Välj betalningsmetod" %}
+            <h5 class="mb-3">{% trans "Välj betalningsmetod" %}</h5>	
 		</th>
 	</tr>
 
@@ -209,10 +209,13 @@
 
 	    <td>
 			<ul class="nav nav-button">
-			    <li class="active" >
-			    <a href="#" class="radiopay" data-toggle="tab" id="C">  
-			    	<input type="radio" checked="checked" name="payment" value="card"> {% trans "Betala med Payex" %}
-			    </a> 
+                <li class="active">
+                    <div class="form-check">  
+                        <a href="" class="radiopay" data-toggle="tab" id="C">  
+                            <input type="radio" checked="checked" class="form-check-input"  name="payment" value="card"> {% trans "Betala med Payex" %}
+                        </a> 
+                    </div>
+                </li>
 			</ul>
 		</td>	
 
@@ -236,10 +239,12 @@
 		<td>
 			<ul class="nav nav-pills">
 			    <li>
-			    	<a href="#"  class="radiopay"  data-toggle="tab" id="P">
-			    		<input type="radio" name="payment" value="post"> 
-			    		{% trans "Betala via postförskott" %}
-			    	</a>
+                    <div class="form-check"> 
+                        <a href="" class="radiopay"  data-toggle="tab" id="P">
+                            <input type="radio" class="form-check-input" name="payment" value="post"> 
+                            {% trans "Betala via postförskott" %}
+                        </a>
+                    </div>
 			    </li>
 			</ul>
 		</td>
@@ -284,10 +289,10 @@
 <table id="adress_form" class="table table-sm">
 	<tr>
 		<th>
-		    {% trans "Adressuppgifter" %}
+            <h5 class="mb-3">{% trans "Adressuppgifter" %} </h5>
 		</th>
 		<th>
-		    {% trans "Kontaktuppgifter" %}
+            <h5 class="mb-3"> {% trans "Kontaktuppgifter" %} </h5>
 		</th>
 	</tr>
 	<tr>
