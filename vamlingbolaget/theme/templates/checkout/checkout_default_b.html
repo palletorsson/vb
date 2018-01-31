@@ -2,7 +2,7 @@
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {%if cartitems or bargains or rea %}
-<table class="table table-sm mb-4 border-bottom">
+<table class="table table-sm mb-4">
 	<thead>
 		{% include "checkout/table_head.html" %}
 	</thead>
@@ -284,10 +284,10 @@
 <table id="adress_form" class="table table-sm">
 	<tr class="border-top-0">
 		<th>
-            <h5 class="mb-3">{% trans "Adressuppgifter" %} </h5>
+            <h5 class="mb-3 mt-4">{% trans "Adressuppgifter" %} </h5>
 		</th>
 		<th>
-            <h5 class="mb-3"> {% trans "Kontaktuppgifter" %} </h5>
+            <h5 class="mb-3 mt-4"> {% trans "Kontaktuppgifter" %} </h5>
 		</th>
 	</tr>
 	<tr>
