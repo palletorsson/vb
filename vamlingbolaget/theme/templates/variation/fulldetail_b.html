@@ -168,9 +168,9 @@
                 </div>
             <div class="media text-muted pt-3">
                 <div class="media-body pb-1 mb-0 small lh-125 border-gray">
-                    <div class="d-flex justify-content-center align-items-center w-100 flex-wrap">
+                    <div class="d-flex justify-content-start align-items-center w-100 flex-wrap">
                         {% for colorsandpattern in full_variations_article %}
-                            <a href="{{ colorsandpattern.link }}"><img id="pattern_color_image" class="pattern_color_image_c p-2" src="{{ MEDIA_URL }}/uploads/120/{{ colorsandpattern.cp }}.jpg" style="width:120px;" /></a>
+                            <a href="{{ colorsandpattern.link }}"><img id="pattern_color_image" class="pattern_color_image_c p-1" src="{{ MEDIA_URL }}/uploads/120/{{ colorsandpattern.cp }}.jpg" style="width:120px;" /></a>
                         {% endfor %}
                     </div>
                 </div>
