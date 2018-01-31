@@ -7,7 +7,7 @@
 		{% include "checkout/table_head.html" %}
 	</thead>
 
-	<tbody>
+	<tbody class="mb-3">
 	    {% for item in cartitems %}
 	    <tr>
 	    <td>
@@ -41,7 +41,7 @@
 	    </td>
         <td>
             <div>
-                <span>{% if item.article.type.order == 8 or  item.article.type.order == 7  %} - {%else%} {{ item.size }} {%endif%}</span>
+                <span>{% if item.article.type.order == 8 or  item.article.type.order == 7  %} - {%else%} <span class="badge badge-info">  {{ item.size }}  </span> {%endif%}</span>
             </div>
         </td>
         <td>
@@ -138,7 +138,7 @@
         </td>
             <td>
                 <div>
-                    <span>{{ item.reaArticle.size }} </span>
+                    <span> <span class="badge badge-info">  {{ item.reaArticle.size }}  </span> </span>
                 </div>
             </td>
 
