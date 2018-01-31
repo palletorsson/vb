@@ -2,7 +2,7 @@
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {%if cartitems or bargains or rea %}
-<table class="table table-sm" >
+<table class="table table-sm mb-4 border-bottom">
 	<thead>
 		{% include "checkout/table_head.html" %}
 	</thead>
@@ -195,7 +195,7 @@
     {{ form.paymentmethod.errors }}
     
 <h5 class="mb-3">{% trans "Välj betalningsmetod" %}</h5>
-<table class="table table-sm">
+<table class="table table-sm mb-3 border-bottom">
 
 	<tr height="45px">
 	    <td>
@@ -281,7 +281,7 @@
 	{% endif %}
 </table>
 
-<table id="adress_form" class="table table-sm mt-5">
+<table id="adress_form" class="table table-sm mb-3 border-bottom">
 	<tr>
 		<th>
             <h5 class="mb-3">{% trans "Adressuppgifter" %} </h5>
