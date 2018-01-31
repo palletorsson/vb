@@ -322,10 +322,9 @@
 		    </div>
 
 		    <div class="form-group" id="postcode">
-		        <label class="col-lg-3 control-label" > <label for="id_postcode">{% trans "Postnummer" %}</label> </label>
-		        {{ form.subject.postcode}}
-		        {% if field.errors %}< li>{{ field.subject.errors|striptags }}< /li>{% endif %}
-		        <div class="col-lg-9">
+		        <label for="id_postcode">{% trans "Postnummer" %}</label> 
+		        <input id="id_postcode" class="form-control" required="" type="text" name="postcode" maxlength="10"> 
+		        <div class="invalid-feedback">
 		            {{ form.postcode }}
 		            {{ form.postcode.errors }} *
 		        </div>
@@ -333,17 +332,24 @@
 
 		    <div class="form-group" id="city">
 		        <label class="col-lg-3 control-label" > <label for="id_city">{% trans "Postort" %}</label> </label>
-		        {{ form.subject.city}}
-		         <div class="col-lg-9">
+		        <input id="id_city" type="text" class="form-control" required="" name="city" maxlength="80">
+		         <div class="invalid-feedback">
 		            {{ form.city }}
 		            {{ form.city.errors }} *
 		        </div>
 		    </div>
 	   
 		    <div class="control-group" id="country">
-		        <label class="col-lg-3 control-label" > <label for="id_country">{% trans "Land" %} </label> </label>
-		        {{ form.subject.country}}
-		          <div class="col-lg-9">
+		     <label for="id_country">{% trans "Land" %} </label> </label>
+		        <select class="w-100" name="country" id="id_country">
+                        <option value="Sverige">Sverige</option>
+                        <option value="Finland">Suomi</option>
+                        <option value="Tyskland">Deutschland</option>
+                        <option value="Danmark">Danmark</option>
+                        <option value="Norge">Norge</option>
+                        <option value="Other">Other</option>
+                </select>
+		          <div class="">
 		            {{ form.country }}
 		        </div>
 		    </div>
@@ -356,9 +362,11 @@
 		</td>
 		<td>
 			<div class="control-group" id="email">
-				<label class="col-lg-3  control-label" > <label for="id_email">{% trans "Email" %} </label></label>
-				{{ form.subject.email}}
-				 <div class="col-lg-9">
+				 <label for="id_email">{% trans "Email" %} </label>
+             
+                <input id="id_email" class="form-control" required="" type="text" name="email" maxlength="75" placeholder="you@example.com">
+              
+				 <div class="invalid-feedback">
 					{{ form.email }}
 					{{ form.email.errors }} *
 				</div>
@@ -366,8 +374,8 @@
 
 			<div class="control-group" id="phone">
 				<label class="col-lg-3 control-label" > <label for="id_phone">{% trans "Telefon" %} </label></label>
-				{{ form.subject.phone}}
-				 <div class="col-lg-9">
+				<input id="id_phone" type="text" class="form-control" required="" name="phone" maxlength="20">
+				 <div class="invalid-feedback">
 					{{ form.phone }}
 					{{ form.phone.errors }} *
 				</div>
@@ -378,7 +386,8 @@
 					<label for="sms">{% trans "Sms-avisering" %} </label>
 				</label>
 				 <div class="col-lg-9">
-		
+                       
+                    
 					<input type="checkbox" id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> {% trans "Jag vill ha sms-avisering" %} <br>
 					<input type="hidden" name="sms" id="id_sms" value="yes">
 				</div>
@@ -389,8 +398,8 @@
 			<hr>
 
 			<div class="control-group" id="message">
-				<label class="col-lg-3 control-label" > <label for="id_message">{% trans "Meddelande till beställning" %}  </label></label>
-				{{form.subject.message}}
+             <label for="id_message">{% trans "Meddelande till beställning" %}  </label>  
+                <textarea id="id_message" rows="10" cols="40" name="message"></textarea>
 				 <div class="col-lg-9">
 					{{ form.message }}
 				</div>
