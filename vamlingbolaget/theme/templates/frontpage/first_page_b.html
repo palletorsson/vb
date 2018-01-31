@@ -30,14 +30,14 @@
         {% elif feature.mediatype == 'L' %}
         <!-- 'halfpostfullLeft' starts -->  
         <div class="row">
-            <div class="col-md-6 mb-6">
+            <div class="col-md-6 mb-5">
                 <a href="{{ feature.link_to }}">  
                 <img src="{% version feature.feature_image 'large' %}" class="img-fluid" alt="{{ feature.heading }}" width="100%"> 
                 </a>
             </div>             
         {% elif feature.mediatype == 'H' %}
         <!-- 'halfpostfullRight' ends -->   
-            <div class="col-md-6 mb-6">
+            <div class="col-md-6 mb-5">
                 <a href="{{ feature.link_to }}">  
                 <img src="{% version feature.feature_image 'large' %}"  class="img-fluid"  alt="{{ feature.heading }}" width="100%"> 
                 </a>
@@ -47,7 +47,7 @@
         {% elif feature.mediatype == 'T' %}
         <!-- 'halfposttopLeft' start -->
         <div class="row">
-            <div class="col-md-6 mb-6">
+            <div class="col-md-6 mb-5">
                 
                     <span> {{ feature.heading }} </span>
                     <span class="muted"> {{ feature.heading_extra}}  </span>
@@ -59,7 +59,7 @@
          
         {% elif feature.mediatype == 'P' %}
         <!-- 'halfposttopRight' ends -->
-            <div class="col-md-6 mb-6">
+            <div class="col-md-6 mb-5">
          
                     <span style="margin-left: 40px;"> {{ feature.heading }} </span>
                     <span class="muted" style="margin-left: 40px;"> {{ feature.heading_extra}} </span>
@@ -74,7 +74,7 @@
         {% elif feature.mediatype == 'B' %}
         <!-- 'halfpostbottomLeft' starts--> 
         <div class="row">
-            <div class="col-md-6 mb-6">
+            <div class="col-md-6 mb-5">
                 <a href="{{ feature.link_to }}">  
                     <img src="{% version feature.feature_image 'large' %}" class="img-fluid"  data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                 </a>
@@ -83,7 +83,7 @@
             </div>
         {% elif feature.mediatype == 'J' %}
         <!-- 'halfpostbottomRight' end --> 
-            <div class="col-md-6 mb-6">
+            <div class="col-md-6 mb-5">
                 <a href="{{ feature.link_to }}">  
                     <img src="{% version feature.feature_image 'large' %}"  class="img-fluid"  data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                 </a>
