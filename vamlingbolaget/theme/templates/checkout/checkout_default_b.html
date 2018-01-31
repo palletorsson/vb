@@ -339,7 +339,7 @@
 		        </div>
 		    </div>
 	   
-		    <div class="control-group" id="country">
+		    <div class="form-group" id="country">
 		     <label for="id_country">{% trans "Land" %} </label> </label>
 		        <select class="w-100  control-label" name="country" id="id_country">
                         <option value="Sverige">Sverige</option>
@@ -358,7 +358,7 @@
 
 		</td>
 		<td>
-			<div class="control-group" id="email">
+			<div class="form-group" id="email">
 				 <label for="id_email">{% trans "Email" %} </label>
              
                 <input id="id_email" class="form-control" required="" type="text" name="email" maxlength="75" placeholder="you@example.com">
@@ -369,7 +369,7 @@
 				</div>
 			</div>
 
-			<div class="control-group" id="phone">
+			<div class="form-group" id="phone">
 				<label for="id_phone">{% trans "Telefon" %} </label>
 				<input id="id_phone" type="text" class="form-control" required="" name="phone" maxlength="20">
 				 <div class="invalid-feedback">
@@ -377,7 +377,7 @@
 					{{ form.phone.errors }} *
 				</div>
 			</div>
-            <hr>
+    
 			<div class="form-check" id="sms">
 			
                     <input type="checkbox" class="form-check-input"  id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> 
@@ -387,9 +387,9 @@
             </div>
           
 
-			<hr>
 
-			<div class="control-group" id="message">
+
+			<div class="form-group" id="message">
              <label for="id_message">{% trans "Meddelande till beställning" %}  </label>  
                 <textarea id="id_message" class="form-control" rows="10" cols="40" name="message"></textarea>
 				 
