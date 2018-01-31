@@ -46,25 +46,25 @@
         <!-- 'halfposttopLeft' start -->
         <div class="row">
             <div class="col-md-6 mb-6">
-                <div class="grid-item top0" style="text-align:right;" >
-                    <h4> {{ feature.heading }} </h4>
-                    <h4> {{ feature.heading_extra}}  </span></h4>
+                
+                    <h5> {{ feature.heading }} </h5>
+                    <h5> {{ feature.heading_extra}}  </span></h5>
                     <a href="{{ feature.link_to }}">  
                         <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                     </a>
-                </div> 
+               
             </div> 
          
         {% elif feature.mediatype == 'P' %}
         <!-- 'halfposttopRight' ends -->
             <div class="col-md-6 mb-6">
-                <div class="grid-item top0">
-                    <h4 style="margin-left: 40px;"> {{ feature.heading }} </h4>
-                    <h4 style="margin-left: 40px;"> {{ feature.heading_extra}} </h4>
+         
+                    <h5 style="margin-left: 40px;"> {{ feature.heading }} </h5>
+                    <h5 style="margin-left: 40px;"> {{ feature.heading_extra}} </h5>
                     <a href="{{ feature.link_to }}">  
                         <img src="{% version feature.feature_image 'large' %}" data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                     </a>
-                </div> 
+          
             </div> 
             <div class="col-md-1">.</div>
         </div> <!-- end row -->   
