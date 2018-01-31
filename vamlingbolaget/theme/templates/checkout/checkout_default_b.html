@@ -377,15 +377,15 @@
 					{{ form.phone.errors }} *
 				</div>
 			</div>
-
-			<div class="control-group" id="sms">
+            <hr>
+			<div class="form-check" id="sms">
 			
-					<input type="checkbox" class="form-control"  id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> <label for="sms-checkbox"> {% trans "Jag vill ha sms-avisering" %} </label>
+                    <input type="checkbox" class="form-check-input"  id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> 
+                    <label for="sms-checkbox" class="form-check-label"> {% trans "Jag vill ha sms-avisering" %} </label>
 					<input type="hidden" name="sms" id="id_sms" value="yes">
 				
-			</div>
-
-			<div style="clear: both;"></div>
+            </div>
+          
 
 			<hr>
 
