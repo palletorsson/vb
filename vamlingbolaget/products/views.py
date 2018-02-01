@@ -407,7 +407,6 @@ def by_type(request, key):
 
 def by_cat(request, key):
     template = 'variation/fullindex.html'
-    print key
     products = FullVariation.objects.filter(variation__article__type__slug = key, size=3840, active=True).order_by('order')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
