@@ -339,6 +339,19 @@ def reareact(request):
                               },
                              context_instance=RequestContext(request))
 
+def reareact_b(request):
+    rea = "true"
+    sizes = SIZES
+    atypes = Type.objects.filter(order__lte=5, active=True)
+    return render_to_response('variation/reareact.html',
+                             {
+                              'rea': rea, 
+                              'sizes': sizes, 
+                              'atypes': atypes,
+                              },
+                             context_instance=RequestContext(request))
+
+
 
 def jsonReaindex(request):
     products = ReaArticle.objects.filter(status='A').order_by('-article__name')
