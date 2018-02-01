@@ -1,6 +1,6 @@
 from django import template
 from django.templatetags.static import register
-from products.models import Quality, Types, Category
+from products.models import Quality, Type, Category
 
 register = template.Library()
 
