@@ -9,9 +9,9 @@ def shop_menu(context):
     qualities = Quality.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
     types = Type.objects.filter(active=True)
-    print 'qualities', qualities, 'categories', categories, 'types ', types 
+    print 'qualities', qualities, 'categories', categories, 'types', types 
 
-    return { 'qualities': qualities, 'categories': categories, 'types ': types }
+    return { 'qualities': qualities, 'categories': categories, 'types': types }
 
 register.inclusion_tag('variation/shop_menu.html', takes_context = True)(shop_menu)
 
