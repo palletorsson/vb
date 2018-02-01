@@ -200,6 +200,7 @@ def fullindex_b(request):
     full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='kvinna').order_by('order') 
     qualities = Quality.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
+    print categories 
     types = Types.objects.filter(active=True)
     return render_to_response('variation/fullindex_b.html',
                              {'products': full_variation,
