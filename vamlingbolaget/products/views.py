@@ -409,14 +409,14 @@ def by_cat(request, key):
     template = 'variation/fullindex_b.html'
     products = FullVariation.objects.filter(variation__article__type__slug = key, size=3840, active=True).order_by('order')
     qualities = Quality.objects.filter(active=True)
-    types = Category.objects.filter(active=True)
+    types = Type.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
   
     return render_to_response(template,
              {'products': products,
               'qualities': qualities,
               'categories': categories,
-              'types': types,},
+              'types': types},
         context_instance=RequestContext(request))
 
 
