@@ -306,6 +306,27 @@ def reaindex(request):
                               },
                              context_instance=RequestContext(request))
 
+def reaindex_b(request):
+
+    products = ReaArticle.objects.filter(status='A').order_by('-article__name')
+
+    qualities = Quality.objects.filter(active=True)
+    types = Category.objects.filter(active=True) 
+    atypes = Type.objects.filter(order__lte=5, active=True)
+
+    rea = "true"
+    sizes = SIZES
+
+    return render_to_response('variation/fullindex.html',
+                             {'products': products,
+                              'qualities': qualities,
+                              'types': types,
+                              'atypes': atypes,
+                              'rea': rea, 
+                              'sizes': sizes, 
+                              },
+                             context_instance=RequestContext(request))
+
 def reareact(request):
     rea = "true"
     sizes = SIZES
