@@ -6,12 +6,12 @@
       <nav class="col-md-2 d-none d-md-block sidebar">
    
 
-              {{ types }} 
+              {{ qualities }} 
             
         <div class="pt-2">
           <ul class="nav flex-column linksactive mb-2">
             <li class="nav-item mt-0">
-                <a class="nav-link vb_link l-s-1" href="/products/full/"> <span class="text-uppercase"> {{ types.0.name }} </span></a>
+                <a class="nav-link vb_link l-s-1" href="/products/full/">  <!-- kvinna -->  <span class="text-uppercase"> {{ types.0.name }} </span></a>
             </li>
             <li class="nav-item mt-0">
                 <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/type/klanning"> KLÄNNING / TUNIKA </a>
@@ -22,7 +22,7 @@
           </ul>
           <ul class="nav flex-column linksactive mb-2">
             <li class="nav-item">
-                <a class="nav-link vb_link l-s-1" href="/products/type/{{ types.1.slug }}"> <span class="text-uppercase"> {{ types.1.name }} </span> </a>
+                <a class="nav-link vb_link l-s-1" href="/products/type/{{ types.1.slug }}"> <!-- Man --> <span class="text-uppercase"> {{ types.1.name }} </span> </a>
             </li>
             <li class="nav-item mt-0">
                 <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/q/man/man"> MANCHESTER </a>
@@ -33,27 +33,27 @@
           </ul>
           <ul class="nav flex-column linksactive mb-2">
             <li class="nav-item">
-                <a class="nav-link vb_link l-s-1" href="/products/type/{{ types.2.slug }}"> {{ types.2.name }}</a>
+                <a class="nav-link vb_link l-s-1" href="/products/type/{{ types.2.slug }}">   <!-- Barn --> {{ types.2.name }}</a>
             </li>
           </ul>
           <ul class="nav flex-column linksactive mb-2">
             <li class="nav-item">
-                <a class="nav-link vb_link l-s-1" href="/products/type/{{ types.3.slug }}"" > <span class="text-uppercase"> {{ types.3.name }} </span> </a>
+                <a class="nav-link vb_link l-s-1" href="/products/type/{{ types.3.slug }}" >  <!-- Accessoarer -->  <span class="text-uppercase"> {{ types.3.name }} </span> </a>
             </li>
           </ul>
           <ul class="nav flex-column linksactive mb-2">
             <li class="nav-item">
-                <a class="nav-link vb_link l-s-1" href="/products/type/"{{ types.4.slug }}"> {{ types.3.name }} </a>
+                <a class="nav-link vb_link l-s-1" href="/products/type/{{ types.4.slug }}">  <!-- Metervara --> {{ types.4.name }} </a>
             </li>
           </ul>
           <ul class="nav flex-column linksactive mb-2">
             <li class="nav-item">
-                <a class="nav-link vb_link l-s-1" href="/products/fullcut/">CUT ON DEMAND </a>     
+                <a class="nav-link vb_link l-s-1" href="/products/fullcut/"> CUT ON DEMAND </a>     
             </li> 
             </ul>
           <ul class="nav flex-column linksactive mb-2"> 
             <li class="nav-item">
-                  <a class="nav-link vb_link l-s-1" href="/products/patternandcolor/">MÖNSTER OCH FÄRGER</a>          
+                  <a class="nav-link vb_link l-s-1" href="/products/patternandcolor/"><span class="text-uppercase"> {% trans "mönster och färger" %}   </span></a>          
             </li>
           </ul>
           <ul class="nav flex-column linksactive mb-2">
