@@ -16,11 +16,11 @@
                         <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_1.jpg" class="image_on lazy img-fluid" alt="Vamlingbolaget {{ product.article.name }}"  />
                         <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_2.jpg" class="image_off lazy img-fluid" alt="Vamlingbolaget {{ product.article.name }}"  />
                     {%endif%}
-                        <p class="text-muted mb-0 l-s-1"> {{ product.variation.article.name }} </p>
+                        <p class="text-muted mb-0 s-80"> {{ product.variation.article.name }} </p>
                     {%if product.variation.article.discount %}
-                        <span class="text-muted discount l-s-1"> {{ product.variation.article.f_discount }} </span> (<span class="text-muted" style="text-decoration: line-through;">{{ product.variation.article.price }} </span>) SEK
+                        <span class="text-muted discount s-80"> {{ product.variation.article.f_discount }} </span> (<span class="text-muted s-80" style="text-decoration: line-through;">{{ product.variation.article.price }} </span>) SEK
                     {%else%}
-                        <p class="text-muted price l-s-1">{{ product.variation.article.price }} SEK</p>
+                        <p class="text-muted price s-80">{{ product.variation.article.price }} SEK</p>
                     {%endif%}
                 </a>
             </div>

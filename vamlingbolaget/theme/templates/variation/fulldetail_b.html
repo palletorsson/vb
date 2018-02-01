@@ -32,13 +32,13 @@
                 <div class="media pt-3">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
-                            <div class="vb_important_text l-s-1" id="articlename">{{ product.variation.article.name }}
+                            <div class="vb_important_text s-80" id="articlename">{{ product.variation.article.name }}
                             </div>
                             <div>
                                 {%if product.variation.article.discount %}
-                                    <span class="discount l-s-1"> {{ product.variation.article.f_discount }} </span> SEK * <br />
+                                    <span class="discount s-80"> {{ product.variation.article.f_discount }} </span> SEK * <br />
                                 {%else%}
-                                    <span class="l-s-1"id="the_price"> {{ product.variation.article.price }} </span> SEK
+                                    <span class="s-80" id="the_price"> {{ product.variation.article.price }} </span> SEK
                                 {%endif%} 
                             </div>
                         </div>
