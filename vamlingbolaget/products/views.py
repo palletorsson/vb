@@ -201,7 +201,7 @@ def fullindex_b(request):
     qualities = Quality.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
     print categories 
-    types = Types.objects.filter(active=True)
+    types = Type.objects.filter(active=True)
     return render_to_response('variation/fullindex_b.html',
                              {'products': full_variation,
                               'qualities': qualities,
