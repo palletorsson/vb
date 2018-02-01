@@ -200,7 +200,6 @@ def fullindex_b(request):
     full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='kvinna').order_by('order') 
     qualities = Quality.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
-    print categories 
     types = Type.objects.filter(active=True)
     return render_to_response('variation/fullindex_b.html',
                              {'products': full_variation,
@@ -408,13 +407,15 @@ def by_type(request, key):
 
 def by_cat(request, key):
     template = 'variation/fullindex.html'
-    products = FullVariation.objects.filter(variation__article__type__slug = key, order__lte=100, size=3840, active=True).order_by('order')
+    print key
+    products = FullVariation.objects.filter(variation__article__type__slug = key, size=3840, active=True).order_by('order')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
 
     return render_to_response(template,
              {'products': products,
               'qualities': qualities,
+              'categories': categories,
               'types': types,},
         context_instance=RequestContext(request))
 
@@ -441,11 +442,7 @@ def by_quality(request, key):
         context_instance=RequestContext(request))
 
 def product_api(request, key):
-   
     product = Variation.objects.get(pk=key)
-    print product
-
-
     resp_d = {'product': product.article.name}
     return HttpResponse(json.dumps(resp_d), content_type="application/json")
 
