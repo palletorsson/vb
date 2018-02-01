@@ -32,20 +32,20 @@
                 <div class="media pt-3">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
-                            <div class="vb_important_text" id="articlename">{{ product.variation.article.name }}
+                            <div class="vb_important_text l-s-1" id="articlename">{{ product.variation.article.name }}
                             </div>
                             <div>
                                 {%if product.variation.article.discount %}
-                                    <span class="discount"> {{ product.variation.article.f_discount }} </span> SEK * <br />
+                                    <span class="discount l-s-1"> {{ product.variation.article.f_discount }} </span> SEK * <br />
                                 {%else%}
-                                    <span id="the_price"> {{ product.variation.article.price }}</span> SEK
+                                    <span class="l-s-1"id="the_price"> {{ product.variation.article.price }} </span> SEK
                                 {%endif%} 
                             </div>
                         </div>
                     </div>
                 </div>
                 {%if product.variation.article.discount %}
-                <div class="media pt-3">
+                <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex align-items-center w-100">          
                             <span> {% trans "tidigare pris: " %} </span>  
@@ -60,7 +60,7 @@
                     <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
                             <div>
-                                <ul class="pagination rounded-0">
+                                <ul class="pagination rounded-0 text-white bg-dark">
                                         {% if product.variation.article.quality.pk == 1 %} 
                                         {% if product.active %} 
                                             {% for size in full_variations %} 
@@ -150,7 +150,7 @@
             <div class="media text-muted pt-3 ">
                 <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
                     <div class="d-flex align-items-center w-100">
-                            {% trans "Art.Nr." %} : {{ product.get_art_num }} - {{ product.variation.article.description }}
+                            {{ product.variation.article.description }}
                     </div>
                     </br>
                     <div>  
