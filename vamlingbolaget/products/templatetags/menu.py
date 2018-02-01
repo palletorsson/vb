@@ -9,6 +9,7 @@ def shop_menu(context):
     qualities = Quality.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
     types = Type.objects.filter(active=True)
+    print 'qualities', qualities, 'categories', categories, 'types ', types 
 
     return { 'qualities': qualities, 'categories': categories, 'types ': types }
 
