@@ -1,0 +1,50 @@
+{% extends "base_b.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{% load endless %}
+{% block allcontent %}
+
+<style type="text/css">
+	.box {
+	  float: left;
+	  margin: 2px;
+	}
+    
+    .box-size {
+      width: 20px;
+	  height: 20px;
+      border: 1px solid rgba(0, 0, 0, .2);
+    }
+	.sizes {
+	  float: left;
+	  padding-right: 5px;
+	  padding-left: 5px;
+	  padding-top: 2px;
+	  height: 20px;
+	  margin: 5px;
+	  border: 1px solid rgba(0, 0, 0, .2);
+	}
+	.iconimg {
+	  width: 20px;
+	  height: 20px;
+	}
+
+	#textsearch {
+		width:100px;
+	}
+</style>
+
+<body>
+    <div id="react-container"></div>
+    <div id="container"></div>   
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bundle_cut.js"></script>
+    <div id="translations" class="hidden">
+    
+    	<span class="colorsandpatterns" id="colorsandpatterns"> {% trans "Färger och Mönster" %} </span>
+
+    </div> 
+</body>
+</html>
+
+{% endblock %}
