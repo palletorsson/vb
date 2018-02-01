@@ -327,6 +327,15 @@ def reaindex_b(request):
                               },
                              context_instance=RequestContext(request))
 
+
+from django import template
+from django.templatetags.static import register
+from cart.models import Cart
+from cart.views import _cart_id, totalsum
+
+register = template.Library()
+
+
 def reareact(request):
     rea = "true"
     sizes = SIZES
