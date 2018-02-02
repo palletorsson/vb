@@ -41,6 +41,12 @@ def checkout(request, test=''):
     except: 
         pass 
 
+    try: 
+        test_ip = request.META['REMOTE_ADDR']
+        print test_ip
+    except: 
+        pass 
+
     voucher = cart.vouchercart_set.all()
     getnames(cartitems)
 
