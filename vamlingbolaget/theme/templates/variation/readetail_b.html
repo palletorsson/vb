@@ -40,17 +40,17 @@
                     </div>
                 </div>
                 <div class="media">
-                    <div class="media-body pb-3 mb-0 border-bottom border-gray">
+                    <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
                         <div class="d-flex justify-content-start align-items-center w-100">       
                         
                                 
-                                <span>{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span> <br/>
-                                <span>{% trans "Kvalitet" %}: <span id="{{ product.article.quality }}">{{ product.article.quality }}</span>  <br/>
+                                <div>{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</div>
+                                <div>{% trans "Kvalitet" %}: <span id="{{ product.article.quality }}">{{ product.article.quality }}</div> 
         
-                                <span id="article_etc"> {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }}</span>  <br/>
-                                <span>  {% trans "Storlek" %}: <span id="article_size"> {{ product.size }} </span> </span>  
-                                ( {{ product.stockquantity }} {% trans "kvar" %} ) 
-                                <hr>						
+                                <div id="article_etc"> {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }}</div> 
+                                <div>  {% trans "Storlek" %}: <span id="article_size"> {{ product.size }} </span> </div>  
+                                <div> ( {{ product.stockquantity }} {% trans "kvar" %} ) </div> 
+                               					
                              
                                          
                         </div>
