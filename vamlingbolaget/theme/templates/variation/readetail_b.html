@@ -41,30 +41,24 @@
                 </div>
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
-                        <div>       
-                        
-                                
-                                <div class="pb-1">{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</div>
+                        <div>    
+                            <div class="pb-1 pt-2" id="article_etc"> <strong>{{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }} </strong> </div> 
+                            <div class="pb-1" id="art_description" > - {{ product.article.description }} </div>     
+                            <div class="pb-1 pt-2">{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="media">
+                        <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
+                            <div>    
                                 <div class="pb-1">{% trans "Kvalitet" %}: <span id="{{ product.article.quality }}">{{ product.article.quality }}</div> 
-        
-                                <div class="pb-1" id="article_etc"> {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }}</div> 
                                 <div class="pb-1">  {% trans "Storlek" %}: <span id="article_size"> {{ product.size }} </span> </div>  
                                 <div class="pb-1"> ( {{ product.stockquantity }} {% trans "kvar" %} ) </div> 
-                               					
-                             
-                                         
+                            </div>
                         </div>
-                    </div>
-                </div> 
+                    </div> 
                        
-                <div class="media">
-                    <div class="media-body pb-3 mb-0 border-bottom border-gray">
-                        <div class="d-flex justify-content-start align-items-center w-100">       
-                            
-                                <div id="art_description" > - {{ product.article.description }} </div>                
-                        </div>
-                    </div>
-                </div> 
+               
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex align-items-center w-100">
