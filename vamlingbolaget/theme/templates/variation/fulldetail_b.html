@@ -117,7 +117,7 @@
                                     {% endif %} 
                                 </ul>
                             </div>
-                        <div class="text-gray-dark mt-3"> <i class="fa fa-chevron-left fa-2x pt-2" aria-hidden="true"> </i>    {% trans "Välj Storlek" %}</div>
+                        <div class="text-gray-dark mb-3"> <i class="fa fa-chevron-left fa-2x pt-2" aria-hidden="true"> </i>    {% trans "Välj Storlek" %}</div>
                     </div>
                 </div>
             </div>           
@@ -143,8 +143,8 @@
                         </div>
                         <div>
                             <span> {% trans "Leverans" %}:  		
-                                <span class="stock_text_no {% if stock_value > 0 %} hidden {% endif %}">{% trans "En till tre veckor" %} </span>
-                                <span class="stock_text_yes {% if stock_value < 1 %} hidden {% endif %}"> {% trans "En till tre veckor" %} </span>
+                                <span class="stock_text_no {% if stock_value > 0 %} class="invisable" {% endif %}">{% trans "En till tre veckor" %} </span>
+                                <span class="stock_text_yes {% if stock_value < 1 %} class="invisable" {% endif %}"> {% trans "En till tre veckor" %} </span>
                             </span>
                         </div>
                     </div>
