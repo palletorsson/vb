@@ -65,29 +65,29 @@
                                         {% if product.active %} 
                                             {% for size in full_variations %} 
                                                 {% if product.size == size.size %}  
-                                                    <li class="page-item active select_size text-white bg-dark" id="{{ size.size }}"  data-size="{{ size.stock }}">
-                                                        <a class="page-link"> {{ size.lettersize }}  </a>
+                                                    <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                        <a class="page-link text-white bg-dark"> {{ size.lettersize }}  </a>
                                                     </li> 							
                                                 {% else %}
-                                                    <li class="page-item select_size text-white bg-dark" id="{{ size.size  }}" data-size="{{ size.stock }}">
-                                                        <a class="page-link"> {{ size.lettersize }} </a>
+                                                    <li class="page-item select_size" id="{{ size.size  }}" data-size="{{ size.stock }}">
+                                                        <a class="page-link text-white bg-dark"> {{ size.lettersize }} </a>
                                                     </li>
                                                 {% endif %} 
                                             {% endfor %}
                                         {% else %}
                                             {% for size in full_variations %} 	
                                                 {% if size.stock < 1 %}								
-                                                <li class="page-item disabled text-white bg-dark" id="{{ size.size }}"  data-size="{{ size.stock }}">
-                                                    <a class="page-link"> {{ size.lettersize }}  </a>
+                                                <li class="page-item disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                    <a class="page-link text-white bg-dark"> {{ size.lettersize }}  </a>
                                                 </li> 
                                                 {% else %}
                                                 {% if product.size == size.size %}  
-                                                        <li class="page-item active select_size text-white bg-dark" id="{{ size.size }}"  data-size="{{ size.stock }}">
-                                                            <a class="page-link"> {{ size.lettersize }}  </a>
+                                                        <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                            <a class="page-link text-white bg-dark"> {{ size.lettersize }}  </a>
                                                         </li> 
                                                     {% else %}
-                                                        <li class="page-item select_size text-white bg-dark" id="{{ size.size }}" data-size="{{ size.stock }}">
-                                                            <a class="page-link"> {{ size.lettersize }} </a>
+                                                        <li class="page-item select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
+                                                            <a class="page-link text-white bg-dark"> {{ size.lettersize }} </a>
                                                         </li>
                                                     {% endif %}
                                                 {% endif %}	
@@ -96,17 +96,17 @@
                                     {% else %}
                                         {% for size in full_variations %} 	
                                             {% if size.stock < 1 %}
-                                                <li class="page-item disabled text-white bg-dark" id="{{ size.size }}"  data-size="{{ size.stock }}">
-                                                    <a class="page-link"> {{ size.lettersize }}  </a>
+                                                <li class="page-item disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                    <a class="page-link text-white bg-dark"> {{ size.lettersize }}  </a>
                                                 </li> 
                                             {% else %}
                                                 {% if product.size == size.size %}  
-                                                    <li class="page-item active select_size text-white bg-dark" id="{{ size.size }}"  data-size="{{ size.stock }}">
-                                                        <a class="page-link"> {{ size.lettersize }}  </a>
+                                                    <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                        <a class="page-link text-white bg-dark"> {{ size.lettersize }}  </a>
                                                         </li> 
                                                 {% else %}
-                                                    <li class="page-item select_size text-white bg-dark" id="{{ size.size }}" data-size="{{ size.stock }}">
-                                                        <a class="page-link"> {{ size.lettersize }} </a>
+                                                    <li class="page-item select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
+                                                        <a class="page-link text-white bg-dark"> {{ size.lettersize }} </a>
                                                     </li>
                                                 {% endif %}
                                             {% endif %}
