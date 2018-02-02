@@ -467,13 +467,6 @@ $(".changonselectupdate").change(function () {
     }
 });
 
-
-
-
-
-
-
-
 $("#changecart").click(function() {
 
     var add_or_edit = 'edit';
@@ -638,6 +631,8 @@ var path = location.pathname
 links = $('a[href="'+window.location.pathname+'"]')
 links.addClass('active');
 console.log("thepath", path); 
+
+$('body input[type=text]').addClass('form-control');
 
 
 var set_first_page = function(){
