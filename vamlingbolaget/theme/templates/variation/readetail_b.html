@@ -11,9 +11,9 @@
         <div class="row">
             <div class="col-md-5">
                 <a href="{{ product.image.url }}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
-                    <img src="{{ product.image.url }}" alt="REA : {{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
+                    <img src="{{ product.image.url }}" class="img-fluid" alt="REA : {{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
                 </a>
-               <div id="art_description" class="img-fluid"> - {{ product.article.description }} 
+               <div id="art_description" > - {{ product.article.description }} 
             </div>           </div>
             <div class="col-md-5 pr-4 pr-5">
                  <div class="media">
