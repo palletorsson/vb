@@ -30,8 +30,8 @@
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex justify-content-end align-items-center w-100">       
-                            <div class="s-80"> 
-                                 ({% trans "tidigare pris" %}   
+                            <div class="s-80 mr-2"> 
+                                 {% trans "tidigare pris" %}   
                             </div> 
                             <div class="s-80"> 
                                  {{ product.article.price }}  SEK 
@@ -60,24 +60,20 @@
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex justify-content-start align-items-center w-100">       
-                            <div> 
+                            
                                 <div id="art_description" > - {{ product.article.description }} </div>                
                         </div>
                     </div>
                 </div> 
-                               
-                                    
-           
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex align-items-center w-100">
-                    
-                        <div id="addreatocart" style="display:block;">
-                            <span style="padding-left: 30px;">
-                                <button class="btn btn-success rounded-0 btn-block" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
-                            </span>
+                            <div id="addreatocart" style="display:block;">
+                                <span style="padding-left: 30px;">
+                                    <button class="btn btn-success rounded-0 btn-block" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
+                                </span>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
                 
