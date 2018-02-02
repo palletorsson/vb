@@ -3,8 +3,8 @@
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
 {%block title%}
-    <title>Vamlingbolaget | {% trans "Kollektion" %} | {{ product.article.name }},  {{ product.variation }} </title>
-    <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }},  {{ product.variation }}" %}/>
+    <title>Vamlingbolaget | {% trans "Kollektion" %} | REA : {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }} </title>
+    <meta name="description" content={% trans "Vamlingbolaget kollektion " %} {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" %}/>
 {%endblock%}
 {% block allcontent %}
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
@@ -13,15 +13,14 @@
                 <a href="{{ product.image.url }}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
                     <img src="{{ product.image.url }}" alt="REA : {{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
                 </a>
-       
-               <div id="art_description" class="image_description_detail"> - {{ product.article.description }} 
-                  
+               <div id="art_description" class="img-fluid"> - {{ product.article.description }} 
             </div>
             <div class="col-md-5 pr-4 pr-5">
                  <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
-                        <span class="articlehead">
-                            <span id="articlename" >
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <div>
+                        
                                 <input id="article_pk" type="hidden" value="{{ product.article.pk }}">
                                 <input id="rea_pk" type="hidden" value="{{ product.pk }}">
                                 REA : {{ product.article.name }} 
@@ -33,7 +32,7 @@
                                     </span>
                                 
                                 <hr/> 
-                                <blockquote>
+                               
                                     <span>{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span> <br/>
                                     <span>{% trans "Kvalitet" %}: <span id="{{ product.article.quality }}">{{ product.article.quality }}</span>  <br/>
             
@@ -41,19 +40,22 @@
                                     <span>  {% trans "Storlek" %}: <span id="article_size"> {{ product.size }} </span> </span>  
                                     <hr>						
                                     <span> {{ product.description }} </span> 
-                                </blockquote>
+                                
                                 <hr/>
-                            </span>
-                        </span>	
+                            </div>
+                    </div>
                 </div>
            
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
+                        <div class="d-flex align-items-center w-100">
+                    
                         <div id="addreatocart" style="display:block;">
                             <span style="padding-left: 30px;">
                                 <button class="btn btn-success btn-lg btn-block" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
                             </span>
                         </div>
+                    </div>
                     </div>
                 </div>
                 
