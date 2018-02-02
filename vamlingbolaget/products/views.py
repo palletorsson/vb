@@ -386,7 +386,7 @@ def jsonReaindex(request):
           "reaprice": p.rea_price,
           "img": p.image.path, 
           "id": p.id,
-          "type": p.article.type.name, 
+          "type": p.article.type.order, 
           })                  
     resp = json.dumps(allproducts)
     
