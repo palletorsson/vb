@@ -294,7 +294,7 @@
 	</tr>
 	<tr>
 		<td>
-				<div class="form-group" id="first_name">
+				<div class="form-check" id="first_name">
 						<label class="col-lg-3 control-label" > <label for="id_first_name">{% trans "Förnamn" %} </label> </label>
 						{{ form.subject.first_name }}
 						 <div class="col-lg-9">
@@ -303,7 +303,7 @@
 						</div>
 					</div>
 				
-					<div class="form-group" id="last_name">
+					<div class="form-check" id="last_name">
 					 <label class="col-lg-3 control-label" > <label for="id_last_name">{% trans "Efternamn" %} </label> </label>
 						{{ form.subject.last_name }}
 						 <div class="col-lg-9">
@@ -312,7 +312,7 @@
 						</div>
 					</div>
 		
-					<div class="form-group" id="street">
+					<div class="form-check" id="street">
 						<label class="col-lg-3 control-label" > <label for="id_street">{% trans "Gatuadress" %}  </label> </label>
 						{{ form.subject.street}}
 						 <div class="col-lg-9">
@@ -321,7 +321,7 @@
 						</div>
 					</div>
 		
-					<div class="form-group" id="postcode">
+					<div class="form-check" id="postcode">
 						<label class="col-lg-3 control-label" > <label for="id_postcode">{% trans "Postnummer" %}</label> </label>
 						{{ form.subject.postcode}}
 						{% if field.errors %}< li>{{ field.subject.errors|striptags }}< /li>{% endif %}
@@ -331,7 +331,7 @@
 						</div>
 					</div>
 		
-					<div class="form-group" id="city">
+					<div class="form-check" id="city">
 						<label class="col-lg-3 control-label" > <label for="id_city">{% trans "Postort" %}</label> </label>
 						{{ form.subject.city}}
 						 <div class="col-lg-9">
@@ -403,7 +403,7 @@
 		<td>
 			<div class="payblock">
 			   	
-                <div class="form-group float-right">
+                <div class="form-check float-right">
                     <input type="submit" id="continue_payment" class="btn btn-success" value="{% trans "Betala med Payex" %}"  />
                 </div>
         
