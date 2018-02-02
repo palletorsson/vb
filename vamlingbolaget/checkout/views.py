@@ -70,7 +70,9 @@ def checkout(request, test=''):
         lang = 'sv'            
 
     if request.method == 'POST':
+        print "post"
         form = CheckoutForm(request.POST)
+        print form
         if form.is_valid():
             # start the order process and store form values 
             new_order = form.save(commit=False)
