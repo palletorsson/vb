@@ -659,6 +659,18 @@ def readetail(request, pk):
                    context_instance=RequestContext(request)
                     )
 
+def readetail_d(request, pk):
+    try:
+        reaArticle = ReaArticle.objects.get(pk=pk)
+
+    except:
+        raise Http404
+
+    return render_to_response('variation/readetail_b.html',
+                   {'product': reaArticle,
+                   },
+                   context_instance=RequestContext(request)
+                    )
 def codwizard(request):
     articles = Article.objects.filter(active = True).order_by('name')
     # qualities = Quality.objects.filter(active=True)
