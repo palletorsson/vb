@@ -31,6 +31,7 @@ def checkout(request, test=''):
     if test  == 'test': 
         print 'katten'
     url_klarna = request.path
+    template_url = 'checkout/checkout.html'
     # get the all cart data 
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
@@ -43,7 +44,9 @@ def checkout(request, test=''):
 
     try: 
         test_ip = request.META['REMOTE_ADDR']
-        print test_ip
+        if test_ip = '213.89.28.254': 
+            print test_ip 
+            template_url = 'checkout/checkout_b.html'
     except: 
         pass 
 
@@ -272,7 +275,7 @@ def checkout(request, test=''):
     else: 
         klarna_test = '0' 
 
-    return render_to_response('checkout/checkout.html', {
+    return render_to_response(template_url, {
         'form': form,
         'totalprice': totalprice,
         'totalitems': totalitems,
