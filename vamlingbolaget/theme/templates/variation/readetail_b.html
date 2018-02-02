@@ -13,38 +13,55 @@
                 <a href="{{ product.image.url }}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
                     <img src="{{ product.image.url }}" class="img-fluid" alt="REA : {{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
                 </a>
-               <div id="art_description" > - {{ product.article.description }} 
             </div>           </div>
             <div class="col-md-5 pr-4 pr-5">
                  <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
-                            <div>
-                        
                                 <input id="article_pk" type="hidden" value="{{ product.article.pk }}">
                                 <input id="rea_pk" type="hidden" value="{{ product.pk }}">
-                                REA : {{ product.article.name }} 
-                                | 
-                                    <span>
-                                            <span>Nu: </span><span class="discount" id="the_price">  {{ product.rea_price }}  </span> <span> :-  | </span>
-                                              ({% trans "tidigare pris" %} :  {{ product.article.price }}  :-)  ( +{{ product.stockquantity }} )  
-                                            <br />	   				 
-                                    </span>
-                                
-                                <hr/> 
-                               
-                                    <span>{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span> <br/>
-                                    <span>{% trans "Kvalitet" %}: <span id="{{ product.article.quality }}">{{ product.article.quality }}</span>  <br/>
-            
-                                    <span id="article_etc"> {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }}</span>  <br/>
-                                    <span>  {% trans "Storlek" %}: <span id="article_size"> {{ product.size }} </span> </span>  
-                                    <hr>						
-                                    <span> {{ product.description }} </span> 
-                                
-                                <hr/>
-                            </div>
+
+                                <div class="s-80"> REA : {{ product.article.name }}  </div>
+                                <div class="discount" id="the_price">  {{ product.rea_price }}  </div> 
+                        </div>
+                    </div>
+                </div> 
+                <div class="media">
+                    <div class="media-body pb-3 mb-0 border-bottom border-gray">
+                        <div class="d-flex justify-content-end align-items-center w-100">       
+                            <div> 
+                                ({% trans "tidigare pris" %} :  {{ product.article.price }}  SEK )  ( + {{ product.stockquantity }} )  
+                            </div>                
+                        </div>
                     </div>
                 </div>
+                <div class="media">
+                    <div class="media-body pb-3 mb-0 border-bottom border-gray">
+                        <div class="d-flex justify-content-start align-items-center w-100">       
+                            <div> 
+                                
+                                <span>{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</span> <br/>
+                                <span>{% trans "Kvalitet" %}: <span id="{{ product.article.quality }}">{{ product.article.quality }}</span>  <br/>
+        
+                                <span id="article_etc"> {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }}</span>  <br/>
+                                <span>  {% trans "Storlek" %}: <span id="article_size"> {{ product.size }} </span> </span>  
+                                <hr>						
+                             
+                                         
+                        </div>
+                    </div>
+                </div> 
+                       
+                <div class="media">
+                    <div class="media-body pb-3 mb-0 border-bottom border-gray">
+                        <div class="d-flex justify-content-start align-items-center w-100">       
+                            <div> 
+                                <div id="art_description" > - {{ product.article.description }} </div>                
+                        </div>
+                    </div>
+                </div> 
+                               
+                                    
            
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
@@ -52,7 +69,7 @@
                     
                         <div id="addreatocart" style="display:block;">
                             <span style="padding-left: 30px;">
-                                <button class="btn btn-success btn-lg btn-block" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
+                                <button class="btn btn-success rounded-0 btn-block" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppinglåda" %}</button>
                             </span>
                         </div>
                     </div>
