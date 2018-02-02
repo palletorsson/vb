@@ -188,7 +188,9 @@
 	</tbody>
 </table>
 
-<form action="" method="post" class="form-horizontal" id="order_form">{% csrf_token %}
+<form action="http://www.vamlingbolaget.com/checkout/" method="post" class="form-horizontal" id="order_form">
+	
+	{% csrf_token %}
 
 	{{ form.subject.post }}
 		<input type=hidden name="paymentmethod" id="id_paymentmethod" value="C">
