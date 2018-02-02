@@ -288,6 +288,7 @@ def checkout(request, test=''):
         'sweden': sweden,
         'voucher': voucher,
         'klarna_test': klarna_test, 
+        'showtopmenu': True
         },
         context_instance=RequestContext(request))
 

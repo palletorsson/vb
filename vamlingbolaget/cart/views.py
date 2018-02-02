@@ -336,6 +336,7 @@ def showcart(request):
     returntotal['bargains'] =  bargains
     returntotal['voucher'] = voucher
     returntotal['rea'] = rea
+    returntotal['showtopmenu'] = True
 
     return render_to_response('cart/show_cart.html',
         returntotal,
@@ -358,6 +359,7 @@ def showcart_b(request):
     returntotal['bargains'] =  bargains
     returntotal['voucher'] = voucher
     returntotal['rea'] = rea
+    returntotal['showtopmenu'] = True
 
     return render_to_response('cart/show_cart_b.html',
         returntotal,
