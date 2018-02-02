@@ -47,10 +47,13 @@
                 {%if product.variation.article.discount %}
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
-                        <div class="d-flex align-items-center w-100">          
-                            <span> {% trans "tidigare pris: " %} </span>  
-                            <span id="the_price"> {{ product.variation.article.price }}  </span>  
-                            <span>   SEK <br /></span>
+                        <div class="d-flex align-items-between w-100">          
+                            <div class="s-80 mr-2"> 
+                                    {% trans "tidigare pris" %}   
+                               </div> 
+                               <div class="s-80"> 
+                                       ▼   <span id="the_price"> {{ product.variation.article.price }}  </span>    SEK 
+                               </div> 
                         </div>
                     </div>
                 </div>
