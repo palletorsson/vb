@@ -1,4 +1,4 @@
-{% extends "collection_base_b.html" %}
+{% extends "base_b.html" %}
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
@@ -24,7 +24,7 @@
                                 <input id="rea_pk" type="hidden" value="{{ product.pk }}">
 
                                 <div class="s-80" id="article_etc"> <strong>REA : {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }} </strong> </div> 
-                                <div class="discount s-80" id="the_price">  {{ product.rea_price }}  SEK </div> 
+                                <div class="discount s-80 strong" id="the_price">  {{ product.rea_price }}  SEK </div> 
                         </div>
                     </div>
                 </div> 
