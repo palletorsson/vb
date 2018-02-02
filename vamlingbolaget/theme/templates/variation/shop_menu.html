@@ -1,7 +1,7 @@
 {% load i18n %}
 <div class="row firstrow">
       <!-- sidebar -->
-      
+
       {% for t in types %}
        {{ t }}
       {% endfor %}
@@ -23,8 +23,8 @@
                 <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/cat/{{ types.1.slug }}">   <span class="text-uppercase"> {{ types.1.name }} </span></a>
             </li>
             <li class="nav-item">
-                    <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/cat/{{ types.2.slug }}">   <span class="text-uppercase"> {{ types.2.name }} </span></a>
-            </li>
+                    <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/both/kvinna/{{ types.2.slug }}">   <span class="text-uppercase"> {{ types.2.name }} </span></a>
+            </li> 
             <li class="nav-item">
                 <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/cat/{{ types.3.slug }}">   <span class="text-uppercase"> {{ types.3.name }} </span></a>
             </li>
@@ -32,7 +32,11 @@
           <ul class="nav flex-column linksactive mb-2">
             <li class="nav-item">
                 <a class="nav-link vb_link l-s-1" href="/products/type/{{ categories.1.slug }}"> <!-- Man --> <span class="text-uppercase"> {{ categories.1.name }} </span> </a>
+
             </li>
+            <li class="nav-item">
+                <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/both/man/{{ types.2.slug }}">   <span class="text-uppercase"> {{ types.2.name }} </span></a>
+            </li> 
             <!--
             <li class="nav-item mt-0">
                 <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/quality/{{ qualities.3.slug }}"> <span class="text-uppercase"> {{ qualities.3.name }} </span>  </a>
