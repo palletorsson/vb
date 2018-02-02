@@ -9,6 +9,10 @@
       {% for t in categories %}
       {{ t }}
      {% endfor %}
+     {% for t in qualities %}
+     {{ t }}
+    {% endfor %}
+   
 
       <nav class="col-md-2 d-none d-md-block sidebar">
         <div class="pt-2">
@@ -23,7 +27,7 @@
                 <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/cat/{{ types.1.slug }}">   <span class="text-uppercase"> {{ types.1.name }} </span></a>
             </li>
             <li class="nav-item">
-                    <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/both/kvinna/{{ types.2.slug }}">   <span class="text-uppercase"> {{ types.2.name }} </span></a>
+                    <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/ct/kvinna/{{ types.2.slug }}">   <span class="text-uppercase"> {{ types.2.name }} </span></a>
             </li> 
             <li class="nav-item">
                 <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/cat/{{ types.3.slug }}">   <span class="text-uppercase"> {{ types.3.name }} </span></a>
@@ -35,7 +39,7 @@
 
             </li>
             <li class="nav-item">
-                <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/both/man/{{ types.2.slug }}">   <span class="text-uppercase"> {{ types.2.name }} </span></a>
+                <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/ct/man/{{ types.2.slug }}">   <span class="text-uppercase"> {{ types.2.name }} </span></a>
             </li> 
             <!--
             <li class="nav-item mt-0">

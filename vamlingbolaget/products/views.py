@@ -486,6 +486,20 @@ def by_cat_type(request, cat, thetype):
               'types': types},
         context_instance=RequestContext(request))
 
+def by_cat_q(request, cat, q):
+    template = 'variation/fullindex_b.html'
+    products = FullVariation.objects.filter(variation__article__quality__slug = q, variation__article__category__slug = cat, size=3840, active=True).order_by('order')
+    qualities = Quality.objects.filter(active=True)
+    types = Type.objects.filter(active=True)
+    categories = Category.objects.filter(active=True)
+  
+    return render_to_response(template,
+             {'products': products,
+              'qualities': qualities,
+              'categories': categories,
+              'types': types},
+        context_instance=RequestContext(request))
+        
 def by_quality(request, key):
     template = 'variation/fullindex.html'
     if key == 'silkestrika':
