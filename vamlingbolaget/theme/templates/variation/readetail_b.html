@@ -20,9 +20,10 @@
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
                                 <input id="article_pk" type="hidden" value="{{ product.article.pk }}">
+
                                 <input id="rea_pk" type="hidden" value="{{ product.pk }}">
 
-                                <div class="s-80"> REA : {{ product.article.name }}  </div>
+                                <div class="s-80" id="article_etc"> <strong>REA : {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }} </strong> </div> 
                                 <div class="discount s-80" id="the_price">  {{ product.rea_price }}  SEK </div> 
                         </div>
                     </div>
@@ -42,9 +43,9 @@
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
                         <div>    
-                            <div class="pb-1 pt-2" id="article_etc"> <strong>{{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }} </strong> </div> 
+   
                             <div class="pb-1" id="art_description" > - {{ product.article.description }} </div>     
-                            <div class="pb-1 pt-2">{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</div>
+                  
                         </div>
                     </div>
                 </div> 
@@ -54,6 +55,7 @@
                                 <div class="pb-1">{% trans "Kvalitet" %}: <span id="{{ product.article.quality }}">{{ product.article.quality }}</div> 
                                 <div class="pb-1">  {% trans "Storlek" %}: <span id="article_size"> {{ product.size }} </span> </div>  
                                 <div class="pb-1"> ( {{ product.stockquantity }} {% trans "kvar" %} ) </div> 
+                                <div class="pb-1 pt-2">{% trans "Art.Nr." %}: <span id="sku_number">{{ product.article.sku_number }}</div>
                             </div>
                         </div>
                     </div> 
