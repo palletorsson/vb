@@ -13,7 +13,8 @@
                 <a href="{{ product.image.url }}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
                     <img src="{{ product.image.url }}" class="img-fluid" alt="REA : {{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
                 </a>
-            </div>           </div>
+            </div>           
+        
             <div class="col-md-5 pr-4 pr-5">
                  <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
@@ -22,15 +23,18 @@
                                 <input id="rea_pk" type="hidden" value="{{ product.pk }}">
 
                                 <div class="s-80"> REA : {{ product.article.name }}  </div>
-                                <div class="discount" id="the_price">  {{ product.rea_price }}  </div> 
+                                <div class="discount" id="the_price">  {{ product.rea_price }}  SEK </div> 
                         </div>
                     </div>
                 </div> 
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
-                        <div class="d-flex justify-content-end align-items-center w-100">       
+                        <div class="d-flex justify-content-end align-items-center w-100 s-80">       
                             <div> 
-                                ({% trans "tidigare pris" %} :  {{ product.article.price }}  SEK )  ( + {{ product.stockquantity }} )  
+                                ({% trans "tidigare pris" %} ( {{ product.stockquantity }} kvar)  
+                            </div> 
+                            <div> 
+                                {{ product.article.price }} SEK 
                             </div>                
                         </div>
                     </div>
