@@ -74,6 +74,7 @@ def checkout(request, test=''):
             new_order.order_number = get_ordernumber() 
 
             new_order.ip = request.META['REMOTE_ADDR']
+            print new_order.ip
             sms = request.POST['sms']
 
             zip = request.POST['postcode'] 
@@ -278,8 +279,7 @@ def checkout(request, test=''):
         'klarna_test': klarna_test, 
         },
         context_instance=RequestContext(request))
-
-def checkout_b(request, test=''):
+def checkout(request, test=''):
     if test  == 'test': 
         print 'katten'
     url_klarna = request.path
@@ -530,7 +530,6 @@ def checkout_b(request, test=''):
         'klarna_test': klarna_test, 
         },
         context_instance=RequestContext(request))
-
 
 def success(request):
     # if payex Transaction was successfully performed we finalize the order

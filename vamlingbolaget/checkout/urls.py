@@ -1,9 +1,8 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('checkout.views',
-   
-    url(r'^test/$', 'checkout_b'),
     url(r'^$', 'checkout'),
+    url(r'^test/$', 'checkout_b'),
     url(r'thanks/', 'thanks'),
     url(r'success/', 'success'),
     url(r'cancel/', 'cancel'),
