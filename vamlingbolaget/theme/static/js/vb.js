@@ -405,12 +405,13 @@ $("#addreatocart").click(function() {
                 _ = data.cartitem;
 
             if (msg != "Fyndet finns redan ") {                
-			     $("#updatecart").html('<hr><li> <strong> + </strong></li><hr> <li> ' + article_etc + '</li><li> ' + article_size + '</li>').fadeIn();
+			     $("#updatecart").html('<div class="card border-info mb-3" style="max-width: 18rem;"> <div class="card-body text-info"> <p class="card-text">  ' + article_etc + ' ' + article_size + '</p></div></div></div>').fadeIn();
             } 
             else {
-                $("#updatecart").html('<hr><li> <strong> - </strong></li><hr> <li> ' + msg + '</li>').fadeIn();
+                $("#updatecart").html('<div class="card border-info mb-3" style="max-width: 18rem;"> <div class="card-body text-info"> <p class="card-text"> ' + msg + '</p></div></div></div>').fadeIn();
             }
 
+          
             if (msg != "Fyndet finns redan ") { 
 			    var old_quantity = $("#widget_quantity").text();
 				var new_quantity = 1 + parseInt(old_quantity);
