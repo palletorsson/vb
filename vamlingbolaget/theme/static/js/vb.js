@@ -328,11 +328,11 @@ $("#addtofullcart").off('click').on({
                       height:'200px'
                     });
 
-                $("#updatecart").html( '<hr> <li> <strong> '+ widgetTextstart+ ' </strong></li><hr><li>'+_.article +' </li>' +
-                     '<li> - '+ widget_size +' </li>' +
-                     '<li> '+ coltext +', '+ pattext +' </li>' +
-                    
-                     ' <div>').fadeIn();
+                    $("#updatecart").html( '<div class="card"> <div class="card-body"> <h6 class="card-title">'+ widgetTextstart+ ' '+_.article +' </h6>' +
+                    ' <p class="card-text">'+ widget_size +' </p>' +
+                    ' <p class="card-text">'+ coltext +', '+ pattext +' </p>' +
+                   
+                    ' </div></div>').fadeIn();
 
                 $("#updatecart").delay(6000).fadeOut(3000).animate({
                       height:'0px'
