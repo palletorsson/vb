@@ -225,8 +225,8 @@ $("#addtocart").off('click').on({
 
 
 
-    			$("#updatecart").html( '<div class="card"> <div class="card-body"> <h6 class="card-title">'+ widgetTextstart+ ' '+_.article +' </h6>' +
-    				 ' <p class="card-text">'+ widget_size +' </p>' +
+    			$("#updatecart").html( '<div class="card border-info mb-3" style="max-width: 12rem;"> <div class="card-body"> <h6 class="card-title">'+ widgetTextstart+ ' '+_.article +' </h6>' +
+    				 ' <p class="card-text text-info">'+ widget_size +' </p>' +
                      ' <p class="card-text">'+ coltext +', '+ pattext +' </p>' +
     				
     				 ' </div></div>').fadeIn();
@@ -328,7 +328,7 @@ $("#addtofullcart").off('click').on({
                       height:'200px'
                     });
 
-                    $("#updatecart").html( '<div class="card border-info mb-3" style="max-width: 18rem;"> <div class="card-header"> '+ widgetTextstart+ ' '+_.article +' </div>' +
+                    $("#updatecart").html( '<div class="card border-info mb-3" style="max-width: 12rem;"> <div class="card-header"> '+ widgetTextstart+ ' '+_.article +' </div>' +
                     ' <div class="card-body text-info"> <p class="card-text">'+ widget_size +' </p>' +
                     ' <p class="card-text">'+ coltext +', '+ pattext +' </p>' +
                    
@@ -405,10 +405,10 @@ $("#addreatocart").click(function() {
                 _ = data.cartitem;
 
             if (msg != "Fyndet finns redan ") {                
-			     $("#updatecart").html('<div class="card border-info mb-3" style="max-width: 18rem;"> <div class="card-body text-info"> <p class="card-text">  ' + article_etc + ' ' + article_size + '</p></div></div></div>').fadeIn();
+			     $("#updatecart").html('<div class="card border-info mb-3" style="max-width: 12rem;"> <div class="card-body text-info"> <p class="card-text">  ' + article_etc + ' ' + article_size + '</p></div></div></div>').fadeIn();
             } 
             else {
-                $("#updatecart").html('<div class="card border-info mb-3" style="max-width: 18rem;"> <div class="card-body text-info"> <p class="card-text"> ' + msg + '</p></div></div></div>').fadeIn();
+                $("#updatecart").html('<div class="card border-info mb-3" style="max-width: 12rem;"> <div class="card-body text-info"> <p class="card-text"> ' + msg + '</p></div></div></div>').fadeIn();
             }
 
           
