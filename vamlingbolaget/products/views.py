@@ -55,6 +55,8 @@ def cutondemandApiSingle(request, sku_number):
             active_sizes = ("90", "100", "110", "120", "130", "140", "150")
             allpossiblities["sizes"] = active_sizes
         
+        print art.description
+        
         allpossiblities["single"] = {
           "article": art.name,
           "sku": art.sku_number,
