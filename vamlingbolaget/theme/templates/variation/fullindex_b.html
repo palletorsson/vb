@@ -8,7 +8,7 @@
         <div class="row">
         {% for product in products %}
         <!-- 3 img shop -->
-            <div class="col-md-4 mb-3">
+            <div class="col-6 col-md-4 mb-3">
                 <a href="/products/fulldetail/{{product.pk}}/#{{ product.variation.article.name }} {% trans "i" %} {{ product.variation.color|lower }} {{ product.pattern|lower }}">
                     {%if product.variation.article.quality.order > 15 or product.variation.article.quality.order == 2 %}
                         <img src="/media/variations/thumb/{{ product.oneimg }}.jpg" class="lazy img-fluid" alt="Vamlingbolaget {{ product.article.name }}"  />
