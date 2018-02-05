@@ -13,8 +13,10 @@
                     {%if product.variation.article.quality.order > 15 or product.variation.article.quality.order == 2 %}
                         <img src="/media/variations/thumb/{{ product.oneimg }}.jpg" class="lazy img-fluid" alt="Vamlingbolaget {{ product.article.name }}"  />
                     {%else%}
-                        <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_1.jpg" class="image_on lazy img-fluid force_image" alt="Vamlingbolaget {{ product.article.name }}"  />
-                        <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_2.jpg" class="image_off lazy img-fluid force_image" alt="Vamlingbolaget {{ product.article.name }}"  />
+                    <span class="force_image">
+                        <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_1.jpg" class="image_on lazy img-fluid" alt="Vamlingbolaget {{ product.article.name }}"  />
+                        <img src="/media/variations/thumb/{{ product.variation.article.sku_number }}_{{ product.variation.pattern.order }}_{{ product.variation.color.order }}_2.jpg" class="image_off lazy img-fluid" alt="Vamlingbolaget {{ product.article.name }}"  />
+                    </span>            
                     {%endif%}
                         <p class="text-muted mb-0 s-80"> {{ product.variation.article.name }} </p>
                     {%if product.variation.article.discount %}
