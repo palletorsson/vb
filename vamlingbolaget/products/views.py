@@ -56,7 +56,7 @@ def cutondemandApiSingle(request, sku_number):
             allpossiblities["sizes"] = active_sizes
         
         print art.description
-        
+
         allpossiblities["single"] = {
           "article": art.name,
           "sku": art.sku_number,
@@ -79,14 +79,14 @@ def cutondemandApiSingle(request, sku_number):
 
 def cutondemandApi(request, category): 
     models = Article.objects.filter(active=True).order_by('category')
+    if (category != 'pc'):
+        if (category == 'all'): 
+            products = FullVariation.objects.filter(active=True, size=3840).order_by('order') 
+        else: 
+            products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
 
-    if (category == 'all'): 
-        products = FullVariation.objects.filter(active=True, size=3840).order_by('order') 
-    else: 
-        products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
-
-    variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('order', 'article__quality')
-    
+        variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('order', 'article__quality')
+        
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     active_sizes = SIZES
     allpossiblities = {}
@@ -94,24 +94,25 @@ def cutondemandApi(request, category):
     allpossiblities["colorspatterns"] = []
     allpossiblities["sizes"] = active_sizes
 
-    try:
-        sellart = FullVariation.objects.get(pk=1994)
-        allpossiblities["single"] = [{
-          "article": unicode("+?"),
-          "sku": "...",
-          "price": "...",
-          "img": "...", 
-          "id": sellart.variation.article.id,
-          "type": sellart.variation.article.type.name, 
-          "category": sellart.variation.article.category.name, 
-          "description": sellart.variation.article.description,
-          "quality": sellart.variation.article.quality.name,
-          "cod_cost": "...",
-          "pattern": unicode("+?"),
-          "color": unicode("+?")
-        }]
-    except:
-        print "no such art"
+    if (category != 'pc'):
+        try:
+            sellart = FullVariation.objects.get(pk=1994)
+            allpossiblities["single"] = [{
+            "article": unicode("+?"),
+            "sku": "...",
+            "price": "...",
+            "img": "...", 
+            "id": sellart.variation.article.id,
+            "type": sellart.variation.article.type.name, 
+            "category": sellart.variation.article.category.name, 
+            "description": sellart.variation.article.description,
+            "quality": sellart.variation.article.quality.name,
+            "cod_cost": "...",
+            "pattern": unicode("+?"),
+            "color": unicode("+?")
+            }]
+        except:
+            print "no such art"
 
     if (category == 'all'): 
         allpossiblities["products"] = []
