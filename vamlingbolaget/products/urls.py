@@ -3,7 +3,7 @@ from django.views.generic import DetailView, ListView
 from models import Variation
 
 urlpatterns = patterns('products.views',
-    url(r'^$', 'index'),
+    url(r'^$', 'fullindex_b'),
     url(r'^fullcut/$', 'fullindexarticle'),
     url(r'^test_f/$', 'fullindex_b'),
     url(r'^full/$', 'fullindex_b'),
