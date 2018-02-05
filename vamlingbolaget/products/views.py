@@ -94,25 +94,25 @@ def cutondemandApi(request, category):
     allpossiblities["colorspatterns"] = []
     allpossiblities["sizes"] = active_sizes
 
-    if (category != 'pc'):
-        try:
-            sellart = FullVariation.objects.get(pk=1994)
-            allpossiblities["single"] = [{
-            "article": unicode("+?"),
-            "sku": "...",
-            "price": "...",
-            "img": "...", 
-            "id": sellart.variation.article.id,
-            "type": sellart.variation.article.type.name, 
-            "category": sellart.variation.article.category.name, 
-            "description": sellart.variation.article.description,
-            "quality": sellart.variation.article.quality.name,
-            "cod_cost": "...",
-            "pattern": unicode("+?"),
-            "color": unicode("+?")
-            }]
-        except:
-            print "no such art"
+   
+    try:
+        sellart = FullVariation.objects.get(pk=1994)
+        allpossiblities["single"] = [{
+        "article": unicode("+?"),
+        "sku": "...",
+        "price": "...",
+        "img": "...", 
+        "id": sellart.variation.article.id,
+        "type": sellart.variation.article.type.name, 
+        "category": sellart.variation.article.category.name, 
+        "description": sellart.variation.article.description,
+        "quality": sellart.variation.article.quality.name,
+        "cod_cost": "...",
+        "pattern": unicode("+?"),
+        "color": unicode("+?")
+        }]
+    except:
+        print "no such art"
 
     if (category == 'all'): 
         allpossiblities["products"] = []
