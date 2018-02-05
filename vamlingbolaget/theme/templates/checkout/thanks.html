@@ -20,17 +20,17 @@
 
 {% block stretchpage %}
     {% if order != 1 %}
-        <div class="col-12">
+        <div class="col-md-8 offset-md-3">
         <pre>{% trans "En bekräftelse på din beställing har skickats till" %} : {{order.email}} </pre>
         </div>
-        <div class="col-12">
+        <div class="col-md-8 offset-md-3">
         <pre>{{order.message}}</pre>
         </div>
-        <div class="col-12">
+        <div class="col-md-8 offset-md-3">
         <pre>{% trans "Vi hör av oss om vi har några frågor" %}. </pre>
         </div>
-        <div class="col-12">
-        <span class="hidden" id="order_num">{{order.order_number}}</span>  
+        <div class="col-md-8 offset-md-3">
+        Order Nr. <span class="hidden" id="order_num">{{order.order_number}}</span>  
         </div>
 
 
