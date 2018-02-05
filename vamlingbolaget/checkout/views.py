@@ -70,9 +70,9 @@ def checkout(request, test=''):
         lang = 'sv'            
 
     if request.method == 'POST':
-        print "post"
+
         form = CheckoutForm(request.POST)
-        print form
+       
         if form.is_valid():
             # start the order process and store form values 
             new_order = form.save(commit=False)
@@ -85,7 +85,7 @@ def checkout(request, test=''):
             new_order.order_number = get_ordernumber() 
 
             new_order.ip = request.META['REMOTE_ADDR']
-            print new_order.ip
+      
             sms = request.POST['sms']
 
             zip = request.POST['postcode'] 
