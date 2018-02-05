@@ -1,4 +1,4 @@
-{% extends "collection_base_b.html" %}
+{% extends "base_b.html" %}
 {% load i18n %}
 {%block title%}
 <title>Vamlingbolaget | {% trans "Tack för din Beställning " %}  </title>
@@ -18,7 +18,7 @@
     {% endif %}
 {% endblock %}
 
-{% block allcontent %}
+{% block stretchpage %}
     {% if order != 1 %}
         <pre>{% trans "En bekräftelse på din beställing har skickats till" %} : {{order.email}} </pre>
         <pre>{{order.message}}</pre>
