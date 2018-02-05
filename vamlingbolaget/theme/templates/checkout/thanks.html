@@ -20,10 +20,18 @@
 
 {% block stretchpage %}
     {% if order != 1 %}
+        <div class="col-12">
         <pre>{% trans "En bekräftelse på din beställing har skickats till" %} : {{order.email}} </pre>
+        </div>
+        <div class="col-12">
         <pre>{{order.message}}</pre>
+        </div>
+        <div class="col-12">
         <pre>{% trans "Vi hör av oss om vi har några frågor" %}. </pre>
+        </div>
+        <div class="col-12">
         <span class="hidden" id="order_num">{{order.order_number}}</span>  
+        </div>
 
 
 <script> $( document ).ready(function() {
