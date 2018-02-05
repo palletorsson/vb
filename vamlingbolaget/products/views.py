@@ -54,8 +54,6 @@ def cutondemandApiSingle(request, sku_number):
         if (art.category.slug == 'barn'):
             active_sizes = ("90", "100", "110", "120", "130", "140", "150")
             allpossiblities["sizes"] = active_sizes
-        
-        print art.description
 
         allpossiblities["single"] = {
           "article": art.name,
@@ -444,13 +442,13 @@ def rea_by_type(request, key):
 def by_type(request, key):
     if key == 'kvinna':
         products = FullVariation.objects.filter(variation__article__category__slug = key, order__lte=100, size=3840, active=True).order_by('order')
-        template = 'variation/fullindex.html'
+        template = 'variation/fullindex_b.html'
     if key == 'man':
         products = FullVariation.objects.filter(variation__article__category__slug = key, size=3840, active=True).order_by('-order')
-        template = 'variation/fullindex.html'
+        template = 'variation/fullindex_b.html'
     else: 
         products = Variation.objects.filter(article__category__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
-        template = 'variation/index.html'
+        template = 'variation/fullindex_b.html'
 
     
     qualities = Quality.objects.filter(active=True)
