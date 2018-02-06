@@ -90,7 +90,7 @@ def cutondemandApi(request, category):
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     active_sizes = SIZES
     allpossiblities = {}
-    if (product.article.quality.order == 13):
+        if (product.article.quality.order == 13):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
             sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
