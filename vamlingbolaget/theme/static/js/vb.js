@@ -685,6 +685,7 @@ $('#sms-checkbox').click(function () {
 $('.change_lang').click(function(e){
     e.stopPropagation();
     var val = $(this).attr('id');
+    console.log("lang", val); 
     $('input[name=language]').val(val)
     $('form#lang').submit();
 });
