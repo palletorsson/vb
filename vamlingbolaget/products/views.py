@@ -56,10 +56,13 @@ def cutondemandApiSingle(request, sku_number):
         else:
             sizes = Size.objects.filter(quality=art.quality).order_by('-pk')
 
-        print sizes
-        print art.quality.order
+        size_2 = []
 
-        allpossiblities["sizes"] = sizes 
+        for s in sizes:
+            size_2.append(s.size)
+
+        print size_2
+        allpossiblities["sizes"] = size_2
 
         allpossiblities["single"] = {
           "article": art.name,
