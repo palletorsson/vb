@@ -10,19 +10,16 @@
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="row">
             <div class="col-md-5">
-                {% with images|first as image %}
-                    <a href="{{ image }}" class="variation_link"><img src="{{ image }}" alt="article image" width="100%" class="variation_img" /></a>
-                {% endwith %}
-                {%if product.article.quality.order > 15 %}
-                {%else%}
-                      <div class="text-center hidden-xs justify-content-center">
-                    {% for image in images %}
-                        <span class="image_button">
-                            <img src="{{ image }}" alt="article image" width="31%" class="variation_imgs m-1" />
-                        </span>
-                      {% endfor %}
-                      </div>
-                  {%endif%}         
+                {% for image in images %}
+                <a href="{% version image.image 'large'%}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
+                    <img src="{% version image.image 'large' %}" alt="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
+                </a>
+           
+               <div id="art_description" class="image_description_detail"> - {{ product.article.description }} 
+               
+               </div>
+   
+               {% endfor %}        
             </div>
             <div class="col-md-5 pr-4 pr-5">
                 <input id="article_pk" type="hidden" value="{{ product.article.sku_number}}">

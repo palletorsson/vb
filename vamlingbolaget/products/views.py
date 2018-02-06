@@ -850,13 +850,32 @@ def fulldetail_b(request, pk):
 def fulldetail_v(request, pk):
     try:
         variation = Variation.objects.get(pk=pk)
+
+        if (product.article.quality.order == 13):
+            sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
+        else:
+            sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
+
+        if (product.article.quality.order == 5 or product.article.quality.order == 14) :
+            colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
+        else:
+            colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
+        
+      
     except:
         raise Http404
     
+    # if type barn sizes else 
 
+    sizes = ['XS','S','M','L', 'XL', 'XXL']
+
+    size_list = [] 
 
     return render_to_response('variation/detail_v.html',
-                   {'product': variation
+                   {'product': variation, 
+                   'sizes': sizes, 
+                   'colorsandpattern': colorsandpattern
+
                    },
                    context_instance=RequestContext(request)
                 )
