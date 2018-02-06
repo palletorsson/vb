@@ -51,9 +51,12 @@ def cutondemandApiSingle(request, sku_number):
     try:
         art = Article.objects.get(sku_number=sku_number)
 
-        if (art.category.slug == 'barn'):
-            active_sizes = ("90", "100", "110", "120", "130", "140", "150")
-            allpossiblities["sizes"] = active_sizes
+        if (art.quality.order == 13):
+            sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
+        else:
+            sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
+
+        allpossiblities["sizes"] = sizes 
 
         allpossiblities["single"] = {
           "article": art.name,
@@ -88,7 +91,7 @@ def cutondemandApi(request, category):
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     active_sizes = SIZES
     allpossiblities = {}
-
+   
     allpossiblities["colorspatterns"] = []
     allpossiblities["sizes"] = active_sizes
 
