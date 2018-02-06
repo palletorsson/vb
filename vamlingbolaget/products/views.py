@@ -42,8 +42,6 @@ def index(request):
 
 SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL')
 
-SIZES2 = ('34', '36', '3840', '42', '44','46')
-
 def cutondemandApiSingle(request, sku_number): 
     models = Article.objects.filter(active=True).order_by('category')
     active_sizes = SIZES
@@ -90,11 +88,6 @@ def cutondemandApi(request, category):
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     active_sizes = SIZES
     allpossiblities = {}
-    
-    if (product.article.quality.order == 13):
-        sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
-    else:
-        sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
 
     allpossiblities["colorspatterns"] = []
     allpossiblities["sizes"] = active_sizes
@@ -867,10 +860,8 @@ def fulldetail_v(request, pk):
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
-            
     except:
         raise Http404
-    
 
     try:        
         images = Image.objects.filter(variation__pk=pk)
