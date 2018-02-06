@@ -42,6 +42,8 @@ def index(request):
 
 SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL')
 
+SIZES2 = ('34', '36', '3840', '42', '44','46')
+
 def cutondemandApiSingle(request, sku_number): 
     models = Article.objects.filter(active=True).order_by('category')
     active_sizes = SIZES
@@ -51,18 +53,9 @@ def cutondemandApiSingle(request, sku_number):
     try:
         art = Article.objects.get(sku_number=sku_number)
 
-        if (art.quality.order == 13):
-            sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
-        else:
-            sizes = Size.objects.filter(quality=art.quality).order_by('-pk')
-
-        size_2 = []
-
-        for s in sizes:
-            size_2.append(s.size)
-
-        print size_2
-        allpossiblities["sizes"] = size_2
+        if (art.category.slug == 'barn'):
+            active_sizes = ("90", "100", "110", "120", "130", "140", "150")
+            allpossiblities["sizes"] = active_sizes
 
         allpossiblities["single"] = {
           "article": art.name,
@@ -97,7 +90,11 @@ def cutondemandApi(request, category):
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     active_sizes = SIZES
     allpossiblities = {}
-   
+    if (product.article.quality.order == 13):
+            sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
+        else:
+            sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
+
     allpossiblities["colorspatterns"] = []
     allpossiblities["sizes"] = active_sizes
 
