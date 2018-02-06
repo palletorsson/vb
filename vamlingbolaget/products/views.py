@@ -83,8 +83,10 @@ def cutondemandApi(request, category):
         else: 
             products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
 
-        variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('order', 'article__quality')
-        
+            variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('article__type')
+    
+    articles = Article.objects.filter(Q(category__slug='barn') | Q(category__slug='accessoarer') |  Q(category__slug='piece-goods'), order__lte=100, active=True).order_by('type')
+            
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     active_sizes = SIZES
     allpossiblities = {}
@@ -92,6 +94,22 @@ def cutondemandApi(request, category):
     allpossiblities["colorspatterns"] = []
     allpossiblities["sizes"] = active_sizes
 
+
+    allpossiblities["articles"] = []   
+    for chil in articles:
+        allpossiblities["articles"].append({
+            "article": chil.name,
+            "sku": chil.sku_number,
+            "price": chil.price,
+            "id": chil.id,
+            "pk": chil.pk,
+            "img": chil.file.name,
+            "type": chil.type.name, 
+            "category":chil.category.name, 
+            "description": chil.description,
+            "quality": chil.quality.name,
+            "cod_cost": chil.ondemand_cost       
+    }) 
    
     try:
         sellart = FullVariation.objects.get(pk=1994)
@@ -112,7 +130,7 @@ def cutondemandApi(request, category):
     except:
         print "no such art"
 
-    if (category == 'all'): 
+    if (category == 'pc'): 
         allpossiblities["products"] = []
         for prod in products: 
           allpossiblities["products"].append({
