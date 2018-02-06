@@ -847,6 +847,19 @@ def fulldetail_b(request, pk):
                    context_instance=RequestContext(request)
                 )
 
+def fulldetail_v(request, pk):
+    try:
+        variation = Variation.objects.get(pk=pk)
+    except:
+        raise Http404
+    
+
+
+    return render_to_response('variation/detail_v.html',
+                   {'product': variation
+                   },
+                   context_instance=RequestContext(request)
+                )
 
 def f7(seq):
     seen = set()

@@ -9,7 +9,7 @@
     {% for product in products %}
         <div class="col-6 col-md-4 mb-3">
 
-            <a href="/products/fulldetail/{{product.pk}}/#{{ product.article.name }}">
+            <a href="/products/vardetail/{{product.pk}}/#{{ product.article.name }}">
                 {% with product.image_set.all|first as image %}
                         <div class="force_image"> <img src="../../..{% version image.image 'large' %}" class="lazy img-fluid" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
                         <div class='image_description'>

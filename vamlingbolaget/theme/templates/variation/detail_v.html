@@ -1,0 +1,182 @@
+{% extends "collection_base_b.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{%block title%}
+    <title>Vamlingbolaget | {% trans "Kollektion" %} | {{ product.article.name }},  {{ product }} </title>
+    <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }},  {{ product }}" %}/>
+{%endblock%}
+{% block allcontent %}
+    <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="row">
+            <div class="col-md-5">
+                {% with images|first as image %}
+                    <a href="{{ image }}" class="variation_link"><img src="{{ image }}" alt="article image" width="100%" class="variation_img" /></a>
+                {% endwith %}
+                {%if product.article.quality.order > 15 %}
+                {%else%}
+                      <div class="text-center hidden-xs justify-content-center">
+                    {% for image in images %}
+                        <span class="image_button">
+                            <img src="{{ image }}" alt="article image" width="31%" class="variation_imgs m-1" />
+                        </span>
+                      {% endfor %}
+                      </div>
+                  {%endif%}         
+            </div>
+            <div class="col-md-5 pr-4 pr-5">
+                <input id="article_pk" type="hidden" value="{{ product.article.sku_number}}">
+                <input type="hidden" id="pattern" name="pattern" value="{{ product.pattern.order}}" >							
+                <input type="hidden" id="color" name="color" value="{{ product.color.order }}" >
+                <input type="hidden" id="full_var" name="full_var" value="1" >
+                <div class="media">
+                    <div class="media-body pb-3 mb-0 border-bottom border-gray">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <div class="vb_important_text s-80" id="articlename">{{ product.article.name }}
+                            </div>
+                            <div>
+                                {%if product.article.discount %}
+                                    <span class="discount s-80"> {{ product.article.f_discount }} </span> <span class="s-80" > SEK  *  </span><br />
+                                {%else%}
+                                    <span class="s-80" id="the_price"> {{ product.article.price }} </span> <span class="s-80" > SEK </span>
+                                {%endif%} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%if product.article.discount %}
+                <div class="media">
+                    <div class="media-body pb-3 mb-0 border-bottom border-gray">
+                        <div class="d-flex justify-content-between  w-100">          
+                            <div class="s-80 mr-2"> 
+                                 
+                               </div> 
+                               <div class="s-80"> 
+                                    {% trans "tidigare pris" %}   ▼   <span id="the_price"> {{ product.article.price }}  </span>    SEK 
+                               </div> 
+                        </div>
+                    </div>
+                </div>
+                
+                {%endif%} 
+                <div class="media text-muted pt-3 ">
+                    <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <div>
+                                <ul class="pagination rounded-0">
+                                        {% if product.article.quality.pk == 1 %} 
+                                        {% if product.active %} 
+                                            {% for size in full_variations %} 
+                                                {% if product.size == size.size %}  
+                                                    <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                        <a class="page-link"> {{ size.lettersize }}  </a>
+                                                    </li> 							
+                                                {% else %}
+                                                    <li class="page-item select_size" id="{{ size.size  }}" data-size="{{ size.stock }}">
+                                                        <a class="page-link"> {{ size.lettersize }} </a>
+                                                    </li>
+                                                {% endif %} 
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for size in full_variations %} 	
+                                                {% if size.stock < 1 %}								
+                                                <li class="page-item disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                    <a class="page-link"> {{ size.lettersize }}  </a>
+                                                </li> 
+                                                {% else %}
+                                                {% if product.size == size.size %}  
+                                                        <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                            <a class="page-link"> {{ size.lettersize }}  </a>
+                                                        </li> 
+                                                    {% else %}
+                                                        <li class="page-item select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
+                                                            <a class="page-link"> {{ size.lettersize }} </a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endif %}	
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% else %}
+                                        {% for size in full_variations %} 	
+                                            {% if size.stock < 1 %}
+                                                <li class="page-item disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                    <a class="page-link"> {{ size.lettersize }}  </a>
+                                                </li> 
+                                            {% else %}
+                                                {% if product.size == size.size %}  
+                                                    <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                        <a class="page-link"> {{ size.lettersize }}  </a>
+                                                        </li> 
+                                                {% else %}
+                                                    <li class="page-item select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
+                                                        <a class="page-link"> {{ size.lettersize }} </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %} 
+                                </ul>
+                            </div>
+                        <div class="text-gray-dark mb-3"> <i class="fa fa-chevron-left fa-2x pt-2" aria-hidden="true"> </i> <span class="mb-2">   {% trans "Välj Storlek" %} </span></div>
+                    </div>
+                </div>
+            </div>           
+            <div class="media text-muted pt-3 ">
+                <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
+                    <div class="d-flex align-items-center w-100">
+                        <div class="text-gray-dark">{% trans "Färger och Mönster" %}:  {{ product.color }}  {{ product.pattern }} </div>            
+                        <input type="hidden" id="size" name="size" value="3840" >
+                        <input type="hidden" id="quantity" name="quantity" value="1" >		
+                        <input type="hidden" id="pc_sellection" name="pc_sellection" value="common" >
+                        <input type="hidden" id="add_or_edit" name="full" value="full" > 
+                        <span class="invisible" id="sku_number">{{ product.article.sku_number }}</span> 
+                    </div>
+                </div>
+            </div>
+            <div class="media text-muted pt-3 ">
+                <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <div>
+                            <span id="addtocart">
+                                <button class="btn btn-sm btn btn-success rounded-0 btn-block add-to-cart-buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppingbag" %}</button>
+                            </span>
+                        </div>
+                        <div>
+                            <span> 		
+                                <div> {% trans "Leverans" %}:  {% trans "En till tre veckor" %} </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="media text-muted pt-3 ">
+                <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
+                    <div class="d-flex align-items-center w-100">
+                            {{ product.article.description }}
+                    </div>
+                    </br>
+                    <div>  
+                        <span class="quality" id="{{ product.article.quality }}">{{ product.article.quality }}</span> : 
+                        <span> {{ product.article.quality.description }} </span> 		
+                    </div>
+                </div>
+            </div>
+            <div class="media text-muted pt-3 ">
+                    <div class="media-body pb-1 mb-0 small lh-125 border-gray">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                           Plagget finns också i: 
+                        </div>
+                    </div>
+                </div>
+            <div class="media text-muted pt-3">
+                <div class="media-body pb-1 mb-0 small lh-125 border-gray">
+                    <div class="d-flex justify-content-start align-items-center w-100 flex-wrap">
+                        {% for colorsandpattern in full_variations_article %}
+                            <a href="{{ colorsandpattern.link }}"><img id="pattern_color_image" class="pattern_color_image_c" src="{{ MEDIA_URL }}/uploads/120/{{ colorsandpattern.cp }}.jpg" style="width:120px;padding:2px;" /></a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>		
+        </div> <!-- end of row -->
+    </main>
+{% endblock %}
