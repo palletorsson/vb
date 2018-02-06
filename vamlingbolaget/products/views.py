@@ -860,21 +860,21 @@ def fulldetail_v(request, pk):
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
-        
-      
+            
     except:
         raise Http404
     
-    # if type barn sizes else 
 
-    sizes = ['XS','S','M','L', 'XL', 'XXL']
-
-    size_list = [] 
+    try:        
+        images = Image.objects.filter(variation__pk=pk)
+    except:
+        raise Http404 
 
     return render_to_response('variation/detail_v.html',
                    {'product': product, 
                    'sizes': sizes, 
-                   'colorsandpattern': colorsandpattern
+                   'colorsandpattern': colorsandpattern, 
+                   'images': images
 
                    },
                    context_instance=RequestContext(request)
