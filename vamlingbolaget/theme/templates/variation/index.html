@@ -11,7 +11,7 @@
 
             <a href="/products/{{product.pk}}/#{{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}">
                 {% with product.image_set.all|first as image %}
-                        <div class="force_image"> <img src="../../..{% version image.image 'large' %}" class="lazy image-fluid" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
+                        <div class="force_image"> <img src="../../..{% version image.image 'large' %}" class="lazy img-fluid" alt="Vamlingbolaget {{ product.article.name }}"  /></div>
                         <div class='image_description'>
                             <p class="text-muted mb-0 s-80">{{ product.article.name }}</p>
                             {%if product.article.discount%}
