@@ -787,7 +787,7 @@ def fulldetail_b(request, pk):
         color_pattern_str = str(full_var.variation.color.order)+"f_"+str(full_var.variation.pattern.order)+"m"
         full_var.cp = color_pattern_str
         num = int(full_var.pk)
-        link = "/products/fullvariation/"+ str(num) + "/#" + str(full_var.variation) + " " + str(full_var)
+        link = "/products/fulldetail/"+ str(num) + "/#" + str(full_var.variation) + " " + str(full_var)
         full_var.link = link
         filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order) 
         file = "/media/variations/"+ filename +"_1.jpg"  
