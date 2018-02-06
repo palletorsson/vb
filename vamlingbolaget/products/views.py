@@ -849,7 +849,7 @@ def fulldetail_b(request, pk):
 
 def fulldetail_v(request, pk):
     try:
-        variation = Variation.objects.get(pk=pk)
+        product = Variation.objects.get(pk=pk)
 
         if (product.article.quality.order == 13):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
@@ -872,7 +872,7 @@ def fulldetail_v(request, pk):
     size_list = [] 
 
     return render_to_response('variation/detail_v.html',
-                   {'product': variation, 
+                   {'product': product, 
                    'sizes': sizes, 
                    'colorsandpattern': colorsandpattern
 
