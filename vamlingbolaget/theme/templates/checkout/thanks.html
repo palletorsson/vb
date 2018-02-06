@@ -21,15 +21,16 @@
 {% block stretchpage %}
     {% if order != 1 %}
 
-    <div class="col-md-8 offset-md-3">
+    <div class="col-md-8 offset-md-2">
             <div class="card">
-                <div class="card-header">
-                    {% trans "Tack för din Beställning " %} 
+                <div class="card-header text-center">
+                   <div class="btn btn-success btn-sm "> {% trans "Tack för din Beställning " %} </div>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{% trans "En bekräftelse på din beställing har skickats till" %} : {{order.email}}</h5>
                     <p class="card-text"> <pre>{{order.message}}</pre></p>
-                    <p class="card-text">    <pre></pre></p>
+                    <p class="card-text"><hr/></p>
+                    z
                     <a href="/products/"> {% trans "Utforska utbudet!" %}  </a>
                     
                 </div>
