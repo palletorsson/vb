@@ -30,11 +30,12 @@
                     <h5 class="card-title">{% trans "En bekräftelse på din beställing har skickats till" %} : {{order.email}}</h5>
                     <p class="card-text"> <pre>{{order.message}}</pre></p>
                     <p class="card-text">    <pre></pre></p>
-                    <a href="/products/" class="btn btn-success"> {% trans "Utforska utbudet!" %}  </a>
-                    <a href="#" class="btn btn-primary">Order Nr. <span class="hidden" id="order_num">{{order.order_number}}</span>  </a>
+                    <a href="/products/"> {% trans "Utforska utbudet!" %}  </a>
+                    
                 </div>
                 <div class="card-footer text-muted">
                     {% trans "Vi hör av oss om vi har några frågor" %}. 
+                    Order Nr. <span class="hidden" id="order_num">{{order.order_number}}</span>
                 </div>
             </div>
         </div>
@@ -113,9 +114,8 @@ $.ajaxSetup({
 </script>
     {% endif %}
 
-        <div> <a href="/products/">{% trans "Utforska utbudet!" %}</a>
-        </div>
-		- {{ message }}
+       
+		
         {% if cancel %}
             {% trans "Gå till" %} <a href="/checkout/" id="token">  {% trans "Beställningen" %} </a>
             <br /><img src="/media/uploads/mah-jongbilder/manchesterjacka_medium.jpg" />
