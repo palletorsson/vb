@@ -128,15 +128,15 @@
             Language
           </button>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-             <a class="dropdown-item" href="#"> <span class="change_lang" id="sv">Svenska</span></a>
-            <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="#"> <span class="change_lang" id="en">English</span>
-            <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="#"> <span class="change_lang" id="de">Deutsch</span>
-            <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="#"> <span class="change_lang" id="fi">Suomalainen</span>  </a>
-            <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="#"> <span class="change_lang" id="da">Dansk</span>  </a>
+             <a class="dropdown-item pb-3 change_lang"  id="sv">Svenska</a>
+            
+             <a class="dropdown-item pb-3 change_lang" id="en">English</a>
+       
+             <a class="dropdown-item pb-3 change_lang" id="de">Deutsch </a>
+       
+             <a class="dropdown-item pb-3 change_lang" id="fi">Suomalainen </a>
+         
+             <a class="dropdown-item pb-3 change_lang" id="da">Dansk </a>
            </div>
            <form action="/i18n/setlang/" method="post" id="lang" >
              {% csrf_token %}
