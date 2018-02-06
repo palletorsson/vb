@@ -46,7 +46,7 @@ def checkout(request, test=''):
         test_ip = request.META['REMOTE_ADDR']
         if (test_ip == '213.89.28.254'): 
             print test_ip 
-            template_url = 'checkout/checkout.html'
+            template_url = 'checkout/checkout_b.html'
     except: 
         pass 
 
