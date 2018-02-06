@@ -85,7 +85,7 @@ def cutondemandApi(request, category):
 
             variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('article__type')
     
-    articles = Article.objects.filter(Q(category__slug='barn') | Q(category__slug='accessoarer') |  Q(category__slug='piece-goods'), active=True).order_by('type')
+    articles = Article.objects.filter(quality__slug ='silkestrika', active=True).order_by('type')
             
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     active_sizes = SIZES
@@ -97,19 +97,20 @@ def cutondemandApi(request, category):
 
     allpossiblities["articles"] = []   
     for chil in articles:
-        allpossiblities["articles"].append({
-            "article": chil.name,
-            "sku": chil.sku_number,
-            "price": chil.price,
-            "id": chil.id,
-            "pk": chil.pk,
-            "img": chil.file.name,
-            "type": chil.type.name, 
-            "category":chil.category.name, 
-            "description": chil.description,
-            "quality": chil.quality.name,
-            "cod_cost": chil.ondemand_cost       
-    }) 
+        if (chil.sku_number != '9805'):
+            allpossiblities["articles"].append({
+                "article": chil.name,
+                "sku": chil.sku_number,
+                "price": chil.price,
+                "id": chil.id,
+                "pk": chil.pk,
+                "img": chil.file.name,
+                "type": chil.type.name, 
+                "category":chil.category.name, 
+                "description": chil.description,
+                "quality": chil.quality.name,
+                "cod_cost": chil.ondemand_cost       
+            }) 
    
     try:
         sellart = FullVariation.objects.get(pk=1994)
