@@ -448,7 +448,7 @@ def by_type(request, key):
         template = 'variation/fullindex_b.html'
     else: 
         products = Variation.objects.filter(article__category__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
-        template = 'variation/fullindex_b.html'
+        template = 'variation/index.html'
 
     
     qualities = Quality.objects.filter(active=True)
