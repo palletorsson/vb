@@ -20,18 +20,21 @@
 
 {% block stretchpage %}
     {% if order != 1 %}
-        <div class="col-md-8 offset-md-3">
-        <pre>{% trans "En bekräftelse på din beställing har skickats till" %} : {{order.email}} </pre>
+    <div class="card text-center">
+        <div class="card-header">
+            <{% trans "Tack för din Beställning " %} 
         </div>
-        <div class="col-md-8 offset-md-3">
-        <pre>{{order.message}}</pre>
+        <div class="card-body">
+            <h5 class="card-title">{% trans "En bekräftelse på din beställing har skickats till" %} : {{order.email}}</h5>
+            <p class="card-text"> <pre>{{order.message}}</pre></p>
+            <p class="card-text">    <pre></pre></p>
+            <a href="/products/" class="btn btn-success"> {% trans "Utforska utbudet!" %}  </a>
         </div>
-        <div class="col-md-8 offset-md-3">
-        <pre>{% trans "Vi hör av oss om vi har några frågor" %}. </pre>
+        <div class="card-footer text-muted">
+            {% trans "Vi hör av oss om vi har några frågor" %}. 
         </div>
-        <div class="col-md-8 offset-md-3">
-        Order Nr. <span class="hidden" id="order_num">{{order.order_number}}</span>  
-        </div>
+    </div>
+     
 
 
 <script> $( document ).ready(function() {
@@ -106,7 +109,7 @@ $.ajaxSetup({
 </script>
     {% endif %}
 
-        <div> <a href="/products/">{% trans "Utforska utbudet!" %}</a>
+        <div> 
         </div>
 		- {{ message }}
         {% if cancel %}
