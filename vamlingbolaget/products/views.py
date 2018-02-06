@@ -85,7 +85,7 @@ def cutondemandApi(request, category):
 
             variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('article__type')
     
-    articles = Article.objects.filter(Q(category__slug='barn') | Q(category__slug='accessoarer') |  Q(category__slug='piece-goods'), order__lte=100, active=True).order_by('type')
+    articles = Article.objects.filter(Q(category__slug='barn') | Q(category__slug='accessoarer') |  Q(category__slug='piece-goods'), active=True).order_by('type')
             
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     active_sizes = SIZES
