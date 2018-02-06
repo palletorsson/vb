@@ -130,7 +130,7 @@ def cutondemandApi(request, category):
     except:
         print "no such art"
 
-    if (category == 'pc'): 
+    if (category == 'all'): 
         allpossiblities["products"] = []
         for prod in products: 
           allpossiblities["products"].append({
