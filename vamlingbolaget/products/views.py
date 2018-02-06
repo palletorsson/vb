@@ -54,7 +54,10 @@ def cutondemandApiSingle(request, sku_number):
         if (art.quality.order == 13):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
-            sizes = Size.objects.filter(quality=product.article.quality).order_by('-pk')
+            sizes = Size.objects.filter(quality=art.quality).order_by('-pk')
+
+        print sizes
+        print art.quality.order
 
         allpossiblities["sizes"] = sizes 
 
