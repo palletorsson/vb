@@ -633,8 +633,9 @@ $('.overlay').each(function(){
 var path = location.pathname
 var pathid = location.pathname.substr(location.pathname.lastIndexOf('/') + 1)
 console.log("thepath", path, pathid)
-var links = $('a[href="'+window.location.pathname+'"]')
-links.addClass('uppercase');
+var link = $('a[href="'+window.location.pathname+'"]')
+console.log("link", link)
+link.addClass('active');
 var pathlink = $('.'+pathid); 
 pathlink.addClass('uppercase');
 
