@@ -631,8 +631,11 @@ $('.overlay').each(function(){
 
 
 var path = location.pathname
+var pathid = this.href.substr(location.pathname.lastIndexOf('/') + 1)
 links = $('a[href="'+window.location.pathname+'"]')
 links.addClass('active');
+pathlink= $('.'+pathid); 
+pathlink.addClass('active');
 console.log("thepath", path); 
 
 $('body input[type=text]').addClass('form-control');
