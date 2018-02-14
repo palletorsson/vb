@@ -632,12 +632,12 @@ $('.overlay').each(function(){
 
 var path = location.pathname
 var pathid = location.pathname.substr(location.pathname.lastIndexOf('/') + 1)
-console.log(path, pathid)
+
 links = $('a[href="'+window.location.pathname+'"]')
-links.addClass('active');
+links.addClass('uppercase');
 pathlink= $('.'+pathid); 
-pathlink.addClass('active');
-console.log("thepath", path); 
+pathlink.addClass('uppercase');
+console.log("thepath", path, pathid)
 
 $('body input[type=text]').addClass('form-control');
 
