@@ -2,6 +2,7 @@ from django import template
 from django.templatetags.static import register
 from cart.models import Cart
 from cart.views import _cart_id, totalsum
+from django.utils import translation
 
 register = template.Library()
 
@@ -18,8 +19,9 @@ def cart_total(context):
     returntotal = totalsum(cartitems, bargains, request, voucher, rea)
     total = returntotal['totalprice']
     numbers = returntotal['totalitems']
+    lang = translation.get_language()
     if numbers > 0: 
         has_items = True
-    return { 'total': total, 'numbers': numbers, 'has_items': has_items }
+    return { 'total': total, 'numbers': numbers, 'has_items': has_items, 'lang': lang }
 
 register.inclusion_tag('cart/cart_template.html', takes_context = True)(cart_total)
