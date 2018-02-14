@@ -631,12 +631,9 @@ $('.overlay').each(function(){
 
 
 var path = location.pathname
-console.log("thepath", path)
 var link = $('a[href="'+window.location.pathname+'"]')
-console.log("link", link)
-link.addClass('active');
-var pathlink = $('.'+pathid); 
-pathlink.addClass('uppercase');
+link.addClass('border-bottom');
+
 
 
 $('body input[type=text]').addClass('form-control');
