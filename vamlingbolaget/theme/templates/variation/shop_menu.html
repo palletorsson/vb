@@ -1,7 +1,7 @@
 {% load i18n %}
 <div class="row firstrow">
       <!-- sidebar -->
-      <nav class="col-md-2 d-none d-md-block sidebar">
+      <nav class="col-md-2 d-none d-md-block sidebar shopmenu">
         <div class="pt-2">
             <ul class="nav flex-column linksactive mb-2">
                 <li class="nav-item">
@@ -10,13 +10,13 @@
             </ul>       
           <ul class="nav flex-column linksactive mb-2">
             <li class="nav-item mt-0">
-                <a class="nav-link vb_link l-s-1" href="/products/full/" id={{ categories.0.name }} >  <!-- kvinna -->  <span class="text-uppercase"> {{ categories.0.name }} </span></a>
+                <a class="nav-link vb_link l-s-1 text-uppercase" href="/products/full/" id={{ categories.0.name }} >  <!-- kvinna --> {{ categories.0.name }} </a>
             </li>
             <li class="nav-item mt-0">
-                <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/cat/{{ types.0.slug }}/" id={{ types.0.slug }}>  <span class="text-uppercase"> {{ types.0.name }} </span></a>
+                <a class="nav-link vb_link l-s-1 ml-1 mt-0 text-uppercase" href="/products/cat/{{ types.0.slug }}/" id={{ types.0.slug }}>   {{ types.0.name }} </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/cat/{{ types.1.slug }}/" id={{ types.1.slug }}>   <span class="text-uppercase"> {{ types.1.name }} </span></a>
+                <a class="nav-link vb_link l-s-1 ml-1 mt-0 text-uppercase" href="/products/cat/{{ types.1.slug }}/" id={{ types.1.slug }}>   {{ types.1.name }} </a>
             </li>
             <li class="nav-item">
                     <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/ct/kvinna/{{ types.2.slug }}/" id={{ types.2.slug }}>   <span class="text-uppercase"> {{ types.2.name }} </span></a>
@@ -24,7 +24,7 @@
            
             
             <li class="nav-item">
-                <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/cat/{{ types.3.slug }}/" id={{ types.3.slug }}>   <span class="text-uppercase"> {{ types.3.name }} </span></a>
+                <a class="nav-link vb_link l-s-1 ml-1 mt-0 text-uppercase" href="/products/cat/{{ types.3.slug }}/" id={{ types.3.slug }}>   <span class="text-uppercase"> {{ types.3.name }} </span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link vb_link l-s-1 ml-1 mt-0" href="/products/qt/kvinna/{{ qualities.8.slug }}/">   <span class="text-uppercase"> {{ qualities.8.name }} </span></a>
