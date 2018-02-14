@@ -632,6 +632,7 @@ $('.overlay').each(function(){
 
 var path = location.pathname
 var pathid = this.href.substr(location.pathname.lastIndexOf('/') + 1)
+console.log(path, pathid)
 links = $('a[href="'+window.location.pathname+'"]')
 links.addClass('active');
 pathlink= $('.'+pathid); 
