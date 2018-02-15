@@ -636,6 +636,8 @@ link.addClass('active-link');
 
 $('body input[type=text]').addClass('form-control');
 
+var text_size = $("#source_size").text(); 
+$("#target_size").text(text_size); 
 
 var set_first_page = function(){
      var wheight = $(window).height(),
