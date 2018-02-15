@@ -30,7 +30,7 @@
                 <input type="hidden" id="color" name="color" value="{{ product.variation.color.order }}" >
                 <input type="hidden" id="full_var" name="full_var" value="1" >
                 <div class="media">
-                    <div class="media-body pb-3 mb-0 border-bottom border-gray">
+                    <div class="media-body pb-3 mb-0 border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
                             <div class="vb_important_text s-80" id="articlename">{{ product.variation.article.name }}
                             </div>
@@ -46,7 +46,7 @@
                 </div>
                 {%if product.variation.article.discount %}
                 <div class="media">
-                    <div class="media-body pb-3 mb-0 border-bottom border-gray">
+                    <div class="media-body pb-3 mb-0 border-gray">
                         <div class="d-flex justify-content-between  w-100">          
                             <div class="s-80 mr-2"> 
                                  
@@ -60,7 +60,19 @@
                 
                 {%endif%} 
                 <div class="media text-muted pt-3 ">
-                    <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
+                    <div class="media-body pb-3 mb-0 small lh-125 border-gray">
+                        <div class="d-flex align-items-center w-100">
+                            <div class="text-gray-dark">{% trans "Färger och Mönster" %}:  {{ product.variation.color }}  {{ product.variation.pattern }} </div>            
+                            <input type="hidden" id="size" name="size" value="3840" >
+                            <input type="hidden" id="quantity" name="quantity" value="1" >		
+                            <input type="hidden" id="pc_sellection" name="pc_sellection" value="common" >
+                            <input type="hidden" id="add_or_edit" name="full" value="full" > 
+                            <span class="invisible" id="sku_number">{{ product.variation.article.sku_number }}</span> 
+                        </div>
+                    </div>
+                </div>
+                <div class="media text-muted pt-3 ">
+                    <div class="media-body pb-3 mb-0 small lh-125 border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
                             <div>
                                 <ul class="pagination rounded-0">
@@ -121,20 +133,22 @@
                     </div>
                 </div>
             </div>           
+           
+           
             <div class="media text-muted pt-3 ">
-                <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
+                <div class="media-body pb-3 mb-0 small lh-125 border-gray">
                     <div class="d-flex align-items-center w-100">
-                        <div class="text-gray-dark">{% trans "Färger och Mönster" %}:  {{ product.variation.color }}  {{ product.variation.pattern }} </div>            
-                        <input type="hidden" id="size" name="size" value="3840" >
-                        <input type="hidden" id="quantity" name="quantity" value="1" >		
-                        <input type="hidden" id="pc_sellection" name="pc_sellection" value="common" >
-                        <input type="hidden" id="add_or_edit" name="full" value="full" > 
-                        <span class="invisible" id="sku_number">{{ product.variation.article.sku_number }}</span> 
+                            {{ product.variation.article.description }}
+                    </div>
+                    </br>
+                    <div>  
+                        <span class="quality" id="{{ product.article.quality }}">{{ product.variation.article.quality }}</span> : 
+                        <span> {{ product.variation.article.quality.description }} </span> 		
                     </div>
                 </div>
             </div>
             <div class="media text-muted pt-3 ">
-                <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
+                <div class="media-body pb-3 mb-0  small lh-125 border-gray">
                     <div class="d-flex justify-content-between align-items-center w-100">
                         <div>
                             <span id="addtocart">
@@ -146,18 +160,6 @@
                                 <div> {% trans "Leverans" %}:  {% trans "En till tre veckor" %} </div>
                             </span>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="media text-muted pt-3 ">
-                <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
-                    <div class="d-flex align-items-center w-100">
-                            {{ product.variation.article.description }}
-                    </div>
-                    </br>
-                    <div>  
-                        <span class="quality" id="{{ product.article.quality }}">{{ product.variation.article.quality }}</span> : 
-                        <span> {{ product.variation.article.quality.description }} </span> 		
                     </div>
                 </div>
             </div>
