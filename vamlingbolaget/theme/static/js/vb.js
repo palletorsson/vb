@@ -636,8 +636,13 @@ link.addClass('active-link');
 
 $('body input[type=text]').addClass('form-control');
 
-var text_size = $("#source_size").text(); 
-$("#target_size").text(text_size); 
+
+if (window.location.pathname == "/products/cut/") {
+    var text_size = $("#source_size").text(); 
+    $("#target_size").text(text_size); 
+    var sq = $("#source_squality").text()    
+    $("#target_squality").text(sq); 
+}
 
 var set_first_page = function(){
      var wheight = $(window).height(),
