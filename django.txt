@@ -1,0 +1,485 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-14 11:15+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+
+#: lib/python2.7/site-packages/zinnia/xmlrpc/pingback.py:97
+#, fuzzy
+msgid "No title"
+msgstr "No titel"
+
+#: vb/vamlingbolaget/checkout/models.py:13
+msgid "Namn"
+msgstr "Name"
+
+#: vb/vamlingbolaget/checkout/models.py:14
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:107
+msgid "Efternamn"
+msgstr "First name"
+
+#: vb/vamlingbolaget/checkout/models.py:16
+
+msgid "Telefonnummer"
+msgstr "Item number"
+
+#: vb/vamlingbolaget/checkout/models.py:17
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:115
+msgid "Gatuadress"
+msgstr "Street"
+
+#: vb/vamlingbolaget/checkout/models.py:18
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:123
+msgid "Postort"
+msgstr "City"
+
+#: vb/vamlingbolaget/checkout/models.py:19
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:131
+msgid "Postnummer"
+msgstr "Item number"
+
+#: vb/vamlingbolaget/checkout/models.py:20
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:141
+msgid "Land"
+msgstr "Country"
+
+#: vb/vamlingbolaget/checkout/models.py:21
+msgid "Meddelande"
+msgstr "Message"
+
+#: vb/vamlingbolaget/checkout/models.py:22
+msgid "Ip"
+msgstr "Ip"
+
+#: vb/vamlingbolaget/checkout/models.py:27
+msgid "Session key"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/about_base.html:5
+msgid "Vamlingbolaget"
+msgstr "Vamlingbolaget"
+
+#: vb/vamlingbolaget/theme/templates/about_base.html:7
+#: vb/vamlingbolaget/theme/templates/base.html:205
+#: vb/vamlingbolaget/theme/templates/base.html:257
+msgid "Om oss"
+msgstr "About"
+
+#: vb/vamlingbolaget/theme/templates/about_base.html:10
+msgid "Kontakt"
+msgstr "Contact"
+
+#: vb/vamlingbolaget/theme/templates/about_base.html:13
+msgid "Vår värdegrund"
+msgstr "Our values"
+
+#: vb/vamlingbolaget/theme/templates/about_base.html:16
+msgid "Så beställer du"
+msgstr "How to order"
+
+#: vb/vamlingbolaget/theme/templates/about_base.html:21
+msgid "Mah-jong"
+msgstr "Mah-jong"
+
+#: vb/vamlingbolaget/theme/templates/about_base.html:23
+msgid "Om Mah-jong"
+msgstr "About Mah-jong"
+
+#: vb/vamlingbolaget/theme/templates/about_base.html:25
+msgid "Stickeri"
+msgstr "Stickeri"
+
+#: vb/vamlingbolaget/theme/templates/about_base.html:27
+msgid "Om Stickeri"
+msgstr "About Stickeri"
+
+#: vb/vamlingbolaget/theme/templates/base.html:185
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:4
+msgid "Din shoppinglåda"
+msgstr "Your shopping cart"
+
+msgid "Shoppinglåda"
+msgstr "Shopping cart"
+
+msgid "Välj färg / mönster"
+msgstr "Choose color / pattern"
+
+
+msgid "Lägg till i Shoppinglåda"
+msgstr "Add to shopping cart"
+
+ 
+
+#: vb/vamlingbolaget/theme/templates/base.html:196
+#: vb/vamlingbolaget/theme/templates/variation/combos.html:5
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:6
+#: vb/vamlingbolaget/theme/templates/variation/index.html:6
+msgid "Kollektion"
+msgstr "Collection"
+
+#: vb/vamlingbolaget/theme/templates/base.html:199
+msgid "Butiker"
+msgstr "Shop"
+
+#: vb/vamlingbolaget/theme/templates/base.html:202
+#: vb/vamlingbolaget/theme/templates/base.html:273
+#: vb/vamlingbolaget/theme/templates/variation/first_page.html:5
+msgid "Nyheter"
+msgstr "News"
+
+#: vb/vamlingbolaget/theme/templates/base.html:208
+#: vb/vamlingbolaget/theme/templates/gallery/gallery.html:8
+msgid "Gallerier"
+msgstr "Galleries"
+
+#: vb/vamlingbolaget/theme/templates/base.html:211
+msgid "Beställ"
+msgstr "Order"
+
+#: vb/vamlingbolaget/theme/templates/base.html:211
+msgid "Bildgallerier"
+msgstr "Images galleries"
+
+#: vb/vamlingbolaget/theme/templates/base.html:211
+msgid "Nyhetsbrev"
+msgstr "NewsLetter"
+
+
+#: vb/vamlingbolaget/theme/templates/base.html:253
+msgid "Öppettider:"
+msgstr "Opening hours"
+
+#: vb/vamlingbolaget/theme/templates/base.html:254
+msgid "juni"
+msgstr "June"
+
+#: vb/vamlingbolaget/theme/templates/base.html:254
+msgid "augusti"
+msgstr "August"
+
+#: vb/vamlingbolaget/theme/templates/base.html:255
+#: vb/vamlingbolaget/theme/templates/base.html:268
+msgid "Vardagar"
+msgstr "Weekdays"
+
+#: vb/vamlingbolaget/theme/templates/base.html:256
+#: vb/vamlingbolaget/theme/templates/base.html:269
+msgid "Lördagar"
+msgstr "Saturdays"
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "Öppettider"
+msgstr "Opening hours"
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "Summa"
+msgstr "Sum"
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "Plagg"
+msgstr "Art."
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "Tillagt"
+msgstr "Added"
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "i"
+msgstr "in"
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "Det finns"
+msgstr "Now you have"
+
+#: vb/vamlingbolaget/theme/templates/base.html:267
+msgid "av denna artikel"
+msgstr "of this article"
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:5
+msgid "Kategorier"
+msgstr "Categories"
+
+#: other
+msgid "Vår senaste kollektion"
+msgstr "Our last collection"
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:12
+
+msgid "Kvaliter"
+msgstr "Quality"
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:19
+msgid "Överskikt"
+msgstr "Overview"
+
+#: vb/vamlingbolaget/theme/templates/collection_base.html:21
+#: vb/vamlingbolaget/theme/templates/variation/combos.html:5
+msgid "Färger och Mönster"
+msgstr "Colors and Patterns"
+
+#: vb/vamlingbolaget/theme/templates/variation/combos.html:5
+msgid "lilla kissen"
+msgstr "litle cat"
+
+
+#: vb/vamlingbolaget/theme/templates/blog/index.html:5
+msgid "Nyheter och Blog"
+msgstr "News"
+
+#: vb/vamlingbolaget/theme/templates/blog/index.html:20
+msgid "läs hela artikeln"
+msgstr "Read the full story"
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:6
+
+msgid "Du ändrar nu din beställning av"
+msgstr "You are editing your order of"
+
+msgid "Du ändrar nu din beställning"
+msgstr "You are editing your order"
+
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:18
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:25
+msgid "Artikelnummer"
+msgstr "Item number"
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:20
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:29
+msgid "Kvalitet"
+msgstr "Quality"
+
+
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:29
+msgid "Vill du ta bort denna post?"
+msgstr "Do you want to remove this post?"
+
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:24
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:34
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:25
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:104
+#: vb/vamlingbolaget/theme/templates/variation/index.html:19
+msgid "Pris"
+msgstr "Price"
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:41
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:25
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:19
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:60
+msgid "Färg"
+msgstr "Color"
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:52
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:28
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:22
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:71
+msgid "Mönster"
+msgstr "Pattern"
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:63
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:31
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:78
+msgid "Storlek"
+msgstr "Size"
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:68
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:69
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:70
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:71
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:13
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:13
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:82
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:83
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:84
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:85
+msgid "Antal"
+msgstr "Count"
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:85
+msgid "Avbryt"
+msgstr "Cancel"
+
+#: vb/vamlingbolaget/theme/templates/cart/detail.html:86
+msgid "Uppdatera"
+msgstr "Update"
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:16
+msgid "Ta bort"
+msgstr "Remove"
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:19
+msgid "Ändra"
+msgstr "Change"
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:22
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:16
+msgid "Artikel"
+msgstr "Article"
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:87
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:63
+msgid "Leverans"
+msgstr "Delivery"
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:95
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:71
+msgid "Totalpris"
+msgstr "Total Price"
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:106
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:80
+msgid "Det ligger inget i din shoppinglåda än"
+msgstr "There is nothing in your shopping cart"
+
+#: vb/vamlingbolaget/theme/templates/cart/show_cart.html:106
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:80
+
+msgid "Börja utforska utbudet"
+msgstr "Continue to explore!"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:4
+#: vb/vamlingbolaget/theme/templates/checkout/summery.html:4
+
+msgid "Din Beställning"
+msgstr "You order"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:90
+msgid "Adressuppgifter"
+msgstr "Addresses"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:93
+msgid "Kontaktuppgifter"
+msgstr "Contact Information"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:99
+msgid "Förnamn"
+msgstr "First name"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:147
+msgid "Din adress"
+msgstr "Your adress"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg"
+msgstr ""
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Betalningsvillkor"
+msgstr "Payment terms"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Se våra betalvillkor här"
+msgstr "Payment terms"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Om vi har tyget i lager levererar vi inom tre veckor"
+msgstr "If we have the fabric in stock, we deliver within three weeks"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:148
+msgid "Du har öppet köp i en vecka och kan returnera plagget oanvänt inom en vecka från det att du hämtat ut det på posten"
+msgstr "For more information click payment term link:"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:149
+msgid "Du betalar mot postförskatt"
+msgstr "The order is payed on delivery"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:165
+msgid "Telefon eller mobiltelefon"
+msgstr "Phone"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:173
+msgid "Meddelande till beställning"
+msgstr "Notice to order"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:190
+msgid "Beställningen skicka mot Postförskott"
+msgstr "The order is payed on delivery"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
+msgid "Skicka Din Beställning"
+msgstr "Send Your Order"
+
+#: vb/vamlingbolaget/theme/templates/checkout/checkout.html:193
+msgid "När du beställer via postorder tillkommer porto plus postförskottsavgift"
+msgstr "Send Your Order"
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:11
+
+msgid "Ordernummer"
+msgstr "Item number"
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:12
+msgid "En bekräftelse på din beställing har skickats till"
+msgstr "A confirmation of your order have been sent to"
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:14
+msgid "Vi hör av oss om vi har några frågor"
+msgstr "We will contact you if we have questions"
+
+#: vb/vamlingbolaget/theme/templates/checkout/thanks.html:16
+msgid "Fortsätt att utforska utbudet!"
+msgstr "Continue to explore!"
+
+#: vb/vamlingbolaget/theme/templates/frontpage/first_page.html:7
+msgid "Välkommen Vamlingbolaget"
+msgstr "Welcome to Vamlingbolaget"
+
+#: vb/vamlingbolaget/theme/templates/gallery/gallery.html:10
+#: vb/vamlingbolaget/theme/templates/variation/gallery.html:10
+
+msgid "Alla gallerier"
+msgstr "All galleries"
+
+#: vb/vamlingbolaget/theme/templates/variation/detail.html:111
+msgid "Lägg till i Köplista"
+msgstr "Add to shopping list"
+
+#: vb/vamlingbolaget/theme/templates/variation/first_page.html:18
+msgid "Välkommen"
+msgstr "Welcome"
+
+#: vb/vamlingbolaget/theme/templates/variation/gallery.html:21
+
+msgid "Featured galleries"
+msgstr "Featured galleries"
+
+#: vb/vamlingbolaget/theme/templates/variation/gallery.html:35
+msgid "Arkiv"
+msgstr "Archive"
+
+#~ msgid "Plagget går att få i alla"
+#~ msgstr "The products is available in all"
+
+#~ msgid "mönster och färger"
+#~ msgstr "colors and patterns"
+
+#~ msgid "publish"
+#~ msgstr "publisera"
+
+#~ msgid "created"
+#~ msgstr "skapad"
+
+#~ msgid "modified"
+#~ msgstr "modifierad"
+
+#~ msgid "posts"
+#~ msgstr "poster"
+
+#~ msgid "hello"
+#~ msgstr "hej"

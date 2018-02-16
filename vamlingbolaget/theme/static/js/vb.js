@@ -650,14 +650,25 @@ if (window.location.pathname == "/products/cut/") {
     $("#target_thist").text(text_thist);
     var text_fabric = $("#source_fabric").text();
     $("#target_fabric").text(text_fabric);
+    
+    var text_choosemodel = $("#ssource_choosemodel").text();
+    $("#target_choosemodel").text(text_choosemodel);
+    var text_choosefabric = $("#source_choosefabric").text();
+    $("#target_choosefabric").text(text_choosefabric);
+    var text_choosesize = $("#source_choosesize").text();
+    $("#target_choosesize").text(text_choosesize);
+
     var text_art = $("#source_art").text();
     $("#target_art").text(text_art);
-    var text_model = $("#source_model").text();
+
+    var text_choosen = $("#source_choosen").text();
     $("#target_choosen").text(text_choosen);
+
     var text_sum = $("#source_sum").text();
     $("#target_sum").text(text_sum);
+
     var text_makechoose = $("#source_makechoose").text();
-    $("#target_fmakechoose").text(text_makechoose);
+    $("#target_makechoose").text(text_makechoose);
 }
 
 var set_first_page = function(){
