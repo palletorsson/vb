@@ -651,7 +651,7 @@ if (window.location.pathname == "/products/cut/") {
     var text_fabric = $("#source_fabric").text();
     $("#target_fabric").text(text_fabric);
     
-    var text_choosemodel = $("#ssource_choosemodel").text();
+    var text_choosemodel = $("#source_choosemodel").text();
     $("#target_choosemodel").text(text_choosemodel);
     var text_choosefabric = $("#source_choosefabric").text();
     $("#target_choosefabric").text(text_choosefabric);
