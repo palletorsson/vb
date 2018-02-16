@@ -669,6 +669,9 @@ if (window.location.pathname == "/products/cut/") {
 
     var text_makechoose = $("#source_makechoose").text();
     $("#target_makechoose").text(text_makechoose);
+
+    var text_add = $("#source_add").text();
+    $("#target_add").text(text_add);
 }
 
 var set_first_page = function(){
