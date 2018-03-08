@@ -18,10 +18,10 @@
        
         {% if feature.mediatype == 'F' %}
          <!-- full size img 'Fullpost'-->
-        <div class="row">
+        <div class="row pb-3">
             <div class="col-12 p-0">
                 <a href="{{ feature.link_to }}">
-                
+                    <div class="downscroll"> scroll down </div>
                     <img src="{% version feature.feature_image 'large' %}" width="100%"/>
                 </a>	
             </div>
@@ -51,7 +51,7 @@
                 
                     <span> {{ feature.heading }} </span>
                     <span class="muted"> {{ feature.heading_extra}}  </span>
-                    <div class="downscroll"> scroll down </div>
+                   
                     <a href="{{ feature.link_to }}">  
                         <img src="{% version feature.feature_image 'large' %}"  class="img-fluid"  data-src="holder.js/500x500/auto" alt="{{ feature.heading }}"> 
                     </a>
