@@ -637,6 +637,7 @@ link.addClass('active-link');
 $('body input[type=text]').addClass('form-control');
 
 window.onscroll = function (e) {  
+  
     console.log("hide scroll"); 
     $('.scrolldown').hide();
 }
