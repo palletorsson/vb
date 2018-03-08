@@ -637,8 +637,8 @@ link.addClass('active-link');
 $('body input[type=text]').addClass('form-control');
 
 $(window).scroll(function (event) {
-    var scroll = $('.scrolldown').hide();
-    // Do something
+    console.log("hide scroll"); 
+    $('.scrolldown').hide();
 });
 
 if (window.location.pathname == "/products/cut/") {
