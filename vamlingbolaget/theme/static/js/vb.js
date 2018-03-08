@@ -636,6 +636,10 @@ link.addClass('active-link');
 
 $('body input[type=text]').addClass('form-control');
 
+$(window).scroll(function (event) {
+    var scroll = $('.scrolldown').hide();
+    // Do something
+});
 
 if (window.location.pathname == "/products/cut/") {
     var text_size = $("#source_size").text(); 
