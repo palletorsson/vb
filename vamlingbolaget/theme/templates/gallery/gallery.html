@@ -26,16 +26,15 @@
             {%endfor%}
 
         {%else%}
-        <div class="col-md-5 mb-5">
+        <div class="d-flex justify-content-between">
                 <a href="{% version gallery.feature_image 'large' %}" title="{{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
                     <img src="{% version gallery.feature_image 'medium' %}" class="img-thumbnail img-100p" />
                 </a>
                 {%for image in images%}
-                <div class="col-md-5 mb-5">
+                
                     <a href="{% version image.image 'large' %}" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
                         <img src="{% version image.image 'medium' %}" class="img-thumbnail img-100p" />
                     </a>       
-                </div> 
                 {%endfor%}
            </div>    
         {%endif%}
