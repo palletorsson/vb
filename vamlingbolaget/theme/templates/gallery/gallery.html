@@ -26,7 +26,7 @@
             {%endfor%}
 
         {%else%}
-        <div class="d-flex justify-content-between">
+        <div class="card-columns">
                 <a href="{% version gallery.feature_image 'large' %}" title="{{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
                     <img src="{% version gallery.feature_image 'medium' %}" class="img-thumbnail img-100p" />
                 </a>
