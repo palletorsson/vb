@@ -41,7 +41,16 @@
                         <img src="{% version image.image 'medium' %}" class="img-thumbnail img-100p" />
                     </a>       
                 {%endfor%}
-           </div>    
+           </div>  
+           {%for image in images%}
+           <div class="modal fade" id="#Modal{{image.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                            <img src="{% version image.image 'medium' %}"/>
+                    </div>  
+                </div>    
+            </div>       
+       {%endfor%}  
         {%endif%}
 
         
