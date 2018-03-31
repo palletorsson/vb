@@ -15,7 +15,7 @@
                 {%for gallery in galleries%}
                     {% if gallery.status = status %}
                     <a class="gallery_img_title" href="/gallery/{{gallery.pk}}" >
-                    <div class="card mb-3">
+                    <div class="card mb-2 border-light">
 
                         <img src="{% version gallery.feature_image 'medium' %}" class="img-thumbnail card-img-top" title="Fotograf: {{feature_image.photographer.name}}"/>
                    
