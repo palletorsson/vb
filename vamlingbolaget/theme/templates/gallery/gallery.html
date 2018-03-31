@@ -4,6 +4,8 @@
 {%block title%}
 <title>Vamlingbolaget |  {%trans "Gallerier" %} </title>
 <meta name="description" content={%trans "Gallerier Vamlingbolaget, Mah-jong"%} />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
 {%endblock%}
 {% version model.field_name version_prefix %}
 
@@ -45,7 +47,8 @@
         {%endif%}
     </div> <!-- end of row -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
+    
+
 <script>
 
 $(document).on('click', '[data-toggle="lightbox"]', function(event) {
