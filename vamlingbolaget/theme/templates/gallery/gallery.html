@@ -37,7 +37,7 @@
                 </a>
                 {%for image in images%}
                 
-                    <a href="{% version image.image 'large' %}"  class="lightbox" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} ">
+                    <a href="{% version image.image 'large' %}" data-toggle="modal" data-target="#Modal{{image.pk}}"  class="lightbox" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} ">
                         <img src="{% version image.image 'medium' %}" class="img-thumbnail img-100p" />
                     </a>       
                 {%endfor%}
@@ -50,7 +50,7 @@
     <script>
   $(document).on('click', '[data-toggle="modal"]', function(event) {
     event.preventDefault();
-    $(this).ekkoLightbox();
+  
 });
     </script>
 {% endblock %}
