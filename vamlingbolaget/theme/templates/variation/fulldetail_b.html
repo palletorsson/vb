@@ -15,11 +15,11 @@
                 {% endwith %}
                 {%if product.variation.article.quality.order > 15 %}
                 {%else%}
-                      <div class="text-center hidden-xs justify-content-between">
+                      <div class="hidden-xs d-flex justify-content-between">
                     {% for image in images %}
-                        <span class="image_button">
-                            <img src="{{ image }}" alt="article image" width="30%" class="variation_imgs m-0 mt-1 " />
-                        </span>
+                        <div class="image_button">
+                            <img src="{{ image }}" alt="article image" width="100%" class="variation_imgs m-0 mt-1 " />
+                        </div>
                       {% endfor %}
                       </div>
                   {%endif%}         
