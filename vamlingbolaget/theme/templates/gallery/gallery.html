@@ -14,12 +14,18 @@
             {%for status in statuses%}
                 {%for gallery in galleries%}
                     {% if gallery.status = status %}
-                    <div class="col-md-5 mb-5">
-                        <div>
-                            <a class="gallery_img_title" href="/gallery/{{gallery.pk}}" ><img src="{% version gallery.feature_image 'medium' %}" class="img-thumbnail img-100p" title="Fotograf: {{feature_image.photographer.name}}"/></a>
+                    <a class="gallery_img_title" href="/gallery/{{gallery.pk}}" >
+                    <div class="card mb-3">
+                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <img src="{% version gallery.feature_image 'medium' %}" class="img-thumbnail img-100p" title="Fotograf: {{feature_image.photographer.name}}"/>
+                   
+                        <div class="card-footer">
+                            <p class="card-text "><small class="text-muted gallery_title">{{gallery.name}}</p>
+    
                         </div>
-                        <div class="gallery_title">&nbsp;{{gallery.name}}</div>
-                    </div>
+                      </div>
+                    </a>
+                 
                     {%endif%}
                 {%endfor%}
                
