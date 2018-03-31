@@ -32,27 +32,25 @@
 
         {%else%}
         <div class="card-columns">
-                <a href="{% version gallery.feature_image 'large' %}"  data-toggle="lightbox" title="{{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
+                <a href="{% version gallery.feature_image 'large' %}" data-toggle="modal" data-target="#Modal{{image.pk}}" title="{{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} ">
                     <img src="{% version gallery.feature_image 'medium' %}" class="img-thumbnail img-100p" />
                 </a>
                 {%for image in images%}
                 
-                    <a href="{% version image.image 'large' %}"  data-toggle="lightbox" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} " data-lightbox="{{gallery}}">
+                    <a href="{% version image.image 'large' %}"  class="lightbox" title=" {{image.name}} {% if image.photographer.name%} Fotograf: {{image.photographer.name}} {%endif%} ">
                         <img src="{% version image.image 'medium' %}" class="img-thumbnail img-100p" />
                     </a>       
                 {%endfor%}
            </div>    
         {%endif%}
+
+        
     </div> <!-- end of row -->
 
-    
-
-<script>
-    $( document ).ready(function() {
-        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-            event.preventDefault();
-            $(this).ekkoLightbox();
-        });
-    });
-</script>
+    <script>
+  $(document).on('click', '[data-toggle="modal"]', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+});
+    </script>
 {% endblock %}
