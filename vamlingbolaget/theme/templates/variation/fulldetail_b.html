@@ -17,9 +17,9 @@
                 {%else%}
                       <div class="text-center hidden-xs justify-content-between">
                     {% for image in images %}
-                     
-                            <img src="{{ image }}" alt="article image" width="30%" class="variation_imgs m-1" />
-                       
+                        <div class="image_button">
+                            <img src="{{ image }}" alt="article image" width="30%" class="variation_imgs m-0 mt-1 " />
+                        </div>
                       {% endfor %}
                       </div>
                   {%endif%}         
