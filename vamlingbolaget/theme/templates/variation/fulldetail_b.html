@@ -174,7 +174,7 @@
                 <div class="media-body pb-1 mb-0 small lh-125 border-gray">
                     <div class="d-flex justify-content-start align-items-center w-100 flex-wrap">
                         {% for colorsandpattern in full_variations_article %}
-                            <div style="width: 120px; height: 120px;">
+                            <div style="width: 120px; height: 120px; overflow:hidden;">
                                  <a href="{{ colorsandpattern.link }}"><img id="pattern_color_image" class="pattern_color_image_c" src="{{ MEDIA_URL }}/uploads/120/{{ colorsandpattern.cp }}.jpg" style="max-width: 100%; height: auto;" /></a>
                             </div>        
                         {% endfor %}
