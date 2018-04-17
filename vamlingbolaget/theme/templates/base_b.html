@@ -193,6 +193,11 @@
          </form>
          </div> <!-- / language -->
          {% endif %}
+         {% if cod %} 
+        <div style="position: fixed; top: 12px; left: 60px; z-index:300;" class="d-none d-md-block d-sm-none"><!-- language --> 
+          <a class="nav-link vb_top_color" href="/products/">{% trans "Shop" %} </a>
+         </div> <!-- / back to shop in cut on demand -->
+         {% endif %}
          <div>  <!-- cart -->
           <ul class="navbar-brand align-top mr-md-2 navbar-nav flex-row pull-right d-md-flex pt-0 pl-4" style="position: fixed; top: 0px; right: 16px; z-index:300">
             <li class="nav-item">

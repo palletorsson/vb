@@ -701,7 +701,8 @@ def codwizard(request):
                    {'articles': articles,
                     'colorsandpatterns': colorsandpatterns, 
                     'sizes': SIZES, 
-                    'product': product
+                    'product': product, 
+                    'cod': True
                    },
                    context_instance=RequestContext(request)
                     )
