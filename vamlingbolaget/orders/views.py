@@ -27,6 +27,8 @@ import datetime
 import re
 from django.core.mail import send_mail
 from django.core import mail
+from django.db.models import Q
+
 
 def ShowOrders(request, stage='all'):
     if request.user.is_authenticated:
@@ -51,6 +53,15 @@ def ShowOrders(request, stage='all'):
                 checkout.fortnoxed = 0
             checkout.num = number
             number = number + 1 
+
+        return render_to_response('orders/orders.html', {
+	        'checkouts': checkouts,
+	        },
+	        context_instance=RequestContext(request))
+
+def ShowOrdersByName(request, name):
+    if request.user.is_authenticated:
+        Checkout.objects.filter(Q(first_name__contains=name) | Q(last_name__contains=name))
 
         return render_to_response('orders/orders.html', {
 	        'checkouts': checkouts,
