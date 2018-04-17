@@ -61,7 +61,7 @@ def ShowOrders(request, stage='all'):
 
 def ShowOrdersByName(request, name):
     if request.user.is_authenticated:
-        Checkout.objects.filter(Q(first_name__contains=name) | Q(last_name__contains=name))
+        checkouts = Checkout.objects.filter(Q(first_name__contains=name) | Q(last_name__contains=name))
 
         return render_to_response('orders/orders.html', {
 	        'checkouts': checkouts,
