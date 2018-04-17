@@ -1012,7 +1012,7 @@ set_first_page();
         window.location = '/orders/order/'+order_id+"/"
     }); 
 
-    $("#search_order").click(function(e) {      
+    $("#search_name").click(function(e) {      
         var order_name = $('#order_name').val();
         console.log("search_name ", order_name); 
         window.location = '/orders/ordersByName/'+order_name+"/"
