@@ -1013,7 +1013,7 @@ set_first_page();
     }); 
 
     $("#search_order").click(function(e) {      
-        var order_id = $('#order_name').val();
+        var order_name = $('#order_name').val();
         console.log("search_name ", order_name); 
         window.location = '/orders/ordersByName/'+order_name+"/"
     }); 
