@@ -1011,6 +1011,14 @@ set_first_page();
         console.log("search_order ", order_id); 
         window.location = '/orders/order/'+order_id+"/"
     }); 
+
+    $("#search_order").click(function(e) {      
+        var order_id = $('#order_name').val();
+        console.log("search_name ", order_name); 
+        window.location = '/orders/ordersByName/'+order_name+"/"
+    }); 
+    
+
     // for pacsoft autoaddress 
 	$(".address_button").click(function() {
 
