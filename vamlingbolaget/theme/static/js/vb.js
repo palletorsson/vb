@@ -633,7 +633,7 @@ $('.overlay').each(function(){
 var path = location.pathname
 var link = $('a[href="'+window.location.pathname+'"] span')
 
-if (!$(link).hasClass("nolink")) {
+if ($(link).hasClass("nolink")) {
     console.log("no link")
 } else {
     link.addClass('active-link');
