@@ -389,6 +389,7 @@ def reacut_b(request):
                               'rea': rea, 
                               'sizes': sizes, 
                               'atypes': atypes,
+                              'cod': True
                               },
                              context_instance=RequestContext(request))
 
