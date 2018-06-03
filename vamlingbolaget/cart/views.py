@@ -523,9 +523,9 @@ def totalsum(cartitems, bargains, request, voucher, rea):
         if (temp_p > 3000 or temp_p < 11):
             handling = 0
 
-    # free shipment
-    handling = 0;
-    
+        # free shipment
+        handling = 0;
+
         temp_p = temp_p + handling
 
     else:
@@ -534,10 +534,12 @@ def totalsum(cartitems, bargains, request, voucher, rea):
 
         if (temp_p > 3000 or temp_p < 11):
             handling = 0
-    # free shipment
-    handling = 0;
+
+        # free shipment
+        handling = 0;
 
         temp_p = temp_p + handling
+
     # free shipment
     handling = 0; 
 
