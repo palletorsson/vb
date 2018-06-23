@@ -88,6 +88,7 @@ def cutondemandApi(request, category):
     articles = Article.objects.filter(quality__slug ='silkestrika', active=True).order_by('type')
             
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
+    print colorsandpatterns
     
     active_sizes = SIZES
     allpossiblities = {}
@@ -103,7 +104,7 @@ def cutondemandApi(request, category):
           "quality_name": csps.quality.name, 
           "quality_num": csps.quality.order
           }) 
-          
+
     print allpossiblities["colorspatterns"]
 
     allpossiblities["sizes"] = active_sizes
