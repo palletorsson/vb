@@ -88,14 +88,28 @@ def cutondemandApi(request, category):
     articles = Article.objects.filter(quality__slug ='silkestrika', active=True).order_by('type')
             
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
+    
     active_sizes = SIZES
     allpossiblities = {}
 
     allpossiblities["colorspatterns"] = []
+
+    for csps in colorsandpatterns:
+        allpossiblities["colorspatterns"].append({
+          "color_num": csps.color.order,
+          "color_name": csps.color.name,
+          "pattern_num": csps.pattern.order,
+          "pattern_name": csps.pattern.name,
+          "quality_name": csps.quality.name, 
+          "quality_num": csps.quality.order
+          }) 
+          
+    print allpossiblities["colorspatterns"]
+
     allpossiblities["sizes"] = active_sizes
 
-
     allpossiblities["articles"] = []   
+
     for chil in articles:
         if (chil.sku_number != '9805'):
             allpossiblities["articles"].append({
@@ -151,6 +165,7 @@ def cutondemandApi(request, category):
               "color_id": prod.variation.color.order,   
               "size": prod.size, 
             }) 
+
     if (category == 'all'):   
         allpossiblities["variations"] = []   
         for chil in variations:
@@ -174,16 +189,6 @@ def cutondemandApi(request, category):
                 "color_id": chil.color.order,   
                 "size": "M", 
         }) 
-
-    for csps in colorsandpatterns:
-        allpossiblities["colorspatterns"].append({
-          "color_num": csps.color.order,
-          "color_name": csps.color.name,
-          "pattern_num": csps.pattern.order,
-          "pattern_name": csps.pattern.name,
-          "quality_name": csps.quality.name, 
-          "quality_num": csps.quality.order
-          }) 
 
     if (category == 'all'):         
         allpossiblities["articles"] = []   
