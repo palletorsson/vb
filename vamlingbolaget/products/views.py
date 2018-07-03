@@ -105,8 +105,6 @@ def cutondemandApi(request, category):
           "quality_num": csps.quality.order
           }) 
 
-    print allpossiblities["colorspatterns"]
-
     allpossiblities["sizes"] = active_sizes
 
     allpossiblities["articles"] = []   
