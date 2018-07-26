@@ -23,9 +23,9 @@
             <div class="col-12 p-0">
                 <a href="{{ feature.link_to }}">
                    
-                    <img src="{% version feature.feature_image 'large' %}" width="100%"/>
+                    <img src="{{ feature.feature_image.url }}" width="100%"/>
 
-                   -- {{ feature.feature_image.url }} {{ feature.feature_image }}
+                
                 </a>	
             </div>
         </div>
