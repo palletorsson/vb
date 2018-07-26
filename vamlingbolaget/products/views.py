@@ -317,7 +317,7 @@ def reaindex(request):
     types = Category.objects.filter(active=True) 
     atypes = Type.objects.filter(order__lte=5, active=True)
 
-    rea = "true"
+    rea = "false"
     sizes = SIZES
 
     return render_to_response('variation/reaindex.html',
