@@ -29,7 +29,7 @@
             <a href="{%url removefromcart item.pk 'cartitem'%}"> <span class="icon-minus badge badge-secondary rounded-0" id="{{ item.id }}">-</span></a>           
         </td>
         <td>
-            <img src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans "i" %} {{ item.color|lower }}" width="80"/>
+            <img class="d-none d-md-block" src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans "i" %} {{ item.color|lower }}" width="80"/>
         </td>
         <td>
             <span> {{ item.article }} i {{item.article.quality|lower}}</span>
