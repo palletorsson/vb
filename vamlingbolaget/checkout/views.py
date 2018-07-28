@@ -31,7 +31,7 @@ def checkout(request, test=''):
     if test  == 'test': 
         print 'katten'
     url_klarna = request.path
-    template_url = 'checkout/checkout.html'
+    template_url = 'checkout/checkout_b.html'
     # get the all cart data 
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
