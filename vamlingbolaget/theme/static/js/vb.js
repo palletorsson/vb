@@ -656,12 +656,13 @@ $allVideos.each(function() {
 $(window).resize(function() {
 
   var newWidth = $fluidEl.width();
+  newWidth = Math.floor(newWidth * 0.8); 
   $allVideos.each(function() {
 
     var $el = $(this);
     $el
-        .width(Math.floor(newWidth/0.8)
-        .height(Math.floor(newWidth * $el.attr('data-aspectRatio')/0.8));
+        .width(newWidth)
+        .height(newWidth * $el.attr('data-aspectRatio'));
 
   });
   console.log("resize ", newWidth, $allVideos);
