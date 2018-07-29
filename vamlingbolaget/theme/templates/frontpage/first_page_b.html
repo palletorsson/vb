@@ -74,7 +74,18 @@
             </div> 
            
         </div> <!-- end row -->   
+        {% elif feature.mediatype == 'V' %}
+            <!-- full  video-->
+            <div class="row pb-3 px-3">
+                    <div class="col-12 p-0">
+                        <a href="{{ feature.link_to }}">
+                                <iframe src="{{ feature.body }}" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                <div> {{ feature.heading }}  <span class="muted"> {{ feature.heading_extra}} </span> </div>
+                               
+                            </a>
 
+                    </div>
+                </div>
         {% elif feature.mediatype == 'B' %}
         <!-- 'halfpostbottomLeft' starts--> 
         <div class="row">

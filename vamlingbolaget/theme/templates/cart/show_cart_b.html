@@ -32,7 +32,7 @@
             <img class="d-none d-md-block" src="{% version item.article.file 'small' %} " alt="{{ item.article.name }} {% trans "i" %} {{ item.color|lower }}" width="80"/>
         </td>
         <td>
-            <span> {{ item.article }} i {{item.article.quality|lower}}</span>
+            <span> {{ item.article }} {% trans "i" %} {{item.article.quality|lower}}</span>
         </td>
         <td>
             <span>{{ item.color }}
@@ -395,12 +395,14 @@
     {% else %}
     <div id="empty" class="mob_empty">
         <div colspan="8">
+            <hr/>
             {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/full/">{% trans "Börja utforska utbudet" %}!</a>
+            <hr/>
             <img src="/media/uploads/ckd/2017/04/02/mirjam-klipper-till.jpg" />
         </div>
     </div>
     </div>
-        {% endif %}
+    {% endif %}
 
 </div> <!-- end hidden-xs -->
 </main>
