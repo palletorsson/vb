@@ -640,7 +640,7 @@ if ($(link).hasClass("nolink")) {
     
 }
 
-var $allVideos = $("iframe[src^='//player.vimeo.com']"),
+var $allVideos = $(".vimeoVid"),
 $fluidEl = $(".vimeoDiv");
 
 $allVideos.each(function() {
