@@ -656,7 +656,9 @@ $allVideos.each(function() {
 $(window).resize(function() {
 
   var newWidth = $fluidEl.width();
-  newWidth = Math.floor(newWidth * 0.8); 
+  if (newWidth > 500) {
+    newWidth = Math.floor(newWidth * 0.8); 
+  }
   $allVideos.each(function() {
 
     var $el = $(this);
