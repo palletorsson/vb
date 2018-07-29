@@ -641,7 +641,7 @@ if ($(link).hasClass("nolink")) {
 }
 
 var $allVideos = $("iframe[src^='//player.vimeo.com']"),
-$fluidEl = $(".videoDiv");
+$fluidEl = $(".vimeoDiv");
 
 $allVideos.each(function() {
 
