@@ -664,7 +664,7 @@ $(window).resize(function() {
         .height(newWidth * $el.attr('data-aspectRatio'));
 
   });
-  console.log("resize ", newWidth, allVideos);
+  console.log("resize ", newWidth, $allVideos);
 
 }).resize();
 
