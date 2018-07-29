@@ -640,8 +640,8 @@ if ($(link).hasClass("nolink")) {
     
 }
 
-var $allVideos = $("iframe[src^='//player.vimeo.com'], iframe[src^='//www.youtube.com'], object, embed"),
-$fluidEl = $("figure");
+var $allVideos = $("iframe[src^='//player.vimeo.com']"),
+$fluidEl = $(".videoDiv");
 
 $allVideos.each(function() {
 
@@ -664,6 +664,7 @@ $(window).resize(function() {
         .height(newWidth * $el.attr('data-aspectRatio'));
 
   });
+  console.log("resize ", newWidth);
 
 }).resize();
 
