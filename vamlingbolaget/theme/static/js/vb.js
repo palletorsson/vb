@@ -660,8 +660,8 @@ $(window).resize(function() {
 
     var $el = $(this);
     $el
-        .width(newWidth)
-        .height(newWidth * $el.attr('data-aspectRatio'));
+        .width(Math.floor(newWidth/0.8)
+        .height(Math.floor(newWidth * $el.attr('data-aspectRatio')/0.8));
 
   });
   console.log("resize ", newWidth, $allVideos);

@@ -35,7 +35,7 @@
         </td>
         <td>
             <div>
-                <span> {{ item.article }} i {{item.article.quality|lower}}</span>
+                <span> {{ item.article }} {% trans "i" %} {{item.article.quality|lower}}</span>
             </div>
         </td>
         <td>
@@ -85,7 +85,7 @@
             </td>
 
             <td colspan="1"> 
-               Cut on demand för {{ item.article.name }} 
+               Cut on demand - {{ item.article.name }} 
             </td>
 
             <td colspan="2"> 
@@ -250,9 +250,11 @@
         {% else %}
         <tr id="empty">
             <td colspan="8">
-                <div class="alert alert-info">
+                <hr/>
+                <div class="well alert alert-info">
                     {% trans "Det ligger inget i din shoppinglåda än" %}. <a href="/products/full/">{% trans "Börja utforska utbudet" %}!</a>
                 </div>
+                <hr/>
                 <img src="/media/uploads/ckd/2017/04/02/mirjam-klipper-till.jpg" style="width:100%"/>
             </td>
         </tr>

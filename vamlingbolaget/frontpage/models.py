@@ -46,7 +46,7 @@ class FrontpageExtended(models.Model):
     theme = models.ForeignKey('FrontpageTheme')
     link_to = models.CharField(max_length=255, help_text="use relative link")
     feature_image = FileBrowseField("Image", max_length=200, directory="frontpage/", extensions=[".jpg", ".gif", ".png"], blank=True, null=True)
-    body = models.TextField(blank=True, help_text="This could be used for sweden")
+    body = models.TextField(blank=True, help_text="This could be used for sweden, use this for vimeo url")
     order = models.IntegerField(help_text="Set the order")
     status = models.CharField(max_length=1, choices=STATUS)
 
