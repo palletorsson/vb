@@ -1010,3 +1010,9 @@ h4, .h4 {
         column-count: 5;
     }
 }
+
+
+.vimeo {
+    width: 100%    !important;
+    height: auto   !important;
+  }
