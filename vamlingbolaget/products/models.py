@@ -19,6 +19,27 @@ SIZES = (
         ('XLL', 'XLL'),
         )
 
+COLORS = (
+        ('RED', 'reddish'), 
+        ('BLV', 'blackwhite'),
+        ('TQS', 'turquoise'),
+        ('GRE', 'green'),
+        ('ORG', 'orange'),
+        ('PUR', 'purple'),
+        ('BLU', 'blue'),
+        ('GRA', 'gray'),
+        )
+
+PATTERS = (
+        ('ONE', 'onecolors'), 
+        ('BRD', 'brids'),
+        ('LIN', 'lines'),
+        ('PEK', 'peaks'),
+        ('FLW', 'flowers'),
+        )
+						
+
+
 class TimeStampedActivate(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -127,6 +148,7 @@ class Color(ChoiceBase):
     Color used in Product Model         
     """
     quality = models.ForeignKey('Quality', default=1)
+    color_type = models.CharField(max_length=3, choices=COLORS, default="RED")
 
     def __unicode__(self):
         return unicode(self.name)
@@ -137,6 +159,7 @@ class Pattern(ChoiceBase):
     Pattern used in Product Model         
     """
     quality = models.ForeignKey('Quality', default=1)
+    pattern_type = models.CharField(max_length=3, choices=PATTERS, default="FLW")
 
     def __unicode__(self):
         return unicode(self.name)
