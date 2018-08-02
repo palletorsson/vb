@@ -534,7 +534,7 @@ def getService(service, amount, phone):
                 { 
                 "id": "NOTSMS", 
                 "phone": phone,
-                "sms": phone
+                "mics": phone
                 }
                 ],
         }
@@ -543,8 +543,7 @@ def getService(service, amount, phone):
           "id": service, 
           "addons": [{
             "id": "NOTSMS",
-            "phone": phone,
-            "sms": phone
+            "mics": phone
             }]
         }
         
