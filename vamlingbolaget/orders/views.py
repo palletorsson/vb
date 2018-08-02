@@ -542,7 +542,7 @@ def getService(service, amount, phone):
         return {
           "id": service, 
           "addons": [{
-            "id": "NOTSMS"
+            "id": "NOTSMS",
             "phone": phone,
             "sms": phone
             }]
