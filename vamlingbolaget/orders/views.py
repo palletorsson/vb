@@ -231,7 +231,7 @@ def OrderAction(request, todo, stage, order_number, send_type='', weight=''):
                 checkout_json = checkout.order
                 parcels = getParcels(checkout.fortnox_obj, weight)
                 pdfConf = getPdfConfig()
-                service = getService(send_type, returntotal['totalprice'], checkout.phone)
+                service = gestService(send_type, returntotal['totalprice'], checkout.phone)
 
                 vamlingbolaget = getSender()
                 opt =  getOptions(checkout.email)
@@ -532,9 +532,7 @@ def getService(service, amount, phone):
                 "accountType": "bg"
                 },
                 { 
-                "id": "NOTSMS", 
-                "phone": phone,
-                "mics": phone
+                "id": "NOTSMS"
                 }
                 ],
         }
@@ -542,8 +540,7 @@ def getService(service, amount, phone):
         return {
           "id": service, 
           "addons": [{
-            "id": "NOTSMS",
-            "mics": phone
+            "id": "NOTSMS"
             }]
         }
         
