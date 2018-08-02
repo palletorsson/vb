@@ -534,6 +534,7 @@ def getService(service, amount, phone):
                 { 
                 "id": "NOTSMS", 
                 "phone": phone,
+                "sms": phone
                 }
                 ],
         }
@@ -542,6 +543,8 @@ def getService(service, amount, phone):
           "id": service, 
           "addons": [{
             "id": "NOTSMS"
+            "phone": phone,
+            "sms": phone
             }]
         }
         
@@ -567,8 +570,7 @@ def getReceiver(name, email, adress1, zipcode, city, country, phone):
       "name": name,
       "address1": adress1,
       "country": "SE",
-      "city": city,
-     
+      "city": city,    
     }
 
 
