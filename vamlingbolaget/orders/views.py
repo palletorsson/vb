@@ -569,7 +569,8 @@ def getReceiver(name, email, adress1, zipcode, city, country, phone):
       "name": name,
       "address1": adress1,
       "country": "SE",
-      "city": city,    
+      "city": city, 
+      "sms": phone   
     }
 
 
