@@ -231,7 +231,7 @@ def OrderAction(request, todo, stage, order_number, send_type='', weight=''):
                 checkout_json = checkout.order
                 parcels = getParcels(checkout.fortnox_obj, weight)
                 pdfConf = getPdfConfig()
-                service = gestService(send_type, returntotal['totalprice'], checkout.phone)
+                service = getService(send_type, returntotal['totalprice'], checkout.phone)
 
                 vamlingbolaget = getSender()
                 opt =  getOptions(checkout.email)
