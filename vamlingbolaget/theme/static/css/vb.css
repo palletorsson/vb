@@ -1011,6 +1011,13 @@ h4, .h4 {
     }
 }
 
+@media screen and (max-width: 992px) {
+    .show_small {
+        display:none; 
+    }
+  }
+
+
 
 .vimeoDiv {
     width: 100%    !important;
