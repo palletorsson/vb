@@ -524,7 +524,7 @@ def totalsum(cartitems, bargains, request, voucher, rea):
             handling = 0
 
         # free shipment
-        # handling = 0;
+        handling = 0;
 
         temp_p = temp_p + handling
 
@@ -536,7 +536,7 @@ def totalsum(cartitems, bargains, request, voucher, rea):
             handling = 0
 
         # free shipment
-        # handling = 0;
+        handling = 0;
 
         temp_p = temp_p + handling
 
