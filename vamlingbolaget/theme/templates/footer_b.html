@@ -29,16 +29,9 @@
             </ul>
           </div>
           <div class="col" style="min-width: 220px;">
-            <div class="s-90-upper">Vamlingbolaget Stockholm</div>
+            <div class="s-90-upper">  {% trans "Leveransvillkor" %} </div>
             <ul class="list-unstyled small">
-                <li>
-                        <strong>{% trans "Öppettider" %} </strong><br/>
-                        <address>
-                        {% trans "Stängt" %} 
-                        <br/>
-                      
-                        </address>
-              </li>
+                {% include "order_terms_links.html" %}
             </ul>
           </div>
           <div class="col" style="min-width: 220px;">
@@ -73,7 +66,7 @@
                     </ul>
                 <strong> ... </strong><br/>
                 <u class="list-unstyled"l>
-                    {% include "order_terms_links.html" %}
+              
                    
                 </ul> 
                 
