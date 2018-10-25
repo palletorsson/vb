@@ -21,8 +21,8 @@ urlpatterns = patterns('products.views',
     url(r'^codartjsonsingle/(?P<sku_number>[a-zA-Z0-9_.-]+)/$', 'cutondemandApiSingle'),   
     url(r'^rea/size/(?P<key>[a-zA-Z0-9_.-]+)/$', 'rea_by_size'),
     url(r'^rea/type/(?P<key>[a-zA-Z0-9_.-]+)/$', 'rea_by_type'),
-    url(r'^rea/(?P<pk>\d+)/$', 'readetail'),
-    url(r'^reaart/(?P<pk>\d+)/$', 'readetail_d'),  
+    url(r'^rea/(?P<pk>\d+)/$', 'reaindex'), #'readetail'
+    url(r'^reaart/(?P<pk>\d+)/$', 'reaindex'), #'readetail_d'
     url(r'^type/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_type'),
     url(r'^cat/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_cat'), 
     url(r'^ct/(?P<cat>[a-zA-Z0-9_.-]+)/(?P<thetype>[a-zA-Z0-9_.-]+)/$', 'by_cat_type'), 
@@ -42,7 +42,7 @@ urlpatterns = patterns('products.views',
     url(r'^allart_admin/(?P<what>[a-zA-Z0-9_.-]+)/(?P<start_at>[a-zA-Z0-9_.-]+)/(?P<end_at>[a-zA-Z0-9_.-]+)/$', 'allArt'),
     url(r'^allfullart_admin/(?P<quality>[a-zA-Z0-9_.-]+)/$', 'allFullArt'),
     url(r'^duplicates/(?P<remove>[a-zA-Z0-9_.-]+)/$', 'variationduplicates'),   
-    url(r'^allart_rea/$', 'allreaArt'),
+    url(r'^allart_rea/$', 'reaindex'), #'allreaArt'
     #url(r'^articles/$', 'articleList'),
     url(r'^articlescsv/$', 'articlesCsv'),
 
