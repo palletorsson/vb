@@ -541,7 +541,11 @@ def totalsum(cartitems, bargains, request, voucher, rea):
         temp_p = temp_p + handling
 
     # free shipment
-    handling = 0; 
+    handling = 0
+    10_rea = True
+    if 10_rea:
+        import math 
+        temp_p = math.floor(temp_p * 0.9) 
 
     total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling, 'se': se}
     return total
