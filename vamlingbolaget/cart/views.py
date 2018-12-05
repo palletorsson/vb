@@ -19,6 +19,9 @@ from fortnox.fortnox import get_headers, searchCustomer
 from django.contrib.auth.decorators import login_required
 from logger.views import keepLog
 
+import math 
+
+
 CART_ID_SESSION_KEY = 'cart_id'
 
 def _generate_cart_id():
@@ -542,7 +545,9 @@ def totalsum(cartitems, bargains, request, voucher, rea):
 
     # free shipment
     handling = 0
-
+    rea10 = True
+    if rea10:
+        temp_p = math.floor(temp_p * 0.9) 
 
     total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling, 'se': se}
     return total
