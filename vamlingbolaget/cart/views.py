@@ -545,7 +545,9 @@ def totalsum(cartitems, bargains, request, voucher, rea):
 
     # free shipment
     handling = 0
-    rea10 = True
+
+    # if rea
+    rea10 = False
     if rea10:
         temp_p = math.floor(temp_p * 0.9) 
 
