@@ -22,7 +22,7 @@ urlpatterns = patterns('products.views',
     url(r'^rea/size/(?P<key>[a-zA-Z0-9_.-]+)/$', 'rea_by_size'),
     url(r'^rea/type/(?P<key>[a-zA-Z0-9_.-]+)/$', 'rea_by_type'),
     url(r'^rea/(?P<pk>\d+)/$', 'reaindex'), #'readetail'
-    url(r'^reaart/(?P<pk>\d+)/$', 'reaindex'), #'readetail_d'
+    url(r'^reaart/(?P<pk>\d+)/$', 'readetail_d'), #'readetail_d'
     url(r'^type/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_type'),
     url(r'^cat/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_cat'), 
     url(r'^ct/(?P<cat>[a-zA-Z0-9_.-]+)/(?P<thetype>[a-zA-Z0-9_.-]+)/$', 'by_cat_type'), 
