@@ -13,16 +13,16 @@ urlpatterns = patterns('products.views',
     url(r'^fullindexlist/$', 'fullindexlist'),
     url(r'^full/quality/(?P<quality>[a-zA-Z0-9_.-]+)/$', 'fullindexQuality'),
     url(r'^(?P<pk>\d+)/$', 'detail'),
-    url(r'^rea/$', 'reaindex'),
-    #url(r'^rea/$', 'reareact_b'),
+    #url(r'^rea/$', 'reaindex'),
+    url(r'^rea/$', 'reareact_b'),
     url(r'^rea_b/$', 'reareact_b'),
     url(r'^reajson/$', 'jsonReaindex'),
     url(r'^codartjson/(?P<category>[a-zA-Z0-9_.-]+)/$', 'cutondemandApi'),
     url(r'^codartjsonsingle/(?P<sku_number>[a-zA-Z0-9_.-]+)/$', 'cutondemandApiSingle'),   
     url(r'^rea/size/(?P<key>[a-zA-Z0-9_.-]+)/$', 'rea_by_size'),
     url(r'^rea/type/(?P<key>[a-zA-Z0-9_.-]+)/$', 'rea_by_type'),
-    #url(r'^rea/(?P<pk>\d+)/$', 'reaindex'), #'readetail'
-    #url(r'^reaart/(?P<pk>\d+)/$', 'reaindex'), #'readetail_d'
+    url(r'^rea/(?P<pk>\d+)/$', 'reaindex'), #'readetail'
+    url(r'^reaart/(?P<pk>\d+)/$', 'reaindex'), #'readetail_d'
     url(r'^type/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_type'),
     url(r'^cat/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_cat'), 
     url(r'^ct/(?P<cat>[a-zA-Z0-9_.-]+)/(?P<thetype>[a-zA-Z0-9_.-]+)/$', 'by_cat_type'), 
