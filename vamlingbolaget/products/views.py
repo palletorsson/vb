@@ -398,7 +398,7 @@ def reacut_b(request):
                              context_instance=RequestContext(request))
 
 def jsonReaindex(request):
-    products = [] #ReaArticle.objects.filter(status='A').order_by('-article__quality')
+    products = ReaArticle.objects.filter(status='A').order_by('-article__quality')
     allproducts = []
     for p in products:
         allproducts.append({
