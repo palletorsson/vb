@@ -1316,7 +1316,7 @@ def fromCsvToDjango(article, pattern, color, size, stock):
         print "one var", variation
 
 
-    fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
+    fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock, active=True)
     # if fullvariation exist only update the fullvaration with stockvalue
     if created_fullvariation == False:
         fullvariation.stock = stock
