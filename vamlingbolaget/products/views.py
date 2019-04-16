@@ -1754,6 +1754,38 @@ def setfullstockCsv(request):
     return HttpResponse(status=200)
 
 @login_required
+def setfullTrue(request):
+    input_file = './modeller.csv'
+
+    # open file and sepate values
+    with open(input_file, 'r') as i:
+
+        for line in i:
+            sepatated_values = line.split(",")
+            print sepatated_values
+            if sepatated_values[1] != '':
+                art_and_partner = sepatated_values[1]
+                splitart = art_and_partner.split("_")
+                print splitart
+                try:
+                    print art_and_partner, splitart
+                    article = Article.objects.get(sku_number=splitart[0])
+                    pattern = Pattern.objects.get(order=splitart[1])
+                    color = Color.objects.get(order=splitart[2])
+                    variation = Variation.objects.get(article=article, pattern=pattern, color=color)
+                    print variation
+                    print splitart[3]
+                    fullvar = FullVariation.objects.get(variation=variation, size=splitart[3])
+                    fullvar.active = True
+
+                    fullvar.save()
+                    print "it worked"
+                except:
+                    print "error"
+
+    return HttpResponse(status=200)
+
+@login_required
 def orderfromCsv(request):
     input_file = './ordercsv.csv'
 
