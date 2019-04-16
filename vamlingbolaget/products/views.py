@@ -42,10 +42,10 @@ def index(request):
 
 SIZES = ('XS', 'S', 'M', 'L', 'XL','XXL')
 
-def cutondemandApiSingle(request, sku_number): 
+def cutondemandApiSingle(request, sku_number):
     models = Article.objects.filter(active=True).order_by('category')
     active_sizes = SIZES
-    allpossiblities = {}  
+    allpossiblities = {}
     allpossiblities["sizes"] = active_sizes
 
     try:
@@ -61,8 +61,8 @@ def cutondemandApiSingle(request, sku_number):
           "price": art.price,
           "img": "...",
           "id": art.id,
-          "type": art.type.name, 
-          "category": art.category.name, 
+          "type": art.type.name,
+          "category": art.category.name,
           "description": art.description,
           "quality": art.quality.name,
           "cod_cost": art.ondemand_cost,
@@ -72,24 +72,24 @@ def cutondemandApiSingle(request, sku_number):
         print "no such art"
 
     resp = json.dumps(allpossiblities)
-    return HttpResponse(resp, content_type="application/json")    
+    return HttpResponse(resp, content_type="application/json")
 
 
-def cutondemandApi(request, category): 
+def cutondemandApi(request, category):
     models = Article.objects.filter(active=True).order_by('category')
     if (category != 'pc'):
-        if (category == 'all'): 
-            products = FullVariation.objects.filter(active=True, size=3840).order_by('order') 
-        else: 
-            products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order') 
+        if (category == 'all'):
+            products = FullVariation.objects.filter(active=True, size=3840).order_by('order')
+        else:
+            products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order')
 
             variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('article__type')
-    
+
     articles = Article.objects.filter(quality__slug ='silkestrika', active=True).order_by('type')
-            
+
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     print colorsandpatterns
-    
+
     active_sizes = SIZES
     allpossiblities = {}
 
@@ -101,13 +101,13 @@ def cutondemandApi(request, category):
           "color_name": csps.color.name,
           "pattern_num": csps.pattern.order,
           "pattern_name": csps.pattern.name,
-          "quality_name": csps.quality.name, 
+          "quality_name": csps.quality.name,
           "quality_num": csps.quality.order
-          }) 
+          })
 
     allpossiblities["sizes"] = active_sizes
 
-    allpossiblities["articles"] = []   
+    allpossiblities["articles"] = []
 
     for chil in articles:
         if (chil.sku_number != '0000'):
@@ -118,23 +118,23 @@ def cutondemandApi(request, category):
                 "id": chil.id,
                 "pk": chil.pk,
                 "img": chil.file.name,
-                "type": chil.type.name, 
-                "category":chil.category.name, 
+                "type": chil.type.name,
+                "category":chil.category.name,
                 "description": chil.description,
                 "quality": chil.quality.name,
-                "cod_cost": chil.ondemand_cost       
-            }) 
-   
+                "cod_cost": chil.ondemand_cost
+            })
+
     try:
         sellart = FullVariation.objects.get(pk=1994)
         allpossiblities["single"] = [{
         "article": unicode("+?"),
         "sku": "...",
         "price": "...",
-        "img": "...", 
+        "img": "...",
         "id": sellart.variation.article.id,
-        "type": sellart.variation.article.type.name, 
-        "category": sellart.variation.article.category.name, 
+        "type": sellart.variation.article.type.name,
+        "category": sellart.variation.article.category.name,
         "description": sellart.variation.article.description,
         "quality": sellart.variation.article.quality.name,
         "cod_cost": "...",
@@ -144,29 +144,29 @@ def cutondemandApi(request, category):
     except:
         print "no such art"
 
-    if (category == 'all'): 
+    if (category == 'all'):
         allpossiblities["products"] = []
-        for prod in products: 
+        for prod in products:
           allpossiblities["products"].append({
               "article": prod.variation.article.name,
               "sku": prod.variation.article.sku_number,
               "price": prod.variation.article.price,
               "id": prod.variation.article.id,
               "pk": prod.pk,
-              "type": prod.variation.article.type.name, 
-              "category": prod.variation.article.category.name, 
+              "type": prod.variation.article.type.name,
+              "category": prod.variation.article.category.name,
               "description": prod.variation.article.description,
               "quality": prod.variation.article.quality.name,
               "cod_cost": prod.variation.article.ondemand_cost,
-              "pattern": unicode(prod.variation.pattern), 
-              "pattern_id": prod.variation.pattern.order, 
-              "color": unicode(prod.variation.color), 
-              "color_id": prod.variation.color.order,   
-              "size": prod.size, 
-            }) 
+              "pattern": unicode(prod.variation.pattern),
+              "pattern_id": prod.variation.pattern.order,
+              "color": unicode(prod.variation.color),
+              "color_id": prod.variation.color.order,
+              "size": prod.size,
+            })
 
-    if (category == 'all'):   
-        allpossiblities["variations"] = []   
+    if (category == 'all'):
+        allpossiblities["variations"] = []
         for chil in variations:
             pf =  chil.pk
             img = Image.objects.get(variation__pk=pf)
@@ -177,40 +177,40 @@ def cutondemandApi(request, category):
                 "id": chil.article.id,
                 "pk": chil.pk,
                 "img": img.image.url,
-                "type": chil.article.type.name, 
-                "category":chil.article.category.name, 
+                "type": chil.article.type.name,
+                "category":chil.article.category.name,
                 "description": chil.article.description,
                 "quality": chil.article.quality.name,
                 "cod_cost": chil.article.ondemand_cost,
-                "pattern": unicode(chil.pattern), 
-                "pattern_id": chil.pattern.order, 
-                "color": unicode(chil.color), 
-                "color_id": chil.color.order,   
-                "size": "M", 
-        }) 
+                "pattern": unicode(chil.pattern),
+                "pattern_id": chil.pattern.order,
+                "color": unicode(chil.color),
+                "color_id": chil.color.order,
+                "size": "M",
+        })
 
-    if (category == 'all'):         
-        allpossiblities["articles"] = []   
+    if (category == 'all'):
+        allpossiblities["articles"] = []
         for a in models:
             allpossiblities["articles"].append({
               "article": a.name,
               "sku": a.sku_number,
               "price": a.price,
-              "img": a.file.url, # this has to be made  
+              "img": a.file.url, # this has to be made
               "id": a.id,
-              "type": a.type.name, 
-              "category": a.category.name, 
+              "type": a.type.name,
+              "category": a.category.name,
               "description": a.description,
               "quality": a.quality.name,
               "cod_cost": a.ondemand_cost
-              })  
+              })
     # TODO add sizes
     resp = json.dumps(allpossiblities)
     return HttpResponse(resp, content_type="application/json")
-        
+
 
 def fullindex(request):
-    full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='kvinna').order_by('order') 
+    full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='kvinna').order_by('order')
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     return render_to_response('variation/fullindex.html',
@@ -221,14 +221,14 @@ def fullindex(request):
                              context_instance=RequestContext(request))
 
 def fullindex_b(request):
-    full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='kvinna').order_by('order') 
+    full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='kvinna').order_by('order')
     qualities = Quality.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
     types = Type.objects.filter(active=True)
     return render_to_response('variation/fullindex_b.html',
                              {'products': full_variation,
                               'qualities': qualities,
-                              'categories': categories, 
+                              'categories': categories,
                               'types': types,
                               },
                              context_instance=RequestContext(request))
@@ -249,10 +249,10 @@ def fullindexarticle(request):
 
 
 def fulllastindex(request):
-    full_variation = FullVariation.objects.filter(size=3840, variation__article__quality=1).order_by('id')[:10] 
+    full_variation = FullVariation.objects.filter(size=3840, variation__article__quality=1).order_by('id')[:10]
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
-    
+
     return render_to_response('variation/fullindex.html',
                              {'products': full_variation,
                               'qualities': qualities,
@@ -266,13 +266,13 @@ def fullindexQuality(request, quality):
     full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__quality__slug__contains = quality).order_by('order')
     qualities = Quality.objects.filter(active=True)
 
-    if quality == 'plysch': 
-        for item in full_variation: 
-            item.oneimg = str(item.variation.article.sku_number) + "_" + str(item.variation.pattern.order) + "_" + str(item.variation.color.order) 
+    if quality == 'plysch':
+        for item in full_variation:
+            item.oneimg = str(item.variation.article.sku_number) + "_" + str(item.variation.pattern.order) + "_" + str(item.variation.color.order)
 
 
     types = Category.objects.filter(active=True)
-  
+
     return render_to_response('variation/fullindex.html',
                              {'products': full_variation,
                               'qualities': qualities,
@@ -286,7 +286,7 @@ def fullindexlist(request):
 
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
-  
+
     return render_to_response('variation/fullindexlist.html',
                              {'products': full_variation,
                               'qualities': qualities,
@@ -299,7 +299,7 @@ def fullexport(request, what):
 
     for var in full_variation:
         print var.variation.article.sku_number, "|", var.variation.color, "|", var.variation.pattern, "|", var.size, "|", var.stock, "|"
-        print str(var.variation.article.sku_number) + "_" + str(var.variation.color.order) + "_" + str(var.variation.pattern.order) + "_" + str(var.size)  
+        print str(var.variation.article.sku_number) + "_" + str(var.variation.color.order) + "_" + str(var.variation.pattern.order) + "_" + str(var.size)
 
     return render_to_response('variation/fullindex.html',
                              {'products': full_variation,
@@ -314,7 +314,7 @@ def reaindex(request):
     products = ReaArticle.objects.filter(status='A').order_by('-article__name')
 
     qualities = Quality.objects.filter(active=True)
-    types = Category.objects.filter(active=True) 
+    types = Category.objects.filter(active=True)
     atypes = Type.objects.filter(order__lte=5, active=True)
 
     rea = "false"
@@ -325,8 +325,8 @@ def reaindex(request):
                               'qualities': qualities,
                               'types': types,
                               'atypes': atypes,
-                              'rea': rea, 
-                              'sizes': sizes, 
+                              'rea': rea,
+                              'sizes': sizes,
                               },
                              context_instance=RequestContext(request))
 
@@ -335,7 +335,7 @@ def reaindex_b(request):
     products = ReaArticle.objects.filter(status='A').order_by('-article__name')
 
     qualities = Quality.objects.filter(active=True)
-    types = Category.objects.filter(active=True) 
+    types = Category.objects.filter(active=True)
     atypes = Type.objects.filter(order__lte=5, active=True)
 
     rea = "true"
@@ -346,8 +346,8 @@ def reaindex_b(request):
                               'qualities': qualities,
                               'types': types,
                               'atypes': atypes,
-                              'rea': rea, 
-                              'sizes': sizes, 
+                              'rea': rea,
+                              'sizes': sizes,
                               },
                              context_instance=RequestContext(request))
 
@@ -366,8 +366,8 @@ def reareact(request):
     atypes = Type.objects.filter(order__lte=5, active=True)
     return render_to_response('variation/reatest.html',
                              {
-                              'rea': rea, 
-                              'sizes': sizes, 
+                              'rea': rea,
+                              'sizes': sizes,
                               'atypes': atypes,
                               },
                              context_instance=RequestContext(request))
@@ -378,8 +378,8 @@ def reareact_b(request):
     atypes = Type.objects.filter(order__lte=5, active=True)
     return render_to_response('variation/reareact.html',
                              {
-                              'rea': rea, 
-                              'sizes': sizes, 
+                              'rea': rea,
+                              'sizes': sizes,
                               'atypes': atypes,
                               },
                              context_instance=RequestContext(request))
@@ -390,8 +390,8 @@ def reacut_b(request):
     atypes = Type.objects.filter(order__lte=5, active=True)
     return render_to_response('variation/cutreact.html',
                              {
-                              'rea': rea, 
-                              'sizes': sizes, 
+                              'rea': rea,
+                              'sizes': sizes,
                               'atypes': atypes,
                               'cod': True
                               },
@@ -406,15 +406,15 @@ def jsonReaindex(request):
           "sku": p.article.sku_number,
           "color": p.color.name,
           "pattern": p.pattern.name,
-          "size": p.size.name, 
+          "size": p.size.name,
           "price": p.article.price,
           "reaprice": p.rea_price,
-          "img": p.image.path, 
+          "img": p.image.path,
           "id": p.id,
-          "type": p.article.type.order, 
-          })                  
+          "type": p.article.type.order,
+          })
     resp = json.dumps(allproducts)
-    
+
     return HttpResponse(resp, content_type="application/json")
 
 def articleindex(request):
@@ -440,7 +440,7 @@ def rea_by_size(request, key):
               'qualities': qualities,
               'types': types,
               'atypes': atypes,
-              'rea': rea, 
+              'rea': rea,
               'sizes': sizes, },
         context_instance=RequestContext(request))
 
@@ -458,7 +458,7 @@ def rea_by_type(request, key):
               'qualities': qualities,
               'types': types,
               'atypes': atypes,
-              'rea': rea, 
+              'rea': rea,
               'sizes': sizes, },
         context_instance=RequestContext(request))
 
@@ -470,11 +470,11 @@ def by_type(request, key):
     if key == 'man':
         products = FullVariation.objects.filter(variation__article__category__slug = key, size=3840, active=True).order_by('-order')
         template = 'variation/fullindex_b.html'
-    else: 
+    else:
         products = Variation.objects.filter(article__category__slug = key, order__lte=100, active=True).order_by('order', 'article__quality')
         template = 'variation/index.html'
 
-    
+
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
 
@@ -490,7 +490,7 @@ def by_cat(request, key):
     qualities = Quality.objects.filter(active=True)
     types = Type.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
-  
+
     return render_to_response(template,
              {'products': products,
               'qualities': qualities,
@@ -504,7 +504,7 @@ def by_cat_type(request, cat, thetype):
     qualities = Quality.objects.filter(active=True)
     types = Type.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
-  
+
     return render_to_response(template,
              {'products': products,
               'qualities': qualities,
@@ -518,27 +518,27 @@ def by_cat_q(request, cat, q):
     qualities = Quality.objects.filter(active=True)
     types = Type.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
-  
+
     return render_to_response(template,
              {'products': products,
               'qualities': qualities,
               'categories': categories,
               'types': types},
         context_instance=RequestContext(request))
-        
+
 def by_quality(request, key):
     template = 'variation/fullindex.html'
     if key == 'silkestrika':
         products = FullVariation.objects.filter(variation__article__quality__slug__contains = 'silkestrika', active=True, size=3840).order_by('order')
-    elif key == 'manchester': 
+    elif key == 'manchester':
         products = FullVariation.objects.filter(variation__article__quality__slug__contains = 'manchester', active=True, size=3840).order_by('order')
-    elif key == 'plysch': 
+    elif key == 'plysch':
         products = FullVariation.objects.filter(variation__article__quality__slug__contains = 'plysch', active=True, size=3840).order_by('order')
         template = 'variation/plyschindex.html'
-    else: 
+    else:
         products = Variation.objects.filter(article__quality__slug__contains = key, order__lte=100, active=True).order_by('-order', 'article__quality')
         template = 'variation/index.html'
-     
+
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     return render_to_response(template,
@@ -575,16 +575,16 @@ def detail(request, pk):
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.article.quality)
-        
-       
-    except:
-        raise Http404 
 
-    try:        
+
+    except:
+        raise Http404
+
+    try:
         images = Image.objects.filter(variation__pk=pk)
     except:
-        raise Http404 
-        
+        raise Http404
+
 
     return render_to_response('variation/detail.html',
                    {
@@ -609,16 +609,16 @@ def articleDetail(request, pk):
         product = Article.objects.get(pk=pk)
         products = FullVariation.objects.filter(variation__article=product, size='3840', active=True)
 
-        for full_var in products: 
+        for full_var in products:
             color_pattern_str = str(full_var.variation.color.order)+"f_"+str(full_var.variation.pattern.order)+"m"
             full_var.cp = color_pattern_str
             num = int(full_var.pk)
             link = "/products/fullvariation/"+ str(num) + "/#" + str(full_var.variation) + " " + str(full_var)
             full_var.link = link
-            filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order) 
-            file = "/media/variations/"+ filename +"_1.jpg"  
-            full_var.image = file   
-        
+            filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order)
+            file = "/media/variations/"+ filename +"_1.jpg"
+            full_var.image = file
+
         qualities = Quality.objects.filter(active = True)
         types = Type.objects.filter(active = True)
         colors = Color.objects.filter(active=True, quality = product.quality)
@@ -628,29 +628,29 @@ def articleDetail(request, pk):
             sizes = Size.objects.filter(quality__pk = 1).order_by('-pk')
         else:
             sizes = Size.objects.filter(quality=product.quality).order_by('-pk')
-        
+
         if (product.quality.order == 5 or product.quality.order == 14):
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
         else:
             colorsandpattern = PatternAndColor.objects.filter(active=True, quality=product.quality)
-        
 
-     
+
+
     except:
-        raise Http404 
+        raise Http404
 
-    try:        
+    try:
         images = Image.objects.filter(variation__pk=pk)
     except:
-        raise Http404 
+        raise Http404
 
     copa_res = []
     ziper = []
-    for copa in colorsandpattern: 
+    for copa in colorsandpattern:
         splited = copa.name.split("&")
-        if len(splited) > 1: 
+        if len(splited) > 1:
             ziper.append(copa)
-        else: 
+        else:
             copa_res.append(copa)
 
     if product.id == 12:
@@ -704,9 +704,9 @@ def codwizard(request):
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
     return render_to_response('variation/codwizard.html',
                    {'articles': articles,
-                    'colorsandpatterns': colorsandpatterns, 
-                    'sizes': SIZES, 
-                    'product': product, 
+                    'colorsandpatterns': colorsandpatterns,
+                    'sizes': SIZES,
+                    'product': product,
                     'cod': True
                    },
                    context_instance=RequestContext(request)
@@ -717,64 +717,64 @@ def fulldetail(request, pk):
         full_variation = FullVariation.objects.get(pk=pk)
     except:
         raise Http404
-    
+
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
 
-    full_variations_article = FullVariation.objects.filter(variation__article=full_variation.variation.article, size="42")  
+    full_variations_article = FullVariation.objects.filter(variation__article=full_variation.variation.article, size="42")
 
-    full_variations = FullVariation.objects.filter(variation=full_variation.variation)   
+    full_variations = FullVariation.objects.filter(variation=full_variation.variation)
 
     init_sizes = ['XS','S','M','L', 'XL', 'XXL']
 
-    size_list = []                           
+    size_list = []
 
-    for full_var in full_variations_article: 
+    for full_var in full_variations_article:
         color_pattern_str = str(full_var.variation.color.order)+"f_"+str(full_var.variation.pattern.order)+"m"
         full_var.cp = color_pattern_str
         num = int(full_var.pk)
         link = "/products/fullvariation/"+ str(num) + "/#" + str(full_var.variation) + " " + str(full_var)
         full_var.link = link
-        filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order) 
-        file = "/media/variations/"+ filename +"_1.jpg"  
-        full_var.image = file   
+        filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order)
+        file = "/media/variations/"+ filename +"_1.jpg"
+        full_var.image = file
 
 
     #mapping name size to number
     for full_var in full_variations:
 
-        if full_var.size == '34':         
+        if full_var.size == '34':
             size_list.append('XS')
             full_var.lettersize = 'XS'
-        elif full_var.size == '36': 
-            size_list.append('S')   
-            full_var.lettersize =  'S' 
-        elif full_var.size == '3840': 
-            size_list.append('M')  
+        elif full_var.size == '36':
+            size_list.append('S')
+            full_var.lettersize =  'S'
+        elif full_var.size == '3840':
+            size_list.append('M')
             full_var.lettersize = 'M'
-        elif full_var.size == '42': 
-            size_list.append('L') 
-            full_var.lettersize = 'L' 
-        elif full_var.size == '44': 
+        elif full_var.size == '42':
+            size_list.append('L')
+            full_var.lettersize = 'L'
+        elif full_var.size == '44':
             size_list.append('XL')
-            full_var.lettersize = 'XL'  
+            full_var.lettersize = 'XL'
         elif full_var.size == '46':
             size_list.append('XXL')
-            full_var.lettersize =  'XXL'  
-        else: 
+            full_var.lettersize =  'XXL'
+        else:
             print "no such size"
 
     variation_sizes  = f7(full_variations)
 
-    full_variations_article = Counter(full_variations_article) 
+    full_variations_article = Counter(full_variations_article)
     full_variations_article = list(full_variations_article)
 
     path_dir = settings.ROOT_DIR
-    filename = str(full_variation.variation.article.sku_number) + "_" + str(full_variation.variation.pattern.order) + "_" + str(full_variation.variation.color.order) 
+    filename = str(full_variation.variation.article.sku_number) + "_" + str(full_variation.variation.pattern.order) + "_" + str(full_variation.variation.color.order)
 
-    images = [] 
+    images = []
 
     for x in range(0, 3):
-        file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"        
+        file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"
         images.append(file)
 
     stock_value = full_variation.stock
@@ -783,10 +783,10 @@ def fulldetail(request, pk):
                    {'product': full_variation,
                    'images': images,
                    'sizes': variation_sizes,
-                   'init_sizes': init_sizes, 
-                   'full_variations': full_variations, 
+                   'init_sizes': init_sizes,
+                   'full_variations': full_variations,
                    'stock_value': stock_value,
-                   'full_variations_article': full_variations_article, 
+                   'full_variations_article': full_variations_article,
                    'colorsandpatterns': colorsandpatterns
                    },
                    context_instance=RequestContext(request)
@@ -797,64 +797,64 @@ def fulldetail_b(request, pk):
         full_variation = FullVariation.objects.get(pk=pk)
     except:
         raise Http404
-    
+
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
 
-    full_variations_article = FullVariation.objects.filter(variation__article=full_variation.variation.article, size="42")  
+    full_variations_article = FullVariation.objects.filter(variation__article=full_variation.variation.article, size="42")
 
-    full_variations = FullVariation.objects.filter(variation=full_variation.variation)   
+    full_variations = FullVariation.objects.filter(variation=full_variation.variation)
 
     init_sizes = ['XS','S','M','L', 'XL', 'XXL']
 
-    size_list = []                           
+    size_list = []
 
-    for full_var in full_variations_article: 
+    for full_var in full_variations_article:
         color_pattern_str = str(full_var.variation.color.order)+"f_"+str(full_var.variation.pattern.order)+"m"
         full_var.cp = color_pattern_str
         num = int(full_var.pk)
         link = "/products/fulldetail/"+ str(num) + "/#" + str(full_var.variation) + " " + str(full_var)
         full_var.link = link
-        filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order) 
-        file = "/media/variations/"+ filename +"_1.jpg"  
-        full_var.image = file   
+        filename = str(full_var.variation.article.sku_number) + "_" + str(full_var.variation.pattern.order) + "_" + str(full_var.variation.color.order)
+        file = "/media/variations/"+ filename +"_1.jpg"
+        full_var.image = file
 
 
     #mapping name size to number
     for full_var in full_variations:
 
-        if full_var.size == '34':         
+        if full_var.size == '34':
             size_list.append('XS')
             full_var.lettersize = 'XS'
-        elif full_var.size == '36': 
-            size_list.append('S')   
-            full_var.lettersize =  'S' 
-        elif full_var.size == '3840': 
-            size_list.append('M')  
+        elif full_var.size == '36':
+            size_list.append('S')
+            full_var.lettersize =  'S'
+        elif full_var.size == '3840':
+            size_list.append('M')
             full_var.lettersize = 'M'
-        elif full_var.size == '42': 
-            size_list.append('L') 
-            full_var.lettersize = 'L' 
-        elif full_var.size == '44': 
+        elif full_var.size == '42':
+            size_list.append('L')
+            full_var.lettersize = 'L'
+        elif full_var.size == '44':
             size_list.append('XL')
-            full_var.lettersize = 'XL'  
+            full_var.lettersize = 'XL'
         elif full_var.size == '46':
             size_list.append('XXL')
-            full_var.lettersize =  'XXL'  
-        else: 
+            full_var.lettersize =  'XXL'
+        else:
             print "no such size"
 
     variation_sizes  = f7(full_variations)
 
-    full_variations_article = Counter(full_variations_article) 
+    full_variations_article = Counter(full_variations_article)
     full_variations_article = list(full_variations_article)
 
     path_dir = settings.ROOT_DIR
-    filename = str(full_variation.variation.article.sku_number) + "_" + str(full_variation.variation.pattern.order) + "_" + str(full_variation.variation.color.order) 
+    filename = str(full_variation.variation.article.sku_number) + "_" + str(full_variation.variation.pattern.order) + "_" + str(full_variation.variation.color.order)
 
-    images = [] 
+    images = []
 
     for x in range(0, 3):
-        file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"        
+        file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"
         images.append(file)
 
     stock_value = full_variation.stock
@@ -863,10 +863,10 @@ def fulldetail_b(request, pk):
                    {'product': full_variation,
                    'images': images,
                    'sizes': variation_sizes,
-                   'init_sizes': init_sizes, 
-                   'full_variations': full_variations, 
+                   'init_sizes': init_sizes,
+                   'full_variations': full_variations,
                    'stock_value': stock_value,
-                   'full_variations_article': full_variations_article, 
+                   'full_variations_article': full_variations_article,
                    'colorsandpatterns': colorsandpatterns
                    },
                    context_instance=RequestContext(request)
@@ -888,15 +888,15 @@ def fulldetail_v(request, pk):
     except:
         raise Http404
 
-    try:        
+    try:
         images = Image.objects.filter(variation__pk=pk)
     except:
-        raise Http404 
+        raise Http404
 
     return render_to_response('variation/detail_v.html',
-                   {'product': product, 
-                   'sizes': sizes, 
-                   'colorsandpattern': colorsandpattern, 
+                   {'product': product,
+                   'sizes': sizes,
+                   'colorsandpattern': colorsandpattern,
                    'images': images
 
                    },
@@ -974,7 +974,7 @@ def category(request, name):
     pass
 
 
-def allArticles(request): 
+def allArticles(request):
     headers = get_headers()
     articles = get_articles(headers, 1)
 
@@ -983,19 +983,19 @@ def allArticles(request):
     }, context_instance=RequestContext(request))
 
 @login_required
-def variationduplicates(request, remove): 
+def variationduplicates(request, remove):
     variation = Variation.objects.all()
     uniq = []
     for var in variation:
-        greg = str(var.article.sku_number) + "_" + str(var.pattern) + "_" + str(var.color)  
-        if greg not in uniq: 
+        greg = str(var.article.sku_number) + "_" + str(var.pattern) + "_" + str(var.color)
+        if greg not in uniq:
             uniq.append(greg)
             print "---------", greg
         else:
             print greg
-            if remove == 1: 
+            if remove == 1:
                 var.delete()
-    print uniq        
+    print uniq
     return HttpResponse(status=200)
 
 # to show all articels
@@ -1005,23 +1005,23 @@ def allArt(request, what='', start_at=1, end_at=10):
     indx = int(start_at)
 
     articles = Article.objects.filter(active = True).order_by('name')
-    full_variations = FullVariation.objects.filter(active=True) 
+    full_variations = FullVariation.objects.filter(active=True)
 
     headers = get_headers()
     check_art = []
     new_art_set = []
 
-    for fullvar in full_variations: 
+    for fullvar in full_variations:
         data = {}
-        art_num = str(fullvar.variation.article.sku_number) + "_" + str(fullvar.variation.pattern.order) + "_" + str(fullvar.variation.color.order) + "_" + str(fullvar.size) 
-        
+        art_num = str(fullvar.variation.article.sku_number) + "_" + str(fullvar.variation.pattern.order) + "_" + str(fullvar.variation.color.order) + "_" + str(fullvar.size)
+
         data["Article"] = {}
         data["Article"]["Description"] = unicode(fullvar)
         data["Article"]["ArticleNumber"] = art_num
         data["Article"]["Price"] = str(fullvar.variation.article.price)
 
-        new_art_set.append(data) 
-    
+        new_art_set.append(data)
+
     for art in articles:
         data = {}
         art_num = art.sku_number
@@ -1030,56 +1030,56 @@ def allArt(request, what='', start_at=1, end_at=10):
         data["Article"]["Description"] = unicode(art)
         data["Article"]["ArticleNumber"] = art_num
         data["Article"]["Price"] = str(art.price)
-        new_art_set.append(data) 
-    
+        new_art_set.append(data)
+
     art_length = len(new_art_set)
-    
-    for art in new_art_set: 
+
+    for art in new_art_set:
         indx = indx + 1
         if indx > 1 and indx > int(start_at) and indx < int(end_at):
             sku_num = art['Article']['ArticleNumber']
             descript = art['Article']['Description']
 
-            res = get_article(headers, str(sku_num)) 
+            res = get_article(headers, str(sku_num))
             res = json.loads(res)
 
             if what == 'look':
                 try:
                     check_art.append(str(indx) + " : " + str(sku_num) + " - " + unicode(res['Article']['Description']))
-                except:  
+                except:
                     check_art.append("error: " + str(sku_num))
-            
-            elif what == 'addifnotexist': 
+
+            elif what == 'addifnotexist':
 
                 try:
-                    check_art.append("Exist: " + str(sku_num) + " " + unicode(res['Article']['Description'])) 
+                    check_art.append("Exist: " + str(sku_num) + " " + unicode(res['Article']['Description']))
                     status = 'found'
-                except:  
+                except:
                     status = 'notfound'
 
-                if status == "notfound": 
+                if status == "notfound":
                     check_art.append("Add ------------ Article: " + unicode(sku_num))
                     data = json.dumps({
                     "Article": {
                         "Description": unicode(descript),
-                        "ArticleNumber": unicode(sku_num), 
-                        "WebshopArticle": True, 
+                        "ArticleNumber": unicode(sku_num),
+                        "WebshopArticle": True,
                       }
                     })
                     created = create_article(str(sku_num), data, headers)
                     check_art.append(created)
 
 
-            elif what == 'setprice': 
+            elif what == 'setprice':
                 check_art.append("Add ------------ Price: " + unicode(sku_num))
                 price_res = get_price(str(sku_num), headers)
                 check_art.append(price_res)
                 price = json.loads(price_res)
-                
-                try: 
-                    if price['ErrorInformation']['code'] != '': 
+
+                try:
+                    if price['ErrorInformation']['code'] != '':
                         status = 'pricenotset'
-                except: 
+                except:
                     status = 'priceexist'
 
                 status = 'pricenotset'
@@ -1089,17 +1089,17 @@ def allArt(request, what='', start_at=1, end_at=10):
                           "Price": {
                             "ArticleNumber": unicode(sku_num),
                             "FromQuantity": 1,
-                            "Price": int(art["Article"]["Price"]), 
+                            "Price": int(art["Article"]["Price"]),
                             "PriceList": "A"
                         }
-                    })  
+                    })
                     updated = update_price(data, headers)
             else:
                 print "no of the above"
 
-   
+
     return render_to_response('variation/admin_view_update.html', {
-        'articles': articles, 
+        'articles': articles,
         'check_art': check_art,
         'art_length': art_length
     }, context_instance=RequestContext(request))
@@ -1108,75 +1108,75 @@ def allArt(request, what='', start_at=1, end_at=10):
 def allFullArt(request, quality):
 
     full_variations = FullVariation.objects.filter(active=True, variation__article__quality__slug__contains=quality)
-    
+
     headers = get_headers()
     check_art = []
 
     products = agigateFortnoxProducts()
-    
-    for art in full_variations: 
+
+    for art in full_variations:
         art_exist = False
-        sku_num = str(art.variation.article.sku_number) + "_" + str(art.variation.pattern.order) + "_" + str(art.variation.color.order) + "_" +  str(art.size)     
-        
-        res = get_article(headers, sku_num) 
+        sku_num = str(art.variation.article.sku_number) + "_" + str(art.variation.pattern.order) + "_" + str(art.variation.color.order) + "_" +  str(art.size)
+
+        res = get_article(headers, sku_num)
         res = json.loads(res)
-        
+
         try:
             d = res['Article']['ArticleNumber']
             check_art.append("ok")
-            art_exist = True 
-        except:  
+            art_exist = True
+        except:
             check_art.append("error: " + str(art.variation.article.sku_number) + " **** " + unicode(art.variation.article))
             headers = get_headers()
 
-        if art_exist == False:    
+        if art_exist == False:
             article_name = unicode(art.variation.article.name) + " " + unicode(art.variation.pattern) + " " + unicode(art.variation.color) + " " + unicode(art.size)
-                 
+
             data = json.dumps({
                 "Article": {
                     "Description": article_name ,
-                    "ArticleNumber": sku_num, 
-                    "WebshopArticle": True, 
+                    "ArticleNumber": sku_num,
+                    "WebshopArticle": True,
                 }
             })
             created = create_article(sku_num, data, headers)
 
     return render_to_response('variation/admin_view.html', {
-        'articles': full_variations, 
+        'articles': full_variations,
         'check_art': check_art
     }, context_instance=RequestContext(request))
 
-def agigateFortnoxProducts(): 
+def agigateFortnoxProducts():
     allart = []
     headers = get_headers()
     for page in range(0, 9):
-        allart_part = get_articles(headers, str(page))  
+        allart_part = get_articles(headers, str(page))
         allart_part = json.loads(allart_part)
-        try: 
+        try:
             products = allart_part['Articles']
 
-            for product in products: 
+            for product in products:
 
                 allart.append(product['ArticleNumber'])
-        except: 
+        except:
             pass
-    return allart 
+    return allart
 
-def checkConsistDjangoFortnox(request): 
-    
-    # get all variation and articles from django 
+def checkConsistDjangoFortnox(request):
+
+    # get all variation and articles from django
     articles = Article.objects.filter(active=True)
     # get fortnox headers
     headers = get_headers()
-    for art in articles: 
+    for art in articles:
       article_check = get_article(headers, art.sku_number)
       print article_check
 
 def allreaArt(request):
     reaarticles = ReaArticle.objects.all().order_by('status')
-    
+
     return render_to_response('variation/admin_rea_art.html', {
-        'articles': reaarticles, 
+        'articles': reaarticles,
 
     }, context_instance=RequestContext(request))
 
@@ -1192,7 +1192,7 @@ def articleList(request):
                               },
                              context_instance=RequestContext(request))
 
-def articlesCsv(request): 
+def articlesCsv(request):
     articles = Article.objects.filter(active = True).order_by('name')
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
@@ -1216,58 +1216,58 @@ def articlesCsv(request):
 
 
 
-def articlesTranferToFortnox(request): 
+def articlesTranferToFortnox(request):
     articles = Article.objects.filter(active = True).order_by('name')
     headers = get_headers()
-    
-    for art in articles: 
-        try: 
+
+    for art in articles:
+        try:
             sku_num = int(art.sku_number)
             sku_num = str(sku_num)
-        except: 
-            sku_num = str(1) 
+        except:
+            sku_num = str(1)
 
-        res = get_article(headers, int(sku_num)) 
+        res = get_article(headers, int(sku_num))
         data = json.dumps({
             "Article": {
                 "Description": art.name,
-                "ArticleNumber": int(sku_num), 
-                "WebshopArticle": True, 
+                "ArticleNumber": int(sku_num),
+                "WebshopArticle": True,
             }
         })
-        
-        if len(res) > 100: 
+
+        if len(res) > 100:
             exist = True
             updated = update_article(int(sku_num), data, headers)
-            print updated 
-        else: 
+            print updated
+        else:
             exist = False
             created = create_article(int(sku_num), data, headers)
-            print created   
+            print created
 
-    return HttpResponse(status=200)    
+    return HttpResponse(status=200)
 
-def fromCsvToFortnox(name, sku_number, stock_value): 
+def fromCsvToFortnox(name, sku_number, stock_value):
 
     headers = get_headers()
     data = json.dumps({
         "Article": {
             "Description": name,
-            "ArticleNumber": sku_number, 
-            "QuantityInStock": int(stock_value), 
+            "ArticleNumber": sku_number,
+            "QuantityInStock": int(stock_value),
         }
     })
     error_or_create = create_article(sku_number, data, headers)
 
-    return error_or_create   
-              
+    return error_or_create
+
 def fromCsvToFortnoxUpdate(name, sku_number, stock_value):
     headers = get_headers()
     data = json.dumps({
         "Article": {
             "Description": name,
-            "ArticleNumber": sku_number, 
-            "QuantityInStock": float(stock_value), 
+            "ArticleNumber": sku_number,
+            "QuantityInStock": float(stock_value),
         }
     })
 
@@ -1279,46 +1279,46 @@ def fromCsvToFortnoxUpdate(name, sku_number, stock_value):
         update_art = "error -------------"
         pass
 
-    return update_art 
+    return update_art
 
-def articleUpdateStock(request, sku_num, stock): 
+def articleUpdateStock(request, sku_num, stock):
     sku_number = sku_num
     headers = get_headers()
     article = Article.objects.get(sku_number = sku_number)
-     
-    res = get_article(headers, sku_number) 
+
+    res = get_article(headers, sku_number)
     data = json.dumps({
         "Article": {
             "Description": article.name,
-            "ArticleNumber": 1401, 
-            "QuantityInStock": stock, 
+            "ArticleNumber": 1401,
+            "QuantityInStock": stock,
         }
     })
-        
-    if len(res) > 100: 
+
+    if len(res) > 100:
         exist = True
         updated = update_article(sku_number, data, headers)
-        print updated 
+        print updated
 
-    return HttpResponse(status=200)    
+    return HttpResponse(status=200)
 
-# import or update fullvaration from csv                     
+# import or update fullvaration from csv
 def fromCsvToDjango(article, pattern, color, size, stock):
     no_simpel_create = 0
     print "je", article, pattern, color, size, stock
-    try: 
+    try:
         variation, created_variation = Variation.objects.get_or_create(article=article, pattern=pattern, color=color)
-    except: 
+    except:
         no_simpel_create = 1
-    # 
-    if no_simpel_create == 1: 
+    #
+    if no_simpel_create == 1:
         variation = Variation.objects.filter(article=article, pattern=pattern, color=color)[0]
         print "one var", variation
 
 
     fullvariation, created_fullvariation = FullVariation.objects.get_or_create(variation=variation, size=size, stock=stock)
     # if fullvariation exist only update the fullvaration with stockvalue
-    if created_fullvariation == False: 
+    if created_fullvariation == False:
         fullvariation.stock = stock
         print "---_"
         fullvariation.save()
@@ -1327,12 +1327,12 @@ def fromCsvToDjango(article, pattern, color, size, stock):
 def fromCsvToDjangoDisable(article, pattern, color, size):
     no_simpel_create = 0
 
-    try: 
+    try:
         variation = Variation.objects.get(article=article, pattern=pattern, color=color)
-    except: 
+    except:
         no_simpel_create = 1
 
-    if no_simpel_create == 1: 
+    if no_simpel_create == 1:
         variation = Variation.objects.filter(article=article, pattern=pattern, color=color)[0]
         print "one var", variation
 
@@ -1340,66 +1340,66 @@ def fromCsvToDjangoDisable(article, pattern, color, size):
     fullvariation = FullVariation.objects.get(variation=variation, size=size)
 
     # if fullvariation exist only update the fullvaration with stockvalue
-    try: 
+    try:
         fullvariation.active = False
         fullvariation.save()
-    except: 
+    except:
         print "disable error"
 
     return True
 
-#read csv and insert full varations or products ini django database and fortnox 
+#read csv and insert full varations or products ini django database and fortnox
 
-@login_required         
+@login_required
 def readCsvOnlyCheck(request):
     path_dir = settings.ROOT_DIR
     input_file = './modeller.csv'
-    count = 0 
-    # open file and sepate values 
+    count = 0
+    # open file and sepate values
     articles = []
     images = []
-    filefails = [] 
+    filefails = []
     check_art = "mjau"
     with open(input_file, 'r') as i:
         for line in i:
             sepatated_values = line.split(",")
-            count = count + 1 
+            count = count + 1
             img_count = 1
-            # see if values exist 
+            # see if values exist
 
-            if sepatated_values[1] != '' and count > 1: 
+            if sepatated_values[1] != '' and count > 1:
                 stock = sepatated_values[2]
                 if stock == '':
                     stock = 0
- 
+
                 full_article_sku = sepatated_values[1]
                 #pattern first
-                #split and get values from 1223_10_12_36 - article_sku, pattern, color, size 
+                #split and get values from 1223_10_12_36 - article_sku, pattern, color, size
                 splitart = full_article_sku.split("_")
-                try: 
+                try:
                     article = Article.objects.get(sku_number=splitart[0])
                 except:
                     article = "no article"
 
-                try: 
+                try:
                     color = Color.objects.get(order=splitart[2])
-                except: 
+                except:
                     color = "no color"
-                try:       
+                try:
                     pattern = Pattern.objects.get(order=splitart[1])
-                except: 
-                    color = "no pattern"      
+                except:
+                    color = "no pattern"
 
                 size = splitart[3]
 
-                img_name = splitart[0] + "_" + splitart[1] + "_" + splitart[2] + "_" + str(img_count) 
-                image = path_dir + "/media/variations/"+ str(img_name) + ".jpg"   
-                #print image     
-                file_exist = os.path.isfile(image) 
+                img_name = splitart[0] + "_" + splitart[1] + "_" + splitart[2] + "_" + str(img_count)
+                image = path_dir + "/media/variations/"+ str(img_name) + ".jpg"
+                #print image
+                file_exist = os.path.isfile(image)
 
-                if file_exist: 
+                if file_exist:
                     image = "ok: " + img_name
-                else: 
+                else:
                     image = "fail: " + img_name + " - " + str(article) + " - " + str(color) + " - " + str(pattern)
                     if size == '3840':
 
@@ -1411,50 +1411,50 @@ def readCsvOnlyCheck(request):
                 images.append(image)
 
                 img_count = img_count + 1
-                #print img_count 
+                #print img_count
                 if img_count == 4:
                     img_count = 1
 
-            else: 
-                pass 
+            else:
+                pass
 
     return render_to_response('variation/csv_view.html', {
-        'articles': articles, 
-        'images': images, 
+        'articles': articles,
+        'images': images,
         'failed': filefails
-    
+
     }, context_instance=RequestContext(request))
 
-#read csv and insert full varations or products ini django database and fortnox          
+#read csv and insert full varations or products ini django database and fortnox
 #url(r'^readcsv/(?P<what>[a-zA-Z0-9_.-]+)/$', 'readCsv'),
 @login_required
 def readCsv(request, what, start_at, end_at):
     input_file = './modeller.csv'
-    count = 0 
+    count = 0
     articles = []
     images = []
-    filefails = [] 
-    # open file and sepate values 
+    filefails = []
+    # open file and sepate values
     with open(input_file, 'r') as i:
         for line in i:
             sepatated_values = line.split(",")
-            count = count + 1 
-            # see if values exist 
+            count = count + 1
+            # see if values exist
             start_at = int(start_at)
             end_at = int(end_at)
             stock = sepatated_values[2]
 
-            if sepatated_values[1] != '' and count > 1 and count > start_at and count < end_at: 
+            if sepatated_values[1] != '' and count > 1 and count > start_at and count < end_at:
                 print "read this line"
                 stock = sepatated_values[2]
                 if stock == '':
                     stock = 0
 
                 full_article_sku = sepatated_values[1]
-                #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
+                #split and get values from 1223_10_12_36 - article_sku, color, pattern, size
                 splitart = full_article_sku.split("_")
                 article_name_ = ''
-                try: 
+                try:
                     article = Article.objects.get(sku_number=splitart[0])
                     color = Color.objects.get(order=splitart[2])
                     pattern = Pattern.objects.get(order=splitart[1])
@@ -1465,10 +1465,10 @@ def readCsv(request, what, start_at, end_at):
                 except:
                     print "art wrong ", count, sepatated_values[1]
                     articles.append("-------------")
-                    
 
-                if what == "fortnox": 
-                    # insert or update product in fortnox       
+
+                if what == "fortnox":
+                    # insert or update product in fortnox
                     try:
                         error_or_create = fromCsvToFortnox(article_name_, full_article_sku, stock)
                         filefails.append(error_or_create)
@@ -1478,12 +1478,12 @@ def readCsv(request, what, start_at, end_at):
                         pass
                         #print "fortnox wrong ", count, sepatated_values[1]
 
-                elif what == "updatefortnox": 
-                    print "update: ", article_name_ 
-                    # insert or update product in fortnox       
+                elif what == "updatefortnox":
+                    print "update: ", article_name_
+                    # insert or update product in fortnox
                     try:
-                        # get the stock value and update name 
-                        try: 
+                        # get the stock value and update name
+                        try:
                             variation = Variation.objects.filter(article=article, pattern=pattern, color=color)[0]
                             full_var = FullVariation.objects.get(variation=variation, size=size)
                             stock = full_var.stock
@@ -1491,12 +1491,12 @@ def readCsv(request, what, start_at, end_at):
                             pass
                         #print full_var, size, article_name_, full_article_sku, stock
                         #print error_or_create
-                        try: 
+                        try:
                             sizename = getFortnoxSize(size)
                             article_n = article_name_ + str(" (" + sizename +")")
                         except:
                             article_n = article_name_
-                                
+
                         error_or_create = fromCsvToFortnoxUpdate(article_n, full_article_sku, stock)
                         print error_or_create
                         filefails.append(error_or_create)
@@ -1504,58 +1504,58 @@ def readCsv(request, what, start_at, end_at):
                         pass
                         #print "fortnox wrong ", count, sepatated_values[1]
 
-                elif what == "django": 
+                elif what == "django":
                     # insert or update full_variation
                     try:
                         fromCsvToDjango(article, pattern, color, size, stock)
-                    except: 
+                    except:
                         print "django wrong ", count, sepatated_values[1]
-                elif what == "djangodisable": 
+                elif what == "djangodisable":
                     # insert or update full_variation
 
                     stock = 10
                     try:
                         fromCsvToDjangoDisable(article, pattern, color, size)
-                    except: 
+                    except:
                         print "django wrong ", count, sepatated_values[1]
-                else: 
-                    print "hej"            
-            else: 
+                else:
+                    print "hej"
+            else:
                 pass
     return render_to_response('variation/csv_view.html', {
-        'articles': articles, 
-        'images': images, 
+        'articles': articles,
+        'images': images,
         'failed': filefails
-    
+
     }, context_instance=RequestContext(request))
 
 @login_required
 def readCsvManchester(request, what, start_at, end_at):
     input_file = './manchester.csv'
-    count = 0 
+    count = 0
     articles = []
     images = []
     filefails = []
-    # open file and sepate values 
+    # open file and sepate values
     with open(input_file, 'r') as i:
         for line in i:
             sepatated_values = line.split(",")
 
-            count = count + 1 
-            # see if values exist 
+            count = count + 1
+            # see if values exist
             start_at = int(start_at)
             end_at = int(end_at)
             stock = sepatated_values[2]
 
-            if sepatated_values[1] != '' and count > 1 and count > start_at and count < end_at: 
+            if sepatated_values[1] != '' and count > 1 and count > start_at and count < end_at:
                 stock = sepatated_values[4]
                 if stock == '':
                     stock = 0
 
                 full_article_sku = sepatated_values[1]
-                #split and get values from 1223_10_12_36 - article_sku, color, pattern, size 
+                #split and get values from 1223_10_12_36 - article_sku, color, pattern, size
                 splitart = full_article_sku.split("_")
-                try: 
+                try:
                     article = Article.objects.get(sku_number=splitart[0])
                     color = Color.objects.get(order=splitart[2])
                     pattern = Pattern.objects.get(order=splitart[1])
@@ -1567,10 +1567,10 @@ def readCsvManchester(request, what, start_at, end_at):
                     article_name_ = ''
                     articles.append(article_name_)
 
-                if what == "fortnox": 
-                    # insert or update product in fortnox       
+                if what == "fortnox":
+                    # insert or update product in fortnox
                     try:
-                        try: 
+                        try:
                             sizename = getFortnoxSize(size)
                             article_n = article_name_ + str(" (" + sizename +")")
                             articles.append(article_name_)
@@ -1578,20 +1578,20 @@ def readCsvManchester(request, what, start_at, end_at):
                             article_n = article_name_
                             articles.append(article_name_)
 
-                        print "art --- ", article_n, full_article_sku   
+                        print "art --- ", article_n, full_article_sku
                         error_or_create = fromCsvToFortnox(article_n, full_article_sku, stock)
                         #print error_or_create
                     except:
                         pass
                         #print "fortnox wrong ", count, sepatated_values[1]
 
-                elif what == "updatefortnox": 
-                  print "update: ", article_name_ 
+                elif what == "updatefortnox":
+                  print "update: ", article_name_
                   # insert or update product in fortnox
 
                   try:
-                      # get the stock value and update name 
-                      try: 
+                      # get the stock value and update name
+                      try:
                           variation = Variation.objects.filter(article=article, pattern=pattern, color=color)[0]
                           full_var = FullVariation.objects.get(variation=variation, size=size)
                           stock = full_var.stock
@@ -1599,14 +1599,14 @@ def readCsvManchester(request, what, start_at, end_at):
                           pass
                       #print full_var, size, article_name_, full_article_sku, stock
                       #print error_or_create
-                      try: 
+                      try:
                           sizename = getFortnoxSize(size)
                           article_n = article_name_ + str(" (" + sizename +")")
                           articles.append(article_n)
                       except:
                           article_n = article_name_
                           articles.append(article_n)
-                              
+
                       error_or_create = fromCsvToFortnoxUpdate(article_n, full_article_sku, stock)
                       print error_or_create
                       filefails.append(error_or_create)
@@ -1614,35 +1614,35 @@ def readCsvManchester(request, what, start_at, end_at):
                       pass
                       #print "fortnox wrong ", count, sepatated_values[1]
 
-                elif what == "django": 
+                elif what == "django":
                     # insert or update full_variation
                     print splitart[0]
                     fromCsvToDjango(article, pattern, color, size, stock)
 
-                else: 
-                    print "hej"            
-            else: 
+                else:
+                    print "hej"
+            else:
                 pass
     return render_to_response('variation/csv_view.html', {
-        'articles': articles, 
-        'images': images, 
+        'articles': articles,
+        'images': images,
         'failed': filefails
-    
+
     }, context_instance=RequestContext(request))
 
 @login_required
 def removeCsv(request, start_at, end_at):
     input_file = './modeller.csv'
-    count = 0 
+    count = 0
     header = get_headers()
-    # open file and sepate values 
+    # open file and sepate values
     with open(input_file, 'r') as i:
         for line in i:
             sepatated_values = line.split(",")
-            count = count + 1 
-            # see if values exist 
+            count = count + 1
+            # see if values exist
 
-            if sepatated_values[1] != '' and count > 1 and count > start_at and count < end_at: 
+            if sepatated_values[1] != '' and count > 1 and count > start_at and count < end_at:
                 print "read this line"
                 stock = sepatated_values[2]
                 if stock == '':
@@ -1654,19 +1654,27 @@ def removeCsv(request, start_at, end_at):
 
     return HttpResponse(status=200)
 
-# 10, 6, 8, 
+@login_required
+def setActiveNon(request):
+    fullart = FullVariation.objects.filter(variation__article__quality=1)
+    for art in fullart:
+        art.active = False
+        art.save()
+    return HttpResponse(status=200)
+
+# 10, 6, 8,
 @login_required
 def removeByColor(request, color, act):
     print "remove color: " + str(color)
-    count = 0 
-    fullart_bycolor = FullVariation.objects.filter(variation__article__quality=1, variation__color__order=int(color)) 
+    count = 0
+    fullart_bycolor = FullVariation.objects.filter(variation__article__quality=1, variation__color__order=int(color))
     print fullart_bycolor
-    for art in fullart_bycolor: 
+    for art in fullart_bycolor:
         print art.variation.color
-        if int(act) == 1: 
+        if int(act) == 1:
             art.active = True
         else:
-            art.active = False  
+            art.active = False
         art.save()
 
     return HttpResponse(status=200)
@@ -1675,30 +1683,30 @@ def removeByColor(request, color, act):
 @login_required
 def orderCsv(request):
     input_file = './order.csv'
-    count = 0 
+    count = 0
     sizes = [34, 36, 3840, 42, 44, 46]
-    # open file and sepate values 
+    # open file and sepate values
     with open(input_file, 'r') as i:
 
         for line in i:
-            #print line 
+            #print line
             sepatated_values = line.split(",")
-            count = count + 1 
-            # see if values exist 
-            if sepatated_values[0] != '': 
-                art_and_partner = sepatated_values[0] 
+            count = count + 1
+            # see if values exist
+            if sepatated_values[0] != '':
+                art_and_partner = sepatated_values[0]
                 splitart = art_and_partner.split("_")
 
-                try: 
+                try:
                     article = Article.objects.get(sku_number=splitart[0])
                     pattern = Pattern.objects.get(order=splitart[1])
                     color = Color.objects.get(order=splitart[2])
                     variation = Variation.objects.get(article=article, pattern=pattern, color=color)
-                    print variation 
+                    print variation
                     order = 100 + count
                     print art_and_partner, splitart, order
-                    for size in sizes: 
-                         
+                    for size in sizes:
+
                         try:
                             fullvar = FullVariation.objects.get(variation=variation, size=size)
                             fullvar.order = order
@@ -1717,23 +1725,23 @@ def orderCsv(request):
 def setfullstockCsv(request):
     input_file = './modeller.csv'
 
-    # open file and sepate values 
+    # open file and sepate values
     with open(input_file, 'r') as i:
 
         for line in i:
             sepatated_values = line.split(",")
             print sepatated_values
-            if sepatated_values[1] != '': 
-                art_and_partner = sepatated_values[1] 
+            if sepatated_values[1] != '':
+                art_and_partner = sepatated_values[1]
                 splitart = art_and_partner.split("_")
-                print splitart 
-                try: 
+                print splitart
+                try:
                     print art_and_partner, splitart
                     article = Article.objects.get(sku_number=splitart[0])
                     pattern = Pattern.objects.get(order=splitart[1])
                     color = Color.objects.get(order=splitart[2])
                     variation = Variation.objects.get(article=article, pattern=pattern, color=color)
-                    print variation 
+                    print variation
                     print splitart[3]
                     fullvar = FullVariation.objects.get(variation=variation, size=splitart[3])
                     fullvar.stock = sepatated_values[2]
@@ -1749,27 +1757,27 @@ def setfullstockCsv(request):
 def orderfromCsv(request):
     input_file = './ordercsv.csv'
 
-    # open file and sepate values 
+    # open file and sepate values
     with open(input_file, 'r') as i:
 
         for line in i:
-            print i 
+            print i
             sepatated_values = line.split(",")
             print sepatated_values
-            if sepatated_values[0] != '': 
-                art_and_partner = sepatated_values[0] 
+            if sepatated_values[0] != '':
+                art_and_partner = sepatated_values[0]
                 splitart = art_and_partner.split("_")
-                try: 
+                try:
                     print splitart
                     article = Article.objects.get(sku_number=splitart[0])
                     pattern = Pattern.objects.get(order=splitart[1])
                     color = Color.objects.get(order=splitart[2])
                     variation = Variation.objects.get(article=article, pattern=pattern, color=color)
-                    print variation 
-                    
+                    print variation
+
                     fullvar = FullVariation.objects.get(variation=variation, size=splitart[3])
-                    fullvar.order = i + 200 
-                    
+                    fullvar.order = i + 200
+
                     print "it worked"
                 except:
                     print "error"
@@ -1780,14 +1788,14 @@ def orderfromCsv(request):
 def downFromCsv(request):
     input_file = './downlist.csv'
 
-    # open file and sepate values 
+    # open file and sepate values
     with open(input_file, 'r') as i:
         for line in i:
-            #print line 
+            #print line
             sepatated_values = line.split(",")
-            # see if values exist 
-            if sepatated_values[0] != '': 
-                fullart = sepatated_values[0] 
+            # see if values exist
+            if sepatated_values[0] != '':
+                fullart = sepatated_values[0]
                 splitart = fullkey.split("_")
                 article = Article.objects.get(sku_number=splitart[0])
                 pattern = Pattern.objects.get(order=splitart[2])
@@ -1795,9 +1803,9 @@ def downFromCsv(request):
                 size = splitart[3]
                 variation = Variation.objects.get(article=article, pattern=pattern, color=color)
                 fullvar = FullVariation.objects.get(variation=variation, size=size)
-                if (fullvar.stock > 0): 
-                    fullvar.stock = fullvar.stock - 1 
-                    fullvar.save()    
+                if (fullvar.stock > 0):
+                    fullvar.stock = fullvar.stock - 1
+                    fullvar.save()
                 print fullvar.stock
     return HttpResponse(status=200)
 
@@ -1810,9 +1818,9 @@ def FullDown(request, fullkey):
     size = splitart[3]
     variation = Variation.objects.get(article=article, pattern=pattern, color=color)
     fullvar = FullVariation.objects.get(variation=variation, size=size)
-    if (fullvar.stock > 0): 
-        fullvar.stock = fullvar.stock - 1 
-        fullvar.save()    
+    if (fullvar.stock > 0):
+        fullvar.stock = fullvar.stock - 1
+        fullvar.save()
     print fullvar.stock
 
     return HttpResponse(status=200)
@@ -1822,46 +1830,46 @@ def FullDown(request, fullkey):
 def setDiscount(request, what=''):
     discount = None
     articles = Article.objects.all()
-    if what == 'set': 
+    if what == 'set':
         discount = Discount.objects.get(reason='survive2016')
-    elif what == 'reset': 
+    elif what == 'reset':
         discount = None
-    elif what == 'setplysch20': 
-        discount = Discount.objects.get(reason='plysch20') 
+    elif what == 'setplysch20':
+        discount = Discount.objects.get(reason='plysch20')
         articles = Article.objects.filter(quality__slug__contains = 'plysch')
-    else: 
+    else:
         discount == False
 
-    if discount != False:     
+    if discount != False:
         for art in articles:
-          art.discount = discount 
+          art.discount = discount
           art.save()
     return HttpResponse(status=200)
 
 @login_required
 def setPriceFromlist(request):
     input_file = './newprices.csv'
-    count = 0 
-    # open file and sepate values 
+    count = 0
+    # open file and sepate values
     with open(input_file, 'r') as i:
         for line in i:
             count = count + 1
             if count > 1:
                 sepatated_values = line.split(",")
-                
+
                 sku = sepatated_values[3]
                 price = sepatated_values[4]
                 ondemandpris = sepatated_values[5]
-            
-                try: 
+
+                try:
                     article = Article.objects.get(sku_number=sku)
                     print article
-                    article.price = price                
+                    article.price = price
                     article.ondemand_cost = ondemandpris
                     article.save()
-                except: 
+                except:
                     print "no article"
-                
+
     return HttpResponse(status=200)
 
 @login_required
