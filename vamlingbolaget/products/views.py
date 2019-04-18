@@ -120,6 +120,7 @@ def cutondemandApi(request, category):
                 print index_c
                 print chil.name
                 print chil.file.name
+                print chil.pk
                 allpossiblities["articles"].append({
                     "article": chil.name,
                     "sku": chil.sku_number,
