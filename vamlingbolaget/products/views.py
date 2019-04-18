@@ -112,23 +112,27 @@ def cutondemandApi(request, category):
     allpossiblities["sizes"] = active_sizes
 
     allpossiblities["articles"] = []
-    print articles 
+    print len(articles)
     for chil in articles:
         print chil
         if (chil.sku_number != '0000'):
-            allpossiblities["articles"].append({
-                "article": chil.name,
-                "sku": chil.sku_number,
-                "price": chil.price,
-                "id": chil.id,
-                "pk": chil.pk,
-                "img": chil.file.name,
-                "type": chil.type.name,
-                "category":chil.category.name,
-                "description": chil.description,
-                "quality": chil.quality.name,
-                "cod_cost": chil.ondemand_cost
-            })
+            try:
+                allpossiblities["articles"].append({
+                    "article": chil.name,
+                    "sku": chil.sku_number,
+                    "price": chil.price,
+                    "id": chil.id,
+                    "pk": chil.pk,
+                    "img": chil.file.name,
+                    "type": chil.type.name,
+                    "category":chil.category.name,
+                    "description": chil.description,
+                    "quality": chil.quality.name,
+                    "cod_cost": chil.ondemand_cost
+                    })
+            except:
+                print "error"
+
     print "when art"
     print allpossiblities
     try:
