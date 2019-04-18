@@ -89,8 +89,7 @@ def cutondemandApi(request, category):
 
         variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('article__type')
     print "cut on demand api"
-    print products
-    print variations
+
     articles = Article.objects.filter(quality__slug ='silkestrika', active=True).order_by('type')
     print articles
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
@@ -111,7 +110,8 @@ def cutondemandApi(request, category):
           })
 
     allpossiblities["sizes"] = active_sizes
-
+    print "when sizes"
+    print allpossiblities
     allpossiblities["articles"] = []
 
     for chil in articles:
@@ -129,7 +129,8 @@ def cutondemandApi(request, category):
                 "quality": chil.quality.name,
                 "cod_cost": chil.ondemand_cost
             })
-
+    print "when art"
+    print allpossiblities
     try:
         sellart = FullVariation.objects.get(pk=1994)
         allpossiblities["single"] = [{
