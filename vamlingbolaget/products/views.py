@@ -88,7 +88,6 @@ def cutondemandApi(request, category):
     articles = Article.objects.filter(quality__slug ='silkestrika', active=True).order_by('type')
 
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
-    print colorsandpatterns
 
     active_sizes = SIZES
     allpossiblities = {}
@@ -206,6 +205,7 @@ def cutondemandApi(request, category):
               })
     # TODO add sizes
     resp = json.dumps(allpossiblities)
+    print resp
     return HttpResponse(resp, content_type="application/json")
 
 
