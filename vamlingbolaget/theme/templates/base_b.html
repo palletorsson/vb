@@ -18,11 +18,11 @@
       <!-- // -->
       <style>
         body {
-          font-family: "Century Gothic", -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Helvetica Neue", Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; 
+          font-family: "Century Gothic", -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Helvetica Neue", Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	        font-size: 14px;
         }
         footer {
-          z-index: 200; 
+          z-index: 200;
         }
 
         .row:before {
@@ -32,8 +32,8 @@
         .row:after {
             content: '';
           }
-         
-        
+
+
         .top_widget_text {
           font-size: 12px;
         }
@@ -46,13 +46,13 @@
         }
 
         .vb_logo {
-           width:35%; 
-           height: auto; 
-           min-width: 200px; 
+           width:35%;
+           height: auto;
+           min-width: 200px;
         }
 
         .topminheight {
-          min-height: 57px; 
+          min-height: 57px;
         }
         .vb_important_text {
           color: #000 !important;
@@ -64,7 +64,7 @@
           text-transform: uppercase !important;
           font-weight: 400;
         }
-        .vb_link:hover { 
+        .vb_link:hover {
           color: grey !important;
         }
         .l-s-1 {
@@ -72,19 +72,19 @@
           padding: .25rem 1.5rem;
           font-weight: 500;
           font-size: 70%;
-          margin-top: 6px; 
+          margin-top: 6px;
         }
-        .s-80 {     
+        .s-80 {
           font-weight: 400;
           font-size: 80%;
-  
+
         }
-        .s-80-upper {     
+        .s-80-upper {
           font-weight: 800;
           font-size: 80%;
           text-transform: uppercase !important;
         }
-        .s-90-upper {     
+        .s-90-upper {
           font-weight: 800;
           font-size: 90%;
           text-transform: uppercase !important;
@@ -103,7 +103,7 @@
             display:none
         }
         .img-100p {
-          width: 100%; 
+          width: 100%;
         }
         .active {
           font-weight: 900;
@@ -129,25 +129,25 @@
 
         }
         .downscroll {
-          position: fixed; 
-          bottom: 20px; 
-          color: white; 
+          position: fixed;
+          bottom: 20px;
+          color: white;
           left: 48%;
         }
-        .sidebar-fixed {       
+        .sidebar-fixed {
             padding: 50px 0 0px 0;
             position: fixed;
-            top: 160px; 
-            left: 16px; 
-            margin-bottom: 800px; 
-            z-index: 100; 
+            top: 160px;
+            left: 16px;
+            margin-bottom: 800px;
+            z-index: 100;
             max-width: 260px;
         }
         .sidebar {
           height: 100%;
         }
         .noheig {
-          height: 0px; 
+          height: 0px;
         }
         @media (min-width: 992px) {
         .modal-lg {
@@ -157,44 +157,44 @@
       </style>
 
   </head>
-  
+
   <body>
     <!-- 3 parts inbetween -->
     <header class="vb-header pt-3 bg-white" >
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-md-12 mb-1 text-center">
-            <div class="mb-1"> 
-              <span class="d-none d-md-block d-sm-none mb-1"> 
+            <div class="mb-1">
+              <span class="d-none d-md-block d-sm-none mb-1">
                 <img src="http://www.vamlingbolaget.com/media/tagline_orange.png" alt="tagline - svensk produktion och design" width="260px" height="auto">
               </span>
           </div>
-            
+
           </div>
         </div>
-      </header> 
+      </header>
       <header class="vb-header sticky-top py-3 bg-white" >
         <div class="row flex-nowrap sticky-top justify-content-between align-items-center">
           <div class="col-md-12 mb-1 text-center">
             <div>
-                <a class="nav-link p-0" href="/"><img src="http://www.vamlingbolaget.com/media/Vamlingbolaget_orange.png" alt="vamlingbolaget" class="vb_logo" width"60%"></a>  
+                <a class="nav-link p-0" href="/"><img src="http://www.vamlingbolaget.com/media/Vamlingbolaget_orange.png" alt="vamlingbolaget" class="vb_logo" width"60%"></a>
               </div>
           </div>
         </div>
-        {% if language %} 
-        <div style="position: fixed; top: 12px; left: 60px; z-index:300;" class="d-none d-md-block d-sm-none"><!-- language --> 
+        {% if language %}
+        <div style="position: fixed; top: 12px; left: 60px; z-index:300;" class="d-none d-md-block d-sm-none"><!-- language -->
           <div class="btn vb_top_color dropdown-toggle top_widget_text" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             LANGUAGE
           </div>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <p class="dropdown-item m-2 py-2"   > --- </p>
              <a class="dropdown-item m-2 py-2 change_lang"  href="#"  id="sv">Svenska</a>
-            
+
              <a class="dropdown-item m-2 py-2 change_lang" href="#" id="en">English</a>
-       
+
              <a class="dropdown-item m-2 py-2 change_lang" href="#" id="de">Deutsch </a>
-       
+
              <a class="dropdown-item m-2 py-2 change_lang" href="#" id="fi">Suomalainen </a>
-         
+
              <a class="dropdown-item py-2 change_lang" href="#" id="da">Dansk </a>
            </div>
            <form action="/i18n/setlang/" method="post" id="lang" >
@@ -204,10 +204,10 @@
          </form>
          </div> <!-- / language -->
          {% endif %}
-         
-         {% if cod %} 
-    
-        <div style="position: fixed; top: 12px; left: 60px; z-index:300;"><!-- language --> 
+
+         {% if cod %}
+
+        <div style="position: fixed; top: 12px; left: 60px; z-index:300;"><!-- language -->
         <a class="nav-link vb_top_color" href="/products/">   <i class="fa fa-caret-left mr-2 vb_top_color" aria-hidden="true"></i> {% trans "Shop" %} </a>
          </div> <!-- / back to shop in cut on demand -->
          {% endif %}
@@ -216,7 +216,7 @@
           <ul class="navbar-brand align-top mr-md-2 navbar-nav flex-row pull-right d-md-flex pt-0 pl-4" style="position: fixed; top: 0px; right: 16px; z-index:300">
             <li class="nav-item">
                 <a id="token" class="nav-item nav-link mr-md-2 px-2" href="/cart/show/">
-                  <button type="button" class="btn rounded-0 button_has_item" style="background-color:white;"> 
+                  <button type="button" class="btn rounded-0 button_has_item" style="background-color:white;">
                       <span class="float-right top_widget_text mt-1">
                       <i class="fa fa-shopping-bag mr-2 vb_top_color" aria-hidden="true"></i>
                         <span class="d-none d-md-block d-xs-none float-right">
@@ -230,13 +230,13 @@
           </ul>
           <div id="updatecart" style="position: fixed; top: 80px; right: 16px; z-index:301"> </div>
           </div>  <!-- / cart -->
-  
-      </header> 
-      {% if showtopmenu %} 
+
+      </header>
+      {% if showtopmenu %}
     <!-- 3 parts inbetween -->
     <header class="vb-header pt-1 bg-white" >
-    
-        </div> <!-- / col --> 
+
+        </div> <!-- / col -->
         <div class="col-12 topminheight"> <!-- logo, menu -->
           <div class="text-center">
               <nav class="navbar navbar-expand-lg navbar-light bg-white">
@@ -244,7 +244,7 @@
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center" style="z-index:310" id="navbarSupportedContent">
-                <ul class="nav">   
+                <ul class="nav">
                   <li class="nav-item px-2">
                     <a class="nav-link vb_top_color" href="/products/">{% trans "Shop" %} </a>
                   </li>
@@ -254,21 +254,21 @@
                   <li class="nav-item px-2">
                       <a class="nav-link vb_top_color" href="/products/cut/">{% trans "Cut on Demand" %}</a>
                     </li>
-                    <li class="nav-item px-2">
+                  <!--  <li class="nav-item px-2">
                         <a class="nav-link vb_top_color" href="/products/rea/">{% trans "Rea" %}</a>
-                      </li> 
-                </ul> 
-              </div>  
-              
+                      </li>  -->
+                </ul>
+              </div>
+
             </nav>
-          </div> 
-         
+          </div>
+
         </div> <!-- / col-4 logo, menu -->
-        
+
       </div>
     </header> <!-- / vb-header -->
     {% endif %}
-    <span id="widget_quantity" class="invisible">{{ numbers }}</span> 
+    <span id="widget_quantity" class="invisible">{{ numbers }}</span>
     {% block superstretchpage %}
     <div class="container-fluid m-2 p-4"> <!--this is for the left margin -->
       <div class="row firstrow">
@@ -283,20 +283,20 @@
 
             {% block allcontent %}
             <nav class="col-md-3 d-none pr-5 d-md-block sidebar d-none d-xs-block d-md-none">
-                
+
                   <div class="row ml-2">
-       
+
                     {% block sidebar %} {% endblock %}
                   </div>
             </nav>
-           
+
             <main role="main" class="col-md-8 col-lg-8 pt-3 px-4 justify-content-start"  style="height : 800px; overflow : auto" >
-                
+
                 {% block content %} {% endblock %}
-              
+
             </main>
-         
-     
+
+
             {% endblock %} <!-- end allcontent -->
         {% endblock %} <!-- end stretchpage -->
     </div>
@@ -308,16 +308,16 @@
            {% include "footer_b.html" %}
         </footer>
     {% endblock %}
-    
+
     {% include "lang.html" %}
-  
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 	<script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
 <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us7.list-manage.com","uuid":"52cd9ca3f312a5e55e98cb1b7","lid":"712d8f7574","uniqueMethods":false}) })</script>
-        
+
 </div>
 </div>
- 
+
  </body>
 </html>
