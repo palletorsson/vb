@@ -112,10 +112,13 @@ def cutondemandApi(request, category):
     allpossiblities["sizes"] = active_sizes
 
     allpossiblities["articles"] = []
-
+    index_c = 0
     for chil in articles:
+        index_c = index_c + 1
         if (chil.sku_number != '0000'):
             try:
+                print index_c
+                print chil.name
                 allpossiblities["articles"].append({
                     "article": chil.name,
                     "sku": chil.sku_number,
