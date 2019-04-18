@@ -227,7 +227,7 @@ def cutondemandApi1(request, category):
 
 def cutondemandApi(request, category):
     resp = json.dumps(cutjson)
-    print resp
+    #print resp
     return HttpResponse(resp, content_type="application/json")
 
 def fullindex(request):
