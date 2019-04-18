@@ -91,7 +91,7 @@ def cutondemandApi(request, category):
     print "cut on demand api"
 
     articles = Article.objects.filter(quality__slug ='silkestrika', active=True).order_by('type')
-    print articles
+
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
 
     active_sizes = SIZES
@@ -110,11 +110,11 @@ def cutondemandApi(request, category):
           })
 
     allpossiblities["sizes"] = active_sizes
-    print "when sizes"
-    print allpossiblities
+    
     allpossiblities["articles"] = []
 
     for chil in articles:
+        print chil
         if (chil.sku_number != '0000'):
             allpossiblities["articles"].append({
                 "article": chil.name,
