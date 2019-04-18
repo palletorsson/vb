@@ -256,7 +256,7 @@ def fullindexarticle(request):
                              {'products': full_variation,
                               'qualities': qualities,
                               'types': types,
-                              'rea': True
+                              'rea': False
                               },
                              context_instance=RequestContext(request))
 
@@ -270,7 +270,7 @@ def fulllastindex(request):
                              {'products': full_variation,
                               'qualities': qualities,
                               'types': types,
-                              'rea': True
+                              'rea': False
                               },
                              context_instance=RequestContext(request))
 
@@ -351,7 +351,7 @@ def reaindex_b(request):
     types = Category.objects.filter(active=True)
     atypes = Type.objects.filter(order__lte=5, active=True)
 
-    rea = "true"
+    rea = "false"
     sizes = SIZES
 
     return render_to_response('variation/fullindex.html',
@@ -374,7 +374,7 @@ register = template.Library()
 
 
 def reareact(request):
-    rea = "true"
+    rea = "false"
     sizes = SIZES
     atypes = Type.objects.filter(order__lte=5, active=True)
     return render_to_response('variation/reatest.html',
@@ -386,7 +386,7 @@ def reareact(request):
                              context_instance=RequestContext(request))
 
 def reareact_b(request):
-    rea = "true"
+    rea = "false"
     sizes = SIZES
     atypes = Type.objects.filter(order__lte=5, active=True)
     return render_to_response('variation/reareact.html',
@@ -398,7 +398,7 @@ def reareact_b(request):
                              context_instance=RequestContext(request))
 
 def reacut_b(request):
-    rea = "true"
+    rea = "false"
     sizes = SIZES
     atypes = Type.objects.filter(order__lte=5, active=True)
     return render_to_response('variation/cutreact.html',
@@ -446,7 +446,7 @@ def rea_by_size(request, key):
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     atypes = Type.objects.filter(order__lte=5, active=True)
-    rea = "true"
+    rea = "false"
     sizes = SIZES
     return render_to_response('variation/reaindex.html',
              {'products': products,
@@ -464,7 +464,7 @@ def rea_by_type(request, key):
     qualities = Quality.objects.filter(active=True)
     types = Category.objects.filter(active=True)
     atypes = Type.objects.filter(order__lte=5, active=True)
-    rea = "true"
+    rea = "false"
     sizes = SIZES
     return render_to_response('variation/reaindex.html',
              {'products': products,
