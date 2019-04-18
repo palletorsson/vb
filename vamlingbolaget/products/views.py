@@ -78,18 +78,19 @@ def cutondemandApiSingle(request, sku_number):
 def cutondemandApi(request, category):
     print category
     models = Article.objects.filter(active=True).order_by('category')
-    #if (category != 'pc'):
-        #print "not pc"
-    if (category == 'all'):
-        print "its all"
-        products = FullVariation.objects.filter(active=True, size=3840).order_by('order')
-    else:
-        print "its not all"
-        products = FullVariation.objects.filter(active=True, size=3840).order_by('order')
+    if (category != 'pc'):
+        print "not pc"
+        if (category == 'all'):
+            print "its all"
+            products = FullVariation.objects.filter(active=True, size=3840).order_by('order')
+        else:
+            print "its not all"
+            products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='silkestrika').order_by('order')
 
-        variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('article__type')
+            variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('article__type')
     print "cut on demand api"
-
+    print products
+    print variations
     articles = Article.objects.filter(quality__slug ='silkestrika', active=True).order_by('type')
 
     colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='silkestrika')
@@ -112,9 +113,8 @@ def cutondemandApi(request, category):
     allpossiblities["sizes"] = active_sizes
 
     allpossiblities["articles"] = []
-    print len(articles)
+
     for chil in articles:
-        print chil
         if (chil.sku_number != '0000'):
             try:
                 allpossiblities["articles"].append({
@@ -129,12 +129,10 @@ def cutondemandApi(request, category):
                     "description": chil.description,
                     "quality": chil.quality.name,
                     "cod_cost": chil.ondemand_cost
-                    })
+                })
             except:
-                print "error"
+                print "no such art"
 
-    print "when art"
-    print allpossiblities
     try:
         sellart = FullVariation.objects.get(pk=1994)
         allpossiblities["single"] = [{
@@ -216,8 +214,7 @@ def cutondemandApi(request, category):
               })
     # TODO add sizes
     resp = json.dumps(allpossiblities)
-    print "all allpossiblities"
-    print allpossiblities
+    print resp
     return HttpResponse(resp, content_type="application/json")
 
 
