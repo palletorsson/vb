@@ -79,9 +79,12 @@ def cutondemandApi(request, category):
     print category
     models = Article.objects.filter(active=True).order_by('category')
     if (category != 'pc'):
+        print "not pc"
         if (category == 'all'):
+            print "its all"
             products = FullVariation.objects.filter(active=True, size=3840).order_by('order')
         else:
+            print "its not all"
             products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='silkestrika').order_by('order')
 
             variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('article__type')
