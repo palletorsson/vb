@@ -77,7 +77,7 @@ def cutondemandApiSingle(request, sku_number):
     return HttpResponse(resp, content_type="application/json")
 
 
-def cutondemandApi(request, category):
+def cutondemandApi2(request, category):
     print category
     models = Article.objects.filter(active=True).order_by('category')
     #if (category != 'pc'):
@@ -224,7 +224,7 @@ def cutondemandApi(request, category):
     return HttpResponse(resp, content_type="application/json")
 
 
-def cutondemandApi1(request, category):
+def cutondemandApi(request, category):
     resp = json.dumps(cutjson)
     #print resp
     return HttpResponse(resp, content_type="application/json")
