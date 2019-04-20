@@ -220,7 +220,7 @@ def cutondemandApi(request, category):
               })
     # TODO add sizes
     resp = json.dumps(allpossiblities)
-    print resp
+    print resp.encode('utf8')
     return HttpResponse(resp, content_type="application/json")
 
 
