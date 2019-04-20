@@ -219,10 +219,9 @@ def cutondemandApi(request, category):
               "cod_cost": a.ondemand_cost
               })
     # TODO add sizes
-    resp = json.dumps(allpossiblities)
+    resp = json.dumps(allpossiblities, ensure_ascii=False)
     print resp
-    return HttpResponse(resp, ensure_ascii=False, content_type="application/json")
-
+    return HttpResponse(resp, content_type="application/json")
 
 def cutondemandApi1(request, category):
     resp = json.dumps(cutjson)
