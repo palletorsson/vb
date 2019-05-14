@@ -18,8 +18,672 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
-cutjson = {"articles": [{"category": "Kvinna", "description": "Vid utställd klänning med u-ringad hals och lång raglanärm. Relativt nätt upptill och mycket vidd nedtill.", "price": 1495, "article": "Raglanklänning lång ärm", "quality": "Silkestrikå", "id": 1, "sku": "1008", "cod_cost": 150, "img": "uploads/1_langarmad_raglanklanning.jpg", "pk": 1, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Figursydd klänning med klock i kjolen och v-ringad bandkantad hals. Smal till normal passform.", "price": 1450, "article": "V-klänning kort ärm", "quality": "Silkestrikå", "id": 5, "sku": "9807", "cod_cost": 150, "img": "uploads/1_kortarmad_v-klanning.jpg", "pk": 5, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Figursydd klockad klänning med bandkantad v-ringad hals och lång ärm. Slutar under knät. Smal till normal passform.", "price": 1495, "article": "V-klänning lång ärm", "quality": "Silkestrikå", "id": 10, "sku": "9808", "cod_cost": 150, "img": "uploads/1_langarmad_v-klanning.jpg", "pk": 10, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Bandkantad omlottklänning med kort ärm vars band går att knyta både bak och fram. Slutar mitt på knät eller strax under. Smal till normal passform.", "price": 1675, "article": "Omlottklänning kort ärm", "quality": "Silkestrikå", "id": 11, "sku": "9901", "cod_cost": 200, "img": "uploads/1_kortarmad_omlott.jpg", "pk": 11, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Rymlig a-formad klänning med v-ringad hals, lång ärm och bandkantad halsringning. Rymlig modell.", "price": 1525, "article": "Swagger lång ärm", "quality": "Silkestrikå", "id": 13, "sku": "805", "cod_cost": 150, "img": "uploads/1_langarmad_swagger.jpg", "pk": 13, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Kort klänning med knäppning på bröstet. Smal modell.\r\n", "price": 1475, "article": "Knäppklänning", "quality": "Silkestrikå", "id": 17, "sku": "801", "cod_cost": 150, "img": "uploads/1_knappklanning.jpg", "pk": 17, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Långärmad kort klänningstunika med liten u-ringning. Normal till rymlig modell.", "price": 1425, "article": "Klänningstunika", "quality": "Silkestrikå", "id": 18, "sku": "201", "cod_cost": 150, "img": "uploads/1_klanningstunika.jpg", "pk": 18, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Vid A-formad klänning med  u-ringning och kort raglanärm. Smal upptill och vid nedtill.", "price": 1450, "article": "Raglanklänning kort ärm", "quality": "Silkestrikå", "id": 41, "sku": "1007", "cod_cost": 150, "img": "uploads/1_kortarmad_raglanklanning.jpg", "pk": 41, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Klockad swagger med bandkantad v-ringad hals. Normal passform.", "price": 1350, "article": "Swagger ", "quality": "Silkestrikå", "id": 42, "sku": "9413", "cod_cost": 150, "img": "uploads/1_kort_swagger.jpg", "pk": 42, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Enkel klänning med holkärm, båtringad hals och ofta avvikande mönster i fickan. Kjolen är något klockad och slutar på eller strax under knät. Normal passform.\r\n\r\n", "price": 1675, "article": "Fickklänning", "quality": "Silkestrikå", "id": 68, "sku": "1401", "cod_cost": 150, "img": "uploads/1_fickklannnig.jpg", "pk": 68, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Bandkantad omlottklänning med lång ärm vars band går att knyta både bak och fram. Slutar mitt på knät eller strax under. Smal till normal passform.", "price": 1695, "article": "Omlottklänning lång ärm", "quality": "Silkestrikå", "id": 69, "sku": "807", "cod_cost": 200, "img": "uploads/1_langarmad_omlott.jpg", "pk": 69, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Kort klänning avskuren i midjan med rund krage och blixtlås fram. Mycket smal passform.", "price": 1450, "article": "Tennisklänning", "quality": "Silkestrikå", "id": 81, "sku": "1605", "cod_cost": 150, "img": "uploads/1_tennisklanning.jpg", "pk": 81, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Linneklänning med linnetop och kort kjol med mycket vidd i. Smal passform.", "price": 945, "article": "Linneklänning", "quality": "Silkestrikå", "id": 75, "sku": "1506", "cod_cost": 100, "img": "uploads/1_kvinna_klinnejklanning.jpg", "pk": 75, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Klänning med knappslå ner till bröstet, liten ståkrage, fickor och slitsar i sidorna. Klänningen är kort, slutar ovanför knäet och passar bra till både byxor och strumpor. Relativt smal passform.", "price": 1750, "article": "Klänning med murar-krage", "quality": "Silkestrikå", "id": 78, "sku": "1511", "cod_cost": 150, "img": "uploads/1_skjortklanning.jpg", "pk": 78, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Snibbklänningen gjordes redan på 60-talet! Den har en rund halsringning och en \"snibb\" som formar ett v ovanför bysten. Klänningen är kort och klockad. Normal passform.", "price": 1445, "article": "Snibbklänning", "quality": "Silkestrikå", "id": 82, "sku": "1606", "cod_cost": 150, "img": "uploads/1_snibbklanning.jpg", "pk": 82, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Klänning med rund hals och sprund i nacken som knäpps med liten knapp. Används med eller utan medföljande skärp. Smal passform.", "price": 1850, "article": "Festklänning", "quality": "Silkestrikå", "id": 84, "sku": "1711", "cod_cost": 150, "img": "uploads/1_festklanning.jpg", "pk": 84, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Klänningen har skjortkrage, fickor i sidorna och en knapprad mitt fram. Den passar att bära knäppt, eller öppen som en kappa eller långkofta. Passformen är normal till rymlig.", "price": 1850, "article": "Ny! Helknäppt skjortklänning", "quality": "Silkestrikå", "id": 93, "sku": "1801", "cod_cost": 200, "img": "uploads/skjiortrock.jpg", "pk": 93, "type": "Klänningar och tunikor"}, {"category": "Kvinna", "description": "Enkelt skuret linne med normal passform.", "price": 750, "article": "Linne", "quality": "Silkestrikå", "id": 8, "sku": "9801", "cod_cost": 100, "img": "uploads/1_linne.jpg", "pk": 8, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "Klassisk t-shirt med rymlig passform.", "price": 825, "article": "Stor t-shirt", "quality": "Silkestrikå", "id": 15, "sku": "9820", "cod_cost": 100, "img": "uploads/1_stor_t-shirt.jpg", "pk": 15, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "Liten t-shirt. Smal passform. \r\n\r\n", "price": 750, "article": "Liten t-shirt", "quality": "Silkestrikå", "id": 16, "sku": "9802", "cod_cost": 100, "img": "uploads/1_liten_t-shirt.jpg", "pk": 16, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "Holkärmströja med rak halsringning. Smal modell.", "price": 825, "article": "Holkärmströja", "quality": "Silkestrikå", "id": 19, "sku": "510", "cod_cost": 100, "img": "uploads/1_holkarmstroja.jpg", "pk": 19, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "Långt linne med slits i sidorna. Rymlig modell.", "price": 950, "article": "Slitslinne", "quality": "Silkestrikå", "id": 38, "sku": "9809", "cod_cost": 100, "img": "uploads/1_slitslinne.jpg", "pk": 38, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "Helknäppt blus med skjortkrage. Normal passform.", "price": 1390, "article": "Blus", "quality": "Silkestrikå", "id": 71, "sku": "1501", "cod_cost": 150, "img": "uploads/1_blus.jpg", "pk": 71, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "Långärmad tröja med rund ringning. Normal passform.", "price": 1095, "article": "Långärmad tröja", "quality": "Silkestrikå", "id": 76, "sku": "1510", "cod_cost": 150, "img": "uploads/1_langarmad_troja.jpg", "pk": 76, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "Blus med murarkrage och knäppning. Smal till normal passform.", "price": 1390, "article": "Murarblus", "quality": "Silkestrikå", "id": 85, "sku": "1710", "cod_cost": 150, "img": "uploads/1_murarblus.jpg", "pk": 85, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "Det här är vår klassiska stora t-shirt nu med mindre ringning och tre cm längre ärm. Rymlig passform.", "price": 825, "article": "NY! stor t-shirt", "quality": "Silkestrikå", "id": 91, "sku": "1803", "cod_cost": 100, "img": "uploads/ny_tishirt_2018.jpg", "pk": 91, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "En vid lång v-ringad tunika. Rymlig passform.", "price": 1425, "article": "Vid tunika", "quality": "Silkestrikå", "id": 88, "sku": "1709", "cod_cost": 150, "img": "uploads/vtunika.jpg", "pk": 88, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "Vår långärmade tröja som fått en lite tightare hals-ringning. För övrigt normal till smal passform.", "price": 1095, "article": "NY! långärmad tröja", "quality": "Silkestrikå", "id": 92, "sku": "1802", "cod_cost": 150, "img": "uploads/ny_troja_2018.jpg", "pk": 92, "type": "Tröjor och linnen"}, {"category": "Kvinna", "description": "Vid jacka med fickor i sidorna. Extra rymlig passform med knappar hela vägen fram.\r\n\r\n", "price": 2050, "article": "Vid jacka", "quality": "Silkestrikå", "id": 7, "sku": "9813", "cod_cost": 200, "img": "uploads/1_vid_jacka.jpg", "pk": 7, "type": "Jackor"}, {"category": "Kvinna", "description": "Vändbar jacka med blixtlås och liten ståkrage. Jackan har olika mönster men i samma färgställning på insida och utsida. Fungerar lika bra som kofta, kavaj eller tunn jacka. Normal passform.", "price": 2150, "article": "Vändbar blixtlåsjacka", "quality": "Silkestrikå", "id": 12, "sku": "9805", "cod_cost": 200, "img": "uploads/1_vandbarjacka.jpg", "pk": 12, "type": "Jackor"}, {"category": "Kvinna", "description": "Jacka med kavajslag, knäppning fram och två fickor. Smal passform.", "price": 1950, "article": "Kragjacka", "quality": "Silkestrikå", "id": 21, "sku": "803", "cod_cost": 200, "img": "uploads/1_kargjacka.jpg", "pk": 21, "type": "Jackor"}, {"category": "Kvinna", "description": "Klockad kjol som slutar strax under knäna med resår i midjan. Normal passform.", "price": 1075, "article": "Klockad kjol", "quality": "Silkestrikå", "id": 24, "sku": "9905", "cod_cost": 100, "img": "uploads/1_kort_klaockad_kjol.jpg", "pk": 24, "type": "Kjolar och byxor"}, {"category": "Kvinna", "description": "Kort rak kjol som slutar strax ovanför knäna. Resår i midjan. Normal passform.", "price": 850, "article": "Kort rak kjol", "quality": "Silkestrikå", "id": 25, "sku": "302", "cod_cost": 100, "img": "uploads/1_kort_rak_kjol.jpg", "pk": 25, "type": "Kjolar och byxor"}, {"category": "Kvinna", "description": "Smal lång byxa med resår i midjan. Normal passform.", "price": 1150, "article": "Smal långbyxa", "quality": "Silkestrikå", "id": 30, "sku": "9812", "cod_cost": 150, "img": "uploads/1_smala_byxor.jpg", "pk": 30, "type": "Kjolar och byxor"}, {"category": "Kvinna", "description": "Rak vid byxa med resår i midjan. Norrmal passform.", "price": 1150, "article": "Vid byxa", "quality": "Silkestrikå", "id": 50, "sku": "9903", "cod_cost": 150, "img": "uploads/1_raka_byxor.jpg", "pk": 50, "type": "Kjolar och byxor"}, {"category": "Kvinna", "description": "Fickkjol som slutar under knät. Kjolen har sköna fickor och ett brett midjeband.", "price": 1350, "article": " NY! Lång Fickkjol", "quality": "Silkestrikå", "id": 96, "sku": "1901", "cod_cost": 150, "img": "uploads/1008_thumb.gif", "pk": 96, "type": "Kjolar och byxor"}, {"category": "Accessoarer ", "description": "Mjuk halsduk sydd i dubbelt tyg, 160 cm lång och 19 cm bred.", "price": 350, "article": "Halsduk", "quality": "Silkestrikå", "id": 26, "sku": "2001", "cod_cost": 100, "img": "uploads/1_sjal.jpg", "pk": 26, "type": "Accessoarer & lakan"}, {"category": "Accessoarer ", "description": "En liten enkel väska för de viktigaste sakerna. Storlek 20 cm x 20 cm. Med blixtlås och axelrem.", "price": 425, "article": "Liten väska", "quality": "Silkestrikå", "id": 27, "sku": "338", "cod_cost": 100, "img": "uploads/liten_vasssska.jpg", "pk": 27, "type": "Accessoarer & lakan"}, {"category": "Accessoarer ", "description": "Stor necessär med blixtlås med måtten 18 cm på höjden, 25 cm på längden och 11 cm djup i botten. Två fickor inuti.", "price": 445, "article": "Stor necessär", "quality": "Silkestrikå", "id": 28, "sku": "2006", "cod_cost": 100, "img": "uploads/stor_neccessar.jpg", "pk": 28, "type": "Accessoarer & lakan"}, {"category": "Accessoarer ", "description": "Liten necessär med blixtlås och två fickor inuti. Mått 11 cm på höjden, 18 cm på längden och 8 cm på djupet i botten.", "price": 395, "article": "Liten necessär", "quality": "Silkestrikå", "id": 29, "sku": "2005", "cod_cost": 100, "img": "uploads/liten_necessar.jpg", "pk": 29, "type": "Accessoarer & lakan"}, {"category": "Man", "description": "Herrtröja i silke med halsslå och knäppning.", "price": 1395, "article": "Herrtröja i silke med halsslå och knappar", "quality": "Silkestrikå", "id": 22, "sku": "1012", "cod_cost": 150, "img": "uploads/1_murarskjorta_kille.jpg", "pk": 22, "type": "Tröjor och Skjortor"}, {"category": "Man", "description": "Smal herrskjorta silke med snibbkrage och knäppning hela vägen fram. Manchettknapp och sprund i ärmen. Smal modell!", "price": 1395, "article": "Herrskjorta silke med snibbkrage", "quality": "Silkestrikå", "id": 23, "sku": "1013", "cod_cost": 160, "img": "uploads/1_man_skjorta.jpg", "pk": 23, "type": "Tröjor och Skjortor"}, {"category": "Man", "description": "Herrt-shirt i silkestrikå med rundringad hals", "price": 850, "article": "Herr t-shirt", "quality": "Silkestrikå", "id": 49, "sku": "524", "cod_cost": 100, "img": "uploads/1_t-shirt_kille.jpg", "pk": 49, "type": "Tröjor och Skjortor"}, {"category": "Man", "description": "Långärmad tröja med rund hals.", "price": 1095, "article": "Herrtröja lång ärm", "quality": "Silkestrikå", "id": 83, "sku": "514", "cod_cost": 150, "img": "uploads/1_kille_langarmad_troja.jpg", "pk": 83, "type": "Tröjor och Skjortor"}], "colorspatterns": [{"quality_num": 1, "color_num": 103, "color_name": "Blå Vit", "pattern_num": 5, "quality_name": "Silkestrikå", "pattern_name": "Kärna"}, {"quality_num": 1, "color_num": 57, "color_name": "Svart Vit Blå", "pattern_num": 46, "quality_name": "Silkestrikå", "pattern_name": "Peaky Stripe"}, {"quality_num": 1, "color_num": 57, "color_name": "Svart Vit Blå", "pattern_num": 4, "quality_name": "Silkestrikå", "pattern_name": "Pyramid"}, {"quality_num": 1, "color_num": 26, "color_name": "Lila Röd", "pattern_num": 9, "quality_name": "Silkestrikå", "pattern_name": "Fågel"}, {"quality_num": 1, "color_num": 50, "color_name": "Röd Vit", "pattern_num": 7, "quality_name": "Silkestrikå", "pattern_name": "Tiger mörk botten"}, {"quality_num": 1, "color_num": 50, "color_name": "Röd Vit", "pattern_num": 5, "quality_name": "Silkestrikå", "pattern_name": "Kärna"}, {"quality_num": 1, "color_num": 50, "color_name": "Röd Vit", "pattern_num": 6, "quality_name": "Silkestrikå", "pattern_name": "Tiger ljus botten"}, {"quality_num": 1, "color_num": 42, "color_name": "Svart Vit Röd", "pattern_num": 45, "quality_name": "Silkestrikå", "pattern_name": "Big Chat "}, {"quality_num": 1, "color_num": 6, "color_name": "Mörk Indigo", "pattern_num": 16, "quality_name": "Silkestrikå", "pattern_name": "Ljung"}, {"quality_num": 1, "color_num": 39, "color_name": "Limegul", "pattern_num": 1, "quality_name": "Silkestrikå", "pattern_name": "Twin Peaks"}, {"quality_num": 1, "color_num": 33, "color_name": "Himmelsblå", "pattern_num": 22, "quality_name": "Silkestrikå", "pattern_name": "Bred Rand"}, {"quality_num": 1, "color_num": 33, "color_name": "Himmelsblå", "pattern_num": 13, "quality_name": "Silkestrikå", "pattern_name": "Enfärgad"}, {"quality_num": 1, "color_num": 31, "color_name": "Mörk Turkos", "pattern_num": 13, "quality_name": "Silkestrikå", "pattern_name": "Enfärgad"}, {"quality_num": 1, "color_num": 30, "color_name": "Konjak", "pattern_num": 13, "quality_name": "Silkestrikå", "pattern_name": "Enfärgad"}, {"quality_num": 1, "color_num": 25, "color_name": "Svart", "pattern_num": 13, "quality_name": "Silkestrikå", "pattern_name": "Enfärgad"}, {"quality_num": 1, "color_num": 8, "color_name": "Lila Rosa", "pattern_num": 9, "quality_name": "Silkestrikå", "pattern_name": "Fågel"}, {"quality_num": 1, "color_num": 3, "color_name": "Silvergrå", "pattern_num": 22, "quality_name": "Silkestrikå", "pattern_name": "Bred Rand"}, {"quality_num": 1, "color_num": 3, "color_name": "Silvergrå", "pattern_num": 13, "quality_name": "Silkestrikå", "pattern_name": "Enfärgad"}, {"quality_num": 1, "color_num": 7, "color_name": "Svart Vit", "pattern_num": 46, "quality_name": "Silkestrikå", "pattern_name": "Peaky Stripe"}, {"quality_num": 1, "color_num": 7, "color_name": "Svart Vit", "pattern_num": 22, "quality_name": "Silkestrikå", "pattern_name": "Bred Rand"}, {"quality_num": 1, "color_num": 7, "color_name": "Svart Vit", "pattern_num": 9, "quality_name": "Silkestrikå", "pattern_name": "Fågel"}, {"quality_num": 1, "color_num": 2, "color_name": "Vallmoröd", "pattern_num": 22, "quality_name": "Silkestrikå", "pattern_name": "Bred Rand"}, {"quality_num": 1, "color_num": 2, "color_name": "Vallmoröd", "pattern_num": 13, "quality_name": "Silkestrikå", "pattern_name": "Enfärgad"}], "sizes": ["XS", "S", "M", "L", "XL", "XXL"]}
-
+cutjson = {
+	"articles": [{
+		"category": "Kvinna",
+		"description": "Vid utställd klänning med u-ringad hals och lång raglanärm. Relativt nätt upptill och mycket vidd nedtill.",
+		"price": 1495,
+		"article": "Raglanklänning lång ärm",
+		"quality": "Silkestrikå",
+		"id": 1,
+		"sku": "1008",
+		"cod_cost": 150,
+		"img": "uploads/1_langarmad_raglanklanning.jpg",
+		"pk": 1,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Figursydd klänning med klock i kjolen och v-ringad bandkantad hals. Smal till normal passform.",
+		"price": 1450,
+		"article": "V-klänning kort ärm",
+		"quality": "Silkestrikå",
+		"id": 5,
+		"sku": "9807",
+		"cod_cost": 150,
+		"img": "uploads/1_kortarmad_v-klanning.jpg",
+		"pk": 5,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Figursydd klockad klänning med bandkantad v-ringad hals och lång ärm. Slutar under knät. Smal till normal passform.",
+		"price": 1495,
+		"article": "V-klänning lång ärm",
+		"quality": "Silkestrikå",
+		"id": 10,
+		"sku": "9808",
+		"cod_cost": 150,
+		"img": "uploads/1_langarmad_v-klanning.jpg",
+		"pk": 10,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Bandkantad omlottklänning med kort ärm vars band går att knyta både bak och fram. Slutar mitt på knät eller strax under. Smal till normal passform.",
+		"price": 1675,
+		"article": "Omlottklänning kort ärm",
+		"quality": "Silkestrikå",
+		"id": 11,
+		"sku": "9901",
+		"cod_cost": 200,
+		"img": "uploads/1_kortarmad_omlott.jpg",
+		"pk": 11,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Rymlig a-formad klänning med v-ringad hals, lång ärm och bandkantad halsringning. Rymlig modell.",
+		"price": 1525,
+		"article": "Swagger lång ärm",
+		"quality": "Silkestrikå",
+		"id": 13,
+		"sku": "805",
+		"cod_cost": 150,
+		"img": "uploads/1_langarmad_swagger.jpg",
+		"pk": 13,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Kort klänning med knäppning på bröstet. Smal modell.\r\n",
+		"price": 1475,
+		"article": "Knäppklänning",
+		"quality": "Silkestrikå",
+		"id": 17,
+		"sku": "801",
+		"cod_cost": 150,
+		"img": "uploads/1_knappklanning.jpg",
+		"pk": 17,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Långärmad kort klänningstunika med liten u-ringning. Normal till rymlig modell.",
+		"price": 1425,
+		"article": "Klänningstunika",
+		"quality": "Silkestrikå",
+		"id": 18,
+		"sku": "201",
+		"cod_cost": 150,
+		"img": "uploads/1_klanningstunika.jpg",
+		"pk": 18,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Vid A-formad klänning med  u-ringning och kort raglanärm. Smal upptill och vid nedtill.",
+		"price": 1450,
+		"article": "Raglanklänning kort ärm",
+		"quality": "Silkestrikå",
+		"id": 41,
+		"sku": "1007",
+		"cod_cost": 150,
+		"img": "uploads/1_kortarmad_raglanklanning.jpg",
+		"pk": 41,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Klockad swagger med bandkantad v-ringad hals. Normal passform.",
+		"price": 1350,
+		"article": "Swagger ",
+		"quality": "Silkestrikå",
+		"id": 42,
+		"sku": "9413",
+		"cod_cost": 150,
+		"img": "uploads/1_kort_swagger.jpg",
+		"pk": 42,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Enkel klänning med holkärm, båtringad hals och ofta avvikande mönster i fickan. Kjolen är något klockad och slutar på eller strax under knät. Normal passform.\r\n\r\n",
+		"price": 1675,
+		"article": "Fickklänning",
+		"quality": "Silkestrikå",
+		"id": 68,
+		"sku": "1401",
+		"cod_cost": 150,
+		"img": "uploads/1_fickklannnig.jpg",
+		"pk": 68,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Bandkantad omlottklänning med lång ärm vars band går att knyta både bak och fram. Slutar mitt på knät eller strax under. Smal till normal passform.",
+		"price": 1695,
+		"article": "Omlottklänning lång ärm",
+		"quality": "Silkestrikå",
+		"id": 69,
+		"sku": "807",
+		"cod_cost": 200,
+		"img": "uploads/1_langarmad_omlott.jpg",
+		"pk": 69,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Kort klänning avskuren i midjan med rund krage och blixtlås fram. Mycket smal passform.",
+		"price": 1450,
+		"article": "Tennisklänning",
+		"quality": "Silkestrikå",
+		"id": 81,
+		"sku": "1605",
+		"cod_cost": 150,
+		"img": "uploads/1_tennisklanning.jpg",
+		"pk": 81,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Linneklänning med linnetop och kort kjol med mycket vidd i. Smal passform.",
+		"price": 945,
+		"article": "Linneklänning",
+		"quality": "Silkestrikå",
+		"id": 75,
+		"sku": "1506",
+		"cod_cost": 100,
+		"img": "uploads/1_kvinna_klinnejklanning.jpg",
+		"pk": 75,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Klänning med knappslå ner till bröstet, liten ståkrage, fickor och slitsar i sidorna. Klänningen är kort, slutar ovanför knäet och passar bra till både byxor och strumpor. Relativt smal passform.",
+		"price": 1750,
+		"article": "Klänning med murar-krage",
+		"quality": "Silkestrikå",
+		"id": 78,
+		"sku": "1511",
+		"cod_cost": 150,
+		"img": "uploads/1_skjortklanning.jpg",
+		"pk": 78,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Snibbklänningen gjordes redan på 60-talet! Den har en rund halsringning och en \"snibb\" som formar ett v ovanför bysten. Klänningen är kort och klockad. Normal passform.",
+		"price": 1445,
+		"article": "Snibbklänning",
+		"quality": "Silkestrikå",
+		"id": 82,
+		"sku": "1606",
+		"cod_cost": 150,
+		"img": "uploads/1_snibbklanning.jpg",
+		"pk": 82,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Klänning med rund hals och sprund i nacken som knäpps med liten knapp. Används med eller utan medföljande skärp. Smal passform.",
+		"price": 1850,
+		"article": "Festklänning",
+		"quality": "Silkestrikå",
+		"id": 84,
+		"sku": "1711",
+		"cod_cost": 150,
+		"img": "uploads/1_festklanning.jpg",
+		"pk": 84,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Klänningen har skjortkrage, fickor i sidorna och en knapprad mitt fram. Den passar att bära knäppt, eller öppen som en kappa eller långkofta. Passformen är normal till rymlig.",
+		"price": 1850,
+		"article": "Ny! Helknäppt skjortklänning",
+		"quality": "Silkestrikå",
+		"id": 93,
+		"sku": "1801",
+		"cod_cost": 200,
+		"img": "uploads/skjiortrock.jpg",
+		"pk": 93,
+		"type": "Klänningar och tunikor"
+	}, {
+		"category": "Kvinna",
+		"description": "Enkelt skuret linne med normal passform.",
+		"price": 750,
+		"article": "Linne",
+		"quality": "Silkestrikå",
+		"id": 8,
+		"sku": "9801",
+		"cod_cost": 100,
+		"img": "uploads/1_linne.jpg",
+		"pk": 8,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "Klassisk t-shirt med rymlig passform.",
+		"price": 825,
+		"article": "Stor t-shirt",
+		"quality": "Silkestrikå",
+		"id": 15,
+		"sku": "9820",
+		"cod_cost": 100,
+		"img": "uploads/1_stor_t-shirt.jpg",
+		"pk": 15,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "Liten t-shirt. Smal passform. \r\n\r\n",
+		"price": 750,
+		"article": "Liten t-shirt",
+		"quality": "Silkestrikå",
+		"id": 16,
+		"sku": "9802",
+		"cod_cost": 100,
+		"img": "uploads/1_liten_t-shirt.jpg",
+		"pk": 16,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "Holkärmströja med rak halsringning. Smal modell.",
+		"price": 825,
+		"article": "Holkärmströja",
+		"quality": "Silkestrikå",
+		"id": 19,
+		"sku": "510",
+		"cod_cost": 100,
+		"img": "uploads/1_holkarmstroja.jpg",
+		"pk": 19,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "Långt linne med slits i sidorna. Rymlig modell.",
+		"price": 950,
+		"article": "Slitslinne",
+		"quality": "Silkestrikå",
+		"id": 38,
+		"sku": "9809",
+		"cod_cost": 100,
+		"img": "uploads/1_slitslinne.jpg",
+		"pk": 38,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "Helknäppt blus med skjortkrage. Normal passform.",
+		"price": 1390,
+		"article": "Blus",
+		"quality": "Silkestrikå",
+		"id": 71,
+		"sku": "1501",
+		"cod_cost": 150,
+		"img": "uploads/1_blus.jpg",
+		"pk": 71,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "Långärmad tröja med rund ringning. Normal passform.",
+		"price": 1095,
+		"article": "Långärmad tröja",
+		"quality": "Silkestrikå",
+		"id": 76,
+		"sku": "1510",
+		"cod_cost": 150,
+		"img": "uploads/1_langarmad_troja.jpg",
+		"pk": 76,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "Blus med murarkrage och knäppning. Smal till normal passform.",
+		"price": 1390,
+		"article": "Murarblus",
+		"quality": "Silkestrikå",
+		"id": 85,
+		"sku": "1710",
+		"cod_cost": 150,
+		"img": "uploads/1_murarblus.jpg",
+		"pk": 85,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "Det här är vår klassiska stora t-shirt nu med mindre ringning och tre cm längre ärm. Rymlig passform.",
+		"price": 825,
+		"article": "NY! stor t-shirt",
+		"quality": "Silkestrikå",
+		"id": 91,
+		"sku": "1803",
+		"cod_cost": 100,
+		"img": "uploads/ny_tishirt_2018.jpg",
+		"pk": 91,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "En vid lång v-ringad tunika. Rymlig passform.",
+		"price": 1425,
+		"article": "Vid tunika",
+		"quality": "Silkestrikå",
+		"id": 88,
+		"sku": "1709",
+		"cod_cost": 150,
+		"img": "uploads/vtunika.jpg",
+		"pk": 88,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "Vår långärmade tröja som fått en lite tightare hals-ringning. För övrigt normal till smal passform.",
+		"price": 1095,
+		"article": "NY! långärmad tröja",
+		"quality": "Silkestrikå",
+		"id": 92,
+		"sku": "1802",
+		"cod_cost": 150,
+		"img": "uploads/ny_troja_2018.jpg",
+		"pk": 92,
+		"type": "Tröjor och linnen"
+	}, {
+		"category": "Kvinna",
+		"description": "Vid jacka med fickor i sidorna. Extra rymlig passform med knappar hela vägen fram.\r\n\r\n",
+		"price": 2050,
+		"article": "Vid jacka",
+		"quality": "Silkestrikå",
+		"id": 7,
+		"sku": "9813",
+		"cod_cost": 200,
+		"img": "uploads/1_vid_jacka.jpg",
+		"pk": 7,
+		"type": "Jackor"
+	}, {
+		"category": "Kvinna",
+		"description": "Vändbar jacka med blixtlås och liten ståkrage. Jackan har olika mönster men i samma färgställning på insida och utsida. Fungerar lika bra som kofta, kavaj eller tunn jacka. Normal passform.",
+		"price": 2150,
+		"article": "Vändbar blixtlåsjacka",
+		"quality": "Silkestrikå",
+		"id": 12,
+		"sku": "9805",
+		"cod_cost": 200,
+		"img": "uploads/1_vandbarjacka.jpg",
+		"pk": 12,
+		"type": "Jackor"
+	}, {
+		"category": "Kvinna",
+		"description": "Jacka med kavajslag, knäppning fram och två fickor. Smal passform.",
+		"price": 1950,
+		"article": "Kragjacka",
+		"quality": "Silkestrikå",
+		"id": 21,
+		"sku": "803",
+		"cod_cost": 200,
+		"img": "uploads/1_kargjacka.jpg",
+		"pk": 21,
+		"type": "Jackor"
+	}, {
+		"category": "Kvinna",
+		"description": "Klockad kjol som slutar strax under knäna med resår i midjan. Normal passform.",
+		"price": 1075,
+		"article": "Klockad kjol",
+		"quality": "Silkestrikå",
+		"id": 24,
+		"sku": "9905",
+		"cod_cost": 100,
+		"img": "uploads/1_kort_klaockad_kjol.jpg",
+		"pk": 24,
+		"type": "Kjolar och byxor"
+	}, {
+		"category": "Kvinna",
+		"description": "Kort rak kjol som slutar strax ovanför knäna. Resår i midjan. Normal passform.",
+		"price": 850,
+		"article": "Kort rak kjol",
+		"quality": "Silkestrikå",
+		"id": 25,
+		"sku": "302",
+		"cod_cost": 100,
+		"img": "uploads/1_kort_rak_kjol.jpg",
+		"pk": 25,
+		"type": "Kjolar och byxor"
+	}, {
+		"category": "Kvinna",
+		"description": "Smal lång byxa med resår i midjan. Normal passform.",
+		"price": 1150,
+		"article": "Smal långbyxa",
+		"quality": "Silkestrikå",
+		"id": 30,
+		"sku": "9812",
+		"cod_cost": 150,
+		"img": "uploads/1_smala_byxor.jpg",
+		"pk": 30,
+		"type": "Kjolar och byxor"
+	}, {
+		"category": "Kvinna",
+		"description": "Rak vid byxa med resår i midjan. Norrmal passform.",
+		"price": 1150,
+		"article": "Vid byxa",
+		"quality": "Silkestrikå",
+		"id": 50,
+		"sku": "9903",
+		"cod_cost": 150,
+		"img": "uploads/1_raka_byxor.jpg",
+		"pk": 50,
+		"type": "Kjolar och byxor"
+	}, {
+		"category": "Kvinna",
+		"description": "Fickkjol som slutar under knät. Kjolen har sköna fickor och ett brett midjeband.",
+		"price": 1350,
+		"article": " NY! Lång Fickkjol",
+		"quality": "Silkestrikå",
+		"id": 96,
+		"sku": "1901",
+		"cod_cost": 150,
+		"img": "uploads/1008_thumb.gif",
+		"pk": 96,
+		"type": "Kjolar och byxor"
+	}, {
+		"category": "Accessoarer ",
+		"description": "Mjuk halsduk sydd i dubbelt tyg, 160 cm lång och 19 cm bred.",
+		"price": 350,
+		"article": "Halsduk",
+		"quality": "Silkestrikå",
+		"id": 26,
+		"sku": "2001",
+		"cod_cost": 100,
+		"img": "uploads/1_sjal.jpg",
+		"pk": 26,
+		"type": "Accessoarer & lakan"
+	}, {
+		"category": "Accessoarer ",
+		"description": "En liten enkel väska för de viktigaste sakerna. Storlek 20 cm x 20 cm. Med blixtlås och axelrem.",
+		"price": 425,
+		"article": "Liten väska",
+		"quality": "Silkestrikå",
+		"id": 27,
+		"sku": "338",
+		"cod_cost": 100,
+		"img": "uploads/liten_vasssska.jpg",
+		"pk": 27,
+		"type": "Accessoarer & lakan"
+	}, {
+		"category": "Accessoarer ",
+		"description": "Stor necessär med blixtlås med måtten 18 cm på höjden, 25 cm på längden och 11 cm djup i botten. Två fickor inuti.",
+		"price": 445,
+		"article": "Stor necessär",
+		"quality": "Silkestrikå",
+		"id": 28,
+		"sku": "2006",
+		"cod_cost": 100,
+		"img": "uploads/stor_neccessar.jpg",
+		"pk": 28,
+		"type": "Accessoarer & lakan"
+	}, {
+		"category": "Accessoarer ",
+		"description": "Liten necessär med blixtlås och två fickor inuti. Mått 11 cm på höjden, 18 cm på längden och 8 cm på djupet i botten.",
+		"price": 395,
+		"article": "Liten necessär",
+		"quality": "Silkestrikå",
+		"id": 29,
+		"sku": "2005",
+		"cod_cost": 100,
+		"img": "uploads/liten_necessar.jpg",
+		"pk": 29,
+		"type": "Accessoarer & lakan"
+	}, {
+		"category": "Man",
+		"description": "Herrtröja i silke med halsslå och knäppning.",
+		"price": 1395,
+		"article": "Herrtröja i silke med halsslå och knappar",
+		"quality": "Silkestrikå",
+		"id": 22,
+		"sku": "1012",
+		"cod_cost": 150,
+		"img": "uploads/1_murarskjorta_kille.jpg",
+		"pk": 22,
+		"type": "Tröjor och Skjortor"
+	}, {
+		"category": "Man",
+		"description": "Smal herrskjorta silke med snibbkrage och knäppning hela vägen fram. Manchettknapp och sprund i ärmen. Smal modell!",
+		"price": 1395,
+		"article": "Herrskjorta silke med snibbkrage",
+		"quality": "Silkestrikå",
+		"id": 23,
+		"sku": "1013",
+		"cod_cost": 160,
+		"img": "uploads/1_man_skjorta.jpg",
+		"pk": 23,
+		"type": "Tröjor och Skjortor"
+	}, {
+		"category": "Man",
+		"description": "Herrt-shirt i silkestrikå med rundringad hals",
+		"price": 850,
+		"article": "Herr t-shirt",
+		"quality": "Silkestrikå",
+		"id": 49,
+		"sku": "524",
+		"cod_cost": 100,
+		"img": "uploads/1_t-shirt_kille.jpg",
+		"pk": 49,
+		"type": "Tröjor och Skjortor"
+	}, {
+		"category": "Man",
+		"description": "Långärmad tröja med rund hals.",
+		"price": 1095,
+		"article": "Herrtröja lång ärm",
+		"quality": "Silkestrikå",
+		"id": 83,
+		"sku": "514",
+		"cod_cost": 150,
+		"img": "uploads/1_kille_langarmad_troja.jpg",
+		"pk": 83,
+		"type": "Tröjor och Skjortor"
+	}],
+	"colorspatterns": [{
+		"quality_num": 1,
+		"color_num": 103,
+		"color_name": "Blå Vit",
+		"pattern_num": 5,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Kärna"
+	}, {
+		"quality_num": 1,
+		"color_num": 57,
+		"color_name": "Svart Vit Blå",
+		"pattern_num": 46,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Peaky Stripe"
+	}, {
+		"quality_num": 1,
+		"color_num": 57,
+		"color_name": "Svart Vit Blå",
+		"pattern_num": 4,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Pyramid"
+	}, {
+		"quality_num": 1,
+		"color_num": 26,
+		"color_name": "Lila Röd",
+		"pattern_num": 9,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Fågel"
+	}, {
+		"quality_num": 1,
+		"color_num": 50,
+		"color_name": "Röd Vit",
+		"pattern_num": 7,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Tiger mörk botten"
+	}, {
+		"quality_num": 1,
+		"color_num": 50,
+		"color_name": "Röd Vit",
+		"pattern_num": 5,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Kärna"
+	}, {
+		"quality_num": 1,
+		"color_num": 50,
+		"color_name": "Röd Vit",
+		"pattern_num": 6,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Tiger ljus botten"
+	}, {
+		"quality_num": 1,
+		"color_num": 42,
+		"color_name": "Svart Vit Röd",
+		"pattern_num": 45,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Big Chat "
+	}, {
+		"quality_num": 1,
+		"color_num": 39,
+		"color_name": "Limegul",
+		"pattern_num": 1,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Twin Peaks"
+	}, {
+		"quality_num": 1,
+		"color_num": 33,
+		"color_name": "Himmelsblå",
+		"pattern_num": 22,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Bred Rand"
+	}, {
+		"quality_num": 1,
+		"color_num": 33,
+		"color_name": "Himmelsblå",
+		"pattern_num": 13,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Enfärgad"
+	}, {
+		"quality_num": 1,
+		"color_num": 30,
+		"color_name": "Konjak",
+		"pattern_num": 13,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Enfärgad"
+	}, {
+		"quality_num": 1,
+		"color_num": 25,
+		"color_name": "Svart",
+		"pattern_num": 13,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Enfärgad"
+	}, {
+		"quality_num": 1,
+		"color_num": 3,
+		"color_name": "Silvergrå",
+		"pattern_num": 22,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Bred Rand"
+	}, {
+		"quality_num": 1,
+		"color_num": 3,
+		"color_name": "Silvergrå",
+		"pattern_num": 13,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Enfärgad"
+	}, {
+		"quality_num": 1,
+		"color_num": 7,
+		"color_name": "Svart Vit",
+		"pattern_num": 46,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Peaky Stripe"
+	}, {
+		"quality_num": 1,
+		"color_num": 7,
+		"color_name": "Svart Vit",
+		"pattern_num": 22,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Bred Rand"
+	}, {
+		"quality_num": 1,
+		"color_num": 2,
+		"color_name": "Vallmoröd",
+		"pattern_num": 22,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Bred Rand"
+	}, {
+		"quality_num": 1,
+		"color_num": 2,
+		"color_name": "Vallmoröd",
+		"pattern_num": 13,
+		"quality_name": "Silkestrikå",
+		"pattern_name": "Enfärgad"
+	}],
+	"sizes": ["XS", "S", "M", "L", "XL", "XXL"]
+}
 def first_page(request):
     variations = Variation.objects.filter(active=True).order_by('article__quality')
     images = Image.objects.all()
