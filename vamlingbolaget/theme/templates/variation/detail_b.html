@@ -62,7 +62,20 @@
                         <div class="d-flex justify-content-between align-items-center w-100">
                             <div>
                                 <ul class="pagination rounded-0">
-
+                                        {% if product.variation.article.quality.pk == 1 %} 
+                                        {% if product.active %}
+                                            {% for size in full_variations %}
+                                                {% if product.size == size.size %}
+                                                    <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                        <a class="page-link"> {{ size.lettersize }}  </a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
+                                                        <a class="page-link"> {{ size.lettersize }} </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
                                             {% for size in full_variations %}
                                                 {% if size.stock < 1 %}
                                                 <li class="page-item disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
@@ -80,8 +93,26 @@
                                                     {% endif %}
                                                 {% endif %}
                                             {% endfor %}
-                                            häst
-
+                                        {% endif %}
+                                    {% else %}
+                                        {% for size in full_variations %}
+                                            {% if size.stock < 1 %}
+                                                <li class="page-item disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                    <a class="page-link"> {{ size.lettersize }}  </a>
+                                                </li>
+                                            {% else %}
+                                                {% if product.size == size.size %}
+                                                    <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
+                                                        <a class="page-link"> {{ size.lettersize }}  </a>
+                                                        </li>
+                                                {% else %}
+                                                    <li class="page-item select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
+                                                        <a class="page-link"> {{ size.lettersize }} </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
                                 </ul>
                             </div>
                         <div class="text-gray-dark mb-3"> <i class="fa fa-chevron-left fa-2x pt-2" aria-hidden="true"> </i> <span class="mb-2">   {% trans "Välj Storlek" %} </span></div>
