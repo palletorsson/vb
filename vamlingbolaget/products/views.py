@@ -550,13 +550,6 @@ cutjson = {
 	}],
 	"colorspatterns": [{
 		"quality_num": 1,
-		"color_num": 103,
-		"color_name": "Blå Vit",
-		"pattern_num": 5,
-		"quality_name": "Silkestrikå",
-		"pattern_name": "Kärna"
-	}, {
-		"quality_num": 1,
 		"color_num": 57,
 		"color_name": "Svart Vit Blå",
 		"pattern_num": 46,

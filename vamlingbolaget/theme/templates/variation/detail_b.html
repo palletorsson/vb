@@ -10,21 +10,21 @@
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="row">
             <div class="col-md-5">
-                   
+
                   {% for image in images %}
 			 <a href="{% version image.image 'large'%}" data-lightbox="image-1" data-title="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" >
 				 <img src="{% version image.image 'large' %}" alt="{{ product.article.name }} {% trans 'i' %} {{ product.color|lower }} {{ product.pattern|lower }}" />
 			 </a>
-		
-			<div id="art_description" class="image_description_detail"> - {{ product.article.description }} 
-			
+
+			<div id="art_description" class="image_description_detail"> - {{ product.article.description }}
+
 	        </div>
 
-			{% endfor %} 
+			{% endfor %}
             </div>
             <div class="col-md-5 pr-4 pr-5">
                 <input id="article_pk" type="hidden" value="{{ product.variation.article.sku_number}}">
-                <input type="hidden" id="pattern" name="pattern" value="{{ product.variation.pattern.order}}" >							
+                <input type="hidden" id="pattern" name="pattern" value="{{ product.variation.pattern.order}}" >
                 <input type="hidden" id="color" name="color" value="{{ product.variation.color.order }}" >
                 <input type="hidden" id="full_var" name="full_var" value="1" >
                 <div class="media">
@@ -37,7 +37,7 @@
                                     <span class="discount s-80"> {{ product.variation.article.f_discount }} </span> <span class="s-80" > SEK  *  </span><br />
                                 {%else%}
                                     <span class="s-80" id="the_price"> {{ product.variation.article.price }} </span> <span class="s-80" > SEK </span>
-                                {%endif%} 
+                                {%endif%}
                             </div>
                         </div>
                     </div>
@@ -45,66 +45,66 @@
                 {%if product.variation.article.discount %}
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
-                        <div class="d-flex justify-content-between  w-100">          
-                            <div class="s-80 mr-2"> 
-                                 
-                               </div> 
-                               <div class="s-80"> 
-                                    {% trans "tidigare pris" %}   ▼   <span id="the_price"> {{ product.variation.article.price }}  </span>    SEK 
-                               </div> 
+                        <div class="d-flex justify-content-between  w-100">
+                            <div class="s-80 mr-2">
+
+                               </div>
+                               <div class="s-80">
+                                    {% trans "tidigare pris" %}   ▼   <span id="the_price"> {{ product.variation.article.price }}  </span>    SEK
+                               </div>
                         </div>
                     </div>
                 </div>
-                
-                {%endif%} 
+
+                {%endif%}
                 <div class="media text-muted pt-3 ">
                     <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
                             <div>
                                 <ul class="pagination rounded-0">
-                                        {% if product.variation.article.quality.pk == 1 %} 
-                                        {% if product.active %} 
-                                            {% for size in full_variations %} 
-                                                {% if product.size == size.size %}  
+                                        {% if product.variation.article.quality.pk == 20 %} 
+                                        {% if product.active %}
+                                            {% for size in full_variations %}
+                                                {% if product.size == size.size %}
                                                     <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
                                                         <a class="page-link"> {{ size.lettersize }}  </a>
-                                                    </li> 							
+                                                    </li>
                                                 {% else %}
-                                                    <li class="page-item select_size" id="{{ size.size  }}" data-size="{{ size.stock }}">
+                                                    <li class="page-item select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
                                                         <a class="page-link"> {{ size.lettersize }} </a>
                                                     </li>
-                                                {% endif %} 
+                                                {% endif %}
                                             {% endfor %}
                                         {% else %}
-                                            {% for size in full_variations %} 	
-                                                {% if size.stock < 1 %}								
+                                            {% for size in full_variations %}
+                                                {% if size.stock < 1 %}
                                                 <li class="page-item disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
                                                     <a class="page-link"> {{ size.lettersize }}  </a>
-                                                </li> 
+                                                </li>
                                                 {% else %}
-                                                {% if product.size == size.size %}  
+                                                {% if product.size == size.size %}
                                                         <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
                                                             <a class="page-link"> {{ size.lettersize }}  </a>
-                                                        </li> 
+                                                        </li>
                                                     {% else %}
                                                         <li class="page-item select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
                                                             <a class="page-link"> {{ size.lettersize }} </a>
                                                         </li>
                                                     {% endif %}
-                                                {% endif %}	
+                                                {% endif %}
                                             {% endfor %}
                                         {% endif %}
                                     {% else %}
-                                        {% for size in full_variations %} 	
+                                        {% for size in full_variations %}
                                             {% if size.stock < 1 %}
                                                 <li class="page-item disabled" id="{{ size.size }}"  data-size="{{ size.stock }}">
                                                     <a class="page-link"> {{ size.lettersize }}  </a>
-                                                </li> 
+                                                </li>
                                             {% else %}
-                                                {% if product.size == size.size %}  
+                                                {% if product.size == size.size %}
                                                     <li class="page-item active select_size" id="{{ size.size }}"  data-size="{{ size.stock }}">
                                                         <a class="page-link"> {{ size.lettersize }}  </a>
-                                                        </li> 
+                                                        </li>
                                                 {% else %}
                                                     <li class="page-item select_size" id="{{ size.size }}" data-size="{{ size.stock }}">
                                                         <a class="page-link"> {{ size.lettersize }} </a>
@@ -112,22 +112,22 @@
                                                 {% endif %}
                                             {% endif %}
                                         {% endfor %}
-                                    {% endif %} 
+                                    {% endif %}
                                 </ul>
                             </div>
                         <div class="text-gray-dark mb-3"> <i class="fa fa-chevron-left fa-2x pt-2" aria-hidden="true"> </i> <span class="mb-2">   {% trans "Välj Storlek" %} </span></div>
                     </div>
                 </div>
-            </div>           
+            </div>
             <div class="media text-muted pt-3 ">
                 <div class="media-body pb-3 mb-0 border-bottom small lh-125 border-gray">
                     <div class="d-flex align-items-center w-100">
-                        <div class="text-gray-dark">{% trans "Färger och Mönster" %}:  {{ product.variation.color }}  {{ product.variation.pattern }} </div>            
+                        <div class="text-gray-dark">{% trans "Färger och Mönster" %}:  {{ product.variation.color }}  {{ product.variation.pattern }} </div>
                         <input type="hidden" id="size" name="size" value="3840" >
-                        <input type="hidden" id="quantity" name="quantity" value="1" >		
+                        <input type="hidden" id="quantity" name="quantity" value="1" >
                         <input type="hidden" id="pc_sellection" name="pc_sellection" value="common" >
-                        <input type="hidden" id="add_or_edit" name="full" value="full" > 
-                        <span class="invisible" id="sku_number">{{ product.variation.article.sku_number }}</span> 
+                        <input type="hidden" id="add_or_edit" name="full" value="full" >
+                        <span class="invisible" id="sku_number">{{ product.variation.article.sku_number }}</span>
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
                             </span>
                         </div>
                         <div>
-                            <span> 		
+                            <span>
                                 <div> {% trans "Leverans" %}:  {% trans "En till tre veckor" %} </div>
                             </span>
                         </div>
@@ -153,16 +153,16 @@
                             {{ product.variation.article.description }}
                     </div>
                     </br>
-                    <div>  
-                        <span class="quality" id="{{ product.article.quality }}">{{ product.variation.article.quality }}</span> : 
-                        <span> {{ product.variation.article.quality.description }} </span> 		
+                    <div>
+                        <span class="quality" id="{{ product.article.quality }}">{{ product.variation.article.quality }}</span> :
+                        <span> {{ product.variation.article.quality.description }} </span>
                     </div>
                 </div>
             </div>
             <div class="media text-muted pt-3 ">
                     <div class="media-body pb-1 mb-0 small lh-125 border-gray">
                         <div class="d-flex justify-content-between align-items-center w-100">
-                           Plagget finns också i: 
+                           Plagget finns också i:
                         </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                         {% endfor %}
                     </div>
                 </div>
-            </div>		
+            </div>
         </div> <!-- end of row -->
     </main>
 {% endblock %}
