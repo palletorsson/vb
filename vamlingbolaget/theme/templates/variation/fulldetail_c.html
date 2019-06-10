@@ -1,0 +1,18 @@
+{% extends "collection_base_b.html" %}
+{% load i18n %}
+{% load fb_versions %}
+{% version model.field_name version_prefix %}
+{%block title%}
+    <title>Vamlingbolaget | {% trans "Kollektion" %} | {{ product.article.name }},  {{ product.variation }} </title>
+    <meta name="description" content="{% trans "Vamlingbolaget kollektion" %} {{ product.article.name }},  {{ product.variation }}" %}/>
+{%endblock%}
+{% block allcontent %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-9 pt-3 px-4">
+        <div class="row">
+          <h1> Tack för att du vill handla hos oss </h1>
+          <h2> Pågrund av högt tryck inventerar vi vår shop </h2>
+          <h3> Vi återkommer inom ett par dagar </h3>
+        </div> <!-- end of row -->
+    </main>
+
+{% endblock %}

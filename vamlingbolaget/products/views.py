@@ -899,6 +899,7 @@ def fullindex(request):
 
 def fullindex_b(request):
     full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='kvinna').order_by('order')
+	# userprofile__level__gte=0
     qualities = Quality.objects.filter(active=True)
     categories = Category.objects.filter(active=True)
     types = Type.objects.filter(active=True)
@@ -910,7 +911,19 @@ def fullindex_b(request):
                               },
                              context_instance=RequestContext(request))
 
-
+def fullindex_c(request):
+    full_variation = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug='kvinna').order_by('order')
+	# userprofile__level__gte=0
+    qualities = Quality.objects.filter(active=True)
+    categories = Category.objects.filter(active=True)
+    types = Type.objects.filter(active=True)
+    return render_to_response('variation/fullindex_c.html',
+                             {'products': full_variation,
+                              'qualities': qualities,
+                              'categories': categories,
+                              'types': types,
+                              },
+                             context_instance=RequestContext(request))
 
 def fullindexarticle(request):
     full_variation = Article.objects.filter(active='A', quality=1).order_by('category')
@@ -1066,6 +1079,18 @@ def reacut_b(request):
     sizes = SIZES
     atypes = Type.objects.filter(order__lte=5, active=True)
     return render_to_response('variation/cutreact.html',
+                             {
+                              'rea': rea,
+                              'sizes': sizes,
+                              'atypes': atypes,
+                              'cod': True
+                              },
+                             context_instance=RequestContext(request))
+def reacut_c(request):
+    rea = "false"
+    sizes = SIZES
+    atypes = Type.objects.filter(order__lte=5, active=True)
+    return render_to_response('variation/cutreact_c.html',
                              {
                               'rea': rea,
                               'sizes': sizes,
