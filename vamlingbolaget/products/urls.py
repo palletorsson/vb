@@ -3,13 +3,13 @@ from django.views.generic import DetailView, ListView
 from models import Variation
 
 urlpatterns = patterns('products.views',
-    url(r'^$', 'fullindex_b'),
+    url(r'^$', 'fullindex_c'),
     url(r'^fullcut/$', 'fullindexarticle'),
     url(r'^test_f/$', 'fullindex_c'),
-    url(r'^full/$', 'fullindex_b'),
+    url(r'^full/$', 'fullindex_c'),
     url(r'^preview/$', 'fulllastindex'),
     url(r'^cod/$', 'codwizard'),
-    url(r'^cut/$', 'reacut_b'),
+    url(r'^cut/$', 'fullindex_c'),
     url(r'^test_cut/$', 'reacut_c'),
     url(r'^fullindexlist/$', 'fullindexlist'),
     url(r'^full/quality/(?P<quality>[a-zA-Z0-9_.-]+)/$', 'fullindexQuality'),
