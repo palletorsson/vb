@@ -35,7 +35,7 @@
 	            {%if item.pattern_2%}
 	                / {{item.pattern_2}}
 	            {%endif%}
-	            
+
 	            </span>
 	        </div>
 	    </td>
@@ -49,27 +49,27 @@
 	            {%if item.article.discount%}
 	            <span class="discount"> {{ item.article.f_discount }} SEK </span>
 	            {%else%}
-	              {% if item.article.oldprice %} SEK <span style=" text-decoration: line-through;" >{{item.article.oldprice}}SEK </span><br/> {%endif%} 
+	              {% if item.article.oldprice %} SEK <span style=" text-decoration: line-through;" >{{item.article.oldprice}}SEK </span><br/> {%endif%}
 	            {{ item.article.price }} SEK
 	            {%endif%}
 	        </div>
 	    </td>
-	     {%if item.s_type == 'COD' %}       
+	     {%if item.s_type == 'COD' %}
         </tr>
         <tr>
 
-            <td colspan="1"> 
+            <td colspan="1">
             +
             </td>
 
-            <td colspan="1"> 
-               Cut on demand för {{ item.article.name }} 
+            <td colspan="1">
+               Cut on demand för {{ item.article.name }}
             </td>
 
-            <td colspan="3"> 
+            <td colspan="3">
                  Cut on demand
             </td>
-            <td> 
+            <td>
                  140 SEK
             </td>
         </tr>
@@ -77,7 +77,7 @@
 	    {% endfor %}
 	</tr>
 	    {% for b in bargains %}
-	    
+
 	        <td>
 	            <div>
 	                <span> 1</span>
@@ -148,16 +148,16 @@
             </div>
         </td>
         {% endfor %}
-       
+
 	    {%if cartitems or bargains or rea %}
 
 	    {%if voucher %}
 		<tr class="voucher_show">
 		    <td class="voucher" colspan="5" style="text-align: right">
-				Rabattkod / Voucher: 
+				Rabattkod / Voucher:
 			</td>
 			<td id="totalprice">
-				<span class="label label-success"> 15% på dyraste plagget </span> 
+				<span class="label label-success"> 15% på dyraste plagget </span>
 			</td>
 	  	</tr>
 		{% endif %}
@@ -166,16 +166,16 @@
 			    {% trans "Leverans" %} :
 			</td>
 			<td id="handling">
-			    {{ handling }} {%trans "SEK"%} 
+			    {{ handling }} {%trans "SEK"%}
 			</td>
 		</tr>
-			
+
 		<tr>
 			<th class="totalprice" colspan="5" style="text-align: right">
 			    {% trans "Total pris" %} :
 			</th>
 			<th id="totalprice">
-			    {{ totalprice }} {%trans "SEK"%} 
+			    {{ totalprice }} {%trans "SEK"%}
 			</th>
 		</tr>
    		{%else%}
@@ -191,35 +191,35 @@
 <form action="" method="post" class="form-horizontal" id="order_form">{% csrf_token %}
 
 	{{ form.subject.post }}
-		<input type=hidden name="paymentmethod" id="id_paymentmethod" value="C">
+		<input type=hidden name="paymentmethod" id="id_paymentmethod" value="P">
     {{ form.paymentmethod.errors }}
-    
+
 <h5 class="mb-3">{% trans "Välj betalningsmetod" %}</h5>
 <table class="table table-sm mb-5 border-bottom">
 
 	<tr height="45px">
 	    <td>
-	    	<img src="/media/logo_payex.png" /> 
+	    	<img src="/media/logo_payex.png" />
 	    </td>
 
 	    <td>
 			<ul class="nav nav-button">
                 <li class="active">
-                    <div class="form-check">  
-                        <a href="#" class="radiopay" data-toggle="tab" id="C">  
-                            <input type="radio" checked="checked" class="form-check-input"  name="payment" value="card"> {% trans "Betala med Payex" %}
-                        </a> 
+                    <div class="form-check">
+                        <a href="#" class="radiopay" data-toggle="tab" id="C">
+                            <input type="radio" class="form-check-input"  name="payment" value="card"> {% trans "Betala med Payex" %}
+                        </a>
                     </div>
                 </li>
 			</ul>
-		</td>	
+		</td>
 
 		<td width='60%'>
 			<div class="paymenttext active" id="card">
 				<ul>
 					<li>
-						{% trans "Fyll i dina uppgifter och skicka beställningen" %}. 
-						{% trans "Efter genomförd betalning bekräftas ditt köp" %}. 
+						{% trans "Fyll i dina uppgifter och skicka beställningen" %}.
+						{% trans "Efter genomförd betalning bekräftas ditt köp" %}.
 					</li>
 				</ul>
 			</div>
@@ -229,14 +229,14 @@
 
 	<tr height="45px">
 		<td>
-			    	<img src="/media/postforskott.png" /> 
+			    	<img src="/media/postforskott.png" />
 	    </td>
 		<td>
 			<ul class="nav nav-pills">
 			    <li>
-                    <div class="form-check"> 
+                    <div class="form-check">
                         <a href="#" class="radiopay"  data-toggle="tab" id="P">
-                            <input type="radio" class="form-check-input" name="payment" value="post"> 
+                            <input type="radio" checked="checked"  class="form-check-input" name="payment" value="post"> 
                             {% trans "Betala via postförskott" %}
                         </a>
                     </div>
@@ -245,10 +245,10 @@
 		</td>
 		<td>
 			<div class="paymenttext hidden" id="post">
-                <ul> 
-                   <li> 
-                   		{% trans "Fyll i dina uppgifter och skicka beställningen" %}. 
-	                    {% trans "Du betalar vid leverans" %}. 
+                <ul>
+                   <li>
+                   		{% trans "Fyll i dina uppgifter och skicka beställningen" %}.
+	                    {% trans "Du betalar vid leverans" %}.
 	                </li>
                 </ul>
 			</div>
@@ -262,7 +262,7 @@
 			<ul class="nav button">
 			    <li>
 			    	<a href="#"  class="radiopay"  data-toggle="tab" id="K">
-			    		<input type="radio" name="payment" value="klarna"> 
+			    		<input type="radio" name="payment" value="klarna">
 			    		{% trans "Betala med Klarna" %}
 			    	</a>
 			    </li>
@@ -271,13 +271,13 @@
 		<td>
 			<div class="paymenttext hidden" id="klarna">
                <ul>
-					<li> 
+					<li>
 						{% trans "Fortsätt genom att betala med Klarna Checkout" %}.
 					</li>
                </ul>
   			</div>
 		</td>
-	</tr>	
+	</tr>
 	{% endif %}
 </table>
 
@@ -300,7 +300,7 @@
 							{{ form.first_name.errors }}
 						</div>
 					</div>
-				
+
 					<div class="form-check" id="last_name">
 					 <label class="col-lg-3 control-label" > <label for="id_last_name">{% trans "Efternamn" %} </label> </label>
 						{{ form.subject.last_name }}
@@ -309,7 +309,7 @@
 							{{ form.last_name.errors }} *
 						</div>
 					</div>
-		
+
 					<div class="form-check" id="street">
 						<label class="col-lg-3 control-label" > <label for="id_street">{% trans "Gatuadress" %}  </label> </label>
 						{{ form.subject.street}}
@@ -318,7 +318,7 @@
 							{{ form.street.errors }} *
 						</div>
 					</div>
-		
+
 					<div class="form-check" id="postcode">
 						<label class="col-lg-3 control-label" > <label for="id_postcode">{% trans "Postnummer" %}</label> </label>
 						{{ form.subject.postcode}}
@@ -328,7 +328,7 @@
 							{{ form.postcode.errors }} *
 						</div>
 					</div>
-		
+
 					<div class="form-check" id="city">
 						<label class="col-lg-3 control-label" > <label for="id_city">{% trans "Postort" %}</label> </label>
 						{{ form.subject.city}}
@@ -337,7 +337,7 @@
 							{{ form.city.errors }} *
 						</div>
 					</div>
-			   
+
 					<div class="control-group" id="country">
 						<label class="col-lg-3 control-label" > <label for="id_country">{% trans "Land" %} </label> </label>
 						{{ form.subject.country}}
@@ -361,7 +361,7 @@
 							{{ form.email.errors }} *
 						</div>
 					</div>
-		
+
 					<div class="control-group" id="phone">
 						<label class="col-lg-3 control-label" > <label for="id_phone">{% trans "Telefon" %} </label></label>
 						{{ form.subject.phone}}
@@ -370,19 +370,19 @@
 							{{ form.phone.errors }} *
 						</div>
 					</div>
-		
+
 					<div class="control-group" id="sms">
 						 <div class="col-lg-9">
-				
+
 							<input type="checkbox" id="sms-checkbox" checked='checked' name="sms_checkbox" value="sms"> {% trans "Jag vill ha sms-avisering" %} <br>
 							<input type="hidden" name="sms" id="id_sms" value="yes">
 						</div>
 					</div>
-		
+
 					<div style="clear: both;"></div>
-		
+
 					<hr>
-		
+
 					<div class="control-group" id="message">
 						<label class="col-lg-3 control-label" > <label for="id_message">{% trans "Meddelande till beställning" %}  </label></label>
 						{{form.subject.message}}
@@ -397,11 +397,11 @@
 	<tr>
 		<td>
 			<div class="payblock">
-			   	
+
                 <div class="form-check float-right">
                     <input type="submit" id="continue_payment" class="btn btn-sm rounded-0 btn-success" value="{% trans "Betala med Payex" %}"  />
                 </div>
-        
+
 			</div>
 		</td>
 	</tr>
@@ -419,5 +419,3 @@
 <div class="alert alert-success">
     <a href="/paymentterms/"> {% trans "Se våra betalvillkor här" %} </a>
 </div>
-
-
