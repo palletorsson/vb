@@ -206,7 +206,7 @@
 			<ul class="nav nav-button">
                 <li class="active">
                     <div class="form-check">
-                        <a href="#" class="radiopay" data-toggle="tab" id="C">
+                        <a href="#" class="radiopay" style="{display:none}"data-toggle="tab" id="C">
                             <input type="radio" class="form-check-input"  name="payment" value="card"> {% trans "Betala med Payex" %}
                         </a>
                     </div>
@@ -218,8 +218,7 @@
 			<div class="paymenttext active" id="card">
 				<ul>
 					<li>
-						{% trans "Fyll i dina uppgifter och skicka beställningen" %}.
-						{% trans "Efter genomförd betalning bekräftas ditt köp" %}.
+						Just nu går det inte att betala med kort eftersom tillgången är begränsad.
 					</li>
 				</ul>
 			</div>
@@ -236,7 +235,7 @@
 			    <li>
                     <div class="form-check">
                         <a href="#" class="radiopay"  data-toggle="tab" id="P">
-                            <input type="radio" checked="checked"  class="form-check-input" name="payment" value="post"> 
+                            <input type="radio" checked="checked"  class="form-check-input" name="payment" value="post">
                             {% trans "Betala via postförskott" %}
                         </a>
                     </div>
