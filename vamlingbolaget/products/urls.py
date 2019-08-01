@@ -56,7 +56,8 @@ urlpatterns = patterns('products.views',
     url(r'^setstock/$', 'setfullstockCsv'),
     url(r'^setactivenon/$', 'setActiveNon'),
     url(r'^setfulltrue/$', 'setfullTrue'),
-
+    url(r'^fortnoxcnox/$', 'updateFortnoxFromActive'),
+    
     url(r'^ordercsv/$', 'orderfromCsv'),
     url(r'^delfromcsv/(?P<start_at>[a-zA-Z0-9_.-]+)/(?P<end_at>[a-zA-Z0-9_.-]+)$', 'removeCsv'),
     url(r'^removecolor/(?P<color>[a-zA-Z0-9_.-]+)/(?P<act>[a-zA-Z0-9_.-]+)$', 'removeByColor'),
