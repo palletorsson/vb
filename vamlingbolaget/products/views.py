@@ -2623,15 +2623,6 @@ def updateFortnoxFromActive(request):
 
 	print "hello"
 	print full_variation
-    try:
-		for f_var in full_variation:
-			full_sku = f_var.get_art_num()
-			print full_sku
-			the_name = str(f_var.variation) + ' ' + str(f_var.size)
-			print the_name
-			#error_or_create = fromCsvToFortnox(the_name, full_sku, 1)
-			print "test" #error_or_create
-	except:
-		pass
+
 
 	return HttpResponse(status=200)
