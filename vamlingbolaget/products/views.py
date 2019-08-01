@@ -2628,7 +2628,7 @@ def updateFortnoxFromActive(request):
 		print the_name
 		try:
 			#error_or_create = fromCsvToFortnox(the_name, full_sku, 1)
-			#print error_or_create
+			print "test"#error_or_create
 		except:
 			pass
 
