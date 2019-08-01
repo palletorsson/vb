@@ -2619,10 +2619,10 @@ def articlecostindex(request):
 
 @login_required
 def updateFortnoxFromActive(request):
-	full_variations = FullVariation.objects.filter(active=True)
-	print full_variations
+	fullvar = FullVariation.objects.get()
+	print fullvar
     try:
-		for f_var in full_variations:
+		for f_var in fullvar:
 			full_sku = f_var.get_art_num()
 			print full_sku
 			the_name = str(f_var.variation) + ' ' + str(f_var.size)
