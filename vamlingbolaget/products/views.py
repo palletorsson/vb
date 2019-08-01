@@ -2619,8 +2619,9 @@ def articlecostindex(request):
 
 @login_required
 def updateFortnoxFromActive(request):
-	fullvar = FullVariation.objects.get()
-	print fullvar
+	full_variation = FullVariation.objects.filter(active=True)
 
+	print full_variation
+    
 
 	return HttpResponse(status=200)
