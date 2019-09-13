@@ -9,13 +9,13 @@ from django.core.mail import EmailMessage
 from products.models import Pattern, Color, Size
 from fortnox.fortnox import getFortnoxSize
 
-# start by creating the costumer message header 
-def head_part_of_message(lang): 
+# start by creating the costumer message header
+def head_part_of_message(lang):
 
     yourorderto = 'Din order till Vamlingbolaget'
     yourorder = 'Din order'
 
-    if lang == 'en': 
+    if lang == 'en':
         yourorderto = 'Your order to Vamlingbolaget'
         yourorder = 'Your order'
 
@@ -24,7 +24,7 @@ def head_part_of_message(lang):
     return message_header
 
 # continue to build the message cart summery
-def cart_part_of_message(cartitems, rea_items, lang, i=1): 
+def cart_part_of_message(cartitems, rea_items, lang, i=1):
 
     cartitems_str = ''
 
@@ -37,7 +37,7 @@ def cart_part_of_message(cartitems, rea_items, lang, i=1):
     size = 'Storlek'
     priceperproduct = "Pris per produkt"
 
-    if lang == 'en': 
+    if lang == 'en':
         product = 'Product'
         amount = ''
         itsin = 'in'
@@ -53,36 +53,37 @@ def cart_part_of_message(cartitems, rea_items, lang, i=1):
 
         if (item.pattern_2 != 0):
             u = Template('$in_ $patternname, $patterncolor ( $outside_ )\n$and_ $patternname2 , $patterncolor2 ( $inside_ )\n')
-            cart_temp = cart_temp + u.substitute(in_=itsin, patternname=item.pattern.name, patterncolor=item.color.name, outside_=outsida, and_=itsand, patternname2=item.pattern_2.name, patterncolor2=item.color_2.name, inside_=insida, ) 
+            cart_temp = cart_temp + u.substitute(in_=itsin, patternname=item.pattern.name, patterncolor=item.color.name, outside_=outsida, and_=itsand, patternname2=item.pattern_2.name, patterncolor2=item.color_2.name, inside_=insida, )
         else:
             u = Template('$in_ $patternname, $patterncolor \n')
-            cart_temp = cart_temp + u.substitute(in_=itsin, patternname=item.pattern.name, patterncolor=item.color.name, ) 
+            cart_temp = cart_temp + u.substitute(in_=itsin, patternname=item.pattern.name, patterncolor=item.color.name, )
 
         if (item.article.type.order < 7 or item.article.type.order == 9):
             v = Template('$size_ : $size_name \n')
             try:
-                cart_temp = cart_temp + v.substitute(size_=size, size_name=item.size.name,) 
+                cart_temp = cart_temp + v.substitute(size_=size, size_name=item.size.name,)
             except:
-                cart_temp = cart_temp + v.substitute(size_=size, size_name=item.size) 
+                cart_temp = cart_temp + v.substitute(size_=size, size_name=item.size)
 
         t = Template('$productprice_ : $price $sek_ \n')
-        cart_temp = cart_temp + t.substitute(productprice_=priceperproduct, price=str(item.article.price), sek_='SEK') 
+        cart_temp = cart_temp + t.substitute(productprice_=priceperproduct, price=str(item.article.price), sek_='SEK')
 
-        cartitems_str = cartitems_str + cart_temp     
+        cartitems_str = cartitems_str + cart_temp
         i = i + 1
 
-    for item in rea_items:   
+    for item in rea_items:
         s = Template('----------- \n$product_ $num_ : (REA) \n$item_quantity $amount_ $art_name ( $art_sku ) \n')
         cart_temp = s.substitute(product_=product, num_=str(i), item_quantity=str(1), amount_=amount, art_name=item.reaArticle.article.name, art_sku=item.reaArticle.article.sku_number, )
         u = Template('$in_ $patternname, $patterncolor \n')
-        cart_temp = cart_temp + u.substitute(in_=itsin, patternname=item.reaArticle.pattern.name, patterncolor=item.reaArticle.color.name, ) 
+        cart_temp = cart_temp + u.substitute(in_=itsin, patternname=item.reaArticle.pattern.name, patterncolor=item.reaArticle.color.name, )
         v = Template('$size_ : $size_name \n')
-        cart_temp = cart_temp + v.substitute(size_=size, size_name=item.reaArticle.size.name,) 
+        cart_temp = cart_temp + v.substitute(size_=size, size_name=item.reaArticle.size.name,)
         t = Template('$productprice_ : $price $sek_  (REA) \n')
-        cart_temp = cart_temp + t.substitute(productprice_=priceperproduct, price=str(item.reaArticle.rea_price), sek_='SEK') 
+        cart_temp = cart_temp + t.substitute(productprice_=priceperproduct, price=str(item.reaArticle.rea_price), sek_='SEK')
 
-        cartitems_str = cartitems_str + cart_temp                   
-                
+        cartitems_str = cartitems_str + cart_temp
+
+
     return cartitems_str
 
 # continue to build summery of the message from form values
@@ -90,7 +91,7 @@ def cartsum_part_of_message(handling, totalprice, lang):
 
     transporthandling = 'Frakt och hantering'
 
-    if lang == 'en': 
+    if lang == 'en':
         transporthandling = 'Shipping and handling'
 
 
@@ -99,11 +100,11 @@ def cartsum_part_of_message(handling, totalprice, lang):
     sum = u.substitute(transporthandling_=transporthandling, handling=handling, totalprice_=totalprice)
     return sum
 
-# continue and add if costumer added personal message 
+# continue and add if costumer added personal message
 def personal_part_of_message(message, lang):
     yourmess = 'Ditt Meddelande till oss'
 
-    if lang == 'en': 
+    if lang == 'en':
         yourmess = 'Your Message to us'
 
 
@@ -113,12 +114,12 @@ def personal_part_of_message(message, lang):
     return mess
 
 
-def adress_part_of_message(new_order, lang): 
+def adress_part_of_message(new_order, lang):
 
     youradress = 'Din adress'
     yourphone = 'Ditt telefonnummer'
 
-    if lang == 'en': 
+    if lang == 'en':
         youradress = 'Your address'
         yourphone = 'Your phone number'
 
@@ -127,8 +128,8 @@ def adress_part_of_message(new_order, lang):
     address_str = s.substitute(youradress_=youradress, first_name=new_order.first_name, last_name=new_order.last_name, street=new_order.street, postcode=new_order.postcode, city=new_order.city, country=new_order.country, yourphone_=yourphone, phone=new_order.phone)
     return address_str
 
-# finalize the message     
-def final_part_of_message(new_order, lang): 
+# finalize the message
+def final_part_of_message(new_order, lang):
     last_part_message = ''
     handling = 'En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. Reaplagg tar ca 1 vecka.'
     youpaypostal = 'Du betalar med postforskott'
@@ -137,7 +138,7 @@ def final_part_of_message(new_order, lang):
     sms_notice = 'sms-avisering kommer'
     yourordernumber = 'Ditt ordernummer'
 
-    if lang == 'en': 
+    if lang == 'en':
         handling = 'An order to Vamlingbolaget takes about 3 weeks since we sew your garments. Rea items takes about 1 week. '
         youpaypostal = 'You pay cash on delivery '
         youpaypayex = 'You chose Payex card payments '
@@ -148,7 +149,7 @@ def final_part_of_message(new_order, lang):
     s = Template('----------------------------------------------------------------------------------------------------------\n* $handling_ \n')
     last_part_message = last_part_message + s.substitute(handling_=handling, )
 
-    # check it the method is to pay --> with card | on delivery  
+    # check it the method is to pay --> with card | on delivery
     if (new_order.paymentmethod == 'P'):
         s = Template('* $youpaypostal_ \n')
         last_part_message = last_part_message + s.substitute(youpaypostal_=unicode(youpaypostal), )
@@ -168,7 +169,7 @@ def final_part_of_message(new_order, lang):
     return last_part_message
 
 
-def getAllMessages(lang): 
+def getAllMessages(lang):
     #
     yourorderto = 'Din order till Vamlingbolaget'
     yourorder = 'Din order'
@@ -195,7 +196,7 @@ def getAllMessages(lang):
     sms_notice = 'sms-avisering kommer'
     yourordernumber = 'Ditt ordernummer'
 
-    if lang == 'en': 
+    if lang == 'en':
         #
         yourorderto = 'Your order to Vamlingbolaget'
         yourorder = 'Your order'
@@ -223,7 +224,7 @@ def getAllMessages(lang):
 
 
 
-def email_one(request, new_order, cartitems, reaitems, handling, totalprice):
+def email_one(request, new_order, cartitems, bargains, reaitems, handling, totalprice):
 
     # get the name of color and patterns
     for item in cartitems:
@@ -238,82 +239,83 @@ def email_one(request, new_order, cartitems, reaitems, handling, totalprice):
             item.pattern_text_2 = pattern
 
         text_size = getFortnoxSize(item.size)
-        if text_size == False: 
+        if text_size == False:
             text_size = Size.objects.get(pk=item.size)
         item.size_text = text_size
         
     mess = request.POST['message']
 
-    # get the name of the size 
-        
+    # get the name of the size
+
 
     ctx = {
         'handling' : handling,
         'totalprice' : totalprice,
         'cartitems' : cartitems,
-        'reaitems' : reaitems, 
+        'bargains' : bargains,
+        'reaitems' : reaitems,
         'new_order': new_order,
         'consumer_message': mess
     }
 
     # save the langage code
-    lang = request.LANGUAGE_CODE 
+    lang = request.LANGUAGE_CODE
 
     # Make messages
     message_en  = render_to_string('checkout/email_en.txt', ctx)
 
     # reset the language
-    translation.activate(lang) 
+    translation.activate(lang)
 
     # return the right combiantion of message
-    if lang == 'en': 
-        message = message_en 
-    elif lang == 'sv': 
+    if lang == 'en':
+        message = message_en
+    elif lang == 'sv':
         message_se = render_to_string('checkout/email_se.txt', ctx)
         message = message_se
     elif lang == 'fi':
-        message_fi  = render_to_string('checkout/email_fi.txt', ctx) 
+        message_fi  = render_to_string('checkout/email_fi.txt', ctx)
         message = message_fi + message_en
-    elif lang == 'dk': 
+    elif lang == 'dk':
         message_dk  = render_to_string('checkout/email_en.txt', ctx)
         message = message_dk + message_en
-    elif lang == 'de': 
+    elif lang == 'de':
         message_de  = render_to_string('checkout/email_en.txt', ctx)
         message = message_de + message_en
-    else: 
-        message = message_en 
-      
-    return message 
+    else:
+        message = message_en
+
+    return message
 
 def email_two(request, new_order):
 
     # get the name of color and patterns
-    
+
     ctx = {
         'new_order': new_order
     }
 
     # save the langage code
-    lang = request.LANGUAGE_CODE 
+    lang = request.LANGUAGE_CODE
 
     # Make messages
     translation.activate('se')
     message_se = render_to_string('checkout/email2_se.txt', ctx)
     message_en = render_to_string('checkout/email2_se.txt', ctx)
-    translation.activate(lang) 
+    translation.activate(lang)
 
     # return the right combiantion of message
-    if lang == 'en': 
-        message = message_en 
-    elif lang == 'se': 
+    if lang == 'en':
+        message = message_en
+    elif lang == 'se':
         message = message_se
-    elif lang == 'fi': 
+    elif lang == 'fi':
         message = message_fi + message_en
-    elif lang == 'dk': 
+    elif lang == 'dk':
         message = message_en + message_en
-    elif lang == 'de': 
+    elif lang == 'de':
         message = message_en + message_en
-    else: 
-        message = message_en 
-      
-    return message 
+    else:
+        message = message_en
+
+    return message
