@@ -16,23 +16,19 @@
     <div class="row">
         {% for product in products %}
         <div class="col-6 col-md-4 mb-3 p-1 pl-3">
-          <a href="{{product.pk}}/">
-
                 <a href="{{product.pk}}">
-                        <div class="collection_list" >
+                      <div class="collection_list" >
                             <img src="{{ product.image.url }}" class="lazy img-fluid"  alt="product image" width="200" />
-                        <p class="mb-0 pt-2 s-80">
-                                {{ product.title }}  </p>
-
-                              <p class="text-muted price s-80">    {{ product.price }} SEK</p>
-
-
+                            <p class="mb-0 pt-2 s-80">
+                                {{ product.title }}
+                            </p>
+                            <p class="text-muted price s-80">
+                                {{ product.price }} SEK
+                            </p>
+                      </div>
                 </a>
-
           </div>
         {% endfor %}
   </div>
 </main>
 {% endblock %}
-
-    

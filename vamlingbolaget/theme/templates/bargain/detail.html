@@ -13,31 +13,32 @@
 
 
 {% block superstretchpage %}
-<div class="row-fluid">
-    <div class="span5">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-9 pt-3 px-4">
+    <div class="row">
+      <div class="col-md-5">
         <img src="{{ product.image.url }}"  alt=" {{ product.article.name }} {% trans "i" %} {{ product.color|lower }} {{ product.pattern|lower }}" style="width: 360px;"/>
-        <br/>
-        <span style="width: 200px; margin:3px;"> {{ product.title }} </span>
-    </div>
-    <div class="span6">
-            <p><h3>{{ product.title }} </strong></h3>
-            <p id="art_description">{{ product.description }}</p>
-        <hr/>
-        <div class="small" id="changetext"></div>
-        <hr/>
-        <div style="clear: both;"></div>
-
-        <div class="span6">
-	        <h4> {% trans "Pris" %}: {{ product.price }} SEK </h4>
+      </div>
+      <div class="col-md-5 pr-4 pr-5">
+        <div class="media">
+            <div class="media-body mb-0 small lh-125 border-gray">
+                <div class="d-flex align-items-center w-100">
+                      {{ product.title }}
+                </div>
+                <div>
+                    <span> {{ product.description }}</span>
+                </div>
+            </div>
         </div>
-        <div id="addtocart" style="display:block;">
-			<span style="padding-left: 30px;">
-				<button class="btn btn-success" type="button">{% trans "Lägg till i Köplista" %} </button>
-			</span>
-		</div>
-        <hr/>
+        <div class="media-body pb-0 mb-0 border-gray">
+          <div class="d-flex justify-content-between align-items-center w-100">
+	           <div>
+               {% trans "Pris" %}: {{ product.price }} SEK
+             </div>
+          </div>
+        </div>
     </div>
-</div>
+  </div> <!-- end of row -->
+</main>
 <script>
     $(function(){
         // using jQuery
