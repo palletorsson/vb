@@ -142,7 +142,7 @@ $("#addtocart").off('click').on({
         var size_val = $('#size').val();
         if (size_val == ''){
           var size_val = $('#sizebargin').val();
-
+    console.log("check size again", size_val)
         }
         console.log("check size", size_val)
         if (size_val == ''){
