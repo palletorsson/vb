@@ -252,7 +252,10 @@ $("#addtocart").off('click').on({
 
 });//end of click
 
-$("#addtobargincart").click(function() {
+$("#addtocart").off('click').on({
+    click:function(e) {
+      console.log("bargin clicked");
+        e.stopPropagation(); 
       var item = $('#item').val();
        $.ajax({
            type:"POST",
