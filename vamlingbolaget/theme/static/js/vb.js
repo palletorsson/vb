@@ -252,7 +252,7 @@ $("#addtocart").off('click').on({
 
 });//end of click
 
-$("#addtocart").off('click').on({
+$("#addtobargincart").off('click').on({
     click:function(e) {
       console.log("bargin clicked");
         e.stopPropagation();
@@ -273,6 +273,7 @@ $("#addtocart").off('click').on({
        });
    }
  });
+
 $("#addtofullcart").off('click').on({
 
     click:function(e) {
