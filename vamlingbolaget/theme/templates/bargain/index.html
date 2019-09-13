@@ -1,4 +1,4 @@
-{% extends "collection_base.html" %}
+{% extends "ollection_base_b.html" %}
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
@@ -8,10 +8,10 @@
 {%endblock%}
 
 {% block pagetitle %}
-    <legend>{% trans "Fyndlåda" %}</legend>
+    <legend>{% trans "Stuvar" %}</legend>
 {% endblock %}
 
-{% block content %}
+{% block allcontent %}
         {% for product in products %}
             <div class='image_wrapper'>
                 <a href="{{product.pk}}">
