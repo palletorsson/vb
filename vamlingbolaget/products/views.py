@@ -1650,13 +1650,16 @@ def bargain(request):
     return render_to_response('bargain/index.html',
         {'products': products,
         'qualities': qualities,
+		'showtopmenu': True,
          'types': types,},
         context_instance=RequestContext(request))
 
 def bargain_detail(request, pk):
     product = Bargainbox.objects.get(pk=pk)
     return render_to_response('bargain/detail.html',
-        {'product': product,},
+        {'product': product,
+		'showtopmenu': True,
+		},
         context_instance=RequestContext(request))
 
 def reaarticle(request, pk):
