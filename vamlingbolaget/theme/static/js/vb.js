@@ -140,6 +140,10 @@ $('#nosize').hide();
 $("#addtocart").off('click').on({
     click:function(e) {
         var size_val = $('#size').val();
+        if (size_val == ''){
+          var size_val = $('#sizebargin').val();
+
+        }
         console.log("check size", size_val)
         if (size_val == ''){
            $('.remove_on_size').addClass('add_size_message');
