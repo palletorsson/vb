@@ -19,7 +19,7 @@ from fortnox.fortnox import get_headers, searchCustomer
 from django.contrib.auth.decorators import login_required
 from logger.views import keepLog
 
-import math 
+import math
 
 
 CART_ID_SESSION_KEY = 'cart_id'
@@ -57,41 +57,41 @@ def addtocart(request):
         msg = ''
         sku = d['article_sku']
         article_db = Article.objects.get(sku_number = sku)
-        
-        try: 
-            s_type = d['s_type']          
-        except: 
+        print sku 
+        try:
+            s_type = d['s_type']
+        except:
             s_type = 'STOCK'
 
-        try: 
+        try:
             color = d['color']
             pattern = d['pattern']
             color2 = d['color2']
-        except: 
+        except:
             color = 0
             pattern = 0
             color2 = 0
 
-        # if color2 exist then it is reversable zip jacket 
+        # if color2 exist then it is reversable zip jacket
         if(color2 == 0):
             pass
         else:
             color2 = d['color2']
             pattern2 = d['pattern2']
 
-        try: 
+        try:
             size = d['size']
-        except: 
+        except:
             size = 1
-        
+
         #  if article is metervara else te quatity is 1
-        if sku == '3' or sku == '1000': 
-            quantity = d['quantity'] 
-        else: 
+        if sku == '3' or sku == '1000':
+            quantity = d['quantity']
+        else:
             quantity = 1
 
         cartitem_id = 1
-        
+
         add_or_edit = d['add_or_edit']
 
         cart_id = _cart_id(request)
@@ -115,9 +115,9 @@ def addtocart(request):
             cartitem.save()
             msg = u'Du har andrat till: </br>'
 
-        # if costumer adds a full varation 
+        # if costumer adds a full varation
         if (add_or_edit == 'full' or add_or_edit == 'add'):
-            
+
             for item in existing_cartitems:
                 #look in the cart to see it it is the same item
                if (str(item.article.sku_number) == str(sku) and str(item.pattern) == str(pattern) and str(item.color) == str(color) and str(item.size) == str(size)):
@@ -125,9 +125,9 @@ def addtocart(request):
                         msg = u'Antal 1,  %s <br/>' %(article_db.name)
                         # same the item
                         item.save()
-                        update = True 
-                
-            if (update != True): 
+                        update = True
+
+            if (update != True):
                 # this is a new cartitem
                 cartitem = CartItem.objects.create(cart = cart)
                 cartitem.article = article_db
@@ -142,29 +142,29 @@ def addtocart(request):
                 msg = u'Du har lagt till: <br/>'
                 cartitem.save()
 
-        else: 
+        else:
             print "o no"
             pass
 
-        # if there is cart item in the shopping cart check if it is the same.     
+        # if there is cart item in the shopping cart check if it is the same.
 
-               
-        try: 
+
+        try:
             color_db = Color.objects.get(order=color)
             pattern_db = Pattern.objects.get(order=pattern)
         except:
             color_db = Color.objects.get(order=1)
             pattern_db = Pattern.objects.get(order=1)
 
-        
-        try: 
+
+        try:
             size_db = getsize(int(size))
             newsize = True
-        except: 
+        except:
             newsize = False
-        
-        if (newsize == False): 
-            try: 
+
+        if (newsize == False):
+            try:
                 size_db = Size.objects.get(pk=size)
                 size_db = size_db.name
             except:
@@ -205,7 +205,7 @@ def addtocart(request):
 
         return_data = json.dumps(returnjson)
         log = 'Cart add: ' + article_db.name + ' ' + sku  + ' ' + color_db.name + ' ' + pattern_db.name + ' ' + size_db
-        keepLog(request, log, 'INFO', '', cart_id) 
+        keepLog(request, log, 'INFO', '', cart_id)
 
     if request.method == 'GET':
         return_data = json.dumps({'msg' : 'nothing here'})
@@ -261,13 +261,13 @@ def add_rea(request):
         cart.save()
 
         existing_reaitems = ReaCartItem.objects.filter(cart=cart)
-       
+
         inbox = False
 
         for  existing_reaitems in existing_reaitems:
             if rea.pk == existing_reaitems.reaArticle.pk:
                 msg = u'Fyndet finns redan '
-                 
+
                 inbox = True
 
         if inbox == False:
@@ -284,7 +284,7 @@ def add_rea(request):
         }
 
     log = 'Rea add: ' + rea.article.name
-    keepLog(request, log, 'INFO', '', cart_id) 
+    keepLog(request, log, 'INFO', '', cart_id)
 
     return_data = json.dumps(returnjson)
     response = HttpResponse(return_data, mimetype="application/json")
@@ -318,11 +318,11 @@ def voucher(request, pk):
 		cart, created = Cart.objects.get_or_create(key=key)
 		voucher, created = VoucherCart.objects.get_or_create(cart = cart)
 		voucher.save()
-	else: 
+	else:
 		print 'fel kod'
-		
+
 	return redirect('/cart/show/')
-	 
+
 def showcart(request):
     cart_id = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=cart_id)
@@ -345,7 +345,7 @@ def showcart(request):
         returntotal,
         context_instance=RequestContext(request))
 
-	 
+
 def showcart_b(request):
     cart_id = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=cart_id)
@@ -367,7 +367,7 @@ def showcart_b(request):
     return render_to_response('cart/show_cart_b.html',
         returntotal,
         context_instance=RequestContext(request))
-        
+
 def showcartBySessionId(request, session_id):
     if request.user.is_authenticated:
         key = session_id
@@ -426,7 +426,7 @@ def removefromcart(request, pk, type):
     try:
         if type == 'bargain':
             cartitem = BargainCartItem.objects.get(pk=pk)
-        elif type == 'rea': 
+        elif type == 'rea':
             cartitem = ReaCartItem.objects.get(pk=pk)
         else:
             cartitem = CartItem.objects.get(pk=pk)
@@ -434,11 +434,11 @@ def removefromcart(request, pk, type):
         cartitem = None
 
     try:
-        log = 'Cartitem remove: ' + cartitem.article.name 
-        keepLog(request, log, 'INFO', '', pk) 
+        log = 'Cartitem remove: ' + cartitem.article.name
+        keepLog(request, log, 'INFO', '', pk)
     except:
-        log = 'Cartitem remove failed' 
-        keepLog(request, log, 'ERROR', '', pk) 
+        log = 'Cartitem remove failed'
+        keepLog(request, log, 'ERROR', '', pk)
 
     cartitem.delete()
     listed = isincart(request, pk, cartitem)
@@ -481,9 +481,9 @@ def totalsum(cartitems, bargains, request, voucher, rea):
 			ordered[0].article.oldprice = int(ordered[0].article.price)
 			ordered[0].article.price = int(ordered[0].article.price * 0.85)
 		except:
-			pass 
-				
-    if (cartitems):		
+			pass
+
+    if (cartitems):
 
         for item in cartitems:
             if item.article.discount:
@@ -494,11 +494,11 @@ def totalsum(cartitems, bargains, request, voucher, rea):
             else:
                 temp_p = temp_p + item.article.price * item.quantity
                 item.totalitemprice = item.article.price * item.quantity
-            
-            if item.s_type == 'COD':    
+
+            if item.s_type == 'COD':
                 temp_p = temp_p + item.article.ondemand_cost
 
-                  
+
             temp_q = temp_q + item.quantity
 
     if (bargains):
@@ -522,7 +522,7 @@ def totalsum(cartitems, bargains, request, voucher, rea):
     if (country == 'SE'):
         se = True
         handling = 80
-        
+
         if (temp_p > 3000 or temp_p < 11):
             handling = 0
 
@@ -549,59 +549,59 @@ def totalsum(cartitems, bargains, request, voucher, rea):
     # if rea
     rea10 = False
     if rea10:
-        temp_p = math.floor(temp_p * 0.9) 
+        temp_p = math.floor(temp_p * 0.9)
 
     total = {'totalprice': temp_p, 'totalitems': temp_q, 'handling': handling, 'se': se}
     return total
 
 def getsize(size):
-    temp_size = size 
-    if size == 34 or size == 1: 
-        return_size = 'XS' 
-    elif size == 36 or size == 2: 
+    temp_size = size
+    if size == 34 or size == 1:
+        return_size = 'XS'
+    elif size == 36 or size == 2:
         return_size = 'S'
-    elif size == 3840 or size == 3: 
+    elif size == 3840 or size == 3:
         return_size = 'M'
-    elif size == 42 or size == 5: 
+    elif size == 42 or size == 5:
         return_size = 'L'
-    elif size == 44 or size == 6: 
-        return_size = 'XL' 
+    elif size == 44 or size == 6:
+        return_size = 'XL'
     elif size == 46 or size == 7:
         return_size = 'XXL'
-    else: 
+    else:
         return_size = 'NO'
 
     if return_size == 'NO':
-        try: 
+        try:
             size_db = Size.objects.get(pk=size)
             size_db = size_db.name
-        except: 
-            pass 
+        except:
+            pass
 
     return return_size
 
 def getnames(cartitems):
     for item in cartitems:
-        try: 
+        try:
             item.color = Color.objects.get(order=item.color)
             item.pattern = Pattern.objects.get(order=item.pattern)
         except:
             item.color= Color.objects.get(order=1)
             item.pattern = Pattern.objects.get(order=1)
 
-        try: 
+        try:
             size_db = getsize(int(item.size))
 
             if size_db == 'NO':
                newsize = False
             else:
-                item.size = size_db 
+                item.size = size_db
                 newsize = True
-        except: 
+        except:
             newsize = False
 
-        if newsize == False: 
-            try: 
+        if newsize == False:
+            try:
                 item.size = Size.objects.get(pk=item.size)
             except:
                 pass
@@ -628,17 +628,14 @@ def f_discount(item_article):
 @login_required
 def customer_email(request, email):
 
-    if request.user.is_superuser:    
+    if request.user.is_superuser:
         name = ''
         headers = get_headers()
-        customer = searchCustomer(headers, name, email) 
+        customer = searchCustomer(headers, name, email)
     else:
         customer = 'you not admin'
 
 
     return render_to_response('cart/admin_customer.html', {
-        'customer': customer, 
+        'customer': customer,
     }, context_instance=RequestContext(request))
-
-
-
