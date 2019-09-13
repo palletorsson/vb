@@ -42,21 +42,14 @@
                     <div>
                       <button class="btn btn-success" type="button">{% trans "Lägg till i Köplista" %} </button>
                     </div>
-                    <span id="addtocart">
+                    <span id="addtobargincart">
                         <button class="btn btn-sm btn btn-success rounded-0 btn-block add-to-cart buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppingbag" %}</button>
                     </span>
                 </div>
             </div>
         </div>
-        <input id="article_pk" type="hidden" value="3">
-        <span class="hidden-*" id="sku_number"> 1701 </span>
-        <input type="hidden" id="pattern" name="pattern" value="1">
-        <input type="hidden" id="color" name="color" value="1">
-        <input type="hidden" id="size" name="size" value="1">
-        <input type="hidden" id="sizebargin" name="sizebargin" value="1">
+        <input id="item" type="hidden" value={{ product.id }}>
 
-        <input type="hidden" id="add_or_edit" name="full" value="full">
-        <input type="hidden" id="full_var" name="full_var" value="1" >
 
 
 
