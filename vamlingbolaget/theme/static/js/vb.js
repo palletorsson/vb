@@ -140,11 +140,7 @@ $('#nosize').hide();
 $("#addtocart").off('click').on({
     click:function(e) {
         var size_val = $('#size').val();
-        if (size_val == ''){
-          var size_val = $('#sizebargin').val();
-    console.log("check size again", size_val)
-        }
-        console.log("check size", size_val)
+        console.log("check size")
         if (size_val == ''){
            $('.remove_on_size').addClass('add_size_message');
            $('#nosize').show();
@@ -158,7 +154,7 @@ $("#addtocart").off('click').on({
 
             full = $('#add_or_edit').val();
             console.log(full);
-            s_type = $('#s_type').val() || 'STOCK';
+            s_type = $('#s_type').val();
             console.log(s_type);
             console.log("add to cart");
 
@@ -198,7 +194,7 @@ $("#addtocart").off('click').on({
         		pattern: pattern,
         		pattern2: pattern2,
         		size: size_id,
-            s_type: s_type,
+                s_type: s_type,
         		csrfmiddlewaretoken: csrftoken,
         		cartitem_id: '1',
         		quantity: quantity,
@@ -256,6 +252,23 @@ $("#addtocart").off('click').on({
 
 });//end of click
 
+$("#addtobargincart").click(function() {
+           var item = {{ product.pk }};
+       $.ajax({
+           type:"POST",
+           url:"/cart/addbargain/",
+           data: {
+              item : item
+           },
+           success: function(data){
+               var msg = data.message.msg,
+                   _ = data.cartitem;
+       $("#changetext")
+         .html( msg +'{%trans " i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
+       .css({'font-size':'11px'})
+           }
+       });
+   });
 
 $("#addtofullcart").off('click').on({
 
