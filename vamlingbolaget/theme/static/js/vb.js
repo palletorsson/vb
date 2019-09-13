@@ -255,7 +255,7 @@ $("#addtocart").off('click').on({
 $("#addtocart").off('click').on({
     click:function(e) {
       console.log("bargin clicked");
-        e.stopPropagation(); 
+        e.stopPropagation();
       var item = $('#item').val();
        $.ajax({
            type:"POST",
@@ -271,8 +271,8 @@ $("#addtocart").off('click').on({
        .css({'font-size':'11px'})
            }
        });
-   });
-
+   }
+ });
 $("#addtofullcart").off('click').on({
 
     click:function(e) {
