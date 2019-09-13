@@ -158,7 +158,7 @@ $("#addtocart").off('click').on({
 
             full = $('#add_or_edit').val();
             console.log(full);
-            s_type = $('#s_type').val();
+            s_type = $('#s_type').val() || 'STOCK';
             console.log(s_type);
             console.log("add to cart");
 
@@ -198,7 +198,7 @@ $("#addtocart").off('click').on({
         		pattern: pattern,
         		pattern2: pattern2,
         		size: size_id,
-                s_type: s_type,
+            s_type: s_type,
         		csrfmiddlewaretoken: csrftoken,
         		cartitem_id: '1',
         		quantity: quantity,
