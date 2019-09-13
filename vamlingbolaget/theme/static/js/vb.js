@@ -253,7 +253,7 @@ $("#addtocart").off('click').on({
 });//end of click
 
 $("#addtobargincart").click(function() {
-           var item = {{ product.pk }};
+      var item = $('#item').val();
        $.ajax({
            type:"POST",
            url:"/cart/addbargain/",
