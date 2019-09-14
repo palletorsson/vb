@@ -32,7 +32,7 @@
         <div class="media-body pb-0 mb-0 border-gray">
           <div class="d-flex justify-content-between align-items-center w-100">
 	           <div>
-               {% trans "Pris" %}: {{ product.price }} SEK
+               {% trans "Pris" %}: <span id="the_price"> {{ product.price }} </span>SEK
              </div>
           </div>
         </div>
@@ -42,7 +42,7 @@
 
 
                         <button id="addtobargincart" class="btn btn-sm btn btn-success rounded-0 btn-block add-to-cart buttom" style="z-index: 66" type="button"> {% trans "Lägg till i Shoppingbag" %}</button>
-                
+
                 </div>
             </div>
         </div>

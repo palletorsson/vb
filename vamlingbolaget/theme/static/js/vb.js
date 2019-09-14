@@ -177,7 +177,7 @@ $("#addtocart").off('click').on({
         		color2 = 0,
         		pattern2 = 0;
                 console.log(size_id)
-        	if (sku_number == 9805) { //fill in proper article no for 2 patterned items
+        	 if (sku_number == 9805) { //fill in proper article no for 2 patterned items
                 if (full_var != 1) {
         		   color2 = $('#color2').val();
         		   pattern2 = $('#pattern2').val();
@@ -256,6 +256,7 @@ $("#addtobargincart").off('click').on({
     click:function(e) {
       console.log("bargin clicked");
         e.stopPropagation();
+      var the_price = $("#the_price").text()
       var item = $('#item').val();
        $.ajax({
            type:"POST",
@@ -264,11 +265,9 @@ $("#addtobargincart").off('click').on({
               item : item
            },
            success: function(data){
-               var msg = data.message.msg,
-                   _ = data.cartitem;
-       $("#changetext")
-         .html( msg +'{%trans " i din"%} <a href="/cart/show/">{%trans "shoppinglåda"%}</a>')
-       .css({'font-size':'11px'})
+             var old_price = $("#widget_total").text();
+             var new_price = parseInt(the_price) + parseInt(old_price) + 80;
+             $('#widget_total').text(new_price);
            }
        });
    }
