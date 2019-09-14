@@ -39,7 +39,7 @@ def checkout(request, test=''):
 
     try:
         bargains = cart.bargaincartitem_set.all()
-        print(bargains[0].title)
+        dir(bargains)
     except:
         pass
 
@@ -716,6 +716,13 @@ def cleanCartandSetStock(request, the_items):
             if (current_stock == 1):
                 item.reaArticle.status = 'E'
             item.reaArticle.save()
+    except:
+        print "clean wrong"
+
+    try:
+        for item in bargains:
+            item.Bargainbox.status = 'E'
+            item.Bargainbox.save()
     except:
         print "clean wrong"
 
