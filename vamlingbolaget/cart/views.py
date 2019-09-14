@@ -545,7 +545,7 @@ def totalsum(cartitems, bargains, request, voucher, rea):
         temp_p = temp_p + handling
 
     # free shipment
-    handling = 0
+    # handling = 0
 
     # if rea
     rea10 = False
