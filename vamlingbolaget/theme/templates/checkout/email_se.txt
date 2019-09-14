@@ -5,19 +5,24 @@ Din order till Vamlingbolaget:
 Din order:
 ---------- {% for item in cartitems %}
 * Artikel: {{ item.article }}
-* Antal: {{ item.quantity }} 
+* Antal: {{ item.quantity }}
 * Färg: {{ item.color_text }} {% if item.color_text_2 > 0 %} (utsida) * Färg 2: {{ item.color_text_2 }} (insida) {%endif%}
 * Mönster: {{ item.pattern_text }} {% if item.pattern_text_2 > 0 %} (utsida) * Mönster 2: {{ item.pattern_2 }} (insida) {%endif%}
 * Storlek: {{ item.size_text }}
-* Pris per produkt: {% if item.discount_price > 0 %} Rea: {{ item.discount_price }} SEK ( Regular price: {%endif%} {{ item.article.price }} {% if item.discount_price > 0 %} ) {%endif%} SEK 
+* Pris per produkt: {% if item.discount_price > 0 %} Rea: {{ item.discount_price }} SEK ( Regular price: {%endif%} {{ item.article.price }} {% if item.discount_price > 0 %} ) {%endif%} SEK
 {% if item.s_type == 'COD' %}* + Cut on demand: {{ item.article.ondemand_cost }} SEK {%endif%}
 -------------- {%endfor%}
 {% for item in reaitems %}* Rea-artikel: {{ item.reaArticle.article }}
-* Antal: 1 
-* Färg: {{ item.reaArticle.color }} 
+* Antal: 1
+* Färg: {{ item.reaArticle.color }}
 * Mönster: {{ item.reaArticle.pattern }}
-* Storlek: {{ item.reaArticle.size }} 
-* Pris per produkt: Reapris: {{ item.reaArticle.rea_price }} SEK 
+* Storlek: {{ item.reaArticle.size }}
+* Pris per produkt: Reapris: {{ item.reaArticle.rea_price }} SEK
+-------------- {%endfor%}
+{% for item in bargains %}* Artikel: {{ item.title }}
+* Antal: 1
+* Om: {{ item.description }}
+* Pris: {{ item.price }} SEK
 -------------- {%endfor%}
 Frakt och hantering :  {{ handling }} SEK
 ------------------------------
@@ -25,7 +30,7 @@ Summa ---------------- {{ totalprice }} SEK
 ------------------------------
 Din adress:
 -----------
-{{ new_order.first_name }} {{ new_order.last_name }} 
+{{ new_order.first_name }} {{ new_order.last_name }}
 {{ new_order.street }}
 {{ new_order.postcode }} {{ new_order.city}}
 {{ new_order.country }}

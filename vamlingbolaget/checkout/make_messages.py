@@ -82,7 +82,7 @@ def cart_part_of_message(cartitems, rea_items, lang, i=1):
         cart_temp = cart_temp + t.substitute(productprice_=priceperproduct, price=str(item.reaArticle.rea_price), sek_='SEK')
 
         cartitems_str = cartitems_str + cart_temp
-                
+
     return cartitems_str
 
 # continue to build summery of the message from form values
@@ -223,7 +223,7 @@ def getAllMessages(lang):
 
 
 
-def email_one(request, new_order, cartitems, reaitems, handling, totalprice):
+def email_one(request, new_order, cartitems, bargains, reaitems, handling, totalprice):
 
     # get the name of color and patterns
     for item in cartitems:
