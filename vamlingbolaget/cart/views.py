@@ -57,7 +57,7 @@ def addtocart(request):
         msg = ''
         sku = d['article_sku']
         article_db = Article.objects.get(sku_number = sku)
-        print sku 
+
         try:
             s_type = d['s_type']
         except:
@@ -226,6 +226,7 @@ def add_bargain(request):
         existing_bargainitems = BargainCartItem.objects.filter(cart=cart)
 
 
+
         inbox = False
 
         for existingbargain in existing_bargainitems:
@@ -234,7 +235,7 @@ def add_bargain(request):
                 inbox = True
 
         if inbox == False:
-            BargainCartItem.objects.create(bargain = bargain, cart=cart)
+            BargainCartItem.objects.create(bargain = bargain, title=bargain.title, price=bargain.price cart=cart)
             msg = u'Du har lagt till %s ' %bargain.title
 
 
