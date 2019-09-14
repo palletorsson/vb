@@ -251,6 +251,7 @@ def email_one(request, new_order, cartitems, bargains, reaitems, handling, total
         'handling' : handling,
         'totalprice' : totalprice,
         'cartitems' : cartitems,
+        'bargains': bargains,
         'reaitems' : reaitems,
         'new_order': new_order,
         'consumer_message': mess
