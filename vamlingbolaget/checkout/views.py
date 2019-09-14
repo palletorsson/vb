@@ -39,9 +39,10 @@ def checkout(request, test=''):
 
     try:
         bargains = cart.bargaincartitem_set.all()
+        print(bargains)
     except:
         pass
-        
+
     try:
         rea_items = cart.reacartitem_set.all()
     except:
