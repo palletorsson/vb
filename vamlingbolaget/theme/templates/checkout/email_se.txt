@@ -19,9 +19,9 @@ Din order:
 * Storlek: {{ item.reaArticle.size }}
 * Pris per produkt: Reapris: {{ item.reaArticle.rea_price }} SEK
 -------------- {%endfor%}
-{% for item in bargains %}* Artikel: {{ item }}
-* ref: {{ item.pk }}
-* Pris: {{ item.price }} SEK
+{% for item in bargains %}* Artikel: {{ item.bargin }}
+* ref: {{ item.bargin.pk }}
+* Pris: {{ item.bargin.price }} SEK
 -------------- {%endfor%}
 Frakt och hantering :  {{ handling }} SEK
 ------------------------------

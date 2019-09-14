@@ -235,7 +235,7 @@ def add_bargain(request):
                 inbox = True
 
         if inbox == False:
-            BargainCartItem.objects.create(bargain = bargain, title=bargain.title, price=bargain.price, cart=cart)
+            BargainCartItem.objects.create(bargain = bargain, cart=cart)
             msg = u'Du har lagt till %s ' %bargain.title
 
 
