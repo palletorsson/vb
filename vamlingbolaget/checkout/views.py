@@ -35,10 +35,20 @@ def checkout(request, test=''):
     # get the all cart data
     key = _cart_id(request)
     cart, created = Cart.objects.get_or_create(key=key)
-    cartitems = cart.cartitem_set.all()
-    bargains = cart.bargaincartitem_set.all()
+
+
+    try:
+        bargains = cart.bargaincartitem_set.all()
+    except:
+        pass
+        
     try:
         rea_items = cart.reacartitem_set.all()
+    except:
+        pass
+
+    try:
+        cartitems = cart.cartitem_set.all()
     except:
         pass
 
@@ -153,7 +163,7 @@ def checkout(request, test=''):
                         new_order.payment_log = item.article.discount.discount
             except:
                 pass
-            email_body = email_one(request, new_order, cartitems, reaitems, handling, totalprice)
+            email_body = email_one(request, new_order, cartitems, bargains, reaitems, handling, totalprice)
             new_order.message = email_body
             new_order.save()
 
