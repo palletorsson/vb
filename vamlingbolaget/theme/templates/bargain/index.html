@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block superstretchpage %}
-<main role="main" class="col-md-8 col-lg-9 pt-3 px-4 offset-md-2">
+<main role="main" class="col-md-10 col-lg-10 pt-3 px-4 offset-md-1">
   <div class="row pb-3 px-3">
       <div class="col-12 p-0">
 
@@ -30,7 +30,7 @@ Ordinarie pris silkestrikå är 350 kronor per meter, vilket blir 1050 kronor pe
   </div>
     <div class="row">
         {% for product in products %}
-        <div class="col-6 col-md-4 mb-3 p-1 pl-3">
+        <div class="col-6 col-md-3 mb-3 p-1 pl-3">
                 <a href="{{product.pk}}">
                       <div class="collection_list" >
                             <img src="{{ product.image.url }}" class="lazy img-fluid"  alt="product image" width="200" />
