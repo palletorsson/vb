@@ -48,14 +48,6 @@ class ArticleAdmin(TranslationAdmin):
     list_per_page = 20
     ordering = ['active', 'name']
 
-class BargainboxAdmin(TranslationAdmin):
-    model = Bargainbox
-    list_display = ('status', 'title', 'price', 'pk',)
-    list_display_links = ('title', )
-    list_editable = ('status')
-    list_filter = ('status')
-    list_per_page = 40
-    ordering = ['status', 'title']
 
 class ReaArticleAdmin(admin.ModelAdmin):
     model = ReaArticle
@@ -140,4 +132,3 @@ admin.site.register(Quality, QualityAdmin)
 admin.site.register(Type, TypeAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Discount)
-admin.site.register(Bargainbox, BargainboxAdmin)
