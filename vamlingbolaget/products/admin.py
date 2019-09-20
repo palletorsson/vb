@@ -68,14 +68,6 @@ class BargainboxAdmin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['status', 'title' ]
 
-    title = models.CharField(max_length=40)
-    description = models.TextField()
-    price = models.IntegerField()
-    created = models.DateTimeField(auto_now_add = True)
-    modified = models.DateTimeField(auto_now = True)
-    status = models.CharField(max_length=2, choices = STATUS)
-    image = models.ImageField(upload_to = 'bargains/')
-
 class ColorAdmin(TranslationAdmin):
     model = Color
     prepopulated_fields = {"slug": ("name",)}
