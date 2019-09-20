@@ -59,6 +59,22 @@ class ReaArticleAdmin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['status', 'id', ]
 
+class BargainboxAdmin(admin.ModelAdmin):
+    model = Bargainbox
+    list_display = ('title', 'price', 'status')
+    list_display_links = ('title')
+    list_editable = ('status')
+    list_filter = ('status')
+    list_per_page = 20
+    ordering = ['status', 'title' ]
+
+    title = models.CharField(max_length=40)
+    description = models.TextField()
+    price = models.IntegerField()
+    created = models.DateTimeField(auto_now_add = True)
+    modified = models.DateTimeField(auto_now = True)
+    status = models.CharField(max_length=2, choices = STATUS)
+    image = models.ImageField(upload_to = 'bargains/')
 
 class ColorAdmin(TranslationAdmin):
     model = Color
@@ -132,4 +148,4 @@ admin.site.register(Quality, QualityAdmin)
 admin.site.register(Type, TypeAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Discount)
-admin.site.register(Bargainbox)
+admin.site.register(Bargainbox, BargainboxAdmin)
