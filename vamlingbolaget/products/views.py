@@ -734,11 +734,11 @@ def cutondemandApiSingle(request, sku_number):
     resp = json.dumps(allpossiblities)
     return HttpResponse(resp, content_type="application/json")
 
-def cutondemandApi(request, category):
-    resp = json.dumps(cutjson)
+#def cutondemandApi(request, category):
+#    resp = json.dumps(cutjson)
     #print resp
-    return HttpResponse(resp, content_type="application/json")
-	
+#    return HttpResponse(resp, content_type="application/json")
+
 def cutondemandApi1(request, category):
     print category
     models = Article.objects.filter(active=True).order_by('category')
