@@ -722,8 +722,7 @@ def cleanCartandSetStock(request, the_items):
     try:
         for item in bargains:
             item.bargain.status = 'E'
-
-        item.bargain.save()
+            item.bargain.save()
     except:
         print "clean wrong"
 
