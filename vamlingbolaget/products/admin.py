@@ -63,10 +63,10 @@ class BargainboxAdmin(admin.ModelAdmin):
     model = Bargainbox
     list_display = ('title', 'price', 'status')
 #    list_display_links = ('title', 'status')
-    list_editable = ('status')
+#    list_editable = ('status')
 #    list_filter = ('status')
 #    list_per_page = 20
-#    ordering = ['status', 'title' ]
+     ordering = ['status', 'title' ]
 
 class ColorAdmin(TranslationAdmin):
     model = Color
