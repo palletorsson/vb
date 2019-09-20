@@ -62,11 +62,11 @@ class ReaArticleAdmin(admin.ModelAdmin):
 class BargainboxAdmin(admin.ModelAdmin):
     model = Bargainbox
     list_display = ('title', 'price', 'status')
-    list_display_links = ('title')
-    list_editable = ('status')
-    list_filter = ('status')
-    list_per_page = 20
-    ordering = ['status', 'title' ]
+#    list_display_links = ('title', 'status')
+#    list_editable = ('status')
+#    list_filter = ('status')
+#    list_per_page = 20
+#    ordering = ['status', 'title' ]
 
 class ColorAdmin(TranslationAdmin):
     model = Color
@@ -131,6 +131,7 @@ class CategoryAdmin(TranslationAdmin):
 admin.site.register(Variation, VariationAdmin)
 admin.site.register(FullVariation, FullVariationAdmin)
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(Bargainbox, BargainboxAdmin)
 admin.site.register(ReaArticle, ReaArticleAdmin)
 admin.site.register(Size, SizeAdmin)
 admin.site.register(PatternAndColor, PatternAndColorAdmin)
@@ -140,4 +141,3 @@ admin.site.register(Quality, QualityAdmin)
 admin.site.register(Type, TypeAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Discount)
-admin.site.register(Bargainbox, BargainboxAdmin)
