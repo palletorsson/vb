@@ -882,7 +882,7 @@ def cutondemandApi(request, category):
               })
     # TODO add sizes
     resp = json.dumps(allpossiblities, ensure_ascii=False)
-    print resp
+    #print resp
     return HttpResponse(resp, content_type="application/json")
 
 
