@@ -18,14 +18,14 @@ class VariationAdmin(admin.ModelAdmin):
     search_fields = ['article']
     list_per_page = 20
     ordering = ['active','article']
-    
+
 class ArticleCostAdmin(admin.ModelAdmin):
     model = ArticleCost
     list_display = ('pk', 'article', 'fabric_m', 'cuttime', 'sawtime', 'addtime', 'attachment', 'get_final_cost', 'get_gross_cost', 'get_out_cost', 'get_current_price')
     list_display_links = ('pk', 'article',)
     list_editable = ('fabric_m', 'cuttime', 'sawtime', 'addtime', 'attachment',)
     list_per_page = 20
- 
+
 class FullVariationAdmin(admin.ModelAdmin):
     model = FullVariation
     list_display = ('active', 'variation', 'size', 'order', 'stock',)
@@ -47,6 +47,15 @@ class ArticleAdmin(TranslationAdmin):
     search_fields = ['sku_number', 'name']
     list_per_page = 20
     ordering = ['active', 'name']
+
+class BargainboxAdmin(TranslationAdmin):
+    model = Bargainbox
+    list_display = ('status', 'title', 'price', 'pk',)
+    list_display_links = ('title', )
+    list_editable = ('status')
+    list_filter = ('status')
+    list_per_page = 40
+    ordering = ['status', 'title']
 
 class ReaArticleAdmin(admin.ModelAdmin):
     model = ReaArticle
@@ -99,7 +108,7 @@ class QualityAdmin(TranslationAdmin):
     list_editable = ('active', 'order', 'name_da',)
     list_filter = ('active', )
     ordering = ['order']
-    
+
 class TypeAdmin(TranslationAdmin):
     model = Type
     prepopulated_fields = {"slug": ("name",)}
@@ -119,8 +128,8 @@ class CategoryAdmin(TranslationAdmin):
     ordering = ['order']
 
 
-admin.site.register(Variation, VariationAdmin)  
-admin.site.register(FullVariation, FullVariationAdmin)     
+admin.site.register(Variation, VariationAdmin)
+admin.site.register(FullVariation, FullVariationAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ReaArticle, ReaArticleAdmin)
 admin.site.register(Size, SizeAdmin)
@@ -131,4 +140,4 @@ admin.site.register(Quality, QualityAdmin)
 admin.site.register(Type, TypeAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Discount)
-admin.site.register(Bargainbox)
+admin.site.register(Bargainbox, BargainboxAdmin)
