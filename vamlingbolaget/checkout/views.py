@@ -190,7 +190,7 @@ def checkout(request, test=''):
                 # send email verifaction to customer if name not Tester
                 to = [request.POST['email'], 'info@vamlingbolaget.com']
                 if (new_order.first_name == "Tester"):
-                    mail.send_mail('Din order med Vamlingbolaget: '+new_order.order_number, u'%s' %email_body, 'palle.torsson@gmail.com', to,  fail_silently=False)
+                    mail.send_mail('Din order med Vamlingbolaget: '+ str(new_order.order_number), u'%s' %email_body, 'palle.torsson@gmail.com', to,  fail_silently=False)
                 else:
                     mail.send_mail('Din order med Vamlingbolaget: ', u'%s' %email_body, 'vamlingbolagetorder@gmail.com', to,  fail_silently=False)
 
