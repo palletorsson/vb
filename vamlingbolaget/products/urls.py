@@ -4,7 +4,7 @@ from models import Variation
 
 urlpatterns = patterns('products.views',
     url(r'^$', 'fullindex_b'),
-    url(r'^fullcut/$', 'fullindexarticle'),
+    url(r'^fullcut/$', 'codwizard'),
     url(r'^test_f/$', 'fullindex_b'),
     url(r'^full/$', 'fullindex_b'),
     url(r'^preview/$', 'fulllastindex'),
