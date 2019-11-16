@@ -21,6 +21,7 @@ Din order:
 -------------- {%endfor%}
 {% for item in bargains %}* Artikel: {{ item.bargain }}
 * ref: {{ item.bargain.pk }}
+* Beskrivning: {{ item.bargain.description }}
 * Pris: {{ item.bargain.price }} SEK
 -------------- {%endfor%}
 Frakt och hantering :  {{ handling }} SEK
@@ -36,7 +37,8 @@ Din adress:
 ---------------------------------
 Ditt telefonnummer : {{ new_order.phone }}
 --------------------------------------------
-* En order till Vamlingbolaget tar ca 3 veckor eftersom vi syr upp dina plagg. Reaplagg och färdiga plagg tar ca 1 vecka.
+* En order till Vamlingbolaget tar ca 4 - 6 veckor. Reaplagg och färdiga plagg tar ca 2 veckor.
+* Vid beställning av plagg Cut On Demand ingår ingen bytesrätt eftersom plagget är specialsytt till dig.
 {% if new_order.paymentmethod == 'P' %}* Du betalar med postforskott {%endif%}{% if new_order.paymentmethod == 'C' %}* Du valde Payex kortbetalning {%endif%}{% if new_order.paymentmethod == 'K' %}* Du valde Klarna checkout {%endif%}
 {% if new_order.post %}* sms-avisering kommer {%endif%}
 ------------------------------
