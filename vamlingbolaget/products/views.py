@@ -677,7 +677,6 @@ cutjson = {
 	}],
 	"sizes": ["XS", "S", "M", "L", "XL", "XXL"]
 }
-
 def first_page(request):
     variations = Variation.objects.filter(active=True).order_by('article__quality')
     images = Image.objects.all()
@@ -735,31 +734,14 @@ def cutondemandApiSingle(request, sku_number):
     resp = json.dumps(allpossiblities)
     return HttpResponse(resp, content_type="application/json")
 
-def cutondemandApiStickeri(request):
-	articles = Article.objects.filter(quality__slug ='stickat-100-ekologisk-ull', active=True).order_by('type')
-	colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug ='stickat-100-ekologisk-ull')
-	allpossiblities = {}
-	active_sizes = SIZES
-	allpossiblities["sizes"] = active_sizes
-	allpossiblities["colorspatterns"] = []
-    for csps in colorsandpatterns:
-        allpossiblities["colorspatterns"].append({
-          "color_num": csps.color.order,
-          "color_name": csps.color.name,
-          "pattern_num": csps.pattern.order,
-          "pattern_name": csps.pattern.name,
-          "quality_name": csps.quality.name,
-          "quality_num": csps.quality.order
-          })
-	allpossiblities["articles"] = []
-    resp = json.dumps(allpossiblities, ensure_ascii=False)
+#def cutondemandApi(request, category):
+#    resp = json.dumps(cutjson)
     #print resp
-    return HttpResponse(resp, content_type="application/json")
+#    return HttpResponse(resp, content_type="application/json")
 
 def cutondemandApi(request, category):
     print category
     models = Article.objects.filter(active=True).order_by('category')
-
     #if (category != 'pc'):
         #print "not pc"
     if (category == 'all'):
