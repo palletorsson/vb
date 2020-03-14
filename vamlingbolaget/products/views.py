@@ -743,11 +743,7 @@ def cutondemandApiSingle(request, sku_number):
 def cutondemandApiStickeri(request):
 	jsonresp = {}
 	articles = Article.objects.filter(quality__slug='stickat-100-ekologisk-ull', active=True).order_by('type')
-	colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug='stickat-100-ekologisk-ull')
-	active_sizes = SIZES
-	jsonresp["sizes"] = active_sizes
-	jsonresp["colorspatterns"] = []
-	jsonresp["articles"] = []
+
 
 
     html = "<html><body>hello</body></html>"
