@@ -739,7 +739,8 @@ def cutondemandApiSingle(request, sku_number):
 #    resp = json.dumps(cutjson)
     #print resp
 #    return HttpResponse(resp, content_type="application/json")
-)
+
+
 
 def cutondemandApi(request, category):
     print category
