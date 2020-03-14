@@ -740,12 +740,11 @@ def cutondemandApiSingle(request, sku_number):
     #print resp
 #    return HttpResponse(resp, content_type="application/json")
 
-def cutondemandApiStickeri(request):
+def apiStickeri(request):
+	print request
 	allpossiblities = {}
-	resp = json.dumps(allpossiblities, ensure_ascii=False)
+	resp = json.dumps(allpossiblities)
     return HttpResponse(resp, content_type="application/json")
-
-
 
 def cutondemandApi(request, category):
     print category
