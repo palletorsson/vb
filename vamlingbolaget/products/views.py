@@ -748,15 +748,7 @@ def cutondemandApiStickeri(request):
 	jsonresp["sizes"] = active_sizes
 	jsonresp["colorspatterns"] = []
 	jsonresp["articles"] = []
-	for csps in colorsandpatterns:
-		jsonresp["colorspatterns"].append({
-			"color_num": csps.color.order,
-			"color_name": csps.color.name,
-			"pattern_num": csps.pattern.order,
-			"pattern_name": csps.pattern.name,
-			"quality_name": csps.quality.name,
-			"quality_num": csps.quality.order
-          })
+
 
     html = "<html><body>hello</body></html>"
     return HttpResponse(html)
