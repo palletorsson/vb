@@ -757,10 +757,10 @@ def cutondemandApiStickeri(request):
 			"quality_name": csps.quality.name,
 			"quality_num": csps.quality.order
 			})
-			allpossiblities["articles"] = []
-			
+
+
 	for chil in articles:
-		allpossiblities["articles"].append({
+		jsonresp["articles"].append({
 			"article": chil.name,
 			"sku": chil.sku_number,
 			"price": chil.price,
