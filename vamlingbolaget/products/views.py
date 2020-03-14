@@ -757,6 +757,22 @@ def cutondemandApiStickeri(request):
 			"quality_name": csps.quality.name,
 			"quality_num": csps.quality.order
 			})
+			allpossiblities["articles"] = []
+			
+	for chil in articles:
+		allpossiblities["articles"].append({
+			"article": chil.name,
+			"sku": chil.sku_number,
+			"price": chil.price,
+			"id": chil.id,
+			"pk": chil.pk,
+			"img": chil.file.name,
+			"type": chil.type.name,
+			"category":chil.category.name,
+			"description": chil.description,
+			"quality": chil.quality.name,
+			"cod_cost": chil.ondemand_cost
+		})
 	resp = json.dumps(jsonresp, ensure_ascii=False)
 	return HttpResponse(resp, content_type="application/json")
 
