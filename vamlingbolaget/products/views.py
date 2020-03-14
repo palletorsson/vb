@@ -741,8 +741,8 @@ def cutondemandApiSingle(request, sku_number):
 #    return HttpResponse(resp, content_type="application/json")
 
 def cutondemandApiStickeri(request):
-	xzy = {}
     html = "<html><body>hello</body></html>"
+	print(html)
     return HttpResponse(html)
 
 def cutondemandApi(request, category):
