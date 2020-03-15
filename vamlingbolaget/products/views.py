@@ -1137,6 +1137,16 @@ def reacut_c(request):
                               },
                              context_instance=RequestContext(request))
 
+def stickeriwizard(request):
+    rea = "false"
+    sizes = SIZES
+    atypes = Type.objects.filter(order__lte=5, active=True)
+    return render_to_response('variation/stickeriwizard.html',
+                             {
+                              'cod': True
+                              },
+                             context_instance=RequestContext(request))
+
 def jsonReaindex(request):
     products = ReaArticle.objects.filter(status='A').order_by('-article__quality')
     allproducts = []
@@ -1452,13 +1462,6 @@ def codwizard(request):
                    context_instance=RequestContext(request)
                     )
 
-def stickeriwizard(request):
-
-    return render_to_response('variation/stickeriwizard.html',
-                   {'cod': True
-                   },
-                   context_instance=RequestContext(request)
-                    )
 
 def fulldetail(request, pk):
     try:
