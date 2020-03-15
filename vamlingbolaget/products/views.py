@@ -758,8 +758,6 @@ def cutondemandApiStickeri(request):
 			"quality_name": csps.quality.name,
 			"quality_num": csps.quality.order
 			})
-
-
 	for chil in articles:
 		jsonresp["articles"].append({
 			"article": chil.name,
@@ -1450,6 +1448,14 @@ def codwizard(request):
                     'sizes': SIZES,
                     'product': product,
                     'cod': True
+                   },
+                   context_instance=RequestContext(request)
+                    )
+
+def stickeriwizard(request):
+
+    return render_to_response('variation/stickeriwizard.html',
+                   {'cod': True
                    },
                    context_instance=RequestContext(request)
                     )
