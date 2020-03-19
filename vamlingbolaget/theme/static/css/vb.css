@@ -949,6 +949,14 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6
       z-index: 11;
  }
 
+ .codhover {
+     border: 1px solid transparent;
+ }
+
+ .codhover:hover {
+     border: 1px solid #d0d0d0;
+ }
+ 
  .tagline_img {
   width: 240px;
  }
@@ -1022,14 +1030,4 @@ h4, .h4 {
 .vimeoDiv {
     width: 100%    !important;
     height: auto   !important;
-  }
-
-  .codhover {
-
-      border: 1px solid transparent;
-  }
-
-  .codhover:hover {
-
-      border: 1px solid #d0d0d0;
   }
