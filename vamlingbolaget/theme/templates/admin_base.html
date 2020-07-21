@@ -15,7 +15,7 @@ Vamlingbolaget." %} />
 	<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/vamlingbolaget.ico"/>
     <!-- The styles -->
 
-     
+
     <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap_new.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/vb.css" rel="stylesheet">
@@ -31,7 +31,7 @@ Vamlingbolaget." %} />
 
 
     <!-- The scripts -->
-   
+
       {% block extra_head %}{% endblock %}
 
 	<script src="{{ STATIC_URL }}js/underscore.js" type="text/javascript"> </script>
@@ -43,7 +43,7 @@ Vamlingbolaget." %} />
 
     <!-- Navbar ================================================== -->
     <div class="navbar navbar-default navbar-fixed-top">
-         
+
 
           <div class="navbar-inner">
             <div class="container">
@@ -51,10 +51,10 @@ Vamlingbolaget." %} />
 				<span class = "visible-xs">
 					  <a id="token" href="/cart/show/">
 					   <span class="mob_shop_icon">
-             <span class="glyphicon glyphicon-gift" aria-hidden="true"  alt="Vamlingbolaget shopping cart" ></span> 
+             <span class="glyphicon glyphicon-gift" aria-hidden="true"  alt="Vamlingbolaget shopping cart" ></span>
              </span>
 					  </a>
-				</span> 
+				</span>
 
                 <a href="/" class="navbar-brand">Vb Admin <span class="glyphicon glyphicon-certificate"  ></span> </a>
                 <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
@@ -66,7 +66,7 @@ Vamlingbolaget." %} />
                 <div class = "collapse navbar-collapse navHeaderCollapse pull-left">
 
                      <ul class = "nav navbar-nav navbar-right nav-list mainnav mob_nav pull-left">
-                    
+
                         <li>
                             <a href="/orders/">{% trans "Alla Orders" %}</a>
                         </li>
@@ -83,13 +83,13 @@ Vamlingbolaget." %} />
 
                         <div class="form-inline">
                         <li style="width: 300px"  class="form-group">
-                          
+
                           <input type="text" id="order_id" class="form-control" placeholder="sök på order nummer...">
                           <button class="btn btn-xs btn-default"id="search_order" type="button">Sök</button>
                         </li>
                         <li class="form-group">
                           <input type="text" id="order_name" class="order_name_search form-control" placeholder="sök på namn...">
-                          
+
                           <button class="btn btn-xs btn-default float-left" id="search_name" type="button">Sök</button>
                         </li>
                         </div>
@@ -134,12 +134,12 @@ Vamlingbolaget." %} />
   <br>
   <br>
   <br>
-  
+
   <div class="nav">
       <div class="container">
     Questions? call Palle: 076044023 <br>
     <a href="https://www.facebook.com/groups/1773339212911963/">Intern Facebook-group</a>
-  
+
   </div>
     <hr>
   </footer>
@@ -148,9 +148,9 @@ Vamlingbolaget." %} />
 	<script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="{{ STATIC_URL }}js/vb.js"  type="text/javascript"></script>
 	<script src="{{ STATIC_URL }}js/lightbox.js" type="text/javascript"> </script>
-        
+
 </div>
 </div>
- 
+
  </body>
 </html>
