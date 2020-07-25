@@ -495,7 +495,12 @@ def getAddon(amount):
 def getParcels(parcel_json, weight):
 
     return_parcels = []
-    parcel_json = json.loads(parcel_json)
+    try:
+        parcel_json = json.loads(parcel_json)
+    except:
+        pass
+
+
     weight = float(weight)/1000
     return_parcels.append({
         "copies": "1",
