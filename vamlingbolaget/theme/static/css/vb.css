@@ -1032,6 +1032,6 @@ h4, .h4 {
     height: auto   !important;
   }
 
-.disabled {
+.dim {
   opacity: 0.2;
 }
