@@ -1032,6 +1032,6 @@ h4, .h4 {
     height: auto   !important;
   }
 
-.pagination.disabled {
-  opacity: 0.2; 
+.disabled {
+  opacity: 0.2;
 }
