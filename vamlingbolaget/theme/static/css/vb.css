@@ -83,12 +83,14 @@ line-height: 1em;
     border: none;
     border-left: 1px solid #dddddd
   }
+
   .page-item.disabled .page-link {
     background-image: url(https://i.imgur.com/OBq3XE9.png);
     background-repeat: repeat-x;
     background-size: auto 170%;
     background-position: left 30%;
   }
+  
   /* menu line beside logo vamlingbolaget */
   .leftsideline{
       position:relative;
