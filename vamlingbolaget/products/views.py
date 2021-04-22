@@ -1524,7 +1524,7 @@ def fulldetail(request, pk):
 
     images = []
 
-    for x in range(0, 3):
+    for x in range(0, 5):
         file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"
         images.append(file)
 
@@ -1604,7 +1604,7 @@ def fulldetail_b(request, pk):
 
     images = []
 
-    for x in range(0, 3):
+    for x in range(0, 5):
         file = "/media/variations/"+ filename +"_" + str(x+1) + ".jpg"
         images.append(file)
 
