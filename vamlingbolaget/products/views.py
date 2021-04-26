@@ -817,26 +817,26 @@ def cutondemandApi(request, category):
     for chil in articles:
         index_c = index_c + 1
         if (chil.sku_number != '0000'):
-            #try:
+            try:
                 #print index_c
                 #print chil.name
                 #print chil.file.name
                 #print chil.pk, chil.sku_number
-            allpossiblities["articles"].append({
-                "article": chil.name,
-                "sku": chil.sku_number,
-                "price": chil.price,
-                "id": chil.id,
-                "pk": chil.pk,
-                "img": chil.file.name,
-                "type": chil.type.name,
-                "category":chil.category.name,
-                "description": chil.description,
-                "quality": chil.quality.name,
-                "cod_cost": chil.ondemand_cost
-            })
-            #except:
-                #print "no such art"
+                allpossiblities["articles"].append({
+                    "article": chil.name,
+                    "sku": chil.sku_number,
+                    "price": chil.price,
+                    "id": chil.id,
+                    "pk": chil.pk,
+                    "img": chil.file.name,
+                    "type": chil.type.name,
+                    "category":chil.category.name,
+                    "description": chil.description,
+                    "quality": chil.quality.name,
+                    "cod_cost": chil.ondemand_cost
+                })
+            except:
+                print "no such art"
 
     try:
         sellart = FullVariation.objects.get(pk=1994)
