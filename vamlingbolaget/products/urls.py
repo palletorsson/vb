@@ -31,7 +31,10 @@ urlpatterns = patterns('products.views',
     url(r'^cat/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_cat'),
     url(r'^ct/(?P<cat>[a-zA-Z0-9_.-]+)/(?P<thetype>[a-zA-Z0-9_.-]+)/$', 'by_cat_type'),
     url(r'^qt/(?P<cat>[a-zA-Z0-9_.-]+)/(?P<q>[a-zA-Z0-9_.-]+)/$', 'by_cat_q'),
-    url(r'^product/(?P<key>[a-zA-Z0-9_.-]+)/$', 'product_api'),
+
+    #url(r'^product/(?P<key>[a-zA-Z0-9_.-]+)/$', 'product_api'),
+    url(r'^product/(?P<key>[a-zA-Z0-9_.-]+)/$', redirect_to, {'url': '/'}),
+
     url(r'^jsonstickeri/$', 'cutondemandApiStickeri', name='cutondemandApiStickeri'),
     #url(r'^quality/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_quality'),
     url(r'^bargain/$', 'bargain', name='bargains'),
