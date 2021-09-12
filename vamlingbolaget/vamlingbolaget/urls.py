@@ -65,7 +65,7 @@ urlpatterns += patterns('',
     (r'^bestall\.php$', redirect_to, {'url': 'order/'}),
     (r'^kontakt\.php$', redirect_to, {'url': 'shop/'}),
     (r'^[a-zA-Z0-9_.-]+\.php*$', redirect_to, {'url': 'products/'}),
-
+    (r'^products/patternandcolor/', redirect_to, {'url': '/'})
 )
 
 
