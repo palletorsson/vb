@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import DetailView, ListView
 from models import Variation
+from django.views.generic.simple import redirect_to
 
 urlpatterns = patterns('products.views',
     url(r'^$', 'fullindex_b'),
@@ -35,7 +36,8 @@ urlpatterns = patterns('products.views',
     #url(r'^quality/(?P<key>[a-zA-Z0-9_.-]+)/$', 'by_quality'),
     url(r'^bargain/$', 'bargain', name='bargains'),
     url(r'^bargain/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'bargain_detail', name='bargain_detail'),
-    url(r'^patternandcolor/$', 'colorpatterntest'),
+    #url(r'^patternandcolor/$', 'colorpatterntest'),
+    url(r'^patternandcolor/$', redirect_to, {'url': '/'}),
     url(r'^articles_admin/$', 'allArticles'),
     url(r'^articles/$', 'articleindex'),
     url(r'^articles/article/(?P<pk>[a-zA-Z0-9_.-]+)/$', 'artdetail'),
