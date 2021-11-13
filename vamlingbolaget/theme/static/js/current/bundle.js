@@ -22926,7 +22926,9 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 
-	      (0, _isomorphicFetch2.default)('/products/reajson/').then(function (response) {
+	      (0, _isomorphicFetch2.default)('/products/reajson/')
+	      //fetch('./static/json/rea.json')
+	      .then(function (response) {
 	        return response.json();
 	      }).then(function (json) {
 	        console.log(json);
@@ -22938,62 +22940,77 @@
 	        _this2.createColorList(new_products);
 	        _this2.createPages(new_products);
 	      });
+	      (0, _isomorphicFetch2.default)('./static/json/prod.json').then(function (response) {
+	        return response.json();
+	      }).then(function (json) {
 
-	      // setting up CSRF
-	      // using jQuery,
-	      function getCookie(name) {
-	        var cookieValue = null;
-	        if (document.cookie && document.cookie !== '') {
-	          var cookies = document.cookie.split(';');
-	          for (var i = 0; i < cookies.length; i++) {
-	            var cookie = $.trim(cookies[i]);
-	            // Does this cookie string begin with the name we want?
-	            if (cookie.substring(0, name.length + 1) == name + '=') {
-	              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-	              break;
+	        json.colorspatterns = _this2.filterPcByQuality(json.colorspatterns);
+	        _this2.setState({
+	          fullProducts: json.products,
+	          fullProductsFiltered: json.products,
+	          articles: json.articles,
+	          patternsandcolors: json.colorspatterns,
+	          variations: json.variations,
+	          singleCod: json.single[0],
+	          sizes: json.sizes
+	        });
+	        _this2.getWords();
+	        _this2.filterByCategory('Kvinna');
+	        // setting up CSRF
+	        // using jQuery,
+	        function getCookie(name) {
+	          var cookieValue = null;
+	          if (document.cookie && document.cookie !== '') {
+	            var cookies = document.cookie.split(';');
+	            for (var i = 0; i < cookies.length; i++) {
+	              var cookie = jQuery.trim(cookies[i]);
+	              // Does this cookie string begin with the name we want?
+	              if (cookie.substring(0, name.length + 1) == name + '=') {
+	                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+	                break;
+	              }
 	            }
 	          }
+	          return cookieValue;
 	        }
-	        return cookieValue;
-	      }
 
-	      var csrftoken = getCookie('csrftoken');
+	        var csrftoken = getCookie('csrftoken');
 
-	      this.setState({
-	        csrftoken: csrftoken
-	      });
-	      function csrfSafeMethod(method) {
-	        // these HTTP methods do not require CSRF protection
-	        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method)
-	        );
-	      }
+	        _this2.setState({
+	          csrftoken: csrftoken
+	        });
+	        function csrfSafeMethod(method) {
+	          // these HTTP methods do not require CSRF protection
+	          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method)
+	          );
+	        }
 
-	      function sameOrigin(url) {
-	        // test that a given url is a same-origin URL
-	        // url could be relative or scheme relative or absolute
-	        var host = document.location.host; // host + port
-	        var protocol = document.location.protocol;
-	        var sr_origin = '//' + host;
-	        var origin = protocol + sr_origin;
-	        // Allow absolute or scheme relative URLs to same origin
-	        return url == origin || url.slice(0, origin.length + 1) == origin + '/' || url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/' ||
-	        // or any other URL that isn't scheme relative or absolute i.e relative.
-	        !/^(\/\/|http:|https:).*/.test(url);
-	      }
+	        function sameOrigin(url) {
+	          // test that a given url is a same-origin URL
+	          // url could be relative or scheme relative or absolute
+	          var host = document.location.host; // host + port
+	          var protocol = document.location.protocol;
+	          var sr_origin = '//' + host;
+	          var origin = protocol + sr_origin;
+	          // Allow absolute or scheme relative URLs to same origin
+	          return url == origin || url.slice(0, origin.length + 1) == origin + '/' || url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/' ||
+	          // or any other URL that isn't scheme relative or absolute i.e relative.
+	          !/^(\/\/|http:|https:).*/.test(url);
+	        }
 
-	      $.ajaxSetup({
-	        beforeSend: function beforeSend(xhr, settings) {
-	          if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-	            // Send the token to same-origin, relative URLs only.
-	            // Send the token only if the method warrants CSRF protection
-	            // Using the CSRFToken value acquired earlier
-	            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	        $.ajaxSetup({
+	          beforeSend: function beforeSend(xhr, settings) {
+	            if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+	              // Send the token to same-origin, relative URLs only.
+	              // Send the token only if the method warrants CSRF protection
+	              // Using the CSRFToken value acquired earlier
+	              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	            }
 	          }
-	        }
-	      }); // --- CSRF end
+	        }); // --- CSRF end
 
-	      // --- setting up cart-widget
-
+	        // --- setting up cart-widget
+	      });
 	    }
 	  }, {
 	    key: 'addToShoppingCart',
