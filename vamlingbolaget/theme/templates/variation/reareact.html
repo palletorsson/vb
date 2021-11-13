@@ -38,7 +38,17 @@
     <div id="react-container"></div>  
 	   <div id="container"></div>   
   	<script type="text/javascript" src="{{ STATIC_URL }}js/bundle_rea.js"></script> 
-	 <script > console.log("fulling")</script>
+	 <script > 
+	 
+	 function removeElementsByClass(className){
+		var elements = document.getElementsByClassName(className);
+		while(elements.length > 0){
+			elements[0].parentNode.removeChild(elements[0]);
+		}
+
+	}
+	removeElementsByClass("mt-2"); 
+	</script>
 	
 	
 </body>
