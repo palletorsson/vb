@@ -22396,7 +22396,7 @@
 	      defColors: {},
 	      showCod: false,
 	      showRea: true,
-	      showCategory: false,
+	      showCategory: true,
 	      fullProducts: [],
 	      variations: [],
 	      fullProductsFiltered: [],
@@ -22479,7 +22479,427 @@
 	        colorvalue: { background: "#FF69B4" }
 	      }
 
-	    }), _defineProperty(_this$state, 'shopMenu', [{ title: "Kvinna", Mid: "M1", type: "category" }, { title: "Man", Mid: "M2", type: "category" }, { title: "Barn", Mid: "M3", type: "category0" }, { title: "Accessoarer & sängkläder", Mid: "M4", type: "category0" }, { title: "Metervara", Mid: "M8", type: "category0" }, { title: "Mönster och Färger", Mid: "M5", type: "mf" }, { title: "Rea", Mid: "M6", type: "rea" }, { title: "Cut on Demand", Mid: "M7", type: "cod" }]), _defineProperty(_this$state, 'artok', false), _defineProperty(_this$state, 'patterncolorok', false), _defineProperty(_this$state, 'sizeok', false), _defineProperty(_this$state, 'codokall', false), _this$state);
+	    }), _defineProperty(_this$state, 'shopMenu', [{ title: "Kvinna", Mid: "M1", type: "category" }, { title: "Man", Mid: "M2", type: "category" }, { title: "Barn", Mid: "M3", type: "category0" }, { title: "Accessoarer & sängkläder", Mid: "M4", type: "category0" }, { title: "Metervara", Mid: "M8", type: "category0" }, { title: "Mönster och Färger", Mid: "M5", type: "mf" }, { title: "Rea", Mid: "M6", type: "rea" }, { title: "Cut on Demand", Mid: "M7", type: "cod" }]), _defineProperty(_this$state, 'artok', false), _defineProperty(_this$state, 'patterncolorok', false), _defineProperty(_this$state, 'sizeok', false), _defineProperty(_this$state, 'codokall', false), _defineProperty(_this$state, 'patternsandcolors', [{
+	      "quality_num": 1,
+	      "color_num": 123,
+	      "color_name": 'Klarbl\xE5 Ljusbl\xE5',
+	      "pattern_num": 1,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Twin Peaks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 49,
+	      "color_name": 'M\xF6rk viol',
+	      "pattern_num": 20,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Wicky Leeks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 49,
+	      "color_name": 'M\xF6rk viol',
+	      "pattern_num": 9,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'F\xE5gel'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 49,
+	      "color_name": 'M\xF6rk viol',
+	      "pattern_num": 16,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Ljung"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 32,
+	      "color_name": 'Nyponr\xF6d',
+	      "pattern_num": 16,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Ljung"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 46,
+	      "color_name": 'R\xF6d Rosa',
+	      "pattern_num": 1,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Twin Peaks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 45,
+	      "color_name": 'P\xE5f\xE5gelbl\xE5',
+	      "pattern_num": 20,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Wicky Leeks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 45,
+	      "color_name": 'P\xE5f\xE5gelbl\xE5',
+	      "pattern_num": 16,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Ljung"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 43,
+	      "color_name": "Indigo",
+	      "pattern_num": 7,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'Tiger m\xF6rk botten'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 20,
+	      "color_name": 'R\xF6dlila',
+	      "pattern_num": 14,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Tre rand"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 10,
+	      "color_name": "Guldnougat",
+	      "pattern_num": 14,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Tre rand"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 10,
+	      "color_name": "Guldnougat",
+	      "pattern_num": 12,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Labyrint"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 10,
+	      "color_name": "Guldnougat",
+	      "pattern_num": 10,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'B\xF6na'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 6,
+	      "color_name": 'M\xF6rk Indigo',
+	      "pattern_num": 10,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'B\xF6na'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 6,
+	      "color_name": 'M\xF6rk Indigo',
+	      "pattern_num": 16,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Ljung"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 6,
+	      "color_name": 'M\xF6rk Indigo',
+	      "pattern_num": 1,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Twin Peaks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 41,
+	      "color_name": "Aqua",
+	      "pattern_num": 20,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Wicky Leeks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 41,
+	      "color_name": "Aqua",
+	      "pattern_num": 5,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'K\xE4rna'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 39,
+	      "color_name": 'Syrligt gr\xF6n',
+	      "pattern_num": 1,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Twin Peaks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 39,
+	      "color_name": 'Syrligt gr\xF6n',
+	      "pattern_num": 5,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'K\xE4rna'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 37,
+	      "color_name": '\xC4rtgr\xF6n',
+	      "pattern_num": 5,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'K\xE4rna'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 33,
+	      "color_name": 'Himmelsbl\xE5',
+	      "pattern_num": 23,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Stor Blomma"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 33,
+	      "color_name": 'Himmelsbl\xE5',
+	      "pattern_num": 22,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Bred Rand"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 33,
+	      "color_name": 'Himmelsbl\xE5',
+	      "pattern_num": 13,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'Enf\xE4rgad'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 31,
+	      "color_name": 'M\xF6rk Turkos',
+	      "pattern_num": 10,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'B\xF6na'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 31,
+	      "color_name": 'M\xF6rk Turkos',
+	      "pattern_num": 13,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'Enf\xE4rgad'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 30,
+	      "color_name": "Konjak",
+	      "pattern_num": 13,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'Enf\xE4rgad'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 30,
+	      "color_name": "Konjak",
+	      "pattern_num": 3,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'Fj\xE4der'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 15,
+	      "color_name": "Jade Turkos",
+	      "pattern_num": 11,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Mah-Jongblomma"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 14,
+	      "color_name": "Jade Ceris",
+	      "pattern_num": 4,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Pyramid"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 13,
+	      "color_name": "Cigarr",
+	      "pattern_num": 1,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Twin Peaks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 17,
+	      "color_name": "Orange Aprikos",
+	      "pattern_num": 4,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Pyramid"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 17,
+	      "color_name": "Orange Aprikos",
+	      "pattern_num": 5,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'K\xE4rna'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 21,
+	      "color_name": 'Lavendelgr\xE5',
+	      "pattern_num": 20,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Wicky Leeks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 21,
+	      "color_name": 'Lavendelgr\xE5',
+	      "pattern_num": 9,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'F\xE5gel'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 21,
+	      "color_name": 'Lavendelgr\xE5',
+	      "pattern_num": 16,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Ljung"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 21,
+	      "color_name": 'Lavendelgr\xE5',
+	      "pattern_num": 1,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Twin Peaks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 24,
+	      "color_name": 'Pistagegr\xF6n',
+	      "pattern_num": 1,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Twin Peaks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 8,
+	      "color_name": "Lila Rosa",
+	      "pattern_num": 10,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'B\xF6na'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 8,
+	      "color_name": "Lila Rosa",
+	      "pattern_num": 9,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'F\xE5gel'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 8,
+	      "color_name": "Lila Rosa",
+	      "pattern_num": 16,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Ljung"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 11,
+	      "color_name": "Mandarin",
+	      "pattern_num": 9,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'F\xE5gel'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 3,
+	      "color_name": 'Silvergr\xE5',
+	      "pattern_num": 22,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Bred Rand"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 3,
+	      "color_name": 'Silvergr\xE5',
+	      "pattern_num": 13,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'Enf\xE4rgad'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 12,
+	      "color_name": "Cyklamen",
+	      "pattern_num": 15,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Ginkgo"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 1,
+	      "color_name": 'Syr\xE9n Lila ',
+	      "pattern_num": 8,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Smal Rand"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 1,
+	      "color_name": 'Syr\xE9n Lila ',
+	      "pattern_num": 5,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'K\xE4rna'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 7,
+	      "color_name": "Svart Vit",
+	      "pattern_num": 20,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Wicky Leeks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 7,
+	      "color_name": "Svart Vit",
+	      "pattern_num": 23,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Stor Blomma"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 7,
+	      "color_name": "Svart Vit",
+	      "pattern_num": 22,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Bred Rand"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 7,
+	      "color_name": "Svart Vit",
+	      "pattern_num": 10,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'B\xF6na'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 7,
+	      "color_name": "Svart Vit",
+	      "pattern_num": 9,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'F\xE5gel'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 7,
+	      "color_name": "Svart Vit",
+	      "pattern_num": 16,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Ljung"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 7,
+	      "color_name": "Svart Vit",
+	      "pattern_num": 1,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Twin Peaks"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 7,
+	      "color_name": "Svart Vit",
+	      "pattern_num": 11,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Mah-Jongblomma"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 7,
+	      "color_name": "Svart Vit",
+	      "pattern_num": 6,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Tiger ljus botten"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 2,
+	      "color_name": 'Vallmor\xF6d',
+	      "pattern_num": 22,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Bred Rand"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 2,
+	      "color_name": 'Vallmor\xF6d',
+	      "pattern_num": 21,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Diagonal"
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 2,
+	      "color_name": 'Vallmor\xF6d',
+	      "pattern_num": 13,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": 'Enf\xE4rgad'
+	    }, {
+	      "quality_num": 1,
+	      "color_num": 5,
+	      "color_name": 'Klarbl\xE5',
+	      "pattern_num": 27,
+	      "quality_name": 'Silkestrik\xE5',
+	      "pattern_name": "Varma Backen"
+	    }]), _this$state);
 	    _this.filterSearchList = _this.filterSearchList.bind(_this);
 	    _this.filterResetList = _this.filterResetList.bind(_this);
 	    _this.filterByPattern = _this.filterByPattern.bind(_this);
