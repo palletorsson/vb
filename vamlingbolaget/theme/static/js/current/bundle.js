@@ -24141,7 +24141,7 @@
 	            { className: "card cardcontrolmedium border-0" },
 	            React.createElement(
 	                "a",
-	                { href: "/products/rea/" + id + "/" },
+	                { href: "/products/reaart/" + id + "/" },
 	                React.createElement("img", { className: "card-img-top", src: "http://www.vamlingbolaget.com/media/" + img, alt: "Vamlingbolaget:" + article }),
 	                React.createElement(
 	                    "div",
