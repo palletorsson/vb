@@ -48,6 +48,11 @@
 
 	}
 	removeElementsByClass("mt-2"); 
+
+	var small = document.getElementsByTagName('small')[0];
+	while(small.length > 0){
+		small[0].parentNode.removeChild(small[0]);
+		}
 	</script>
 	
 	
