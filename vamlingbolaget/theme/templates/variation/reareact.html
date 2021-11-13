@@ -49,10 +49,15 @@
 	}
 	removeElementsByClass("mt-2"); 
 
-	var small = document.getElementsByTagName('small')[0];
-	while(small.length > 0){
-		small[0].parentNode.removeChild(small[0]);
+	var small 
+	function removeElementsByTag(tagName){
+		var elements = document.getElementsByTagName(tagName);
+		while(elements.length > 0){
+			elements[0].parentNode.removeChild(elements[0]);
 		}
+
+	}
+	removeElementsByTag("small"); 
 	</script>
 	
 	
