@@ -24318,7 +24318,7 @@
 	                                                                 }, key: i },
 	                                                    React.createElement(
 	                                                                 "a",
-	                                                                 { className: "page-link p-5", id: i },
+	                                                                 { className: "page-link", id: i },
 	                                                                 React.createElement("div", { style: items[item].colorvalue, className: "boxline" })
 	                                                    )
 	                                       );
