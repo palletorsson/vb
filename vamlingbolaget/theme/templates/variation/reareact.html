@@ -49,17 +49,7 @@
 	}
 	removeElementsByClass("mt-2"); 
 
-
-	function removeElementsByTag(tagName){
-	console.log(tagName); 
-		var element = document.getElementsByTagName(tagName), index;
-
-		for (index = element.length - 1; index >= 0; index--) {
-			element[index].parentNode.removeChild(element[index]);
-		}
-
-	}
-	removeElementsByTag("small"); 
+	$( "small" ).remove();
 	</script>
 	
 	
