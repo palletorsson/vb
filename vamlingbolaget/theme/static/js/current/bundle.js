@@ -22477,38 +22477,38 @@
 	      "red": {
 	        color: "red",
 	        family: ["Red Purple", "Red Rose", "Poopy Red", "Röd Rosa", "Rödlila", "Vallmoröd"],
-	        colorvalue: { background: "#FF0000" }
+	        colorvalue: { background: "#FF0000", width: "30px", height: "30px" }
 	      },
 	      "white": {
 	        color: "white",
 	        family: ["Black White", "Svart Vit"],
-	        colorvalue: { background: "#FFF" }
+	        colorvalue: { background: "#FFF", width: "30px", height: "30px" }
 	      },
 	      "green": {
 	        color: "green",
 	        family: ["Pistagegreen-green", "Pea Green", "Green", "Grön", "Pistagegrön", "Ärtgrön", "Sommarfärgen Pistagegrön"],
-	        colorvalue: { background: "#0F0" }
+	        colorvalue: { background: "#0F0", width: "30px", height: "30px" }
 	      },
 	      "blue": {
 	        color: "blue",
 	        family: ["Aqua", "Heaven Blue", "Himmelsblå", "Påfågelblå", "Indigoblå", "Indigo Blue", "Indigo ", "Lavendel Blue", "Jade Ceris", "Purple Black", "Aqua", "Klarblå", "Havsturkos svart", "Jade Turkos", "Lavendel Cikoria"],
-	        colorvalue: { background: "#00F" }
+	        colorvalue: { background: "#00F", width: "30px", height: "30px" }
 	      },
 
 	      "lilic": {
 	        color: "lilic",
 	        family: ["Lilac", "Vine-Greyish rose", "Syrén Lila ", "Lila Rosa", "Lila Svart", "Cyclamen", "Ceris Apricot", "Ceris Aprikos"],
-	        colorvalue: { background: "#A26BA2" }
+	        colorvalue: { background: "#A26BA2", width: "30px", height: "30px" }
 	      },
 	      "orange": {
 	        color: "orange",
 	        family: ["Chocolate Nougat", "Cognac", "Amber", "Guldnougat", "Konjak", "Rasberryapricot", "Rasberry-apricot", "Orange Aprikos", "Bärnsten"],
-	        colorvalue: { background: "#FF7F00" }
+	        colorvalue: { background: "#FF7F00", width: "30px", height: "30px" }
 	      },
 	      "pink": {
 	        color: "pink",
 	        family: ["Pink", "Purple Pink", "Rosa", "Lilarosa ", "Vin Grårosa", "Hallonaprikos"],
-	        colorvalue: { background: "#FF69B4" }
+	        colorvalue: { background: "#FF69B4", width: "30px", height: "30px" }
 	      }
 
 	    }), _defineProperty(_this$state, 'shopMenu', [{ title: "Kvinna", Mid: "M1", type: "category" }, { title: "Man", Mid: "M2", type: "category" }, { title: "Barn", Mid: "M3", type: "category0" }, { title: "Accessoarer & sängkläder", Mid: "M4", type: "category0" }, { title: "Metervara", Mid: "M8", type: "category0" }, { title: "Mönster och Färger", Mid: "M5", type: "mf" }, { title: "Rea", Mid: "M6", type: "rea" }, { title: "Cut on Demand", Mid: "M7", type: "cod" }]), _defineProperty(_this$state, 'artok', false), _defineProperty(_this$state, 'patterncolorok', false), _defineProperty(_this$state, 'sizeok', false), _defineProperty(_this$state, 'codokall', false), _defineProperty(_this$state, 'patternsandcolors', [{
@@ -24318,7 +24318,7 @@
 	                                                                 }, key: i },
 	                                                    React.createElement(
 	                                                                 "a",
-	                                                                 { className: "page-link", id: i },
+	                                                                 { className: "page-link p-5", id: i },
 	                                                                 React.createElement("div", { style: items[item].colorvalue, className: "boxline" })
 	                                                    )
 	                                       );
