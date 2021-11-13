@@ -52,10 +52,10 @@
 
 	function removeElementsByTag(tagName){
 	console.log(tagName); 
-		var elements = document.getElementsByTagName(tagName);
-		console.log(elements); 
-		while(elements.length > 0){
-			elements[0].parentNode.removeChild(elements[0]);
+		var element = document.getElementsByTagName(tagName), index;
+
+		for (index = element.length - 1; index >= 0; index--) {
+			element[index].parentNode.removeChild(element[index]);
 		}
 
 	}
