@@ -22356,6 +22356,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -22369,11 +22371,13 @@
 	  _inherits(Products, _Component);
 
 	  function Products(props) {
+	    var _this$state;
+
 	    _classCallCheck(this, Products);
 
 	    var _this = _possibleConstructorReturn(this, (Products.__proto__ || Object.getPrototypeOf(Products)).call(this, props));
 
-	    _this.state = {
+	    _this.state = (_this$state = {
 
 	      vPages: [{
 	        "page": 1
@@ -22400,14 +22404,82 @@
 	      patternsandcolors: [],
 	      sizes: [],
 	      sizebase: 1,
-	      singleCod: [],
-	      shopMenu: [{ title: "Kvinna", Mid: "M1", type: "category" }, { title: "Man", Mid: "M2", type: "category" }, { title: "Barn", Mid: "M3", type: "category0" }, { title: "Accessoarer & sängkläder", Mid: "M4", type: "category0" }, { title: "Metervara", Mid: "M8", type: "category0" }, { title: "Mönster och Färger", Mid: "M5", type: "mf" }, { title: "Rea", Mid: "M6", type: "rea" }, { title: "Cut on Demand", Mid: "M7", type: "cod" }],
-	      artok: false,
-	      patterncolorok: false,
-	      sizeok: false,
-	      codokall: false
+	      singleCod: []
+	    }, _defineProperty(_this$state, 'defSizes', ["S", "M", "L"]), _defineProperty(_this$state, 'defPatterns', {
+	      "stripes": {
+	        pattern: "stripes",
+	        family: ["Tre rand", "Smal Rand", "Three Stripe", "Thin Stripe", "Diagonal"],
+	        icon: "stripes.jpg"
+	      },
+	      "dotts": {
+	        pattern: "dotts",
+	        family: ["Bean", "Böna"],
+	        icon: "dotts.jpg"
+	      },
+	      "zack": {
+	        pattern: "zack",
+	        family: ["Labyrint", "Twin Peaks", "Wicky Leeks"],
+	        icon: "zack.jpg"
+	      },
+	      "animals": {
+	        pattern: "animals",
+	        family: ["Light Tiger", "Tiger ljus botten", "Dark Tiger", "Tiger mörk botten", "Fjäder", "Fågel", "Feather", "Heather", "Heather "],
+	        icon: "animals.jpg"
+	      },
+	      "flowers": {
+	        pattern: "flowers",
+	        family: ["Mah-Jongblomma", "Ginkgo", "Ljung", "Varma Backen", "Ginkgo Fantasi", "Ljung ", "Stor Blomma", "Lilla Backen", "Mah-Jongflower", "ginkgo", "Varm Meadow", "Ginkgo Fantasy", "Big Flower", "Little meadow"],
+	        icon: "flowers.jpg"
+	      },
+	      "symbols": {
+	        pattern: "symbols",
+	        family: ["Pyramid", "The Seed", "Kärna", "Pyramid"],
+	        icon: "symbols.jpg"
+	      },
+	      "unpattern": {
+	        pattern: "unpattern",
+	        family: ["one color", "Enfärgad"],
+	        icon: "unpattern.jpg"
+	      }
+	    }), _defineProperty(_this$state, 'defColors', {
+	      "red": {
+	        color: "red",
+	        family: ["Red Purple", "Red Rose", "Poopy Red", "Röd Rosa", "Rödlila", "Vallmoröd"],
+	        colorvalue: { background: "#FF0000" }
+	      },
+	      "white": {
+	        color: "white",
+	        family: ["Black White", "Svart Vit"],
+	        colorvalue: { background: "#FFF" }
+	      },
+	      "green": {
+	        color: "green",
+	        family: ["Pistagegreen-green", "Pea Green", "Green", "Grön", "Pistagegrön", "Ärtgrön", "Sommarfärgen Pistagegrön"],
+	        colorvalue: { background: "#0F0" }
+	      },
+	      "blue": {
+	        color: "blue",
+	        family: ["Aqua", "Heaven Blue", "Himmelsblå", "Påfågelblå", "Indigoblå", "Indigo Blue", "Indigo ", "Lavendel Blue", "Jade Ceris", "Purple Black", "Aqua", "Klarblå", "Havsturkos svart", "Jade Turkos", "Lavendel Cikoria"],
+	        colorvalue: { background: "#00F" }
+	      },
 
-	    };
+	      "lilic": {
+	        color: "lilic",
+	        family: ["Lilac", "Vine-Greyish rose", "Syrén Lila ", "Lila Rosa", "Lila Svart", "Cyclamen", "Ceris Apricot", "Ceris Aprikos"],
+	        colorvalue: { background: "#A26BA2" }
+	      },
+	      "orange": {
+	        color: "orange",
+	        family: ["Chocolate Nougat", "Cognac", "Amber", "Guldnougat", "Konjak", "Rasberryapricot", "Rasberry-apricot", "Orange Aprikos", "Bärnsten"],
+	        colorvalue: { background: "#FF7F00" }
+	      },
+	      "pink": {
+	        color: "pink",
+	        family: ["Pink", "Purple Pink", "Rosa", "Lilarosa ", "Vin Grårosa", "Hallonaprikos"],
+	        colorvalue: { background: "#FF69B4" }
+	      }
+
+	    }), _defineProperty(_this$state, 'shopMenu', [{ title: "Kvinna", Mid: "M1", type: "category" }, { title: "Man", Mid: "M2", type: "category" }, { title: "Barn", Mid: "M3", type: "category0" }, { title: "Accessoarer & sängkläder", Mid: "M4", type: "category0" }, { title: "Metervara", Mid: "M8", type: "category0" }, { title: "Mönster och Färger", Mid: "M5", type: "mf" }, { title: "Rea", Mid: "M6", type: "rea" }, { title: "Cut on Demand", Mid: "M7", type: "cod" }]), _defineProperty(_this$state, 'artok', false), _defineProperty(_this$state, 'patterncolorok', false), _defineProperty(_this$state, 'sizeok', false), _defineProperty(_this$state, 'codokall', false), _this$state);
 	    _this.filterSearchList = _this.filterSearchList.bind(_this);
 	    _this.filterResetList = _this.filterResetList.bind(_this);
 	    _this.filterByPattern = _this.filterByPattern.bind(_this);
@@ -22860,24 +22932,6 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
-	        _react2.default.createElement(_MenuList.ShopMenu, { items: this.state.shopMenu,
-	          MenuClick: this.MenuClick }),
-	        _react2.default.createElement('hr', null),
-	        this.state.showCod && _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(_CutOnDemand.CodMenu, null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'tab-content', id: 'myTabContent' },
-	            _react2.default.createElement(_CutOnDemand.CodIntro, null),
-	            _react2.default.createElement(_CutOnDemand.ArtList, { arts: this.state.articles, chooseCod: this.chooseCod }),
-	            _react2.default.createElement(_CutOnDemand.ColorPatternList, { copa: this.state.patternsandcolors, chooseCod: this.chooseCod }),
-	            _react2.default.createElement(_CutOnDemand.Order, { orderitem: this.state.singleCod, sizes: this.state.sizes, patterncolorok: this.state.patterncolorok, artok: this.state.artok,
-	              addToShoppingCart: this.addToShoppingCart, addSizeToArt: this.addSizeToArt, codokall: this.state.codokall, sizebase: this.state.sizebase }),
-	            '}'
-	          )
-	        ),
 	        this.state.showRea && _react2.default.createElement(
 	          'div',
 	          null,
