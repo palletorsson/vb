@@ -22428,7 +22428,7 @@
 	      },
 	      showCod: false,
 	      showRea: true,
-	      showCategory: true,
+	      showCategory: false,
 	      fullProducts: [],
 	      variations: [],
 	      fullProductsFiltered: [],

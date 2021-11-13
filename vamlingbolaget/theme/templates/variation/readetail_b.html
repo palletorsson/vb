@@ -23,7 +23,7 @@
 
                                 <input id="rea_pk" type="hidden" value="{{ product.pk }}">
 
-                                <div class="s-80" id="article_etc"> <strong>REA : {{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }} </strong> </div> 
+                                <div class="s-80" id="article_etc"> <strong>{{ product.article.name }} {% trans "i" %} {{ product.color }}, {{ product.pattern }} </strong> </div> 
                                 <div class="discount s-80 strong" id="the_price">  {{ product.rea_price }}  SEK </div> 
                         </div>
                     </div>
@@ -31,11 +31,10 @@
                 <div class="media">
                     <div class="media-body pb-3 mb-0 border-bottom border-gray">
                         <div class="d-flex justify-content-end align-items-center w-100">       
-                            <div class="s-80 mr-2"> 
-                                 {% trans "tidigare pris" %}   
-                            </div> 
+                        
+                
                             <div class="s-80"> 
-                                    ▼  {{ product.article.price }}  SEK 
+                                 {{ product.article.price }}  SEK 
                             </div>                
                         </div>
                     </div>
