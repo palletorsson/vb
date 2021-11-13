@@ -23708,19 +23708,8 @@
 	                        "p",
 	                        { className: "card-text" },
 	                        " ",
-	                        reaprice,
+	                        price,
 	                        " SEK "
-	                    ),
-	                    React.createElement(
-	                        "p",
-	                        { className: "card-text" },
-	                        React.createElement(
-	                            "small",
-	                            { className: "text-muted" },
-	                            "( \u25BC ",
-	                            price,
-	                            ")"
-	                        )
 	                    ),
 	                    React.createElement(
 	                        "p",
