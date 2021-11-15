@@ -12,12 +12,12 @@ Din order:
 * Pris per produkt: {% if item.discount_price > 0 %} Rea: {{ item.discount_price }} SEK ( Regular price: {%endif%} {{ item.article.price }} {% if item.discount_price > 0 %} ) {%endif%} SEK
 {% if item.s_type == 'COD' %}* + Cut on demand: {{ item.article.ondemand_cost }} SEK {%endif%}
 -------------- {%endfor%}
-{% for item in reaitems %}* Rea-artikel: {{ item.reaArticle.article }}
+{% for item in reaitems %}* Artikel: {{ item.reaArticle.article }}
 * Antal: 1
 * Färg: {{ item.reaArticle.color }}
 * Mönster: {{ item.reaArticle.pattern }}
 * Storlek: {{ item.reaArticle.size }}
-* Pris per produkt: Reapris: {{ item.reaArticle.rea_price }} SEK
+* Pris per produkt: Pris: {{ item.reaArticle.rea_price }} SEK
 -------------- {%endfor%}
 {% for item in bargains %}* Artikel: {{ item.bargain }}
 * ref: {{ item.bargain.pk }}
