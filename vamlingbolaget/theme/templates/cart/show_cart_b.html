@@ -1,4 +1,4 @@
-{% extends "base_b.html" %}
+    {% extends "base_b.html" %}
 {% load i18n %}
 {% load fb_versions %}
 {% version model.field_name version_prefix %}
@@ -105,7 +105,7 @@
         </td>
         <td>
             <div>
-                <span>  {{ item.reaArticle.article.name }} i {{item.reaArticle.article.quality|lower}} <span class="discount"> (REA) </span>  </span>
+                <span>  {{ item.reaArticle.article.name }} i {{item.reaArticle.article.quality|lower}} <!-- <span class="discount"> (REA) </span> --> </span>
             </div>
         </td>
         <td>
@@ -135,7 +135,7 @@
 
             <td>
             <div>
-           	<span class="discount"> {{ item.reaArticle.rea_price }} </span>(<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} SEK </span>)</span>
+           	<span class="discount"> {{ item.reaArticle.rea_price }} </span> <!-- (<span style=" text-decoration: line-through;" > {{item.reaArticle.article.price}} SEK </span>) --></span>
             </div>
         </td>
     </tbody>
