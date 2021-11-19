@@ -39,16 +39,18 @@
 	   <div id="container"></div>   
 <script type="text/javascript" src="{{ STATIC_URL }}js/current/bundle.js"></script> 
 <script>
-	let navigationLinks = document.getElementsByTagName('nav')[0];
-	console.log(navigationLinks); 
-	navigationLinks.remove();
+	setTimeout(function(){ 
+		let navigationLinks = document.getElementsByTagName('nav')[0];
+		console.log(navigationLinks); 
+		navigationLinks.remove();
 
-	Array.prototype.slice.call(document.getElementsByTagName('small')).forEach(
-  function(item) {
-    item.remove();
-    // or item.parentNode.removeChild(item); for older browsers (Edge-)
-});
-
+		Array.prototype.slice.call(document.getElementsByTagName('small')).forEach(
+			function(item) {
+				item.remove();
+				// or item.parentNode.removeChild(item); for older browsers (Edge-)
+			});
+		}, 3000);
+		
 
 </script>
   <!-- <script src="{{ STATIC_URL }}js/current/2.a122efba.chunk.js"></script>
