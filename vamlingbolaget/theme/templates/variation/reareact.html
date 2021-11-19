@@ -43,11 +43,11 @@
 	console.log(navigationLinks); 
 	navigationLinks.remove();
 
-	let descript = document.getElementsByTagName('small');
-		descript.forEach(
-			function(item) {
-				item.remove();
-		}); 
+	Array.prototype.slice.call(document.getElementsByTagName('small')).forEach(
+  function(item) {
+    item.remove();
+    // or item.parentNode.removeChild(item); for older browsers (Edge-)
+});
 
 
 </script>
