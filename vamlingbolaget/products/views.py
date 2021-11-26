@@ -760,6 +760,7 @@ def cutondemandApiStickeri(request):
 			"quality_name": csps.quality.name,
 			"quality_num": csps.quality.order
 			})
+	print(jsonresp)
 	for chil in articles:
 		jsonresp["articles"].append({
 			"article": chil.name,
@@ -774,6 +775,7 @@ def cutondemandApiStickeri(request):
 			"quality": chil.quality.name,
 			"cod_cost": chil.ondemand_cost
 		})
+	print(jsonresp)
 	resp = json.dumps(jsonresp, ensure_ascii=False)
 	print(resp)
 	return HttpResponse(resp, content_type="application/json")
