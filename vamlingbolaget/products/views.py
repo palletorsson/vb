@@ -775,6 +775,7 @@ def cutondemandApiStickeri(request):
 			"cod_cost": chil.ondemand_cost
 		})
 	resp = json.dumps(jsonresp, ensure_ascii=False)
+	print(resp)
 	return HttpResponse(resp, content_type="application/json")
 
 
