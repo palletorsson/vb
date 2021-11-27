@@ -745,9 +745,9 @@ def cutondemandApiStickeri(request):
 	articles = Article.objects.filter(quality__slug='stickat-100-ekologisk-ull')
 	colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug='stickat-100-ekologisk-ull')
 	active_sizes = SIZES
-	print(articles)
-	print(colorsandpatterns)
-	print(active_sizes)
+	#print(articles)
+	#print(colorsandpatterns)
+	#print(active_sizes)
 	jsonresp["sizes"] = active_sizes
 	jsonresp["colorspatterns"] = []
 	jsonresp["articles"] = []
@@ -761,7 +761,7 @@ def cutondemandApiStickeri(request):
                 "quality_name": csps.quality.name,
                 "quality_num": csps.quality.order
                 })
-			print(csps)
+			#print(csps)
 	except:
 		print ("no such color pattern stickeri")
 	#print(jsonresp)
