@@ -742,7 +742,7 @@ def cutondemandApiSingle(request, sku_number):
 
 def cutondemandApiStickeri(request):
 	jsonresp = {}
-	articles = Article.objects.filter(quality__slug='stickat-100-ekologisk-ull').order_by('type')
+	articles = Article.objects.filter(quality__slug='stickat-100-ekologisk-ull')
 	colorsandpatterns = PatternAndColor.objects.filter(active=True, quality__slug='stickat-100-ekologisk-ull')
 	active_sizes = SIZES
 	print(articles)
@@ -751,30 +751,37 @@ def cutondemandApiStickeri(request):
 	jsonresp["sizes"] = active_sizes
 	jsonresp["colorspatterns"] = []
 	jsonresp["articles"] = []
-	for csps in colorsandpatterns:
-		jsonresp["colorspatterns"].append({
-			"color_num": csps.color.order,
-			"color_name": csps.color.name,
-			"pattern_num": csps.pattern.order,
-			"pattern_name": csps.pattern.name,
-			"quality_name": csps.quality.name,
-			"quality_num": csps.quality.order
-			})
+	try:
+		for csps in colorsandpatterns:
+			jsonresp["colorspatterns"].append({
+                "color_num": csps.color.order,
+                "color_name": csps.color.name,
+                "pattern_num": csps.pattern.order,
+                "pattern_name": csps.pattern.name,
+                "quality_name": csps.quality.name,
+                "quality_num": csps.quality.order
+                })
+			print(csps)
+	except:
+		print ("no such color pattern stickeri")
 	#print(jsonresp)
-	for chil in articles:
-		jsonresp["articles"].append({
-			"article": chil.name,
-			"sku": chil.sku_number,
-			"price": chil.price,
-			"id": chil.id,
-			"pk": chil.pk,
-			"img": chil.file.name,
-			"type": chil.type.name,
-			"category":chil.category.name,
-			"description": chil.description,
-			"quality": chil.quality.name,
-			"cod_cost": chil.ondemand_cost
-		})
+	try:
+		for chil in articles:
+			jsonresp["articles"].append({
+                "article": chil.name,
+                "sku": chil.sku_number,
+                "price": chil.price,
+                "id": chil.id,
+                "pk": chil.pk,
+                "img": chil.file.name,
+                "type": chil.type.name,
+                "category":chil.category.name,
+                "description": chil.description,
+                "quality": chil.quality.name,
+                "cod_cost": chil.ondemand_cost
+            })
+	except:
+		print ("no such color art stickeri")
 	#print(jsonresp)
 	resp = json.dumps(jsonresp, ensure_ascii=False)
 	#print(resp)
@@ -783,19 +790,19 @@ def cutondemandApiStickeri(request):
 
 
 def cutondemandApi(request, category):
-    print category
+    #print category
     models = Article.objects.filter(active=True).order_by('category')
     #if (category != 'pc'):
         #print "not pc"
     if (category == 'all'):
-        print "its all"
+        #print "its all"
         products = FullVariation.objects.filter(active=True, size=3840).order_by('order')
     else:
-        print "its not all"
+        #print "its not all"
         products = FullVariation.objects.filter(active=True, size=3840, variation__article__category__slug=category).order_by('order')
 
         variations = Variation.objects.filter(Q(article__category__slug='barn') | Q(article__category__slug='accessoarer') |  Q(article__category__slug='piece-goods'), order__lte=100, active=True).order_by('article__type')
-    print "cut on demand api"
+    #print "cut on demand api"
 
     articles = Article.objects.filter(quality__slug ='silkestrika', active=True).order_by('type')
 
