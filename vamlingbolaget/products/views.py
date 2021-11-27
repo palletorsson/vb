@@ -785,7 +785,6 @@ def cutondemandApiStickeri(request):
 	#print(jsonresp)
 	resp = json.dumps(jsonresp, ensure_ascii=False)
 	#print(resp)
-	resp = ''
 	return HttpResponse(resp, content_type="application/json")
 
 
